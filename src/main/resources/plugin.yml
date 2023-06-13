@@ -1,0 +1,4 @@
+name: R01
+version: '${version}'
+main: teamzesa.r01.R01
+api-version: 1.20
