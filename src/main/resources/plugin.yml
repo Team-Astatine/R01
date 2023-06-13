@@ -1,4 +1,7 @@
 name: R01
 version: '${version}'
 main: teamzesa.r01.R01
-api-version: 1.20
+api-version: 1.19
+commands:
+  totem:
+    description: 토템을 합칩니다.
