@@ -16,7 +16,7 @@ import teamzesa.totem.TotemStacking;
 
 public final class R01 extends JavaPlugin implements Listener {
     private static PluginManager pm;
-    PlayerExpHealthScale playerExpHealthScale;
+    private PlayerExpHealthScale playerExpHealthScale;
     public R01() {
         pm = getServer().getPluginManager();
         playerExpHealthScale = new PlayerExpHealthScale();
