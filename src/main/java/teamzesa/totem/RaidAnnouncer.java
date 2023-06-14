@@ -20,8 +20,6 @@ public class RaidAnnouncer implements Listener {
         this.x = loc.getX();
         this.z = loc.getZ();
 
-        System.out.println(e.getRaid().getBadOmenLevel());
-
         Bukkit.broadcastMessage(
                 String.format(
                         ChatColor.RED + "%s 월드의 X : %1.0f Y : %1.0f 에서 레이드가 시작됩니다.",
