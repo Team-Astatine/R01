@@ -14,7 +14,7 @@ import teamzesa.expHandler.PlayerExpHealthScale;
 import teamzesa.totem.RaidAnnouncer;
 import teamzesa.totem.TotemStacking;
 
-public final class R01 extends JavaPlugin implements Listener,Runnable {
+public final class R01 extends JavaPlugin implements Listener {
     private static PluginManager pm;
     PlayerExpHealthScale playerExpHealthScale;
     public R01() {
@@ -24,19 +24,13 @@ public final class R01 extends JavaPlugin implements Listener,Runnable {
 
     @Override
     public void onEnable() {
-        pm.registerEvents(new PlayerDyingSet(),this);
-        pm.registerEvents(new EntityNoDamageSet(),this);
-        pm.registerEvents(new RaidAnnouncer(),this);
         pm.registerEvents(this,this);
+        pm.registerEvents(new EntityNoDamageSet(),this);
+        pm.registerEvents(new PlayerExpHealthScale(),this);
+        pm.registerEvents(new PlayerDyingSet(),this);
+        pm.registerEvents(new RaidAnnouncer(),this);
 
         Bukkit.getPluginCommand("totem").setExecutor(new TotemStacking());
-        Bukkit.getScheduler().runTaskTimerAsynchronously(
-                this,this,0L,20L);
-    }
-
-    @Override
-    public void run() {
-        pm.registerEvents(new PlayerExpHealthScale(),this);
     }
 
     @EventHandler
