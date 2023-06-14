@@ -1,6 +1,6 @@
 # R01
 
 > ## Function
-* Totem Stacking
-* Attack Speed
-* Exp HealthScale Set
+* Totem Stacking `6/14` ✅
+* Attack Speed `6/14` ✅
+* Exp HealthScale Set `6/14 ~ 15` 👨‍💻
