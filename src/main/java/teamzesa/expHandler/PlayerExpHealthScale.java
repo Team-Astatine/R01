@@ -1,10 +1,8 @@
 package teamzesa.expHandler;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 
 public class PlayerExpHealthScale implements Listener {
@@ -39,7 +37,7 @@ public class PlayerExpHealthScale implements Listener {
         if (playerHealthScale > MAX_HEALTH_SCALE)
             return;
 
-        if (playerLevel % STANDARD_LEVEL != 0)
+        if (playerLevel < STANDARD_LEVEL)
             return;
 
         int extraHealth = (playerLevel / STANDARD_LEVEL) * 2;
