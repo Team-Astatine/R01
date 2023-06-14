@@ -9,57 +9,68 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class TotemStacking implements CommandExecutor {
-    private final int MINIMUM = 2;
-    private Player p;
-    private ItemStack offHandStuff;
-    private ItemStack[] playerItemStack;
-    private ArrayList<Integer> itemList;
+    private final int MINIMUM = 1; // 합칠 수 있는 최소단위
+    private List<Integer> itemList;
+
+    public TotemStacking() {
+    }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        Player p = (Player) sender;
+        List<ItemStack> playerItemStack = new ArrayList<>(
+                Arrays.asList(p.getInventory().getContents()));
 
-        int totemCount = 0;
-        p = (Player) sender;
-        offHandStuff = p.getInventory().getItemInOffHand();
-        playerItemStack = p.getInventory().getContents();
-        itemList = new ArrayList<>();
+        // Checking total Totem amount
+        itemList = playerItemStack.stream()
+                .filter(item -> item != null && item.getType() == Material.TOTEM_OF_UNDYING)
+                .map(ItemStack::getAmount)
+                .collect(Collectors.toList());
 
-//        Checking total Totem amount
-        for (ItemStack item : playerItemStack) {
-            if (item != null && item.getType() == Material.TOTEM_OF_UNDYING)
-                itemList.add(item.getAmount());
-        }
-
-//        Exception Check
-        if (itemList.size() < MINIMUM) {
+        // validation totemCount
+        if (validMinimumTotemCount(itemList)) {
             p.sendMessage(ChatColor.RED + "2개 이상의 토템을 가지고 있으셔야 합니다.");
             return false;
         }
 
-//        remove Inventory
-        for (ItemStack item : playerItemStack) {
-            if (item != null && item.getType() == Material.TOTEM_OF_UNDYING) {
-                p.getInventory().remove(item);
-            }
+        if (validTotemCommand(itemList)) {
+            p.sendMessage(ChatColor.RED + "합칠 토템이 없습니다.");
+            return false;
         }
-//        offHandCheck
-        if (offHandStuff.getType() == Material.TOTEM_OF_UNDYING)
+
+        // offHandCheck
+        if (p.getInventory().getItemInOffHand().getType() == Material.TOTEM_OF_UNDYING)
             p.getInventory().setItemInOffHand(null);
 
-//        setTotem
-        ItemStack stackOfTotem = new ItemStack(Material.TOTEM_OF_UNDYING,totalListCount(itemList));
+        // remove Inventory
+        playerItemStack.stream()
+                .filter(item -> item != null && item.getType() == Material.TOTEM_OF_UNDYING)
+                .forEach(item -> p.getInventory().remove(item));
+
+        // setTotem
+        int totalAmount = itemList.stream().mapToInt(Integer::intValue).sum();
+//        p.sendMessage("총 토템 " + String.valueOf(totalAmount));
+        ItemStack stackOfTotem = new ItemStack(Material.TOTEM_OF_UNDYING, totalAmount);
         p.getInventory().addItem(stackOfTotem);
         p.sendRawMessage(ChatColor.YELLOW + "토템을 합쳤습니다.");
 
         return true;
     }
 
-    public int totalListCount(ArrayList<Integer> list) {
-        int result = 0;
-        for (int i = 0; i < list.size(); i++)
-            result += list.get(i);
-        return result;
+    public boolean validMinimumTotemCount(List<Integer> list) {
+        int cnt = (int) list.stream().filter(num -> num == 1).count();
+        return list.stream()
+                .noneMatch(num -> num > MINIMUM || cnt > MINIMUM);
+    }
+
+    public boolean validTotemCommand(List<Integer> list) {
+        int cnt = (int) list.stream().filter(num -> num < 64).count();
+        return list.stream()
+                .noneMatch(num -> cnt > MINIMUM);
     }
 }
