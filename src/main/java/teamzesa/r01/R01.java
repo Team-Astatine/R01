@@ -2,9 +2,11 @@ package teamzesa.r01;
 
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -38,5 +40,15 @@ public final class R01 extends JavaPlugin implements Listener {
         Player p = e.getPlayer();
         playerExpHealthScale.expChangeEvent(p);
         p.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(40.0);
+    }
+
+    @EventHandler
+    public boolean explosive(ExplosionPrimeEvent e) {
+        if (e.getEntity().getType() != EntityType.MINECART_TNT)
+            return false;
+
+        e.setRadius(20);
+
+        return true;
     }
 }
