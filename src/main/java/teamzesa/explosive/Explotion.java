@@ -19,6 +19,7 @@ public class Explotion implements Listener {
                 e.setFire(true);
             }
         };
+        task.runTaskLater(Bukkit.getPluginManager().getPlugin("R01"), 0L);
         return true;
     }
 }
