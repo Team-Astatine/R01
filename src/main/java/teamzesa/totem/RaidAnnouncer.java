@@ -13,9 +13,9 @@ public class RaidAnnouncer implements Listener {
     private double z;
 
     @EventHandler
-    public boolean raidAnnouncer(RaidTriggerEvent e) {
+    public void raidAnnouncer(RaidTriggerEvent e) {
         if (e.getPlayer().getUniqueId().toString().equals("27d84b4f-5991-4001-89d5-0fdfd3374a3d"))
-            return false;
+            return;
 
         this.loc = e.getRaid().getLocation();
         String activeWorld = worldName(e.getWorld().getName());
@@ -29,7 +29,6 @@ public class RaidAnnouncer implements Listener {
                         activeWorld, x, z
                 )
         );
-        return true;
     }
 
     public String worldName(String worldName) {

@@ -5,21 +5,20 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 
 public class EntityNoDamageSet implements Listener {
 
     @EventHandler
-    public boolean entityHit(EntityDamageByEntityEvent e) {
+    public void entityHit(EntityDamageByEntityEvent e) {
         if (e.getEntityType() != EntityType.PLAYER)
-            return false;
+            return;
 
         if (e.getDamager().getType() != EntityType.PLAYER)
-            return false;
+            return;
 
         Player target = (Player) e.getEntity();
         //default 20
         target.setMaximumNoDamageTicks(1);
-
-        return true;
     }
 }
