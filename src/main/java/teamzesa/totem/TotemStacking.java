@@ -17,8 +17,7 @@ public class TotemStacking implements CommandExecutor {
     private final int MINIMUM = 1; // 합칠 수 있는 최소단위
     private List<Integer> itemList;
 
-    public TotemStacking() {
-    }
+    public TotemStacking() {}
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
