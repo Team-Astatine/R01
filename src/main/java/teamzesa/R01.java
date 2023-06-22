@@ -19,8 +19,8 @@ public final class R01 extends JavaPlugin implements Listener {
     }
 
     private void commandHandler() {
-        this.getCommand("nameChanger").setExecutor(new NameChanger());
         this.getCommand("토템").setExecutor(new TotemStacking());
+        this.getCommand("nameChanger").setExecutor(new NameChanger());
     }
 
     @Override
@@ -28,10 +28,10 @@ public final class R01 extends JavaPlugin implements Listener {
         this.commandHandler(); // command set
 
         pm.registerEvents(this,this);
-        pm.registerEvents(new ExplotionHandler(),this);
         pm.registerEvents(new RaidAnnouncer(),this);
+        pm.registerEvents(new ExplotionHandler(),this);
         pm.registerEvents(new PlayerDyingHandler(),this);
-        pm.registerEvents(new EntityDamageTickingHandler(),this);
         pm.registerEvents(new PlayerHealthScaleHandler(),this);
+        pm.registerEvents(new EntityDamageTickingHandler(),this);
     }
 }
