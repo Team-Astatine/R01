@@ -7,6 +7,7 @@ import java.util.UUID;
 public class User {
     private UUID uuid;
     private String name;
+    private String koreanName;
     private int level;
     private double healthScale;
 
@@ -31,5 +32,13 @@ public class User {
 
     public double getHealthScale() {
         return healthScale;
+    }
+
+    public String getKoreanName() {
+        return koreanName;
+    }
+
+    public void setKoreanName(String koreanName) {
+        this.koreanName = koreanName;
     }
 }
