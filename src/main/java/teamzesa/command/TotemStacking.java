@@ -1,4 +1,4 @@
-package teamzesa.commandHandler;
+package teamzesa.command;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -8,7 +8,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

@@ -1,4 +1,4 @@
-package teamzesa.commandHandler;
+package teamzesa.command;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
