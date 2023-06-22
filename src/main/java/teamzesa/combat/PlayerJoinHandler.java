@@ -6,11 +6,11 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-public class PlayerJoinSet implements Listener {
-    private PlayerExpHealthScale playerExpHealthScale;
+public class PlayerJoinHandler implements Listener {
+    private PlayerHealthScaleHandler playerExpHealthScale;
 
-    public PlayerJoinSet() {
-        playerExpHealthScale = new PlayerExpHealthScale();
+    public PlayerJoinHandler() {
+        playerExpHealthScale = new PlayerHealthScaleHandler();
     }
 
     @EventHandler

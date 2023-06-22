@@ -7,7 +7,7 @@ import org.bukkit.event.entity.CreeperPowerEvent;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class Explotion implements Listener {
+public class ExplotionHandler implements Listener {
     @EventHandler(priority = EventPriority.HIGH)
     public void explosive(ExplosionPrimeEvent e) {
         BukkitRunnable task = new BukkitRunnable() {

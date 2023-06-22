@@ -6,7 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-public class EntityNoDamageSet implements Listener {
+public class EntityDamageTickingHandler implements Listener {
 
     @EventHandler
     public void entityHit(EntityDamageByEntityEvent e) {

@@ -3,13 +3,13 @@ package teamzesa;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import teamzesa.combat.EntityNoDamageSet;
-import teamzesa.commandHandler.NameChanger;
-import teamzesa.combat.PlayerDyingSet;
-import teamzesa.combat.PlayerExpHealthScale;
-import teamzesa.combat.Explotion;
+import teamzesa.combat.EntityDamageTickingHandler;
+import teamzesa.command.NameChanger;
+import teamzesa.combat.PlayerDyingHandler;
+import teamzesa.combat.PlayerHealthScaleHandler;
+import teamzesa.combat.ExplotionHandler;
 import teamzesa.announcer.RaidAnnouncer;
-import teamzesa.commandHandler.TotemStacking;
+import teamzesa.command.TotemStacking;
 
 public final class R01 extends JavaPlugin implements Listener {
     private static PluginManager pm;
@@ -28,10 +28,10 @@ public final class R01 extends JavaPlugin implements Listener {
         this.commandHandler(); // command set
 
         pm.registerEvents(this,this);
-        pm.registerEvents(new Explotion(),this);
+        pm.registerEvents(new ExplotionHandler(),this);
         pm.registerEvents(new RaidAnnouncer(),this);
-        pm.registerEvents(new PlayerDyingSet(),this);
-        pm.registerEvents(new EntityNoDamageSet(),this);
-        pm.registerEvents(new PlayerExpHealthScale(),this);
+        pm.registerEvents(new PlayerDyingHandler(),this);
+        pm.registerEvents(new EntityDamageTickingHandler(),this);
+        pm.registerEvents(new PlayerHealthScaleHandler(),this);
     }
 }
