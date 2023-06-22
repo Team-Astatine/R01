@@ -10,6 +10,9 @@ import teamzesa.combat.PlayerHealthScaleHandler;
 import teamzesa.combat.ExplotionHandler;
 import teamzesa.announcer.RaidAnnouncer;
 import teamzesa.command.TotemStacking;
+import teamzesa.user.UserHandler;
+
+import java.io.File;
 
 public final class R01 extends JavaPlugin implements Listener {
     private static PluginManager pm;
@@ -21,6 +24,16 @@ public final class R01 extends JavaPlugin implements Listener {
     private void commandHandler() {
         this.getCommand("토템").setExecutor(new TotemStacking());
         this.getCommand("nameChanger").setExecutor(new NameChanger());
+    }
+
+    private void inputUserData() {
+        UserHandler userHandler = UserHandler.getInstance();
+        File userDataFile = new File(this.getDataFolder(),"userData.yml");
+
+    }
+
+    private void outputUserData() {
+
     }
 
     @Override
