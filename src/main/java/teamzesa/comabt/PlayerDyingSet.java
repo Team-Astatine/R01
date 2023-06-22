@@ -1,4 +1,4 @@
-package teamzesa.expHandler;
+package teamzesa.comabt;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

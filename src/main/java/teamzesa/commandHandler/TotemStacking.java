@@ -1,4 +1,4 @@
-package teamzesa.totem;
+package teamzesa.commandHandler;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -8,6 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,8 +17,6 @@ import java.util.stream.Collectors;
 public class TotemStacking implements CommandExecutor {
     private final int MINIMUM = 1; // 합칠 수 있는 최소단위
     private List<Integer> itemList;
-
-    public TotemStacking() {}
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {

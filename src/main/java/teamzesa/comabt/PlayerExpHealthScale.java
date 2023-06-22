@@ -1,4 +1,4 @@
-package teamzesa.expHandler;
+package teamzesa.comabt;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
