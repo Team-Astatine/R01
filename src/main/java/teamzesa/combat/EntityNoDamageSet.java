@@ -1,4 +1,4 @@
-package teamzesa.comabt;
+package teamzesa.combat;
 
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;

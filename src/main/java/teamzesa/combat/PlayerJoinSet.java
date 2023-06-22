@@ -1,11 +1,10 @@
-package teamzesa.comabt;
+package teamzesa.combat;
 
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import teamzesa.comabt.PlayerExpHealthScale;
 
 public class PlayerJoinSet implements Listener {
     private PlayerExpHealthScale playerExpHealthScale;

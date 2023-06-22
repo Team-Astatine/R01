@@ -1,4 +1,4 @@
-package teamzesa.comabt;
+package teamzesa.combat;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

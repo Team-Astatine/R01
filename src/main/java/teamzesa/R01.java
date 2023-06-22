@@ -3,11 +3,11 @@ package teamzesa;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import teamzesa.comabt.EntityNoDamageSet;
+import teamzesa.combat.EntityNoDamageSet;
 import teamzesa.commandHandler.NameChanger;
-import teamzesa.comabt.PlayerDyingSet;
-import teamzesa.comabt.PlayerExpHealthScale;
-import teamzesa.comabt.Explotion;
+import teamzesa.combat.PlayerDyingSet;
+import teamzesa.combat.PlayerExpHealthScale;
+import teamzesa.combat.Explotion;
 import teamzesa.announcer.RaidAnnouncer;
 import teamzesa.commandHandler.TotemStacking;
 
