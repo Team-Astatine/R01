@@ -7,7 +7,7 @@ import teamzesa.combat.EntityDamageTickingHandler;
 import teamzesa.command.NameChanger;
 import teamzesa.combat.PlayerDyingHandler;
 import teamzesa.combat.PlayerHealthScaleHandler;
-import teamzesa.combat.ExplotionHandler;
+import teamzesa.combat.ExplosiveHandler;
 import teamzesa.announcer.RaidAnnouncer;
 import teamzesa.command.TotemStacking;
 import teamzesa.user.UserHandler;
@@ -42,7 +42,7 @@ public final class R01 extends JavaPlugin implements Listener {
 
         pm.registerEvents(this,this);
         pm.registerEvents(new RaidAnnouncer(),this);
-        pm.registerEvents(new ExplotionHandler(),this);
+        pm.registerEvents(new ExplosiveHandler(),this);
         pm.registerEvents(new PlayerDyingHandler(),this);
         pm.registerEvents(new PlayerHealthScaleHandler(),this);
         pm.registerEvents(new EntityDamageTickingHandler(),this);
