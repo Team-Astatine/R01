@@ -7,7 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class PlayerHealthScaleHandler implements Listener {
+public class UserHealthScaleHandler implements Listener {
     private final double MAX_HEALTH_SCALE = 60.0;
     private final int STANDARD_LEVEL = 10;
     private final int DEFAULT_PLAYER_HEALTH = 20;
