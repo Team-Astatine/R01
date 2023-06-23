@@ -5,7 +5,7 @@ api-version: '1.20'
 authors: [ JAXPLE ]
 
 commands:
-  nameChanger:
+  NameChanger:
     description: 이름변경.
   토템:
     description: 토템을 합칩니다.
