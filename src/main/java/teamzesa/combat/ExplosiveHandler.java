@@ -8,6 +8,7 @@ import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class ExplosiveHandler implements Listener {
+
     @EventHandler(priority = EventPriority.HIGH)
     public void explosive(ExplosionPrimeEvent e) {
         BukkitRunnable task = new BukkitRunnable() {
