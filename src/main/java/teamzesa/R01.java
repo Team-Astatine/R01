@@ -1,5 +1,6 @@
 package teamzesa;
 
+import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.bukkit.event.Listener;
@@ -13,10 +14,14 @@ import teamzesa.user.User;
 import teamzesa.user.UserHandler;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public final class R01 extends JavaPlugin implements Listener {
     private static PluginManager pm;
@@ -34,8 +39,13 @@ public final class R01 extends JavaPlugin implements Listener {
         this.getCommand("nameChanger").setExecutor(new NameChanger());
     }
 
-    private void inputUserData() throws IOException {
-//        데이터 해쉬맵에 쑤셔넣기
+    private void inputUserData() {
+        Gson gson = new Gson();
+        try (FileReader reader = new FileReader(userDataFile)) {
+            userHandler.updateUserData(gson.fromJson(reader,User[].class));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void outputUserData() {
@@ -51,9 +61,9 @@ public final class R01 extends JavaPlugin implements Listener {
         }
     }
 
-
     @Override
     public void onEnable() {
+        inputUserData();  // user Data Set
         commandHandler(); // command set
 
         pm.registerEvents(this,this);
