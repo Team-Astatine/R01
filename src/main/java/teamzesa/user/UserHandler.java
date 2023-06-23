@@ -1,5 +1,6 @@
 package teamzesa.user;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -11,7 +12,11 @@ public class UserHandler {
     private static Map<UUID, User> userData;
 
     private UserHandler() {
-        this.userData = new HashMap<>();
+        userData = new HashMap<>();
+    }
+
+    public Map<UUID,User> getUserMap() {
+        return userData;
     }
 
     public static UserHandler getInstance() {
@@ -19,6 +24,7 @@ public class UserHandler {
     }
 
     public void addUser(Player player) {
+        Bukkit.getLogger().info(player.getName() + "님이 등록됐습니다.");
         userData.put(player.getUniqueId(), new User(player));
     }
 

@@ -6,8 +6,20 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import teamzesa.user.User;
+import teamzesa.user.UserHandler;
+
+import java.util.Map;
+import java.util.UUID;
 
 public class NameChanger implements CommandExecutor {
+    private UserHandler userHandler;
+    private Map<UUID, User> userData;
+
+    public NameChanger() {
+        userHandler = UserHandler.getInstance();
+        userData = userHandler.getUserMap();
+    }
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
@@ -34,6 +46,9 @@ public class NameChanger implements CommandExecutor {
             listNameColor = ChatColor.WHITE;
 
         player.setPlayerListName(listNameColor + newNickname);
+
+        User user = userData.get(player.getUniqueId());
+        user.setKoreanName(listNameColor + newNickname);
 
         return true;
     }
