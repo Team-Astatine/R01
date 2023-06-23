@@ -9,16 +9,11 @@ import org.bukkit.entity.Player;
 import teamzesa.user.User;
 import teamzesa.user.UserHandler;
 
-import java.util.Map;
-import java.util.UUID;
-
 public class NameChanger implements CommandExecutor {
     private UserHandler userHandler;
-    private Map<UUID, User> userData;
 
     public NameChanger() {
         userHandler = UserHandler.getInstance();
-        userData = userHandler.getUserMap();
     }
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -47,8 +42,9 @@ public class NameChanger implements CommandExecutor {
 
         player.setPlayerListName(listNameColor + newNickname);
 
-        User user = userData.get(player.getUniqueId());
+        User user = userHandler.getUser(player);
         user.setKoreanName(listNameColor + newNickname);
+        userHandler.updateUser(user);
 
         return true;
     }
