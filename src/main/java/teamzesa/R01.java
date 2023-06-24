@@ -6,6 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import teamzesa.combat.*;
 import teamzesa.command.NameChanger;
 import teamzesa.announcer.RaidAnnouncer;
+import teamzesa.command.SaveUserData;
 import teamzesa.command.TotemStacking;
 import teamzesa.user.IOHandler;
 
@@ -14,20 +15,23 @@ import java.io.File;
 public final class R01 extends JavaPlugin implements Listener {
     private static PluginManager pm;
     private static IOHandler ioHandler;
+    private File userDataFile;
 
     public R01() {
         pm = getServer().getPluginManager();
         ioHandler = IOHandler.getInstance();
+        userDataFile = new File(this.getDataFolder(), "userData.json");
     }
 
     private void commandHandler() {
         this.getCommand("토템").setExecutor(new TotemStacking());
         this.getCommand("NameChanger").setExecutor(new NameChanger());
+        this.getCommand("SavaUserData").setExecutor(new SaveUserData(userDataFile));
     }
 
     @Override
     public void onEnable() {
-        ioHandler.inputUserData(new File(this.getDataFolder(), "userData.json"));  // user Data Set
+        ioHandler.inputUserData(userDataFile);  // user Data Set
         commandHandler(); // command set
 
         pm.registerEvents(this,this);
@@ -41,6 +45,6 @@ public final class R01 extends JavaPlugin implements Listener {
 
     @Override
     public void onDisable() {
-        ioHandler.outputUserData(new File(this.getDataFolder(),"userData.json"));
+        ioHandler.outputUserData(userDataFile);
     }
 }
