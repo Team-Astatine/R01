@@ -39,7 +39,7 @@ public class UserHealthScaleHandler implements Listener {
             public void run() {
                 int extraHealth = (playerLevel / STANDARD_LEVEL) * 2;
                 player.setHealthScale(DEFAULT_PLAYER_HEALTH + (double) extraHealth);
-                userHandler.updateUser(player.getUniqueId(),player.getHealthScale());
+                userHandler.updateUser(player.getUniqueId(),player.getHealthScale(),player.getLevel());
             }
         };
 
