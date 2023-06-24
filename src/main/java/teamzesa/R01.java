@@ -11,27 +11,38 @@ import teamzesa.command.TotemStacking;
 import teamzesa.user.IOHandler;
 
 import java.io.File;
+import java.io.IOException;
 
 public final class R01 extends JavaPlugin implements Listener {
     private static PluginManager pm;
     private static IOHandler ioHandler;
-    private File userDataFile;
 
     public R01() {
         pm = getServer().getPluginManager();
         ioHandler = IOHandler.getInstance();
-        userDataFile = new File(this.getDataFolder(), "userData.json");
+    }
+
+    private File checkUpDataFile() {
+        File file = new File(this.getDataFolder(), "userData.json");
+
+        if (!file.exists())
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        return file;
     }
 
     private void commandHandler() {
         this.getCommand("토템").setExecutor(new TotemStacking());
         this.getCommand("NameChanger").setExecutor(new NameChanger());
-        this.getCommand("SavaUserData").setExecutor(new SaveUserData(userDataFile));
+        this.getCommand("SaveUserData").setExecutor(new SaveUserData(checkUpDataFile()));
     }
 
     @Override
     public void onEnable() {
-        ioHandler.inputUserData(userDataFile);  // user Data Set
+        ioHandler.inputUserData(checkUpDataFile());  // user Data Set
         commandHandler(); // command set
 
         pm.registerEvents(this,this);
@@ -45,6 +56,6 @@ public final class R01 extends JavaPlugin implements Listener {
 
     @Override
     public void onDisable() {
-        ioHandler.outputUserData(userDataFile);
+        ioHandler.outputUserData(checkUpDataFile());
     }
 }
