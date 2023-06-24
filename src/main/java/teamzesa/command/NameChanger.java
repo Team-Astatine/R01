@@ -6,6 +6,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.Team;
 import teamzesa.user.User;
 import teamzesa.user.UserHandler;
 
@@ -32,19 +34,31 @@ public class NameChanger implements CommandExecutor {
         String newNickname = args[1];
         player.sendMessage(ChatColor.YELLOW + player.getName() + "님의 닉네임을 " + newNickname + "로 변경하였습니다.");
 
-        ChatColor listNameColor = ChatColor.RESET;
+        ChatColor listNameColor = null;
 
         if (args[2].equals("moder"))
             listNameColor = ChatColor.RED;
 
         if (args[2].equals("user"))
-            listNameColor = ChatColor.WHITE;
+            listNameColor = ChatColor.RESET;
 
         String newName = listNameColor + newNickname;
 
         player.setPlayerListName(newName);
+        setPlayerNameTag(player,newName);
         userHandler.updateUser(player.getUniqueId(),newName);
 
         return true;
+    }
+
+    public void setPlayerNameTag(Player player, String nameTag) {
+        Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
+        Team team = scoreboard.getEntryTeam(player.getName());
+
+        if (team == null)
+            team = scoreboard.registerNewTeam(player.getName());
+
+        team.setPrefix(nameTag);
+        team.addEntry(player.getName());
     }
 }
