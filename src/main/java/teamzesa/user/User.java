@@ -45,4 +45,8 @@ public class User {
     public void setHealthScale(double healthScale) {
         this.healthScale = healthScale;
     }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
 }
