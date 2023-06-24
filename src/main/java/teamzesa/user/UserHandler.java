@@ -43,7 +43,19 @@ public class UserHandler {
         userData.replace(user.getUuid(), user);
     }
 
-    public void updateUser(UUID uuid,double healthScale) {
+    public void updateDyingUser(Player player) {
+        Player p = player;
+        p.setLevel(0);
+        p.setHealthScale(20);
+
+        User user = userData.get(player.getUniqueId());
+        user.setLevel(p.getLevel());
+        user.setHealthScale(p.getHealthScale());
+
+        userData.replace(p.getUniqueId(),user);
+    }
+
+    public void updateUser(UUID uuid,double healthScale,int level) {
         User user = userData.get(uuid);
 
         if (user == null) {
@@ -52,6 +64,7 @@ public class UserHandler {
         }
 
         user.setHealthScale(healthScale);
+        user.setLevel(level);
         updateUser(user);
     }
 
