@@ -1,5 +1,6 @@
 package teamzesa.command;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -26,13 +27,8 @@ public class SaveUserData implements CommandExecutor {
             return false;
         }
 
-        BukkitRunnable task = new BukkitRunnable() {
-            @Override
-            public void run() {
-                ioHandler.outputUserData(userDataFile);
-            }
-        };
-
+        ioHandler.outputUserData(userDataFile);
+        System.out.println("Success to saving UserData");
         return true;
     }
 }
