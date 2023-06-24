@@ -7,5 +7,7 @@ authors: [ JAXPLE ]
 commands:
   NameChanger:
     description: 이름변경.
+  SavaUserData:
+    description: 유저 데이터를 저장합니다.
   토템:
     description: 토템을 합칩니다.
