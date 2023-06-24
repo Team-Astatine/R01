@@ -35,12 +35,36 @@ public class UserHandler {
         }
     }
 
-    public User getUser(Player player) {
-        return  userData.get(player.getUniqueId());
+    public User getUser(UUID uuid) {
+        return  userData.get(uuid);
     }
 
     public void updateUser(User user) {
         userData.replace(user.getUuid(), user);
+    }
+
+    public void updateUser(UUID uuid,double healthScale) {
+        User user = userData.get(uuid);
+
+        if (user == null) {
+            Bukkit.getLogger().warning("해당 유저는 존재하지 않습니다.");
+            return;
+        }
+
+        user.setHealthScale(healthScale);
+        updateUser(user);
+    }
+
+    public void updateUser(UUID uuid,String koreanName) {
+        User user = userData.get(uuid);
+
+        if (user == null) {
+            Bukkit.getLogger().warning("해당 유저는 존재하지 않습니다.");
+            return;
+        }
+
+        user.setKoreanName(koreanName);
+        updateUser(user);
     }
 
     public void removeUser(Player player) {
