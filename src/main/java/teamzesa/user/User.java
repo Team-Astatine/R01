@@ -41,4 +41,8 @@ public class User {
     public void setKoreanName(String koreanName) {
         this.koreanName = koreanName;
     }
+
+    public void setHealthScale(double healthScale) {
+        this.healthScale = healthScale;
+    }
 }
