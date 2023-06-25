@@ -13,7 +13,7 @@ import teamzesa.user.IOHandler;
 import java.io.File;
 import java.io.IOException;
 
-public final class R01 extends JavaPlugin implements Listener {
+public final class R01 extends JavaPlugin {
     private static PluginManager pm;
     private static IOHandler ioHandler;
 
@@ -45,7 +45,6 @@ public final class R01 extends JavaPlugin implements Listener {
         ioHandler.inputUserData(checkUpDataFile());  // user Data Set
         commandHandler(); // command set
 
-        pm.registerEvents(this,this);
         pm.registerEvents(new RaidAnnouncer(),this);
         pm.registerEvents(new UserJoinHandler(),this);
         pm.registerEvents(new ExplosiveHandler(),this);
