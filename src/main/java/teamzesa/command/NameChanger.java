@@ -19,11 +19,6 @@ public class NameChanger implements CommandExecutor {
     }
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (sender instanceof Player) {
-            sender.sendMessage(ChatColor.RED + "권한이 없습니다.");
-            return false;
-        }
-
         Player player = Bukkit.getPlayer(args[0]);
 
         if (player == null) {
@@ -58,7 +53,7 @@ public class NameChanger implements CommandExecutor {
         if (team == null)
             team = scoreboard.registerNewTeam(player.getName());
 
-        team.setPrefix(nameTag);
+        team.setPrefix(nameTag+" ");
         team.addEntry(player.getName());
     }
 }
