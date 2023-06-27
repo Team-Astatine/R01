@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 
 public class TotemStacking implements CommandExecutor {
     private final int MINIMUM = 1; // 합칠 수 있는 최소단위
-    private List<Integer> itemList;
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -24,7 +23,7 @@ public class TotemStacking implements CommandExecutor {
                 Arrays.asList(p.getInventory().getContents()));
 
         // Checking total Totem amount
-        itemList = playerItemStack.stream()
+        List<Integer> itemList = playerItemStack.stream()
                 .filter(item -> item != null && item.getType() == Material.TOTEM_OF_UNDYING)
                 .map(ItemStack::getAmount)
                 .collect(Collectors.toList());
