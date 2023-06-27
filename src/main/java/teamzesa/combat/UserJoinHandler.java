@@ -5,8 +5,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import teamzesa.user.User;
-import teamzesa.user.UserHandler;
+import teamzesa.userValue.User;
+import teamzesa.userValue.UserHandler;
 
 public class UserJoinHandler implements Listener {
     private UserHandler userHandler;

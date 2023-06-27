@@ -8,8 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
-import teamzesa.user.User;
-import teamzesa.user.UserHandler;
+import teamzesa.userValue.UserHandler;
 
 public class NameChanger implements CommandExecutor {
     private UserHandler userHandler;
@@ -28,7 +27,6 @@ public class NameChanger implements CommandExecutor {
 
         String newNickname = args[1];
         player.sendMessage(ChatColor.YELLOW + player.getName() + "님의 닉네임을 " + newNickname + "로 변경하였습니다.");
-
         ChatColor listNameColor = null;
 
         if (args[2].equals("moder"))

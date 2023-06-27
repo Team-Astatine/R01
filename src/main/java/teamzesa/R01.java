@@ -1,6 +1,5 @@
 package teamzesa;
 
-import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import teamzesa.combat.*;
@@ -8,7 +7,7 @@ import teamzesa.command.NameChanger;
 import teamzesa.announcer.RaidAnnouncer;
 import teamzesa.command.SaveUserData;
 import teamzesa.command.TotemStacking;
-import teamzesa.user.IOHandler;
+import teamzesa.userValue.IOHandler;
 
 import java.io.File;
 import java.io.IOException;

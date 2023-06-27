@@ -1,11 +1,9 @@
 package teamzesa.combat;
 
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import teamzesa.user.User;
-import teamzesa.user.UserHandler;
+import teamzesa.userValue.UserHandler;
 
 public class UserDyingHandler implements Listener {
     private UserHandler userHandler;

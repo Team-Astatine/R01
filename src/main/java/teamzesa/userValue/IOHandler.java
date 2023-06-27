@@ -1,4 +1,4 @@
-package teamzesa.user;
+package teamzesa.userValue;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
