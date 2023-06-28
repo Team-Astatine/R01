@@ -11,15 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IOHandler {
-    private static IOHandler IOInstance = new IOHandler();
+    private static IOHandler instance = new IOHandler();
     private final UserHandler userHandler;
 
     private IOHandler() {
         userHandler = UserHandler.getUserInstance();
     }
 
-    public static IOHandler getInstance() {
-        return IOInstance;
+    public static IOHandler getIOInstance() {
+        return instance;
     }
 
     public void inputUserData(File userDataFile) {

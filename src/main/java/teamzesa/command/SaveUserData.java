@@ -14,7 +14,7 @@ public class SaveUserData implements CommandExecutor {
     private File userDataFile;
 
     public SaveUserData(File userDataFile) {
-        ioHandler = IOHandler.getInstance();
+        ioHandler = IOHandler.getIOInstance();
         this.userDataFile = userDataFile;
     }
 
