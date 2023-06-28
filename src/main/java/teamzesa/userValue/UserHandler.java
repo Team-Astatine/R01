@@ -19,7 +19,7 @@ public class UserHandler {
         return userData;
     }
 
-    public static UserHandler getInstance() {
+    public static UserHandler getUserInstance() {
         return instance;
     }
 

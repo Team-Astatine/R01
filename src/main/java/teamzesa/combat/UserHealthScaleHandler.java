@@ -15,7 +15,7 @@ public class UserHealthScaleHandler implements Listener {
     private final UserHandler userHandler;
 
     public UserHealthScaleHandler() {
-        userHandler = UserHandler.getInstance();
+        userHandler = UserHandler.getUserInstance();
     }
 
     @EventHandler

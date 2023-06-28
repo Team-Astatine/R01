@@ -12,7 +12,7 @@ public class UserJoinHandler implements Listener {
     private UserHandler userHandler;
 
     public UserJoinHandler() {
-        userHandler = UserHandler.getInstance();
+        userHandler = UserHandler.getUserInstance();
     }
 
     @EventHandler
