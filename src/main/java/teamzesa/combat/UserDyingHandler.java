@@ -8,7 +8,7 @@ import teamzesa.userValue.UserHandler;
 public class UserDyingHandler implements Listener {
     private UserHandler userHandler;
     public UserDyingHandler() {
-        userHandler = UserHandler.getUserInstance();
+        userHandler = UserHandler.getUserHandler();
     }
     @EventHandler
     public void onDeathPlayer(PlayerDeathEvent e) {

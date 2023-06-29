@@ -14,7 +14,7 @@ public class NameChanger implements CommandExecutor {
     private UserHandler userHandler;
 
     public NameChanger() {
-        userHandler = UserHandler.getUserInstance();
+        userHandler = UserHandler.getUserHandler();
     }
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
