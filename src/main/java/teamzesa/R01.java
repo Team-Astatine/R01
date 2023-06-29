@@ -18,7 +18,7 @@ public final class R01 extends JavaPlugin {
 
     public R01() {
         pm = getServer().getPluginManager();
-        ioHandler = IOHandler.getIOInstance();
+        ioHandler = IOHandler.getIOHandler();
     }
 
     private File checkUpDataFile() {

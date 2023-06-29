@@ -15,10 +15,10 @@ public class IOHandler {
     private final UserHandler userHandler;
 
     private IOHandler() {
-        userHandler = UserHandler.getUserInstance();
+        userHandler = UserHandler.getUserHandler();
     }
 
-    public static IOHandler getIOInstance() {
+    public static IOHandler getIOHandler() {
         return instance;
     }
 
