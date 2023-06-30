@@ -11,5 +11,16 @@ commands:
   SaveUserData:
     description: 유저 데이터를 저장합니다.
     permission: R01.SaveData
+  몸통:
+    description: 손에 든 아이템을 몸통에 착용합니다.
+    permission: R01.ChestArmour
+  바지:
+    description: 손에 든 아이템을 바지에 착용합니다.
+    permission: R01.PantsArmour
+  신발:
+    description: 손에 든 아이템을 신발에 착용합니다.
+    permission: R01.BootsArmour
+  머리:
+    description: 손에 든 아이템을 머리에 착용합니다.
   토템:
     description: 토템을 합칩니다.

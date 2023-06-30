@@ -3,6 +3,7 @@ package teamzesa;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import teamzesa.combat.*;
+import teamzesa.command.ArmourSet;
 import teamzesa.command.NameChanger;
 import teamzesa.announcer.RaidAnnouncer;
 import teamzesa.command.SaveUserData;
@@ -34,6 +35,10 @@ public final class R01 extends JavaPlugin {
     }
 
     private void commandHandler() {
+        this.getCommand("머리").setExecutor(new ArmourSet());
+        this.getCommand("몸통").setExecutor(new ArmourSet());
+        this.getCommand("바지").setExecutor(new ArmourSet());
+        this.getCommand("신발").setExecutor(new ArmourSet());
         this.getCommand("토템").setExecutor(new TotemStacking());
         this.getCommand("NameChanger").setExecutor(new NameChanger());
         this.getCommand("SaveUserData").setExecutor(new SaveUserData(checkUpDataFile()));
