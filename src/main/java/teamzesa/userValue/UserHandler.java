@@ -2,12 +2,15 @@ package teamzesa.userValue;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class UserHandler {
+public class UserHandler implements Listener {
     private static UserHandler instance = new UserHandler();
     private static Map<UUID, User> userData;
 
@@ -43,31 +46,6 @@ public class UserHandler {
         userData.replace(user.getUuid(), user);
     }
 
-    public void updateDyingUser(Player player) {
-        Player p = player;
-        p.setLevel(0);
-        p.setHealthScale(20);
-
-        User user = userData.get(player.getUniqueId());
-        user.setLevel(p.getLevel());
-        user.setHealthScale(p.getHealthScale());
-
-        userData.replace(p.getUniqueId(),user);
-    }
-
-    public void updateUser(UUID uuid,double healthScale,int level) {
-        User user = userData.get(uuid);
-
-        if (user == null) {
-            Bukkit.getLogger().warning("해당 유저는 존재하지 않습니다.");
-            return;
-        }
-
-        user.setHealthScale(healthScale);
-        user.setLevel(level);
-        updateUser(user);
-    }
-
     public void updateUser(UUID uuid,double healthScale) {
         User user = userData.get(uuid);
 
@@ -92,8 +70,20 @@ public class UserHandler {
         updateUser(user);
     }
 
-    public void removeUser(Player player) {
-        Bukkit.getLogger().info(player.getName() + "님이 삭제됐습니다.");
-        userData.remove(player.getUniqueId());
+    @EventHandler
+    public void saveAllUserData() {
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            updateUser(player.getUniqueId(), player.getHealthScale());
+        }
+    }
+
+    @EventHandler
+    public void onQuit(PlayerQuitEvent e) {
+        Player player = e.getPlayer();
+
+        if (player.getHealthScale() == 20.0)
+            return;
+
+        updateUser(player.getUniqueId(), player.getHealthScale());
     }
 }

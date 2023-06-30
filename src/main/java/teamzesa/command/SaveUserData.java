@@ -6,15 +6,18 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import teamzesa.userValue.IOHandler;
+import teamzesa.userValue.UserHandler;
 
 import java.io.File;
 
 public class SaveUserData implements CommandExecutor {
     private static IOHandler ioHandler;
-    private File userDataFile;
+    private static UserHandler userHandler;
+    private final File userDataFile;
 
     public SaveUserData(File userDataFile) {
         ioHandler = IOHandler.getIOHandler();
+        userHandler = UserHandler.getUserHandler();
         this.userDataFile = userDataFile;
     }
 
@@ -25,6 +28,7 @@ public class SaveUserData implements CommandExecutor {
             return false;
         }
 
+        userHandler.saveAllUserData();
         ioHandler.outputUserData(userDataFile);
         System.out.println("Success to saving UserData");
         return true;

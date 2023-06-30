@@ -5,6 +5,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 import teamzesa.userValue.UserHandler;
 
 public class UserHealthScaleHandler implements Listener {
@@ -31,7 +33,7 @@ public class UserHealthScaleHandler implements Listener {
         if (killer.getHealthScale() >= MAX_HEALTH_SCALE)
             return;
 
-        if (killed != killer) {
+        if (killed == killer) {
             return;
         }
 
@@ -42,14 +44,10 @@ public class UserHealthScaleHandler implements Listener {
 
         killed.setHealthScale(killedHealth);
         killer.setHealthScale(killerHealth);
-
-        userHandler.updateUser(killed.getUniqueId() , killedHealth);
-        userHandler.updateUser(killer.getUniqueId() , killerHealth);
     }
 
     public void talking(Player killed, Player killer) {
         killed.sendRawMessage(ChatColor.RED + killer.getName() + "님이 체력을 약탈했습니다.");
         killer.sendRawMessage(ChatColor.RED + killed.getName() + "님의 체력을 약탈했습니다.");
     }
-
 }
