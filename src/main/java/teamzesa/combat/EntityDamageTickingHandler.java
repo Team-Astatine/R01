@@ -1,6 +1,7 @@
 package teamzesa.combat;
 
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -23,6 +24,7 @@ public class EntityDamageTickingHandler implements Listener {
                 Player target = (Player) e.getEntity();
                 //default 20
                 target.setMaximumNoDamageTicks(1);
+//                ((LivingEntity) e.getEntity()).setMaximumNoDamageTicks(1);
             }
         };
         task.run();
