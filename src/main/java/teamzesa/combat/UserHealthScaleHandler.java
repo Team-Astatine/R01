@@ -54,8 +54,4 @@ public class UserHealthScaleHandler implements Listener {
         killer.sendRawMessage(ChatColor.RED + killed.getName() + "님의 체력을 약탈했습니다.");
     }
 
-    @EventHandler
-    public void healthSet(BlockBreakEvent e){
-        e.getPlayer().setHealthScale(20);
-    }
 }
