@@ -32,12 +32,13 @@ public final class R01 extends JavaPlugin {
     }
 
     private void commandHandler() {
-        this.getCommand("Motd").setExecutor(new MotdSet());
         this.getCommand("머리").setExecutor(new ArmourSet());
         this.getCommand("몸통").setExecutor(new ArmourSet());
         this.getCommand("바지").setExecutor(new ArmourSet());
         this.getCommand("신발").setExecutor(new ArmourSet());
         this.getCommand("토템").setExecutor(new TotemStacking());
+        this.getCommand("Motd").setExecutor(new MotdSet());
+        this.getCommand("체력초기화").setExecutor(new HealthSet());
         this.getCommand("NameChanger").setExecutor(new NameChanger());
         this.getCommand("SaveUserData").setExecutor(new SaveUserData(checkUpDataFile()));
     }
