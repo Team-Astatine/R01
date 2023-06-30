@@ -13,11 +13,8 @@
   * 기존 엔티티 폭팔범위를 수정합니다.
   * TnT Cart , TnT , Creeper 등
   
-* PlayerDyingHandler
-  * 플레이어 사망 시 이벤트를 처리합니다.
-  
 * PlayerHealthScaleHandler
-  * 레벨 & 킬에 의한 영구체력을 설정합니다.
+  * 킬에 의한 영구체력을 설정합니다.
   
 * PlayerJoinHandler
   * 플레이어 접속 시 해당 플레이어 데이터를 적용합니다.

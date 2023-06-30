@@ -1,17 +1,18 @@
 package teamzesa.combat;
 
-import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerLevelChangeEvent;
-import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import teamzesa.userValue.UserHandler;
 
 public class UserHealthScaleHandler implements Listener {
     private final double MAX_HEALTH_SCALE = 60.0;
-    private final int STANDARD_LEVEL = 10;
-    private final int DEFAULT_PLAYER_HEALTH = 20;
+    private final Double MIN_HEALTH_SCALE = 4.0;
+    private final Double STEP_SIZE = 2.0;
     private final UserHandler userHandler;
 
     public UserHealthScaleHandler() {
@@ -19,30 +20,42 @@ public class UserHealthScaleHandler implements Listener {
     }
 
     @EventHandler
-    public void expChangeEvent(PlayerLevelChangeEvent e) {
-        Player player = e.getPlayer();
-        updatePlayerHealthScale(player);
+    public void onPlayerDeath(PlayerDeathEvent e) {
+        Player killed = e.getEntity();
+        Player killer = killed.getKiller();
+
+        if (killer == null)
+            return;
+
+        if (killed.getHealthScale() <= MIN_HEALTH_SCALE)
+            return;
+
+        if (killer.getHealthScale() >= MAX_HEALTH_SCALE)
+            return;
+
+        if (killed != killer) {
+            return;
+        }
+
+        talking(killed,killer);
+
+        double killedHealth = killed.getHealthScale() - STEP_SIZE;
+        double killerHealth = killer.getHealthScale() + STEP_SIZE;
+
+        killed.setHealthScale(killedHealth);
+        killer.setHealthScale(killerHealth);
+
+        userHandler.updateUser(killed.getUniqueId() , killedHealth);
+        userHandler.updateUser(killer.getUniqueId() , killerHealth);
     }
 
-    private void updatePlayerHealthScale(Player player) {
-        int playerLevel = player.getLevel();
-        double playerHealthScale = player.getHealthScale();
+    public void talking(Player killed, Player killer) {
+        killed.sendRawMessage(ChatColor.RED + killer.getName() + "님이 체력을 약탈했습니다.");
+        killer.sendRawMessage(ChatColor.RED + killed.getName() + "님의 체력을 약탈했습니다.");
+    }
 
-        if (playerHealthScale > MAX_HEALTH_SCALE)
-            return;
-
-        if (playerLevel < STANDARD_LEVEL)
-            return;
-
-        BukkitRunnable task = new BukkitRunnable() {
-            @Override
-            public void run() {
-                int extraHealth = (playerLevel / STANDARD_LEVEL) * 2;
-                player.setHealthScale(DEFAULT_PLAYER_HEALTH + (double) extraHealth);
-                userHandler.updateUser(player.getUniqueId(),player.getHealthScale(),player.getLevel());
-            }
-        };
-
-        task.runTaskLater(Bukkit.getPluginManager().getPlugin("R01"), 1L);
+    @EventHandler
+    public void healthSet(BlockBreakEvent e){
+        e.getPlayer().setHealthScale(20);
     }
 }

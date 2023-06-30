@@ -68,6 +68,18 @@ public class UserHandler {
         updateUser(user);
     }
 
+    public void updateUser(UUID uuid,double healthScale) {
+        User user = userData.get(uuid);
+
+        if (user == null) {
+            Bukkit.getLogger().warning("해당 유저는 존재하지 않습니다.");
+            return;
+        }
+
+        user.setHealthScale(healthScale);
+        updateUser(user);
+    }
+
     public void updateUser(UUID uuid,String koreanName) {
         User user = userData.get(uuid);
 
