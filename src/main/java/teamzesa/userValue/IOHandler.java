@@ -25,7 +25,7 @@ public class IOHandler {
     public void inputUserData(File userDataFile) {
         Gson gson = new Gson();
         try (FileReader reader = new FileReader(userDataFile)) {
-            userHandler.updateUserData(gson.fromJson(reader,User[].class));
+            userHandler.updateAllUserData(gson.fromJson(reader,User[].class));
         } catch (IOException e) {
             e.printStackTrace();
         }

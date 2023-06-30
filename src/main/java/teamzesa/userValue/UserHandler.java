@@ -31,13 +31,6 @@ public class UserHandler implements Listener {
         userData.put(player.getUniqueId(), new User(player));
     }
 
-    public void updateUserData(User[] newUserData) {
-        for (User user : newUserData) {
-            userData.put(user.getUuid(), user);
-//            Bukkit.getLogger().info(user.getName());
-        }
-    }
-
     public User getUser(UUID uuid) {
         return  userData.get(uuid);
     }
@@ -68,6 +61,13 @@ public class UserHandler implements Listener {
 
         user.setKoreanName(koreanName);
         updateUser(user);
+    }
+
+    public void updateAllUserData(User[] newUserData) {
+        for (User user : newUserData) {
+            userData.put(user.getUuid(), user);
+//            Bukkit.getLogger().info(user.getName());
+        }
     }
 
     @EventHandler
