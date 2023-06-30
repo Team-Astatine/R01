@@ -41,13 +41,15 @@ public class UserHandler implements Listener {
 
     public void updateUser(UUID uuid,double healthScale) {
         User user = userData.get(uuid);
+        Player player = Bukkit.getPlayer(uuid);
 
         if (user == null) {
             Bukkit.getLogger().warning("해당 유저는 존재하지 않습니다.");
-            return;
+            addUser(player);
         }
 
         user.setHealthScale(healthScale);
+        player.setHealthScale(healthScale);
         updateUser(user);
     }
 
