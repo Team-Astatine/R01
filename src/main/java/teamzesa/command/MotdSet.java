@@ -14,7 +14,8 @@ public class MotdSet implements CommandExecutor {
             return false;
         }
 
-        Bukkit.setMotd(label);
+        Bukkit.setMotd(args[0]);
+        System.out.println(args[0] + "로 MOTD 재설정");
         return true;
     }
 }
