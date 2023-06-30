@@ -5,8 +5,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.scheduler.BukkitRunnable;
 import teamzesa.userValue.UserHandler;
 
 public class UserHealthScaleHandler implements Listener {
@@ -42,8 +40,8 @@ public class UserHealthScaleHandler implements Listener {
         double killedHealth = killed.getHealthScale() - STEP_SIZE;
         double killerHealth = killer.getHealthScale() + STEP_SIZE;
 
-        killed.setHealthScale(killedHealth);
-        killer.setHealthScale(killerHealth);
+        userHandler.updateUser(killed.getUniqueId(),killedHealth);
+        userHandler.updateUser(killer.getUniqueId(),killerHealth);
     }
 
     public void talking(Player killed, Player killer) {
