@@ -16,7 +16,7 @@ public class HealthSet implements CommandExecutor {
             return false;
 
         player.setHealthScale(Double.parseDouble(args[1]));
-        sender.sendMessage(Color.YELLOW + args[0] + "님의 체력이" + args[1] + "로 설정됐습니다.");
+        sender.sendPlainMessage(Color.YELLOW + args[0] + "님의 체력이" + args[1] + "로 설정됐습니다.");
         return true;
     }
 }

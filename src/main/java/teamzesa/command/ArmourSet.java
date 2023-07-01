@@ -35,7 +35,7 @@ public class ArmourSet implements CommandExecutor {
         ItemStack itemInHand = playerInventory.getItemInMainHand();
 
         if (itemInHand == null) {
-            this.player.sendMessage(Color.RED + "손에 아이템이 없습니다.");
+            this.player.sendPlainMessage(Color.RED + "손에 아이템이 없습니다.");
             return;
         }
 
@@ -48,7 +48,7 @@ public class ArmourSet implements CommandExecutor {
         ItemStack itemInHand = playerInventory.getItemInMainHand();
 
         if (itemInHand == null) {
-            this.player.sendMessage(Color.RED + "손에 아이템이 없습니다.");
+            this.player.sendPlainMessage(Color.RED + "손에 아이템이 없습니다.");
             return;
         }
 
@@ -61,7 +61,7 @@ public class ArmourSet implements CommandExecutor {
         ItemStack itemInHand = playerInventory.getItemInMainHand();
 
         if (itemInHand == null) {
-            this.player.sendMessage(Color.RED + "손에 아이템이 없습니다.");
+            this.player.sendPlainMessage(Color.RED + "손에 아이템이 없습니다.");
             return;
         }
 
@@ -74,7 +74,7 @@ public class ArmourSet implements CommandExecutor {
         ItemStack itemInHand = playerInventory.getItemInMainHand();
 
         if (itemInHand == null) {
-            this.player.sendMessage(Color.RED + "손에 아이템이 없습니다.");
+            this.player.sendPlainMessage(Color.RED + "손에 아이템이 없습니다.");
             return;
         }
 

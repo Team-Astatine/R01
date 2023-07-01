@@ -26,7 +26,7 @@ public class SaveUserData implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
-            sender.sendMessage(Color.RED + "권한이 없습니다.");
+            sender.sendPlainMessage(Color.RED + "권한이 없습니다.");
             return false;
         }
 

@@ -45,7 +45,7 @@ public class UserHealthScaleHandler implements Listener {
     }
 
     public void talking(Player killed, Player killer) {
-        killed.sendRawMessage(Color.RED + killer.getName() + "님이 체력을 약탈했습니다.");
-        killer.sendRawMessage(Color.RED + killed.getName() + "님의 체력을 약탈했습니다.");
+        killed.sendPlainMessage(Color.RED + killer.getName() + "님이 체력을 약탈했습니다.");
+        killer.sendPlainMessage(Color.RED + killed.getName() + "님의 체력을 약탈했습니다.");
     }
 }

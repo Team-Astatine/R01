@@ -30,12 +30,12 @@ public class TotemStacking implements CommandExecutor {
 
         // validation totemCount
         if (validMinimumTotemCount(itemList)) {
-            p.sendMessage(Color.RED + "2개 이상의 토템을 가지고 있으셔야 합니다.");
+            p.sendPlainMessage(Color.RED + "2개 이상의 토템을 가지고 있으셔야 합니다.");
             return false;
         }
 
         if (validTotemCommand(itemList)) {
-            p.sendMessage(Color.RED + "합칠 토템이 없습니다.");
+            p.sendPlainMessage(Color.RED + "합칠 토템이 없습니다.");
             return false;
         }
 
@@ -53,7 +53,7 @@ public class TotemStacking implements CommandExecutor {
 //        p.sendMessage("총 토템 " + String.valueOf(totalAmount));
         ItemStack stackOfTotem = new ItemStack(Material.TOTEM_OF_UNDYING, totalAmount);
         p.getInventory().addItem(stackOfTotem);
-        p.sendRawMessage(Color.YELLOW + "토템을 합쳤습니다.");
+        p.sendPlainMessage(Color.YELLOW + "토템을 합쳤습니다.");
 
         return true;
     }
