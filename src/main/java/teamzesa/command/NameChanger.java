@@ -21,12 +21,12 @@ public class NameChanger implements CommandExecutor {
         Player player = Bukkit.getPlayer(args[0]);
 
         if (player == null) {
-            sender.sendMessage(ChatColor.RED + "플레이어를 찾을 수 없습니다.");
+            sender.sendPlainMessage(ChatColor.RED + "플레이어를 찾을 수 없습니다.");
             return true;
         }
 
         String newNickname = args[1];
-        player.sendMessage(ChatColor.YELLOW + player.getName() + "님의 닉네임을 " + newNickname + "로 변경하였습니다.");
+        player.sendPlainMessage(ChatColor.YELLOW + player.getName() + "님의 닉네임을 " + newNickname + "로 변경하였습니다.");
         ChatColor listNameColor = null;
 
         if (args[2].equals("moder"))
