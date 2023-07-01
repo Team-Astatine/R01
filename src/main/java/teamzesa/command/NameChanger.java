@@ -37,9 +37,9 @@ public class NameChanger implements CommandExecutor {
 
         String newName = listNameColor + newNickname;
 
-        player.setCustomName(newName);
-        player.setPlayerListName(newName);
         setPlayerNameTag(player,newName);
+        player.setCustomName(newName + " " + ChatColor.WHITE + args[0]);
+        player.setPlayerListName(newName + " " + ChatColor.WHITE + args[0]);
         userHandler.updateUser(player.getUniqueId(),newName);
         return true;
     }
