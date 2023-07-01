@@ -15,18 +15,32 @@
   
 * PlayerHealthScaleHandler
   * 킬에 의한 영구체력을 설정합니다.
-  
-* PlayerJoinHandler
-  * 플레이어 접속 시 해당 플레이어 데이터를 적용합니다.
-  * 공격속도 , 최대체력 , 한글이름 등을 저장합니다.
-  * 해당 데이터는 서버종료전까지 생명주기를 가지며 업데이트 됩니다.
 
 > ## command
+* ArmourSet
+  * 손에 든 아이템을 특정부위에 착용합니다.
+  * /머리
+  * /몸통
+  * /바지
+  * /신발
+
+* HealthSet
+  * 임의로 특정유저의 체력을 조작합니다.
+  * /체력초기화 [닉네임] [체력]
+
+* MotdSet
+  * 서버 Motd를 저장합니다.
+  * /motd [설정할 이름]
+
+* SaveUserData
+  * 모든 유저정보를 저장합니다.
+  * /saveuserdata
+
 * NameChanger
   * 플레이어 이름을 변환하며 콘솔에서만 작성 가능합니다.
   * 관리자는 빨강으로 표기 됩니다.
   * 탭 리스트 , 채팅의 플레이어 이름을 변화합니다. ❌
-  * _/namechange [닉네임] [바꿀이름] user or moder_
+  * /namechange [닉네임] [바꿀이름] user or moder_
   
 * TotemStacking
   * 플레이어의 토템을 합칩니다.
@@ -36,10 +50,20 @@
     * 단, 합칠토템이 없을 시 작동하지 않습니다.
 
 > ## user
+* IOHandler
+  * 유저의 Input Output을 핸들링 합니다. 
+
+* JoinAndQuit
+  * 플레이어 접속 시 해당 플레이어 데이터를 적용합니다.
+  * 공격속도 , 최대체력 , 한글이름 등을 저장합니다.
+  * 해당 데이터는 서버종료전까지 생명주기를 가지며 업데이트 됩니다.
+
 * User
   * 유저의 Value Object 로 유저상세 정보를 저장 및 수정 합니다.
 
 * UserHandler
   * UUID 로 해당 유저의 상세 정보를 로드하여 서버에 적용합니다.
   * 서버종료 시 HashMap 생명주기가 끝나며, 저장됩니다.
+
+
 
