@@ -6,13 +6,16 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 
 public class ArmourSet implements CommandExecutor {
     private Player player;
+    private PlayerInventory playerInventory;
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         this.player = (Player)sender;
+        this.playerInventory = player.getInventory();
 
         if (label.equals("머리"))
             headSet();
@@ -28,54 +31,55 @@ public class ArmourSet implements CommandExecutor {
     }
 
     private void headSet(){
-        ItemStack armourHead = this.player.getInventory().getHelmet();
-        ItemStack onCursor = this.player.getItemOnCursor();
+        ItemStack armourHead = playerInventory.getHelmet();
+        ItemStack itemInHand = playerInventory.getItemInMainHand();
 
-        if (onCursor == null) {
+        if (itemInHand == null) {
             this.player.sendMessage(ChatColor.RED + "손에 아이템이 없습니다.");
             return;
         }
 
-        this.player.getInventory().setHelmet(onCursor);
-        player.setItemOnCursor(armourHead);
+        playerInventory.setHelmet(itemInHand);
+        playerInventory.setItemInMainHand(armourHead);
     }
 
     private void bodySet(){
-        ItemStack armourHead = this.player.getInventory().getChestplate();
-        ItemStack onCursor = this.player.getItemOnCursor();
+        ItemStack chestSet = playerInventory.getChestplate();
+        ItemStack itemInHand = playerInventory.getItemInMainHand();
 
-        if (onCursor == null) {
+        if (itemInHand == null) {
             this.player.sendMessage(ChatColor.RED + "손에 아이템이 없습니다.");
             return;
         }
 
-        this.player.getInventory().setChestplate(onCursor);
-        player.setItemOnCursor(armourHead);
+        playerInventory.setChestplate(itemInHand);
+        playerInventory.setItemInMainHand(chestSet);
     }
 
-    private void pantSet(){
-        ItemStack armourHead = this.player.getInventory().getLeggings();
-        ItemStack onCursor = this.player.getItemOnCursor();
+    private void pantSet() {
+        ItemStack pantSet = playerInventory.getLeggings();
+        ItemStack itemInHand = playerInventory.getItemInMainHand();
 
-        if (onCursor == null) {
+        if (itemInHand == null) {
             this.player.sendMessage(ChatColor.RED + "손에 아이템이 없습니다.");
             return;
         }
 
-        this.player.getInventory().setLeggings(onCursor);
-        player.setItemOnCursor(armourHead);
+        playerInventory.setLeggings(itemInHand);
+        playerInventory.setItemInMainHand(pantSet);
     }
 
-    private void shooSet(){
-        ItemStack armourHead = this.player.getInventory().getBoots();
-        ItemStack onCursor = this.player.getItemOnCursor();
+    private void shooSet() {
+        ItemStack shooSet = playerInventory.getBoots();
+        ItemStack itemInHand = playerInventory.getItemInMainHand();
 
-        if (onCursor == null) {
+        if (itemInHand == null) {
             this.player.sendMessage(ChatColor.RED + "손에 아이템이 없습니다.");
             return;
         }
 
-        this.player.getInventory().setBoots(onCursor);
-        player.setItemOnCursor(armourHead);
+        playerInventory.setBoots(itemInHand);
+        playerInventory.setItemInMainHand(shooSet);
     }
+
 }

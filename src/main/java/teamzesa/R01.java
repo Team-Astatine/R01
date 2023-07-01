@@ -6,6 +6,7 @@ import teamzesa.combat.*;
 import teamzesa.command.*;
 import teamzesa.announcer.RaidAnnouncer;
 import teamzesa.userValue.IOHandler;
+import teamzesa.userValue.UserHandler;
 
 import java.io.File;
 import java.io.IOException;
@@ -49,8 +50,8 @@ public final class R01 extends JavaPlugin {
         commandHandler(); // command set
 
         pm.registerEvents(new RaidAnnouncer(),this);
-        pm.registerEvents(new UserJoinHandler(),this);
         pm.registerEvents(new ExplosiveHandler(),this);
+        pm.registerEvents(UserHandler.getUserHandler(),this);
         pm.registerEvents(new UserHealthScaleHandler(),this);
         pm.registerEvents(new EntityDamageTickingHandler(),this);
     }
