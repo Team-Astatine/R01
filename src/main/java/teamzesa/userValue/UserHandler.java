@@ -74,7 +74,6 @@ public class UserHandler implements Listener {
         }
     }
 
-    @EventHandler
     public void saveAllUserData() {
         for (Player player : Bukkit.getOnlinePlayers()) {
             updateUser(player.getUniqueId(), player.getHealthScale());
