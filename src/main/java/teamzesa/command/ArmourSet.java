@@ -1,5 +1,6 @@
 package teamzesa.command;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -35,7 +36,7 @@ public class ArmourSet implements CommandExecutor {
         ItemStack itemInHand = playerInventory.getItemInMainHand();
 
         if (itemInHand == null) {
-            this.player.sendPlainMessage(Color.RED + "손에 아이템이 없습니다.");
+            this.player.sendPlainMessage("$c손에 아이템이 없습니다.");
             return;
         }
 
@@ -48,7 +49,7 @@ public class ArmourSet implements CommandExecutor {
         ItemStack itemInHand = playerInventory.getItemInMainHand();
 
         if (itemInHand == null) {
-            this.player.sendPlainMessage(Color.RED + "손에 아이템이 없습니다.");
+            this.player.sendPlainMessage("$c손에 아이템이 없습니다.");
             return;
         }
 
@@ -61,7 +62,7 @@ public class ArmourSet implements CommandExecutor {
         ItemStack itemInHand = playerInventory.getItemInMainHand();
 
         if (itemInHand == null) {
-            this.player.sendPlainMessage(Color.RED + "손에 아이템이 없습니다.");
+            this.player.sendPlainMessage(ChatColor.RED + "손에 아이템이 없습니다.");
             return;
         }
 
@@ -74,7 +75,7 @@ public class ArmourSet implements CommandExecutor {
         ItemStack itemInHand = playerInventory.getItemInMainHand();
 
         if (itemInHand == null) {
-            this.player.sendPlainMessage(Color.RED + "손에 아이템이 없습니다.");
+            this.player.sendPlainMessage(ChatColor.RED + "손에 아이템이 없습니다.");
             return;
         }
 
