@@ -1,7 +1,7 @@
 package teamzesa.command;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
+import org.bukkit.Color;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -16,7 +16,7 @@ public class HealthSet implements CommandExecutor {
             return false;
 
         player.setHealthScale(Double.parseDouble(args[1]));
-        sender.sendMessage(ChatColor.YELLOW + args[0] + "님의 체력이" + args[1] + "로 설정됐습니다.");
+        sender.sendMessage(Color.YELLOW + args[0] + "님의 체력이" + args[1] + "로 설정됐습니다.");
         return true;
     }
 }
