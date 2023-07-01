@@ -1,6 +1,7 @@
 package teamzesa.command;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -30,12 +31,12 @@ public class TotemStacking implements CommandExecutor {
 
         // validation totemCount
         if (validMinimumTotemCount(itemList)) {
-            p.sendMessage(ChatColor.RED + "2개 이상의 토템을 가지고 있으셔야 합니다.");
+            p.sendPlainMessage(ChatColor.RED + "2개 이상의 토템을 가지고 있으셔야 합니다.");
             return false;
         }
 
         if (validTotemCommand(itemList)) {
-            p.sendMessage(ChatColor.RED + "합칠 토템이 없습니다.");
+            p.sendPlainMessage(ChatColor.RED + "합칠 토템이 없습니다.");
             return false;
         }
 
@@ -53,7 +54,7 @@ public class TotemStacking implements CommandExecutor {
 //        p.sendMessage("총 토템 " + String.valueOf(totalAmount));
         ItemStack stackOfTotem = new ItemStack(Material.TOTEM_OF_UNDYING, totalAmount);
         p.getInventory().addItem(stackOfTotem);
-        p.sendRawMessage(ChatColor.YELLOW + "토템을 합쳤습니다.");
+        p.sendPlainMessage(ChatColor.YELLOW + "토템을 합쳤습니다.");
 
         return true;
     }
