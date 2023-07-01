@@ -1,5 +1,6 @@
 package teamzesa.command;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -30,7 +31,7 @@ public class SaveUserData implements CommandExecutor {
 
         userHandler.saveAllUserData();
         ioHandler.outputUserData(userDataFile);
-        System.out.println("Success to saving UserData");
+        Bukkit.getLogger().info("Success to saving UserData");
         return true;
     }
 }
