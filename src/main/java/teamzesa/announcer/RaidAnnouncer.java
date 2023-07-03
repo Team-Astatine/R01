@@ -6,13 +6,13 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.raid.RaidTriggerEvent;
 
 public class RaidAnnouncer implements Listener {
-    private ComponentHandler componentHandler;
+    private ComponentExchanger componentExchanger;
     private Location loc;
     private double x;
     private double z;
 
     public RaidAnnouncer() {
-        componentHandler = ComponentHandler.getAnnouncerHandler();
+        componentExchanger = ComponentExchanger.getAnnouncerHandler();
     }
 
     @EventHandler
@@ -26,7 +26,7 @@ public class RaidAnnouncer implements Listener {
         this.x = loc.getX();
         this.z = loc.getZ();
 
-        ComponentHandler.serverAnnouncer(
+        ComponentExchanger.serverAnnouncer(
                 String.format(
                         "%s 월드의 X : %1.0f Z : %1.0f 에서 레이드가 시작됩니다."
                         ,activeWorld,x,z) , 0xF80040);

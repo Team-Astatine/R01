@@ -1,19 +1,18 @@
 package teamzesa.announcer;
 
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-public class ComponentHandler {
+public class ComponentExchanger {
 
-    private static ComponentHandler instance;
+    private static ComponentExchanger instance;
     private static Component component;
 
-    public static ComponentHandler getAnnouncerHandler() {
+    public static ComponentExchanger getAnnouncerHandler() {
         if (instance == null)
-            return new ComponentHandler();
+            return new ComponentExchanger();
         return instance;
     }
 
