@@ -1,6 +1,5 @@
 package teamzesa.userValue;
 
-import org.bukkit.ChatColor;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -25,7 +24,6 @@ public class JoinAndQuit implements Listener {
         User user = userHandler.getUser(player.getUniqueId());
 
         player.setHealthScale(user.getHealthScale());
-        player.setPlayerListName(user.getKoreanName() + ChatColor.WHITE + " " + e.getPlayer().getName());
         player.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(40.0);
     }
 

@@ -1,11 +1,12 @@
 package teamzesa.command;
 
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import teamzesa.announcer.ComponentHandler;
 import teamzesa.userValue.UserIOHandler;
 import teamzesa.userValue.UserHandler;
 
@@ -25,7 +26,7 @@ public class SaveUserData implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
-            sender.sendPlainMessage(ChatColor.RED + "권한이 없습니다.");
+            ComponentHandler.playerAnnouncer((Player)sender, "권한이 없습니다.", TextColor.color(0xF80040));
             return false;
         }
 

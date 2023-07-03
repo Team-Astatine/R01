@@ -1,13 +1,13 @@
 package teamzesa.command;
 
-import org.bukkit.ChatColor;
-import org.bukkit.Color;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import teamzesa.announcer.ComponentHandler;
 
 public class ArmourSet implements CommandExecutor {
     private Player player;
@@ -36,7 +36,8 @@ public class ArmourSet implements CommandExecutor {
         ItemStack itemInHand = playerInventory.getItemInMainHand();
 
         if (itemInHand == null) {
-            this.player.sendPlainMessage("$c손에 아이템이 없습니다.");
+            ComponentHandler.playerAnnouncer(
+                    this.player,"손에 아이템이 없습니다.", TextColor.color(0xF80040));
             return;
         }
 
@@ -49,7 +50,8 @@ public class ArmourSet implements CommandExecutor {
         ItemStack itemInHand = playerInventory.getItemInMainHand();
 
         if (itemInHand == null) {
-            this.player.sendPlainMessage("$c손에 아이템이 없습니다.");
+            ComponentHandler.playerAnnouncer(
+                    this.player,"손에 아이템이 없습니다.", TextColor.color(0xF80040));
             return;
         }
 
@@ -62,7 +64,8 @@ public class ArmourSet implements CommandExecutor {
         ItemStack itemInHand = playerInventory.getItemInMainHand();
 
         if (itemInHand == null) {
-            this.player.sendPlainMessage(ChatColor.RED + "손에 아이템이 없습니다.");
+            ComponentHandler.playerAnnouncer(
+                    this.player,"손에 아이템이 없습니다.", TextColor.color(0xF80040));
             return;
         }
 
@@ -75,7 +78,8 @@ public class ArmourSet implements CommandExecutor {
         ItemStack itemInHand = playerInventory.getItemInMainHand();
 
         if (itemInHand == null) {
-            this.player.sendPlainMessage(ChatColor.RED + "손에 아이템이 없습니다.");
+            ComponentHandler.playerAnnouncer(
+                    this.player,"손에 아이템이 없습니다.", TextColor.color(0xF80040));
             return;
         }
 

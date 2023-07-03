@@ -1,5 +1,6 @@
 package teamzesa.userValue;
 
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -32,6 +33,10 @@ public class UserHandler {
         return  userData.get(uuid);
     }
 
+    public User getUser(Player player) {
+        return  userData.get(player.getUniqueId());
+    }
+
     public void updateUser(User user) {
         userData.replace(user.getUuid(), user);
     }
@@ -50,7 +55,7 @@ public class UserHandler {
         updateUser(user);
     }
 
-    public void updateUser(UUID uuid,String koreanName) {
+    public void updateUser(UUID uuid, String koreanName, TextColor color) {
         User user = userData.get(uuid);
 
         if (user == null) {
@@ -58,7 +63,8 @@ public class UserHandler {
             return;
         }
 
-        user.setKoreanName(koreanName);
+        user.setPrefix(koreanName);
+        user.setColor(color);
         updateUser(user);
     }
 
