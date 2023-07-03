@@ -9,16 +9,12 @@ import java.util.UUID;
 public class User {
     private UUID uuid;
     private String name;
-    private String prefix;
-    private TextColor color;
     private int level;
     private double healthScale;
 
     public User(Player player) {
         this.uuid = player.getUniqueId();
         this.name = player.getName();
-        this.prefix = null;
-        this.color = null;
         this.level = player.getLevel();
         this.healthScale = player.getHealthScale();
     }
@@ -37,14 +33,6 @@ public class User {
 
     public double getHealthScale() {
         return healthScale;
-    }
-
-    public void setPrefix(String prefix) {
-        this.prefix = prefix;
-    }
-
-    public void setColor(TextColor color) {
-        this.color = color;
     }
 
     public void setHealthScale(double healthScale) {

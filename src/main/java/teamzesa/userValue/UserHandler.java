@@ -55,19 +55,6 @@ public class UserHandler {
         updateUser(user);
     }
 
-    public void updateUser(UUID uuid, String koreanName, TextColor color) {
-        User user = userData.get(uuid);
-
-        if (user == null) {
-            Bukkit.getLogger().warning("해당 유저는 존재하지 않습니다.");
-            return;
-        }
-
-        user.setPrefix(koreanName);
-        user.setColor(color);
-        updateUser(user);
-    }
-
     public void updateAllUserData(User[] newUserData) {
         for (User user : newUserData) {
             userData.put(user.getUuid(), user);
