@@ -10,15 +10,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IOHandler {
-    private static IOHandler instance = new IOHandler();
+public class UserIOHandler {
+    private static UserIOHandler instance = new UserIOHandler();
     private final UserHandler userHandler;
 
-    private IOHandler() {
+    private UserIOHandler() {
         userHandler = UserHandler.getUserHandler();
     }
 
-    public static IOHandler getIOHandler() {
+    public static UserIOHandler getIOHandler() {
         return instance;
     }
 
