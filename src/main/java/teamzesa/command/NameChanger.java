@@ -41,7 +41,7 @@ public class NameChanger implements CommandExecutor {
         if (args[2].equals("user"))
             nameColor = TextColor.color(255,255,255);
 
-        Component listName = ComponentExchanger.nameChanger(args[1], nameColor);
+        Component listName = ComponentExchanger.componentSet(args[1], nameColor);
 
         player.customName(listName);
         player.playerListName(listName);

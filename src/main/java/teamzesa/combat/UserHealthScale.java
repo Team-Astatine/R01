@@ -3,6 +3,7 @@ package teamzesa.combat;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import teamzesa.announcer.ComponentExchanger;
@@ -18,7 +19,7 @@ public class UserHealthScale implements Listener {
         userHandler = UserHandler.getUserHandler();
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerDeath(PlayerDeathEvent e) {
         Player killed = e.getEntity();
         Player killer = killed.getKiller();

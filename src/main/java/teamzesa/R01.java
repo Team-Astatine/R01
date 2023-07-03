@@ -50,9 +50,9 @@ public final class R01 extends JavaPlugin {
         userIoHandler.inputUserData(checkUpDataFile());  // user Data Set
         commandHandler(); // command set
 
+        pm.registerEvents(new Explosive(),this);
         pm.registerEvents(new JoinAndQuit(),this);
         pm.registerEvents(new RaidAnnouncer(),this);
-        pm.registerEvents(new Explosive(),this);
         pm.registerEvents(new UserHealthScale(),this);
         pm.registerEvents(new EntityDamageTicking(),this);
     }

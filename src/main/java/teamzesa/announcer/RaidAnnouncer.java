@@ -6,14 +6,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.raid.RaidTriggerEvent;
 
 public class RaidAnnouncer implements Listener {
-    private ComponentExchanger componentExchanger;
     private Location loc;
     private double x;
     private double z;
-
-    public RaidAnnouncer() {
-        componentExchanger = ComponentExchanger.getAnnouncerHandler();
-    }
 
     @EventHandler
     public void raidAnnouncer(RaidTriggerEvent e) {
