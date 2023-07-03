@@ -26,6 +26,9 @@ commands:
   체력초기화:
     description: 체력을 초기화 합니다.
     permission: R01.Moder
+  나:
+    description: debuging.
+    permission: R01.debug
   머리:
     description: 손에 든 아이템을 머리에 착용합니다.
   토템:
