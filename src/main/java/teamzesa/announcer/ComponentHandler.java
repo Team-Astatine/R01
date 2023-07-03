@@ -42,10 +42,9 @@ public class ComponentHandler {
         return component;
     }
 
-    public static Component nameChanger(String prefix , String name, TextColor color) {
+    public static Component nameChanger(String prefix, TextColor color) {
         component = Component.text(prefix)
-                .color(color)
-                .append(Component.text(" " + name, NamedTextColor.WHITE));
+                .color(color);
 
         return component;
     }

@@ -36,19 +36,17 @@ public class NameChanger implements CommandExecutor {
         TextColor nameColor = null;
 
         if (args[2].equals("moder"))
-            nameColor = TextColor.color(0xF80040);
+            nameColor = TextColor.color(0xF89935);
 
         if (args[2].equals("user"))
             nameColor = TextColor.color(255,255,255);
 
-        Component prefix = ComponentHandler.componentSet(args[1],nameColor);
-        Component listName = ComponentHandler.nameChanger(args[1], player.getName(), nameColor);
+        Component listName = ComponentHandler.nameChanger(args[1], nameColor);
 
         player.customName(listName);
         player.playerListName(listName);
-        setPlayerNameTag(player, prefix);
+        setPlayerNameTag(player, listName);
 
-        userHandler.updateUser(player.getUniqueId(),args[1],nameColor);
         return true;
     }
 
