@@ -7,7 +7,6 @@ import teamzesa.command.*;
 import teamzesa.announcer.RaidAnnouncer;
 import teamzesa.userValue.IOHandler;
 import teamzesa.userValue.JoinAndQuit;
-import teamzesa.userValue.UserHandler;
 
 import java.io.File;
 import java.io.IOException;
@@ -52,9 +51,9 @@ public final class R01 extends JavaPlugin {
 
         pm.registerEvents(new JoinAndQuit(),this);
         pm.registerEvents(new RaidAnnouncer(),this);
-        pm.registerEvents(new ExplosiveHandler(),this);
-        pm.registerEvents(new UserHealthScaleHandler(),this);
-        pm.registerEvents(new EntityDamageTickingHandler(),this);
+        pm.registerEvents(new Explosive(),this);
+        pm.registerEvents(new UserHealthScale(),this);
+        pm.registerEvents(new EntityDamageTicking(),this);
     }
 
     @Override

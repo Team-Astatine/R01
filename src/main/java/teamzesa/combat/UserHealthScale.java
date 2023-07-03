@@ -7,13 +7,13 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import teamzesa.userValue.UserHandler;
 
-public class UserHealthScaleHandler implements Listener {
+public class UserHealthScale implements Listener {
     private final double MAX_HEALTH_SCALE = 60.0;
     private final Double MIN_HEALTH_SCALE = 4.0;
     private final Double STEP_SIZE = 2.0;
     private final UserHandler userHandler;
 
-    public UserHealthScaleHandler() {
+    public UserHealthScale() {
         userHandler = UserHandler.getUserHandler();
     }
 
