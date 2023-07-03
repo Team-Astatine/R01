@@ -24,7 +24,6 @@ public class JoinAndQuit implements Listener {
         User user = userHandler.getUser(player.getUniqueId());
 
         player.setHealthScale(user.getHealthScale());
-        player.setPlayerListName(user.getKoreanName());
         player.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(40.0);
     }
 

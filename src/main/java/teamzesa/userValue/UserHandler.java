@@ -1,5 +1,6 @@
 package teamzesa.userValue;
 
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -32,6 +33,10 @@ public class UserHandler {
         return  userData.get(uuid);
     }
 
+    public User getUser(Player player) {
+        return  userData.get(player.getUniqueId());
+    }
+
     public void updateUser(User user) {
         userData.replace(user.getUuid(), user);
     }
@@ -47,18 +52,6 @@ public class UserHandler {
 
         user.setHealthScale(healthScale);
         player.setHealthScale(healthScale);
-        updateUser(user);
-    }
-
-    public void updateUser(UUID uuid,String koreanName) {
-        User user = userData.get(uuid);
-
-        if (user == null) {
-            Bukkit.getLogger().warning("해당 유저는 존재하지 않습니다.");
-            return;
-        }
-
-        user.setKoreanName(koreanName);
         updateUser(user);
     }
 

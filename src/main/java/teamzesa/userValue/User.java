@@ -1,5 +1,7 @@
 package teamzesa.userValue;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.entity.Player;
 
 import java.util.UUID;
@@ -7,7 +9,6 @@ import java.util.UUID;
 public class User {
     private UUID uuid;
     private String name;
-    private String koreanName;
     private int level;
     private double healthScale;
 
@@ -34,19 +35,21 @@ public class User {
         return healthScale;
     }
 
-    public String getKoreanName() {
-        return koreanName;
-    }
-
-    public void setKoreanName(String koreanName) {
-        this.koreanName = koreanName;
-    }
-
     public void setHealthScale(double healthScale) {
         this.healthScale = healthScale;
     }
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "uuid=" + uuid +
+                ", name='" + name + '\'' +
+                ", level=" + level +
+                ", healthScale=" + healthScale +
+                '}';
     }
 }

@@ -5,20 +5,19 @@ import org.bukkit.plugin.java.JavaPlugin;
 import teamzesa.combat.*;
 import teamzesa.command.*;
 import teamzesa.announcer.RaidAnnouncer;
-import teamzesa.userValue.IOHandler;
+import teamzesa.userValue.UserIOHandler;
 import teamzesa.userValue.JoinAndQuit;
-import teamzesa.userValue.UserHandler;
 
 import java.io.File;
 import java.io.IOException;
 
 public final class R01 extends JavaPlugin {
     private static PluginManager pm;
-    private static IOHandler ioHandler;
+    private static UserIOHandler userIoHandler;
 
     public R01() {
         pm = getServer().getPluginManager();
-        ioHandler = IOHandler.getIOHandler();
+        userIoHandler = UserIOHandler.getIOHandler();
     }
 
     private File checkUpDataFile() {
@@ -34,6 +33,7 @@ public final class R01 extends JavaPlugin {
     }
 
     private void commandHandler() {
+        this.getCommand("나").setExecutor(new VoChecker());
         this.getCommand("머리").setExecutor(new ArmourSet());
         this.getCommand("몸통").setExecutor(new ArmourSet());
         this.getCommand("바지").setExecutor(new ArmourSet());
@@ -47,18 +47,18 @@ public final class R01 extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        ioHandler.inputUserData(checkUpDataFile());  // user Data Set
+        userIoHandler.inputUserData(checkUpDataFile());  // user Data Set
         commandHandler(); // command set
 
         pm.registerEvents(new JoinAndQuit(),this);
         pm.registerEvents(new RaidAnnouncer(),this);
-        pm.registerEvents(new ExplosiveHandler(),this);
-        pm.registerEvents(new UserHealthScaleHandler(),this);
-        pm.registerEvents(new EntityDamageTickingHandler(),this);
+        pm.registerEvents(new Explosive(),this);
+        pm.registerEvents(new UserHealthScale(),this);
+        pm.registerEvents(new EntityDamageTicking(),this);
     }
 
     @Override
     public void onDisable() {
-        ioHandler.outputUserData(checkUpDataFile());
+        userIoHandler.outputUserData(checkUpDataFile());
     }
 }

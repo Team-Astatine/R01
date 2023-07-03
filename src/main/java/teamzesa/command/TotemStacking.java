@@ -1,13 +1,13 @@
 package teamzesa.command;
 
-import org.bukkit.ChatColor;
-import org.bukkit.Color;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import teamzesa.announcer.ComponentHandler;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,9 +19,9 @@ public class TotemStacking implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        Player p = (Player) sender;
+        Player player = (Player) sender;
         List<ItemStack> playerItemStack = new ArrayList<>(
-                Arrays.asList(p.getInventory().getContents()));
+                Arrays.asList(player.getInventory().getContents()));
 
         // Checking total Totem amount
         List<Integer> itemList = playerItemStack.stream()
@@ -31,31 +31,31 @@ public class TotemStacking implements CommandExecutor {
 
         // validation totemCount
         if (validMinimumTotemCount(itemList)) {
-            p.sendPlainMessage(ChatColor.RED + "2개 이상의 토템을 가지고 있으셔야 합니다.");
+            ComponentHandler.playerAnnouncer(player,"2개 이상의 토템을 가지고 있으셔야 합니다.", TextColor.color(0xF80040));
             return false;
         }
 
         if (validTotemCommand(itemList)) {
-            p.sendPlainMessage(ChatColor.RED + "합칠 토템이 없습니다.");
+            ComponentHandler.playerAnnouncer(player,"합칠 토템이 없습니다.", TextColor.color(0xF80040));
             return false;
         }
 
         // offHandCheck
-        if (p.getInventory().getItemInOffHand().getType() == Material.TOTEM_OF_UNDYING)
-            p.getInventory().setItemInOffHand(null);
+        if (player.getInventory().getItemInOffHand().getType() == Material.TOTEM_OF_UNDYING)
+            player.getInventory().setItemInOffHand(null);
 
         // remove Inventory
         playerItemStack.stream()
                 .filter(item -> item != null && item.getType() == Material.TOTEM_OF_UNDYING)
-                .forEach(item -> p.getInventory().remove(item));
+                .forEach(item -> player.getInventory().remove(item));
 
         // setTotem
         int totalAmount = itemList.stream().mapToInt(Integer::intValue).sum();
 //        p.sendMessage("총 토템 " + String.valueOf(totalAmount));
         ItemStack stackOfTotem = new ItemStack(Material.TOTEM_OF_UNDYING, totalAmount);
-        p.getInventory().addItem(stackOfTotem);
-        p.sendPlainMessage(ChatColor.YELLOW + "토템을 합쳤습니다.");
+        player.getInventory().addItem(stackOfTotem);
 
+        ComponentHandler.playerAnnouncer(player,"합칠 토템이 없습니다.", TextColor.color(255,255,0));
         return true;
     }
 

@@ -1,16 +1,19 @@
 package teamzesa.announcer;
 
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.raid.RaidTriggerEvent;
 
 public class RaidAnnouncer implements Listener {
+    private ComponentHandler componentHandler;
     private Location loc;
     private double x;
     private double z;
+
+    public RaidAnnouncer() {
+        componentHandler = ComponentHandler.getAnnouncerHandler();
+    }
 
     @EventHandler
     public void raidAnnouncer(RaidTriggerEvent e) {
@@ -23,12 +26,10 @@ public class RaidAnnouncer implements Listener {
         this.x = loc.getX();
         this.z = loc.getZ();
 
-        Bukkit.broadcastMessage(
+        ComponentHandler.serverAnnouncer(
                 String.format(
-                        ChatColor.RED + "%s 월드의 X : %1.0f Y : %1.0f 에서 레이드가 시작됩니다.",
-                        activeWorld, x, z
-                )
-        );
+                        "%s 월드의 X : %1.0f Z : %1.0f 에서 레이드가 시작됩니다."
+                        ,activeWorld,x,z) , 0xF80040);
     }
 
     public String worldName(String worldName) {

@@ -1,24 +1,24 @@
 package teamzesa.command;
 
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Color;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import teamzesa.userValue.IOHandler;
+import teamzesa.announcer.ComponentHandler;
+import teamzesa.userValue.UserIOHandler;
 import teamzesa.userValue.UserHandler;
 
 import java.io.File;
 
 public class SaveUserData implements CommandExecutor {
-    private static IOHandler ioHandler;
+    private static UserIOHandler userIoHandler;
     private static UserHandler userHandler;
     private final File userDataFile;
 
     public SaveUserData(File userDataFile) {
-        ioHandler = IOHandler.getIOHandler();
+        userIoHandler = UserIOHandler.getIOHandler();
         userHandler = UserHandler.getUserHandler();
         this.userDataFile = userDataFile;
     }
@@ -26,12 +26,12 @@ public class SaveUserData implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
-            sender.sendPlainMessage(ChatColor.RED + "권한이 없습니다.");
+            ComponentHandler.playerAnnouncer((Player)sender, "권한이 없습니다.", TextColor.color(0xF80040));
             return false;
         }
 
         userHandler.saveAllUserData();
-        ioHandler.outputUserData(userDataFile);
+        userIoHandler.outputUserData(userDataFile);
         Bukkit.getLogger().info("Success to saving UserData");
         return true;
     }
