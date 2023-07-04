@@ -7,12 +7,14 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import teamzesa.announcer.ComponentExchanger;
 
+import java.awt.*;
+
 public class MotdSet implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
             ComponentExchanger
-                    .componentSet("해당 명령어는 플레이어가 사용할 수 없습니다.", "RED");
+                    .componentSet("해당 명령어는 플레이어가 사용할 수 없습니다.", Color.RED);
             return false;
         }
 

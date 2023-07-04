@@ -10,6 +10,7 @@ import teamzesa.announcer.ComponentExchanger;
 import teamzesa.userValue.UserIOHandler;
 import teamzesa.userValue.UserHandler;
 
+import java.awt.*;
 import java.io.File;
 
 public class SaveUserData implements CommandExecutor {
@@ -26,7 +27,7 @@ public class SaveUserData implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
-            ComponentExchanger.playerAnnouncer((Player)sender, "권한이 없습니다.", "RED");
+            ComponentExchanger.playerAnnouncer((Player)sender, "권한이 없습니다.", Color.RED);
             return false;
         }
 

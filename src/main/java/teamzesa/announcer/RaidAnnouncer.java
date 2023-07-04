@@ -5,6 +5,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.raid.RaidTriggerEvent;
 
+import java.awt.*;
+
 public class RaidAnnouncer implements Listener {
     private Location loc;
     private double x;
@@ -24,7 +26,7 @@ public class RaidAnnouncer implements Listener {
         ComponentExchanger.serverAnnouncer(
                 String.format(
                         "%s 월드의 X : %1.0f Z : %1.0f 에서 레이드가 시작됩니다."
-                        ,activeWorld,x,z) , "RED");
+                        ,activeWorld,x,z) , Color.RED);
     }
 
     public String worldName(String worldName) {

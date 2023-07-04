@@ -8,6 +8,8 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import teamzesa.announcer.ComponentExchanger;
 import teamzesa.userValue.UserHandler;
 
+import java.awt.*;
+
 public class UserHealthScale implements Listener {
     private final double MAX_HEALTH_SCALE = 60.0;
     private final Double MIN_HEALTH_SCALE = 4.0;
@@ -47,8 +49,8 @@ public class UserHealthScale implements Listener {
 
     public void talking(Player killed, Player killer) {
         ComponentExchanger.playerAnnouncer(
-                killed,killer.getName() + "님이 체력을 약탈했습니다.", "RED");
+                killed,killer.getName() + "님이 체력을 약탈했습니다.", Color.RED);
         ComponentExchanger.playerAnnouncer(
-                killer,killed.getName() + "님이 체력을 약탈했습니다.", "RED");
+                killer,killed.getName() + "님이 체력을 약탈했습니다.", Color.RED);
     }
 }
