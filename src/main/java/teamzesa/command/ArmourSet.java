@@ -1,13 +1,12 @@
 package teamzesa.command;
 
-import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import teamzesa.announcer.ComponentHandler;
+import teamzesa.announcer.ComponentExchanger;
 
 public class ArmourSet implements CommandExecutor {
     private Player player;
@@ -36,8 +35,8 @@ public class ArmourSet implements CommandExecutor {
         ItemStack itemInHand = playerInventory.getItemInMainHand();
 
         if (itemInHand == null) {
-            ComponentHandler.playerAnnouncer(
-                    this.player,"손에 아이템이 없습니다.", TextColor.color(0xF80040));
+            ComponentExchanger.playerAnnouncer(
+                    this.player,"손에 아이템이 없습니다.", "RED");
             return;
         }
 
@@ -50,8 +49,8 @@ public class ArmourSet implements CommandExecutor {
         ItemStack itemInHand = playerInventory.getItemInMainHand();
 
         if (itemInHand == null) {
-            ComponentHandler.playerAnnouncer(
-                    this.player,"손에 아이템이 없습니다.", TextColor.color(0xF80040));
+            ComponentExchanger.playerAnnouncer(
+                    this.player,"손에 아이템이 없습니다.", "RED");
             return;
         }
 
@@ -64,8 +63,8 @@ public class ArmourSet implements CommandExecutor {
         ItemStack itemInHand = playerInventory.getItemInMainHand();
 
         if (itemInHand == null) {
-            ComponentHandler.playerAnnouncer(
-                    this.player,"손에 아이템이 없습니다.", TextColor.color(0xF80040));
+            ComponentExchanger.playerAnnouncer(
+                    this.player,"손에 아이템이 없습니다.", "RED");
             return;
         }
 
@@ -78,8 +77,8 @@ public class ArmourSet implements CommandExecutor {
         ItemStack itemInHand = playerInventory.getItemInMainHand();
 
         if (itemInHand == null) {
-            ComponentHandler.playerAnnouncer(
-                    this.player,"손에 아이템이 없습니다.", TextColor.color(0xF80040));
+            ComponentExchanger.playerAnnouncer(
+                    this.player,"손에 아이템이 없습니다.", "RED");
             return;
         }
 

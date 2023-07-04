@@ -1,7 +1,6 @@
 package teamzesa.command;
 
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -9,7 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
-import teamzesa.announcer.ComponentHandler;
+import teamzesa.announcer.ComponentExchanger;
 import teamzesa.userValue.UserHandler;
 
 public class NameChanger implements CommandExecutor {
@@ -23,30 +22,30 @@ public class NameChanger implements CommandExecutor {
         Player player = Bukkit.getPlayer(args[0]);
 
         if (player == null) {
-            ComponentHandler.playerAnnouncer(
-                    (Player)sender,"플레이어를 찾을 수 없습니다.", TextColor.color(0xF80040));
+            ComponentExchanger.playerAnnouncer(
+                    (Player)sender,"플레이어를 찾을 수 없습니다.", "RED");
             return true;
         }
 
-        ComponentHandler.playerAnnouncer(
-                player, player.getName() + "님의 닉네임을 " + args[1] + "로 변경하였습니다."
-                        ,TextColor.color(255,255,0)
+        ComponentExchanger.playerAnnouncer(
+                player, player.getName() + "님의 닉네임을 " + args[1] + "로 변경하였습니다.","YELLOW"
         );
 
-        TextColor nameColor = null;
+        String nameColor = null;
 
         if (args[2].equals("moder"))
-            nameColor = TextColor.color(0xF89935);
+            nameColor = "ORANGE";
 
         if (args[2].equals("user"))
-            nameColor = TextColor.color(255,255,255);
+            nameColor = "WHITE";
 
-        Component listName = ComponentHandler.nameChanger(args[1], nameColor);
+        Component listName = ComponentExchanger.componentSet(args[1], nameColor);
 
         player.customName(listName);
         player.playerListName(listName);
         setPlayerNameTag(player, listName);
 
+//        userHandler.updateUser(player,listName);
         return true;
     }
 

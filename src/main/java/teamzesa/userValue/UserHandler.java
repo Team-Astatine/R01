@@ -1,9 +1,11 @@
 package teamzesa.userValue;
 
+import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -41,6 +43,12 @@ public class UserHandler {
         userData.replace(user.getUuid(), user);
     }
 
+    /*public void updateUser(Player player, Component name) {
+        User user = getUser(player.getUniqueId());
+        user.setPrefix(name.toString());
+        Bukkit.getLogger().info(name.toString());
+    }*/
+
     public void updateUser(UUID uuid,double healthScale) {
         User user = userData.get(uuid);
         Player player = Bukkit.getPlayer(uuid);
@@ -56,15 +64,14 @@ public class UserHandler {
     }
 
     public void updateAllUserData(User[] newUserData) {
-        for (User user : newUserData) {
-            userData.put(user.getUuid(), user);
-//            Bukkit.getLogger().info(user.getName());
-        }
+        userData.clear();
+
+        Arrays.stream(newUserData)
+                .forEach(user -> userData.put(user.getUuid(), user));
     }
 
     public void saveAllUserData() {
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            updateUser(player.getUniqueId(), player.getHealthScale());
-        }
+        Bukkit.getOnlinePlayers().stream()
+                .forEach(player -> updateUser(player.getUniqueId(),player.getHealthScale()));
     }
 }
