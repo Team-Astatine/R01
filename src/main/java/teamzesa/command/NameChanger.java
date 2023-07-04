@@ -1,7 +1,6 @@
 package teamzesa.command;
 
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -24,22 +23,21 @@ public class NameChanger implements CommandExecutor {
 
         if (player == null) {
             ComponentExchanger.playerAnnouncer(
-                    (Player)sender,"플레이어를 찾을 수 없습니다.", TextColor.color(0xF80040));
+                    (Player)sender,"플레이어를 찾을 수 없습니다.", "RED");
             return true;
         }
 
         ComponentExchanger.playerAnnouncer(
-                player, player.getName() + "님의 닉네임을 " + args[1] + "로 변경하였습니다."
-                        ,TextColor.color(255,255,0)
+                player, player.getName() + "님의 닉네임을 " + args[1] + "로 변경하였습니다.","YELLOW"
         );
 
-        TextColor nameColor = null;
+        String nameColor = null;
 
         if (args[2].equals("moder"))
-            nameColor = TextColor.color(0xF89935);
+            nameColor = "ORANGE";
 
         if (args[2].equals("user"))
-            nameColor = TextColor.color(255,255,255);
+            nameColor = "WHITE";
 
         Component listName = ComponentExchanger.componentSet(args[1], nameColor);
 
@@ -47,6 +45,7 @@ public class NameChanger implements CommandExecutor {
         player.playerListName(listName);
         setPlayerNameTag(player, listName);
 
+//        userHandler.updateUser(player,listName);
         return true;
     }
 

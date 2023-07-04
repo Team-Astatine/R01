@@ -1,6 +1,5 @@
 package teamzesa.command;
 
-import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -12,7 +11,8 @@ public class MotdSet implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
-            ComponentExchanger.componentSet("해당 명령어는 플레이어가 사용할 수 없습니다.", TextColor.color(0xF80040));
+            ComponentExchanger
+                    .componentSet("해당 명령어는 플레이어가 사용할 수 없습니다.", "RED");
             return false;
         }
 

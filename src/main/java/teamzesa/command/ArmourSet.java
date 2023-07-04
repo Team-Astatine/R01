@@ -1,6 +1,5 @@
 package teamzesa.command;
 
-import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -37,7 +36,7 @@ public class ArmourSet implements CommandExecutor {
 
         if (itemInHand == null) {
             ComponentExchanger.playerAnnouncer(
-                    this.player,"손에 아이템이 없습니다.", TextColor.color(0xF80040));
+                    this.player,"손에 아이템이 없습니다.", "RED");
             return;
         }
 
@@ -51,7 +50,7 @@ public class ArmourSet implements CommandExecutor {
 
         if (itemInHand == null) {
             ComponentExchanger.playerAnnouncer(
-                    this.player,"손에 아이템이 없습니다.", TextColor.color(0xF80040));
+                    this.player,"손에 아이템이 없습니다.", "RED");
             return;
         }
 
@@ -65,7 +64,7 @@ public class ArmourSet implements CommandExecutor {
 
         if (itemInHand == null) {
             ComponentExchanger.playerAnnouncer(
-                    this.player,"손에 아이템이 없습니다.", TextColor.color(0xF80040));
+                    this.player,"손에 아이템이 없습니다.", "RED");
             return;
         }
 
@@ -79,7 +78,7 @@ public class ArmourSet implements CommandExecutor {
 
         if (itemInHand == null) {
             ComponentExchanger.playerAnnouncer(
-                    this.player,"손에 아이템이 없습니다.", TextColor.color(0xF80040));
+                    this.player,"손에 아이템이 없습니다.", "RED");
             return;
         }
 

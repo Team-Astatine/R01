@@ -1,6 +1,5 @@
 package teamzesa.command;
 
-import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -18,7 +17,7 @@ public class HealthSet implements CommandExecutor {
 
         player.setHealthScale(Double.parseDouble(args[1]));
         ComponentExchanger.playerAnnouncer(
-                player,args[0] + "님의 체력이" + args[1] + "로 설정됐습니다.", TextColor.color(255,255,0)
+                player,args[0] + "님의 체력이" + args[1] + "로 설정됐습니다.", "YELLOW"
         );
 
         return true;

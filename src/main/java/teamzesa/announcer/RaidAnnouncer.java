@@ -24,7 +24,7 @@ public class RaidAnnouncer implements Listener {
         ComponentExchanger.serverAnnouncer(
                 String.format(
                         "%s 월드의 X : %1.0f Z : %1.0f 에서 레이드가 시작됩니다."
-                        ,activeWorld,x,z) , 0xF80040);
+                        ,activeWorld,x,z) , "RED");
     }
 
     public String worldName(String worldName) {

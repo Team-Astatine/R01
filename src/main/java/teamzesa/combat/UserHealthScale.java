@@ -1,6 +1,5 @@
 package teamzesa.combat;
 
-import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -48,8 +47,8 @@ public class UserHealthScale implements Listener {
 
     public void talking(Player killed, Player killer) {
         ComponentExchanger.playerAnnouncer(
-                killed,killer.getName() + "님이 체력을 약탈했습니다.", TextColor.color(0xF80040));
+                killed,killer.getName() + "님이 체력을 약탈했습니다.", "RED");
         ComponentExchanger.playerAnnouncer(
-                killer,killed.getName() + "님이 체력을 약탈했습니다.", TextColor.color(0xF80040));
+                killer,killed.getName() + "님이 체력을 약탈했습니다.", "RED");
     }
 }
