@@ -8,7 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
-import teamzesa.announcer.ComponentExchanger;
+import teamzesa.ComponentExchanger;
 import teamzesa.userValue.UserHandler;
 
 import java.awt.*;

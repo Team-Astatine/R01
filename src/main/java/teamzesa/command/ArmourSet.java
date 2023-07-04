@@ -6,7 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import teamzesa.announcer.ComponentExchanger;
+import teamzesa.ComponentExchanger;
 
 import java.awt.*;
 

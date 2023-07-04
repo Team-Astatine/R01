@@ -4,6 +4,7 @@ import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.raid.RaidTriggerEvent;
+import teamzesa.ComponentExchanger;
 
 import java.awt.*;
 

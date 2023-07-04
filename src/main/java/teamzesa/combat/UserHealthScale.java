@@ -5,7 +5,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import teamzesa.announcer.ComponentExchanger;
+import teamzesa.ComponentExchanger;
 import teamzesa.userValue.UserHandler;
 
 import java.awt.*;
