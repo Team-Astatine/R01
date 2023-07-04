@@ -12,7 +12,9 @@ import teamzesa.userValue.UserHandler;
 public class VoChecker implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        User user = UserHandler.getUserHandler().getUser((Player)sender);
+        User user = UserHandler
+                .getUserHandler()
+                .getUser((Player)sender);
 
         Bukkit.getLogger().info(user.toString());
         return true;
