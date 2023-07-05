@@ -14,7 +14,7 @@ public class VoChecker implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         User user = UserHandler
                 .getUserHandler()
-                .getUser((Player)sender);
+                .getUser(sender);
 
         Bukkit.getLogger().info(user.toString());
         return true;
