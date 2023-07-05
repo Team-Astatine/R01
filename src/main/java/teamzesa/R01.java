@@ -51,6 +51,7 @@ public final class R01 extends JavaPlugin {
         commandHandler(); // command set
 
         pm.registerEvents(new Explosive(),this);
+        pm.registerEvents(new HandSwing(),this);
         pm.registerEvents(new JoinAndQuit(),this);
         pm.registerEvents(new RaidAnnouncer(),this);
         pm.registerEvents(new UserHealthScale(),this);
