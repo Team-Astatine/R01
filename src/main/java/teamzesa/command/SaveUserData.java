@@ -5,7 +5,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import teamzesa.announcer.ComponentExchanger;
+import teamzesa.ComponentExchanger;
 import teamzesa.userValue.UserIOHandler;
 import teamzesa.userValue.UserHandler;
 
@@ -26,7 +26,7 @@ public class SaveUserData implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
-            ComponentExchanger.playerAnnouncer((Player)sender, "권한이 없습니다.", Color.RED);
+            ComponentExchanger.playerAnnouncer((Player)sender, "권한이 없습니다.", "RED");
             return false;
         }
 

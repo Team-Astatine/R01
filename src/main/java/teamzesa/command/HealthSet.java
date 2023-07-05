@@ -5,7 +5,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import teamzesa.announcer.ComponentExchanger;
+import teamzesa.ComponentExchanger;
 
 import java.awt.*;
 
@@ -19,7 +19,7 @@ public class HealthSet implements CommandExecutor {
 
         player.setHealthScale(Double.parseDouble(args[1]));
         ComponentExchanger.playerAnnouncer(
-                player,args[0] + "님의 체력이" + args[1] + "로 설정됐습니다.", Color.yellow
+                player,args[0] + "님의 체력이" + args[1] + "로 설정됐습니다.", "YELLOW"
         );
 
         return true;

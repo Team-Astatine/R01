@@ -6,7 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import teamzesa.announcer.ComponentExchanger;
+import teamzesa.ComponentExchanger;
 
 import java.awt.*;
 
@@ -38,7 +38,7 @@ public class ArmourSet implements CommandExecutor {
 
         if (itemInHand == null) {
             ComponentExchanger.playerAnnouncer(
-                    this.player,"손에 아이템이 없습니다.", Color.RED);
+                    this.player,"손에 아이템이 없습니다.", "RED");
             return;
         }
 
@@ -52,7 +52,7 @@ public class ArmourSet implements CommandExecutor {
 
         if (itemInHand == null) {
             ComponentExchanger.playerAnnouncer(
-                    this.player,"손에 아이템이 없습니다.", Color.RED);
+                    this.player,"손에 아이템이 없습니다.", "RED");
             return;
         }
 
@@ -66,7 +66,7 @@ public class ArmourSet implements CommandExecutor {
 
         if (itemInHand == null) {
             ComponentExchanger.playerAnnouncer(
-                    this.player,"손에 아이템이 없습니다.", Color.RED);
+                    this.player,"손에 아이템이 없습니다.", "RED");
             return;
         }
 
@@ -80,7 +80,7 @@ public class ArmourSet implements CommandExecutor {
 
         if (itemInHand == null) {
             ComponentExchanger.playerAnnouncer(
-                    this.player,"손에 아이템이 없습니다.", Color.RED);
+                    this.player,"손에 아이템이 없습니다.", "RED");
             return;
         }
 

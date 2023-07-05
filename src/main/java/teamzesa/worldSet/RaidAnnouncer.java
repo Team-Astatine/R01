@@ -1,9 +1,10 @@
-package teamzesa.announcer;
+package teamzesa.worldSet;
 
 import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.raid.RaidTriggerEvent;
+import teamzesa.ComponentExchanger;
 
 import java.awt.*;
 
@@ -26,7 +27,7 @@ public class RaidAnnouncer implements Listener {
         ComponentExchanger.serverAnnouncer(
                 String.format(
                         "%s 월드의 X : %1.0f Z : %1.0f 에서 레이드가 시작됩니다."
-                        ,activeWorld,x,z) , Color.RED);
+                        ,activeWorld,x,z) , "RED");
     }
 
     public String worldName(String worldName) {

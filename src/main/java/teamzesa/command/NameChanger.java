@@ -8,7 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
-import teamzesa.announcer.ComponentExchanger;
+import teamzesa.ComponentExchanger;
 import teamzesa.userValue.UserHandler;
 
 import java.awt.*;
@@ -25,21 +25,21 @@ public class NameChanger implements CommandExecutor {
 
         if (player == null) {
             ComponentExchanger.playerAnnouncer(
-                    (Player)sender,"플레이어를 찾을 수 없습니다.", Color.RED);
+                    (Player)sender,"플레이어를 찾을 수 없습니다.", "RED");
             return true;
         }
 
         ComponentExchanger.playerAnnouncer(
-                player, player.getName() + "님의 닉네임을 " + args[1] + "로 변경하였습니다.",Color.YELLOW
+                player, player.getName() + "님의 닉네임을 " + args[1] + "로 변경하였습니다.", "YELLOW"
         );
 
-        Color nameColor = null;
+        String nameColor = null;
 
         if (args[2].equals("moder"))
-            nameColor = Color.ORANGE;
+            nameColor = "ORANGE";
 
         if (args[2].equals("user"))
-            nameColor = Color.WHITE;
+            nameColor = "WHITE";
 
         Component listName = ComponentExchanger.componentSet(args[1], nameColor);
 
