@@ -1,5 +1,8 @@
 package teamzesa.combat;
 
+import org.bukkit.Location;
+import org.bukkit.Particle;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -8,7 +11,6 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import teamzesa.ComponentExchanger;
 import teamzesa.userValue.UserHandler;
 
-import java.awt.*;
 
 public class UserHealthScale implements Listener {
     private final double MAX_HEALTH_SCALE = 60.0;
@@ -22,6 +24,15 @@ public class UserHealthScale implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerDeath(PlayerDeathEvent e) {
+        if (e.getEntity().getName().equals("JAXPLE")) {
+            Location playerLocation = e.getPlayer().getLocation();
+            playerLocation.getWorld().playSound(playerLocation, Sound.ITEM_TOTEM_USE, 1.0f, 1.0f);
+            playerLocation.getWorld().spawnParticle(Particle.TOTEM, playerLocation, 100);
+
+            e.setCancelled(true);
+            return;
+        }
+
         Player killed = e.getEntity();
         Player killer = killed.getKiller();
 
