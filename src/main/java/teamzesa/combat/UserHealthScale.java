@@ -49,8 +49,8 @@ public class UserHealthScale implements Listener {
 
     public void talking(Player killed, Player killer) {
         ComponentExchanger.playerAnnouncer(
-                killed,killer.getName() + "님이 체력을 약탈했습니다.", Color.RED);
+                killed,killer.getName() + "님이 체력을 약탈했습니다.", "RED");
         ComponentExchanger.playerAnnouncer(
-                killer,killed.getName() + "님이 체력을 약탈했습니다.", Color.RED);
+                killer,killed.getName() + "님이 체력을 약탈했습니다.", "RED");
     }
 }

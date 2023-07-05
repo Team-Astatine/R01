@@ -14,7 +14,7 @@ public class MotdSet implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
             ComponentExchanger
-                    .componentSet("해당 명령어는 플레이어가 사용할 수 없습니다.", Color.RED);
+                    .componentSet("해당 명령어는 플레이어가 사용할 수 없습니다.", "RED");
             return false;
         }
 
