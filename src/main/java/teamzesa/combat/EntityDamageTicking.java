@@ -45,6 +45,12 @@ public class EntityDamageTicking implements Listener {
         if (mainHand.getType().equals(Material.NETHERITE_AXE) && offHand.getType().equals(Material.NETHERITE_AXE))
             return true;
 
+        if (mainHand.getType().equals(Material.NETHERITE_SWORD) && offHand.getType().equals(Material.NETHERITE_AXE))
+            return true;
+
+        if (mainHand.getType().equals(Material.NETHERITE_AXE) && offHand.getType().equals(Material.NETHERITE_SWORD))
+            return true;
+
         return false;
     }
 }
