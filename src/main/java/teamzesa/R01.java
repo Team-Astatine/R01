@@ -32,7 +32,6 @@ public final class R01 extends JavaPlugin {
         this.getCommand("신발").setExecutor(new ArmourSet());
         this.getCommand("토템").setExecutor(new TotemStacking());
         this.getCommand("체력초기화").setExecutor(new HealthSet());
-        this.getCommand("NameChanger").setExecutor(new NameChanger());
         this.getCommand("SaveUserData").setExecutor(new SaveUserData(checkUpDataFile()));
     }
 
@@ -47,11 +46,10 @@ public final class R01 extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        commandHandler(); // command set
-        functionHandler(); // function set
-
-        this.saveDefaultConfig();
-        userIoHandler.inputUserData(checkUpDataFile());  // user Data Set
+        this.commandHandler(); // command set
+        this.functionHandler(); // function set
+        this.saveDefaultConfig(); //dataFile set
+        userIoHandler.inputUserData(checkUpDataFile()); // user Data Set
     }
 
     @Override
