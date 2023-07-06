@@ -6,7 +6,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.raid.RaidTriggerEvent;
 import teamzesa.ComponentExchanger;
 
-import java.awt.*;
 
 public class RaidAnnouncer implements Listener {
     private Location loc;
@@ -15,9 +14,6 @@ public class RaidAnnouncer implements Listener {
 
     @EventHandler
     public void raidAnnouncer(RaidTriggerEvent e) {
-        if (e.getPlayer().getUniqueId().toString().equals("27d84b4f-5991-4001-89d5-0fdfd3374a3d"))
-            return;
-
         this.loc = e.getRaid().getLocation();
         String activeWorld = worldName(e.getWorld().getName());
 
