@@ -1,6 +1,7 @@
 package teamzesa.userValue;
 
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
@@ -29,23 +30,21 @@ public class UserHandler {
         userData.put(player.getUniqueId(), new User(player));
     }
 
-    public User getUser(UUID uuid) {
-        return  userData.get(uuid);
-    }
-
     public User getUser(Player player) {
         return  userData.get(player.getUniqueId());
+    }
+
+    public User getUser(CommandSender sender) {
+        return userData.get((Player)sender);
+    }
+
+    public User getUser(UUID uuid) {
+        return  userData.get(uuid);
     }
 
     public void updateUser(User user) {
         userData.replace(user.getUuid(), user);
     }
-
-    /*public void updateUser(Player player, Component name) {
-        User user = getUser(player.getUniqueId());
-        user.setPrefix(name.toString());
-        Bukkit.getLogger().info(name.toString());
-    }*/
 
     public void updateUser(UUID uuid,double healthScale) {
         User user = userData.get(uuid);

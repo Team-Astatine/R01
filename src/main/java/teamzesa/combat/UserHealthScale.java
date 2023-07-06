@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 import teamzesa.ComponentExchanger;
 import teamzesa.userValue.UserHandler;
 
@@ -24,14 +25,25 @@ public class UserHealthScale implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerDeath(PlayerDeathEvent e) {
-        if (e.getEntity().getName().equals("JAXPLE")) {
+        //ModerSet
+        /*if (e.getEntity().getName().equals("JAXPLE")) {
+
             Location playerLocation = e.getPlayer().getLocation();
-            playerLocation.getWorld().playSound(playerLocation, Sound.ITEM_TOTEM_USE, 1.0f, 1.0f);
-            playerLocation.getWorld().spawnParticle(Particle.TOTEM, playerLocation, 100);
+            playerLocation.setY(playerLocation.getY() + 2.0);
+
+            BukkitRunnable task = new BukkitRunnable() {
+                @Override
+                public void run() {
+                    playerLocation.getWorld().playSound(playerLocation, Sound.ENTITY_WITHER_SPAWN, 1.0f, 1.0f);
+                    playerLocation.getWorld().spawnParticle(Particle.TOTEM, playerLocation, 200);
+                    playerLocation.createExplosion(60);
+                }
+            };
 
             e.setCancelled(true);
+            task.run();
             return;
-        }
+        }*/
 
         Player killed = e.getEntity();
         Player killer = killed.getKiller();

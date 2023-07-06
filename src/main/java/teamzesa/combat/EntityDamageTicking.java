@@ -22,7 +22,8 @@ public class EntityDamageTicking implements Listener {
         Player heater = (Player) e.getDamager();
         Player target = (Player) e.getEntity();
 
-        //default 20
+//        default 20
+//        ((LivingEntity) e.getEntity()).setMaximumNoDamageTicks(1);
         int hurtTick = 20;
         boolean stuffCheck = handStuffChecker(
                 heater.getInventory().getItemInMainHand() ,
@@ -35,7 +36,6 @@ public class EntityDamageTicking implements Listener {
             hurtTick = 1;
 
         target.setMaximumNoDamageTicks(hurtTick);
-//        ((LivingEntity) e.getEntity()).setMaximumNoDamageTicks(1);
     }
 
     private Boolean handStuffChecker(ItemStack mainHand , ItemStack offHand) {

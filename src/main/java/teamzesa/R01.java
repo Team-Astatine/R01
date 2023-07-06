@@ -9,7 +9,6 @@ import teamzesa.userValue.UserIOHandler;
 import teamzesa.userValue.JoinAndQuit;
 
 import java.io.File;
-import java.io.IOException;
 
 public final class R01 extends JavaPlugin {
     private static PluginManager pm;
@@ -21,15 +20,7 @@ public final class R01 extends JavaPlugin {
     }
 
     private File checkUpDataFile() {
-        File file = new File(this.getDataFolder(), "userData.json");
-
-        if (!file.exists())
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        return file;
+        return new File(this.getDataFolder(), "userData.json");
     }
 
     private void commandHandler() {
@@ -45,17 +36,22 @@ public final class R01 extends JavaPlugin {
         this.getCommand("SaveUserData").setExecutor(new SaveUserData(checkUpDataFile()));
     }
 
-    @Override
-    public void onEnable() {
-        userIoHandler.inputUserData(checkUpDataFile());  // user Data Set
-        commandHandler(); // command set
-
+    private void functionHandler() {
         pm.registerEvents(new Explosive(),this);
         pm.registerEvents(new HandSwing(),this);
         pm.registerEvents(new JoinAndQuit(),this);
         pm.registerEvents(new RaidAnnouncer(),this);
         pm.registerEvents(new UserHealthScale(),this);
         pm.registerEvents(new EntityDamageTicking(),this);
+    }
+
+    @Override
+    public void onEnable() {
+        commandHandler(); // command set
+        functionHandler(); // function set
+
+        this.saveDefaultConfig();
+        userIoHandler.inputUserData(checkUpDataFile());  // user Data Set
     }
 
     @Override
