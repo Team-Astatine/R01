@@ -46,11 +46,10 @@ public final class R01 extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        commandHandler(); // command set
-        functionHandler(); // function set
-
-        this.saveDefaultConfig();
-        userIoHandler.inputUserData(checkUpDataFile());  // user Data Set
+        this.commandHandler(); // command set
+        this.functionHandler(); // function set
+        this.saveDefaultConfig(); //dataFile set
+        userIoHandler.inputUserData(checkUpDataFile()); // user Data Set
     }
 
     @Override
