@@ -53,6 +53,7 @@ public class UserHandler {
         if (user == null) {
             Bukkit.getLogger().warning("해당 유저는 존재하지 않습니다.");
             addUser(player);
+            return;
         }
 
         user.setHealthScale(healthScale);
