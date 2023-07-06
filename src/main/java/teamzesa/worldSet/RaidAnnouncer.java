@@ -26,7 +26,7 @@ public class RaidAnnouncer implements Listener {
                         ,activeWorld,x,z) , "RED");
     }
 
-    public String worldName(String worldName) {
+    private String worldName(String worldName) {
         switch (worldName) {
             case "world" :
                 return "야생";
