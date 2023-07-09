@@ -26,7 +26,7 @@ public class EntityDamageTicking implements Listener {
 //        ((LivingEntity) e.getEntity()).setMaximumNoDamageTicks(1);
         int hurtTick = 20;
         boolean stuffCheck = handStuffChecker(
-                heater.getInventory().getItemInMainHand() ,
+                heater.getInventory().getItemInMainHand(),
                 heater.getInventory().getItemInOffHand());
 
         if (!stuffCheck) //One Hand Sword
