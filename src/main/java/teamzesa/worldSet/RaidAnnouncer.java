@@ -23,16 +23,16 @@ public class RaidAnnouncer implements Listener {
         ComponentExchanger.serverAnnouncer(
                 String.format(
                         "%s 월드의 X : %1.0f Z : %1.0f 에서 레이드가 시작됩니다."
-                        ,activeWorld,x,z) , "RED");
+                        , activeWorld, x, z), "RED");
     }
 
     private String worldName(String worldName) {
         switch (worldName) {
-            case "world" :
+            case "world":
                 return "야생";
-            case "world_nether" :
+            case "world_nether":
                 return "지옥";
-            case "world_the_end" :
+            case "world_the_end":
                 return "엔더";
         }
         return null;
