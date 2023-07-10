@@ -26,7 +26,7 @@ public class EntityDamageTicking implements Listener {
 //        ((LivingEntity) e.getEntity()).setMaximumNoDamageTicks(1);
         int hurtTick = 20;
         boolean stuffCheck = handStuffChecker(
-                heater.getInventory().getItemInMainHand() ,
+                heater.getInventory().getItemInMainHand(),
                 heater.getInventory().getItemInOffHand());
 
         if (!stuffCheck) //One Hand Sword
@@ -39,16 +39,20 @@ public class EntityDamageTicking implements Listener {
     }
 
     private Boolean handStuffChecker(ItemStack mainHand , ItemStack offHand) {
-        if (mainHand.getType().equals(Material.NETHERITE_SWORD) && offHand.getType().equals(Material.NETHERITE_SWORD))
+        if (mainHand.getType().equals(Material.NETHERITE_SWORD)
+                && offHand.getType().equals(Material.NETHERITE_SWORD))
             return true;
 
-        if (mainHand.getType().equals(Material.NETHERITE_AXE) && offHand.getType().equals(Material.NETHERITE_AXE))
+        if (mainHand.getType().equals(Material.NETHERITE_AXE)
+                && offHand.getType().equals(Material.NETHERITE_AXE))
             return true;
 
-        if (mainHand.getType().equals(Material.NETHERITE_SWORD) && offHand.getType().equals(Material.NETHERITE_AXE))
+        if (mainHand.getType().equals(Material.NETHERITE_SWORD)
+                && offHand.getType().equals(Material.NETHERITE_AXE))
             return true;
 
-        if (mainHand.getType().equals(Material.NETHERITE_AXE) && offHand.getType().equals(Material.NETHERITE_SWORD))
+        if (mainHand.getType().equals(Material.NETHERITE_AXE)
+                && offHand.getType().equals(Material.NETHERITE_SWORD))
             return true;
 
         return false;
