@@ -8,7 +8,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.ComponentExchanger;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -55,7 +54,7 @@ public class TotemStacking implements CommandExecutor {
         ItemStack stackOfTotem = new ItemStack(Material.TOTEM_OF_UNDYING, totalAmount);
         player.getInventory().addItem(stackOfTotem);
 
-        ComponentExchanger.playerAnnouncer(player,"합칠 토템이 없습니다.", "YELLOW");
+        ComponentExchanger.playerAnnouncer(player,"토템을 합쳤습니다.", "YELLOW");
         return true;
     }
 
