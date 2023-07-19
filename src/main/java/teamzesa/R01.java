@@ -26,13 +26,13 @@ public final class R01 extends JavaPlugin {
     private void commandHandler() {
         this.getCommand("운석").setExecutor(new Meteor());
         this.getCommand("나").setExecutor(new VoChecker());
-        this.getCommand("Motd").setExecutor(new MotdSet());
         this.getCommand("머리").setExecutor(new ArmourSet());
         this.getCommand("몸통").setExecutor(new ArmourSet());
         this.getCommand("바지").setExecutor(new ArmourSet());
         this.getCommand("신발").setExecutor(new ArmourSet());
         this.getCommand("토템").setExecutor(new TotemStacking());
         this.getCommand("체력초기화").setExecutor(new HealthSet());
+        this.getCommand("Motd").setExecutor(new MotdSet(getConfig()));
         this.getCommand("SaveUserData").setExecutor(new SaveUserData(checkUpDataFile()));
     }
 
