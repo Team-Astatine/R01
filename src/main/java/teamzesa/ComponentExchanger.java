@@ -48,15 +48,4 @@ public abstract class ComponentExchanger {
                 .color(TextColor.color(colorExchanger(color)));
         return component;
     }
-
-    public static Component componentSet(StringBuilder string) {
-        component = Component.text(String.valueOf(string));
-        return component;
-    }
-
-    public static Component componentSet(StringBuilder string, String color) {
-        component = Component.text(String.valueOf(string))
-                .color(TextColor.color(colorExchanger(color)));
-        return component;
-    }
 }
