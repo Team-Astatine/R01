@@ -24,6 +24,7 @@ public final class R01 extends JavaPlugin {
     }
 
     private void commandHandler() {
+        this.getCommand("운석").setExecutor(new Meteor());
         this.getCommand("나").setExecutor(new VoChecker());
         this.getCommand("Motd").setExecutor(new MotdSet());
         this.getCommand("머리").setExecutor(new ArmourSet());
