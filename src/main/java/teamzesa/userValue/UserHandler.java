@@ -42,6 +42,14 @@ public class UserHandler {
         return  userData.get(uuid);
     }
 
+    public User getUser(String userName) {
+        return getUser(Bukkit.getPlayer(userName));
+    }
+
+    public Player getPlayer(String playerName) {
+        return Bukkit.getPlayer(getUser(playerName).getUuid());
+    }
+
     public void updateUser(User user) {
         userData.replace(user.getUuid(), user);
     }
