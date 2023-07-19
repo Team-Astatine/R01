@@ -29,6 +29,9 @@ commands:
   운석:
     description: 운석을 떨어트립니다.
     permission: R01.Meteor
+  god:
+    description: 갓 모드를 활성화 합니다.
+    permission: R01.god
   머리:
     description: 손에 든 아이템을 머리에 착용합니다.
   토템:
