@@ -4,6 +4,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import teamzesa.combat.*;
 import teamzesa.command.*;
+import teamzesa.configIOHandler.ConfigIOHandler;
 import teamzesa.worldSet.RaidAnnouncer;
 import teamzesa.userValue.UserIOHandler;
 import teamzesa.userValue.JoinAndQuit;
@@ -13,10 +14,12 @@ import java.io.File;
 public final class R01 extends JavaPlugin {
     private static PluginManager pm;
     private static UserIOHandler userIoHandler;
+    private static ConfigIOHandler configIOHandler;
 
     public R01() {
         pm = getServer().getPluginManager();
         userIoHandler = UserIOHandler.getIOHandler();
+        configIOHandler = ConfigIOHandler.getConfigIOHandler(new File(getDataFolder(),"config.yml"));
     }
 
     private File checkUpDataFile() {
@@ -24,6 +27,7 @@ public final class R01 extends JavaPlugin {
     }
 
     private void commandHandler() {
+        this.getCommand("운석").setExecutor(new Meteor());
         this.getCommand("나").setExecutor(new VoChecker());
         this.getCommand("Motd").setExecutor(new MotdSet());
         this.getCommand("머리").setExecutor(new ArmourSet());
@@ -48,8 +52,9 @@ public final class R01 extends JavaPlugin {
     public void onEnable() {
         this.commandHandler(); // command set
         this.functionHandler(); // function set
-        this.saveDefaultConfig(); //dataFile set
-        userIoHandler.inputUserData(checkUpDataFile()); // user Data Set
+        this.saveDefaultConfig(); // dataFile set
+//        configIOHandler.getMotd(); // motd set
+        userIoHandler.inputUserData(checkUpDataFile()); // userData Set
     }
 
     @Override
