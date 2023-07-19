@@ -1,4 +1,4 @@
-package teamzesa.combat;
+package teamzesa.userValue;
 
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -10,40 +10,22 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import teamzesa.ComponentExchanger;
-import teamzesa.userValue.UserHandler;
 
 
-public class UserHealthScale implements Listener {
+public class Death implements Listener {
     private final double MAX_HEALTH_SCALE = 60.0;
     private final Double MIN_HEALTH_SCALE = 4.0;
     private final Double STEP_SIZE = 2.0;
     private final UserHandler userHandler;
 
-    public UserHealthScale() {
+    public Death() {
         userHandler = UserHandler.getUserHandler();
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerDeath(PlayerDeathEvent e) {
-        //ModerSet
-        /*if (e.getEntity().getName().equals("JAXPLE")) {
-
-            Location playerLocation = e.getPlayer().getLocation();
-            playerLocation.setY(playerLocation.getY() + 2.0);
-
-            BukkitRunnable task = new BukkitRunnable() {
-                @Override
-                public void run() {
-                    playerLocation.getWorld().playSound(playerLocation, Sound.ENTITY_WITHER_SPAWN, 1.0f, 1.0f);
-                    playerLocation.getWorld().spawnParticle(Particle.TOTEM, playerLocation, 200);
-                    playerLocation.createExplosion(60);
-                }
-            };
-
-            e.setCancelled(true);
-            task.run();
+        if (onDeath(e))
             return;
-        }*/
 
         Player killed = e.getEntity();
         Player killer = killed.getKiller();
@@ -75,5 +57,27 @@ public class UserHealthScale implements Listener {
                 killed,killer.getName() + "님이 체력을 약탈했습니다.", "RED");
         ComponentExchanger.playerAnnouncer(
                 killer,killed.getName() + "님이 체력을 약탈했습니다.", "RED");
+    }
+
+    public Boolean onDeath(PlayerDeathEvent e) {
+        User user = userHandler.getUser(e.getPlayer());
+
+        if (!user.isGodMode())
+            return false;
+
+        Location playerLocation = e.getPlayer().getLocation();
+        playerLocation.setY(playerLocation.getY() + 2.0);
+        BukkitRunnable task = new BukkitRunnable() {
+            @Override
+            public void run() {
+                playerLocation.getWorld().playSound(playerLocation, Sound.ENTITY_WITHER_SPAWN, 1.0f, 1.0f);
+                playerLocation.getWorld().spawnParticle(Particle.TOTEM, playerLocation, 200);
+                playerLocation.createExplosion(60);
+            }
+        };
+
+        e.setCancelled(true);
+        task.run();
+        return true;
     }
 }
