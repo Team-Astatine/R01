@@ -10,7 +10,10 @@ import java.util.Map;
 import java.util.UUID;
 
 public class UserHandler {
-    private static UserHandler instance = new UserHandler();
+    private static class UserHandlerHolder {
+        private static UserHandler INSTANCE = new UserHandler();
+    }
+
     private static Map<UUID, User> userData;
 
     private UserHandler() {
@@ -22,7 +25,7 @@ public class UserHandler {
     }
 
     public static UserHandler getUserHandler() {
-        return instance;
+        return UserHandlerHolder.INSTANCE;
     }
 
     public void addUser(Player player) {

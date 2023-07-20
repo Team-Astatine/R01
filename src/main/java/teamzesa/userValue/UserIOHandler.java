@@ -11,7 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserIOHandler {
-    private static UserIOHandler instance = new UserIOHandler();
+    private static class UserIOHandlerHolder {
+        private static UserIOHandler INSTANCE = new UserIOHandler();
+    }
     private final UserHandler userHandler;
 
     private UserIOHandler() {
@@ -19,7 +21,7 @@ public class UserIOHandler {
     }
 
     public static UserIOHandler getIOHandler() {
-        return instance;
+        return UserIOHandlerHolder.INSTANCE;
     }
 
     public void inputUserData(File userDataFile) {
