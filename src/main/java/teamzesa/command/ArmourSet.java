@@ -8,8 +8,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import teamzesa.ComponentExchanger;
 
-import java.awt.*;
-
 public class ArmourSet extends ComponentExchanger implements CommandExecutor {
     private Player player;
     private PlayerInventory playerInventory;

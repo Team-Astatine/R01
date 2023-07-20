@@ -9,7 +9,6 @@ import teamzesa.ComponentExchanger;
 import teamzesa.userValue.UserIOHandler;
 import teamzesa.userValue.UserHandler;
 
-import java.awt.*;
 import java.io.File;
 
 public class SaveUserData extends ComponentExchanger implements CommandExecutor {

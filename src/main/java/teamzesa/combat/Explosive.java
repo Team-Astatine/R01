@@ -1,12 +1,10 @@
 package teamzesa.combat;
 
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreeperPowerEvent;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
-import org.bukkit.scheduler.BukkitRunnable;
 
 
 public class Explosive implements Listener {
