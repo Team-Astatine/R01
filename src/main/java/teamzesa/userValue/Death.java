@@ -22,11 +22,13 @@ public class Death implements Listener {
         userHandler = UserHandler.getUserHandler();
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
-    public void onPlayerDeath(PlayerDeathEvent e) {
-        if (onDeath(e))
-            return;
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+    public void onPlayerDeath(PlayerDeathEvent event) {
+        checkingGodMod(event);
+        lifeSteel(event);
+    }
 
+    private void lifeSteel(PlayerDeathEvent e) {
         Player killed = e.getEntity();
         Player killer = killed.getKiller();
 
@@ -52,18 +54,18 @@ public class Death implements Listener {
         userHandler.updateUser(killer.getUniqueId(),killerHealth);
     }
 
-    public void talking(Player killed, Player killer) {
+    private void talking(Player killed, Player killer) {
         ComponentExchanger.playerAnnouncer(
                 killed,killer.getName() + "님이 체력을 약탈했습니다.", "RED");
         ComponentExchanger.playerAnnouncer(
                 killer,killed.getName() + "님이 체력을 약탈했습니다.", "RED");
     }
 
-    public Boolean onDeath(PlayerDeathEvent e) {
+    private void checkingGodMod(PlayerDeathEvent e) {
         User user = userHandler.getUser(e.getPlayer());
 
         if (!user.isGodMode())
-            return false;
+            return;
 
         Location playerLocation = e.getPlayer().getLocation();
         playerLocation.setY(playerLocation.getY() + 2.0);
@@ -78,6 +80,5 @@ public class Death implements Listener {
 
         e.setCancelled(true);
         task.run();
-        return true;
     }
 }
