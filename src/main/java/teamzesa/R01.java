@@ -5,6 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import teamzesa.combat.*;
 import teamzesa.command.*;
 import teamzesa.configIOHandler.ConfigIOHandler;
+import teamzesa.userValue.Death;
 import teamzesa.worldSet.RaidAnnouncer;
 import teamzesa.userValue.UserIOHandler;
 import teamzesa.userValue.JoinAndQuit;
@@ -34,6 +35,7 @@ public final class R01 extends JavaPlugin {
         this.getCommand("몸통").setExecutor(new ArmourSet());
         this.getCommand("바지").setExecutor(new ArmourSet());
         this.getCommand("신발").setExecutor(new ArmourSet());
+        this.getCommand("god").setExecutor(new GodModeSet());
         this.getCommand("토템").setExecutor(new TotemStacking());
         this.getCommand("체력초기화").setExecutor(new HealthSet());
         this.getCommand("SaveUserData").setExecutor(new SaveUserData(checkUpDataFile()));
@@ -44,7 +46,7 @@ public final class R01 extends JavaPlugin {
         pm.registerEvents(new HandSwing(),this);
         pm.registerEvents(new JoinAndQuit(),this);
         pm.registerEvents(new RaidAnnouncer(),this);
-        pm.registerEvents(new UserHealthScale(),this);
+        pm.registerEvents(new Death(),this);
         pm.registerEvents(new EntityDamageTicking(),this);
     }
 

@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TotemStacking implements CommandExecutor {
+public class TotemStacking extends ComponentExchanger implements CommandExecutor {
     private final int MINIMUM = 1; // 합칠 수 있는 최소단위
 
     @Override
@@ -30,12 +30,12 @@ public class TotemStacking implements CommandExecutor {
 
         // validation totemCount
         if (validMinimumTotemCount(itemList)) {
-            ComponentExchanger.playerAnnouncer(player,"2개 이상의 토템을 가지고 있으셔야 합니다.", "RED");
+            playerAnnouncer(player,"2개 이상의 토템을 가지고 있으셔야 합니다.", "RED");
             return false;
         }
 
         if (validTotemCommand(itemList)) {
-            ComponentExchanger.playerAnnouncer(player,"합칠 토템이 없습니다.", "RED");
+            playerAnnouncer(player,"합칠 토템이 없습니다.", "RED");
             return false;
         }
 
@@ -54,7 +54,7 @@ public class TotemStacking implements CommandExecutor {
         ItemStack stackOfTotem = new ItemStack(Material.TOTEM_OF_UNDYING, totalAmount);
         player.getInventory().addItem(stackOfTotem);
 
-        ComponentExchanger.playerAnnouncer(player,"토템을 합쳤습니다.", "YELLOW");
+        playerAnnouncer(player,"토템을 합쳤습니다.", "YELLOW");
         return true;
     }
 

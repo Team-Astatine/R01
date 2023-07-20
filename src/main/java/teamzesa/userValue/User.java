@@ -9,12 +9,14 @@ public class User {
     private String name;
     private int level;
     private double healthScale;
+    private boolean godMode;
 
     public User(Player player) {
         this.uuid = player.getUniqueId();
         this.name = player.getName();
         this.level = player.getLevel();
         this.healthScale = player.getHealthScale();
+        this.godMode = false;
     }
 
     public UUID getUuid() {
@@ -37,6 +39,14 @@ public class User {
         this.level = level;
     }
 
+    public void setGodMode(boolean godMode) {
+        this.godMode = godMode;
+    }
+
+    public boolean isGodMode() {
+        return godMode;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -44,6 +54,7 @@ public class User {
                 ", name='" + name + '\'' +
                 ", level=" + level +
                 ", healthScale=" + healthScale +
+                ", godMode=" + godMode +
                 '}';
     }
 }
