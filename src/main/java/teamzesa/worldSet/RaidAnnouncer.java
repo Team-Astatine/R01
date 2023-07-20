@@ -7,7 +7,7 @@ import org.bukkit.event.raid.RaidTriggerEvent;
 import teamzesa.ComponentExchanger;
 
 
-public class RaidAnnouncer implements Listener {
+public class RaidAnnouncer extends ComponentExchanger implements Listener {
     private Location loc;
     private double x;
     private double z;
@@ -20,10 +20,8 @@ public class RaidAnnouncer implements Listener {
         this.x = loc.getX();
         this.z = loc.getZ();
 
-        ComponentExchanger.serverAnnouncer(
-                String.format(
-                        "%s 월드의 X : %1.0f Z : %1.0f 에서 레이드가 시작됩니다."
-                        , activeWorld, x, z), "RED");
+        serverAnnouncer(String.format(
+                        "%s 월드의 X : %1.0f Z : %1.0f 에서 레이드가 시작됩니다.", activeWorld, x, z), "RED");
     }
 
     private String worldName(String worldName) {

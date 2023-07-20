@@ -9,18 +9,18 @@ import java.io.File;
 import java.io.IOException;
 
 public class ConfigIOHandler {
-    private static ConfigIOHandler instance;
-    private static File file;
-    private static FileConfiguration config;
+    private static class ConfigIOHandlerHolder {
+        private static ConfigIOHandler INSTANCE = new ConfigIOHandler();
+    }
+    private File file;
+    private FileConfiguration config;
 
-    private ConfigIOHandler(File file) {
-        config = YamlConfiguration.loadConfiguration(file);
+    private ConfigIOHandler() {
+//        config = YamlConfiguration.loadConfiguration();
     }
 
-    public static ConfigIOHandler getConfigIOHandler(File file) {
-        if (instance == null)
-            return  new ConfigIOHandler(file);
-        return instance;
+    public static ConfigIOHandler getConfigIOHandler(File cofigFile) {
+        return ConfigIOHandlerHolder.INSTANCE;
     }
 
     public void setMotd(String motd) {

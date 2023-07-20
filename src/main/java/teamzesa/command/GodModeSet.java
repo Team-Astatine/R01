@@ -10,7 +10,7 @@ import teamzesa.ComponentExchanger;
 import teamzesa.userValue.User;
 import teamzesa.userValue.UserHandler;
 
-public class GodModeSet implements CommandExecutor {
+public class GodModeSet extends ComponentExchanger implements CommandExecutor {
     private UserHandler userHandler;
 
     public GodModeSet() {
@@ -23,11 +23,11 @@ public class GodModeSet implements CommandExecutor {
         User user = userHandler.getUser(player.getUniqueId());
         String mention = null;
 
-        user.setGodMode(!user.isGodMode());
+        user.setGodMode(!user.isGodMode()); // Checking GodMode Enabling
         userHandler.updateUser(user);
 
         mention = user.isGodMode() ? "당신은 이제 신 입니다." : "당신은 이제 인간 입니다.";
-        player.sendMessage(ComponentExchanger.componentSet(mention,"ORANGE"));
+        player.sendMessage(componentSet(mention,"ORANGE"));
 
         return false;
     }

@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import teamzesa.ComponentExchanger;
 
-public class MotdSet implements CommandExecutor {
+public class MotdSet extends ComponentExchanger implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -22,7 +22,7 @@ public class MotdSet implements CommandExecutor {
             customMotd.append(motd).append(" ");
 
         Bukkit.getLogger().info("Motd Set > " + customMotd);
-        Bukkit.motd(ComponentExchanger.componentSet(customMotd.toString()));
+        Bukkit.motd(componentSet(customMotd.toString()));
 //        player.sendMessage(
 //                ComponentExchanger.componentSet(customMotd.append(" 로 변경 됐습니다.").toString(),"YELLOW"));
         return true;
