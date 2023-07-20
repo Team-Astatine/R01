@@ -17,8 +17,6 @@ public class Meteor extends ComponentExchanger implements CommandExecutor {
         int z = Integer.parseInt(args[1]);
 
         ItemStack meteor = new ItemStack(Material.PAPER);
-
-
         return true;
     }
 }
