@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import teamzesa.ComponentExchanger;
 
+import java.awt.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,7 +40,7 @@ public class RecipeController extends ComponentExchanger implements Listener {
                     return;
 
                 Player player = (Player)e.getWhoClicked();
-                player.sendMessage(componentSet("해당 아이템은 조합할 수 없습니다.","RED"));
+                player.sendMessage(componentSet("해당 아이템은 조합할 수 없습니다.", Color.RED));
                 e.setCancelled(true);
             }
         };
