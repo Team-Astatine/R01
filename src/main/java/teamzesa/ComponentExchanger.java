@@ -29,6 +29,11 @@ public abstract class ComponentExchanger {
         player.sendMessage(component);
     }
 
+    public static void playerAnnouncer(Player player, String string) {
+        component = Component.text(string);
+        player.sendMessage(component);
+    }
+
     public static Component componentSet(String string) {
         component = Component.text(string);
         return component;
