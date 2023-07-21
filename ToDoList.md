@@ -1,3 +1,7 @@
 # ToDo List
 > ## 노션 계획안 링크
 https://jaxple.notion.site/d1ef58aa889d4b8ba1342fc09c0249b4?pvs=4
+
+1. ConfigIOHandler 완성 후 Motd config save 제공하기
+2. 메테오 만들기
+3. Armour Set Enum 만들기

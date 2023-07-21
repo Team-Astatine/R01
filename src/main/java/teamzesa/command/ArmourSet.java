@@ -8,9 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import teamzesa.ComponentExchanger;
 
-import java.awt.*;
-
-public class ArmourSet implements CommandExecutor {
+public class ArmourSet extends ComponentExchanger implements CommandExecutor {
     private Player player;
     private PlayerInventory playerInventory;
 
@@ -37,8 +35,7 @@ public class ArmourSet implements CommandExecutor {
         ItemStack itemInHand = playerInventory.getItemInMainHand();
 
         if (itemInHand == null) {
-            ComponentExchanger.playerAnnouncer(
-                    this.player,"손에 아이템이 없습니다.", "RED");
+            playerAnnouncer(this.player,"손에 아이템이 없습니다.", "RED");
             return;
         }
 
@@ -51,8 +48,7 @@ public class ArmourSet implements CommandExecutor {
         ItemStack itemInHand = playerInventory.getItemInMainHand();
 
         if (itemInHand == null) {
-            ComponentExchanger.playerAnnouncer(
-                    this.player,"손에 아이템이 없습니다.", "RED");
+            playerAnnouncer(this.player,"손에 아이템이 없습니다.", "RED");
             return;
         }
 
@@ -65,8 +61,7 @@ public class ArmourSet implements CommandExecutor {
         ItemStack itemInHand = playerInventory.getItemInMainHand();
 
         if (itemInHand == null) {
-            ComponentExchanger.playerAnnouncer(
-                    this.player,"손에 아이템이 없습니다.", "RED");
+            playerAnnouncer(this.player,"손에 아이템이 없습니다.", "RED");
             return;
         }
 
@@ -79,8 +74,7 @@ public class ArmourSet implements CommandExecutor {
         ItemStack itemInHand = playerInventory.getItemInMainHand();
 
         if (itemInHand == null) {
-            ComponentExchanger.playerAnnouncer(
-                    this.player,"손에 아이템이 없습니다.", "RED");
+            playerAnnouncer(this.player,"손에 아이템이 없습니다.", "RED");
             return;
         }
 
