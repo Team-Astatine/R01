@@ -21,11 +21,19 @@ public final class R01 extends JavaPlugin {
     public R01() {
         pm = getServer().getPluginManager();
         userIoHandler = UserIOHandler.getIOHandler();
-        configIOHandler = ConfigIOHandler.getConfigIOHandler(new File(getDataFolder(),"config.yml"));
+//        configIOHandler = ConfigIOHandler.getConfigIOHandler(new File(this.getDataFolder(),"config.yml"));
     }
 
-    private File checkUpDataFile() {
-        return new File(this.getDataFolder(), "userData.json");
+    private File checkUpDataFile(DataFile string) {
+        switch (string) {
+            case USER_DATA -> {
+                return new File(this.getDataFolder(), "userData.json");
+            }
+            case CONFIG -> {
+                return new File(this.getDataFolder(), "config.yml");
+            }
+        }
+        return null;
     }
 
     private void commandHandler() {
@@ -39,7 +47,9 @@ public final class R01 extends JavaPlugin {
         this.getCommand("god").setExecutor(new GodModeSet());
         this.getCommand("토템").setExecutor(new TotemStacking());
         this.getCommand("체력초기화").setExecutor(new HealthSet());
-        this.getCommand("SaveUserData").setExecutor(new SaveUserData(checkUpDataFile()));
+        this.getCommand("SaveUserData").setExecutor(
+                new SaveUserData(checkUpDataFile(DataFile.USER_DATA))
+        );
     }
 
     private void functionHandler() {
@@ -58,11 +68,15 @@ public final class R01 extends JavaPlugin {
         this.functionHandler(); // function set
         this.saveDefaultConfig(); // dataFile set
 //        configIOHandler.getMotd(); // motd set
-        userIoHandler.inputUserData(checkUpDataFile()); // userData Set
+        userIoHandler.inputUserData( // userData Set
+                checkUpDataFile(DataFile.USER_DATA)
+        );
     }
 
     @Override
     public void onDisable() {
-        userIoHandler.outputUserData(checkUpDataFile());
+        userIoHandler.outputUserData(
+                checkUpDataFile(DataFile.USER_DATA)
+        );
     }
 }
