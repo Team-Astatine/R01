@@ -23,22 +23,22 @@ public class ArmourSet extends ComponentExchanger implements CommandExecutor {
         this.player = (Player)sender;
         this.playerInventory = player.getInventory();
 
-        ItemStack itemInHand = playerInventory.getItemInMainHand();
-        if (itemInHand == null) {
+        ItemStack tmpItemInHand = playerInventory.getItemInMainHand();
+        if (tmpItemInHand == null) {
             playerAnnouncer(this.player,"손에 아이템이 없습니다.", Color.RED);
             return false;
         }
 
         ArmourType armourType = ArmourType.valueOf(label);
         switch (armourType) {
-            case 헬멧 -> headSet(itemInHand);
+            case 헬멧 -> headSet(tmpItemInHand);
         }
         return true;
     }
 
-    private void headSet(ItemStack itemInHand){
+    private void headSet(ItemStack temp){
         ItemStack armourHead = playerInventory.getHelmet();
-        playerInventory.setHelmet(itemInHand);
+        playerInventory.setHelmet(temp);
         playerInventory.setItemInMainHand(armourHead);
     }
 }
