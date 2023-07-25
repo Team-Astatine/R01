@@ -4,10 +4,11 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import teamzesa.combat.*;
 import teamzesa.command.*;
-import teamzesa.configIOHandler.ConfigIOHandler;
+import teamzesa.IOHandler.ConfigIOHandler;
+import teamzesa.IOHandler.DataFile;
 import teamzesa.userValue.Death;
 import teamzesa.worldSet.RaidAnnouncer;
-import teamzesa.userValue.UserIOHandler;
+import teamzesa.IOHandler.UserIOHandler;
 import teamzesa.userValue.JoinAndQuit;
 import teamzesa.worldSet.RecipeController;
 
@@ -21,7 +22,7 @@ public final class R01 extends JavaPlugin {
     public R01() {
         pm = getServer().getPluginManager();
         userIoHandler = UserIOHandler.getIOHandler();
-//        configIOHandler = ConfigIOHandler.getConfigIOHandler(new File(this.getDataFolder(),"config.yml"));
+        configIOHandler = ConfigIOHandler.getConfigIOHandler();
     }
 
     private File checkUpDataFile(DataFile string) {
