@@ -41,6 +41,7 @@ public final class R01 extends JavaPlugin {
         this.getCommand("god").setExecutor(new GodModeSet());
         this.getCommand("토템").setExecutor(new TotemStacking());
         this.getCommand("체력초기화").setExecutor(new HealthSet());
+        this.getCommand("R01ConfigReload").setExecutor(new Reload());
         this.getCommand("SaveUserData").setExecutor(
                 new SaveUserData(checkUpDataFile(DataFile.USER_DATA))
         );
