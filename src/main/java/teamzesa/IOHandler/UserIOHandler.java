@@ -1,7 +1,9 @@
-package teamzesa.userValue;
+package teamzesa.IOHandler;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import teamzesa.userValue.User;
+import teamzesa.userValue.UserHandler;
 
 import java.io.File;
 import java.io.FileReader;
@@ -27,7 +29,7 @@ public class UserIOHandler {
     public void inputUserData(File userDataFile) {
         Gson gson = new Gson();
         try (FileReader reader = new FileReader(userDataFile)) {
-            userHandler.updateAllUserData(gson.fromJson(reader,User[].class));
+            userHandler.updateAllUserData(gson.fromJson(reader, User[].class));
         } catch (IOException e) {
             e.printStackTrace();
         }

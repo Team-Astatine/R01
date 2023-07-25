@@ -1,4 +1,4 @@
-package teamzesa;
+package teamzesa.IOHandler;
 
 public enum DataFile {
     USER_DATA("userData.json"),
@@ -10,7 +10,7 @@ public enum DataFile {
         fileName = dataName;
     }
 
-    public String getDataFileName() {
+    public String getName() {
         return fileName;
     }
 }
