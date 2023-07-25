@@ -32,8 +32,9 @@ public class ConfigIOHandler extends ComponentExchanger {
         worldConfigLoad();
     }
 
-    private void worldConfigLoad() {
+    public void worldConfigLoad() {
         String motd = config.getString("world_setting.motd");
+        System.out.println(motd);
         Bukkit.motd(componentSet(motd));
     }
 

@@ -22,7 +22,7 @@ public class MotdSet extends ComponentExchanger implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player player = (Player)sender;
         if (!player.getName().equals("JAXPLE")) {
-            ComponentExchanger.componentSet("해당 명령어는 플레이어가 사용할 수 없습니다.", Color.RED);
+            componentSet("해당 명령어는 플레이어가 사용할 수 없습니다.", Color.RED);
             return false;
         }
 
@@ -32,11 +32,10 @@ public class MotdSet extends ComponentExchanger implements CommandExecutor {
                       .append(" ");
 
         configIOHandler.worldConfigSave(customMotd);
-
         Bukkit.getLogger().info("Motd Set :: " + customMotd);
         Bukkit.motd(componentSet(customMotd.toString()));
         player.sendMessage(
-                ComponentExchanger.componentSet(customMotd.append(" 로 변경 됐습니다.").toString(),Color.YELLOW));
+                componentSet(customMotd.append(" 로 변경 됐습니다.").toString(),Color.YELLOW));
         return true;
     }
 }
