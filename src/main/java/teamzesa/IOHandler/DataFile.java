@@ -10,7 +10,7 @@ public enum DataFile {
         fileName = dataName;
     }
 
-    public String getName() {
+    public String getFileName() {
         return fileName;
     }
 }

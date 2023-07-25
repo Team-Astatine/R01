@@ -23,18 +23,11 @@ public final class R01 extends JavaPlugin {
         pm = getServer().getPluginManager();
         userIoHandler = UserIOHandler.getIOHandler();
         configIOHandler = ConfigIOHandler.getConfigIOHandler();
+        configIOHandler.configLoader(checkUpDataFile(DataFile.CONFIG));
     }
 
     private File checkUpDataFile(DataFile string) {
-        switch (string) {
-            case USER_DATA -> {
-                return new File(this.getDataFolder(), "userData.json");
-            }
-            case CONFIG -> {
-                return new File(this.getDataFolder(), "config.yml");
-            }
-        }
-        return null;
+        return new File(this.getDataFolder(), string.getFileName());
     }
 
     private void commandHandler() {
@@ -68,7 +61,7 @@ public final class R01 extends JavaPlugin {
         this.commandHandler(); // command set
         this.functionHandler(); // function set
         this.saveDefaultConfig(); // dataFile set
-//        configIOHandler.getMotd(); // motd set
+        configIOHandler.allConfigLoad(); //config Load
         userIoHandler.inputUserData( // userData Set
                 checkUpDataFile(DataFile.USER_DATA)
         );
