@@ -4,10 +4,11 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import teamzesa.combat.*;
 import teamzesa.command.*;
-import teamzesa.configIOHandler.ConfigIOHandler;
+import teamzesa.IOHandler.ConfigIOHandler;
+import teamzesa.IOHandler.DataFile;
 import teamzesa.userValue.Death;
 import teamzesa.worldSet.RaidAnnouncer;
-import teamzesa.userValue.UserIOHandler;
+import teamzesa.IOHandler.UserIOHandler;
 import teamzesa.userValue.JoinAndQuit;
 import teamzesa.worldSet.RecipeController;
 
@@ -21,11 +22,12 @@ public final class R01 extends JavaPlugin {
     public R01() {
         pm = getServer().getPluginManager();
         userIoHandler = UserIOHandler.getIOHandler();
-        configIOHandler = ConfigIOHandler.getConfigIOHandler(new File(getDataFolder(),"config.yml"));
+        configIOHandler = ConfigIOHandler.getConfigIOHandler();
+        configIOHandler.configLoader(checkUpDataFile(DataFile.CONFIG));
     }
 
-    private File checkUpDataFile() {
-        return new File(this.getDataFolder(), "userData.json");
+    private File checkUpDataFile(DataFile string) {
+        return new File(this.getDataFolder(), string.getFileName());
     }
 
     private void commandHandler() {
@@ -39,7 +41,10 @@ public final class R01 extends JavaPlugin {
         this.getCommand("god").setExecutor(new GodModeSet());
         this.getCommand("토템").setExecutor(new TotemStacking());
         this.getCommand("체력초기화").setExecutor(new HealthSet());
-        this.getCommand("SaveUserData").setExecutor(new SaveUserData(checkUpDataFile()));
+        this.getCommand("R01ConfigReload").setExecutor(new Reload());
+        this.getCommand("SaveUserData").setExecutor(
+                new SaveUserData(checkUpDataFile(DataFile.USER_DATA))
+        );
     }
 
     private void functionHandler() {
@@ -57,12 +62,16 @@ public final class R01 extends JavaPlugin {
         this.commandHandler(); // command set
         this.functionHandler(); // function set
         this.saveDefaultConfig(); // dataFile set
-//        configIOHandler.getMotd(); // motd set
-        userIoHandler.inputUserData(checkUpDataFile()); // userData Set
+        configIOHandler.allConfigLoad(); //config Load
+        userIoHandler.inputUserData( // userData Set
+                checkUpDataFile(DataFile.USER_DATA)
+        );
     }
 
     @Override
     public void onDisable() {
-        userIoHandler.outputUserData(checkUpDataFile());
+        userIoHandler.outputUserData(
+                checkUpDataFile(DataFile.USER_DATA)
+        );
     }
 }
