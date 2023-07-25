@@ -33,8 +33,7 @@ public class ConfigIOHandler extends ComponentExchanger {
     }
 
     private void worldConfigLoad() {
-        ConfigurationSection configMotd = config.getConfigurationSection("world_setting");
-        String motd = configMotd.getString("motd");
+        String motd = config.getString("world_setting.motd");
         Bukkit.motd(componentSet(motd));
     }
 
@@ -43,8 +42,7 @@ public class ConfigIOHandler extends ComponentExchanger {
     }
 
     public void worldConfigSave(String motd) {
-        ConfigurationSection configMotd = config.getConfigurationSection("world_setting");
-        configMotd.set("motd",motd);
+        config.set("world_setting.motd",motd);
         try {
             config.save(file);
         } catch (IOException e) {
