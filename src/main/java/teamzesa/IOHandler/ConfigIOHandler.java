@@ -7,7 +7,7 @@ import teamzesa.ComponentExchanger;
 import java.io.File;
 import java.io.IOException;
 
-public class ConfigIOHandler extends ComponentExchanger {
+public class ConfigIOHandler extends ComponentExchanger implements IOHandler {
     private static class ConfigIOHandlerHolder {
         private static ConfigIOHandler INSTANCE = new ConfigIOHandler();
     }
@@ -19,7 +19,7 @@ public class ConfigIOHandler extends ComponentExchanger {
         return ConfigIOHandlerHolder.INSTANCE;
     }
 
-    public void configLoader(File configPathFile) {
+    public void fileLoader(File configPathFile) {
         config = YamlConfiguration.loadConfiguration(configPathFile);
         file = configPathFile;
     }

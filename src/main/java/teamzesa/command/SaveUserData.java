@@ -15,12 +15,10 @@ import java.io.File;
 public class SaveUserData extends ComponentExchanger implements CommandExecutor {
     private static UserIOHandler userIoHandler;
     private static UserHandler userHandler;
-    private final File userDataFile;
 
-    public SaveUserData(File userDataFile) {
+    public SaveUserData() {
         userIoHandler = UserIOHandler.getIOHandler();
         userHandler = UserHandler.getUserHandler();
-        this.userDataFile = userDataFile;
     }
 
     @Override
@@ -31,7 +29,7 @@ public class SaveUserData extends ComponentExchanger implements CommandExecutor 
         }
 
         userHandler.saveAllUserData();
-        userIoHandler.outputUserData(userDataFile);
+        userIoHandler.outputUserData();
         Bukkit.getLogger().info("Success to saving UserData");
         return true;
     }
