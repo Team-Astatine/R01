@@ -2,6 +2,7 @@ package teamzesa;
 
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import teamzesa.IOHandler.IOHandler;
 import teamzesa.combat.*;
 import teamzesa.command.*;
 import teamzesa.IOHandler.ConfigIOHandler;
@@ -25,8 +26,9 @@ public final class R01 extends JavaPlugin {
         configIOHandler = ConfigIOHandler.getConfigIOHandler();
     }
 
-    public void configLoader() {
-        configIOHandler.configLoader(checkUpDataFile(DataFile.CONFIG));
+    public void fileLoader() {
+        userIoHandler.fileLoader(checkUpDataFile(DataFile.USER_DATA));
+        configIOHandler.fileLoader(checkUpDataFile(DataFile.CONFIG));
     }
 
     private File checkUpDataFile(DataFile string) {
@@ -44,10 +46,9 @@ public final class R01 extends JavaPlugin {
         this.getCommand("god").setExecutor(new GodModeSet());
         this.getCommand("토템").setExecutor(new TotemStacking());
         this.getCommand("체력초기화").setExecutor(new HealthSet());
+        this.getCommand("SaveUserData").setExecutor(new SaveUserData());
         this.getCommand("R01ConfigReload").setExecutor(
                 new Reload(checkUpDataFile(DataFile.CONFIG)));
-        this.getCommand("SaveUserData").setExecutor(
-                new SaveUserData(checkUpDataFile(DataFile.USER_DATA)));
     }
 
     private void functionHandler() {
@@ -65,17 +66,13 @@ public final class R01 extends JavaPlugin {
         this.commandHandler(); // command set
         this.functionHandler(); // function set
         this.saveDefaultConfig(); // dataFile set
-        this.configLoader(); // config set File
+        this.fileLoader(); // config set File
         configIOHandler.allConfigLoad(); //config Load
-        userIoHandler.inputUserData( // userData Set
-                checkUpDataFile(DataFile.USER_DATA)
-        );
+        userIoHandler.inputUserData(); // userData Set
     }
 
     @Override
     public void onDisable() {
-        userIoHandler.outputUserData(
-                checkUpDataFile(DataFile.USER_DATA)
-        );
+        userIoHandler.outputUserData();
     }
 }

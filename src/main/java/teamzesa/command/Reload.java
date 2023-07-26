@@ -28,7 +28,7 @@ public class Reload extends ComponentExchanger implements CommandExecutor {
             return false;
         }
 
-        configIOHandler.configLoader(dataPathFile);
+        configIOHandler.fileLoader(dataPathFile);
         configIOHandler.worldConfigLoad();
         player.sendMessage(
                 componentSet("Reload 완료"));
