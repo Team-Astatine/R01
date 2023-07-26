@@ -15,7 +15,7 @@ public class ArmourSet extends ComponentExchanger implements CommandExecutor {
     private PlayerInventory playerInventory;
 
     public enum ArmourType {
-        헬멧
+        머리
     }
 
     @Override
@@ -31,7 +31,7 @@ public class ArmourSet extends ComponentExchanger implements CommandExecutor {
 
         ArmourType armourType = ArmourType.valueOf(label);
         switch (armourType) {
-            case 헬멧 -> headSet(tmpItemInHand);
+            case 머리 -> headSet(tmpItemInHand);
         }
         return true;
     }
