@@ -8,78 +8,37 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import teamzesa.ComponentExchanger;
 
+import java.awt.*;
+
 public class ArmourSet extends ComponentExchanger implements CommandExecutor {
     private Player player;
     private PlayerInventory playerInventory;
+
+    public enum ArmourType {
+        머리
+    }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         this.player = (Player)sender;
         this.playerInventory = player.getInventory();
 
-        if (label.equals("머리"))
-            headSet();
-        if (label.equals("몸통"))
-            bodySet();
-        if (label.equals("바지"))
-            pantSet();
-        if (label.equals("신발"))
-            shooSet();
+        ItemStack tmpItemInHand = playerInventory.getItemInMainHand();
+        if (tmpItemInHand == null) {
+            playerAnnouncer(this.player,"손에 아이템이 없습니다.", Color.RED);
+            return false;
+        }
 
-        else return false;
+        ArmourType armourType = ArmourType.valueOf(label);
+        switch (armourType) {
+            case 머리 -> headSet(tmpItemInHand);
+        }
         return true;
     }
 
-    private void headSet(){
+    private void headSet(ItemStack temp){
         ItemStack armourHead = playerInventory.getHelmet();
-        ItemStack itemInHand = playerInventory.getItemInMainHand();
-
-        if (itemInHand == null) {
-            playerAnnouncer(this.player,"손에 아이템이 없습니다.", "RED");
-            return;
-        }
-
-        playerInventory.setHelmet(itemInHand);
+        playerInventory.setHelmet(temp);
         playerInventory.setItemInMainHand(armourHead);
     }
-
-    private void bodySet(){
-        ItemStack chestSet = playerInventory.getChestplate();
-        ItemStack itemInHand = playerInventory.getItemInMainHand();
-
-        if (itemInHand == null) {
-            playerAnnouncer(this.player,"손에 아이템이 없습니다.", "RED");
-            return;
-        }
-
-        playerInventory.setChestplate(itemInHand);
-        playerInventory.setItemInMainHand(chestSet);
-    }
-
-    private void pantSet() {
-        ItemStack pantSet = playerInventory.getLeggings();
-        ItemStack itemInHand = playerInventory.getItemInMainHand();
-
-        if (itemInHand == null) {
-            playerAnnouncer(this.player,"손에 아이템이 없습니다.", "RED");
-            return;
-        }
-
-        playerInventory.setLeggings(itemInHand);
-        playerInventory.setItemInMainHand(pantSet);
-    }
-
-    private void shooSet() {
-        ItemStack shooSet = playerInventory.getBoots();
-        ItemStack itemInHand = playerInventory.getItemInMainHand();
-
-        if (itemInHand == null) {
-            playerAnnouncer(this.player,"손에 아이템이 없습니다.", "RED");
-            return;
-        }
-
-        playerInventory.setBoots(itemInHand);
-        playerInventory.setItemInMainHand(shooSet);
-    }
-
 }

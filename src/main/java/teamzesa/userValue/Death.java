@@ -11,6 +11,8 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import teamzesa.ComponentExchanger;
 
+import java.awt.*;
+
 
 public class Death extends ComponentExchanger implements Listener {
     private final double MAX_HEALTH_SCALE = 60.0;
@@ -55,8 +57,8 @@ public class Death extends ComponentExchanger implements Listener {
     }
 
     private void talking(Player killed, Player killer) {
-        playerAnnouncer(killed,killer.getName() + "님이 체력을 약탈했습니다.", "RED");
-        playerAnnouncer(killer,killed.getName() + "님이 체력을 약탈했습니다.", "RED");
+        playerAnnouncer(killed,killer.getName() + "님이 체력을 약탈했습니다.", Color.RED);
+        playerAnnouncer(killer,killed.getName() + "님이 체력을 약탈했습니다.", Color.RED);
     }
 
     private void checkingGodMod(PlayerDeathEvent e) {

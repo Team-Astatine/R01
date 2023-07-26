@@ -9,6 +9,8 @@ import teamzesa.ComponentExchanger;
 import teamzesa.userValue.User;
 import teamzesa.userValue.UserHandler;
 
+import java.awt.*;
+
 public class GodModeSet extends ComponentExchanger implements CommandExecutor {
     private UserHandler userHandler;
 
@@ -26,7 +28,7 @@ public class GodModeSet extends ComponentExchanger implements CommandExecutor {
         userHandler.updateUser(user);
 
         mention = user.isGodMode() ? "당신은 이제 신 입니다." : "당신은 이제 인간 입니다.";
-        player.sendMessage(componentSet(mention,"ORANGE"));
+        player.sendMessage(componentSet(mention, Color.ORANGE));
 
         return false;
     }

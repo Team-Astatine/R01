@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.ComponentExchanger;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,12 +31,12 @@ public class TotemStacking extends ComponentExchanger implements CommandExecutor
 
         // validation totemCount
         if (validMinimumTotemCount(itemList)) {
-            playerAnnouncer(player,"2개 이상의 토템을 가지고 있으셔야 합니다.", "RED");
+            playerAnnouncer(player,"2개 이상의 토템을 가지고 있으셔야 합니다.", Color.RED);
             return false;
         }
 
         if (validTotemCommand(itemList)) {
-            playerAnnouncer(player,"합칠 토템이 없습니다.", "RED");
+            playerAnnouncer(player,"합칠 토템이 없습니다.", Color.RED);
             return false;
         }
 
@@ -54,7 +55,7 @@ public class TotemStacking extends ComponentExchanger implements CommandExecutor
         ItemStack stackOfTotem = new ItemStack(Material.TOTEM_OF_UNDYING, totalAmount);
         player.getInventory().addItem(stackOfTotem);
 
-        playerAnnouncer(player,"토템을 합쳤습니다.", "YELLOW");
+        playerAnnouncer(player,"토템을 합쳤습니다.", Color.YELLOW);
         return true;
     }
 
