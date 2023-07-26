@@ -1,14 +1,10 @@
 package teamzesa.IOHandler;
 
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import teamzesa.ComponentExchanger;
 
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 
 public class ConfigIOHandler extends ComponentExchanger {
@@ -23,9 +19,9 @@ public class ConfigIOHandler extends ComponentExchanger {
         return ConfigIOHandlerHolder.INSTANCE;
     }
 
-    public void configLoader(File filePath) {
-        file = filePath;
-        config = YamlConfiguration.loadConfiguration(file);
+    public void configLoader(File configPathFile) {
+        config = YamlConfiguration.loadConfiguration(configPathFile);
+        file = configPathFile;
     }
 
     public void allConfigLoad() {
@@ -34,7 +30,6 @@ public class ConfigIOHandler extends ComponentExchanger {
 
     public void worldConfigLoad() {
         String motd = config.getString("world_setting.motd");
-        System.out.println(motd);
         Bukkit.motd(componentSet(motd));
     }
 

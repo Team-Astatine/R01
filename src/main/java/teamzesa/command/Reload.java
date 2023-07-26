@@ -1,6 +1,5 @@
 package teamzesa.command;
 
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -10,11 +9,14 @@ import teamzesa.ComponentExchanger;
 import teamzesa.IOHandler.ConfigIOHandler;
 
 import java.awt.*;
+import java.io.File;
 
 public class Reload extends ComponentExchanger implements CommandExecutor {
+    private File dataPathFile;
     private ConfigIOHandler configIOHandler;
 
-    public Reload() {
+    public Reload(File file) {
+        dataPathFile = file;
         configIOHandler = ConfigIOHandler.getConfigIOHandler();
     }
 
@@ -26,9 +28,10 @@ public class Reload extends ComponentExchanger implements CommandExecutor {
             return false;
         }
 
+        configIOHandler.configLoader(dataPathFile);
         configIOHandler.worldConfigLoad();
         player.sendMessage(
-                componentSet("Reload 완료"+Bukkit.getMotd()));
+                componentSet("Reload 완료"));
         return true;
     }
 }

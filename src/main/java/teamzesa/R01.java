@@ -23,11 +23,14 @@ public final class R01 extends JavaPlugin {
         pm = getServer().getPluginManager();
         userIoHandler = UserIOHandler.getIOHandler();
         configIOHandler = ConfigIOHandler.getConfigIOHandler();
+    }
+
+    public void configLoader() {
         configIOHandler.configLoader(checkUpDataFile(DataFile.CONFIG));
     }
 
     private File checkUpDataFile(DataFile string) {
-        return new File(this.getDataFolder(), string.getFileName());
+        return new File(getDataFolder(), string.getFileName());
     }
 
     private void commandHandler() {
@@ -41,10 +44,10 @@ public final class R01 extends JavaPlugin {
         this.getCommand("god").setExecutor(new GodModeSet());
         this.getCommand("토템").setExecutor(new TotemStacking());
         this.getCommand("체력초기화").setExecutor(new HealthSet());
-        this.getCommand("R01ConfigReload").setExecutor(new Reload());
+        this.getCommand("R01ConfigReload").setExecutor(
+                new Reload(checkUpDataFile(DataFile.CONFIG)));
         this.getCommand("SaveUserData").setExecutor(
-                new SaveUserData(checkUpDataFile(DataFile.USER_DATA))
-        );
+                new SaveUserData(checkUpDataFile(DataFile.USER_DATA)));
     }
 
     private void functionHandler() {
@@ -62,6 +65,7 @@ public final class R01 extends JavaPlugin {
         this.commandHandler(); // command set
         this.functionHandler(); // function set
         this.saveDefaultConfig(); // dataFile set
+        this.configLoader(); // config set File
         configIOHandler.allConfigLoad(); //config Load
         userIoHandler.inputUserData( // userData Set
                 checkUpDataFile(DataFile.USER_DATA)
