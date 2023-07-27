@@ -3,13 +3,11 @@ package teamzesa.userValue;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import teamzesa.ComponentExchanger;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
-public class UserHandler {
+public class UserHandler extends ComponentExchanger {
     private static class UserHandlerHolder {
         private static UserHandler INSTANCE = new UserHandler();
     }
@@ -21,11 +19,17 @@ public class UserHandler {
     }
 
     public Map<UUID,User> getUserMap() {
+        saveAllUserData();
         return userData;
     }
 
     public static UserHandler getUserHandler() {
         return UserHandlerHolder.INSTANCE;
+    }
+
+    public void checkUpUser() {
+        List<UUID> user = new ArrayList<>(userData.keySet());
+        user.forEach(uuid -> Bukkit.getLogger().info(uuid.toString()));
     }
 
     public void addUser(Player player) {
@@ -74,7 +78,6 @@ public class UserHandler {
 
     public void updateAllUserData(User[] newUserData) {
         userData.clear();
-
         Arrays.stream(newUserData)
                 .forEach(user -> userData.put(user.getUuid(), user));
     }
