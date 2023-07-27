@@ -17,8 +17,8 @@ public class SaveUserData extends ComponentExchanger implements CommandExecutor 
     private static UserHandler userHandler;
 
     public SaveUserData() {
-        userIoHandler = UserIOHandler.getIOHandler();
         userHandler = UserHandler.getUserHandler();
+        userIoHandler = UserIOHandler.getIOHandler();
     }
 
     @Override
@@ -28,7 +28,6 @@ public class SaveUserData extends ComponentExchanger implements CommandExecutor 
             return false;
         }
 
-        userHandler.saveAllUserData();
         userIoHandler.outputUserData();
         Bukkit.getLogger().info("Success to saving UserData");
         return true;
