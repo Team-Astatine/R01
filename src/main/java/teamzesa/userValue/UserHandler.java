@@ -83,6 +83,7 @@ public class UserHandler extends ComponentExchanger {
     }
 
     public void saveAllUserData() {
+        Bukkit.getLogger().info("Saving User Data..");
         Bukkit.getOnlinePlayers().stream()
                 .forEach(player -> updateUser(player.getUniqueId(),player.getHealthScale()));
     }
