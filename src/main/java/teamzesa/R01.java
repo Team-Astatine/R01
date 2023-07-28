@@ -66,7 +66,7 @@ public final class R01 extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        updateChecker.fileManager(); //checking update
+//        updateChecker.fileManager(); //checking update
 
         this.commandHandler(); // command set
         this.functionHandler(); // function set
