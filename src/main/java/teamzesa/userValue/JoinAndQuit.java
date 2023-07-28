@@ -1,5 +1,6 @@
 package teamzesa.userValue;
 
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,6 +17,7 @@ public class JoinAndQuit implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
+        attackSpeed(player);
         userHandling(player);
         setHealthScale(player);
     }
@@ -29,6 +31,10 @@ public class JoinAndQuit implements Listener {
         User user = userHandler.getUser(player.getUniqueId());
         if (user != null)
             player.setHealthScale(user.getHealthScale());
+    }
+
+    private void attackSpeed(Player player) {
+        player.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(40.0);
     }
 
     @EventHandler
