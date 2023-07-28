@@ -2,11 +2,11 @@ package teamzesa;
 
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import teamzesa.IOHandler.IOHandler;
 import teamzesa.combat.*;
 import teamzesa.command.*;
 import teamzesa.IOHandler.ConfigIOHandler;
 import teamzesa.IOHandler.DataFile;
+import teamzesa.update.UpdateChecker;
 import teamzesa.userValue.Death;
 import teamzesa.worldSet.RaidAnnouncer;
 import teamzesa.IOHandler.UserIOHandler;
@@ -19,16 +19,19 @@ public final class R01 extends JavaPlugin {
     private static PluginManager pm;
     private static UserIOHandler userIoHandler;
     private static ConfigIOHandler configIOHandler;
+    private static UpdateChecker updateChecker;
 
     public R01() {
         pm = getServer().getPluginManager();
         userIoHandler = UserIOHandler.getIOHandler();
+        updateChecker = UpdateChecker.getUpdateChecker();
         configIOHandler = ConfigIOHandler.getConfigIOHandler();
     }
 
     public void fileLoader() {
-        userIoHandler.fileLoader(checkUpDataFile(DataFile.USER_DATA));
         configIOHandler.fileLoader(checkUpDataFile(DataFile.CONFIG));
+        userIoHandler.fileLoader(checkUpDataFile(DataFile.USER_DATA));
+        updateChecker.fileLoader(new File(getDataFolder().getParentFile().getAbsolutePath()));
     }
 
     private File checkUpDataFile(DataFile string) {
@@ -63,8 +66,11 @@ public final class R01 extends JavaPlugin {
 
     @Override
     public void onEnable() {
+//        updateChecker.fileManager(); //checking update
+
         this.commandHandler(); // command set
         this.functionHandler(); // function set
+
         this.saveDefaultConfig(); // dataFile set
         this.fileLoader(); // config set File
         configIOHandler.allConfigLoad(); //config Load
