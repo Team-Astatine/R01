@@ -20,18 +20,24 @@ public final class R01 extends JavaPlugin {
     private static UserIOHandler userIoHandler;
     private static ConfigIOHandler configIOHandler;
     private static UpdateChecker updateChecker;
+    private static File pluginFiles;
 
     public R01() {
         pm = getServer().getPluginManager();
         userIoHandler = UserIOHandler.getIOHandler();
         updateChecker = UpdateChecker.getUpdateChecker();
         configIOHandler = ConfigIOHandler.getConfigIOHandler();
+        pluginFiles = new File(getDataFolder().getParentFile().getAbsolutePath());
     }
 
     public void fileLoader() {
         configIOHandler.fileLoader(checkUpDataFile(DataFile.CONFIG));
         userIoHandler.fileLoader(checkUpDataFile(DataFile.USER_DATA));
-        updateChecker.fileLoader(new File(getDataFolder().getParentFile().getAbsolutePath()));
+    }
+
+    public void updateCheck() {
+        updateChecker.fileLoader(pluginFiles);
+        updateChecker.fileManager(); //checking update
     }
 
     private File checkUpDataFile(DataFile string) {
@@ -66,15 +72,19 @@ public final class R01 extends JavaPlugin {
 
     @Override
     public void onEnable() {
-//        updateChecker.fileManager(); //checking update
-
         this.commandHandler(); // command set
         this.functionHandler(); // function set
 
-        this.saveDefaultConfig(); // dataFile set
+//        update check
+        this.updateCheck();
+
+//        configSet
         this.fileLoader(); // config set File
-        configIOHandler.allConfigLoad(); //config Load
         userIoHandler.inputUserData(); // userData Set
+
+//        dataSet
+        this.saveDefaultConfig(); // dataFile set
+        configIOHandler.allConfigLoad(); //config Load
     }
 
     @Override
