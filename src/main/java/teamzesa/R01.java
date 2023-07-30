@@ -4,12 +4,12 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import teamzesa.combat.*;
 import teamzesa.command.*;
-import teamzesa.IOHandler.ConfigIOHandler;
+import teamzesa.IOHandler.config.ConfigIOHandler;
 import teamzesa.IOHandler.DataFile;
-import teamzesa.update.UpdateChecker;
+import teamzesa.IOHandler.update.UpdateChecker;
 import teamzesa.userValue.Death;
 import teamzesa.worldSet.RaidAnnouncer;
-import teamzesa.IOHandler.UserIOHandler;
+import teamzesa.IOHandler.userHandler.UserIOHandler;
 import teamzesa.userValue.JoinAndQuit;
 import teamzesa.worldSet.RecipeController;
 

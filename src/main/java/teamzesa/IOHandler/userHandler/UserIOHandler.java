@@ -1,8 +1,8 @@
-package teamzesa.IOHandler;
+package teamzesa.IOHandler.userHandler;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import org.bukkit.configuration.file.YamlConfiguration;
+import teamzesa.IOHandler.IOHandler;
 import teamzesa.userValue.User;
 import teamzesa.userValue.UserHandler;
 
