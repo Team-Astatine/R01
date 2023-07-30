@@ -32,7 +32,7 @@ public class UserHandler extends ComponentExchanger {
         user.forEach(uuid -> Bukkit.getLogger().info(uuid.toString()));
     }
 
-    public void addUser(Player player) {
+    public synchronized void addUser(Player player) {
         Bukkit.getLogger().info(player.getName() + "님이 신규유저 등록됐습니다.");
         userData.put(player.getUniqueId(), new User(player));
     }
