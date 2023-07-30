@@ -11,35 +11,35 @@ public abstract class ComponentExchanger {
 
     private static Component component;
 
-    private static TextColor colorExchanger(Color color) {
+    private TextColor colorExchanger(Color color) {
 //        Ensure 24-bit RGB value
         int rgb = color.getRGB() & 0xFFFFFF;
         return TextColor.color(rgb);
     }
 
-    public static void serverAnnouncer(String string, Color color) {
+    public void serverAnnouncer(String string, Color color) {
         component = Component.text(string)
                 .color(colorExchanger(color));
         Bukkit.broadcast(component);
     }
 
-    public static void playerAnnouncer(Player player, String string, Color color) {
+    public void playerAnnouncer(Player player, String string, Color color) {
         component = Component.text(string)
                 .color(colorExchanger(color));
         player.sendMessage(component);
     }
 
-    public static void playerAnnouncer(Player player, String string) {
+    public void playerAnnouncer(Player player, String string) {
         component = Component.text(string);
         player.sendMessage(component);
     }
 
-    public static Component componentSet(String string) {
+    public Component componentSet(String string) {
         component = Component.text(string);
         return component;
     }
 
-    public static Component componentSet(String string, Color color) {
+    public Component componentSet(String string, Color color) {
         component = Component.text(string)
                 .color(colorExchanger(color));
         return component;
