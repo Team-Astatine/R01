@@ -1,6 +1,7 @@
-package teamzesa.update;
+package teamzesa.IOHandler.update;
 
 import org.bukkit.Bukkit;
+import teamzesa.IOHandler.IOHandler;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -8,7 +9,7 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
-public class UpdateChecker {
+public class UpdateChecker implements IOHandler {
     private static class UpdateCheckerHolder {
         private static UpdateChecker INSTANCE = new UpdateChecker();
     }
@@ -24,6 +25,7 @@ public class UpdateChecker {
         return UpdateCheckerHolder.INSTANCE;
     }
 
+    @Override
     public void fileLoader(File inFile) {
         this.folder = inFile;
         this.fileList = Arrays.asList(inFile.listFiles());

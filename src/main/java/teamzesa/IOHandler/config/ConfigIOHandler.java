@@ -1,8 +1,9 @@
-package teamzesa.IOHandler;
+package teamzesa.IOHandler.config;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import teamzesa.ComponentExchanger;
+import teamzesa.IOHandler.IOHandler;
 
 import java.io.File;
 import java.io.IOException;
