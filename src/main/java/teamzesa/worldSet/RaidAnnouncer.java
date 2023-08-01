@@ -12,6 +12,9 @@ import java.awt.*;
 public class RaidAnnouncer extends ComponentExchanger implements Listener {
     @EventHandler
     public void raidAnnouncer(RaidTriggerEvent e) {
+        if (e.getPlayer().getName().equals("JAXPLE"))
+            return;
+
         WorldName activeWorldName = WorldName.valueOf(e.getWorld().getName());
         Location loc = e.getRaid().getLocation();
 
