@@ -12,10 +12,9 @@ public class HandSwing implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onSwing(PlayerArmSwingEvent e) {
         if (e.getHand() == EquipmentSlot.OFF_HAND)
-            return;
+            e.setCancelled(true);
 
         Player player = (Player) e.getPlayer();
         player.swingOffHand();
-        e.setCancelled(true);
     }
 }
