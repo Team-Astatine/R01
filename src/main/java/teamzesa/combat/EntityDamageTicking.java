@@ -32,10 +32,8 @@ public class EntityDamageTicking implements Listener {
         if (!stuffCheck) //One Hand Sword
             hurtTick = 10;
 
-        if (stuffCheck) { //Two Hand Sword
-            heater.swingOffHand();
+        if (stuffCheck) //Two Hand Sword
             hurtTick = 1;
-        }
 
         target.setMaximumNoDamageTicks(hurtTick);
     }
