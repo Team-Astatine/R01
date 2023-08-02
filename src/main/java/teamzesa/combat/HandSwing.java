@@ -12,5 +12,6 @@ public class HandSwing implements Listener {
         Player player = e.getPlayer();
         player.swingMainHand();
         player.swingOffHand();
+        e.setCancelled(true);
     }
 }
