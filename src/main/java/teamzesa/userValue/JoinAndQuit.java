@@ -29,6 +29,7 @@ public class JoinAndQuit implements Listener {
 
     private void setHealthScale(Player player) {
         User user = userHandler.getUser(player.getUniqueId());
+        player.setHealthScale(user.getHealthScale());
         player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(user.getHealthScale());
     }
 

@@ -73,6 +73,7 @@ public class UserHandler extends ComponentExchanger {
         }
 
         user.setHealthScale(healthScale);
+        player.setHealthScale(healthScale);
         player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(healthScale);
         updateUser(user);
     }

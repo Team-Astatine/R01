@@ -24,6 +24,7 @@ public class HealthSet extends ComponentExchanger implements CommandExecutor {
             return false;
 
         player.addPotionEffect(healEffect);
+        player.setHealthScale(Double.parseDouble(args[1]));
         player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(Double.parseDouble(args[1]));
         userHandler.updateUser(player, player.getHealthScale());
 
