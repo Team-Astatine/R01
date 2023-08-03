@@ -1,0 +1,20 @@
+package teamzesa.worldSet;
+
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.HoverEvent;
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockPlaceEvent;
+import teamzesa.ComponentExchanger;
+
+public class DisplayEntity extends ComponentExchanger implements Listener {
+
+    @EventHandler
+    public void onEntity(BlockPlaceEvent e) {
+        Location position = e.getBlock().getLocation().add(0,10,0);
+        Player player = e.getPlayer();
+        HoverEvent<Component> hoverEvent = HoverEvent.showText(componentSet("Test"));
+    }
+}
