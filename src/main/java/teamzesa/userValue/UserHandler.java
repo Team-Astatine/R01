@@ -1,6 +1,7 @@
 package teamzesa.userValue;
 
 import org.bukkit.Bukkit;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import teamzesa.ComponentExchanger;
@@ -73,6 +74,7 @@ public class UserHandler extends ComponentExchanger {
 
         user.setHealthScale(healthScale);
         player.setHealthScale(healthScale);
+        player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(healthScale);
         updateUser(user);
     }
 
