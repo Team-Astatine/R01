@@ -53,6 +53,7 @@ public final class R01 extends JavaPlugin {
         this.getCommand("바지").setExecutor(new ArmourSet());
         this.getCommand("신발").setExecutor(new ArmourSet());
         this.getCommand("god").setExecutor(new GodModeSet());
+        this.getCommand("관리자").setExecutor(new Moderator());
         this.getCommand("토템").setExecutor(new TotemStacking());
         this.getCommand("체력초기화").setExecutor(new HealthSet());
         this.getCommand("SaveUserData").setExecutor(new SaveUserData());
