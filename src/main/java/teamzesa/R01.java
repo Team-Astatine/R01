@@ -8,6 +8,7 @@ import teamzesa.IOHandler.config.ConfigIOHandler;
 import teamzesa.IOHandler.DataFile;
 import teamzesa.IOHandler.update.UpdateChecker;
 import teamzesa.userValue.Death;
+import teamzesa.worldSet.DisplayEntity;
 import teamzesa.worldSet.RaidAnnouncer;
 import teamzesa.IOHandler.userHandler.UserIOHandler;
 import teamzesa.userValue.JoinAndQuit;
@@ -62,6 +63,7 @@ public final class R01 extends JavaPlugin {
     }
 
     private void functionHandler() {
+        pm.registerEvents(new DisplayEntity(),this);
         pm.registerEvents(new Death(),this);
         pm.registerEvents(new Explosive(),this);
         pm.registerEvents(new HandSwing(),this);
