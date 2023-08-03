@@ -76,6 +76,11 @@ public class UserHandler extends ComponentExchanger {
         updateUser(user);
     }
 
+    public void updateUser(Player player,double healthScale) {
+        User user = userData.get(player.getUniqueId());
+        user.setHealthScale(healthScale);
+    }
+
     public void updateAllUserData(User[] newUserData) {
         userData.clear();
         Arrays.stream(newUserData)
