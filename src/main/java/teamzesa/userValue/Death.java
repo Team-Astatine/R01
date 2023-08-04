@@ -24,9 +24,10 @@ public class Death extends ComponentExchanger implements Listener {
         userHandler = UserHandler.getUserHandler();
     }
 
-    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerDeath(PlayerDeathEvent event) {
-        checkingGodMod(event);
+        if (checkingGodMod(event))
+            return;
         lifeSteel(event);
     }
 
@@ -61,11 +62,11 @@ public class Death extends ComponentExchanger implements Listener {
         playerAnnouncer(killer,killed.getName() + "님이 체력을 약탈했습니다.", Color.RED);
     }
 
-    private void checkingGodMod(PlayerDeathEvent e) {
+    private Boolean checkingGodMod(PlayerDeathEvent e) {
         User user = userHandler.getUser(e.getPlayer());
 
         if (!user.isGodMode())
-            return;
+            return false;
 
         Location playerLocation = e.getPlayer().getLocation();
         playerLocation.setY(playerLocation.getY() + 2.0);
@@ -74,11 +75,12 @@ public class Death extends ComponentExchanger implements Listener {
             public void run() {
                 playerLocation.getWorld().playSound(playerLocation, Sound.ENTITY_WITHER_SPAWN, 1.0f, 1.0f);
                 playerLocation.getWorld().spawnParticle(Particle.TOTEM, playerLocation, 200);
-                playerLocation.createExplosion(60);
+//                playerLocation.createExplosion(60);
             }
         };
 
-        e.setCancelled(true);
         task.run();
+        e.setCancelled(true);
+        return true;
     }
 }

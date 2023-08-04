@@ -6,21 +6,18 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import teamzesa.ComponentExchanger;
-import teamzesa.IOHandler.UserIOHandler;
+import teamzesa.IOHandler.userHandler.UserIOHandler;
 import teamzesa.userValue.UserHandler;
 
 import java.awt.*;
-import java.io.File;
 
 public class SaveUserData extends ComponentExchanger implements CommandExecutor {
     private static UserIOHandler userIoHandler;
     private static UserHandler userHandler;
-    private final File userDataFile;
 
-    public SaveUserData(File userDataFile) {
-        userIoHandler = UserIOHandler.getIOHandler();
+    public SaveUserData() {
         userHandler = UserHandler.getUserHandler();
-        this.userDataFile = userDataFile;
+        userIoHandler = UserIOHandler.getIOHandler();
     }
 
     @Override
@@ -30,8 +27,7 @@ public class SaveUserData extends ComponentExchanger implements CommandExecutor 
             return false;
         }
 
-        userHandler.saveAllUserData();
-        userIoHandler.outputUserData(userDataFile);
+        userIoHandler.outputUserData();
         Bukkit.getLogger().info("Success to saving UserData");
         return true;
     }

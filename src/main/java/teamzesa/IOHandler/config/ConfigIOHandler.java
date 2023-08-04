@@ -1,13 +1,14 @@
-package teamzesa.IOHandler;
+package teamzesa.IOHandler.config;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import teamzesa.ComponentExchanger;
+import teamzesa.IOHandler.IOHandler;
 
 import java.io.File;
 import java.io.IOException;
 
-public class ConfigIOHandler extends ComponentExchanger {
+public class ConfigIOHandler extends ComponentExchanger implements IOHandler {
     private static class ConfigIOHandlerHolder {
         private static ConfigIOHandler INSTANCE = new ConfigIOHandler();
     }
@@ -19,7 +20,7 @@ public class ConfigIOHandler extends ComponentExchanger {
         return ConfigIOHandlerHolder.INSTANCE;
     }
 
-    public void configLoader(File configPathFile) {
+    public void fileLoader(File configPathFile) {
         config = YamlConfiguration.loadConfiguration(configPathFile);
         file = configPathFile;
     }

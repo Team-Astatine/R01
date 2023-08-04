@@ -6,7 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
-import teamzesa.IOHandler.ConfigIOHandler;
+import teamzesa.IOHandler.config.ConfigIOHandler;
 
 import java.awt.*;
 import java.io.File;
@@ -28,7 +28,7 @@ public class Reload extends ComponentExchanger implements CommandExecutor {
             return false;
         }
 
-        configIOHandler.configLoader(dataPathFile);
+        configIOHandler.fileLoader(dataPathFile);
         configIOHandler.worldConfigLoad();
         player.sendMessage(
                 componentSet("Reload 완료"));

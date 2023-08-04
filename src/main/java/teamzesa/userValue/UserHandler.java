@@ -1,15 +1,14 @@
 package teamzesa.userValue;
 
 import org.bukkit.Bukkit;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import teamzesa.ComponentExchanger;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
-public class UserHandler {
+public class UserHandler extends ComponentExchanger {
     private static class UserHandlerHolder {
         private static UserHandler INSTANCE = new UserHandler();
     }
@@ -21,6 +20,7 @@ public class UserHandler {
     }
 
     public Map<UUID,User> getUserMap() {
+        saveAllUserData();
         return userData;
     }
 
@@ -28,7 +28,12 @@ public class UserHandler {
         return UserHandlerHolder.INSTANCE;
     }
 
-    public void addUser(Player player) {
+    public void checkUpUser() {
+        List<UUID> user = new ArrayList<>(userData.keySet());
+        user.forEach(uuid -> Bukkit.getLogger().info(uuid.toString()));
+    }
+
+    public synchronized void addUser(Player player) {
         Bukkit.getLogger().info(player.getName() + "님이 신규유저 등록됐습니다.");
         userData.put(player.getUniqueId(), new User(player));
     }
@@ -69,17 +74,23 @@ public class UserHandler {
 
         user.setHealthScale(healthScale);
         player.setHealthScale(healthScale);
+        player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(healthScale);
         updateUser(user);
+    }
+
+    public void updateUser(Player player,double healthScale) {
+        User user = userData.get(player.getUniqueId());
+        user.setHealthScale(healthScale);
     }
 
     public void updateAllUserData(User[] newUserData) {
         userData.clear();
-
         Arrays.stream(newUserData)
                 .forEach(user -> userData.put(user.getUuid(), user));
     }
 
     public void saveAllUserData() {
+        Bukkit.getLogger().info("Saving User Data..");
         Bukkit.getOnlinePlayers().stream()
                 .forEach(player -> updateUser(player.getUniqueId(),player.getHealthScale()));
     }
