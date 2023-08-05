@@ -51,11 +51,14 @@ public class UserHandler extends ComponentExchanger {
     }
 
     public User getUser(String userName) {
-        return getUser(Bukkit.getPlayer(userName));
+        return userData.values().stream()
+                .filter(data -> data.getName().equals(userName))
+                .findFirst()
+                .orElse(null);
     }
 
-    public Player getPlayer(String playerName) {
-        return Bukkit.getPlayer(getUser(playerName).getUuid());
+    public Player getPlayer(String userName) {
+        return Bukkit.getPlayer(userName);
     }
 
     public void updateUser(User user) {
