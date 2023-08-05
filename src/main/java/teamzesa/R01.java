@@ -80,7 +80,6 @@ public final class R01 extends JavaPlugin {
     public void onEnable() {
         this.commandHandler(); // command set
         this.functionHandler(); // function set
-        announcer.defaultAnnouncer(this); // Announcer Set
 
 //        update check
         this.updateCheck();
@@ -92,6 +91,7 @@ public final class R01 extends JavaPlugin {
 //        dataSet
         this.saveDefaultConfig(); // dataFile set
         configIOHandler.allConfigLoad(); //config Load
+        announcer.defaultAnnouncer(this); // Announcer Set
     }
 
     @Override

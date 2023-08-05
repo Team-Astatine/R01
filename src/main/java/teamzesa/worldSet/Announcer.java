@@ -36,20 +36,24 @@ public class Announcer extends ComponentExchanger {
 
     public void defaultAnnouncer(JavaPlugin plugin) {
         int delay = 0; // 초기 딜레이 (0 틱, 즉 즉시 시작)
-        int interval = 3 * 60 * 20; // 5분마다 (1분 = 60초, 1초 = 20틱)
+        int interval = 400; // 20초마다 (1초 = 20틱)
 
-        String mineListLink = configIOHandler.minelistConfigLoad();
+        String mineListLink = configIOHandler.mineListConfigLoad();
         String discordLink = configIOHandler.discordConfigLoad();
         String notionLink = configIOHandler.notionConfigLoad();
 
-        Component mineList = createLinkComponent("마인리스트 추천",mineListLink,Color.GREEN);
-        Component discord = createLinkComponent("디스코드 참가",discordLink,Color.BLUE);
-        Component notion = createLinkComponent("서버 플레이 방법",notionLink,Color.MAGENTA);
+        Component firstLine = componentSet("================[클릭하세요]================");
+        Component mineList = createLinkComponent("[클릭] > 마인리스트 추천",mineListLink,Color.GREEN);
+        Component discord = createLinkComponent("[클릭] > 디스코드 참가",discordLink,new Color(114, 137, 218));
+        Component notion = createLinkComponent("[클릭] > 서버 플레이 가이드",notionLink,Color.MAGENTA);
+        Component secondLine = componentSet("========================================");
 
         Bukkit.getScheduler().runTaskTimer(plugin, () -> {
+            Bukkit.broadcast(firstLine);
             Bukkit.broadcast(mineList);
             Bukkit.broadcast(discord);
             Bukkit.broadcast(notion);
+            Bukkit.broadcast(secondLine);
         }, delay, interval);
     }
 }

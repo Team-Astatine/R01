@@ -30,7 +30,7 @@ public class Reload extends ComponentExchanger implements CommandExecutor {
 
         configIOHandler.fileLoader(dataPathFile);
         configIOHandler.worldConfigLoad();
-        configIOHandler.minelistConfigLoad();
+        configIOHandler.mineListConfigLoad();
         configIOHandler.discordConfigLoad();
         configIOHandler.notionConfigLoad();
 
