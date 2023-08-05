@@ -30,6 +30,10 @@ public class Reload extends ComponentExchanger implements CommandExecutor {
 
         configIOHandler.fileLoader(dataPathFile);
         configIOHandler.worldConfigLoad();
+        configIOHandler.minelistConfigLoad();
+        configIOHandler.discordConfigLoad();
+        configIOHandler.notionConfigLoad();
+
         player.sendMessage(
                 componentSet("Reload 완료"));
         return true;
