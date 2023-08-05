@@ -31,6 +31,10 @@ public class User {
         return healthScale;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setHealthScale(double healthScale) {
         this.healthScale = healthScale;
     }
