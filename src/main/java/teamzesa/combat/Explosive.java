@@ -11,7 +11,7 @@ import org.bukkit.event.entity.ExplosionPrimeEvent;
 
 
 public class Explosive implements Listener {
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.LOW)
     public void explosiveMineCart(ExplosionPrimeEvent e) {
         e.setRadius(100);
         e.setFire(true);
@@ -19,12 +19,4 @@ public class Explosive implements Listener {
 
     @EventHandler
     public void creeperSet(CreeperPowerEvent e) {}
-
-    @EventHandler(priority = EventPriority.LOWEST)
-    public void entityDeath(EntityExplodeEvent e) {
-        if (!e.getEntityType().equals(EntityType.GHAST))
-            return;
-
-        e.setCancelled(true);
-    }
 }
