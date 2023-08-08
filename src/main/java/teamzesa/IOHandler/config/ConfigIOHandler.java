@@ -55,8 +55,8 @@ public class ConfigIOHandler extends ComponentExchanger implements IOHandler {
         return config.getString(WORLD_SETTING_NOTION);
     }
 
-    public void worldConfigSave(String motd) {
-        config.set(WORLD_SETTING_MOTD, motd);
+    public void worldConfigSave(StringBuilder motd) {
+        config.set(WORLD_SETTING_MOTD, String.valueOf(motd));
         try {
             config.save(file);
         } catch (IOException e) {
