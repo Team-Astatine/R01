@@ -8,15 +8,39 @@ import org.bukkit.event.entity.CreeperPowerEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
+import org.bukkit.scheduler.BukkitRunnable;
 
 
 public class Explosive implements Listener {
     @EventHandler(priority = EventPriority.LOW)
     public void explosiveMineCart(ExplosionPrimeEvent e) {
-        e.setRadius(100);
-        e.setFire(true);
+        switch (e.getEntityType()) {
+            case PRIMED_TNT -> {boomBer();  break;}
+            case CREEPER -> {creeperBoom(); break;}
+            case GHAST -> {ghastBoom(); break;}
+            case WITHER_SKULL -> {witherBoom(); break;}
+            case MINECART_TNT -> {cartBoom();   break;}
+            default -> e.setCancelled(true);
+        }
     }
 
-    @EventHandler
-    public void creeperSet(CreeperPowerEvent e) {}
+    private void boomBer() {
+
+    }
+
+    private void creeperBoom() {
+
+    }
+
+    private void ghastBoom() {
+
+    }
+
+    private void witherBoom() {
+
+    }
+
+    private void cartBoom() {
+
+    }
 }
