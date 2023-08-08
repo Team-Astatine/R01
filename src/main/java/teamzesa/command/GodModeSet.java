@@ -1,5 +1,6 @@
 package teamzesa.command;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -25,16 +26,19 @@ public class GodModeSet extends ComponentExchanger implements CommandExecutor {
             return false;
         }
 
-        Player player = userHandler.getPlayer(args[0]);
-        User user = userHandler.getUser(player.getUniqueId());
-        String mention = null;
+        User targetUser = userHandler.getUser(args[0]);
+        targetUser.setGodMode(!targetUser.isGodMode());
+        userHandler.updateUser(targetUser);
 
-        user.setGodMode(!user.isGodMode()); // Checking GodMode Enabling
-        userHandler.updateUser(user);
+        String status = targetUser.isGodMode() ? "신" : "인간";
+        String mention = "은 이제 " + status + " 입니다.";
 
-        mention = user.isGodMode() ? "당신은 이제 신 입니다." : "당신은 이제 인간 입니다.";
-        player.sendMessage(componentSet(mention, Color.ORANGE));
+        sender.sendMessage(componentSet(args[0] + " 님" + mention,Color.yellow));
 
-        return false;
+        Player targetPlayer = Bukkit.getPlayer(targetUser.getUuid());
+        if (targetPlayer != null)
+            targetPlayer.sendMessage(componentSet("당신" + mention, Color.ORANGE));
+
+        return true;
     }
 }

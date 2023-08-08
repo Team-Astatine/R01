@@ -8,6 +8,7 @@ import teamzesa.IOHandler.config.ConfigIOHandler;
 import teamzesa.IOHandler.DataFile;
 import teamzesa.IOHandler.update.UpdateChecker;
 import teamzesa.userValue.Death;
+import teamzesa.worldSet.Announcer;
 import teamzesa.worldSet.DisplayEntity;
 import teamzesa.worldSet.RaidAnnouncer;
 import teamzesa.IOHandler.userHandler.UserIOHandler;
@@ -22,9 +23,11 @@ public final class R01 extends JavaPlugin {
     private static ConfigIOHandler configIOHandler;
     private static UpdateChecker updateChecker;
     private static File pluginFiles;
+    private static Announcer announcer;
 
     public R01() {
         pm = getServer().getPluginManager();
+        announcer = Announcer.getAnnouncer();
         userIoHandler = UserIOHandler.getIOHandler();
         updateChecker = UpdateChecker.getUpdateChecker();
         configIOHandler = ConfigIOHandler.getConfigIOHandler();
@@ -63,7 +66,7 @@ public final class R01 extends JavaPlugin {
     }
 
     private void functionHandler() {
-        pm.registerEvents(new DisplayEntity(),this);
+        pm.registerEvents(new DisplayEntity(),this); // test
         pm.registerEvents(new Death(),this);
         pm.registerEvents(new Explosive(),this);
         pm.registerEvents(new HandSwing(),this);
@@ -88,6 +91,7 @@ public final class R01 extends JavaPlugin {
 //        dataSet
         this.saveDefaultConfig(); // dataFile set
         configIOHandler.allConfigLoad(); //config Load
+        announcer.defaultAnnouncer(this); // Announcer Set
     }
 
     @Override

@@ -27,11 +27,26 @@ public class ConfigIOHandler extends ComponentExchanger implements IOHandler {
 
     public void allConfigLoad() {
         worldConfigLoad();
+        mineListConfigLoad();
+        discordConfigLoad();
+        notionConfigLoad();
     }
 
     public void worldConfigLoad() {
         String motd = config.getString("world_setting.motd");
         Bukkit.motd(componentSet(motd));
+    }
+
+    public String mineListConfigLoad() {
+        return config.getString("world_setting.minelist");
+    }
+
+    public String discordConfigLoad() {
+        return config.getString("world_setting.discord");
+    }
+
+    public String notionConfigLoad() {
+        return config.getString("world_setting.notion");
     }
 
     public void worldConfigSave(StringBuilder motd) {
