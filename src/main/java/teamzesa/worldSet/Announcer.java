@@ -38,9 +38,9 @@ public class Announcer extends ComponentExchanger {
         int delay = 0; // 초기 딜레이 (0 틱, 즉 즉시 시작)
         int interval = 18000; // 3분마다 (1초 = 20틱)
 
-        String mineListLink = configIOHandler.mineListConfigLoad();
-        String discordLink = configIOHandler.discordConfigLoad();
-        String notionLink = configIOHandler.notionConfigLoad();
+        String mineListLink = configIOHandler.getMineListConfig();
+        String discordLink = configIOHandler.getDiscordConfig();
+        String notionLink = configIOHandler.getNotionConfig();
 
         Component firstLine = componentSet("================[클릭하세요]================");
         Component mineList = createLinkComponent("[클릭] > 마인리스트 추천",mineListLink,Color.GREEN);
