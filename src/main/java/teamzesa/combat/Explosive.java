@@ -39,10 +39,10 @@ public class Explosive implements Listener {
 
     private void creeperBoom(ExplosionPrimeEvent e) {
         Creeper creeper = (Creeper) e.getEntity();
-        int explosiveRadius = 100;
+        int explosiveRadius = 20;
 
         if (creeper.isPowered())
-            explosiveRadius = 20;
+            explosiveRadius = 100;
 
         e.setRadius(explosiveRadius);
         e.setFire(true);
@@ -55,8 +55,10 @@ public class Explosive implements Listener {
 
     private void witherBoom(ExplosionPrimeEvent e) {
         WitherSkull witherSkull = (WitherSkull) e.getEntity();
-        if (!witherSkull.isCharged())
+        if (witherSkull.isCharged())
             e.setRadius(40);
+        if (!witherSkull.isCharged())
+            e.setRadius(100);
     }
 
     private void cartBoom(ExplosionPrimeEvent e) {
