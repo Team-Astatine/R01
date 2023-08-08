@@ -36,7 +36,7 @@ public class Announcer extends ComponentExchanger {
 
     public void defaultAnnouncer(JavaPlugin plugin) {
         int delay = 0; // 초기 딜레이 (0 틱, 즉 즉시 시작)
-        int interval = 400; // 20초마다 (1초 = 20틱)
+        int interval = 18000; // 3분마다 (1초 = 20틱)
 
         String mineListLink = configIOHandler.mineListConfigLoad();
         String discordLink = configIOHandler.discordConfigLoad();
