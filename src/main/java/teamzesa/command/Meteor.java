@@ -17,8 +17,12 @@ import teamzesa.ComponentExchanger;
 public class Meteor extends ComponentExchanger implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        if (!sender.isOp()) {
+            return false;
+        }
+
         if (args.length < 3) {
-            sender.sendMessage("Please provide x, y and z coordinates.");
+            sender.sendMessage("x y z 좌표를 입력하세요.");
             return false;
         }
 
@@ -35,14 +39,6 @@ public class Meteor extends ComponentExchanger implements CommandExecutor {
             meta.setCustomModelData(5);
             meteorItem.setItemMeta(meta);
         }
-
-        ArmorStand meteorStand = (ArmorStand) world.spawnEntity(location, EntityType.ARMOR_STAND);
-        meteorStand.setHelmet(meteorItem);
-        meteorStand.setVisible(false); // Make the armor stand invisible, so only the item is seen
-        meteorStand.setGravity(true);
-        meteorStand.setInvulnerable(true);
-        meteorStand.setCustomName("Meteor");
-        meteorStand.setCustomNameVisible(false);
 
         return true;
     }
