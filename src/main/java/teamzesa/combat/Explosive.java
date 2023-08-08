@@ -1,9 +1,8 @@
 package teamzesa.combat;
 
+import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.entity.Creeper;
-import org.bukkit.entity.Ghast;
-import org.bukkit.entity.WitherSkull;
+import org.bukkit.entity.*;
 import org.bukkit.entity.minecart.ExplosiveMinecart;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -22,20 +21,14 @@ public class Explosive implements Listener {
 //        Wither Skull:
 //        Blue Skull: 1 block
 //        Black Skull: Varies depending on difficulty
-        BukkitRunnable task = new BukkitRunnable() {
-            @Override
-            public void run() {
-                switch (e.getEntityType()) {
-                    case PRIMED_TNT -> boomBer(e);
-                    case CREEPER -> creeperBoom(e);
-                    case GHAST -> ghastBoom(e);
-                    case WITHER_SKULL -> witherBoom(e);
-                    case MINECART_TNT -> cartBoom(e);
-                    default -> e.setCancelled(true);
-                }
-            }
-        };
-        task.run();
+        switch (e.getEntityType()) {
+            case PRIMED_TNT -> boomBer(e);
+            case CREEPER -> creeperBoom(e);
+            case FIREBALL -> ghastBoom(e);
+            case WITHER_SKULL -> witherBoom(e);
+            case MINECART_TNT -> cartBoom(e);
+            default -> e.setCancelled(true);
+        }
     }
 
     private void boomBer(ExplosionPrimeEvent e) {
@@ -46,18 +39,18 @@ public class Explosive implements Listener {
 
     private void creeperBoom(ExplosionPrimeEvent e) {
         Creeper creeper = (Creeper) e.getEntity();
-        int explosiveRadius = 20;
+        int explosiveRadius = 100;
 
         if (creeper.isPowered())
-            explosiveRadius = 100;
+            explosiveRadius = 20;
 
         e.setRadius(explosiveRadius);
         e.setFire(true);
     }
 
     private void ghastBoom(ExplosionPrimeEvent e) {
-        Ghast ghast = (Ghast) e.getEntity();
-        ghast.setExplosionPower(5);
+        e.setRadius(10);
+        e.setFire(true);
     }
 
     private void witherBoom(ExplosionPrimeEvent e) {
@@ -67,7 +60,6 @@ public class Explosive implements Listener {
     }
 
     private void cartBoom(ExplosionPrimeEvent e) {
-        ExplosiveMinecart explosiveMinecart = (ExplosiveMinecart) e.getEntity();
-        explosiveMinecart.explode(1000);
+        Location location = e.getEntity().getLocation();;
     }
 }
