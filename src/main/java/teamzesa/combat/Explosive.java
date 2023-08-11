@@ -11,8 +11,10 @@ import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class Explosive implements Listener {
+    private ExplosionPrimeEvent event;
     @EventHandler(priority = EventPriority.LOW)
-    public void explosiveHandler(ExplosionPrimeEvent e) {
+    public void explosiveHandler(ExplosionPrimeEvent event) {
+        this.event = event;
 //        TNT: 4 blocks
 //        Creeper:
 //        Normal: 3 blocks
@@ -21,47 +23,55 @@ public class Explosive implements Listener {
 //        Wither Skull:
 //        Blue Skull: 1 block
 //        Black Skull: Varies depending on difficulty
-        switch (e.getEntityType()) {
-            case PRIMED_TNT -> boomBer(e);
-            case CREEPER -> creeperBoom(e);
-            case FIREBALL -> ghastBoom(e);
-            case WITHER_SKULL -> witherBoom(e);
-            case MINECART_TNT -> cartBoom(e);
-            default -> e.setCancelled(true);
+        switch (this.event.getEntityType()) {
+            case PRIMED_TNT -> boomBer();
+            case CREEPER -> creeperBoom();
+            case FIREBALL -> ghastBoom();
+            case WITHER_SKULL -> witherBoom();
+            case MINECART_TNT -> cartBoom();
+            default -> this.event.setCancelled(true);
         }
     }
 
-    private void boomBer(ExplosionPrimeEvent e) {
-        e.setCancelled(true);
-        World world = e.getEntity().getWorld();
-        world.createExplosion(e.getEntity().getLocation(), 20.0F, true);
+    private void boomBer() {
+        event.setCancelled(true);
+        World world = event.getEntity().getWorld();
+        world.createExplosion(event.getEntity().getLocation(), 20.0F, true);
     }
 
-    private void creeperBoom(ExplosionPrimeEvent e) {
-        Creeper creeper = (Creeper) e.getEntity();
+    private void creeperBoom() {
+        Creeper creeper = (Creeper) event.getEntity();
         int explosiveRadius = 20;
 
         if (creeper.isPowered())
             explosiveRadius = 100;
 
-        e.setRadius(explosiveRadius);
-        e.setFire(true);
+        event.setRadius(explosiveRadius);
+        event.setFire(true);
     }
 
-    private void ghastBoom(ExplosionPrimeEvent e) {
-        e.setRadius(10);
-        e.setFire(true);
+    private void ghastBoom() {
+        event.setRadius(10);
+        event.setFire(true);
     }
 
-    private void witherBoom(ExplosionPrimeEvent e) {
-        WitherSkull witherSkull = (WitherSkull) e.getEntity();
+    private void witherBoom() {
+        WitherSkull witherSkull = (WitherSkull) event.getEntity();
         if (witherSkull.isCharged())
-            e.setRadius(40);
+            event.setRadius(40);
         if (!witherSkull.isCharged())
-            e.setRadius(100);
+            event.setRadius(100);
     }
 
-    private void cartBoom(ExplosionPrimeEvent e) {
-        Location location = e.getEntity().getLocation();;
+    private void cartBoom() {
+        Location location = event.getEntity().getLocation();
+        BukkitRunnable task = new BukkitRunnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < 5; i++)
+                    location.getWorld().createExplosion(location, 30, true);
+            }
+        };
+        task.run();
     }
 }
