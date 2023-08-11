@@ -88,8 +88,6 @@ public final class R01 extends JavaPlugin {
 //        configSet
         this.fileLoader(); // config set File
         userIoHandler.inputUserData(); // userData Set
-
-//        dataSet
         configIOHandler.allConfigLoad(); //config Load
         announcer.defaultAnnouncer(this); // Announcer Set
     }
