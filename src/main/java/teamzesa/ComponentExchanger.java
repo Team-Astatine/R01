@@ -1,6 +1,8 @@
 package teamzesa;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.event.ClickEvent;
 import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -15,6 +17,14 @@ public abstract class ComponentExchanger {
 //        Ensure 24-bit RGB value
         int rgb = color.getRGB() & 0xFFFFFF;
         return TextColor.color(rgb);
+    }
+
+    public Component createLinkComponent(String text, String url, Color color) {
+        TextComponent.Builder component = Component.text()
+                .content(text)
+                .color(colorExchanger(color))
+                .clickEvent(ClickEvent.openUrl(url));
+        return component.build();
     }
 
     public void serverAnnouncer(String string, Color color) {

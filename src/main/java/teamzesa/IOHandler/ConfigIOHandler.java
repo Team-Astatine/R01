@@ -1,9 +1,8 @@
-package teamzesa.IOHandler.config;
+package teamzesa.IOHandler;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import teamzesa.ComponentExchanger;
-import teamzesa.IOHandler.IOHandler;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,7 +14,7 @@ public class ConfigIOHandler extends ComponentExchanger implements IOHandler {
     private static final String WORLD_SETTING_NOTION = "world_setting.notion";
 
     private static class ConfigIOHandlerHolder {
-        private static ConfigIOHandler INSTANCE = new ConfigIOHandler();
+        private static final ConfigIOHandler INSTANCE = new ConfigIOHandler();
     }
 
     private File file;
@@ -38,11 +37,6 @@ public class ConfigIOHandler extends ComponentExchanger implements IOHandler {
         getNotionConfig();
     }
 
-    public void worldConfigLoad() {
-        String motd = config.getString(WORLD_SETTING_MOTD);
-        Bukkit.motd(componentSet(motd));
-    }
-
     public String getMineListConfig() {
         return config.getString(WORLD_SETTING_MINELIST);
     }
@@ -53,6 +47,13 @@ public class ConfigIOHandler extends ComponentExchanger implements IOHandler {
 
     public String getNotionConfig() {
         return config.getString(WORLD_SETTING_NOTION);
+    }
+
+
+    public void worldConfigLoad() {
+        Bukkit.motd(
+                componentSet(config.getString(WORLD_SETTING_MOTD))
+        );
     }
 
     public void worldConfigSave(StringBuilder motd) {

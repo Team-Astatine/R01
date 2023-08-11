@@ -4,14 +4,14 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import teamzesa.combat.*;
 import teamzesa.command.*;
-import teamzesa.IOHandler.config.ConfigIOHandler;
+import teamzesa.IOHandler.ConfigIOHandler;
 import teamzesa.IOHandler.DataFile;
-import teamzesa.IOHandler.update.UpdateChecker;
+import teamzesa.IOHandler.UpdateChecker;
 import teamzesa.userValue.Death;
 import teamzesa.worldSet.Announcer;
 import teamzesa.worldSet.DisplayEntity;
 import teamzesa.worldSet.RaidAnnouncer;
-import teamzesa.IOHandler.userHandler.UserIOHandler;
+import teamzesa.IOHandler.UserIOHandler;
 import teamzesa.userValue.JoinAndQuit;
 import teamzesa.worldSet.RecipeController;
 
@@ -26,6 +26,7 @@ public final class R01 extends JavaPlugin {
     private static Announcer announcer;
 
     public R01() {
+        this.saveDefaultConfig(); // dataFile set
         pm = getServer().getPluginManager();
         announcer = Announcer.getAnnouncer();
         userIoHandler = UserIOHandler.getIOHandler();
@@ -89,7 +90,6 @@ public final class R01 extends JavaPlugin {
         userIoHandler.inputUserData(); // userData Set
 
 //        dataSet
-        this.saveDefaultConfig(); // dataFile set
         configIOHandler.allConfigLoad(); //config Load
         announcer.defaultAnnouncer(this); // Announcer Set
     }

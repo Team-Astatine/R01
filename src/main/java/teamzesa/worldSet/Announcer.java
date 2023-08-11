@@ -7,16 +7,16 @@ import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import teamzesa.ComponentExchanger;
-import teamzesa.IOHandler.config.ConfigIOHandler;
+import teamzesa.IOHandler.ConfigIOHandler;
 
 import java.awt.*;
 
 public class Announcer extends ComponentExchanger {
 
     private static class AnnouncerHolder {
-        private static Announcer INSTANCE = new Announcer();
+        private static final Announcer INSTANCE = new Announcer();
     }
-    ConfigIOHandler configIOHandler;
+    private final ConfigIOHandler configIOHandler;
 
     private Announcer() {
         configIOHandler = ConfigIOHandler.getConfigIOHandler();
@@ -24,14 +24,6 @@ public class Announcer extends ComponentExchanger {
 
     public static Announcer getAnnouncer() {
         return AnnouncerHolder.INSTANCE;
-    }
-
-    private Component createLinkComponent(String text, String url, Color color) {
-        TextComponent.Builder component = Component.text()
-                .content(text)
-                .color(TextColor.color(color.getRGB() & 0xFFFFFF))
-                .clickEvent(ClickEvent.openUrl(url));
-        return component.build();
     }
 
     public void defaultAnnouncer(JavaPlugin plugin) {
