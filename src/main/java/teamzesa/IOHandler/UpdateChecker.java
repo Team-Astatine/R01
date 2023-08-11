@@ -1,7 +1,6 @@
-package teamzesa.IOHandler.update;
+package teamzesa.IOHandler;
 
 import org.bukkit.Bukkit;
-import teamzesa.IOHandler.IOHandler;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -11,7 +10,7 @@ import java.util.List;
 
 public class UpdateChecker implements IOHandler {
     private static class UpdateCheckerHolder {
-        private static UpdateChecker INSTANCE = new UpdateChecker();
+        private static final UpdateChecker INSTANCE = new UpdateChecker();
     }
 
     private static double gitVersion;

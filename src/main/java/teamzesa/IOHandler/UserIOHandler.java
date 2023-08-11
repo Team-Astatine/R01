@@ -1,8 +1,7 @@
-package teamzesa.IOHandler.userHandler;
+package teamzesa.IOHandler;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import teamzesa.IOHandler.IOHandler;
 import teamzesa.userValue.User;
 import teamzesa.userValue.UserHandler;
 
@@ -15,7 +14,7 @@ import java.util.List;
 
 public class UserIOHandler implements IOHandler {
     private static class UserIOHandlerHolder {
-        private static UserIOHandler INSTANCE = new UserIOHandler();
+        private static final UserIOHandler INSTANCE = new UserIOHandler();
     }
     private File file;
     private final UserHandler userHandler;

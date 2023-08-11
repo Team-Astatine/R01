@@ -6,7 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
-import teamzesa.IOHandler.config.ConfigIOHandler;
+import teamzesa.IOHandler.ConfigIOHandler;
 
 import java.awt.*;
 import java.io.File;
@@ -29,7 +29,7 @@ public class Reload extends ComponentExchanger implements CommandExecutor {
         }
 
         configIOHandler.fileLoader(dataPathFile);
-        configIOHandler.worldConfigLoad();
+        configIOHandler.getWorldConfig();
         configIOHandler.getMineListConfig();
         configIOHandler.getDiscordConfig();
         configIOHandler.getMineListConfig();

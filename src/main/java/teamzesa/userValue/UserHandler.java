@@ -10,7 +10,7 @@ import java.util.*;
 
 public class UserHandler extends ComponentExchanger {
     private static class UserHandlerHolder {
-        private static UserHandler INSTANCE = new UserHandler();
+        private static final UserHandler INSTANCE = new UserHandler();
     }
 
     private static Map<UUID, User> userData;
