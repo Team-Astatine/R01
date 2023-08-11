@@ -37,6 +37,7 @@ public class UserIOHandler implements IOHandler {
         try (FileReader reader = new FileReader(file)) {
             userHandler.updateAllUserData(gson.fromJson(reader, User[].class));
         } catch (IOException e) {
+            System.err.println("InputUserData Exception");
             e.printStackTrace();
         }
     }
