@@ -36,8 +36,8 @@ public final class R01 extends JavaPlugin {
     }
 
     public void fileLoader() {
-        configIOHandler.fileLoader(checkUpDataFile(DataFile.CONFIG));
-        userIoHandler.fileLoader(checkUpDataFile(DataFile.USER_DATA));
+        configIOHandler.fileLoader(checkUpdateFile(DataFile.CONFIG));
+        userIoHandler.fileLoader(checkUpdateFile(DataFile.USER_DATA));
     }
 
     public void updateCheck() {
@@ -45,8 +45,8 @@ public final class R01 extends JavaPlugin {
         updateChecker.fileManager(); //checking update
     }
 
-    private File checkUpDataFile(DataFile string) {
-        return new File(getDataFolder(), string.getFileName());
+    private File checkUpdateFile(DataFile value) {
+        return new File(getDataFolder(), value.getFileName());
     }
 
     private void commandHandler() {
@@ -63,7 +63,7 @@ public final class R01 extends JavaPlugin {
         this.getCommand("체력초기화").setExecutor(new HealthSet());
         this.getCommand("SaveUserData").setExecutor(new SaveUserData());
         this.getCommand("R01ConfigReload").setExecutor(
-                new Reload(checkUpDataFile(DataFile.CONFIG)));
+                new Reload(checkUpdateFile(DataFile.CONFIG)));
     }
 
     private void functionHandler() {

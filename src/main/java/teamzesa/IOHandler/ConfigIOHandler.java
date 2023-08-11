@@ -26,15 +26,21 @@ public class ConfigIOHandler extends ComponentExchanger implements IOHandler {
 
     @Override
     public void fileLoader(File configPathFile) {
-        config = YamlConfiguration.loadConfiguration(configPathFile);
         file = configPathFile;
+        config = YamlConfiguration.loadConfiguration(configPathFile);
     }
 
     public void allConfigLoad() {
-        worldConfigLoad();
+        getWorldConfig();
         getMineListConfig();
         getDiscordConfig();
         getNotionConfig();
+    }
+
+    public void getWorldConfig() {
+        Bukkit.motd(
+                componentSet(config.getString(WORLD_SETTING_MOTD))
+        );
     }
 
     public String getMineListConfig() {
@@ -47,13 +53,6 @@ public class ConfigIOHandler extends ComponentExchanger implements IOHandler {
 
     public String getNotionConfig() {
         return config.getString(WORLD_SETTING_NOTION);
-    }
-
-
-    public void worldConfigLoad() {
-        Bukkit.motd(
-                componentSet(config.getString(WORLD_SETTING_MOTD))
-        );
     }
 
     public void worldConfigSave(StringBuilder motd) {

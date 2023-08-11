@@ -35,10 +35,10 @@ public class Announcer extends ComponentExchanger {
         String notionLink = configIOHandler.getNotionConfig();
 
         Component firstLine = componentSet("================[클릭하세요]================");
+        Component secondLine = componentSet("========================================");
         Component mineList = createLinkComponent("[클릭] > 마인리스트 추천",mineListLink,Color.GREEN);
         Component discord = createLinkComponent("[클릭] > 디스코드 참가",discordLink,new Color(114, 137, 218));
-        Component notion = createLinkComponent("[클릭] > 서버 플레이 가이드",notionLink,Color.MAGENTA);
-        Component secondLine = componentSet("========================================");
+        Component notion = createLinkComponent("[클릭] > 서버 플레이 가이드",notionLink,new Color(78, 115, 223));
 
         Bukkit.getScheduler().runTaskTimer(plugin, () -> {
             Bukkit.broadcast(firstLine);
