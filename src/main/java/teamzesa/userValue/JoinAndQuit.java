@@ -6,12 +6,15 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import teamzesa.worldSet.Announcer;
 
 public class JoinAndQuit implements Listener {
-    private UserHandler userHandler;
+    private final UserHandler userHandler;
+    private final Announcer announcer;
 
     public JoinAndQuit() {
         userHandler = UserHandler.getUserHandler();
+        announcer = Announcer.getAnnouncer();
     }
 
     @EventHandler
@@ -20,6 +23,7 @@ public class JoinAndQuit implements Listener {
         attackSpeed(player);
         userHandling(player);
         setHealthScale(player);
+        announcer.joinAnnouncer(player);
     }
 
     private void userHandling(Player player) {
