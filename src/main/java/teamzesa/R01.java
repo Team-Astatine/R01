@@ -19,14 +19,13 @@ import java.io.File;
 
 public final class R01 extends JavaPlugin {
     private static PluginManager pm;
+    private static Announcer announcer;
     private static UserIOHandler userIoHandler;
     private static ConfigIOHandler configIOHandler;
     private static UpdateChecker updateChecker;
     private static File pluginFiles;
-    private static Announcer announcer;
 
     public R01() {
-        this.saveDefaultConfig(); // dataFile set
         pm = getServer().getPluginManager();
         announcer = Announcer.getAnnouncer();
         userIoHandler = UserIOHandler.getIOHandler();
@@ -50,6 +49,7 @@ public final class R01 extends JavaPlugin {
     }
 
     private void commandHandler() {
+        this.getCommand("fly").setExecutor(new Fly());
         this.getCommand("운석").setExecutor(new Meteor());
         this.getCommand("나").setExecutor(new VoChecker());
         this.getCommand("Motd").setExecutor(new MotdSet());
@@ -68,6 +68,7 @@ public final class R01 extends JavaPlugin {
 
     private void functionHandler() {
         pm.registerEvents(new DisplayEntity(),this); // test
+
         pm.registerEvents(new Death(),this);
         pm.registerEvents(new Explosive(),this);
         pm.registerEvents(new HandSwing(),this);
@@ -84,6 +85,12 @@ public final class R01 extends JavaPlugin {
 
 //        update check
         this.updateCheck();
+
+//        saveDefaultSource
+        if (!getDataFolder().exists()) {
+            this.saveDefaultConfig(); // config Data
+            this.saveResource(DataFile.USER_DATA.getFileName(),false); // userData
+        }
 
 //        configSet
         this.fileLoader(); // config set File
