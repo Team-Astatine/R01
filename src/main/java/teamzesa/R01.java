@@ -49,6 +49,7 @@ public final class R01 extends JavaPlugin {
     }
 
     private void commandHandler() {
+        this.getCommand("fly").setExecutor(new Fly());
         this.getCommand("운석").setExecutor(new Meteor());
         this.getCommand("나").setExecutor(new VoChecker());
         this.getCommand("Motd").setExecutor(new MotdSet());
@@ -86,8 +87,10 @@ public final class R01 extends JavaPlugin {
         this.updateCheck();
 
 //        saveDefaultSource
-        this.saveDefaultConfig(); // dataFile set
-        this.saveResource(DataFile.CONFIG.getFileName(),false);
+        if (!getDataFolder().exists()) {
+            this.saveDefaultConfig(); // config Data
+            this.saveResource(DataFile.USER_DATA.getFileName(),false); // userData
+        }
 
 //        configSet
         this.fileLoader(); // config set File
