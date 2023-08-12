@@ -19,11 +19,11 @@ import java.io.File;
 
 public final class R01 extends JavaPlugin {
     private static PluginManager pm;
+    private static Announcer announcer;
     private static UserIOHandler userIoHandler;
     private static ConfigIOHandler configIOHandler;
     private static UpdateChecker updateChecker;
     private static File pluginFiles;
-    private static Announcer announcer;
 
     public R01() {
         pm = getServer().getPluginManager();
