@@ -26,7 +26,6 @@ public final class R01 extends JavaPlugin {
     private static Announcer announcer;
 
     public R01() {
-        this.saveDefaultConfig(); // dataFile set
         pm = getServer().getPluginManager();
         announcer = Announcer.getAnnouncer();
         userIoHandler = UserIOHandler.getIOHandler();
@@ -68,6 +67,7 @@ public final class R01 extends JavaPlugin {
 
     private void functionHandler() {
         pm.registerEvents(new DisplayEntity(),this); // test
+
         pm.registerEvents(new Death(),this);
         pm.registerEvents(new Explosive(),this);
         pm.registerEvents(new HandSwing(),this);
@@ -84,6 +84,10 @@ public final class R01 extends JavaPlugin {
 
 //        update check
         this.updateCheck();
+
+//        saveDefaultSource
+        this.saveDefaultConfig(); // dataFile set
+        this.saveResource(DataFile.CONFIG.getFileName(),false);
 
 //        configSet
         this.fileLoader(); // config set File
