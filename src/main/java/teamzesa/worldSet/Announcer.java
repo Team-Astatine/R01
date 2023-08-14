@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import teamzesa.ComponentExchanger;
 import teamzesa.IOHandler.ConfigIOHandler;
+import teamzesa.R01;
 
 import java.awt.*;
 
@@ -33,13 +34,13 @@ public class Announcer extends ComponentExchanger {
             player.sendMessage(component);
     }
 
-    public void defaultAnnouncer(JavaPlugin plugin) {
+    public void defaultAnnouncer() {
         int delay = 0; // 초기 딜레이 (0 틱, 즉 즉시 시작)
         int interval = 18000; // 3분마다 (1초 = 20틱)
 
         Component[] components = createComponents("================[클릭하세요]================");
 
-        Bukkit.getScheduler().runTaskTimer(plugin, () -> {
+        Bukkit.getScheduler().runTaskTimer(R01.getPlugin(R01.class), () -> {
             for (Component component : components)
                 Bukkit.broadcast(component);
         }, delay, interval);
