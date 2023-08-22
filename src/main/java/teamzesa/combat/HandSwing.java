@@ -1,20 +1,42 @@
 package teamzesa.combat;
 
 import io.papermc.paper.event.player.PlayerArmSwingEvent;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.event.player.PlayerAnimationType;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
+import teamzesa.ComponentExchanger;
+import teamzesa.R01;
 
 
-public class HandSwing implements Listener {
+public class HandSwing extends ComponentExchanger implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onSwing(PlayerArmSwingEvent e) {
-        if (e.getHand() == EquipmentSlot.OFF_HAND)
-            e.setCancelled(true);
-
         Player player = e.getPlayer();
-        player.swingOffHand();
+
+        if (player.getInventory().getItemInMainHand().getType() != Material.AIR) {
+//            playerAnnouncer(player,"mainHandReturn");
+            return;
+        }
+
+        if (player.getInventory().getItemInOffHand().getType() != Material.AIR) {
+//            playerAnnouncer(player, "offHandReturn");
+            return;
+        }
+
+        if (e.getAnimationType() == PlayerAnimationType.OFF_ARM_SWING)
+            return;
+
+        BukkitTask offHandSwingTask = new BukkitRunnable() {
+            @Override
+            public void run() {
+//                playerAnnouncer(player,"Start Off Hand Swing");
+                e.getPlayer().swingOffHand();
+            }
+        }.runTaskLater(R01.getPlugin(R01.class), 7L);
     }
 }
