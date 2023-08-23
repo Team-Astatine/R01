@@ -11,27 +11,26 @@ import teamzesa.ComponentExchanger;
 import java.awt.*;
 
 public class ArmourSet extends ComponentExchanger implements CommandExecutor {
-    private Player player;
     private PlayerInventory playerInventory;
 
     public enum ArmourType {
-        머리
+        helmet
     }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        this.player = (Player)sender;
+        Player player = (Player) sender;
         this.playerInventory = player.getInventory();
 
         ItemStack tmpItemInHand = playerInventory.getItemInMainHand();
         if (tmpItemInHand == null) {
-            playerAnnouncer(this.player,"손에 아이템이 없습니다.", Color.RED);
+            playerAnnouncer(player,"손에 아이템이 없습니다.", Color.RED);
             return false;
         }
 
         ArmourType armourType = ArmourType.valueOf(label);
         switch (armourType) {
-            case 머리 -> headSet(tmpItemInHand);
+            case helmet -> headSet(tmpItemInHand);
         }
         return true;
     }
