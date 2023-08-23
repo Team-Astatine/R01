@@ -1,4 +1,4 @@
-package teamzesa.userValue;
+package teamzesa.userEvent;
 
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -10,6 +10,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import teamzesa.ComponentExchanger;
+import teamzesa.dataValue.userData.User;
+import teamzesa.dataValue.userData.UserHandler;
 
 import java.awt.*;
 

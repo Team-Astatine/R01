@@ -2,8 +2,8 @@ package teamzesa.IOHandler;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import teamzesa.userValue.User;
-import teamzesa.userValue.UserHandler;
+import teamzesa.dataValue.userData.User;
+import teamzesa.dataValue.userData.UserHandler;
 
 import java.io.File;
 import java.io.FileReader;

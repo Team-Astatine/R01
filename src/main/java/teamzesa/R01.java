@@ -7,10 +7,10 @@ import teamzesa.command.*;
 import teamzesa.IOHandler.ConfigIOHandler;
 import teamzesa.IOHandler.DataFile;
 import teamzesa.IOHandler.UpdateChecker;
-import teamzesa.userValue.Death;
+import teamzesa.userEvent.Death;
 import teamzesa.worldSet.*;
 import teamzesa.IOHandler.UserIOHandler;
-import teamzesa.userValue.JoinAndQuit;
+import teamzesa.userEvent.JoinAndQuit;
 
 import java.io.File;
 

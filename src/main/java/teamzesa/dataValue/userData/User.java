@@ -1,4 +1,4 @@
-package teamzesa.userValue;
+package teamzesa.dataValue.userData;
 
 import org.bukkit.entity.Player;
 
