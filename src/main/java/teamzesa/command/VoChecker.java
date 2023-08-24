@@ -7,8 +7,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
-import teamzesa.userValue.User;
-import teamzesa.userValue.UserHandler;
+import teamzesa.dataValue.userData.User;
+import teamzesa.dataValue.userData.UserHandler;
 
 import java.awt.*;
 

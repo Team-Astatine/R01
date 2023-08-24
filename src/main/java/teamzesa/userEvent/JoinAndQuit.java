@@ -1,4 +1,4 @@
-package teamzesa.userValue;
+package teamzesa.userEvent;
 
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
@@ -6,6 +6,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import teamzesa.dataValue.userData.User;
+import teamzesa.dataValue.userData.UserHandler;
 import teamzesa.worldSet.Announcer;
 
 public class JoinAndQuit implements Listener {

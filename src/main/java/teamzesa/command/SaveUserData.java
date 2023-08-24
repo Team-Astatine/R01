@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import teamzesa.ComponentExchanger;
 import teamzesa.IOHandler.UserIOHandler;
-import teamzesa.userValue.UserHandler;
+import teamzesa.dataValue.userData.UserHandler;
 
 import java.awt.*;
 

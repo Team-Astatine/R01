@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import teamzesa.ComponentExchanger;
-import teamzesa.userValue.UserHandler;
+import teamzesa.dataValue.userData.UserHandler;
 
 import java.awt.*;
 

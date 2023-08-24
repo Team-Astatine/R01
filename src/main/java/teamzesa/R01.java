@@ -7,13 +7,10 @@ import teamzesa.command.*;
 import teamzesa.IOHandler.ConfigIOHandler;
 import teamzesa.IOHandler.DataFile;
 import teamzesa.IOHandler.UpdateChecker;
-import teamzesa.userValue.Death;
-import teamzesa.worldSet.Announcer;
-import teamzesa.worldSet.DisplayEntity;
-import teamzesa.worldSet.RaidAnnouncer;
+import teamzesa.userEvent.Death;
+import teamzesa.worldSet.*;
 import teamzesa.IOHandler.UserIOHandler;
-import teamzesa.userValue.JoinAndQuit;
-import teamzesa.worldSet.RecipeController;
+import teamzesa.userEvent.JoinAndQuit;
 
 import java.io.File;
 
@@ -67,6 +64,7 @@ public final class R01 extends JavaPlugin {
     }
 
     private void functionHandler() {
+        pm.registerEvents(new Anvil(),this); // test
         pm.registerEvents(new DisplayEntity(),this); // test
 
         pm.registerEvents(new Death(),this);
