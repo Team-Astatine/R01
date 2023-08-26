@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import teamzesa.ComponentExchanger;
 
+import java.net.InetSocketAddress;
 import java.util.*;
 
 public class UserHandler extends ComponentExchanger {
@@ -33,13 +34,26 @@ public class UserHandler extends ComponentExchanger {
         user.forEach(uuid -> Bukkit.getLogger().info(uuid.toString()));
     }
 
+    /*public boolean checkUpUserIp(Player player) {
+        User user = getUser(player);
+        List<InetSocketAddress> list = user.getIp();
+
+//        ip가 이미 존재하면 false 반환
+        if (list.stream().anyMatch(ip -> ip.equals(player.getAddress())))
+            return false;
+
+//        신규등록이면 true 반환
+        user.setIp(player.getAddress());
+        return true;
+    }*/
+
     public synchronized void addUser(Player player) {
         Bukkit.getLogger().info(player.getName() + "님이 신규유저 등록됐습니다.");
         userData.put(player.getUniqueId(), new User(player));
     }
 
     public User getUser(Player player) {
-        return  userData.get(player.getUniqueId());
+        return userData.get(player.getUniqueId());
     }
 
     public User getUser(CommandSender sender) {

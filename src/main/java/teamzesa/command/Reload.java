@@ -29,7 +29,7 @@ public class Reload extends ComponentExchanger implements CommandExecutor {
         }
 
         configIOHandler.fileLoader(dataPathFile);
-        configIOHandler.getWorldConfig();
+        configIOHandler.setWorldSettingMotd();
         configIOHandler.getMineListConfig();
         configIOHandler.getDiscordConfig();
         configIOHandler.getMineListConfig();
