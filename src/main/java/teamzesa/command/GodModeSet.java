@@ -9,14 +9,15 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
 import teamzesa.dataValue.userData.User;
 import teamzesa.dataValue.userData.UserHandler;
+import teamzesa.dataValue.userData.UserMapHandler;
 
 import java.awt.*;
 
 public class GodModeSet extends ComponentExchanger implements CommandExecutor {
-    private UserHandler userHandler;
+    private UserMapHandler userMapHandler;
 
     public GodModeSet() {
-        userHandler = UserHandler.getUserHandler();
+        userMapHandler = UserMapHandler.getUserHandler();
     }
 
     @Override
@@ -26,16 +27,15 @@ public class GodModeSet extends ComponentExchanger implements CommandExecutor {
             return false;
         }
 
-        User targetUser = userHandler.getUser(args[0]);
+        UserHandler targetUser = new UserHandler(userMapHandler.getUser(args[0]));
         targetUser.setGodMode(!targetUser.isGodMode());
-        userHandler.updateUser(targetUser);
 
         String status = targetUser.isGodMode() ? "신" : "인간";
         String mention = "은 이제 " + status + " 입니다.";
 
         playerAnnouncer((Player)sender,args[0] + " 님" + mention,Color.yellow);
 
-        Player targetPlayer = Bukkit.getPlayer(targetUser.getUuid());
+        Player targetPlayer = Bukkit.getPlayer(targetUser.getUser().getUuid());
         if (targetPlayer != null)
             playerAnnouncer(targetPlayer,"당신" + mention, Color.ORANGE);
 

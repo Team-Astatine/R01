@@ -3,7 +3,7 @@ package teamzesa.IOHandler;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import teamzesa.dataValue.userData.User;
-import teamzesa.dataValue.userData.UserHandler;
+import teamzesa.dataValue.userData.UserMapHandler;
 
 import java.io.File;
 import java.io.FileReader;
@@ -17,10 +17,10 @@ public class UserIOHandler implements IOHandler {
         private static final UserIOHandler INSTANCE = new UserIOHandler();
     }
     private File file;
-    private final UserHandler userHandler;
+    private final UserMapHandler userMapHandler;
 
     private UserIOHandler() {
-        userHandler = UserHandler.getUserHandler();
+        userMapHandler = UserMapHandler.getUserHandler();
     }
 
     @Override
@@ -35,7 +35,7 @@ public class UserIOHandler implements IOHandler {
     public void inputUserData() {
         Gson gson = new Gson();
         try (FileReader reader = new FileReader(file)) {
-            userHandler.updateAllUserData(gson.fromJson(reader, User[].class));
+            userMapHandler.updateAllUserData(gson.fromJson(reader, User[].class));
         } catch (IOException e) {
             System.err.println("InputUserData Exception");
             e.printStackTrace();
@@ -43,7 +43,7 @@ public class UserIOHandler implements IOHandler {
     }
 
     public void outputUserData() {
-        List<User> userData = new ArrayList<>(userHandler.getUserMap().values());
+        List<User> userData = new ArrayList<>(userMapHandler.getUserMap().values());
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
                 .create();

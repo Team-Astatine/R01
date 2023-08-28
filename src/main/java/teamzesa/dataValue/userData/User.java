@@ -4,13 +4,15 @@ import org.bukkit.entity.Player;
 
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 public class User {
     private UUID uuid;
     private String name;
-//    private List<InetSocketAddress> ip;
+    private List<String> ip;
     private int joinCount;
     private int level;
     private double healthScale;
@@ -19,7 +21,7 @@ public class User {
     public User(Player player) {
         this.uuid = player.getUniqueId();
         this.name = player.getName();
-//        this.ip.add(player.getAddress());
+        this.ip.add(player.getAddress().getAddress().getHostAddress());
         this.joinCount = 1; //최초 등록 자체가 1회 접속임.
         this.level = player.getLevel();
         this.healthScale = player.getHealthScale();
@@ -42,12 +44,16 @@ public class User {
         return name;
     }
 
-    /*public List<InetSocketAddress> getIp() {
+    public List<String> getIPList() {
         return ip;
-    }*/
+    }
 
     public int getJoinCount() {
         return joinCount;
+    }
+
+    public boolean isGodMode() {
+        return godMode;
     }
 
     public void setHealthScale(double healthScale) {
@@ -58,20 +64,16 @@ public class User {
         this.level = level;
     }
 
+    public void setIp(List<String> ip) {
+        this.ip = ip;
+    }
+
+    public void setJoinCount(int count) {
+        this.joinCount = count;
+    }
+
     public void setGodMode(boolean godMode) {
         this.godMode = godMode;
-    }
-
-    /*public void setIp(InetSocketAddress ip) {
-        this.ip.add(ip);
-    }*/
-
-    public void setAddJoinCount() {
-        this.joinCount += 1;
-    }
-
-    public boolean isGodMode() {
-        return godMode;
     }
 
     @Override
@@ -79,7 +81,7 @@ public class User {
         return "User{" +
                 "uuid=" + uuid +
                 ", name='" + name + '\'' +
-//                ", ip=" + ip +
+                ", ip=" + ip +
                 ", joinCount=" + joinCount +
                 ", level=" + level +
                 ", healthScale=" + healthScale +

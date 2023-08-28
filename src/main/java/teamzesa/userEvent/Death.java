@@ -11,7 +11,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import teamzesa.ComponentExchanger;
 import teamzesa.dataValue.userData.User;
-import teamzesa.dataValue.userData.UserHandler;
+import teamzesa.dataValue.userData.UserMapHandler;
 
 import java.awt.*;
 
@@ -20,10 +20,10 @@ public class Death extends ComponentExchanger implements Listener {
     private final double MAX_HEALTH_SCALE = 60.0;
     private final Double MIN_HEALTH_SCALE = 4.0;
     private final Double STEP_SIZE = 2.0;
-    private final UserHandler userHandler;
+    private final UserMapHandler userMapHandler;
 
     public Death() {
-        userHandler = UserHandler.getUserHandler();
+        userMapHandler = UserMapHandler.getUserHandler();
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -55,8 +55,8 @@ public class Death extends ComponentExchanger implements Listener {
         double killedHealth = killed.getHealthScale() - STEP_SIZE;
         double killerHealth = killer.getHealthScale() + STEP_SIZE;
 
-        userHandler.updateUser(killed.getUniqueId(),killedHealth);
-        userHandler.updateUser(killer.getUniqueId(),killerHealth);
+        userMapHandler.updateUser(killed.getUniqueId(),killedHealth);
+        userMapHandler.updateUser(killer.getUniqueId(),killerHealth);
     }
 
     private void talking(Player killed, Player killer) {
@@ -65,7 +65,7 @@ public class Death extends ComponentExchanger implements Listener {
     }
 
     private Boolean checkingGodMod(PlayerDeathEvent e) {
-        User user = userHandler.getUser(e.getPlayer());
+        User user = userMapHandler.getUser(e.getPlayer());
 
         if (!user.isGodMode())
             return false;

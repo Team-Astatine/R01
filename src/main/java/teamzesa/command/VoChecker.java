@@ -8,14 +8,14 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
 import teamzesa.dataValue.userData.User;
-import teamzesa.dataValue.userData.UserHandler;
+import teamzesa.dataValue.userData.UserMapHandler;
 
 import java.awt.*;
 
 public class VoChecker extends ComponentExchanger implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        User user = UserHandler
+        User user = UserMapHandler
                 .getUserHandler()
                 .getUser(Bukkit.getPlayer(args[0]));
 

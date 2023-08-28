@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import teamzesa.ComponentExchanger;
 import teamzesa.IOHandler.ConfigIOHandler;
 import teamzesa.R01;
-import teamzesa.dataValue.userData.UserHandler;
+import teamzesa.dataValue.userData.UserMapHandler;
 
 import java.awt.*;
 
@@ -17,11 +17,11 @@ public class Announcer extends ComponentExchanger {
     }
 
     private final ConfigIOHandler configIOHandler;
-    private final UserHandler userHandler;
+    private final UserMapHandler userMapHandler;
 
     private Announcer() {
         configIOHandler = ConfigIOHandler.getConfigIOHandler();
-        userHandler = UserHandler.getUserHandler();
+        userMapHandler = UserMapHandler.getUserHandler();
     }
 
     public static Announcer getAnnouncer() {
@@ -32,13 +32,13 @@ public class Announcer extends ComponentExchanger {
         playerAnnouncer(
                 player,
                 configIOHandler.getWorldMotdConfig() + "을 " +
-                        String.valueOf(userHandler.getUser(player).getJoinCount())
+                        String.valueOf(userMapHandler.getUser(player).getJoinCount())
                         + "회 접속하셨습니다.",
                 new Color(191,0,255));
     }
 
     public void joinAnnouncer(Player player) {
-        int count = userHandler.getUser(player).getJoinCount();
+        int count = userMapHandler.getUser(player).getJoinCount();
         System.out.println(count);
         String joinMention = "";
 

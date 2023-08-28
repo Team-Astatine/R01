@@ -10,13 +10,13 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import teamzesa.ComponentExchanger;
 import teamzesa.dataValue.userData.User;
 import teamzesa.dataValue.userData.UserHandler;
+import teamzesa.dataValue.userData.UserMapHandler;
 import teamzesa.worldSet.Announcer;
 
-import java.net.InetSocketAddress;
-import java.util.List;
+import java.awt.*;
 
 public class JoinAndQuit extends ComponentExchanger implements Listener {
-    private final UserHandler userHandler;
+    private final UserMapHandler userMapHandler;
     private final Announcer announcer;
 
     private Player joinPlayer;
@@ -24,41 +24,52 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
     private Player quitPlayer;
 
     public JoinAndQuit() {
-        userHandler = UserHandler.getUserHandler();
+        userMapHandler = UserMapHandler.getUserHandler();
         announcer = Announcer.getAnnouncer();
     }
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         joinPlayer = e.getPlayer();
+        joinUser = new User(joinPlayer);
 
 //        ipChecking();
         attackSpeed();
         userHandling();
         setHealthScale();
+        userIPCheckUp();
         addUserJoinCount(); //접속횟수
         announcer.joinAnnouncer(joinPlayer);
     }
 
-    /*private void ipChecking() {
-        if (!userHandler.checkUpUserIp(joinPlayer))
+    private void userHandling() {
+        if (userMapHandler.getUser(joinPlayer.getUniqueId()) == null)
+            userMapHandler.addUser(joinPlayer);
+    }
+
+    private void userIPCheckUp() {
+        UserHandler userHandler = new UserHandler(joinUser);
+
+//        접속 유저가 처음 접속 이면 return
+        if (joinUser.getJoinCount() == 1)
             return;
 
-        Bukkit.getLogger().info(joinPlayer.getName() + "님이 신규 IP로 접속했습니다.");
-    }*/
+//        접속유저의 IP가 등록되어 있지 않다면?
+        if (!userHandler.existsIP(joinPlayer.getAddress()))
+            return;
 
-    private void userHandling() {
-        if (userHandler.getUser(joinPlayer.getUniqueId()) == null)
-            userHandler.addUser(joinPlayer);
+        if (userHandler.addIP(joinPlayer.getAddress()))
+            playerAnnouncer(joinPlayer,"새로운 IP로 접속하셨습니다.",Color.YELLOW);
+        else Bukkit.getLogger().info(joinPlayer.getName() + " IP 추가 실패");
     }
 
     private void addUserJoinCount() {
-        User user = userHandler.getUser(joinPlayer);
-        user.setAddJoinCount();
+        UserHandler user = new UserHandler(userMapHandler.getUser(joinPlayer));
+        user.addJoinCnt();
     }
 
     private void setHealthScale() {
-        User user = userHandler.getUser(joinPlayer.getUniqueId());
+        User user = userMapHandler.getUser(joinPlayer.getUniqueId());
         joinPlayer.setHealthScale(user.getHealthScale());
         joinPlayer.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(user.getHealthScale());
     }
@@ -72,6 +83,6 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
         Player quitPlayer = e.getPlayer();
         double healthScale = quitPlayer.getHealthScale();
         if (healthScale != 20.0)
-            userHandler.updateUser(quitPlayer.getUniqueId(), healthScale);
+            userMapHandler.updateUser(quitPlayer.getUniqueId(), healthScale);
     }
 }

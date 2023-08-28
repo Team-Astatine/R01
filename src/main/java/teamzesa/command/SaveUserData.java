@@ -7,16 +7,16 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import teamzesa.ComponentExchanger;
 import teamzesa.IOHandler.UserIOHandler;
-import teamzesa.dataValue.userData.UserHandler;
+import teamzesa.dataValue.userData.UserMapHandler;
 
 import java.awt.*;
 
 public class SaveUserData extends ComponentExchanger implements CommandExecutor {
     private static UserIOHandler userIoHandler;
-    private static UserHandler userHandler;
+    private static UserMapHandler userMapHandler;
 
     public SaveUserData() {
-        userHandler = UserHandler.getUserHandler();
+        userMapHandler = UserMapHandler.getUserHandler();
         userIoHandler = UserIOHandler.getIOHandler();
     }
 

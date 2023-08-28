@@ -1,114 +1,66 @@
 package teamzesa.dataValue.userData;
 
-import org.bukkit.Bukkit;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import teamzesa.ComponentExchanger;
 
 import java.net.InetSocketAddress;
-import java.util.*;
+import java.util.List;
+import java.util.UUID;
 
-public class UserHandler extends ComponentExchanger {
-    private static class UserHandlerHolder {
-        private static final UserHandler INSTANCE = new UserHandler();
+public class UserHandler {
+    private final UserMapHandler userMapHandler = UserMapHandler.getUserHandler();
+    private User user;
+    private UUID uuid;
+    private String name;
+    private List<String> ip;
+    private int joinCount;
+    private int level;
+    private double healthScale;
+    private boolean godMode;
+
+    public UserHandler(Player player) {
+        this.user = userMapHandler.getUser(player);
+        this.ip = user.getIPList();
     }
 
-    private static Map<UUID, User> userData;
-
-    private UserHandler() {
-        userData = new HashMap<>();
+    public UserHandler(User user) {
+        this.user = user;
+        this.ip = user.getIPList();
+        this.godMode = user.isGodMode();
     }
 
-    public Map<UUID,User> getUserMap() {
-        saveAllUserData();
-        return userData;
+    public Boolean existsIP(InetSocketAddress ip) {
+        return this.ip
+                .stream()
+                .anyMatch(listIP -> listIP.equals(ip.getAddress().getHostAddress()));
     }
 
-    public static UserHandler getUserHandler() {
-        return UserHandlerHolder.INSTANCE;
-    }
+    public boolean addIP(InetSocketAddress ip) {
+        this.ip.add(ip.getAddress().getHostAddress());
+        user.setIp(this.ip);
 
-    public void checkUpUser() {
-        List<UUID> user = new ArrayList<>(userData.keySet());
-        user.forEach(uuid -> Bukkit.getLogger().info(uuid.toString()));
-    }
-
-    /*public boolean checkUpUserIp(Player player) {
-        User user = getUser(player);
-        List<InetSocketAddress> list = user.getIp();
-
-//        ip가 이미 존재하면 false 반환
-        if (list.stream().anyMatch(ip -> ip.equals(player.getAddress())))
-            return false;
-
-//        신규등록이면 true 반환
-        user.setIp(player.getAddress());
+        updateUser();
         return true;
-    }*/
-
-    public synchronized void addUser(Player player) {
-        Bukkit.getLogger().info(player.getName() + "님이 신규유저 등록됐습니다.");
-        userData.put(player.getUniqueId(), new User(player));
     }
 
-    public User getUser(Player player) {
-        return userData.get(player.getUniqueId());
+    public void addJoinCnt() {
+        user.setJoinCount(user.getJoinCount() + 1);
+        updateUser();
     }
 
-    public User getUser(CommandSender sender) {
-        return userData.get((Player)sender);
+    public boolean isGodMode() {
+        return godMode;
     }
 
-    public User getUser(UUID uuid) {
-        return  userData.get(uuid);
+    public void setGodMode(boolean enable) {
+        user.setGodMode(true);
+        updateUser();
     }
 
-    public User getUser(String userName) {
-        return userData.values().stream()
-                .filter(data -> data.getName().equals(userName))
-                .findFirst()
-                .orElse(null);
+    public void updateUser() {
+        userMapHandler.updateUser(user);
     }
 
-    public Player getPlayer(String userName) {
-        return Bukkit.getPlayer(userName);
-    }
-
-    public void updateUser(User user) {
-        userData.replace(user.getUuid(), user);
-    }
-
-    public void updateUser(UUID uuid,double healthScale) {
-        User user = userData.get(uuid);
-        Player player = Bukkit.getPlayer(uuid);
-
-        if (user == null) {
-            Bukkit.getLogger().warning("해당 유저는 존재하지 않습니다.");
-            addUser(player);
-            return;
-        }
-
-        user.setHealthScale(healthScale);
-        player.setHealthScale(healthScale);
-        player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(healthScale);
-        updateUser(user);
-    }
-
-    public void updateUser(Player player,double healthScale) {
-        User user = userData.get(player.getUniqueId());
-        user.setHealthScale(healthScale);
-    }
-
-    public void updateAllUserData(User[] newUserData) {
-        userData.clear();
-        Arrays.stream(newUserData)
-                .forEach(user -> userData.put(user.getUuid(), user));
-    }
-
-    public void saveAllUserData() {
-        Bukkit.getLogger().info("Saving User Data..");
-        Bukkit.getOnlinePlayers().stream()
-                .forEach(player -> updateUser(player.getUniqueId(),player.getHealthScale()));
+    public User getUser() {
+        return user;
     }
 }
