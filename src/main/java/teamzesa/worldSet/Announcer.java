@@ -39,7 +39,6 @@ public class Announcer extends ComponentExchanger {
 
     public void joinAnnouncer(Player player) {
         int count = userMapHandler.getUser(player).getJoinCount();
-        System.out.println(count);
         String joinMention = "";
 
         if (count < 10) joinMention = "번째 접속";
