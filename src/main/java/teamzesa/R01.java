@@ -92,8 +92,9 @@ public final class R01 extends JavaPlugin {
 
 //        configSet
         this.fileLoader(); // config set File
-        userIoHandler.inputUserData(); // userData Set
         configIOHandler.allConfigLoad(); //config Load
+
+        userIoHandler.inputUserData(); // userData Set
         announcer.defaultAnnouncer(); // Announcer Set
     }
 
