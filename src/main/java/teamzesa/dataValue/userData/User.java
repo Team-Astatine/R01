@@ -20,7 +20,7 @@ public class User {
         this.uuid = player.getUniqueId();
         this.name = player.getName();
         this.ip.add(player.getAddress().getAddress().getHostAddress());
-        this.joinCount = 1; //최초 등록 자체가 1회 접속임.
+        this.joinCount = 0; //최초 등록 자체가 1회 접속임.
         this.level = player.getLevel();
         this.healthScale = player.getHealthScale();
         this.godMode = false;
