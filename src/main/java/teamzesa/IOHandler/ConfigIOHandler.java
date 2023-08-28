@@ -31,16 +31,20 @@ public class ConfigIOHandler extends ComponentExchanger implements IOHandler {
     }
 
     public void allConfigLoad() {
-        getWorldConfig();
+        setWorldSettingMotd();
         getMineListConfig();
         getDiscordConfig();
         getNotionConfig();
     }
 
-    public void getWorldConfig() {
+    public void setWorldSettingMotd() {
         Bukkit.motd(
                 componentSet(config.getString(WORLD_SETTING_MOTD))
         );
+    }
+
+    public String getWorldMotdConfig() {
+        return config.getString(WORLD_SETTING_MOTD);
     }
 
     public String getMineListConfig() {

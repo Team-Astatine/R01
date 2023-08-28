@@ -31,15 +31,15 @@ public class Anvil implements Listener {
 
         for (Map.Entry<Enchantment,Integer> entry : leftStuffEnchant.entrySet()) {
             EnchantValue enchantValue = new EnchantValue(entry.getKey(), entry.getValue());
+            System.out.println(enchantValue);
             leftOption.add(enchantValue);
         }
-        leftOption.forEach(System.out::println);
 
 
         for (Map.Entry<Enchantment,Integer> entry : rightStuffEnchant.entrySet()) {
             EnchantValue enchantValue = new EnchantValue(entry.getKey(), entry.getValue());
+            System.out.println(enchantValue);
             rightOption.add(enchantValue);
         }
-        rightOption.forEach(System.out::println);
     }
 }

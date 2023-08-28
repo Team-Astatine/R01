@@ -1,14 +1,12 @@
 package teamzesa.worldSet;
 
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.event.ClickEvent;
-import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
 import teamzesa.ComponentExchanger;
 import teamzesa.IOHandler.ConfigIOHandler;
 import teamzesa.R01;
+import teamzesa.dataValue.userData.UserHandler;
 
 import java.awt.*;
 
@@ -19,17 +17,38 @@ public class Announcer extends ComponentExchanger {
     }
 
     private final ConfigIOHandler configIOHandler;
+    private final UserHandler userHandler;
 
     private Announcer() {
         configIOHandler = ConfigIOHandler.getConfigIOHandler();
+        userHandler = UserHandler.getUserHandler();
     }
 
     public static Announcer getAnnouncer() {
         return AnnouncerHolder.INSTANCE;
     }
 
+    public void countAnnouncer(Player player) {
+        playerAnnouncer(
+                player,
+                configIOHandler.getWorldMotdConfig() + "을 " +
+                        String.valueOf(userHandler.getUser(player).getJoinCount())
+                        + "회 접속하셨습니다.",
+                new Color(191,0,255));
+    }
+
     public void joinAnnouncer(Player player) {
-        Component[] components = createComponents("환영합니다");
+        int count = userHandler.getUser(player).getJoinCount();
+        System.out.println(count);
+        String joinMention = "";
+
+        if (count < 10) joinMention = "번째 접속";
+        else if (count < 100) joinMention = "번 접속";
+        else joinMention = " 접속";
+
+        Component[] components = createComponents(
+                String.valueOf(count) + joinMention
+        );
         for (Component component : components)
             player.sendMessage(component);
     }
