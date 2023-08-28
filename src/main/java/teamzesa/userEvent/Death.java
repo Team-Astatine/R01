@@ -11,6 +11,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import teamzesa.ComponentExchanger;
 import teamzesa.dataValue.userData.User;
+import teamzesa.dataValue.userData.UserHandler;
 import teamzesa.dataValue.userData.UserMapHandler;
 
 import java.awt.*;

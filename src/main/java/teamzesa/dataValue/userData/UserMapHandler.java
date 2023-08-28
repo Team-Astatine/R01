@@ -66,24 +66,19 @@ public class UserMapHandler extends ComponentExchanger {
     }
 
     public void updateUser(UUID uuid,double healthScale) {
-        User user = userData.get(uuid);
+        UserHandler userHandler = new UserHandler(userData.get(uuid));
         Player player = Bukkit.getPlayer(uuid);
 
-        if (user == null) {
+        if (userHandler.getUser() == null) {
             Bukkit.getLogger().warning("해당 유저는 존재하지 않습니다.");
             addUser(player);
             return;
         }
 
-        user.setHealthScale(healthScale);
         player.setHealthScale(healthScale);
         player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(healthScale);
-        updateUser(user);
-    }
 
-    public void updateUser(Player player,double healthScale) {
-        User user = userData.get(player.getUniqueId());
-        user.setHealthScale(healthScale);
+        userHandler.setHealthScale(healthScale);
     }
 
     public void updateAllUserData(User[] newUserData) {

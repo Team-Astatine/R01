@@ -7,7 +7,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
-import teamzesa.dataValue.userData.User;
 import teamzesa.dataValue.userData.UserHandler;
 import teamzesa.dataValue.userData.UserMapHandler;
 

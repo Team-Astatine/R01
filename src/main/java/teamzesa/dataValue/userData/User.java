@@ -25,12 +25,9 @@ public class User {
         this.godMode = false;
     }
 
+//    getter
     public UUID getUuid() {
         return uuid;
-    }
-
-    public int getLevel() {
-        return level;
     }
 
     public double getHealthScale() {
@@ -53,12 +50,9 @@ public class User {
         return godMode;
     }
 
+//    setter userHandler
     public void setHealthScale(double healthScale) {
         this.healthScale = healthScale;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
     }
 
     public void setIp(List<String> ip) {

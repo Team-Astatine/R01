@@ -56,6 +56,11 @@ public class UserHandler {
         updateUser();
     }
 
+    public void setHealthScale(double healthScale) {
+        user.setHealthScale(healthScale);
+        updateUser();
+    }
+
     public void updateUser() {
         userMapHandler.updateUser(user);
     }
