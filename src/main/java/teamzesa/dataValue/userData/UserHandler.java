@@ -38,7 +38,6 @@ public class UserHandler {
     public boolean addIP(@NotNull InetSocketAddress ip) {
         this.ip.add(ip.getAddress().getHostAddress());
         user.setIp(this.ip);
-
         updateUser();
         return true;
     }
