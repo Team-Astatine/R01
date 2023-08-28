@@ -1,6 +1,7 @@
 package teamzesa.dataValue.userData;
 
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
@@ -9,13 +10,13 @@ import java.util.*;
 public class User {
     private UUID uuid;
     private String name;
-    private List<String> ip = new ArrayList<>();;
+    private Set<String> ip = new HashSet<>();
     private int joinCount;
     private int level;
     private double healthScale;
     private boolean godMode;
 
-    public User(Player player) {
+    public User(@NotNull Player player) {
         this.uuid = player.getUniqueId();
         this.name = player.getName();
         this.ip.add(player.getAddress().getAddress().getHostAddress());
@@ -38,7 +39,7 @@ public class User {
         return name;
     }
 
-    public List<String> getIPList() {
+    public Set<String> getIPList() {
         return ip;
     }
 
@@ -55,7 +56,7 @@ public class User {
         this.healthScale = healthScale;
     }
 
-    public void setIp(List<String> ip) {
+    public void setIp(Set<String> ip) {
         this.ip = ip;
     }
 
