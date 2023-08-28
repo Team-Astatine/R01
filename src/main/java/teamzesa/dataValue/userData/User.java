@@ -4,15 +4,12 @@ import org.bukkit.entity.Player;
 
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 public class User {
     private UUID uuid;
     private String name;
-    private List<String> ip;
+    private List<String> ip = new ArrayList<>();;
     private int joinCount;
     private int level;
     private double healthScale;
