@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -21,14 +22,14 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
 
     private Player joinPlayer;
     private User joinUser;
-    private Player quitPlayer;
+//    private Player quitPlayer;
 
     public JoinAndQuit() {
         userMapHandler = UserMapHandler.getUserHandler();
         announcer = Announcer.getAnnouncer();
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onJoin(PlayerJoinEvent e) {
         joinPlayer = e.getPlayer();
         joinUser = new User(joinPlayer);
@@ -80,9 +81,13 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
 
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
+        /*
         Player quitPlayer = e.getPlayer();
         double healthScale = quitPlayer.getHealthScale();
+
+//        valid healthScale
         if (healthScale != 20.0)
             userMapHandler.updateUser(quitPlayer.getUniqueId(), healthScale);
+        */
     }
 }
