@@ -40,6 +40,8 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
         setHealthScale();
         userIPCheckUp();
         addUserJoinCount(); //접속횟수
+
+        announcer.countAnnouncer(joinPlayer);
         announcer.joinAnnouncer(joinPlayer);
     }
 
