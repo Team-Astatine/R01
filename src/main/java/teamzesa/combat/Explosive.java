@@ -65,13 +65,7 @@ public class Explosive implements Listener {
 
     private void cartBoom() {
         Location location = event.getEntity().getLocation();
-        BukkitRunnable task = new BukkitRunnable() {
-            @Override
-            public void run() {
-                for (int i = 0; i < 5; i++)
-                    location.getWorld().createExplosion(location, 30, true);
-            }
-        };
-        task.run();
+            for (int i = 0; i < 5; i++)
+                location.getWorld().createExplosion(location, 30, true);
     }
 }
