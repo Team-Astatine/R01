@@ -3,6 +3,7 @@ package teamzesa.worldSet;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
 import teamzesa.IOHandler.ConfigIOHandler;
 import teamzesa.R01;
@@ -29,25 +30,16 @@ public class Announcer extends ComponentExchanger {
     }
 
     public void countAnnouncer(Player player) {
-        playerAnnouncer(
-                player,
-                configIOHandler.getWorldMotdConfig() + "을 " +
-                        String.valueOf(userMapHandler.getUser(player).getJoinCount())
-                        + "회 접속하셨습니다.",
-                new Color(191,0,255));
+        int joinCnt = userMapHandler.getUser(player).getJoinCount();
+        player.sendMessage(
+                componentSet("ASTATINE ONLINE",new Color(173,216,230))
+                        .append(componentSet(" "+String.valueOf(joinCnt),new Color(255,182,193)))
+                        .append(componentSet("번째 접속!",new Color(173,216,230)))
+        );
     }
 
     public void joinAnnouncer(Player player) {
-        int count = userMapHandler.getUser(player).getJoinCount();
-        String joinMention = "";
-
-        if (count < 10) joinMention = "번째 접속";
-        else if (count < 100) joinMention = "번 접속";
-        else joinMention = " 접속";
-
-        Component[] components = createComponents(
-                String.valueOf(count) + joinMention
-        );
+        Component[] components = createComponents("환영합니다");
         for (Component component : components)
             player.sendMessage(component);
     }
@@ -57,14 +49,13 @@ public class Announcer extends ComponentExchanger {
         int interval = 18000; // 3분마다 (1초 = 20틱)
 
         Component[] components = createComponents("클릭하세요");
-
         Bukkit.getScheduler().runTaskTimer(R01.getPlugin(R01.class), () -> {
             for (Component component : components)
                 Bukkit.broadcast(component);
         }, delay, interval);
     }
 
-    private Component[] createComponents(String title) {
+    private Component @NotNull [] createComponents(String title) {
         String mineListLink = configIOHandler.getMineListConfig();
         String discordLink = configIOHandler.getDiscordConfig();
         String notionLink = configIOHandler.getNotionConfig();
