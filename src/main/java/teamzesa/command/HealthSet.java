@@ -8,6 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
 import teamzesa.dataValue.userData.UserMapHandler;
 
@@ -15,7 +16,7 @@ import java.awt.*;
 
 public class HealthSet extends ComponentExchanger implements CommandExecutor {
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String @NotNull [] args) {
         PotionEffect healEffect = new PotionEffect(PotionEffectType.HEAL, 40, 1);
         UserMapHandler userMapHandler = UserMapHandler.getUserHandler();
         Player player = Bukkit.getPlayer(args[0]);

@@ -4,6 +4,7 @@ import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.raid.RaidTriggerEvent;
+import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
 
 import java.awt.*;
@@ -11,7 +12,7 @@ import java.awt.*;
 
 public class RaidAnnouncer extends ComponentExchanger implements Listener {
     @EventHandler
-    public void raidAnnouncer(RaidTriggerEvent e) {
+    public void raidAnnouncer(@NotNull RaidTriggerEvent e) {
         if (e.getPlayer().getName().equals("JAXPLE"))
             return;
 

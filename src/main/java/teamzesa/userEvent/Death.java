@@ -9,6 +9,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
 import teamzesa.dataValue.userData.User;
 import teamzesa.dataValue.userData.UserHandler;
@@ -34,7 +35,7 @@ public class Death extends ComponentExchanger implements Listener {
         lifeSteel(event);
     }
 
-    private void lifeSteel(PlayerDeathEvent e) {
+    private void lifeSteel(@NotNull PlayerDeathEvent e) {
         Player killed = e.getEntity();
         Player killer = killed.getKiller();
 
@@ -60,12 +61,12 @@ public class Death extends ComponentExchanger implements Listener {
         userMapHandler.updateUser(killer.getUniqueId(),killerHealth);
     }
 
-    private void talking(Player killed, Player killer) {
+    private void talking(Player killed, @NotNull Player killer) {
         playerAnnouncer(killed,killer.getName() + "님이 체력을 약탈했습니다.", Color.RED);
         playerAnnouncer(killer,killed.getName() + "님이 체력을 약탈했습니다.", Color.RED);
     }
 
-    private Boolean checkingGodMod(PlayerDeathEvent e) {
+    private @NotNull Boolean checkingGodMod(@NotNull PlayerDeathEvent e) {
         User user = userMapHandler.getUser(e.getPlayer());
 
         if (!user.isGodMode())

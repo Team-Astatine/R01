@@ -9,13 +9,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerAnimationType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
+import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
 import teamzesa.R01;
 
 
 public class HandSwing extends ComponentExchanger implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onSwing(PlayerArmSwingEvent e) {
+    public void onSwing(@NotNull PlayerArmSwingEvent e) {
         Player player = e.getPlayer();
 
         if (player.getInventory().getItemInMainHand().getType() != Material.AIR) {

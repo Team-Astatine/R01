@@ -1,6 +1,7 @@
 package teamzesa.IOHandler;
 
 import org.bukkit.Bukkit;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -25,7 +26,7 @@ public class UpdateChecker implements IOHandler {
     }
 
     @Override
-    public void fileLoader(File inFile) {
+    public void fileLoader(@NotNull File inFile) {
         this.folder = inFile;
         this.fileList = Arrays.asList(inFile.listFiles());
     }

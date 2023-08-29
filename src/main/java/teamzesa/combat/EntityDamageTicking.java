@@ -8,11 +8,12 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 public class EntityDamageTicking implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void entityHit(EntityDamageByEntityEvent e) {
+    public void entityHit(@NotNull EntityDamageByEntityEvent e) {
         if (!e.getDamager().getType().equals(EntityType.PLAYER))
             return;
 
@@ -38,7 +39,7 @@ public class EntityDamageTicking implements Listener {
         target.setMaximumNoDamageTicks(hurtTick);
     }
 
-    private Boolean handStuffChecker(ItemStack mainHand , ItemStack offHand) {
+    private @NotNull Boolean handStuffChecker(ItemStack mainHand , ItemStack offHand) {
         if (mainHand.getType().equals(Material.NETHERITE_SWORD)
                 && offHand.getType().equals(Material.NETHERITE_SWORD))
             return true;
