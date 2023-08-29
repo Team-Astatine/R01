@@ -4,6 +4,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 import org.purpurmc.purpur.event.inventory.AnvilUpdateResultEvent;
 import teamzesa.dataValue.EnchantValue;
 
@@ -14,7 +15,7 @@ import java.util.Map;
 public class Anvil implements Listener {
 
     @EventHandler
-    public void onAnvil(AnvilUpdateResultEvent e) {
+    public void onAnvil(@NotNull AnvilUpdateResultEvent e) {
 
         ItemStack leftStuff = e.getInventory().getItem(0);
         ItemStack rightStuff = e.getInventory().getItem(1);

@@ -2,6 +2,8 @@ package teamzesa;
 
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import teamzesa.combat.*;
 import teamzesa.command.*;
 import teamzesa.IOHandler.ConfigIOHandler;
@@ -41,7 +43,8 @@ public final class R01 extends JavaPlugin {
         updateChecker.fileManager(); //checking update
     }
 
-    private File checkUpdateFile(DataFile value) {
+    @Contract("_ -> new")
+    private @NotNull File checkUpdateFile(@NotNull DataFile value) {
         return new File(getDataFolder(), value.getFileName());
     }
 

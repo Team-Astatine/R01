@@ -6,6 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
 
 import java.awt.*;
@@ -59,13 +60,13 @@ public class TotemStacking extends ComponentExchanger implements CommandExecutor
         return true;
     }
 
-    public boolean validMinimumTotemCount(List<Integer> list) {
+    public boolean validMinimumTotemCount(@NotNull List<Integer> list) {
         int cnt = (int) list.stream().filter(num -> num == 1).count();
         return list.stream()
                 .noneMatch(num -> num > MINIMUM || cnt > MINIMUM);
     }
 
-    public boolean validTotemCommand(List<Integer> list) {
+    public boolean validTotemCommand(@NotNull List<Integer> list) {
         int cnt = (int) list.stream().filter(num -> num < 64).count();
         return list.stream()
                 .noneMatch(num -> cnt > MINIMUM);

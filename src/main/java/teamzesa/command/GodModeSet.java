@@ -20,7 +20,7 @@ public class GodModeSet extends ComponentExchanger implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
         if (args.length == 0) {
             componentSet("/god [플레이어 이름]",Color.RED);
             return false;

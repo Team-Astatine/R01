@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
 
 import java.util.*;
@@ -33,12 +34,12 @@ public class UserMapHandler extends ComponentExchanger {
         user.forEach(uuid -> Bukkit.getLogger().info(uuid.toString()));
     }
 
-    public synchronized void addUser(Player player) {
+    public synchronized void addUser(@NotNull Player player) {
         Bukkit.getLogger().info(player.getName() + "님이 신규유저 등록됐습니다.");
         userData.put(player.getUniqueId(), new User(player));
     }
 
-    public User getUser(Player player) {
+    public User getUser(@NotNull Player player) {
         return userData.get(player.getUniqueId());
     }
 

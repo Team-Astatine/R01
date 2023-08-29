@@ -1,5 +1,7 @@
 package test;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,11 +19,11 @@ public class Handler {
         userMap.put(user.getName(), user);
     }
 
-    public User read(User user) {
+    public User read(@NotNull User user) {
         return userMap.get(user.getName());
     }
 
-    public void updateData(User[] userData) {
+    public void updateData(User @NotNull [] userData) {
         userMap.clear();
         for (User user : userData) {
             System.out.println(user);
