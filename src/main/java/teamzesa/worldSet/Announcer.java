@@ -1,6 +1,9 @@
 package teamzesa.worldSet;
 
+import net.kyori.adventure.audience.Audience;
+import net.kyori.adventure.pointer.Pointer;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.ComponentLike;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -35,6 +38,12 @@ public class Announcer extends ComponentExchanger {
                 componentSet("ASTATINE ONLINE",new Color(173,216,230))
                         .append(componentSet(" "+String.valueOf(joinCnt),new Color(255,182,193)))
                         .append(componentSet("번째 접속!",new Color(173,216,230)))
+        );
+    }
+
+    public void playerTab(@NotNull Audience player) {
+        player.sendPlayerListHeader(
+                componentSet("ASTATINE ONLINE",new Color(139, 0, 255))
         );
     }
 
