@@ -19,6 +19,7 @@ public class VoChecker extends ComponentExchanger implements CommandExecutor {
                 .getUserHandler()
                 .getUser(Bukkit.getPlayer(args[0]));
 
+        Bukkit.getLogger().info(user.toString());
         playerAnnouncer((Player) sender,user.toString(), Color.YELLOW);
         return true;
     }
