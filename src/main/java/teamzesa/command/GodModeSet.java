@@ -32,9 +32,12 @@ public class GodModeSet extends ComponentExchanger implements CommandExecutor {
         String status = targetUser.isGodMode() ? "신" : "인간";
         String mention = "은 이제 " + status + " 입니다.";
 
-        playerAnnouncer((Player)sender,args[0] + " 님" + mention,Color.yellow);
+//        스스로에게 적용했을시 무시
+        if (!sender.getName().equals(targetUser.getUser().getName()))
+            playerAnnouncer((Player)sender,args[0] + " 님" + mention,Color.yellow);
 
         Player targetPlayer = Bukkit.getPlayer(targetUser.getUser().getUuid());
+
         if (targetPlayer != null)
             playerAnnouncer(targetPlayer,"당신" + mention, Color.ORANGE);
 
