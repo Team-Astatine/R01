@@ -9,6 +9,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
+import teamzesa.R01;
 
 public class Explosive implements Listener {
     private ExplosionPrimeEvent event;
@@ -65,7 +67,14 @@ public class Explosive implements Listener {
 
     private void cartBoom() {
         Location location = event.getEntity().getLocation();
-            for (int i = 0; i < 5; i++)
-                location.getWorld().createExplosion(location, 30, true);
+        BukkitRunnable explosiveTask = new BukkitRunnable() {
+            @Override
+            public void run() {
+                location.createExplosion(40,true);
+            }
+        };
+
+        for (int i = 0; i < 100; i++)
+            explosiveTask.run();
     }
 }
