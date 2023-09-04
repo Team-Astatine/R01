@@ -12,7 +12,7 @@ import teamzesa.dataValue.userData.UserMapHandler;
 
 import java.awt.*;
 
-public class VoChecker extends ComponentExchanger implements CommandExecutor {
+public class UserObjectChecker extends ComponentExchanger implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
         User user = UserMapHandler
