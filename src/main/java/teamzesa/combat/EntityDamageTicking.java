@@ -39,7 +39,7 @@ public class EntityDamageTicking implements Listener {
         target.setMaximumNoDamageTicks(hurtTick);
     }
 
-    private @NotNull Boolean handStuffChecker(ItemStack mainHand , ItemStack offHand) {
+    private @NotNull Boolean handStuffChecker(@NotNull ItemStack mainHand , ItemStack offHand) {
         if (mainHand.getType().equals(Material.NETHERITE_SWORD)
                 && offHand.getType().equals(Material.NETHERITE_SWORD))
             return true;
