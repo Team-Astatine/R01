@@ -44,7 +44,6 @@ public class RecipeController extends ComponentExchanger implements Listener {
                 e.setCancelled(true);
             }
         };
-
         task.run();
     }
 }
