@@ -12,8 +12,8 @@ import java.awt.*;
 import java.io.File;
 
 public class Reload extends ComponentExchanger implements CommandExecutor {
-    private File dataPathFile;
-    private ConfigIOHandler configIOHandler;
+    private final File dataPathFile;
+    private final ConfigIOHandler configIOHandler;
 
     public Reload(File file) {
         dataPathFile = file;
