@@ -15,7 +15,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class RecipeController extends ComponentExchanger implements Listener {
-    private Set<Material> lockingStuff;
+    private final Set<Material> lockingStuff;
 
     public RecipeController() {
         this.lockingStuff = new HashSet<>();
