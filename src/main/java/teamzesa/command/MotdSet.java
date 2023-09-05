@@ -5,6 +5,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
 import teamzesa.IOHandler.ConfigIOHandler;
 
@@ -19,7 +20,7 @@ public class MotdSet extends ComponentExchanger implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         Player player = (Player)sender;
         if (!player.getName().equals("JAXPLE")) {
             componentSet("해당 명령어는 플레이어가 사용할 수 없습니다.", Color.RED);
@@ -32,10 +33,11 @@ public class MotdSet extends ComponentExchanger implements CommandExecutor {
                       .append(" ");
 
         configIOHandler.worldConfigSave(customMotd);
-        Bukkit.getLogger().info("Motd Set :: " + customMotd.toString().trim());
+
+        Bukkit.getLogger().info("Motd Set > " + customMotd.toString().trim());
         Bukkit.motd(componentSet(customMotd.toString()));
-        player.sendMessage(
-                componentSet(customMotd.append(" 로 변경 됐습니다.").toString(),Color.YELLOW));
+        player.sendMessage(componentSet(customMotd.append("로 변경 됐습니다.").toString(),Color.YELLOW));
+
         return true;
     }
 }
