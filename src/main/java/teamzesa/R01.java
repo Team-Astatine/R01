@@ -99,6 +99,7 @@ public final class R01 extends JavaPlugin {
 
         userIoHandler.importUserData(); // userData Set
         announcer.defaultAnnouncer(); // Announcer Set
+        announcer.commandAnnouncer(); // Command Set
     }
 
     @Override
