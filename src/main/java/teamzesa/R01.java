@@ -1,5 +1,6 @@
 package teamzesa;
 
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.Contract;
@@ -67,8 +68,8 @@ public final class R01 extends JavaPlugin {
     }
 
     private void functionHandler() {
-        pm.registerEvents(new Anvil(),this); // test
-        pm.registerEvents(new DisplayEntity(),this); // test
+//        pm.registerEvents(new Anvil(),this); // test
+//        pm.registerEvents(new DisplayEntity(),this); // test
 
         pm.registerEvents(new Death(),this);
         pm.registerEvents(new Explosive(),this);
