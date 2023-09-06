@@ -11,13 +11,13 @@ import teamzesa.dataValue.userData.User;
 import teamzesa.dataValue.userData.UserMapHandler;
 
 import java.awt.*;
+import java.util.Optional;
 
 public class UserObjectChecker extends ComponentExchanger implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
-        User user = UserMapHandler
-                .getUserHandler()
-                .getUser(Bukkit.getPlayer(args[0]));
+        Optional<Player> player = Optional.ofNullable(Bukkit.getPlayer(args[0]));
+        User user = UserMapHandler.getUserHandler().getUser(player.get());
 
         Bukkit.getLogger().info(user.toString());
         playerAnnouncer((Player) sender,user.toString(), Color.YELLOW);

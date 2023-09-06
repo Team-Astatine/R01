@@ -6,9 +6,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
 
 import java.awt.*;
+import java.util.Optional;
 
 public class ArmourSet extends ComponentExchanger implements CommandExecutor {
     private PlayerInventory playerInventory;
@@ -18,19 +20,19 @@ public class ArmourSet extends ComponentExchanger implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         Player player = (Player) sender;
         this.playerInventory = player.getInventory();
 
-        ItemStack tmpItemInHand = playerInventory.getItemInMainHand();
-        if (tmpItemInHand == null) {
+        Optional<ItemStack> tmpItemInHand = Optional.of(playerInventory.getItemInMainHand());
+        if (tmpItemInHand.isEmpty()) {
             playerAnnouncer(player,"손에 아이템이 없습니다.", Color.RED);
             return false;
         }
 
         ArmourType armourType = ArmourType.valueOf(label);
         switch (armourType) {
-            case helmet -> headSet(tmpItemInHand);
+            case helmet -> headSet(tmpItemInHand.get());
         }
         return true;
     }

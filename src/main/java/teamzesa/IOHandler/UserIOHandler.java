@@ -32,7 +32,7 @@ public class UserIOHandler implements IOHandler {
         return UserIOHandlerHolder.INSTANCE;
     }
 
-    public void inputUserData() {
+    public void importUserData() {
         Gson gson = new Gson();
         try (FileReader reader = new FileReader(file)) {
             userMapHandler.updateAllUserData(gson.fromJson(reader, User[].class));
@@ -42,7 +42,7 @@ public class UserIOHandler implements IOHandler {
         }
     }
 
-    public void outputUserData() {
+    public void exportUserData() {
         List<User> userData = new ArrayList<>(userMapHandler.getUserMap().values());
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()

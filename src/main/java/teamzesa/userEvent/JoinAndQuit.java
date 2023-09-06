@@ -40,11 +40,17 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
         userIPCheckUp(); //접속 IP 확인
 
         attackSpeed();
+        playerFlight(); //flight Set
         setHealthScale();
 
         announcer.playerTab(joinPlayer);
         announcer.countAnnouncer(joinPlayer);
         announcer.joinAnnouncer(joinPlayer);
+    }
+
+    private void playerFlight() {
+        joinPlayer.setAllowFlight(true);
+        playerAnnouncer(joinPlayer,"플라이 활성화",Color.YELLOW);
     }
 
     private void userHandling() {

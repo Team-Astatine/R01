@@ -13,13 +13,14 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class TotemStacking extends ComponentExchanger implements CommandExecutor {
     private final int MINIMUM = 1; // 합칠 수 있는 최소단위
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender,@NotNull Command command,@NotNull String label, String[] args) {
         Player player = (Player) sender;
         List<ItemStack> playerItemStack = new ArrayList<>(
                 Arrays.asList(player.getInventory().getContents()));
@@ -54,19 +55,26 @@ public class TotemStacking extends ComponentExchanger implements CommandExecutor
         int totalAmount = itemList.stream().mapToInt(Integer::intValue).sum();
 //        p.sendMessage("총 토템 " + String.valueOf(totalAmount));
         ItemStack stackOfTotem = new ItemStack(Material.TOTEM_OF_UNDYING, totalAmount);
-        player.getInventory().addItem(stackOfTotem);
+
+//        offHandTotemCheckUp
+        Optional<ItemStack> offHandTempVariable = Optional.of(player.getInventory().getItemInOffHand());
+//        offHandHasSomething
+        if (offHandTempVariable.get().getType() != Material.AIR)
+            player.getInventory().addItem(offHandTempVariable.get());
+//        offHandHasNothing
+        player.getInventory().setItemInOffHand(stackOfTotem);
 
         playerAnnouncer(player,"토템을 합쳤습니다.", Color.YELLOW);
         return true;
     }
 
-    public boolean validMinimumTotemCount(@NotNull List<Integer> list) {
+    public boolean validMinimumTotemCount(List<Integer> list) {
         int cnt = (int) list.stream().filter(num -> num == 1).count();
         return list.stream()
                 .noneMatch(num -> num > MINIMUM || cnt > MINIMUM);
     }
 
-    public boolean validTotemCommand(@NotNull List<Integer> list) {
+    public boolean validTotemCommand(List<Integer> list) {
         int cnt = (int) list.stream().filter(num -> num < 64).count();
         return list.stream()
                 .noneMatch(num -> cnt > MINIMUM);
