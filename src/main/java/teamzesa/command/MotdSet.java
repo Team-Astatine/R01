@@ -32,10 +32,11 @@ public class MotdSet extends ComponentExchanger implements CommandExecutor {
             customMotd.append(motd)
                       .append(" ");
 
-        configIOHandler.worldConfigSave(customMotd);
-        Bukkit.getLogger().info("Motd Set > " + customMotd.toString().trim());
+        String finalMotd = customMotd.toString().trim();
+        configIOHandler.worldConfigSave(finalMotd);
+        Bukkit.getLogger().info("Motd Set > " + finalMotd);
         Bukkit.motd(componentSet(customMotd.toString()));
-        player.sendMessage(componentSet(customMotd.append("로 변경 됐습니다.").toString(),Color.YELLOW));
+        playerAnnouncer(player,finalMotd + "로 변경 됐습니다.",Color.YELLOW);
         return true;
     }
 }

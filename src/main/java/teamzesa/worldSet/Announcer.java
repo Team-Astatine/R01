@@ -49,6 +49,10 @@ public class Announcer extends ComponentExchanger {
         Component[] components = createComponents("환영합니다",1);
         for (Component component : components)
             player.sendMessage(component);
+
+        Component[] serverTip = createComponents("tip", 2);
+        for (Component component : serverTip)
+            Bukkit.broadcast(component);
     }
 
     public void defaultAnnouncer() {
