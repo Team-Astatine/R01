@@ -67,7 +67,7 @@ public class Announcer extends ComponentExchanger {
     }
 
     public void commandAnnouncer() {
-        int delay = 9000; // 초기 딜레이 (0 틱, 즉 즉시 시작)
+        int delay = 0; // 초기 딜레이 (0 틱, 즉 즉시 시작)
         int interval = 18000; // 3분마다 (1초 = 20틱)
 
         Component[] components = createComponents("서 버 팁",2);
