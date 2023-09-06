@@ -11,6 +11,7 @@ import teamzesa.R01;
 import teamzesa.dataValue.userData.UserMapHandler;
 
 import java.awt.*;
+import java.util.Arrays;
 
 public class Announcer extends ComponentExchanger {
 
@@ -51,8 +52,8 @@ public class Announcer extends ComponentExchanger {
             player.sendMessage(component);
 
         Component[] serverTip = createComponents("tip", 2);
-        for (Component component : serverTip)
-            Bukkit.broadcast(component);
+        for (int i = 0; i < serverTip.length; i++)
+            player.sendMessage(serverTip[i]);
     }
 
     public void defaultAnnouncer() {
