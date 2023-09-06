@@ -7,12 +7,8 @@ https://jaxple.notion.site/d1ef58aa889d4b8ba1342fc09c0249b4?pvs=4
    1. 약탈3 + 약탈3 = 약탈4
 
 ## server Fix List
-1. Geyser Motd 추가하기
-2. Speed Limit Config Setup
+1. Anti Chat Report 추가하기
+2. 
 
 ## Debug List
-1. /motd
-2. /머리
-3. /totem 수정필요
-4. join > flight
-5. command & server Tip Announcer
+1. 토템 기능 확인하기
