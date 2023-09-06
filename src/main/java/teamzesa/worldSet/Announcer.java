@@ -88,13 +88,14 @@ public class Announcer extends ComponentExchanger {
         }
 
         if (menu == 2) {
+            Component steelLifeTip = componentSet("플레이어 사살시 체력을 약탈합니다.", new Color(233, 30, 99));
             Component raidTip = componentSet("습격 발생시 해당 좌표 지점이 공지됩니다.", new Color(233, 30, 99));
             Component weaponTip = componentSet("네더라이트 검 or 도끼를 양손에 들시 공격 속도가 매우 빨라 집니다.", new Color(233, 30, 99));
             Component explosiveTip = componentSet("모든 폭팔을 조심하세요. 크리퍼, 가스트, 위더, TNT 모든게 \"매우\"위험 합니다.", new Color(233, 30, 99));
             Component commandFly = componentSet("/fly - 하늘을 납니다.", new Color(139, 195, 74));
             Component commandHat = componentSet("/머리 - 손에 든 아이템을 머리에 씁니다.", new Color(139, 195, 74));
             Component commandTotem = componentSet("/토템 - 인벤토리의 토템을 모두 합칩니다.", new Color(139, 195, 74));
-            return new Component[]{weaponTip, explosiveTip, raidTip, commandFly, commandHat, commandTotem};
+            return new Component[]{steelLifeTip, raidTip, weaponTip, explosiveTip, commandFly, commandHat, commandTotem};
         }
         return null;
     }
