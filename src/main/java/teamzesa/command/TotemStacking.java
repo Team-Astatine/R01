@@ -13,6 +13,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class TotemStacking extends ComponentExchanger implements CommandExecutor {
@@ -54,7 +55,14 @@ public class TotemStacking extends ComponentExchanger implements CommandExecutor
         int totalAmount = itemList.stream().mapToInt(Integer::intValue).sum();
 //        p.sendMessage("총 토템 " + String.valueOf(totalAmount));
         ItemStack stackOfTotem = new ItemStack(Material.TOTEM_OF_UNDYING, totalAmount);
-        player.getInventory().addItem(stackOfTotem);
+
+//        offHandTotemCheckUp
+        Optional<ItemStack> offHandTempVariable = Optional.of(player.getInventory().getItemInOffHand());
+//        offHandHasSomething
+        if (offHandTempVariable.get().getType() != Material.AIR)
+            player.getInventory().addItem(offHandTempVariable.get());
+//        offHandHasNothing
+        player.getInventory().setItemInOffHand(stackOfTotem);
 
         playerAnnouncer(player,"토템을 합쳤습니다.", Color.YELLOW);
         return true;
