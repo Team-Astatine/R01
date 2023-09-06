@@ -7,7 +7,7 @@ https://jaxple.notion.site/d1ef58aa889d4b8ba1342fc09c0249b4?pvs=4
    1. 약탈3 + 약탈3 = 약탈4
 
 ## server Fix List
-1. Anti Chat Report 추가하기
+1.
 2. 
 
 ## Debug List
