@@ -27,7 +27,7 @@ public class SaveUserData extends ComponentExchanger implements CommandExecutor 
             return false;
         }
 
-        userIoHandler.outputUserData();
+        userIoHandler.exportUserData();
         Bukkit.getLogger().info("Success to saving UserData");
         return true;
     }

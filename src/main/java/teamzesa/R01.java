@@ -97,12 +97,12 @@ public final class R01 extends JavaPlugin {
         this.fileLoader(); // config set File
         configIOHandler.allConfigLoad(); //config Load
 
-        userIoHandler.inputUserData(); // userData Set
+        userIoHandler.importUserData(); // userData Set
         announcer.defaultAnnouncer(); // Announcer Set
     }
 
     @Override
     public void onDisable() {
-        userIoHandler.outputUserData();
+        userIoHandler.exportUserData();
     }
 }
