@@ -16,21 +16,21 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TotemStacking extends ComponentExchanger implements CommandExecutor {
-    private final int MINIMUM = 1; // 합칠 수 있는 최소 단위 +1
+    private final int MINIMUM = 1; // 합칠 수 있는 최소단위
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender,@NotNull Command command,@NotNull String label, String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player player = (Player) sender;
         List<ItemStack> playerItemStack = new ArrayList<>(
                 Arrays.asList(player.getInventory().getContents()));
 
-//        Checking total Totem amount
+        // Checking total Totem amount
         List<Integer> itemList = playerItemStack.stream()
-                .filter(item -> item.getType() != Material.AIR && item.getType() == Material.TOTEM_OF_UNDYING)
+                .filter(item -> item != null && item.getType() == Material.TOTEM_OF_UNDYING)
                 .map(ItemStack::getAmount)
                 .collect(Collectors.toList());
 
-//        validation
+        // validation totemCount
         if (validMinimumTotemCount(itemList)) {
             playerAnnouncer(player,"2개 이상의 토템을 가지고 있으셔야 합니다.", Color.RED);
             return false;
@@ -41,16 +41,16 @@ public class TotemStacking extends ComponentExchanger implements CommandExecutor
             return false;
         }
 
-//        offHandCheck
+        // offHandCheck
         if (player.getInventory().getItemInOffHand().getType() == Material.TOTEM_OF_UNDYING)
             player.getInventory().setItemInOffHand(null);
 
-//        remove Inventory
+        // remove Inventory
         playerItemStack.stream()
                 .filter(item -> item != null && item.getType() == Material.TOTEM_OF_UNDYING)
                 .forEach(item -> player.getInventory().remove(item));
 
-//        setTotem
+        // setTotem
         int totalAmount = itemList.stream().mapToInt(Integer::intValue).sum();
 //        p.sendMessage("총 토템 " + String.valueOf(totalAmount));
         ItemStack stackOfTotem = new ItemStack(Material.TOTEM_OF_UNDYING, totalAmount);
@@ -60,14 +60,14 @@ public class TotemStacking extends ComponentExchanger implements CommandExecutor
         return true;
     }
 
-    public boolean validMinimumTotemCount(List<Integer> list) {
-        long cnt = list.stream().filter(num -> num == 1).count();
+    public boolean validMinimumTotemCount(@NotNull List<Integer> list) {
+        int cnt = (int) list.stream().filter(num -> num == 1).count();
         return list.stream()
                 .noneMatch(num -> num > MINIMUM || cnt > MINIMUM);
     }
 
-    public boolean validTotemCommand(List<Integer> list) {
-        long cnt = list.stream().filter(num -> num < 32).count();
+    public boolean validTotemCommand(@NotNull List<Integer> list) {
+        int cnt = (int) list.stream().filter(num -> num < 64).count();
         return list.stream()
                 .noneMatch(num -> cnt > MINIMUM);
     }
