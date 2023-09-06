@@ -55,14 +55,7 @@ public class TotemStacking extends ComponentExchanger implements CommandExecutor
         int totalAmount = itemList.stream().mapToInt(Integer::intValue).sum();
 //        p.sendMessage("총 토템 " + String.valueOf(totalAmount));
         ItemStack stackOfTotem = new ItemStack(Material.TOTEM_OF_UNDYING, totalAmount);
-
-//        offHandTotemCheckUp
-        Optional<ItemStack> offHandTempVariable = Optional.of(player.getInventory().getItemInOffHand());
-//        offHandHasSomething
-        if (offHandTempVariable.get().getType() != Material.AIR)
-            player.getInventory().addItem(offHandTempVariable.get());
-//        offHandHasNothing
-        player.getInventory().setItemInOffHand(stackOfTotem);
+        player.getInventory().addItem(stackOfTotem);
 
         playerAnnouncer(player,"토템을 합쳤습니다.", Color.YELLOW);
         return true;
