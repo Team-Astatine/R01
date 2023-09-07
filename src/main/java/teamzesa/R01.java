@@ -94,7 +94,7 @@ public final class R01 extends JavaPlugin {
         if (!getDataFolder().exists()) {
             this.saveDefaultConfig(); // config Data
             this.saveResource(DataFile.USER_DATA.getFileName(),false); // userData
-            Bukkit.getLogger().info("R01 Plugin Data File 생성 완료.");
+            System.out.println("Plugin Data File 생성 완료.");
         }
 
 //        configSet
