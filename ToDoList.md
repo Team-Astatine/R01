@@ -7,8 +7,14 @@ https://jaxple.notion.site/d1ef58aa889d4b8ba1342fc09c0249b4?pvs=4
    1. 약탈3 + 약탈3 = 약탈4
 
 ## server Fix List
-1. Anti Chat Report 추가하기
-2. 
+1. 
 
 ## Debug List
-1. 토템 기능 확인하기
+1. /totem
+2. /reload
+3. announcer join & broadCast
+
+## Plugin
+1. https://www.spigotmc.org/resources/speedlimit-1-20-1-support.75269/
+2. https://github.com/Camotoy/GeyserSkinManager/tree/master/spigot/src/main/java/com/github/camotoy/geyserskinmanager/spigot/profile
+3. 
