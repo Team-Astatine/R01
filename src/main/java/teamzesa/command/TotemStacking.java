@@ -24,6 +24,10 @@ public class TotemStacking extends ComponentExchanger implements CommandExecutor
         List<ItemStack> playerItemStack = new ArrayList<>(
                 Arrays.asList(player.getInventory().getContents()));
 
+        player.getInventory().getStorageContents();
+        player.getInventory().getExtraContents();
+        player.getInventory().getContents();
+
 //        Checking total Totem amount
         List<Integer> itemList = playerItemStack.stream()
                 .filter(item -> item.getType() != Material.AIR && item.getType() == Material.TOTEM_OF_UNDYING)
