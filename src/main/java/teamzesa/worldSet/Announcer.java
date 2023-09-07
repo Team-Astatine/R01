@@ -51,8 +51,8 @@ public class Announcer extends ComponentExchanger {
             player.sendMessage(component);
 
         Component[] serverTip = createComponents(2);
-        for (Component component : serverTip)
-            Bukkit.broadcast(component);
+        for (int i = 0; i < serverTip.length; i++)
+            player.sendMessage(serverTip[i]);
     }
 
     public void defaultAnnouncer() {
