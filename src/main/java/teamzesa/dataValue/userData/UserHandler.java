@@ -52,7 +52,7 @@ public class UserHandler {
     }
 
     public void setGodMode(boolean enable) {
-        user.setGodMode(true);
+        user.setGodMode(enable);
         updateUser();
     }
 

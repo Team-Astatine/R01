@@ -29,7 +29,7 @@ public class GodModeSet extends ComponentExchanger implements CommandExecutor {
         UserHandler targetUser = new UserHandler(userMapHandler.getUser(args[0]));
         targetUser.setGodMode(!targetUser.isGodMode());
 
-        String status = targetUser.isGodMode() ? "신" : "인간";
+        String status = targetUser.isGodMode() ? "인간" : "신";
         String mention = "은 이제 " + status + " 입니다.";
 
 //        스스로에게 적용했을시 무시
