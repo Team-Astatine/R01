@@ -45,6 +45,7 @@ public final class R01 extends JavaPlugin {
     }
 
     @Contract("_ -> new")
+//    어떤 파라미터든 객체를 반환하는 메서드 intellij annotation
     private @NotNull File checkUpdateFile(@NotNull DataFile value) {
         return new File(getDataFolder(), value.getFileName());
     }
