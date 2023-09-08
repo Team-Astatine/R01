@@ -10,9 +10,10 @@ https://jaxple.notion.site/d1ef58aa889d4b8ba1342fc09c0249b4?pvs=4
 1. 
 
 ## Debug List
-1. /totem
-2. /reload
-3. announcer join & broadCast
+1. 토템 remove 시 material
+2. 전체 remove 되는지
+3. 하도 없을때 예외처리 check
+4. 머리에 totem 쓰고 있을시 개수체크 예외처리
 
 ## Plugin
 1. https://www.spigotmc.org/resources/speedlimit-1-20-1-support.75269/
