@@ -21,6 +21,9 @@ import java.util.stream.Collectors;
 public class TotemStacking extends ComponentExchanger implements CommandExecutor {
     private final int MINIMUM = 1; // 합칠 수 있는 최소 단위 +1
     private final int MAX_STACK = 64;
+    private ItemStack offHandStuff;
+    private ItemStack helmetStuff;
+    private int totalTotemCnt;
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender,@NotNull Command command,@NotNull String label, String[] args) {
@@ -29,72 +32,82 @@ public class TotemStacking extends ComponentExchanger implements CommandExecutor
         List<ItemStack> playerItemStack = Arrays.asList(player.getInventory().getContents());
 
 //        vaild Amount Of Totem
-        List<Integer>totemCountData = playerItemStack.stream()
-                .filter(Objects::nonNull)
-                .filter(item -> item.getType().equals(Material.TOTEM_OF_UNDYING))
-                .map(ItemStack::getAmount)
-                .toList();
-
+        List<Integer>totemCountData = totalTotemCntToList(playerItemStack);
 //        System.out.println(totemCountData);
 
+//        validation
+        if (totemCountData.isEmpty()) {
+            playerAnnouncer(player,"인벤토리에 토템이 없습니다.",Color.RED);
+            return false;
+        }
+
+        if (validMinimumTotemCount(totemCountData)) {
+            playerAnnouncer(player,"2개 이상의 토템을 가지고 있으셔야 합니다.", Color.RED);
+            return false;
+        }
 
         if (validTotemCommand(totemCountData)) {
             playerAnnouncer(player,"합칠 토템이 없습니다.", Color.RED);
             return false;
         }
 
-//        validation
-        if (validMinimumTotemCount(totemCountData)) {
-            playerAnnouncer(player,"2개 이상의 토템을 가지고 있으셔야 합니다.", Color.RED);
-            return false;
-        }
-
-//        offHandCheck 토템제공 후 addItem 예정
-        ItemStack tempOffHandStuff = player.getInventory().getItemInOffHand();
-        if (tempOffHandStuff.getType() == Material.TOTEM_OF_UNDYING) {
-            player.getInventory().setItemInOffHand(null);
-            tempOffHandStuff = null;
-        }
-
+        System.out.println(playerItemStack);
 //        remove Inventory
-        playerItemStack.stream()
-                .filter(Objects::nonNull)
-                .filter(item -> item.getType() == Material.TOTEM_OF_UNDYING)
-                .forEach(item -> player.getInventory().remove(item));
+        player.getInventory().remove(Material.TOTEM_OF_UNDYING);
+        System.out.println(Arrays.toString(player.getInventory().getContents()));
 
-//        setTotem
-        int totalAmount = totemCountData.stream()
-                .mapToInt(Integer::intValue)
-                .sum();
-//        player.sendMessage("총 토템 " + totalAmount);
+
+//        먼저 토템인거 삭제 했으니 토템이면 공기로 바뀜, 즉 다른 아이템이면 AIR가 아닐테니 deep copy
+        ItemStack tempOffHandStuff = player.getInventory().getItemInOffHand();
+        ItemStack tempHeadStuff = player.getInventory().getHelmet();
+        if (tempOffHandStuff.getType() != Material.AIR)
+            offHandStuff = tempOffHandStuff.clone();
+        if (tempHeadStuff.getType() != Material.AIR)
+            helmetStuff = tempHeadStuff.clone();
 
 //        만약 한셋 이하면
-        if (totalAmount <= 64) {
-            player.getInventory().setItemInOffHand(
-                    new ItemStack(Material.TOTEM_OF_UNDYING,totalAmount)
-            );
-        } else {
-//       한셋 그 이상이면
-            player.getInventory().setItemInOffHand(new ItemStack(Material.TOTEM_OF_UNDYING, MAX_STACK));
-            player.getInventory().addItem(new ItemStack(Material.TOTEM_OF_UNDYING, totalAmount - MAX_STACK));
+        if (totalTotemCnt <= 64) {
+            player.getInventory().setItemInOffHand(new ItemStack(Material.TOTEM_OF_UNDYING,totalTotemCnt));
         }
 
-        player.getInventory().addItem(tempOffHandStuff);
+//       한셋 그 이상이면
+        if (totalTotemCnt > 64){
+            player.getInventory().setItemInOffHand(new ItemStack(Material.TOTEM_OF_UNDYING, MAX_STACK));
+            player.getInventory().addItem(new ItemStack(Material.TOTEM_OF_UNDYING, totalTotemCnt - MAX_STACK));
+        }
+
+        player.getInventory().addItem(offHandStuff);
+        player.getInventory().addItem(helmetStuff);
         playerAnnouncer(player,"토템을 합쳤습니다.", Color.YELLOW);
         return true;
     }
 
-    public boolean validMinimumTotemCount(List<Integer> list) {
-        long cnt = list.stream().filter(num -> num == 1).count();
-        return list.stream().noneMatch(num -> num > MINIMUM || cnt > MINIMUM);
+    private List<Integer> totalTotemCntToList(List<ItemStack> list) {
+        return list.stream()
+                .filter(Objects::nonNull)
+                .filter(item -> item.getType().equals(Material.TOTEM_OF_UNDYING))
+                .map(ItemStack::getAmount)
+                .toList();
     }
 
-    public boolean validTotemCommand(List<Integer> list) {
+    private boolean validMinimumTotemCount(List<Integer> list) {
+        totalTotemCnt = list.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+
+        return totalTotemCnt == MINIMUM;
+    }
+
+    private boolean validTotemCommand(List<Integer> list) {
+//        1이 들어가 있지 않고
         boolean singleCnt = !list.contains(MINIMUM);
+
+//        64개 미만인 값을 count 해서
         long nonMaxStack = list.stream()
                 .filter(cnt -> cnt < MAX_STACK)
                 .count();
 
+//        1이 들어가 있지 않으며, 64개 미만 값이 1이면 return
         return singleCnt && nonMaxStack == 1;
     }
 }
