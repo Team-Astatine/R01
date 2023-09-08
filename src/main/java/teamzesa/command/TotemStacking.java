@@ -20,14 +20,13 @@ import java.util.stream.Collectors;
 
 public class TotemStacking extends ComponentExchanger implements CommandExecutor {
     private final int MINIMUM = 1; // 합칠 수 있는 최소 단위 +1
-    private final int STACK = 64;
+    private final int MAX_STACK = 64;
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender,@NotNull Command command,@NotNull String label, String[] args) {
         Player player = (Player) sender;
 //        armour inv + offHand
-        List<ItemStack> playerItemStack = new ArrayList<>(
-                Arrays.asList(player.getInventory().getContents()));
+        List<ItemStack> playerItemStack = Arrays.asList(player.getInventory().getContents());
 
 //        vaild Amount Of Totem
         List<Integer>totemCountData = playerItemStack.stream()
@@ -76,8 +75,8 @@ public class TotemStacking extends ComponentExchanger implements CommandExecutor
             );
         } else {
 //       한셋 그 이상이면
-            player.getInventory().setItemInOffHand(new ItemStack(Material.TOTEM_OF_UNDYING, STACK));
-            player.getInventory().addItem(new ItemStack(Material.TOTEM_OF_UNDYING, totalAmount - STACK));
+            player.getInventory().setItemInOffHand(new ItemStack(Material.TOTEM_OF_UNDYING, MAX_STACK));
+            player.getInventory().addItem(new ItemStack(Material.TOTEM_OF_UNDYING, totalAmount - MAX_STACK));
         }
 
         player.getInventory().addItem(tempOffHandStuff);
@@ -91,6 +90,11 @@ public class TotemStacking extends ComponentExchanger implements CommandExecutor
     }
 
     public boolean validTotemCommand(List<Integer> list) {
-        return !list.contains(MINIMUM);
+        boolean singleCnt = !list.contains(MINIMUM);
+        long nonMaxStack = list.stream()
+                .filter(cnt -> cnt < MAX_STACK)
+                .count();
+
+        return singleCnt && nonMaxStack == 1;
     }
 }
