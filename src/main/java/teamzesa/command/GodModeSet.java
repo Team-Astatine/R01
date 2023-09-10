@@ -5,6 +5,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
 import teamzesa.dataValue.userData.UserHandler;
@@ -25,9 +27,13 @@ public class GodModeSet extends ComponentExchanger implements CommandExecutor {
             componentSet("/god [플레이어 이름]",Color.RED);
             return false;
         }
+        Player player = Bukkit.getPlayer(args[0]);
 
-        UserHandler targetUser = new UserHandler(userMapHandler.getUser(args[0]));
+        UserHandler targetUser = new UserHandler(userMapHandler.getUser(player));
         targetUser.setGodMode(!targetUser.isGodMode());
+        player.addPotionEffect(
+                new PotionEffect(PotionEffectType.SATURATION,100000000,0)
+        );
 
         String status = targetUser.isGodMode() ? "인간" : "신";
         String mention = "은 이제 " + status + " 입니다.";
