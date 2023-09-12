@@ -11,9 +11,14 @@ import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import teamzesa.R01;
+import teamzesa.ThreadPool;
 
 public class Explosive implements Listener {
     private ExplosionPrimeEvent event;
+    private ThreadPool threadPool;
+    public Explosive() {
+        threadPool = ThreadPool.getThreadPool();
+    }
     @EventHandler(priority = EventPriority.LOW)
     public void explosiveHandler(ExplosionPrimeEvent event) {
         this.event = event;
@@ -75,6 +80,6 @@ public class Explosive implements Listener {
         };
 
         for (int i = 0; i < 100; i++)
-            explosiveTask.run();
+            threadPool.addTask(explosiveTask);
     }
 }
