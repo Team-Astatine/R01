@@ -5,13 +5,13 @@ import java.util.concurrent.Executors;
 
 public class ThreadPool {
     private static class ThreadPoolHolder {
-        private static final ThreadPool INSATNCE = new ThreadPool();
+        private static final ThreadPool INSTANCE = new ThreadPool();
     }
 
     private final ExecutorService executorService;
 
     public static ThreadPool getThreadPool() {
-        return ThreadPoolHolder.INSATNCE;
+        return ThreadPoolHolder.INSTANCE;
     }
 
     private ThreadPool() {
