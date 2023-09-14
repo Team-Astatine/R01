@@ -72,23 +72,23 @@ public class Announcer extends ComponentExchanger {
         String discordLink = configIOHandler.getDiscordConfig();
         String notionLink = configIOHandler.getNotionConfig();
 
-        if (menu == 1) {
-            Component mineList = createLinkComponent(configIOHandler.getMineListVote(), mineListLink, new Color(167, 123, 202));
-            Component discord = createLinkComponent(configIOHandler.getDiscordInvite(), discordLink, new Color(114, 137, 218));
-            Component notion = createLinkComponent(configIOHandler.getServerGuideNotion(), notionLink, new Color(112, 71, 157));
-            return new Component[]{mineList, discord, notion};
-        }
-
-        if (menu == 2) {
-            Component steelLifeTip = componentSet(configIOHandler.getSteelLifeTip(), new Color(233, 30, 99));
-            Component raidTip = componentSet(configIOHandler.getRaidTip(), new Color(233, 30, 99));
-            Component weaponTip = componentSet(configIOHandler.getWeaponTip(), new Color(233, 30, 99));
-            Component explosiveTip = componentSet(configIOHandler.getExplosiveTip(), new Color(233, 30, 99));
-            Component commandFly = componentSet(configIOHandler.getCommandFly(), new Color(139, 195, 74));
-            Component commandHat = componentSet(configIOHandler.getCommandHat(), new Color(139, 195, 74));
-            Component commandTotem = componentSet(configIOHandler.getCommandTotem(), new Color(139, 195, 74));
-            return new Component[]{steelLifeTip, raidTip, weaponTip, explosiveTip, commandFly, commandHat, commandTotem};
-        }
-        return null;
+        return switch (menu) {
+            case 1 -> new Component[]{
+                    createLinkComponent(configIOHandler.getMineListVote(), mineListLink, new Color(167, 123, 202)),
+                    createLinkComponent(configIOHandler.getDiscordInvite(), discordLink, new Color(114, 137, 218)),
+                    createLinkComponent(configIOHandler.getServerGuideNotion(), notionLink, new Color(112, 71, 157))
+            };
+            case 2 -> new Component[]{
+                    componentSet(configIOHandler.getSteelLifeTip(), new Color(233, 30, 99)),
+                    componentSet(configIOHandler.getRaidTip(), new Color(233, 30, 99)),
+                    componentSet(configIOHandler.getWeaponTip(), new Color(233, 30, 99)),
+                    componentSet(configIOHandler.getExplosiveTip(), new Color(233, 30, 99)),
+                    componentSet(configIOHandler.getCommandFly(), new Color(139, 195, 74)),
+                    componentSet(configIOHandler.getCommandHat(), new Color(139, 195, 74)),
+                    componentSet(configIOHandler.getCommandTotem(), new Color(139, 195, 74))
+            };
+            default -> null;
+        };
     }
+
 }
