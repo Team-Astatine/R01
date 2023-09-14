@@ -24,14 +24,14 @@ public class Reload extends ComponentExchanger implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         Player player = (Player)sender;
         if (!player.isOp()) {
-            player.sendMessage(componentSet("해당 명령어는 플레이어가 사용할 수 없습니다.", Color.RED));
+            playerAnnouncer(player,"해당 명령어는 플레이어가 사용할 수 없습니다.", Color.RED);
             return false;
         }
 
         configIOHandler.fileLoader(dataPathFile);
         configIOHandler.allConfigLoad();
 
-        player.sendMessage(componentSet("Reload 완료"));
+        playerAnnouncer(player,"Reload Done",Color.YELLOW);
         return true;
     }
 }
