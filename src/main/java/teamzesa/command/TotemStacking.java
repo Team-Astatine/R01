@@ -1,6 +1,5 @@
 package teamzesa.command;
 
-import com.destroystokyo.paper.MaterialSetTag;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -13,7 +12,6 @@ import teamzesa.ComponentExchanger;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class TotemStacking extends ComponentExchanger implements CommandExecutor {
     private final int MINIMUM = 1; // 합칠 수 있는 최소 단위 +1

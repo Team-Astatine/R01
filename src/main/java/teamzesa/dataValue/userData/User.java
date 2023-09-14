@@ -3,8 +3,6 @@ package teamzesa.dataValue.userData;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
 import java.util.*;
 
 public class User {

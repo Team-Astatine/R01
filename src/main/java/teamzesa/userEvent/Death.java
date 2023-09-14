@@ -13,7 +13,6 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
 import teamzesa.ThreadPool;
 import teamzesa.dataValue.userData.User;
-import teamzesa.dataValue.userData.UserHandler;
 import teamzesa.dataValue.userData.UserMapHandler;
 
 import java.awt.*;
