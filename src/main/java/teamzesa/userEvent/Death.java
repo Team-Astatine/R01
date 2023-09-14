@@ -11,6 +11,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
+import teamzesa.ThreadPool;
 import teamzesa.dataValue.userData.User;
 import teamzesa.dataValue.userData.UserHandler;
 import teamzesa.dataValue.userData.UserMapHandler;
@@ -23,8 +24,10 @@ public class Death extends ComponentExchanger implements Listener {
     private final Double MIN_HEALTH_SCALE = 4.0;
     private final Double STEP_SIZE = 2.0;
     private final UserMapHandler userMapHandler;
+    private final ThreadPool threadPool;
 
     public Death() {
+        threadPool = ThreadPool.getThreadPool();
         userMapHandler = UserMapHandler.getUserHandler();
     }
 
@@ -82,9 +85,7 @@ public class Death extends ComponentExchanger implements Listener {
 //                playerLocation.createExplosion(60);
             }
         };
-        Thread unDyingTask = new Thread(task);
-        unDyingTask.start();
-
+        threadPool.addTask(task);
         e.setCancelled(true);
         return true;
     }

@@ -9,6 +9,7 @@ import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import teamzesa.ComponentExchanger;
+import teamzesa.ThreadPool;
 
 import java.awt.*;
 import java.util.HashSet;
@@ -16,8 +17,11 @@ import java.util.Set;
 
 public class RecipeController extends ComponentExchanger implements Listener {
     private final Set<Material> lockingStuff;
+    private final ThreadPool threadPool;
 
     public RecipeController() {
+        threadPool = ThreadPool.getThreadPool();
+
         this.lockingStuff = new HashSet<>();
 //    define BanItem
         this.lockingStuff.add(Material.TNT);
@@ -41,9 +45,9 @@ public class RecipeController extends ComponentExchanger implements Listener {
 
                 Player player = (Player)e.getWhoClicked();
                 player.sendMessage(componentSet("해당 아이템은 조합할 수 없습니다.", Color.RED));
-                e.setCancelled(true);
             }
         };
-        task.run();
+        threadPool.addTask(task);
+        e.setCancelled(true);
     }
 }

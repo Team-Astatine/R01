@@ -43,13 +43,13 @@ public class TotemStacking extends ComponentExchanger implements CommandExecutor
         }
 
         if (maxTotemCnt() < 2) {
-            System.out.println(maxTotemCnt());
+//            System.out.println(maxTotemCnt());
             playerAnnouncer(player,"합칠 토템이 없습니다.", Color.RED);
             return false;
         }
 
         if (maxTotemCnt() < 2 && minTotemCnt() < 2) {
-            System.out.println(minTotemCnt());
+//            System.out.println(minTotemCnt());
             playerAnnouncer(player,"2개 이상의 토템을 가지고 있으셔야 합니다.", Color.RED);
             return false;
         }
@@ -58,7 +58,7 @@ public class TotemStacking extends ComponentExchanger implements CommandExecutor
         int totalAmount = totemCountData.stream()
                 .mapToInt(Integer::intValue)
                 .sum();
-        player.sendMessage("총 토템 " + totalAmount);
+//        player.sendMessage("총 토템 " + totalAmount);
 
 //        remove Inventory
         player.getInventory().remove(Material.TOTEM_OF_UNDYING);
