@@ -102,8 +102,8 @@ public final class R01 extends JavaPlugin {
         configIOHandler.allConfigLoad(); //config Load
 
         userIoHandler.importUserData(); // userData Set
-        announcer.defaultAnnouncer(); // Announcer Set
-        announcer.commandAnnouncer(); // Command Set
+        announcer.defaultAnnouncer(1); // Announcer Set
+        announcer.defaultAnnouncer(2); // Announcer Set
     }
 
     @Override

@@ -11,6 +11,7 @@ import teamzesa.R01;
 import teamzesa.dataValue.userData.UserMapHandler;
 
 import java.awt.*;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class Announcer extends ComponentExchanger {
 
@@ -55,22 +56,11 @@ public class Announcer extends ComponentExchanger {
             player.sendMessage(serverTip[i]);
     }
 
-    public void defaultAnnouncer() {
+    public void defaultAnnouncer(int menu) {
         int delay = 0; // 초기 딜레이 (0 틱, 즉 즉시 시작)
         int interval = 18000; // 3분마다 (1초 = 20틱)
 
-        Component[] components = createComponents(1);
-        Bukkit.getScheduler().runTaskTimer(R01.getPlugin(R01.class), () -> {
-            for (Component component : components)
-                Bukkit.broadcast(component);
-        }, delay, interval);
-    }
-
-    public void commandAnnouncer() {
-        int delay = 0; // 초기 딜레이 (0 틱, 즉 즉시 시작)
-        int interval = 18000; // 3분마다 (1초 = 20틱)
-
-        Component[] components = createComponents(2);
+        Component[] components = createComponents(menu);
         Bukkit.getScheduler().runTaskTimer(R01.getPlugin(R01.class), () -> {
             for (Component component : components)
                 Bukkit.broadcast(component);
