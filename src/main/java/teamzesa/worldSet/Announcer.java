@@ -5,16 +5,13 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
 import teamzesa.IOHandler.ConfigIOHandler;
-import teamzesa.R01;
 import teamzesa.ThreadPool;
 import teamzesa.dataValue.userData.UserMapHandler;
 
 import java.awt.*;
-import java.util.concurrent.TimeUnit;
 
 public class Announcer extends ComponentExchanger {
 
@@ -52,21 +49,17 @@ public class Announcer extends ComponentExchanger {
     }
 
     public void joinAnnouncer(Player player) {
-        Component[] components = createComponents(1);
+        Component[] components = createComponents();
         for (Component component : components)
             player.sendMessage(component);
-
-        Component[] serverTip = createComponents(2);
-        for (int i = 0; i < serverTip.length; i++)
-            player.sendMessage(serverTip[i]);
     }
 
-    public void defaultAnnouncer(int menu) {
+    public void defaultAnnouncer() {
         long delay = 0;
-        long interval = 18000; // 3분마다 (1초 = 20틱)
+        long interval = 3600; // 3분마다 (1초 = 20틱)
 //        long interval = 1; // 3분마다 (1초 = 20틱)
 
-        Component[] components = createComponents(menu);
+        Component[] components = createComponents();
 
         Runnable task = new BukkitRunnable() {
             @Override
@@ -76,30 +69,30 @@ public class Announcer extends ComponentExchanger {
             }
         };
         threadPool.addSchedulingTask(task,delay,interval);
-
     }
 
-    private Component[] createComponents(int menu) {
+    private Component[] createComponents() {
         String mineListLink = configIOHandler.getMineListConfig();
         String discordLink = configIOHandler.getDiscordConfig();
         String notionLink = configIOHandler.getNotionConfig();
 
-        return switch (menu) {
-            case 1 -> new Component[]{
-                    createLinkComponent(configIOHandler.getMineListVote(), mineListLink, new Color(167, 123, 202)),
-                    createLinkComponent(configIOHandler.getDiscordInvite(), discordLink, new Color(114, 137, 218)),
-                    createLinkComponent(configIOHandler.getServerGuideNotion(), notionLink, new Color(112, 71, 157))
-            };
-            case 2 -> new Component[]{
-                    componentSet(configIOHandler.getSteelLifeTip(), new Color(233, 30, 99)),
-                    componentSet(configIOHandler.getRaidTip(), new Color(233, 30, 99)),
-                    componentSet(configIOHandler.getWeaponTip(), new Color(233, 30, 99)),
-                    componentSet(configIOHandler.getExplosiveTip(), new Color(233, 30, 99)),
-                    componentSet(configIOHandler.getCommandFly(), new Color(139, 195, 74)),
-                    componentSet(configIOHandler.getCommandHat(), new Color(139, 195, 74)),
-                    componentSet(configIOHandler.getCommandTotem(), new Color(139, 195, 74))
-            };
-            default -> null;
+        Color voteColor = new Color(167, 123, 202);
+        Color commonColor = new Color(233, 30, 99);
+        Color notionColor = new Color(112, 71, 157);
+        Color commandColor = new Color(139, 195, 74);
+        Color discordColor = new Color(114, 137, 218);
+
+        return new Component[]{
+                createLinkComponent(configIOHandler.getMineListVote(), mineListLink, voteColor),
+                createLinkComponent(configIOHandler.getDiscordInvite(), discordLink, discordColor),
+                createLinkComponent(configIOHandler.getServerGuideNotion(), notionLink, notionColor),
+                componentSet(configIOHandler.getSteelLifeTip(), commonColor),
+                componentSet(configIOHandler.getRaidTip(), commonColor),
+                componentSet(configIOHandler.getWeaponTip(), commonColor),
+                componentSet(configIOHandler.getExplosiveTip(), commonColor),
+                componentSet(configIOHandler.getCommandFly(), commandColor),
+                componentSet(configIOHandler.getCommandHat(), commandColor),
+                componentSet(configIOHandler.getCommandTotem(), commandColor)
         };
     }
 

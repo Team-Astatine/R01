@@ -1,5 +1,6 @@
 package teamzesa;
 
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.Contract;
@@ -102,14 +103,13 @@ public final class R01 extends JavaPlugin {
         configIOHandler.allConfigLoad(); //config Load
 
         userIoHandler.importUserData(); // userData Set
-        announcer.defaultAnnouncer(1); // Announcer Set
-        announcer.defaultAnnouncer(2); // Announcer Set
+        announcer.defaultAnnouncer(); // Announcer Set
     }
 
     @Override
     public void onDisable() {
         threadPool.serviceOff();
         userIoHandler.exportUserData();
+        Bukkit.getScheduler().cancelTasks(this);
     }
-
 }
