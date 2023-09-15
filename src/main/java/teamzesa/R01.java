@@ -55,7 +55,6 @@ public final class R01 extends JavaPlugin {
     private void commandHandler() {
         this.getCommand("fly").setExecutor(new Fly());
         this.getCommand("운석").setExecutor(new Meteor());
-        this.getCommand("나").setExecutor(new UserObjectChecker());
         this.getCommand("Motd").setExecutor(new MotdSet());
         this.getCommand("머리").setExecutor(new ArmourSet());
         this.getCommand("몸통").setExecutor(new ArmourSet());
@@ -65,9 +64,10 @@ public final class R01 extends JavaPlugin {
         this.getCommand("관리자").setExecutor(new Moderator());
         this.getCommand("토템").setExecutor(new TotemStacking());
         this.getCommand("체력초기화").setExecutor(new HealthSet());
+        this.getCommand("나").setExecutor(new UserObjectChecker());
         this.getCommand("SaveUserData").setExecutor(new SaveUserData());
-        this.getCommand("R01ConfigReload").setExecutor(
-                new Reload(checkUpdateFile(DataFile.CONFIG)));
+        this.getCommand("R01ConfigReload")
+                .setExecutor(new Reload(checkUpdateFile(DataFile.CONFIG)));
     }
 
     private void functionHandler() {
