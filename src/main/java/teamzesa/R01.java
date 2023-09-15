@@ -23,10 +23,12 @@ public final class R01 extends JavaPlugin {
     private static ConfigIOHandler configIOHandler;
     private static UpdateChecker updateChecker;
     private static File pluginFiles;
+    private static ThreadPool threadPool;
 
     public R01() {
         pm = getServer().getPluginManager();
         announcer = Announcer.getAnnouncer();
+        threadPool = ThreadPool.getThreadPool();
         userIoHandler = UserIOHandler.getIOHandler();
         updateChecker = UpdateChecker.getUpdateChecker();
         configIOHandler = ConfigIOHandler.getConfigIOHandler();
@@ -106,6 +108,7 @@ public final class R01 extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        threadPool.serviceOff();
         userIoHandler.exportUserData();
     }
 
