@@ -1,7 +1,12 @@
 package teamzesa;
 
+import org.bukkit.Bukkit;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 
 public class ThreadPool {
     private static class ThreadPoolHolder {
@@ -9,6 +14,7 @@ public class ThreadPool {
     }
 
     private final ExecutorService executorService;
+    private final ScheduledExecutorService scheduledExecutorService;
 
     public static ThreadPool getThreadPool() {
         return ThreadPoolHolder.INSTANCE;
@@ -16,9 +22,19 @@ public class ThreadPool {
 
     private ThreadPool() {
         executorService = Executors.newFixedThreadPool(1000);
+        scheduledExecutorService = Executors.newScheduledThreadPool(10);
     }
 
     public void addTask(Runnable task) {
         executorService.submit(task);
+    }
+
+    public void addSchedulingTask(Runnable task, long delay , long interval) {
+        scheduledExecutorService.scheduleWithFixedDelay(task,delay,interval,TimeUnit.SECONDS);
+    }
+
+    public void serviceOff() {
+        executorService.shutdownNow();
+        scheduledExecutorService.shutdownNow();
     }
 }

@@ -4,13 +4,17 @@ import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
 import teamzesa.IOHandler.ConfigIOHandler;
 import teamzesa.R01;
+import teamzesa.ThreadPool;
 import teamzesa.dataValue.userData.UserMapHandler;
 
 import java.awt.*;
+import java.util.concurrent.TimeUnit;
 
 public class Announcer extends ComponentExchanger {
 
@@ -20,10 +24,12 @@ public class Announcer extends ComponentExchanger {
 
     private final ConfigIOHandler configIOHandler;
     private final UserMapHandler userMapHandler;
+    private final ThreadPool threadPool;
 
     private Announcer() {
         configIOHandler = ConfigIOHandler.getConfigIOHandler();
         userMapHandler = UserMapHandler.getUserHandler();
+        threadPool = ThreadPool.getThreadPool();
     }
 
     public static Announcer getAnnouncer() {
@@ -56,14 +62,21 @@ public class Announcer extends ComponentExchanger {
     }
 
     public void defaultAnnouncer(int menu) {
-        int delay = 0; // 초기 딜레이 (0 틱, 즉 즉시 시작)
-        int interval = 18000; // 3분마다 (1초 = 20틱)
+        long delay = 0;
+        long interval = 18000; // 3분마다 (1초 = 20틱)
+//        long interval = 1; // 3분마다 (1초 = 20틱)
 
         Component[] components = createComponents(menu);
-        Bukkit.getScheduler().runTaskTimer(R01.getPlugin(R01.class), () -> {
-            for (Component component : components)
-                Bukkit.broadcast(component);
-        }, delay, interval);
+
+        Runnable task = new BukkitRunnable() {
+            @Override
+            public void run() {
+                for (Component component : components)
+                    Bukkit.broadcast(component);
+            }
+        };
+        threadPool.addSchedulingTask(task,delay,interval);
+
     }
 
     private Component[] createComponents(int menu) {
