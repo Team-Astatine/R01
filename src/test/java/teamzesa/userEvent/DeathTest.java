@@ -1,10 +1,10 @@
 package teamzesa.userEvent;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class DeathTest {
 
-    @org.junit.jupiter.api.Test
+    @Test
     void onPlayerDeath() {
     }
 }
