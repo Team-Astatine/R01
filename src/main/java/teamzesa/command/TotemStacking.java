@@ -51,7 +51,7 @@ public class TotemStacking extends ComponentExchanger implements CommandExecutor
         player.getInventory().remove(new ItemStack(Material.TOTEM_OF_UNDYING, totalTotemCount));
 
         // Create stacks
-        int stackCount = fullStacks + (hasRemainder ? remainder : 0);
+        int stackCount = fullStacks + (hasRemainder ? 1 : 0);
         ItemStack[] stacks = new ItemStack[stackCount];
 
         int i = 0;
