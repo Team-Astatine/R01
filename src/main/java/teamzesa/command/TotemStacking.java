@@ -14,6 +14,7 @@ import java.util.*;
 import java.util.List;
 
 public class TotemStacking extends ComponentExchanger implements CommandExecutor {
+    private final Material TOTEM = Material.TOTEM_OF_UNDYING;
     private final int MINIMUM = 1; // 합칠 수 있는 최소 단위 +1
     private final int STACK = 64;
     private List<Integer> totemCountData;
@@ -30,7 +31,7 @@ public class TotemStacking extends ComponentExchanger implements CommandExecutor
 //        vaild Amount Of Totem
         this.totemCountData = playerItemStack.stream()
                 .filter(Objects::nonNull)
-                .filter(item -> item.getType().equals(Material.TOTEM_OF_UNDYING))
+                .filter(item -> item.getType().equals(TOTEM))
                 .map(ItemStack::getAmount)
                 .toList();
 
@@ -59,30 +60,30 @@ public class TotemStacking extends ComponentExchanger implements CommandExecutor
 //        player.sendMessage("총 토템 " + totalAmount);
 
 //        remove Inventory
-        player.getInventory().remove(Material.TOTEM_OF_UNDYING);
+        player.getInventory().remove(TOTEM);
 //        System.out.println(Arrays.toString(player.getInventory().getContents()));
 
         tempHelmetStuff.ifPresent(helmet -> {
 //            System.out.println("totemHelmet > " + helmet);
-            if (helmet.getType() == Material.TOTEM_OF_UNDYING)
+            if (helmet.getType() == TOTEM)
                 player.getInventory().setHelmet(null);
         });
 
         tempOffHandStuff.ifPresent(offhand -> {
 //            System.out.println("totemOffHand > " + offhand);
-            if (offhand.getType() == Material.TOTEM_OF_UNDYING)
+            if (offhand.getType() == TOTEM)
                 player.getInventory().setItemInOffHand(null);
         });
 
 //        만약 한셋 이하면
         if (totalAmount <= STACK) {
             player.getInventory().setItemInOffHand(
-                    new ItemStack(Material.TOTEM_OF_UNDYING,totalAmount)
+                    new ItemStack(TOTEM,totalAmount)
             );
         } else {
 //       한셋 그 이상이면
-            player.getInventory().setItemInOffHand(new ItemStack(Material.TOTEM_OF_UNDYING, STACK));
-            player.getInventory().addItem(new ItemStack(Material.TOTEM_OF_UNDYING, totalAmount - STACK));
+            player.getInventory().setItemInOffHand(new ItemStack(TOTEM, STACK));
+            player.getInventory().addItem(new ItemStack(TOTEM, totalAmount - STACK));
         }
 
         playerAnnouncer(player,"토템을 합쳤습니다.", Color.YELLOW);
