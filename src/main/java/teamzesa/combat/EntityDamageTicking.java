@@ -10,6 +10,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Optional;
+
 public class EntityDamageTicking implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -39,23 +41,18 @@ public class EntityDamageTicking implements Listener {
         target.setMaximumNoDamageTicks(hurtTick);
     }
 
-    private @NotNull Boolean handStuffChecker(@NotNull ItemStack mainHand , ItemStack offHand) {
-        if (mainHand.getType().equals(Material.NETHERITE_SWORD)
-                && offHand.getType().equals(Material.NETHERITE_SWORD))
-            return true;
+    private @NotNull Boolean handStuffChecker(ItemStack mainStuff , ItemStack offStuff) {
+        Optional<Material> mainStuffType = Optional.of(mainStuff.getType());
+        Optional<Material> offStuffType = Optional.of(offStuff.getType());
 
-        if (mainHand.getType().equals(Material.NETHERITE_AXE)
-                && offHand.getType().equals(Material.NETHERITE_AXE))
-            return true;
+        boolean mainHand = mainStuffType.filter(stuff ->
+            stuff.equals(Material.NETHERITE_SWORD) || stuff.equals(Material.NETHERITE_AXE)
+        ).isPresent();
 
-        if (mainHand.getType().equals(Material.NETHERITE_SWORD)
-                && offHand.getType().equals(Material.NETHERITE_AXE))
-            return true;
+        boolean offHand = offStuffType.filter(stuff ->
+                stuff.equals(Material.NETHERITE_SWORD) || stuff.equals(Material.NETHERITE_AXE)
+        ).isPresent();
 
-        if (mainHand.getType().equals(Material.NETHERITE_AXE)
-                && offHand.getType().equals(Material.NETHERITE_SWORD))
-            return true;
-
-        return false;
+        return mainHand && offHand;
     }
 }
