@@ -19,6 +19,8 @@ import java.awt.*;
 
 
 public class Death extends ComponentExchanger implements Listener {
+    private final int MAX_RANDOM_TP = 1000;
+    private final int MIN_RANDOM_TP = -1000;
     private final double MAX_HEALTH_SCALE = 60.0;
     private final Double MIN_HEALTH_SCALE = 4.0;
     private final Double STEP_SIZE = 2.0;
@@ -87,5 +89,22 @@ public class Death extends ComponentExchanger implements Listener {
         threadPool.addTask(task);
         e.setCancelled(true);
         return true;
+    }
+
+    public void deathRandomTeleport(@NotNull PlayerDeathEvent e) {
+        Player player = e.getPlayer();
+
+        System.out.println(player.getBedSpawnLocation());
+        if (player.getBedSpawnLocation() == null)
+            return;
+
+        int x = ranNumGenerator(MAX_RANDOM_TP,MIN_RANDOM_TP);
+        int z = ranNumGenerator(MAX_RANDOM_TP,MIN_RANDOM_TP);
+        int y = ranNumGenerator(60,100);
+    }
+
+    public int ranNumGenerator(int maxValue, int minValue) {
+        int range = maxValue - minValue + 1;
+        return (int) (Math.random() * range) + minValue;
     }
 }
