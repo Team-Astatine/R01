@@ -1,8 +1,6 @@
 package teamzesa.userEvent;
 
-import org.bukkit.Location;
-import org.bukkit.Particle;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -16,6 +14,7 @@ import teamzesa.dataValue.userData.User;
 import teamzesa.dataValue.userData.UserMapHandler;
 
 import java.awt.*;
+import java.awt.Color;
 
 
 public class Death extends ComponentExchanger implements Listener {
@@ -37,6 +36,7 @@ public class Death extends ComponentExchanger implements Listener {
         if (checkingGodMod(event))
             return;
         lifeSteel(event);
+//        doRandomTeleport(event);
     }
 
     private void lifeSteel(@NotNull PlayerDeathEvent e) {
@@ -94,17 +94,34 @@ public class Death extends ComponentExchanger implements Listener {
     public void deathRandomTeleport(@NotNull PlayerDeathEvent e) {
         Player player = e.getPlayer();
 
-        System.out.println(player.getBedSpawnLocation());
-        if (player.getBedSpawnLocation() == null)
+//        오버월드 일 것
+
+        if (player.getBedSpawnLocation() == null) {
+            playerAnnouncer(player, "침대가 없어 랜덤 텔레포트 됩니다.", Color.YELLOW);
             return;
+        }
 
         int x = ranNumGenerator(MAX_RANDOM_TP,MIN_RANDOM_TP);
         int z = ranNumGenerator(MAX_RANDOM_TP,MIN_RANDOM_TP);
-        int y = ranNumGenerator(60,100);
+        int y = groundChecker(player.getWorld(),x,z);
+
+        System.out.println(x);
+        System.out.println(y);
+        System.out.println(z);
     }
 
     public int ranNumGenerator(int maxValue, int minValue) {
         int range = maxValue - minValue + 1;
         return (int) (Math.random() * range) + minValue;
+    }
+
+    public int groundChecker(World world, int x, int z) {
+        int maxHigh = world.getMaxHeight();
+
+        for (int i = maxHigh; i > 62; i--) {
+            if (world.getBlockAt(x,i,z).getType() != Material.AIR)
+                return i;
+        }
+        return 0;
     }
 }
