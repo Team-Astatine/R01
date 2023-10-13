@@ -36,9 +36,9 @@ public class RandomTeleport extends ComponentExchanger implements Listener {
         System.out.println("maxHigh > " + maxHigh);
         for (int i = maxHigh; i >= 63; i--) {
             Material airType = world.getBlockAt(x,i,z).getBlockData().getMaterial();
-//            System.out.println(airType);
+            System.out.println("Material > " + airType);
             if (airType != Material.VOID_AIR && airType != Material.AIR) {
-                System.out.println(airType);
+                System.out.println("y > " + i);
                 return i;
             }
         }
