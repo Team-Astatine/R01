@@ -20,11 +20,15 @@ import java.awt.Color;
 public class Death extends ComponentExchanger implements Listener {
     private final int MAX_RANDOM_TP = 1000;
     private final int MIN_RANDOM_TP = -1000;
+
     private final double MAX_HEALTH_SCALE = 60.0;
     private final Double MIN_HEALTH_SCALE = 4.0;
     private final Double STEP_SIZE = 2.0;
+
     private final UserMapHandler userMapHandler;
     private final ThreadPool threadPool;
+
+    private PlayerDeathEvent event;
 
     public Death() {
         threadPool = ThreadPool.getThreadPool();
@@ -32,15 +36,16 @@ public class Death extends ComponentExchanger implements Listener {
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onPlayerDeath(PlayerDeathEvent event) {
-        if (checkingGodMod(event))
+    public void onPlayerDeath(PlayerDeathEvent e) {
+        this.event = e;
+        if (checkingGodMod())
             return;
-        lifeSteel(event);
+        lifeSteel();
 //        doRandomTeleport(event);
     }
 
-    private void lifeSteel(@NotNull PlayerDeathEvent e) {
-        Player killed = e.getEntity();
+    private void lifeSteel() {
+        Player killed = this.event.getEntity();
         Player killer = killed.getKiller();
 
         if (killer == null)
@@ -70,13 +75,13 @@ public class Death extends ComponentExchanger implements Listener {
         playerAnnouncer(killer,killed.getName() + "님이 체력을 약탈했습니다.", Color.RED);
     }
 
-    private @NotNull Boolean checkingGodMod(@NotNull PlayerDeathEvent e) {
-        User user = userMapHandler.getUser(e.getPlayer());
+    private @NotNull Boolean checkingGodMod() {
+        User user = userMapHandler.getUser(this.event.getPlayer());
 
         if (!user.isGodMode())
             return false;
 
-        Location playerLocation = e.getPlayer().getLocation();
+        Location playerLocation = this.event.getPlayer().getLocation();
         playerLocation.setY(playerLocation.getY() + 2.0);
         BukkitRunnable task = new BukkitRunnable() {
             @Override
@@ -87,12 +92,12 @@ public class Death extends ComponentExchanger implements Listener {
             }
         };
         threadPool.addTask(task);
-        e.setCancelled(true);
+        this.event.setCancelled(true);
         return true;
     }
 
-    public void deathRandomTeleport(@NotNull PlayerDeathEvent e) {
-        Player player = e.getPlayer();
+    public void deathRandomTeleport() {
+        Player player = this.event.getPlayer();
 
 //        오버월드 일 것
 
