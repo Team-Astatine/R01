@@ -19,9 +19,6 @@ import java.awt.Color;
 
 
 public class Death extends ComponentExchanger implements Listener {
-    private final int MAX_RANDOM_TP = 1000;
-    private final int MIN_RANDOM_TP = -1000;
-
     private final double MAX_HEALTH_SCALE = 60.0;
     private final Double MIN_HEALTH_SCALE = 4.0;
     private final Double STEP_SIZE = 2.0;
@@ -36,13 +33,13 @@ public class Death extends ComponentExchanger implements Listener {
         userMapHandler = UserMapHandler.getUserHandler();
     }
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler
     public void onPlayerDeath(PlayerDeathEvent e) {
         this.event = e;
         if (checkingGodMod())
             return;
+
         lifeSteel();
-//        doRandomTeleport(event);
     }
 
     private void lifeSteel() {
@@ -95,40 +92,5 @@ public class Death extends ComponentExchanger implements Listener {
         threadPool.addTask(task);
         this.event.setCancelled(true);
         return true;
-    }
-
-    public void deathRandomTeleport() {
-        Player player = this.event.getPlayer();
-
-        if (player.getBedSpawnLocation() == null) {
-            playerAnnouncer(player, "침대가 없어 랜덤 텔레포트 됩니다.", Color.YELLOW);
-            return;
-        }
-
-        int x = ranNumGenerator(MAX_RANDOM_TP,MIN_RANDOM_TP);
-        int z = ranNumGenerator(MAX_RANDOM_TP,MIN_RANDOM_TP);
-        int y = groundChecker(player.getWorld(),x,z);
-
-        System.out.println(x);
-        System.out.println(y);
-        System.out.println(z);
-    }
-
-    public int ranNumGenerator(int maxValue, int minValue) {
-        int range = maxValue - minValue + 1;
-        return (int) (Math.random() * range) + minValue;
-    }
-
-    public int groundChecker(World world, int x, int z) {
-        int maxHigh = world.getMaxHeight() - 1; //320 > Material_VOID_AIR
-        int minHigh = world.getMinHeight(); //-64
-
-        for (int i = maxHigh; i > minHigh; i--) {
-            Block block = world.getBlockAt(x,i,z);
-//            System.out.println(block.getType());
-            if (block.getType() != Material.AIR)
-                return i;
-        }
-        return 0;
     }
 }

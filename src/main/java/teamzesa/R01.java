@@ -11,7 +11,7 @@ import teamzesa.IOHandler.ConfigIOHandler;
 import teamzesa.IOHandler.DataFile;
 import teamzesa.IOHandler.UpdateChecker;
 import teamzesa.userEvent.Death;
-import teamzesa.userEvent.RandomTeleport;
+import teamzesa.userEvent.Respawn;
 import teamzesa.worldSet.*;
 import teamzesa.IOHandler.UserIOHandler;
 import teamzesa.userEvent.JoinAndQuit;
@@ -78,6 +78,7 @@ public final class R01 extends JavaPlugin {
 //        pm.registerEvents(new RandomTeleport(),this);
 
         pm.registerEvents(new Death(),this);
+        pm.registerEvents(new Respawn(),this);
         pm.registerEvents(new Explosive(),this);
         pm.registerEvents(new HandSwing(),this);
         pm.registerEvents(new JoinAndQuit(),this);
