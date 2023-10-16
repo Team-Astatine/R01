@@ -28,55 +28,48 @@ public class Explosive implements Listener {
 //        Blue Skull: 1 block
 //        Black Skull: Varies depending on difficulty
         switch (this.event.getEntityType()) {
-            case PRIMED_TNT -> boomBer();
             case CREEPER -> creeperBoom();
             case FIREBALL -> ghastBoom();
             case WITHER_SKULL -> witherBoom();
+            case PRIMED_TNT -> boomBer();
             case MINECART_TNT -> cartBoom();
             default -> this.event.setCancelled(true);
         }
     }
 
     private void boomBer() {
-        event.setCancelled(true);
-        World world = event.getEntity().getWorld();
-        world.createExplosion(event.getEntity().getLocation(), 20.0F, true);
+        this.event.setRadius(30);
+        this.event.setFire(true);
     }
 
     private void creeperBoom() {
-        Creeper creeper = (Creeper) event.getEntity();
-        int explosiveRadius = 20;
-
-        if (creeper.isPowered())
-            explosiveRadius = 100;
-
-        event.setRadius(explosiveRadius);
-        event.setFire(true);
+        Creeper creeper = (Creeper) this.event.getEntity();
+        int explosiveRadius = creeper.isPowered() ? 20 : 100;
+        this.event.setRadius(explosiveRadius);
+        this.event.setFire(true);
     }
 
     private void ghastBoom() {
-        event.setRadius(10);
-        event.setFire(true);
+        this.event.setRadius(10);
+        this.event.setFire(true);
     }
 
     private void witherBoom() {
-        WitherSkull witherSkull = (WitherSkull) event.getEntity();
-        if (witherSkull.isCharged())
-            event.setRadius(40);
-        if (!witherSkull.isCharged())
-            event.setRadius(100);
+        WitherSkull witherSkull = (WitherSkull) this.event.getEntity();
+        int explosiveRadius = witherSkull.isCharged() ? 40 : 100;
+        this.event.setRadius(explosiveRadius);
     }
 
     private void cartBoom() {
-        Location location = event.getEntity().getLocation();
+        this.event.setCancelled(true);
+        Location location = this.event.getEntity().getLocation();
         BukkitRunnable explosiveTask = new BukkitRunnable() {
             @Override
             public void run() {
                 location.createExplosion(40,true);
             }
         };
-
-        for (int i = 0; i < 100; i++)
-            threadPool.addTask(explosiveTask);
+        for (int i = 0; i < 50; i++)
+            explosiveTask.run();
     }
 }
