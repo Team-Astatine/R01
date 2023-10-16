@@ -6,6 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
 
@@ -15,31 +16,26 @@ import java.util.List;
 
 public class TotemStacking extends ComponentExchanger implements CommandExecutor {
     private final Material TOTEM = Material.TOTEM_OF_UNDYING;
-    private Player player;
-    private ItemStack offHandStuff;
     private final int STACK = 64;
     private final int MINIMUM = 1; // 합칠 수 있는 최소 단위 +1
+    private Player player;
+    private PlayerInventory playerInventory;
     private List<Integer> totemCountData;
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender,@NotNull Command command,@NotNull String label, String[] args) {
         this.player = (Player) sender;
-
+        this.playerInventory = this.player.getInventory();
         getAllOfPlayerTotems();
 
-        if (validationInventory()) 
-            return false;
-
+        if (validationInventory()) return false;
         removeTotemInInv();
-
         supplyTotems();
-
         return true;
     }
 
     private void getAllOfPlayerTotems() {
-        List<ItemStack> playerItemStack = Arrays.asList(this.player.getInventory().getContents());
-        this.totemCountData = playerItemStack.stream()
+        this.totemCountData = Arrays.stream(this.playerInventory.getContents())
                 .filter(Objects::nonNull)
                 .filter(item -> item.getType().equals(TOTEM))
                 .map(ItemStack::getAmount)
@@ -53,32 +49,32 @@ public class TotemStacking extends ComponentExchanger implements CommandExecutor
 
 //        n <= STACK
         if (totalAmount <= STACK) {
-            this.player.getInventory().setItemInOffHand(new ItemStack(TOTEM,totalAmount));
+            this.playerInventory.setItemInOffHand(new ItemStack(TOTEM,totalAmount));
         } else {
 //        n >= STACK
-            this.player.getInventory().setItemInOffHand(new ItemStack(TOTEM, STACK));
-            this.player.getInventory().addItem(new ItemStack(TOTEM, totalAmount - STACK));
+            this.playerInventory.setItemInOffHand(new ItemStack(TOTEM, STACK));
+            this.playerInventory.addItem(new ItemStack(TOTEM, totalAmount - STACK));
         }
 
         playerAnnouncer(this.player,"토템을 합쳤습니다.", Color.YELLOW);
     }
 
     private void removeTotemInInv() {
-        this.player.getInventory().remove(TOTEM);
+        this.playerInventory.remove(TOTEM);
 
 //        전체 아이템 창 정보 다 가져옴 armour , offHand Whatever
-        Optional <ItemStack> tempHelmetStuff = Optional.ofNullable(this.player.getInventory().getHelmet());
+        Optional <ItemStack> tempHelmetStuff = Optional.ofNullable(this.playerInventory.getHelmet());
         tempHelmetStuff.ifPresent(helmet -> {
             if (helmet.getType() == TOTEM)
-                this.player.getInventory().setHelmet(null);
+                this.playerInventory.setHelmet(null);
         });
 
-        Optional <ItemStack> tempOffHandStuff = Optional.of(this.player.getInventory().getItemInOffHand());
+        Optional <ItemStack> tempOffHandStuff = Optional.of(this.playerInventory.getItemInOffHand());
         tempOffHandStuff.ifPresent(offhand -> {
             if (offhand.getType() == TOTEM)
-                this.player.getInventory().setItemInOffHand(null);
+                this.playerInventory.setItemInOffHand(null);
             else
-                this.player.getInventory().addItem(tempOffHandStuff.get());
+                this.playerInventory.addItem(tempOffHandStuff.get());
         });
     }
 
