@@ -1,6 +1,7 @@
 package teamzesa.userEvent;
 
 import org.bukkit.*;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -99,8 +100,6 @@ public class Death extends ComponentExchanger implements Listener {
     public void deathRandomTeleport() {
         Player player = this.event.getPlayer();
 
-//        오버월드 일 것
-
         if (player.getBedSpawnLocation() == null) {
             playerAnnouncer(player, "침대가 없어 랜덤 텔레포트 됩니다.", Color.YELLOW);
             return;
@@ -121,10 +120,13 @@ public class Death extends ComponentExchanger implements Listener {
     }
 
     public int groundChecker(World world, int x, int z) {
-        int maxHigh = world.getMaxHeight();
+        int maxHigh = world.getMaxHeight() - 1; //320 > Material_VOID_AIR
+        int minHigh = world.getMinHeight(); //-64
 
-        for (int i = maxHigh; i > 62; i--) {
-            if (world.getBlockAt(x,i,z).getType() != Material.AIR)
+        for (int i = maxHigh; i > minHigh; i--) {
+            Block block = world.getBlockAt(x,i,z);
+//            System.out.println(block.getType());
+            if (block.getType() != Material.AIR)
                 return i;
         }
         return 0;

@@ -75,7 +75,7 @@ public final class R01 extends JavaPlugin {
 //        pm.registerEvents(new Anvil(),this); // test
 //        pm.registerEvents(new DisplayEntity(),this); // test
 
-        pm.registerEvents(new RandomTeleport(),this);
+//        pm.registerEvents(new RandomTeleport(),this);
 
         pm.registerEvents(new Death(),this);
         pm.registerEvents(new Explosive(),this);
