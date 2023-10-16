@@ -16,6 +16,7 @@ import java.util.List;
 public class TotemStacking extends ComponentExchanger implements CommandExecutor {
     private final Material TOTEM = Material.TOTEM_OF_UNDYING;
     private Player player;
+    private ItemStack offHandStuff;
     private final int STACK = 64;
     private final int MINIMUM = 1; // 합칠 수 있는 최소 단위 +1
     private List<Integer> totemCountData;
@@ -50,55 +51,54 @@ public class TotemStacking extends ComponentExchanger implements CommandExecutor
                 .mapToInt(Integer::intValue)
                 .sum();
 
-//        만약 한셋 이하면
+//        n <= STACK
         if (totalAmount <= STACK) {
-            this.player.getInventory().setItemInOffHand(
-                    new ItemStack(TOTEM,totalAmount)
-            );
+            this.player.getInventory().setItemInOffHand(new ItemStack(TOTEM,totalAmount));
         } else {
-//       한셋 그 이상이면
+//        n >= STACK
             this.player.getInventory().setItemInOffHand(new ItemStack(TOTEM, STACK));
             this.player.getInventory().addItem(new ItemStack(TOTEM, totalAmount - STACK));
         }
 
+        this.player.getInventory().setItemInOffHand(offHandStuff);
         playerAnnouncer(this.player,"토템을 합쳤습니다.", Color.YELLOW);
     }
 
     private void removeTotemInInv() {
-        //        remove Inventory
         this.player.getInventory().remove(TOTEM);
 
-//        전체 아이템 창 정보 다 가져옴 armour , offHand What ever
-        Optional <ItemStack> tempHelmetStuff = Optional. ofNullable(this.player.getInventory().getHelmet());
+//        전체 아이템 창 정보 다 가져옴 armour , offHand Whatever
+        Optional <ItemStack> tempHelmetStuff = Optional.ofNullable(this.player.getInventory().getHelmet());
         tempHelmetStuff.ifPresent(helmet -> {
-//            System.out.println("totemHelmet > " + helmet);
             if (helmet.getType() == TOTEM)
                 this.player.getInventory().setHelmet(null);
         });
 
         Optional <ItemStack> tempOffHandStuff = Optional.of(this.player.getInventory().getItemInOffHand());
         tempOffHandStuff.ifPresent(offhand -> {
-//            System.out.println("totemOffHand > " + offhand);
             if (offhand.getType() == TOTEM)
                 this.player.getInventory().setItemInOffHand(null);
+            else
+                this.offHandStuff = tempOffHandStuff.get();
         });
     }
 
     private boolean validationInventory() {
-        String message = null;
+        StringBuilder message = new StringBuilder();
+
         if (this.totemCountData.isEmpty())
-            message = "인벤토리에 토템이 없습니다.";
+            message.append("인벤토리에 토템이 없습니다.");
 
-        else if (maxTotemCnt() < 2)
-            message = "합칠 토템이 없습니다.";
+        else if (maxTotemCnt() < 2 && minTotemCnt() < 1)
+            message.append("합칠 토템이 없습니다.");
 
-        else if (minTotemCnt() < 2)
-            message = "2개 이상의 토템을 가지고 있으셔야 합니다.";
+        else if (maxTotemCnt() < 2 && minTotemCnt() < 2)
+            message.append("2개 이상의 토템을 가지고 있으셔야 합니다.");
 
-        if (message == null)
+        if (message.isEmpty())
             return false;
 
-        playerAnnouncer(this.player, message, Color.RED);
+        playerAnnouncer(this.player, message.toString(), Color.RED);
         return true;
     }
 
