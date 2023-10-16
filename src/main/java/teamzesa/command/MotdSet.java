@@ -19,24 +19,40 @@ public class MotdSet extends ComponentExchanger implements CommandExecutor {
         configIOHandler = ConfigIOHandler.getConfigIOHandler();
     }
 
+    private String finalMotd;
+    private String[] commandContext;
+
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
-        Player player = (Player)sender;
-        if (!player.getName().equals("JAXPLE")) {
-            componentSet("해당 명령어는 플레이어가 사용할 수 없습니다.", Color.RED);
-            return false;
+        this.commandContext = args;
+
+        if (!(sender instanceof Player)) {
+            motdSetup();
+            Bukkit.getLogger().info("Motd Set > " + finalMotd);
+            return true;
         }
 
-        StringBuilder customMotd = new StringBuilder();
-        for (String motd : args)
-            customMotd.append(motd)
-                      .append(" ");
+        else if (sender.getName().equals("JAXPLE")) {
+            motdSetup();
+            playerAnnouncer((Player)sender, this.finalMotd + "로 변경 됐습니다.",Color.YELLOW);
+            return true;
+        }
 
-        String finalMotd = customMotd.toString().trim();
+        else playerAnnouncer((Player)sender, "해당 명령어는 플레이어가 사용할 수 없습니다.", Color.RED);
+        return false;
+    }
+
+    private void motdSetup() {
+        StringBuilder customMotd = new StringBuilder();
+        for (String motd : this.commandContext)
+            customMotd.append(motd).append(" ");
+
+        this.finalMotd = customMotd.toString().trim();
+        applyMotd(this.finalMotd);
+    }
+
+    private void applyMotd(String finalMotd) {
         configIOHandler.worldConfigSave(finalMotd);
-        Bukkit.getLogger().info("Motd Set > " + finalMotd);
-        Bukkit.motd(componentSet(customMotd.toString()));
-        playerAnnouncer(player,finalMotd + "로 변경 됐습니다.",Color.YELLOW);
-        return true;
+        Bukkit.motd(componentSet(finalMotd));
     }
 }
