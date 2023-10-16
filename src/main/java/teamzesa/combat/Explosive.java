@@ -38,13 +38,13 @@ public class Explosive implements Listener {
     }
 
     private void boomBer() {
-        this.event.setRadius(30);
+        this.event.setRadius(25);
         this.event.setFire(true);
     }
 
     private void creeperBoom() {
         Creeper creeper = (Creeper) this.event.getEntity();
-        int explosiveRadius = creeper.isPowered() ? 20 : 100;
+        int explosiveRadius = creeper.isPowered() ? 100 : 20;
         this.event.setRadius(explosiveRadius);
         this.event.setFire(true);
     }
@@ -56,7 +56,7 @@ public class Explosive implements Listener {
 
     private void witherBoom() {
         WitherSkull witherSkull = (WitherSkull) this.event.getEntity();
-        int explosiveRadius = witherSkull.isCharged() ? 40 : 100;
+        int explosiveRadius = witherSkull.isCharged() ? 100 : 40;
         this.event.setRadius(explosiveRadius);
     }
 
@@ -66,10 +66,9 @@ public class Explosive implements Listener {
         BukkitRunnable explosiveTask = new BukkitRunnable() {
             @Override
             public void run() {
-                location.createExplosion(40,true);
+                location.createExplosion(200,true);
             }
         };
-        for (int i = 0; i < 50; i++)
-            explosiveTask.run();
+        explosiveTask.run();
     }
 }

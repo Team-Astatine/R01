@@ -13,16 +13,19 @@ import org.bukkit.event.player.PlayerItemBreakEvent;
 import teamzesa.ComponentExchanger;
 
 public class RandomTeleport extends ComponentExchanger implements Listener {
+    private Player player;
 
     @EventHandler
     public void randomTeleport(BlockPlaceEvent e) {
+        this.player = e.getPlayer();
+
         int x = ranNumGenerator(1000,-1000);
         int z = ranNumGenerator(1000,-1000);
         int y = groundChecker(e.getPlayer().getWorld(),x,z);
 
-        System.out.println(x);
-        System.out.println(y);
-        System.out.println(z);
+        System.out.println("x > " + x);
+        System.out.println("y > " + y);
+        System.out.println("z > " + z);
     }
 
     public int ranNumGenerator(int maxValue, int minValue) {
@@ -31,14 +34,17 @@ public class RandomTeleport extends ComponentExchanger implements Listener {
     }
 
     public int groundChecker(World world, int x, int z) {
-        int maxHigh = world.getMaxHeight();
+        int maxHigh = world.getMaxHeight() - 1; //320 > Material_VOID_AIR
+        int minHigh = world.getMinHeight(); //-64
 
-        System.out.println("maxHigh > " + maxHigh);
-        for (int i = maxHigh; i >= 63; i--) {
-            Material airType = world.getBlockAt(x,i,z).getBlockData().getMaterial();
-            System.out.println("Material > " + airType);
-            if (airType != Material.VOID_AIR && airType != Material.AIR) {
-                System.out.println("y > " + i);
+        for (int i = maxHigh; i > minHigh; i--) {
+            Block block = world.getBlockAt(x,i,z);
+//            System.out.println(block.getType());
+                playerAnnouncer(this.player,i + " " + block.getType());
+                System.out.println(i + " " + block.getType());
+            if (block.getType() != Material.AIR) {
+                String print = String.format("x > %d , y > %d , z > %d",x,i,z);
+                playerAnnouncer(this.player,print);
                 return i;
             }
         }

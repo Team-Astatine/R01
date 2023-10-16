@@ -89,11 +89,11 @@ public class TotemStacking extends ComponentExchanger implements CommandExecutor
         if (this.totemCountData.isEmpty())
             message = "인벤토리에 토템이 없습니다.";
 
-        if (maxTotemCnt() < 2) 
-            message = "합칠 토템이 없습니다.";
-
-        if (maxTotemCnt() < 2 && minTotemCnt() < 2) 
+        else if (maxTotemCnt() < 2 && minTotemCnt() < 2)
             message = "2개 이상의 토템을 가지고 있으셔야 합니다.";
+
+        else if (maxTotemCnt() < 2)
+            message = "합칠 토템이 없습니다.";
         
         if (message != null) {
             playerAnnouncer(this.player, message, Color.RED);
