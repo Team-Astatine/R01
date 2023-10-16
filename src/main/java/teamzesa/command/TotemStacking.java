@@ -15,9 +15,9 @@ import java.util.List;
 
 public class TotemStacking extends ComponentExchanger implements CommandExecutor {
     private final Material TOTEM = Material.TOTEM_OF_UNDYING;
-    private final int MINIMUM = 1; // 합칠 수 있는 최소 단위 +1
-    private final int STACK = 64;
     private Player player;
+    private final int STACK = 64;
+    private final int MINIMUM = 1; // 합칠 수 있는 최소 단위 +1
     private List<Integer> totemCountData;
 
     @Override
@@ -33,7 +33,6 @@ public class TotemStacking extends ComponentExchanger implements CommandExecutor
 
         supplyTotems();
 
-        playerAnnouncer(this.player,"토템을 합쳤습니다.", Color.YELLOW);
         return true;
     }
 
@@ -61,6 +60,8 @@ public class TotemStacking extends ComponentExchanger implements CommandExecutor
             this.player.getInventory().setItemInOffHand(new ItemStack(TOTEM, STACK));
             this.player.getInventory().addItem(new ItemStack(TOTEM, totalAmount - STACK));
         }
+
+        playerAnnouncer(this.player,"토템을 합쳤습니다.", Color.YELLOW);
     }
 
     private void removeTotemInInv() {
