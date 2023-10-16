@@ -60,7 +60,6 @@ public class TotemStacking extends ComponentExchanger implements CommandExecutor
             this.player.getInventory().addItem(new ItemStack(TOTEM, totalAmount - STACK));
         }
 
-        this.player.getInventory().setItemInOffHand(offHandStuff);
         playerAnnouncer(this.player,"토템을 합쳤습니다.", Color.YELLOW);
     }
 
@@ -79,7 +78,7 @@ public class TotemStacking extends ComponentExchanger implements CommandExecutor
             if (offhand.getType() == TOTEM)
                 this.player.getInventory().setItemInOffHand(null);
             else
-                this.offHandStuff = tempOffHandStuff.get();
+                this.player.getInventory().addItem(tempOffHandStuff.get());
         });
     }
 
