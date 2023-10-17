@@ -72,7 +72,8 @@ public class Explosive implements Listener {
                 location.createExplosion(200,true);
             }
         };
-        threadPool.addTask(explosiveTask);
-        threadPool.executorServiceOff();
+        explosiveTask.run();
+//        threadPool.addTask(explosiveTask);
+//        threadPool.executorServiceOff();
     }
 }

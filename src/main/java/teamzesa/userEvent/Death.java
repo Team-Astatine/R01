@@ -89,8 +89,9 @@ public class Death extends ComponentExchanger implements Listener {
 //                playerLocation.createExplosion(60);
             }
         };
-        threadPool.addTask(task);
-        threadPool.executorServiceOff();
+        task.run();
+//        threadPool.addTask(task);
+//        threadPool.executorServiceOff();
         this.event.setCancelled(true);
         return true;
     }
