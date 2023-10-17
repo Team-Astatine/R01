@@ -48,6 +48,7 @@ public class RecipeController extends ComponentExchanger implements Listener {
             }
         };
         threadPool.addTask(task);
+        threadPool.executorServiceOff();
         e.setCancelled(true);
     }
 }

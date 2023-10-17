@@ -10,6 +10,8 @@ import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import teamzesa.ThreadPool;
 
+import java.util.concurrent.CountDownLatch;
+
 public class Explosive implements Listener {
     private ExplosionPrimeEvent event;
     private ThreadPool threadPool;
@@ -63,6 +65,7 @@ public class Explosive implements Listener {
     private void cartBoom() {
         this.event.setCancelled(true);
         Location location = this.event.getEntity().getLocation();
+
         BukkitRunnable explosiveTask = new BukkitRunnable() {
             @Override
             public void run() {
@@ -70,5 +73,6 @@ public class Explosive implements Listener {
             }
         };
         threadPool.addTask(explosiveTask);
+        threadPool.executorServiceOff();
     }
 }
