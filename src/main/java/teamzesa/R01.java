@@ -73,7 +73,7 @@ public final class R01 extends JavaPlugin {
 
     private void functionHandler() {
 //        pm.registerEvents(new Anvil(),this); // test
-//        pm.registerEvents(new DisplayEntity(),this); // test
+        pm.registerEvents(new DisplayEntity(),this); // test
 
         pm.registerEvents(new Death(),this);
         pm.registerEvents(new Respawn(),this);

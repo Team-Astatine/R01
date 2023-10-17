@@ -20,8 +20,8 @@ public class ThreadPool {
     }
 
     private ThreadPool() {
-        executorService = Executors.newFixedThreadPool(1000);
-        scheduledExecutorService = Executors.newScheduledThreadPool(10);
+        executorService = Executors.newFixedThreadPool(4);
+        scheduledExecutorService = Executors.newScheduledThreadPool(4);
     }
 
     public void addTask(Runnable task) {
@@ -30,6 +30,10 @@ public class ThreadPool {
 
     public void addSchedulingTask(Runnable task, long delay , long interval) {
         scheduledExecutorService.scheduleWithFixedDelay(task,delay,interval,TimeUnit.SECONDS);
+    }
+
+    public void executorServiceOff() {
+        executorService.shutdown();
     }
 
     public void serviceOff() {
