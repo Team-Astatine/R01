@@ -41,12 +41,12 @@ public class Respawn extends ComponentExchanger implements Listener {
         playerAnnouncer(player,"침대가 없어 랜덤 텔레포트 되었습니다.", Color.ORANGE);
     }
 
-    public double ranNumGenerator(int maxValue, int minValue) {
+    private double ranNumGenerator(int maxValue, int minValue) {
         int range = maxValue - minValue + 1;
-        return (int) (Math.random() * range) + minValue;
+        return (Math.random() * range) + minValue;
     }
 
-    public double groundChecker(World world, double x, double z) {
+    private double groundChecker(World world, double x, double z) {
         int maxHigh = world.getMaxHeight() - 1; //320 > Material_VOID_AIR
         int minHigh = world.getMinHeight(); //-64
 
