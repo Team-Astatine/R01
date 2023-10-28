@@ -13,7 +13,9 @@ import teamzesa.dataValue.userData.UserMapHandler;
 
 import java.awt.*;
 
-public class Announcer extends ComponentExchanger {
+import static teamzesa.ComponentExchanger.componentSet;
+
+public class Announcer {
 
     private static class AnnouncerHolder {
         private static final Announcer INSTANCE = new Announcer();
@@ -36,7 +38,7 @@ public class Announcer extends ComponentExchanger {
     public void countAnnouncer(Player player) {
         int joinCnt = userMapHandler.getUser(player).getJoinCount();
         player.sendMessage(
-                ComponentExchanger.componentSet(configIOHandler.getWorldMotdConfig(),new Color(173,216,230))
+                componentSet(configIOHandler.getWorldMotdConfig(),new Color(173,216,230))
                         .append(componentSet(" " + joinCnt ,new Color(255,182,193)))
                         .append(componentSet("번째 접속!",new Color(173,216,230)))
         );
@@ -83,16 +85,16 @@ public class Announcer extends ComponentExchanger {
         Color discordColor = new Color(114, 137, 218);
 
         return new Component[]{
-                createLinkComponent(configIOHandler.getMineListVote(), mineListLink, voteColor),
-                createLinkComponent(configIOHandler.getDiscordInvite(), discordLink, discordColor),
-                createLinkComponent(configIOHandler.getServerGuideNotion(), notionLink, notionColor),
-                componentSet(configIOHandler.getSteelLifeTip(), commonColor),
-                componentSet(configIOHandler.getRaidTip(), commonColor),
-                componentSet(configIOHandler.getWeaponTip(), commonColor),
-                componentSet(configIOHandler.getExplosiveTip(), commonColor),
-                componentSet(configIOHandler.getCommandFly(), commandColor),
-                componentSet(configIOHandler.getCommandHat(), commandColor),
-                componentSet(configIOHandler.getCommandTotem(), commandColor)
+                ComponentExchanger.createLinkComponent(configIOHandler.getMineListVote(), mineListLink, voteColor),
+                ComponentExchanger.createLinkComponent(configIOHandler.getDiscordInvite(), discordLink, discordColor),
+                ComponentExchanger.createLinkComponent(configIOHandler.getServerGuideNotion(), notionLink, notionColor),
+                ComponentExchanger.componentSet(configIOHandler.getSteelLifeTip(), commonColor),
+                ComponentExchanger.componentSet(configIOHandler.getRaidTip(), commonColor),
+                ComponentExchanger.componentSet(configIOHandler.getWeaponTip(), commonColor),
+                ComponentExchanger.componentSet(configIOHandler.getExplosiveTip(), commonColor),
+                ComponentExchanger.componentSet(configIOHandler.getCommandFly(), commandColor),
+                ComponentExchanger.componentSet(configIOHandler.getCommandHat(), commandColor),
+                ComponentExchanger.componentSet(configIOHandler.getCommandTotem(), commandColor)
         };
     }
 

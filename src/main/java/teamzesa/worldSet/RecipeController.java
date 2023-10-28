@@ -15,7 +15,7 @@ import java.awt.*;
 import java.util.HashSet;
 import java.util.Set;
 
-public class RecipeController extends ComponentExchanger implements Listener {
+public class RecipeController implements Listener {
     private final Set<Material> lockingStuff;
     private final ThreadPool threadPool;
 

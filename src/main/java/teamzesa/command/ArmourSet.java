@@ -12,7 +12,7 @@ import teamzesa.ComponentExchanger;
 import java.awt.*;
 import java.util.Optional;
 
-public class ArmourSet extends ComponentExchanger implements CommandExecutor {
+public class ArmourSet implements CommandExecutor {
     private PlayerInventory playerInventory;
 
     public enum ArmourType {

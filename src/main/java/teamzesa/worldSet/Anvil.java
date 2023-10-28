@@ -19,7 +19,6 @@ public class Anvil implements Listener {
     @EventHandler
     public void onAnvil(@NotNull AnvilUpdateResultEvent e) {
 
-
         Optional<ItemStack> leftStuff = Optional.ofNullable(e.getInventory().getItem(0));
         Optional<ItemStack> rightStuff = Optional.ofNullable(e.getInventory().getItem(1));
 

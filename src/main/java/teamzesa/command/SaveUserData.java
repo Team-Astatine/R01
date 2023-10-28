@@ -11,7 +11,7 @@ import teamzesa.dataValue.userData.UserMapHandler;
 
 import java.awt.*;
 
-public class SaveUserData extends ComponentExchanger implements CommandExecutor {
+public class SaveUserData implements CommandExecutor {
     private static UserIOHandler userIoHandler;
     private static UserMapHandler userMapHandler;
 

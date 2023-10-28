@@ -10,7 +10,7 @@ import teamzesa.ComponentExchanger;
 import java.awt.*;
 
 
-public class RaidAnnouncer extends ComponentExchanger implements Listener {
+public class RaidAnnouncer implements Listener {
     @EventHandler
     public void raidAnnouncer(@NotNull RaidTriggerEvent e) {
         if (e.getPlayer().getName().equals("JAXPLE"))

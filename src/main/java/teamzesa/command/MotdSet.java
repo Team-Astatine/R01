@@ -11,7 +11,7 @@ import teamzesa.IOHandler.ConfigIOHandler;
 
 import java.awt.*;
 
-public class MotdSet extends ComponentExchanger implements CommandExecutor {
+public class MotdSet implements CommandExecutor {
 
     private ConfigIOHandler configIOHandler;
 
@@ -53,6 +53,6 @@ public class MotdSet extends ComponentExchanger implements CommandExecutor {
 
     private void applyMotd(String finalMotd) {
         configIOHandler.worldConfigSave(finalMotd);
-        Bukkit.motd(componentSet(finalMotd));
+        Bukkit.motd(ComponentExchanger.componentSet(finalMotd));
     }
 }

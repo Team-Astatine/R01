@@ -14,7 +14,7 @@ import teamzesa.ComponentExchanger;
 import teamzesa.R01;
 
 
-public class HandSwing extends ComponentExchanger implements Listener {
+public class HandSwing implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onSwing(@NotNull PlayerArmSwingEvent e) {
         Player player = e.getPlayer();

@@ -13,7 +13,7 @@ import teamzesa.dataValue.userData.UserMapHandler;
 import java.awt.*;
 import java.util.Optional;
 
-public class UserObjectChecker extends ComponentExchanger implements CommandExecutor {
+public class UserObjectChecker implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
         Optional<Player> player = Optional.ofNullable(Bukkit.getPlayer(args[0]));

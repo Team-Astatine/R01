@@ -69,6 +69,7 @@ public final class R01 extends JavaPlugin {
         this.getCommand("SaveUserData").setExecutor(new SaveUserData());
         this.getCommand("R01ConfigReload")
                 .setExecutor(new Reload(checkUpdateFile(DataFile.CONFIG)));
+
     }
 
     private void functionHandler() {

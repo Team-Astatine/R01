@@ -11,7 +11,7 @@ import teamzesa.IOHandler.ConfigIOHandler;
 import java.awt.*;
 import java.io.File;
 
-public class Reload extends ComponentExchanger implements CommandExecutor {
+public class Reload implements CommandExecutor {
     private final File dataPathFile;
     private final ConfigIOHandler configIOHandler;
 

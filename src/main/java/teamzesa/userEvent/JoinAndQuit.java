@@ -17,7 +17,7 @@ import teamzesa.worldSet.Announcer;
 
 import java.awt.*;
 
-public class JoinAndQuit extends ComponentExchanger implements Listener {
+public class JoinAndQuit implements Listener {
     private final UserMapHandler userMapHandler;
     private final Announcer announcer;
 

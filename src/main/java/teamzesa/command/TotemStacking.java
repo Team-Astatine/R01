@@ -16,7 +16,7 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-public class TotemStacking extends ComponentExchanger implements CommandExecutor {
+public class TotemStacking implements CommandExecutor {
     private final Material TOTEM = Material.TOTEM_OF_UNDYING;
     private final int STACK = 64;
     private final int MINIMUM = 1; // 합칠 수 있는 최소 단위 +1

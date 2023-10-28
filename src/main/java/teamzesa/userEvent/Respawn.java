@@ -13,7 +13,7 @@ import teamzesa.ComponentExchanger;
 import java.awt.*;
 
 
-public class Respawn extends ComponentExchanger implements Listener {
+public class Respawn implements Listener {
     private PlayerRespawnEvent event;
 
     @EventHandler
@@ -26,7 +26,7 @@ public class Respawn extends ComponentExchanger implements Listener {
         Player player = this.event.getPlayer();
 
         if (player.getBedSpawnLocation() != null) {
-            playerAnnouncer(player, "침대로 텔레포트 됩니다.", Color.YELLOW);
+            ComponentExchanger.playerAnnouncer(player, "침대로 텔레포트 됩니다.", Color.YELLOW);
             return;
         }
 

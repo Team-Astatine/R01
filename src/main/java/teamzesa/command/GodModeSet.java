@@ -14,7 +14,7 @@ import teamzesa.dataValue.userData.UserMapHandler;
 
 import java.awt.*;
 
-public class GodModeSet extends ComponentExchanger implements CommandExecutor {
+public class GodModeSet implements CommandExecutor {
     private UserMapHandler userMapHandler;
 
     public GodModeSet() {

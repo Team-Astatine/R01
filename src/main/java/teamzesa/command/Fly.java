@@ -9,7 +9,7 @@ import teamzesa.ComponentExchanger;
 
 import java.awt.*;
 
-public class Fly extends ComponentExchanger implements CommandExecutor {
+public class Fly implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         Player player = (Player) sender;

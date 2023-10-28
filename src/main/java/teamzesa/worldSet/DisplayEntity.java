@@ -10,12 +10,13 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
 
-public class DisplayEntity extends ComponentExchanger implements Listener {
+public class DisplayEntity implements Listener {
 
     @EventHandler
     public void onEntity(@NotNull BlockPlaceEvent e) {
         Location position = e.getBlock().getLocation().add(0,10,0);
         Player player = e.getPlayer();
-        HoverEvent<Component> hoverEvent = HoverEvent.showText(componentSet("Test"));
+        HoverEvent<Component> hoverEvent = HoverEvent.showText(
+                ComponentExchanger.componentSet("Test"));
     }
 }
