@@ -38,7 +38,7 @@ public class Respawn extends ComponentExchanger implements Listener {
         double y = groundChecker(player.getWorld(),x,z);
 
         this.event.setRespawnLocation(new Location(player.getWorld(),x,y,z));
-        playerAnnouncer(player,"침대가 없어 랜덤 텔레포트 되었습니다.", Color.ORANGE);
+        ComponentExchanger.playerAnnouncer(player,"침대가 없어 랜덤 텔레포트 되었습니다.", Color.ORANGE);
     }
 
     private double ranNumGenerator(int maxValue, int minValue) {

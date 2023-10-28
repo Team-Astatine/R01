@@ -1,5 +1,7 @@
 package teamzesa.command;
 
+import net.kyori.adventure.text.BuildableComponent;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -56,7 +58,7 @@ public class TotemStacking extends ComponentExchanger implements CommandExecutor
             this.playerInventory.addItem(new ItemStack(TOTEM, totalAmount - STACK));
         }
 
-        playerAnnouncer(this.player,"토템을 합쳤습니다.", Color.YELLOW);
+       ComponentExchanger.playerAnnouncer(this.player,"토템을 합쳤습니다.", Color.YELLOW);
     }
 
     private void removeTotemInInv() {
@@ -79,21 +81,21 @@ public class TotemStacking extends ComponentExchanger implements CommandExecutor
     }
 
     private boolean validationInventory() {
-        StringBuilder message = new StringBuilder();
+        String message = "";
 
         if (this.totemCountData.isEmpty())
-            message.append("인벤토리에 토템이 없습니다.");
+            message = "인벤토리에 토템이 없습니다.";
 
         else if (maxTotemCnt() < 2 && minTotemCnt() < 1)
-            message.append("합칠 토템이 없습니다.");
+            message = "합칠 토템이 없습니다.";
 
         else if (maxTotemCnt() < 2 && minTotemCnt() < 2)
-            message.append("2개 이상의 토템을 가지고 있으셔야 합니다.");
+            message = "2개 이상의 토템을 가지고 있으셔야 합니다.";
 
         if (message.isEmpty())
             return false;
 
-        playerAnnouncer(this.player, message.toString(), Color.RED);
+        ComponentExchanger.playerAnnouncer(this.player, message, Color.RED);
         return true;
     }
 

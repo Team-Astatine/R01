@@ -44,7 +44,7 @@ public class RecipeController extends ComponentExchanger implements Listener {
                     return;
 
                 Player player = (Player)e.getWhoClicked();
-                player.sendMessage(componentSet("해당 아이템은 조합할 수 없습니다.", Color.RED));
+                ComponentExchanger.playerAnnouncer(player,"해당 아이템은 조합할 수 없습니다.",Color.RED);
             }
         };
         task.run();

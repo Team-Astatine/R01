@@ -10,17 +10,15 @@ import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
-public abstract class ComponentExchanger {
+public class ComponentExchanger {
 
-    private static Component component;
-
-    private @NotNull TextColor colorExchanger(@NotNull Color color) {
+    private static TextColor colorExchanger(@NotNull Color color) {
 //        Ensure 24-bit RGB value
         int rgb = color.getRGB() & 0xFFFFFF;
         return TextColor.color(rgb);
     }
 
-    public Component createLinkComponent(String text, String url, Color color) {
+    public static Component createLinkComponent(String text, String url, Color color) {
         TextComponent.Builder component = Component.text()
                 .content(text)
                 .color(colorExchanger(color))
@@ -28,31 +26,28 @@ public abstract class ComponentExchanger {
         return component.build();
     }
 
-    public void serverAnnouncer(String string, Color color) {
-        component = Component.text(string)
+    public static void serverAnnouncer(String string, Color color) {
+        Component component = Component.text(string)
                 .color(colorExchanger(color));
         Bukkit.broadcast(component);
     }
 
-    public void playerAnnouncer(@NotNull Player player, String string, Color color) {
-        component = Component.text(string)
+    public static void playerAnnouncer(@NotNull Player player, String string, Color color) {
+        Component component = Component.text(string)
                 .color(colorExchanger(color));
         player.sendMessage(component);
     }
 
-    public void playerAnnouncer(@NotNull Player player, String string) {
-        component = Component.text(string);
-        player.sendMessage(component);
+    public static void playerAnnouncer(@NotNull Player player, String string) {
+        player.sendMessage(Component.text(string));
     }
 
-    public Component componentSet(String string) {
-        component = Component.text(string);
-        return component;
+    public static Component componentSet(String string) {
+        return Component.text(string);
     }
 
-    public Component componentSet(String string, Color color) {
-        component = Component.text(string)
+    public static Component componentSet(String string, Color color) {
+        return Component.text(string)
                 .color(colorExchanger(color));
-        return component;
     }
 }

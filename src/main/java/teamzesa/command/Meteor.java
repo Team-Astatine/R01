@@ -7,10 +7,13 @@ import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
+
+import java.awt.*;
 
 public class Meteor extends ComponentExchanger implements CommandExecutor {
     @Override
@@ -20,7 +23,7 @@ public class Meteor extends ComponentExchanger implements CommandExecutor {
         }
 
         if (args.length < 3) {
-            sender.sendMessage("x y z 좌표를 입력하세요.");
+            ComponentExchanger.playerAnnouncer((Player)sender, "x y z 좌표를 입력하세요.", Color.RED);
             return false;
         }
 

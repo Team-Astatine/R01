@@ -26,7 +26,7 @@ public class ArmourSet extends ComponentExchanger implements CommandExecutor {
 
         Optional<ItemStack> tmpItemInHand = Optional.of(playerInventory.getItemInMainHand());
         if (tmpItemInHand.isEmpty()) {
-            playerAnnouncer(player,"손에 아이템이 없습니다.", Color.RED);
+            ComponentExchanger.playerAnnouncer(player,"손에 아이템이 없습니다.", Color.RED);
             return false;
         }
 

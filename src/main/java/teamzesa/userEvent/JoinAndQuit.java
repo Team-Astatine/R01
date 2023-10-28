@@ -49,7 +49,7 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
 
     private void playerFlight() {
         joinPlayer.setAllowFlight(true);
-        playerAnnouncer(joinPlayer,"플라이 활성화",Color.YELLOW);
+        ComponentExchanger.playerAnnouncer(joinPlayer,"플라이 활성화",Color.YELLOW);
     }
 
     private void userHandling() {
@@ -64,12 +64,12 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
 
 //        접속유저의 IP가 이미 존재하면 Return
         if (userHandler.existsIP(joinPlayer.getAddress())) {
-            if (joinCnt == 1) playerAnnouncer(joinPlayer,message, Color.YELLOW);
+            if (joinCnt == 1) ComponentExchanger.playerAnnouncer(joinPlayer,message, Color.YELLOW);
             else return;
         }
 
         if (userHandler.addIP(joinPlayer.getAddress()))
-            playerAnnouncer(joinPlayer, message, Color.YELLOW);
+            ComponentExchanger.playerAnnouncer(joinPlayer, message, Color.YELLOW);
 
         else Bukkit.getLogger().info(joinPlayer.getName() + " IP 추가 실패");
     }

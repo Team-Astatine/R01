@@ -17,7 +17,7 @@ public class Fly extends ComponentExchanger implements CommandExecutor {
         player.setAllowFlight(!player.getAllowFlight());
         String announcer = player.getAllowFlight() ? "활성화" : "비활성화";
 
-        playerAnnouncer(player,"플라이 " + announcer,Color.YELLOW);
+        ComponentExchanger.playerAnnouncer(player,"플라이 " + announcer,Color.YELLOW);
         return true;
     }
 }

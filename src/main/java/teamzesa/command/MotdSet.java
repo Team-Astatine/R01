@@ -34,11 +34,11 @@ public class MotdSet extends ComponentExchanger implements CommandExecutor {
 
         else if (sender.getName().equals("JAXPLE")) {
             motdSetup();
-            playerAnnouncer((Player)sender, this.finalMotd + "로 변경 됐습니다.",Color.YELLOW);
+            ComponentExchanger.playerAnnouncer((Player)sender, this.finalMotd + "로 변경 됐습니다.",Color.YELLOW);
             return true;
         }
 
-        else playerAnnouncer((Player)sender, "해당 명령어는 플레이어가 사용할 수 없습니다.", Color.RED);
+        else ComponentExchanger.playerAnnouncer((Player)sender, "해당 명령어는 플레이어가 사용할 수 없습니다.", Color.RED);
         return false;
     }
 

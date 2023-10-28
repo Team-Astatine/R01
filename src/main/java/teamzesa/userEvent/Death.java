@@ -69,8 +69,8 @@ public class Death extends ComponentExchanger implements Listener {
     }
 
     private void talking(Player killed, @NotNull Player killer) {
-        playerAnnouncer(killed,killer.getName() + "님이 체력을 약탈했습니다.", Color.RED);
-        playerAnnouncer(killer,killed.getName() + "님이 체력을 약탈했습니다.", Color.RED);
+        ComponentExchanger.playerAnnouncer(killed,killer.getName() + "님이 체력을 약탈했습니다.", Color.RED);
+        ComponentExchanger.playerAnnouncer(killer,killed.getName() + "님이 체력을 약탈했습니다.", Color.RED);
     }
 
     private @NotNull Boolean checkingGodMod() {

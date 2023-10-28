@@ -36,7 +36,7 @@ public class Announcer extends ComponentExchanger {
     public void countAnnouncer(Player player) {
         int joinCnt = userMapHandler.getUser(player).getJoinCount();
         player.sendMessage(
-                componentSet(configIOHandler.getWorldMotdConfig(),new Color(173,216,230))
+                ComponentExchanger.componentSet(configIOHandler.getWorldMotdConfig(),new Color(173,216,230))
                         .append(componentSet(" " + joinCnt ,new Color(255,182,193)))
                         .append(componentSet("번째 접속!",new Color(173,216,230)))
         );

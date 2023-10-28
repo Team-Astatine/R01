@@ -24,7 +24,7 @@ public class GodModeSet extends ComponentExchanger implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
         if (args.length == 0) {
-            componentSet("/god [플레이어 이름]",Color.RED);
+            ComponentExchanger.componentSet("/god [플레이어 이름]",Color.RED);
             return false;
         }
         Player player = Bukkit.getPlayer(args[0]);
@@ -40,12 +40,12 @@ public class GodModeSet extends ComponentExchanger implements CommandExecutor {
 
 //        스스로에게 적용했을시 무시
         if (!sender.getName().equals(targetUser.getUser().getName()))
-            playerAnnouncer((Player)sender,args[0] + " 님" + mention,Color.yellow);
+            ComponentExchanger.playerAnnouncer((Player)sender,args[0] + " 님" + mention,Color.yellow);
 
         Player targetPlayer = Bukkit.getPlayer(targetUser.getUser().getUuid());
 
         if (targetPlayer != null)
-            playerAnnouncer(targetPlayer,"당신" + mention, Color.ORANGE);
+            ComponentExchanger.playerAnnouncer(targetPlayer,"당신" + mention, Color.ORANGE);
 
         return true;
     }

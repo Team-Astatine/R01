@@ -8,35 +8,38 @@ import org.jetbrains.annotations.NotNull;
 import org.purpurmc.purpur.event.inventory.AnvilUpdateResultEvent;
 import teamzesa.dataValue.EnchantValue;
 
+import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class Anvil implements Listener {
 
     @EventHandler
     public void onAnvil(@NotNull AnvilUpdateResultEvent e) {
 
-        ItemStack leftStuff = e.getInventory().getItem(0);
-        ItemStack rightStuff = e.getInventory().getItem(1);
 
-        if (leftStuff == null || rightStuff == null)
-            return;
+        Optional<ItemStack> leftStuff = Optional.ofNullable(e.getInventory().getItem(0));
+        Optional<ItemStack> rightStuff = Optional.ofNullable(e.getInventory().getItem(1));
 
+        Map<Enchantment, Integer> leftStuffEnchants = null;
+        if (leftStuff.isPresent())
+            leftStuffEnchants = leftStuff.get().getEnchants();
+
+        Map<Enchantment, Integer> rightStuffEnchant = null;
+        if (rightStuff.isPresent())
+            rightStuffEnchant = rightStuff.get().getEnchants();
 
         List<EnchantValue> leftOption = new ArrayList<>();
-        List<EnchantValue> rightOption = new ArrayList<>();
-        Map<Enchantment, Integer> leftStuffEnchant = leftStuff.getEnchants();
-        Map<Enchantment, Integer> rightStuffEnchant = rightStuff.getEnchants();
-
-
-        for (Map.Entry<Enchantment,Integer> entry : leftStuffEnchant.entrySet()) {
+        for (Map.Entry<Enchantment,Integer> entry : leftStuffEnchants.entrySet()) {
             EnchantValue enchantValue = new EnchantValue(entry.getKey(), entry.getValue());
             System.out.println(enchantValue);
             leftOption.add(enchantValue);
         }
 
 
+        List<EnchantValue> rightOption = new ArrayList<>();
         for (Map.Entry<Enchantment,Integer> entry : rightStuffEnchant.entrySet()) {
             EnchantValue enchantValue = new EnchantValue(entry.getKey(), entry.getValue());
             System.out.println(enchantValue);

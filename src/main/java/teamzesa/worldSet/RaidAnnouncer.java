@@ -23,7 +23,7 @@ public class RaidAnnouncer extends ComponentExchanger implements Listener {
         double z = loc.getZ();
 
 
-        serverAnnouncer(
+        ComponentExchanger.serverAnnouncer(
                 String.format("%s 월드의 X : %1.0f | Z : %1.0f 에서 레이드가 시작됩니다.",
                         activeWorldName.getWorld(), x, z), Color.RED
         );

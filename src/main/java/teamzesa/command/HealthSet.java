@@ -29,7 +29,7 @@ public class HealthSet extends ComponentExchanger implements CommandExecutor {
         player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(Double.parseDouble(args[1]));
         userMapHandler.updateUser(player.getUniqueId(), player.getHealthScale());
 
-        playerAnnouncer(player,args[0] + "님의 체력이" + args[1] + "으로 설정됐습니다.", Color.YELLOW);
+        ComponentExchanger.playerAnnouncer(player,args[0] + "님의 체력이" + args[1] + "으로 설정됐습니다.", Color.YELLOW);
         return true;
     }
 }

@@ -23,7 +23,7 @@ public class SaveUserData extends ComponentExchanger implements CommandExecutor 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
-            playerAnnouncer((Player)sender, "권한이 없습니다.", Color.RED);
+            ComponentExchanger.playerAnnouncer((Player)sender, "권한이 없습니다.", Color.RED);
             return false;
         }
 

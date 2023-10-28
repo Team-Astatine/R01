@@ -70,10 +70,10 @@ public class Explosive implements Listener {
             @Override
             public void run() {
                 location.createExplosion(200,true);
+//                threadPool.executorServiceOff();
             }
         };
         explosiveTask.run();
 //        threadPool.addTask(explosiveTask);
-//        threadPool.executorServiceOff();
     }
 }
