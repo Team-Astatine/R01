@@ -5,11 +5,18 @@ https://jaxple.notion.site/d1ef58aa889d4b8ba1342fc09c0249b4?pvs=4
 ## server Fix List
 1. 
 
+## develop List
+* filePath 분리하기
+  * CommandListup.java
+  * EventListup.java
+
+## refactor List
+* godMode.java
+* moderSet.java
+* etc ..
+
 ## Debug List
-1. 토템 remove 시 material
-2. 전체 remove 되는지
-3. 하도 없을때 예외처리 check
-4. 머리에 totem 쓰고 있을시 개수체크 예외처리
+1. 
 
 ## Plugin
 1. https://www.spigotmc.org/resources/speedlimit-1-20-1-support.75269/
