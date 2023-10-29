@@ -9,11 +9,12 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
 import teamzesa.dataValue.userData.User;
 import teamzesa.dataValue.userData.UserMapHandler;
+import teamzesa.resgisterEvent.EventExecutor;
 
 import java.awt.*;
 import java.util.Optional;
 
-public class UserObjectChecker implements CommandExecutor {
+public class UserObjectChecker implements CommandExecutor, EventExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
         Optional<Player> player = Optional.ofNullable(Bukkit.getPlayer(args[0]));

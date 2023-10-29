@@ -8,10 +8,11 @@ import org.bukkit.entity.Player;
 import teamzesa.ComponentExchanger;
 import teamzesa.IOHandler.UserIOHandler;
 import teamzesa.dataValue.userData.UserMapHandler;
+import teamzesa.resgisterEvent.EventExecutor;
 
 import java.awt.*;
 
-public class SaveUserData implements CommandExecutor {
+public class SaveUserData implements CommandExecutor, EventExecutor {
     private static UserIOHandler userIoHandler;
     private static UserMapHandler userMapHandler;
 

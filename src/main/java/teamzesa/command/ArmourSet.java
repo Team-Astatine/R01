@@ -8,11 +8,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
+import teamzesa.resgisterEvent.EventExecutor;
 
 import java.awt.*;
 import java.util.Optional;
 
-public class ArmourSet implements CommandExecutor {
+public class ArmourSet implements CommandExecutor, EventExecutor {
     private PlayerInventory playerInventory;
 
     public enum ArmourType {

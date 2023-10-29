@@ -8,10 +8,11 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
 import teamzesa.IOHandler.ConfigIOHandler;
+import teamzesa.resgisterEvent.EventExecutor;
 
 import java.awt.*;
 
-public class MotdSet implements CommandExecutor {
+public class MotdSet implements CommandExecutor, EventExecutor {
 
     private ConfigIOHandler configIOHandler;
 

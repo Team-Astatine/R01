@@ -11,10 +11,11 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
 import teamzesa.dataValue.userData.UserHandler;
 import teamzesa.dataValue.userData.UserMapHandler;
+import teamzesa.resgisterEvent.EventExecutor;
 
 import java.awt.*;
 
-public class GodModeSet implements CommandExecutor {
+public class GodModeSet implements CommandExecutor, EventExecutor {
     private UserMapHandler userMapHandler;
 
     public GodModeSet() {

@@ -1,15 +1,17 @@
 package teamzesa.IOHandler;
 
+import java.io.File;
+
 public enum DataFilePath {
     USER_DATA("userData.json"),
     CONFIG("config.yml");
-    private final String fileName;
+    private final String fileInstance;
 
     DataFilePath(String dataName) {
-        fileName = dataName;
+        fileInstance = dataName;
     }
 
-    public String getFileName() {
-        return fileName;
+    public String getFileInstance() {
+        return fileInstance;
     }
 }

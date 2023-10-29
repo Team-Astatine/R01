@@ -11,10 +11,11 @@ import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
 import teamzesa.dataValue.userData.UserMapHandler;
+import teamzesa.resgisterEvent.EventExecutor;
 
 import java.awt.*;
 
-public class HealthSet implements CommandExecutor {
+public class HealthSet implements CommandExecutor, EventExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String @NotNull [] args) {
         Player targetPlayer = Bukkit.getPlayer(args[0]);

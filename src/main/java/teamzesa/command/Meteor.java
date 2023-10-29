@@ -12,10 +12,11 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
+import teamzesa.resgisterEvent.EventExecutor;
 
 import java.awt.*;
 
-public class Meteor extends ComponentExchanger implements CommandExecutor {
+public class Meteor implements CommandExecutor, EventExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (!sender.isOp()) {

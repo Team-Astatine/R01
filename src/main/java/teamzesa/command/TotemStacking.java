@@ -1,7 +1,5 @@
 package teamzesa.command;
 
-import net.kyori.adventure.text.BuildableComponent;
-import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -11,12 +9,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
+import teamzesa.resgisterEvent.EventExecutor;
 
 import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-public class TotemStacking implements CommandExecutor {
+public class TotemStacking implements CommandExecutor, EventExecutor {
     private final Material TOTEM = Material.TOTEM_OF_UNDYING;
     private final int STACK = 64;
     private final int MINIMUM = 1; // 합칠 수 있는 최소 단위 +1

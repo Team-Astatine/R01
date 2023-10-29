@@ -6,8 +6,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import teamzesa.resgisterEvent.EventExecutor;
 
-public class Moderator implements CommandExecutor {
+public class Moderator implements CommandExecutor, EventExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
         if (args.length == 0)
