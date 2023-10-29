@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
 import teamzesa.IOHandler.ConfigIOHandler;
 import teamzesa.ThreadPool;
+import teamzesa.dataValue.userData.UserHandler;
 import teamzesa.dataValue.userData.UserMapHandler;
 
 import java.awt.*;
@@ -22,13 +23,11 @@ public class Announcer {
     }
 
     private final ConfigIOHandler configIOHandler;
-    private final UserMapHandler userMapHandler;
     private final ThreadPool threadPool;
 
     private Announcer() {
-        configIOHandler = ConfigIOHandler.getConfigIOHandler();
-        userMapHandler = UserMapHandler.getUserHandler();
-        threadPool = ThreadPool.getThreadPool();
+        this.configIOHandler = ConfigIOHandler.getConfigIOHandler();
+        this.threadPool = ThreadPool.getThreadPool();
     }
 
     public static Announcer getAnnouncer() {
@@ -36,17 +35,18 @@ public class Announcer {
     }
 
     public void countAnnouncer(Player player) {
-        int joinCnt = userMapHandler.getUser(player).getJoinCount();
+
+        int joinCnt = UserMapHandler.getUserHandler().getUser(player).getJoinCount();
         player.sendMessage(
-                componentSet(configIOHandler.getWorldMotdConfig(),new Color(173,216,230))
-                        .append(componentSet(" " + joinCnt ,new Color(255,182,193)))
-                        .append(componentSet("번째 접속!",new Color(173,216,230)))
+                ComponentExchanger.componentSet(configIOHandler.getWorldMotdConfig(),new Color(173,216,230))
+                        .append(ComponentExchanger.componentSet(" " + joinCnt ,new Color(255,182,193)))
+                        .append(ComponentExchanger.componentSet("번째 접속!",new Color(173,216,230)))
         );
     }
 
     public void playerTab(@NotNull Audience player) {
         player.sendPlayerListHeader(
-                componentSet(configIOHandler.getWorldMotdConfig(),new Color(139, 0, 255))
+                ComponentExchanger.componentSet(configIOHandler.getWorldMotdConfig(),new Color(139, 0, 255))
         );
     }
 
@@ -62,7 +62,6 @@ public class Announcer {
 //        long interval = 1; // 3분마다 (1초 = 20틱)
 
         Component[] components = createComponents();
-
         Runnable task = new BukkitRunnable() {
             @Override
             public void run() {
@@ -70,7 +69,7 @@ public class Announcer {
                     Bukkit.broadcast(component);
             }
         };
-        threadPool.addSchedulingTask(task,delay,interval);
+        this.threadPool.addSchedulingTask(task,delay,interval);
     }
 
     private Component[] createComponents() {

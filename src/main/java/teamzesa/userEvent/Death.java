@@ -19,18 +19,11 @@ import java.awt.Color;
 
 
 public class Death extends ComponentExchanger implements Listener {
-    private final double MAX_HEALTH_SCALE = 60.0;
-    private final Double MIN_HEALTH_SCALE = 4.0;
-    private final Double STEP_SIZE = 2.0;
-
     private final UserMapHandler userMapHandler;
-    private final ThreadPool threadPool;
-
     private PlayerDeathEvent event;
 
     public Death() {
-        threadPool = ThreadPool.getThreadPool();
-        userMapHandler = UserMapHandler.getUserHandler();
+        this.userMapHandler = UserMapHandler.getUserHandler();
     }
 
     @EventHandler
@@ -43,6 +36,10 @@ public class Death extends ComponentExchanger implements Listener {
     }
 
     private void lifeSteel() {
+        double MAX_HEALTH_SCALE = 60.0;
+        double MIN_HEALTH_SCALE = 4.0;
+        double STEP_SIZE = 2.0;
+
         Player killed = this.event.getEntity();
         Player killer = killed.getKiller();
 
@@ -64,8 +61,8 @@ public class Death extends ComponentExchanger implements Listener {
         double killedHealth = killed.getHealthScale() - STEP_SIZE;
         double killerHealth = killer.getHealthScale() + STEP_SIZE;
 
-        userMapHandler.updateUser(killed.getUniqueId(),killedHealth);
-        userMapHandler.updateUser(killer.getUniqueId(),killerHealth);
+        this.userMapHandler.updateUser(killed.getUniqueId(),killedHealth);
+        this.userMapHandler.updateUser(killer.getUniqueId(),killerHealth);
     }
 
     private void talking(Player killed, @NotNull Player killer) {
@@ -74,7 +71,7 @@ public class Death extends ComponentExchanger implements Listener {
     }
 
     private @NotNull Boolean checkingGodMod() {
-        User user = userMapHandler.getUser(this.event.getPlayer());
+        User user = this.userMapHandler.getUser(this.event.getPlayer());
 
         if (!user.isGodMode())
             return false;
@@ -90,8 +87,7 @@ public class Death extends ComponentExchanger implements Listener {
             }
         };
         task.run();
-//        threadPool.addTask(task);
-//        threadPool.executorServiceOff();
+//        ThreadPool.getThreadPool().addTask(task);
         this.event.setCancelled(true);
         return true;
     }

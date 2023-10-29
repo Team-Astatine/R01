@@ -28,9 +28,10 @@ public class GodModeSet implements CommandExecutor, EventExecutor {
             ComponentExchanger.componentSet("/god [플레이어 이름]",Color.RED);
             return false;
         }
-        Player player = Bukkit.getPlayer(args[0]);
 
+        Player player = Bukkit.getPlayer(args[0]);
         UserHandler targetUser = new UserHandler(userMapHandler.getUser(player));
+
         targetUser.setGodMode(!targetUser.isGodMode());
         player.addPotionEffect(
                 new PotionEffect(PotionEffectType.SATURATION,100000000,0)

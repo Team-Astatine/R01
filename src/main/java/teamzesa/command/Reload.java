@@ -16,8 +16,8 @@ public class Reload implements CommandExecutor {
     private final ConfigIOHandler configIOHandler;
 
     public Reload(File file) {
-        dataPathFile = file;
-        configIOHandler = ConfigIOHandler.getConfigIOHandler();
+        this.dataPathFile = file;
+        this.configIOHandler = ConfigIOHandler.getConfigIOHandler();
     }
 
     @Override
@@ -28,8 +28,8 @@ public class Reload implements CommandExecutor {
             return false;
         }
 
-        configIOHandler.fileLoader(dataPathFile);
-        configIOHandler.allConfigLoad();
+        this.configIOHandler.fileLoader(dataPathFile);
+        this.configIOHandler.allConfigLoad();
 
         ComponentExchanger.playerAnnouncer(player,"Reload Done",Color.YELLOW);
         return true;

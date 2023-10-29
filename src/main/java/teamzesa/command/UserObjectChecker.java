@@ -19,11 +19,16 @@ public class UserObjectChecker implements CommandExecutor, EventExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
         Optional<Player> player = Optional.ofNullable(Bukkit.getPlayer(args[0]));
         User user = null;
+
         if (player.isPresent())
             user = UserMapHandler.getUserHandler().getUser(player.get());
 
-        Bukkit.getLogger().info(user.toString());
-        ComponentExchanger.playerAnnouncer((Player) sender,user.toString(), Color.YELLOW);
+        sendContext((Player) sender, user);
         return true;
+    }
+
+    private void sendContext(Player sender, User user) {
+        Bukkit.getLogger().info(user.toString());
+        ComponentExchanger.playerAnnouncer(sender, user.toString(), Color.YELLOW);
     }
 }

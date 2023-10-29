@@ -21,20 +21,19 @@ public class MotdSet implements CommandExecutor, EventExecutor {
     }
 
     private String finalMotd;
-    private String[] commandContext;
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
-        this.commandContext = args;
+        String[] commandContext = args;
 
         if (!(sender instanceof Player)) {
-            motdSetup();
+            motdSetup(commandContext);
             Bukkit.getLogger().info("Motd Set > " + finalMotd);
             return true;
         }
 
         else if (sender.getName().equals("JAXPLE")) {
-            motdSetup();
+            motdSetup(commandContext);
             ComponentExchanger.playerAnnouncer((Player)sender, this.finalMotd + "로 변경 됐습니다.",Color.YELLOW);
             return true;
         }
@@ -43,9 +42,9 @@ public class MotdSet implements CommandExecutor, EventExecutor {
         return false;
     }
 
-    private void motdSetup() {
+    private void motdSetup(String[] commandContext) {
         StringBuilder customMotd = new StringBuilder();
-        for (String motd : this.commandContext)
+        for (String motd : commandContext)
             customMotd.append(motd).append(" ");
 
         this.finalMotd = customMotd.toString().trim();
@@ -53,7 +52,7 @@ public class MotdSet implements CommandExecutor, EventExecutor {
     }
 
     private void applyMotd(String finalMotd) {
-        configIOHandler.worldConfigSave(finalMotd);
+        this.configIOHandler.worldConfigSave(finalMotd);
         Bukkit.motd(ComponentExchanger.componentSet(finalMotd));
     }
 }

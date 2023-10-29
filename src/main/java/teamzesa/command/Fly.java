@@ -17,7 +17,6 @@ public class Fly implements CommandExecutor, EventExecutor {
 
         player.setAllowFlight(!player.getAllowFlight());
         String announcer = player.getAllowFlight() ? "활성화" : "비활성화";
-
         ComponentExchanger.playerAnnouncer(player,"플라이 " + announcer,Color.YELLOW);
         return true;
     }

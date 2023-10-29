@@ -26,21 +26,21 @@ public class JoinAndQuit implements Listener {
 //    private Player quitPlayer;
 
     public JoinAndQuit() {
-        announcer = Announcer.getAnnouncer();
-        userMapHandler = UserMapHandler.getUserHandler();
+        this.announcer = Announcer.getAnnouncer();
+        this.userMapHandler = UserMapHandler.getUserHandler();
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onJoin(@NotNull PlayerJoinEvent e) {
-        joinPlayer = e.getPlayer();
+        this.joinPlayer = e.getPlayer();
 
         userHandling(); //User Object 추가
         addUserJoinCount(); //접속횟수
         userIPCheckUp(); //접속 IP 확인
 
-        announcer.playerTab(joinPlayer);
-        announcer.joinAnnouncer(joinPlayer);
-        announcer.countAnnouncer(joinPlayer);
+        this.announcer.playerTab(this.joinPlayer);
+        this.announcer.joinAnnouncer(this.joinPlayer);
+        this.announcer.countAnnouncer(this.joinPlayer);
 
         attackSpeed();
         playerFlight(); //flight Set
@@ -48,45 +48,45 @@ public class JoinAndQuit implements Listener {
     }
 
     private void playerFlight() {
-        joinPlayer.setAllowFlight(true);
-        ComponentExchanger.playerAnnouncer(joinPlayer,"플라이 활성화",Color.YELLOW);
+        this.joinPlayer.setAllowFlight(true);
+        ComponentExchanger.playerAnnouncer(this.joinPlayer,"플라이 활성화",Color.YELLOW);
     }
 
     private void userHandling() {
-        if (userMapHandler.getUser(joinPlayer.getUniqueId()) == null)
-            userMapHandler.addUser(joinPlayer);
+        if (userMapHandler.getUser(this.joinPlayer.getUniqueId()) == null)
+            userMapHandler.addUser(this.joinPlayer);
     }
 
     private void userIPCheckUp() {
-        this.userHandler = new UserHandler(joinPlayer);
+        this.userHandler = new UserHandler(this.joinPlayer);
         int joinCnt = userHandler.getUser().getJoinCount();
         String message = joinCnt == 1 ? "신규 IP를 등록합니다." : "새로운 IP로 접속하셨습니다.";
 
 //        접속유저의 IP가 이미 존재하면 Return
-        if (userHandler.existsIP(joinPlayer.getAddress())) {
-            if (joinCnt == 1) ComponentExchanger.playerAnnouncer(joinPlayer,message, Color.YELLOW);
+        if (userHandler.existsIP(this.joinPlayer.getAddress())) {
+            if (joinCnt == 1) ComponentExchanger.playerAnnouncer(this.joinPlayer,message, Color.YELLOW);
             else return;
         }
 
-        if (userHandler.addIP(joinPlayer.getAddress()))
-            ComponentExchanger.playerAnnouncer(joinPlayer, message, Color.YELLOW);
+        if (userHandler.addIP(this.joinPlayer.getAddress()))
+            ComponentExchanger.playerAnnouncer(this.joinPlayer, message, Color.YELLOW);
 
-        else Bukkit.getLogger().info(joinPlayer.getName() + " IP 추가 실패");
+        else Bukkit.getLogger().info(this.joinPlayer.getName() + " IP 추가 실패");
     }
 
     private void addUserJoinCount() {
-        this.userHandler = new UserHandler(joinPlayer);
+        this.userHandler = new UserHandler(this.joinPlayer);
         userHandler.addJoinCnt();
     }
 
     private void setHealthScale() {
-        User user = userMapHandler.getUser(joinPlayer.getUniqueId());
-        joinPlayer.setHealthScale(user.getHealthScale());
-        joinPlayer.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(user.getHealthScale());
+        User user = userMapHandler.getUser(this.joinPlayer.getUniqueId());
+        this.joinPlayer.setHealthScale(user.getHealthScale());
+        this.joinPlayer.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(user.getHealthScale());
     }
 
     private void attackSpeed() {
-        joinPlayer.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(40.0);
+        this.joinPlayer.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(40.0);
     }
 
     @EventHandler
