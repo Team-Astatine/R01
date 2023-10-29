@@ -1,11 +1,11 @@
 package teamzesa.IOHandler;
 
-public enum DataFile {
+public enum DataFilePath {
     USER_DATA("userData.json"),
     CONFIG("config.yml");
     private final String fileName;
 
-    DataFile(String dataName) {
+    DataFilePath(String dataName) {
         fileName = dataName;
     }
 
