@@ -9,9 +9,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
+import teamzesa.dataValue.ColorList;
 import teamzesa.resgisterEvent.EventExecutor;
 
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 
@@ -57,7 +57,7 @@ public class TotemStacking implements CommandExecutor, EventExecutor {
             this.playerInventory.addItem(new ItemStack(TOTEM, totalAmount - STACK));
         }
 
-       ComponentExchanger.playerAnnouncer(this.player,"토템을 합쳤습니다.", Color.YELLOW);
+       ComponentExchanger.playerAnnouncer(this.player,"토템을 합쳤습니다.", ColorList.YELLOW);
     }
 
     private void removeTotemInInv() {
@@ -94,7 +94,7 @@ public class TotemStacking implements CommandExecutor, EventExecutor {
         if (message.isEmpty())
             return false;
 
-        ComponentExchanger.playerAnnouncer(this.player, message, Color.RED);
+        ComponentExchanger.playerAnnouncer(this.player, message, ColorList.RED);
         return true;
     }
 

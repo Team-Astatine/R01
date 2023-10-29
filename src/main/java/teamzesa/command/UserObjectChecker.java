@@ -7,11 +7,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
+import teamzesa.dataValue.ColorList;
 import teamzesa.dataValue.userData.User;
 import teamzesa.dataValue.userData.UserMapHandler;
 import teamzesa.resgisterEvent.EventExecutor;
 
-import java.awt.*;
 import java.util.Optional;
 
 public class UserObjectChecker implements CommandExecutor, EventExecutor {
@@ -29,6 +29,6 @@ public class UserObjectChecker implements CommandExecutor, EventExecutor {
 
     private void sendContext(Player sender, User user) {
         Bukkit.getLogger().info(user.toString());
-        ComponentExchanger.playerAnnouncer(sender, user.toString(), Color.YELLOW);
+        ComponentExchanger.playerAnnouncer(sender, user.toString(), ColorList.YELLOW);
     }
 }

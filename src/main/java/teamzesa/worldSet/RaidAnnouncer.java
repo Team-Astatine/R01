@@ -1,14 +1,13 @@
 package teamzesa.worldSet;
 
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.raid.RaidTriggerEvent;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
-
-import java.awt.*;
-
+import teamzesa.dataValue.ColorList;
 
 public class RaidAnnouncer implements Listener {
     @EventHandler
@@ -22,10 +21,8 @@ public class RaidAnnouncer implements Listener {
         double x = loc.getX();
         double z = loc.getZ();
 
-
         ComponentExchanger.serverAnnouncer(
                 String.format("%s 월드의 X : %1.0f | Z : %1.0f 에서 레이드가 시작됩니다.",
-                        activeWorldName.getWorld(), x, z), Color.RED
-        );
+                        activeWorldName.getWorld(), x, z), ColorList.RED);
     }
 }

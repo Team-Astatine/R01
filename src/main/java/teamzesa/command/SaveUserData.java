@@ -7,10 +7,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import teamzesa.ComponentExchanger;
 import teamzesa.IOHandler.UserIOHandler;
+import teamzesa.dataValue.ColorList;
 import teamzesa.dataValue.userData.UserMapHandler;
 import teamzesa.resgisterEvent.EventExecutor;
 
-import java.awt.*;
 
 public class SaveUserData implements CommandExecutor, EventExecutor {
     private static UserIOHandler userIoHandler;
@@ -24,7 +24,7 @@ public class SaveUserData implements CommandExecutor, EventExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
-            ComponentExchanger.playerAnnouncer((Player)sender, "권한이 없습니다.", Color.RED);
+            ComponentExchanger.playerAnnouncer((Player)sender, "권한이 없습니다.", ColorList.RED);
             return false;
         }
 

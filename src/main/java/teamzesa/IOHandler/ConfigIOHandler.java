@@ -7,7 +7,7 @@ import teamzesa.ComponentExchanger;
 import java.io.File;
 import java.io.IOException;
 
-public class ConfigIOHandler extends ComponentExchanger implements IOHandler {
+public class ConfigIOHandler implements IOHandler {
     private static final String WORLD_SETTING_MOTD = "world_setting.motd";
     private static final String WORLD_SETTING_MINELIST = "world_setting.minelist";
     private static final String WORLD_SETTING_DISCORD = "world_setting.discord";
@@ -62,7 +62,7 @@ public class ConfigIOHandler extends ComponentExchanger implements IOHandler {
 
     public void setWorldSettingMotd() {
         Bukkit.motd(
-                componentSet(config.getString(WORLD_SETTING_MOTD))
+                ComponentExchanger.componentSet(config.getString(WORLD_SETTING_MOTD))
         );
     }
 

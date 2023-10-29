@@ -8,9 +8,9 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
 import teamzesa.IOHandler.ConfigIOHandler;
+import teamzesa.dataValue.ColorList;
 import teamzesa.resgisterEvent.EventExecutor;
 
-import java.awt.*;
 
 public class MotdSet implements CommandExecutor, EventExecutor {
 
@@ -34,11 +34,11 @@ public class MotdSet implements CommandExecutor, EventExecutor {
 
         else if (sender.getName().equals("JAXPLE")) {
             motdSetup(commandContext);
-            ComponentExchanger.playerAnnouncer((Player)sender, this.finalMotd + "로 변경 됐습니다.",Color.YELLOW);
+            ComponentExchanger.playerAnnouncer((Player)sender, this.finalMotd + "로 변경 됐습니다.", ColorList.YELLOW);
             return true;
         }
 
-        else ComponentExchanger.playerAnnouncer((Player)sender, "해당 명령어는 플레이어가 사용할 수 없습니다.", Color.RED);
+        else ComponentExchanger.playerAnnouncer((Player)sender, "해당 명령어는 플레이어가 사용할 수 없습니다.", ColorList.RED);
         return false;
     }
 

@@ -10,12 +10,12 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
+import teamzesa.dataValue.ColorList;
 import teamzesa.dataValue.userData.User;
 import teamzesa.dataValue.userData.UserHandler;
 import teamzesa.dataValue.userData.UserMapHandler;
 import teamzesa.worldSet.Announcer;
 
-import java.awt.*;
 
 public class JoinAndQuit implements Listener {
     private final UserMapHandler userMapHandler;
@@ -49,7 +49,7 @@ public class JoinAndQuit implements Listener {
 
     private void playerFlight() {
         this.joinPlayer.setAllowFlight(true);
-        ComponentExchanger.playerAnnouncer(this.joinPlayer,"플라이 활성화",Color.YELLOW);
+        ComponentExchanger.playerAnnouncer(this.joinPlayer,"플라이 활성화",ColorList.YELLOW);
     }
 
     private void userHandling() {
@@ -64,12 +64,12 @@ public class JoinAndQuit implements Listener {
 
 //        접속유저의 IP가 이미 존재하면 Return
         if (userHandler.existsIP(this.joinPlayer.getAddress())) {
-            if (joinCnt == 1) ComponentExchanger.playerAnnouncer(this.joinPlayer,message, Color.YELLOW);
+            if (joinCnt == 1) ComponentExchanger.playerAnnouncer(this.joinPlayer,message, ColorList.YELLOW);
             else return;
         }
 
         if (userHandler.addIP(this.joinPlayer.getAddress()))
-            ComponentExchanger.playerAnnouncer(this.joinPlayer, message, Color.YELLOW);
+            ComponentExchanger.playerAnnouncer(this.joinPlayer, message, ColorList.YELLOW);
 
         else Bukkit.getLogger().info(this.joinPlayer.getName() + " IP 추가 실패");
     }

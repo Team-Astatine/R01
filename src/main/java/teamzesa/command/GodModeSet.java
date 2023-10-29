@@ -1,6 +1,8 @@
 package teamzesa.command;
 
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -9,11 +11,11 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
+import teamzesa.dataValue.ColorList;
 import teamzesa.dataValue.userData.UserHandler;
 import teamzesa.dataValue.userData.UserMapHandler;
 import teamzesa.resgisterEvent.EventExecutor;
 
-import java.awt.*;
 
 public class GodModeSet implements CommandExecutor, EventExecutor {
     private UserMapHandler userMapHandler;
@@ -25,7 +27,7 @@ public class GodModeSet implements CommandExecutor, EventExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
         if (args.length == 0) {
-            ComponentExchanger.componentSet("/god [플레이어 이름]",Color.RED);
+            ComponentExchanger.componentSet("/god [플레이어 이름]", ColorList.RED);
             return false;
         }
 
@@ -42,12 +44,12 @@ public class GodModeSet implements CommandExecutor, EventExecutor {
 
 //        스스로에게 적용했을시 무시
         if (!sender.getName().equals(targetUser.getUser().getName()))
-            ComponentExchanger.playerAnnouncer((Player)sender,args[0] + " 님" + mention,Color.yellow);
+            ComponentExchanger.playerAnnouncer((Player)sender,args[0] + " 님" + mention, ColorList.YELLOW);
 
         Player targetPlayer = Bukkit.getPlayer(targetUser.getUser().getUuid());
 
         if (targetPlayer != null)
-            ComponentExchanger.playerAnnouncer(targetPlayer,"당신" + mention, Color.ORANGE);
+            ComponentExchanger.playerAnnouncer(targetPlayer,"당신" + mention, ColorList.ORANGE);
 
         return true;
     }

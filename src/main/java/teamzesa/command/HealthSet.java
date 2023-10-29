@@ -10,10 +10,10 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
+import teamzesa.dataValue.ColorList;
 import teamzesa.dataValue.userData.UserMapHandler;
 import teamzesa.resgisterEvent.EventExecutor;
 
-import java.awt.*;
 
 public class HealthSet implements CommandExecutor, EventExecutor {
     @Override
@@ -31,15 +31,15 @@ public class HealthSet implements CommandExecutor, EventExecutor {
         return true;
     }
 
-    private void updatePlayerInfo(Player targetPlayer) {
+    private void updatePlayerInfo(@NotNull Player targetPlayer) {
         UserMapHandler userMapHandler = UserMapHandler.getUserHandler();
         userMapHandler.updateUser(targetPlayer.getUniqueId(), targetPlayer.getHealthScale());
     }
 
-    private void setPlayerHealth(double targetPlayerHealth, Player targetPlayer) {
+    private void setPlayerHealth(double targetPlayerHealth, @NotNull Player targetPlayer) {
         targetPlayer.setHealthScale(targetPlayerHealth);
         targetPlayer.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 40, 1));
         targetPlayer.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(targetPlayerHealth);
-        ComponentExchanger.playerAnnouncer(targetPlayer,targetPlayer.getName() + "님의 체력이" + targetPlayerHealth + "으로 설정됐습니다.", Color.YELLOW);
+        ComponentExchanger.playerAnnouncer(targetPlayer,targetPlayer.getName() + "님의 체력이" + targetPlayerHealth + "으로 설정됐습니다.", ColorList.YELLOW);
     }
 }

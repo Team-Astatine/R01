@@ -1,21 +1,17 @@
 package teamzesa.userEvent;
 
 import org.bukkit.*;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
-import teamzesa.ThreadPool;
+import teamzesa.dataValue.ColorList;
 import teamzesa.dataValue.userData.User;
 import teamzesa.dataValue.userData.UserMapHandler;
 
-import java.awt.*;
-import java.awt.Color;
 
 
 public class Death extends ComponentExchanger implements Listener {
@@ -66,8 +62,8 @@ public class Death extends ComponentExchanger implements Listener {
     }
 
     private void talking(Player killed, @NotNull Player killer) {
-        ComponentExchanger.playerAnnouncer(killed,killer.getName() + "님이 체력을 약탈했습니다.", Color.RED);
-        ComponentExchanger.playerAnnouncer(killer,killed.getName() + "님이 체력을 약탈했습니다.", Color.RED);
+        ComponentExchanger.playerAnnouncer(killed,killer.getName() + "님이 체력을 약탈했습니다.", ColorList.RED);
+        ComponentExchanger.playerAnnouncer(killer,killed.getName() + "님이 체력을 약탈했습니다.", ColorList.RED);
     }
 
     private @NotNull Boolean checkingGodMod() {

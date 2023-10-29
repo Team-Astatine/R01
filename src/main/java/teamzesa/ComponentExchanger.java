@@ -3,38 +3,31 @@ package teamzesa;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.event.ClickEvent;
-import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-
-import java.awt.*;
+import teamzesa.dataValue.ColorList;
 
 public class ComponentExchanger {
 
-    private static TextColor colorExchanger(@NotNull Color color) {
-//        Ensure 24-bit RGB value
-        int rgb = color.getRGB() & 0xFFFFFF;
-        return TextColor.color(rgb);
-    }
-
-    public static Component createLinkComponent(String text, String url, Color color) {
+    public static @NotNull Component createLinkComponent(String text, String url, @NotNull ColorList color) {
         TextComponent.Builder component = Component.text()
                 .content(text)
-                .color(colorExchanger(color))
+                .color(color.getTextColor())
                 .clickEvent(ClickEvent.openUrl(url));
         return component.build();
     }
 
-    public static void serverAnnouncer(String string, Color color) {
+    public static void serverAnnouncer(String string, @NotNull ColorList color) {
         Component component = Component.text(string)
-                .color(colorExchanger(color));
+                .color(color.getTextColor());
         Bukkit.broadcast(component);
     }
 
-    public static void playerAnnouncer(@NotNull Player player, String string, Color color) {
+    public static void playerAnnouncer(@NotNull Player player, String string, @NotNull ColorList color) {
         Component component = Component.text(string)
-                .color(colorExchanger(color));
+                .color(color.getTextColor());
         player.sendMessage(component);
     }
 
@@ -42,12 +35,13 @@ public class ComponentExchanger {
         player.sendMessage(Component.text(string));
     }
 
-    public static Component componentSet(String string) {
+    @Contract(value = "_ -> new", pure = true)
+    public static @NotNull Component componentSet(String string) {
         return Component.text(string);
     }
 
-    public static Component componentSet(String string, Color color) {
+    public static @NotNull Component componentSet(String string, @NotNull ColorList color) {
         return Component.text(string)
-                .color(colorExchanger(color));
+                .color(color.getTextColor());
     }
 }

@@ -2,19 +2,17 @@ package teamzesa.worldSet;
 
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
 import teamzesa.IOHandler.ConfigIOHandler;
 import teamzesa.ThreadPool;
-import teamzesa.dataValue.userData.UserHandler;
+import teamzesa.dataValue.ColorList;
 import teamzesa.dataValue.userData.UserMapHandler;
-
-import java.awt.*;
-
-import static teamzesa.ComponentExchanger.componentSet;
 
 public class Announcer {
 
@@ -38,15 +36,15 @@ public class Announcer {
 
         int joinCnt = UserMapHandler.getUserHandler().getUser(player).getJoinCount();
         player.sendMessage(
-                ComponentExchanger.componentSet(configIOHandler.getWorldMotdConfig(),new Color(173,216,230))
-                        .append(ComponentExchanger.componentSet(" " + joinCnt ,new Color(255,182,193)))
-                        .append(ComponentExchanger.componentSet("번째 접속!",new Color(173,216,230)))
+                ComponentExchanger.componentSet(configIOHandler.getWorldMotdConfig(),ColorList.SKY_BLUE)
+                        .append(ComponentExchanger.componentSet(" " + joinCnt ,ColorList.PINK))
+                        .append(ComponentExchanger.componentSet("번째 접속!",ColorList.SKY_BLUE))
         );
     }
 
     public void playerTab(@NotNull Audience player) {
         player.sendPlayerListHeader(
-                ComponentExchanger.componentSet(configIOHandler.getWorldMotdConfig(),new Color(139, 0, 255))
+                ComponentExchanger.componentSet(configIOHandler.getWorldMotdConfig(),ColorList.PURPLE)
         );
     }
 
@@ -72,16 +70,16 @@ public class Announcer {
         this.threadPool.addSchedulingTask(task,delay,interval);
     }
 
-    private Component[] createComponents() {
-        String mineListLink = configIOHandler.getMineListConfig();
-        String discordLink = configIOHandler.getDiscordConfig();
+    private Component @NotNull [] createComponents() {
         String notionLink = configIOHandler.getNotionConfig();
+        String discordLink = configIOHandler.getDiscordConfig();
+        String mineListLink = configIOHandler.getMineListConfig();
 
-        Color voteColor = new Color(167, 123, 202);
-        Color commonColor = new Color(233, 30, 99);
-        Color notionColor = new Color(112, 71, 157);
-        Color commandColor = new Color(139, 195, 74);
-        Color discordColor = new Color(114, 137, 218);
+        ColorList commonColor = ColorList.RED;
+        ColorList voteColor = ColorList.VOTE_COLOR;
+        ColorList notionColor = ColorList.NOTIOIN_COLOR;
+        ColorList commandColor = ColorList.COMMAND_COLOR;
+        ColorList discordColor = ColorList.DISCORD_COLOR;
 
         return new Component[]{
                 ComponentExchanger.createLinkComponent(configIOHandler.getMineListVote(), mineListLink, voteColor),

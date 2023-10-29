@@ -41,7 +41,7 @@ public class EntityDamageTicking implements Listener {
         target.setMaximumNoDamageTicks(hurtTick);
     }
 
-    private @NotNull Boolean handStuffChecker(ItemStack mainStuff , ItemStack offStuff) {
+    private @NotNull Boolean handStuffChecker(@NotNull ItemStack mainStuff , @NotNull ItemStack offStuff) {
         Optional<Material> mainStuffType = Optional.of(mainStuff.getType());
         Optional<Material> offStuffType = Optional.of(offStuff.getType());
 

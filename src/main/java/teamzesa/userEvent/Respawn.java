@@ -9,8 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import teamzesa.ComponentExchanger;
-
-import java.awt.*;
+import teamzesa.dataValue.ColorList;
 
 
 public class Respawn implements Listener {
@@ -26,7 +25,7 @@ public class Respawn implements Listener {
         Player player = this.event.getPlayer();
 
         if (player.getBedSpawnLocation() != null) {
-            ComponentExchanger.playerAnnouncer(player, "침대로 텔레포트 됩니다.", Color.YELLOW);
+            ComponentExchanger.playerAnnouncer(player, "침대로 텔레포트 됩니다.", ColorList.YELLOW);
             return;
         }
 
@@ -38,7 +37,7 @@ public class Respawn implements Listener {
         double y = groundChecker(player.getWorld(),x,z);
 
         this.event.setRespawnLocation(new Location(player.getWorld(),x,y,z));
-        ComponentExchanger.playerAnnouncer(player,"침대가 없어 랜덤 텔레포트 되었습니다.", Color.ORANGE);
+        ComponentExchanger.playerAnnouncer(player,"침대가 없어 랜덤 텔레포트 되었습니다.", ColorList.ORANGE);
     }
 
     private double ranNumGenerator(int maxValue, int minValue) {

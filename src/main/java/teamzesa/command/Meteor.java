@@ -12,9 +12,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
+import teamzesa.dataValue.ColorList;
 import teamzesa.resgisterEvent.EventExecutor;
 
-import java.awt.*;
 
 public class Meteor implements CommandExecutor, EventExecutor {
     @Override
@@ -24,7 +24,7 @@ public class Meteor implements CommandExecutor, EventExecutor {
         }
 
         if (args.length < 3) {
-            ComponentExchanger.playerAnnouncer((Player)sender, "x y z 좌표를 입력하세요.", Color.RED);
+            ComponentExchanger.playerAnnouncer((Player)sender, "x y z 좌표를 입력하세요.", ColorList.RED);
             return false;
         }
 
