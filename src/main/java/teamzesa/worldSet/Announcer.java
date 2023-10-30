@@ -19,11 +19,9 @@ public class Announcer {
     }
 
     private final ConfigIOHandler configIOHandler;
-    private final ThreadPool threadPool;
 
     private Announcer() {
         this.configIOHandler = ConfigIOHandler.getConfigIOHandler();
-        this.threadPool = ThreadPool.getThreadPool();
     }
 
     public static Announcer getAnnouncer() {
@@ -31,7 +29,6 @@ public class Announcer {
     }
 
     public void countAnnouncer(Player player) {
-
         int joinCnt = UserMapHandler.getUserMapHandler().getUser(player).getJoinCount();
         player.sendMessage(
                 ComponentExchanger.componentSet(configIOHandler.getWorldMotdConfig(),ColorList.SKY_BLUE)
@@ -65,7 +62,7 @@ public class Announcer {
                     Bukkit.broadcast(component);
             }
         };
-        this.threadPool.addSchedulingTask(task,delay,interval);
+        ThreadPool.getThreadPool().addSchedulingTask(task,delay,interval);
     }
 
     private Component @NotNull [] createComponents() {
