@@ -1,8 +1,5 @@
 package teamzesa.command;
-
-import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
-import org.bukkit.Color;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -16,41 +13,49 @@ import teamzesa.dataValue.userData.UserHandler;
 import teamzesa.dataValue.userData.UserMapHandler;
 import teamzesa.resgisterEvent.EventExecutor;
 
+import java.util.Optional;
+
 
 public class GodModeSet implements CommandExecutor, EventExecutor {
-    private UserMapHandler userMapHandler;
-
-    public GodModeSet() {
-        userMapHandler = UserMapHandler.getUserHandler();
-    }
-
+    private Player targetPlayer;
+    private UserHandler targetUser;
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
-        if (args.length == 0) {
-            ComponentExchanger.componentSet("/god [플레이어 이름]", ColorList.RED);
+//        콘솔로 입력 시 return
+        if (!(sender instanceof Player))
             return false;
-        }
 
-        Player player = Bukkit.getPlayer(args[0]);
-        UserHandler targetUser = new UserHandler(userMapHandler.getUser(player));
+        Optional<Player>checkingPlayer = Optional.ofNullable(Bukkit.getPlayer(args[0]));
+        if (checkingPlayer.isEmpty()) {
+            ComponentExchanger.playerAnnouncer(sender, "/god [플레이어 이름]", ColorList.RED);
+            return false;
+        } else setFieldVariable(checkingPlayer.get());
 
-        targetUser.setGodMode(!targetUser.isGodMode());
-        player.addPotionEffect(
-                new PotionEffect(PotionEffectType.SATURATION,100000000,0)
-        );
-
-        String status = targetUser.isGodMode() ? "인간" : "신";
-        String mention = "은 이제 " + status + " 입니다.";
-
-//        스스로에게 적용했을시 무시
-        if (!sender.getName().equals(targetUser.getUser().getName()))
-            ComponentExchanger.playerAnnouncer((Player)sender,args[0] + " 님" + mention, ColorList.YELLOW);
-
-        Player targetPlayer = Bukkit.getPlayer(targetUser.getUser().getUuid());
-
-        if (targetPlayer != null)
-            ComponentExchanger.playerAnnouncer(targetPlayer,"당신" + mention, ColorList.ORANGE);
-
+        setPlayerGodMode();
+        setComment(sender);
         return true;
+    }
+
+    private void setFieldVariable(@NotNull Player player) {
+        this.targetPlayer = player;
+        this.targetUser = new UserHandler(UserMapHandler.getUserMapHandler().getUser(player));
+    }
+
+    private void setPlayerGodMode() {
+        this.targetUser.setGodMode(!this.targetUser.isGodMode());
+        this.targetPlayer.addPotionEffect(new PotionEffect(PotionEffectType.SATURATION,100000000,0));
+    }
+
+    private void setComment(CommandSender sender) {
+        String targetName = this.targetPlayer.equals(sender) ? "당신" : this.targetPlayer.getName()+"님";
+        String targetStatus = this.targetUser.isGodMode() ? "신" : "인간";
+
+        StringBuilder comment = new StringBuilder();
+        comment.append(targetName)
+                .append("은 이제")
+                .append(targetStatus)
+                .append(" 입니다.");
+
+        ComponentExchanger.playerAnnouncer(this.targetPlayer,comment,ColorList.ORANGE);
     }
 }
