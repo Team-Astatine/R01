@@ -32,7 +32,8 @@ public class GodModeSet implements CommandExecutor, EventExecutor {
         } else setFieldVariable(checkingPlayer.get());
 
         setPlayerGodMode();
-        setComment(sender);
+        sendCommentSendUser(sender);
+        sendCommentTargetUser();
         return true;
     }
 
@@ -46,16 +47,26 @@ public class GodModeSet implements CommandExecutor, EventExecutor {
         this.targetPlayer.addPotionEffect(new PotionEffect(PotionEffectType.SATURATION,100000000,0));
     }
 
-    private void setComment(CommandSender sender) {
-        String targetName = this.targetPlayer.equals(sender) ? "당신" : this.targetPlayer.getName()+"님";
+    private void sendCommentSendUser(CommandSender sender) {
+        String targetName = this.targetPlayer.equals(sender) ? "" : this.targetPlayer.getName() + "님";
         String targetStatus = this.targetUser.isGodMode() ? "신" : "인간";
-
-        StringBuilder comment = new StringBuilder();
-        comment.append(targetName)
-                .append("은 이제")
+        StringBuilder commandSenderComment = new StringBuilder();
+        commandSenderComment.append(targetName)
+                .append("은 이제 ")
                 .append(targetStatus)
                 .append(" 입니다.");
 
-        ComponentExchanger.playerAnnouncer(this.targetPlayer,comment,ColorList.ORANGE);
+        if (!targetName.isBlank())
+            ComponentExchanger.playerAnnouncer(sender, commandSenderComment, ColorList.ORANGE);
+    }
+
+    private void sendCommentTargetUser() {
+        String targetStatus = this.targetUser.isGodMode() ? "신" : "인간";
+        StringBuilder targetUserComment = new StringBuilder();
+        targetUserComment.append("당신은 이제 ")
+                .append(targetStatus)
+                .append(" 입니다.");
+
+        ComponentExchanger.playerAnnouncer(this.targetPlayer,targetUserComment,ColorList.ORANGE);
     }
 }
