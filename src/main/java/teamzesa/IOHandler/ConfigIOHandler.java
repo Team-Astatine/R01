@@ -7,7 +7,7 @@ import teamzesa.ComponentExchanger;
 import java.io.File;
 import java.io.IOException;
 
-public class ConfigIOHandler implements IOHandler {
+public class ConfigIOHandler {
     private static final String WORLD_SETTING_MOTD = "world_setting.motd";
     private static final String WORLD_SETTING_MINELIST = "world_setting.minelist";
     private static final String WORLD_SETTING_DISCORD = "world_setting.discord";
@@ -36,10 +36,9 @@ public class ConfigIOHandler implements IOHandler {
         return ConfigIOHandlerHolder.INSTANCE;
     }
 
-    @Override
-    public void fileLoader(File configPathFile) {
-        file = configPathFile;
-        config = YamlConfiguration.loadConfiguration(configPathFile);
+    public void fileLoader() {
+        this.file = DataFile.CONFIG.getFileInstance();
+        this.config = YamlConfiguration.loadConfiguration(DataFile.CONFIG.getFileInstance());
     }
 
     public void allConfigLoad() {
@@ -61,9 +60,7 @@ public class ConfigIOHandler implements IOHandler {
 
 
     public void setWorldSettingMotd() {
-        Bukkit.motd(
-                ComponentExchanger.componentSet(config.getString(WORLD_SETTING_MOTD))
-        );
+        Bukkit.motd(ComponentExchanger.componentSet(config.getString(WORLD_SETTING_MOTD)));
     }
 
     public String getWorldMotdConfig() {

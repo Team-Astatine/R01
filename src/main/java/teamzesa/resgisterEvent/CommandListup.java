@@ -1,6 +1,7 @@
 package teamzesa.resgisterEvent;
 
 import org.bukkit.command.CommandExecutor;
+import teamzesa.IOHandler.DataFile;
 import teamzesa.command.*;
 
 public enum CommandListup {
@@ -16,8 +17,8 @@ public enum CommandListup {
     TOTEM_STACKING("토템", new TotemStacking()),
     HEALTH_RESET("체력초기화", new HealthSet()),
     USER_OBJECT_CHECKER("나", new UserObjectChecker()),
-    SAVE_USER_DATA("SaveUserData", new SaveUserData());
-//    CONFIG_RELOAD("R01ConfigReload", new Reload(R01.checkUpdateFile(DataFilePath.CONFIG));
+    SAVE_USER_DATA("SaveUserData", new SaveUserData()),
+    CONFIG_RELOAD("R01ConfigReload", new Reload());
 
     private final String command;
     private final CommandExecutor executor;

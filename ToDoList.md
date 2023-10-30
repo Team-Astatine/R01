@@ -9,6 +9,7 @@ https://jaxple.notion.site/d1ef58aa889d4b8ba1342fc09c0249b4?pvs=4
 * filePath 분리하기
   * CommandListup.java
   * EventListup.java
+* AutoUpdate 
 
 ## refactor List
 * godMode.java (80%)

@@ -8,8 +8,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
-public class UpdateChecker implements IOHandler {
+public class UpdateChecker {
     private static class UpdateCheckerHolder {
         private static final UpdateChecker INSTANCE = new UpdateChecker();
     }
@@ -25,10 +26,10 @@ public class UpdateChecker implements IOHandler {
         return UpdateCheckerHolder.INSTANCE;
     }
 
-    @Override
-    public void fileLoader(@NotNull File inFile) {
-        this.folder = inFile;
-        this.fileList = Arrays.asList(inFile.listFiles());
+    public void fileLoader() {
+        this.folder = DataFile.ABSOLUTE_PATH.getFileInstance();
+        Optional<File[]> folderListFile = Optional.ofNullable(this.folder.listFiles());
+        folderListFile.ifPresent(file -> this.fileList = List.of(file));
     }
 
     public void fileManager() {
