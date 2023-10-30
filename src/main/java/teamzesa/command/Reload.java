@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
 import teamzesa.IOHandler.ConfigIOHandler;
+import teamzesa.R01;
 import teamzesa.dataValue.ColorList;
 
 
@@ -20,10 +21,7 @@ public class Reload implements CommandExecutor {
             return false;
         }
 
-        ConfigIOHandler configIOHandler = ConfigIOHandler.getConfigIOHandler();
-        configIOHandler.fileLoader();
-        configIOHandler.allConfigLoad();
-
+        R01.getPlugin(R01.class).fileLoader();
         ComponentExchanger.playerAnnouncer(player,"Reload Done", ColorList.YELLOW);
         return true;
     }
