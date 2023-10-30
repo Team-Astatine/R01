@@ -2,9 +2,7 @@ package teamzesa.worldSet;
 
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
-import org.bukkit.Color;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
@@ -34,7 +32,7 @@ public class Announcer {
 
     public void countAnnouncer(Player player) {
 
-        int joinCnt = UserMapHandler.getUserHandler().getUser(player).getJoinCount();
+        int joinCnt = UserMapHandler.getUserMapHandler().getUser(player).getJoinCount();
         player.sendMessage(
                 ComponentExchanger.componentSet(configIOHandler.getWorldMotdConfig(),ColorList.SKY_BLUE)
                         .append(ComponentExchanger.componentSet(" " + joinCnt ,ColorList.PINK))

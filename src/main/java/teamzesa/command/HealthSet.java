@@ -32,7 +32,7 @@ public class HealthSet implements CommandExecutor, EventExecutor {
     }
 
     private void updatePlayerInfo(@NotNull Player targetPlayer) {
-        UserMapHandler userMapHandler = UserMapHandler.getUserHandler();
+        UserMapHandler userMapHandler = UserMapHandler.getUserMapHandler();
         userMapHandler.updateUser(targetPlayer.getUniqueId(), targetPlayer.getHealthScale());
     }
 

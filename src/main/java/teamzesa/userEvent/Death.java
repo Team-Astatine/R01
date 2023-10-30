@@ -19,7 +19,7 @@ public class Death extends ComponentExchanger implements Listener {
     private PlayerDeathEvent event;
 
     public Death() {
-        this.userMapHandler = UserMapHandler.getUserHandler();
+        this.userMapHandler = UserMapHandler.getUserMapHandler();
     }
 
     @EventHandler

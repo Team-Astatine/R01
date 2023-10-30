@@ -17,7 +17,7 @@ public class SaveUserData implements CommandExecutor, EventExecutor {
     private static UserMapHandler userMapHandler;
 
     public SaveUserData() {
-        userMapHandler = UserMapHandler.getUserHandler();
+        userMapHandler = UserMapHandler.getUserMapHandler();
         userIoHandler = UserIOHandler.getIOHandler();
     }
 

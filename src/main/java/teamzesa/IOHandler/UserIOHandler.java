@@ -20,7 +20,7 @@ public class UserIOHandler implements IOHandler {
     private final UserMapHandler userMapHandler;
 
     private UserIOHandler() {
-        userMapHandler = UserMapHandler.getUserHandler();
+        userMapHandler = UserMapHandler.getUserMapHandler();
     }
 
     @Override

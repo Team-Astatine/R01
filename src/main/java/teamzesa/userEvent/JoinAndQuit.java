@@ -27,7 +27,7 @@ public class JoinAndQuit implements Listener {
 
     public JoinAndQuit() {
         this.announcer = Announcer.getAnnouncer();
-        this.userMapHandler = UserMapHandler.getUserHandler();
+        this.userMapHandler = UserMapHandler.getUserMapHandler();
     }
 
     @EventHandler(priority = EventPriority.LOWEST)

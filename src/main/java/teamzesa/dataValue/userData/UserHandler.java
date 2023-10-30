@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.UUID;
 
 public class UserHandler {
-    private final UserMapHandler userMapHandler = UserMapHandler.getUserHandler();
+    private final UserMapHandler userMapHandler = UserMapHandler.getUserMapHandler();
     private User user;
     private UUID uuid;
     private String name;

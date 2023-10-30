@@ -21,7 +21,7 @@ public class UserObjectChecker implements CommandExecutor, EventExecutor {
         User user = null;
 
         if (player.isPresent())
-            user = UserMapHandler.getUserHandler().getUser(player.get());
+            user = UserMapHandler.getUserMapHandler().getUser(player.get());
 
         sendContext((Player) sender, user);
         return true;
