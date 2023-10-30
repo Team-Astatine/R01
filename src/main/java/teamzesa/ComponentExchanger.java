@@ -20,27 +20,34 @@ public class ComponentExchanger {
         return component.build();
     }
 
-    public static void serverAnnouncer(String string, @NotNull ColorList color) {
-        Component component = Component.text(string)
+    public static void serverAnnouncer(String comment, @NotNull ColorList color) {
+        Component component = Component.text(comment)
                 .color(color.getTextColor());
         Bukkit.broadcast(component);
     }
 
-    public static void playerAnnouncer(@NotNull Player player, String string, @NotNull ColorList color) {
-        Component component = Component.text(string)
+    public static void playerAnnouncer(@NotNull Player player, String comment, @NotNull ColorList color) {
+        Component component = Component.text(comment)
                 .color(color.getTextColor());
         player.sendMessage(component);
     }
 
-    public static void playerAnnouncer(@NotNull Player player, @NotNull StringBuilder string, @NotNull ColorList color) {
-        Component component = Component.text(string.toString())
+    public static void playerAnnouncer(@NotNull Player player, @NotNull StringBuilder comment, @NotNull ColorList color) {
+        Component component = Component.text(comment.toString())
                 .color(color.getTextColor());
         player.sendMessage(component);
     }
 
-    public static void playerAnnouncer(@NotNull CommandSender sender, @NotNull String string, @NotNull ColorList color) {
+    public static void playerAnnouncer(@NotNull CommandSender sender, @NotNull String comment, @NotNull ColorList color) {
         Player player = (Player) sender;
-        Component component = Component.text(string)
+        Component component = Component.text(comment)
+                .color(color.getTextColor());
+        player.sendMessage(component);
+    }
+
+    public static void playerAnnouncer(@NotNull CommandSender sender, @NotNull StringBuilder comment, @NotNull ColorList color) {
+        Player player = (Player) sender;
+        Component component = Component.text(comment.toString())
                 .color(color.getTextColor());
         player.sendMessage(component);
     }
@@ -50,12 +57,12 @@ public class ComponentExchanger {
     }
 
     @Contract(value = "_ -> new", pure = true)
-    public static @NotNull Component componentSet(String string) {
-        return Component.text(string);
+    public static @NotNull Component componentSet(String comment) {
+        return Component.text(comment);
     }
 
-    public static @NotNull Component componentSet(String string, @NotNull ColorList color) {
-        return Component.text(string)
+    public static @NotNull Component componentSet(String comment, @NotNull ColorList color) {
+        return Component.text(comment)
                 .color(color.getTextColor());
     }
 }
