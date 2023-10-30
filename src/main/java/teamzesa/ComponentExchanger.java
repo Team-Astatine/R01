@@ -4,6 +4,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.event.ClickEvent;
 import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -26,6 +27,19 @@ public class ComponentExchanger {
     }
 
     public static void playerAnnouncer(@NotNull Player player, String string, @NotNull ColorList color) {
+        Component component = Component.text(string)
+                .color(color.getTextColor());
+        player.sendMessage(component);
+    }
+
+    public static void playerAnnouncer(@NotNull Player player, @NotNull StringBuilder string, @NotNull ColorList color) {
+        Component component = Component.text(string.toString())
+                .color(color.getTextColor());
+        player.sendMessage(component);
+    }
+
+    public static void playerAnnouncer(@NotNull CommandSender sender, @NotNull String string, @NotNull ColorList color) {
+        Player player = (Player) sender;
         Component component = Component.text(string)
                 .color(color.getTextColor());
         player.sendMessage(component);
