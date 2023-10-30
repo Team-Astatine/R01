@@ -9,6 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreeperPowerEvent;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 import teamzesa.ThreadPool;
 
 import java.util.concurrent.CountDownLatch;
@@ -67,14 +68,14 @@ public class Explosive implements Listener {
         this.event.setCancelled(true);
         Location location = this.event.getEntity().getLocation();
 
-        BukkitRunnable explosiveTask = new BukkitRunnable() {
+        Runnable explosiveTask = new BukkitRunnable() {
             @Override
             public void run() {
                 location.createExplosion(200,true);
 //                threadPool.executorServiceOff();
             }
         };
-        explosiveTask.run();
-//        threadPool.addTask(explosiveTask);
+//        explosiveTask.run();
+        threadPool.addTask(explosiveTask);
     }
 }
