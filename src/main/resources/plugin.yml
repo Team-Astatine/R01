@@ -32,7 +32,7 @@ commands:
   god:
     description: 갓 모드를 활성화 합니다.
     permission: R01.god
-  R01ConfigReload:
+  dataFileRelaod:
     description: config를 Reload 합니다.
     permission: R01.reload
   관리자:

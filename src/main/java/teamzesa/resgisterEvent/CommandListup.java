@@ -18,7 +18,7 @@ public enum CommandListup {
     HEALTH_RESET("체력초기화", new HealthSet()),
     USER_OBJECT_CHECKER("나", new UserObjectChecker()),
     SAVE_USER_DATA("SaveUserData", new SaveUserData()),
-    CONFIG_RELOAD("R01ConfigReload", new Reload());
+    CONFIG_RELOAD("dataFileRelaod", new Reload());
 
     private final String command;
     private final CommandExecutor executor;
