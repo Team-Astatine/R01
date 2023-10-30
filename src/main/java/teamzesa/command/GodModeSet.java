@@ -22,8 +22,10 @@ public class GodModeSet implements CommandExecutor, EventExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
 //        콘솔로 입력 시 return
-        if (!(sender instanceof Player))
+        if (!(sender instanceof Player)) {
+            Bukkit.getLogger().info("[R01] 유저 상태로 입력해주세요.");
             return false;
+        }
 
         Optional<Player>checkingPlayer = Optional.ofNullable(Bukkit.getPlayer(args[0]));
         if (checkingPlayer.isEmpty()) {
@@ -33,7 +35,6 @@ public class GodModeSet implements CommandExecutor, EventExecutor {
 
         setPlayerGodMode();
         sendCommentSendUser(sender);
-        sendCommentTargetUser();
         return true;
     }
 
@@ -48,25 +49,15 @@ public class GodModeSet implements CommandExecutor, EventExecutor {
     }
 
     private void sendCommentSendUser(CommandSender sender) {
-        String targetName = this.targetPlayer.equals(sender) ? "" : this.targetPlayer.getName() + "님";
-        String targetStatus = this.targetUser.isGodMode() ? "신" : "인간";
-        StringBuilder commandSenderComment = new StringBuilder();
-        commandSenderComment.append(targetName)
-                .append("은 이제 ")
-                .append(targetStatus)
-                .append(" 입니다.");
-
-        if (!targetName.isBlank())
-            ComponentExchanger.playerAnnouncer(sender, commandSenderComment, ColorList.ORANGE);
+        if (this.targetPlayer.equals(sender))
+            ComponentExchanger.playerAnnouncer(this.targetPlayer, "당신" + getGodModStatus(), ColorList.ORANGE);
+        else {
+            ComponentExchanger.playerAnnouncer(this.targetPlayer, "당신" + getGodModStatus(), ColorList.ORANGE);
+            ComponentExchanger.playerAnnouncer(sender, this.targetPlayer.getName() + getGodModStatus(), ColorList.ORANGE);
+        }
     }
 
-    private void sendCommentTargetUser() {
-        String targetStatus = this.targetUser.isGodMode() ? "신" : "인간";
-        StringBuilder targetUserComment = new StringBuilder();
-        targetUserComment.append("당신은 이제 ")
-                .append(targetStatus)
-                .append(" 입니다.");
-
-        ComponentExchanger.playerAnnouncer(this.targetPlayer,targetUserComment,ColorList.ORANGE);
+    private @NotNull String getGodModStatus() {
+        return "은 이제 " + (this.targetUser.isGodMode() ? "신" : "인간") + " 입니다.";
     }
 }
