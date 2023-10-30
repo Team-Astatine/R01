@@ -25,7 +25,7 @@ public class UserMapHandler extends ComponentExchanger {
         return userData;
     }
 
-    public static UserMapHandler getUserHandler() {
+    public static UserMapHandler getUserMapHandler() {
         return UserMapHandlerHolder.INSTANCE;
     }
 
@@ -44,7 +44,7 @@ public class UserMapHandler extends ComponentExchanger {
     }
 
     public User getUser(CommandSender sender) {
-        return userData.get((Player)sender);
+        return userData.get(((Player) sender).getUniqueId());
     }
 
     public User getUser(UUID uuid) {
