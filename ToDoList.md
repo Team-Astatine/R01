@@ -11,12 +11,13 @@ https://jaxple.notion.site/d1ef58aa889d4b8ba1342fc09c0249b4?pvs=4
   * EventListup.java
 
 ## refactor List
-* godMode.java
-* moderSet.java
+* godMode.java (80%)
+* moderSet.java (80%)
 * etc ..
 
 ## Debug List
-1. 
+1. godMode
+2. moderSet
 
 ## Plugin
 1. https://www.spigotmc.org/resources/speedlimit-1-20-1-support.75269/
