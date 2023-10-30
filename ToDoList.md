@@ -14,6 +14,8 @@ https://jaxple.notion.site/d1ef58aa889d4b8ba1342fc09c0249b4?pvs=4
 ## refactor List
 * godMode.java (80%)
 * moderSet.java (80%)
+* Update DataFile.java Make File Instance
+  Refactor All File Dependency Class & Method
 * etc ..
 
 ## Debug List
