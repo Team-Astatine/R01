@@ -49,12 +49,9 @@ public class GodModeSet implements CommandExecutor, EventExecutor {
     }
 
     private void sendCommentSendUser(CommandSender sender) {
-        if (this.targetPlayer.equals(sender))
-            ComponentExchanger.playerAnnouncer(this.targetPlayer, "당신" + getGodModStatus(), ColorList.ORANGE);
-        else {
-            ComponentExchanger.playerAnnouncer(this.targetPlayer, "당신" + getGodModStatus(), ColorList.ORANGE);
+        if (!this.targetPlayer.equals(sender))
             ComponentExchanger.playerAnnouncer(sender, this.targetPlayer.getName() + getGodModStatus(), ColorList.ORANGE);
-        }
+        ComponentExchanger.playerAnnouncer(this.targetPlayer, "당신" + getGodModStatus(), ColorList.ORANGE);
     }
 
     private @NotNull String getGodModStatus() {
