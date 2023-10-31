@@ -17,18 +17,24 @@ import java.util.Optional;
 public class UserObjectChecker implements CommandExecutor, EventExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
-        Optional<Player> player = Optional.ofNullable(Bukkit.getPlayer(args[0]));
-        User user = null;
-
-        if (player.isPresent())
-            user = UserMapHandler.getUserMapHandler().getUser(player.get());
-
-        sendContext((Player) sender, user);
+        Optional<User> user = Optional.ofNullable(
+                UserMapHandler.getUserMapHandler().getUser(args[0]));
+        user.ifPresentOrElse(
+                existUser -> sendComment(sender, existUser),
+                () -> sendComment(sender, "존재하지 않는 유저")
+        );
         return true;
     }
 
-    private void sendContext(Player sender, User user) {
-        Bukkit.getLogger().info(user.toString());
-        ComponentExchanger.playerAnnouncer(sender, user.toString(), ColorList.YELLOW);
+    private void sendComment(CommandSender sender, User user) {
+        if (sender instanceof Player)
+            ComponentExchanger.playerAnnouncer(sender, user.toString(), ColorList.YELLOW);
+        else Bukkit.getLogger().info(user.toString());
+    }
+
+    private void sendComment(CommandSender sender, String comment) {
+        if (sender instanceof Player)
+            ComponentExchanger.playerAnnouncer(sender, comment, ColorList.YELLOW);
+        else Bukkit.getLogger().info(comment);
     }
 }
