@@ -9,9 +9,10 @@ import teamzesa.ComponentExchanger;
 import teamzesa.IOHandler.ConfigIOHandler;
 import teamzesa.R01;
 import teamzesa.dataValue.ColorList;
+import teamzesa.resgisterEvent.EventExecutor;
 
 
-public class Reload implements CommandExecutor {
+public class Reload implements CommandExecutor, EventExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
