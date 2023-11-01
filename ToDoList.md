@@ -13,9 +13,12 @@ https://jaxple.notion.site/d1ef58aa889d4b8ba1342fc09c0249b4?pvs=4
 * godMode -> 코멘트 bukkit 입력시 상대방에게 가도 (해결)
 * healthSet -> 명령어 미완성 / 버킷에서 출력 예외처리 (해결)
 * moderator -> 관리자 미지정 예외처리(해결)
-* 
+
+* 커멘드를 consol에서 보낸건지 player가 보낸건지 체크하는 로직 만들기
 
 ## Debug List
+* godMod Print consol ,player announcer
+* optional 관련 클래스
 
 
 ## Plugin
