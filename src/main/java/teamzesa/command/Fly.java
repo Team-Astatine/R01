@@ -13,11 +13,11 @@ import teamzesa.resgisterEvent.EventExecutor;
 public class Fly implements CommandExecutor, EventExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        Player player = (Player) sender;
+        Player targetPlayer = (Player) sender;
 
-        player.setAllowFlight(!player.getAllowFlight());
-        String announcer = player.getAllowFlight() ? "활성화" : "비활성화";
-        ComponentExchanger.playerAnnouncer(player,"플라이 " + announcer, ColorList.YELLOW);
+        targetPlayer.setAllowFlight(!targetPlayer.getAllowFlight());
+        String comment = targetPlayer.getAllowFlight() ? "활성화" : "비활성화";
+        ComponentExchanger.playerAnnouncer(targetPlayer,"플라이 " + comment, ColorList.YELLOW);
         return true;
     }
 }
