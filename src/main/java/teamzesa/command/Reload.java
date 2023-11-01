@@ -1,5 +1,6 @@
 package teamzesa.command;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -22,8 +23,14 @@ public class Reload implements CommandExecutor, EventExecutor {
             return false;
         }
 
+        sendComment(sender);
         R01.getPlugin(R01.class).fileLoader();
-        ComponentExchanger.playerAnnouncer(player,"Reload Done", ColorList.YELLOW);
         return true;
+    }
+
+    public void sendComment(CommandSender sender) {
+        if (sender instanceof Player)
+            ComponentExchanger.playerAnnouncer(sender,"Reload Done", ColorList.YELLOW);
+        else Bukkit.getLogger().info("[R01] Reload Done");
     }
 }
