@@ -43,10 +43,6 @@ public class UserMapHandler extends ComponentExchanger {
         return userData.get(player.getUniqueId());
     }
 
-    public User getUser(CommandSender sender) {
-        return userData.get(((Player) sender).getUniqueId());
-    }
-
     public User getUser(UUID uuid) {
         return  userData.get(uuid);
     }
@@ -56,10 +52,6 @@ public class UserMapHandler extends ComponentExchanger {
                 .filter(data -> data.getName().equals(userName))
                 .findFirst()
                 .orElse(null);
-    }
-
-    public Player getPlayer(String userName) {
-        return Bukkit.getPlayer(userName);
     }
 
     public void updateUser(User user) {
