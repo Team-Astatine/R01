@@ -17,12 +17,11 @@ import java.util.Optional;
 public class UserObjectChecker implements CommandExecutor, EventExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
-        Optional<User> user = Optional.ofNullable(
-                UserMapHandler.getUserMapHandler().getUser(args[0]));
-        user.ifPresentOrElse(
-                existUser -> sendComment(sender, existUser),
-                () -> sendComment(sender, "존재하지 않는 유저")
-        );
+        Optional.ofNullable(UserMapHandler.getUserMapHandler().getUser(args[0]))
+                .ifPresentOrElse(
+                    existUser -> sendComment(sender, existUser),
+                    () -> sendComment(sender, "존재하지 않는 유저")
+                );
         return true;
     }
 

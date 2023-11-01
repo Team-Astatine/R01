@@ -38,13 +38,13 @@ public class Moderator implements CommandExecutor, EventExecutor {
             return false;
         }
 
-        Optional<Player> targetPlayer = Optional.ofNullable(Bukkit.getPlayer(args[0]));
-        targetPlayer.ifPresent(player -> {
-            if (checkupMod(player)){
-                player.setOp(true);
-                ComponentExchanger.playerAnnouncer(player,"지금부터 관리자 입니다.", ColorList.ORANGE);
-            }
-        });
+        Optional.ofNullable(Bukkit.getPlayer(args[0]))
+                .ifPresent(player -> {
+                    if (checkupMod(player)){
+                        player.setOp(true);
+                        ComponentExchanger.playerAnnouncer(player,"지금부터 관리자 입니다.", ColorList.ORANGE);
+                    }
+                });
 
         return true;
     }

@@ -28,8 +28,7 @@ public class UpdateChecker {
 
     public void fileLoader() {
         this.folder = DataFile.ABSOLUTE_PATH.getFileInstance();
-        Optional<File[]> folderListFile = Optional.ofNullable(this.folder.listFiles());
-        folderListFile.ifPresent(file -> this.fileList = List.of(file));
+        Optional.ofNullable(this.folder.listFiles()).ifPresent(file -> this.fileList = List.of(file));
     }
 
     public void fileManager() {

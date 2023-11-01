@@ -64,19 +64,19 @@ public class TotemStacking implements CommandExecutor, EventExecutor {
         this.playerInventory.remove(TOTEM);
 
 //        전체 아이템 창 정보 다 가져옴 armour , offHand Whatever
-        Optional <ItemStack> tempHelmetStuff = Optional.ofNullable(this.playerInventory.getHelmet());
-        tempHelmetStuff.ifPresent(helmet -> {
-            if (helmet.getType() == TOTEM)
-                this.playerInventory.setHelmet(null);
-        });
+        Optional.ofNullable(this.playerInventory.getHelmet())
+                .ifPresent(helmetStuff -> {
+                    if (helmetStuff.getType() == TOTEM)
+                        this.playerInventory.setHelmet(null);
+                });
 
-        Optional <ItemStack> tempOffHandStuff = Optional.of(this.playerInventory.getItemInOffHand());
-        tempOffHandStuff.ifPresent(offhand -> {
-            if (offhand.getType() == TOTEM)
-                this.playerInventory.setItemInOffHand(null);
-            else
-                this.playerInventory.addItem(tempOffHandStuff.get());
-        });
+        Optional.of(this.playerInventory.getItemInOffHand())
+                .ifPresent(offhandStuff -> {
+                    if (offhandStuff.getType() == TOTEM)
+                        this.playerInventory.setItemInOffHand(null);
+                    else
+                        this.playerInventory.addItem(offhandStuff);
+                });
     }
 
     private boolean validationInventory() {

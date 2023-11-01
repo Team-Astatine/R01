@@ -42,14 +42,12 @@ public class EntityDamageTicking implements Listener {
     }
 
     private @NotNull Boolean handStuffChecker(@NotNull ItemStack mainStuff , @NotNull ItemStack offStuff) {
-        Optional<Material> mainStuffType = Optional.of(mainStuff.getType());
-        Optional<Material> offStuffType = Optional.of(offStuff.getType());
 
-        boolean mainHand = mainStuffType.filter(stuff ->
+        boolean mainHand = Optional.of(mainStuff.getType()).filter(stuff ->
             stuff.equals(Material.NETHERITE_SWORD) || stuff.equals(Material.NETHERITE_AXE)
         ).isPresent();
 
-        boolean offHand = offStuffType.filter(stuff ->
+        boolean offHand = Optional.of(offStuff.getType()).filter(stuff ->
                 stuff.equals(Material.NETHERITE_SWORD) || stuff.equals(Material.NETHERITE_AXE)
         ).isPresent();
 
