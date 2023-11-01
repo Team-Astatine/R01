@@ -30,10 +30,15 @@ public class Moderator implements CommandExecutor, EventExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
-        if (args.length == 0)
+        if (args.length == 0){
+            if (sender instanceof Player)
+                ComponentExchanger.playerAnnouncer(sender,"/관리자 [닉네임]",ColorList.RED);
+            else
+                Bukkit.getLogger().info("[R01] /관리자 [닉네임]");
             return false;
+        }
 
-        if (!checkupMod((Player)sender))
+        if (!checkupMod(Bukkit.getPlayer(args[0])))
             return false;
 
         Optional<Player> targetPlayer = Optional.ofNullable(Bukkit.getPlayer(args[0]));
@@ -46,7 +51,7 @@ public class Moderator implements CommandExecutor, EventExecutor {
     }
 
     private boolean checkupMod(@NotNull Player sendPlayer) {
-        String senderUUID = sendPlayer.getUniqueId().toString();
+        String senderUUID = sendPlayer.getUniqueId().toString(); //대쉬 표기되며 출력됌
         return this.moderatorName.stream().anyMatch(senderUUID::equals);
     }
 }
