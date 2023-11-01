@@ -23,14 +23,14 @@ public class Reload implements CommandExecutor, EventExecutor {
             return false;
         }
 
-        sendComment(sender);
+        sendComment(sender, "Reload Done");
         R01.getPlugin(R01.class).fileLoader();
         return true;
     }
 
-    public void sendComment(CommandSender sender) {
+    private void sendComment(CommandSender sender, String comment) {
         if (sender instanceof Player)
-            ComponentExchanger.playerAnnouncer(sender,"Reload Done", ColorList.YELLOW);
-        else Bukkit.getLogger().info("[R01] Reload Done");
+            ComponentExchanger.playerAnnouncer(sender, comment, ColorList.YELLOW);
+        else Bukkit.getLogger().info(comment);
     }
 }

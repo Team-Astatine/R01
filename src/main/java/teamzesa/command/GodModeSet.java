@@ -22,8 +22,8 @@ public class GodModeSet implements CommandExecutor, EventExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
 //        콘솔로 입력 시 return
-        if (!(sender instanceof Player)) {
-            Bukkit.getLogger().info("[R01] 유저 상태로 입력해주세요.");
+        if (!sender.isOp()) {
+            ComponentExchanger.playerAnnouncer(sender ,"권한이 없습니다.", ColorList.RED);
             return false;
         }
 
@@ -34,7 +34,10 @@ public class GodModeSet implements CommandExecutor, EventExecutor {
         } else setFieldVariable(checkingPlayer.get());
 
         setPlayerGodMode();
-        sendCommentSendUser(sender);
+
+        if (sender instanceof Player)
+            sendCommentSendUser(sender);
+        else Bukkit.getLogger().info("[R01] " + targetPlayer.getName() + "은 이제 " + targetUser.isGodMode() + "입니다.");
         return true;
     }
 
