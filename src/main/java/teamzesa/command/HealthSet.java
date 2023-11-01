@@ -21,6 +21,15 @@ public class HealthSet implements CommandExecutor, EventExecutor {
     private Player targetPlayer;
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String @NotNull [] args) {
+
+        if (args.length < 2) {
+            if (sender instanceof Player)
+                ComponentExchanger.playerAnnouncer(sender,"/체력초기화 [닉네임] [체력값]",ColorList.RED);
+            else
+                Bukkit.getLogger().info("[R01] /체력초기화 [닉네임] [체력값]");
+            return false;
+        }
+
         Optional<Player> player = Optional.ofNullable(Bukkit.getPlayer(args[0]));
         Optional<Double> targetPlayerHealth = Optional.of(Double.parseDouble(args[1]));
 
