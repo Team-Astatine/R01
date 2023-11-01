@@ -38,12 +38,14 @@ public class GodModeSet implements CommandExecutor, EventExecutor {
     }
 
     private void sendCommment(@NotNull CommandSender sender) {
+        boolean senderInstance = sender instanceof Player; //true == player , false == consol
         String comment = "은 이제 " + (this.targetUser.isGodMode() ? "신" : "인간") + " 입니다.";
 
-        if (sender instanceof Player && (!this.targetPlayer.equals(sender))) {
+        if (!this.targetPlayer.equals(sender) && senderInstance)
             ComponentExchanger.playerAnnouncer(sender, this.targetPlayer.getName() + comment, ColorList.ORANGE);
-        }
-        else Bukkit.getLogger().info("[R01] " + targetPlayer.getName() + comment);
+
+        if (!senderInstance)
+            Bukkit.getLogger().info("[R01] " + targetPlayer.getName() + comment);
 
         ComponentExchanger.playerAnnouncer(this.targetPlayer, "당신" + comment, ColorList.ORANGE);
     }
