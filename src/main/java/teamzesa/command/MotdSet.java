@@ -18,11 +18,6 @@ public class MotdSet implements CommandExecutor, EventExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
-        if (!sender.isOp()) {
-            ComponentExchanger.playerAnnouncer((Player)sender, "해당 명령어는 플레이어가 사용할 수 없습니다.", ColorList.RED);
-            return false;
-        }
-
         setNewMotdToFieldVariable(args);
         sendComment(sender);
         configDataUpdate();
