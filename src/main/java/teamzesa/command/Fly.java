@@ -1,6 +1,5 @@
 package teamzesa.command;
 
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -18,12 +17,7 @@ public class Fly implements CommandExecutor, EventExecutor {
 
         targetPlayer.setAllowFlight(!targetPlayer.getAllowFlight());
         String comment = targetPlayer.getAllowFlight() ? "활성화" : "비활성화";
-        sendComment(sender,"플라이 " + comment);
+        ComponentExchanger.playerAnnouncer(targetPlayer,"플라이 " + comment, ColorList.YELLOW);
         return true;
-    }
-    private void sendComment(CommandSender sender, String comment) {
-        if (sender instanceof Player)
-            ComponentExchanger.playerAnnouncer(sender, comment, ColorList.YELLOW);
-        else Bukkit.getLogger().info("[R01] " + sender.getName() + comment);
     }
 }
