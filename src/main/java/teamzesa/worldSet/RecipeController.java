@@ -17,11 +17,8 @@ import java.util.Set;
 
 public class RecipeController implements Listener {
     private final Set<Material> lockingStuff;
-    private final ThreadPool threadPool;
 
     public RecipeController() {
-        threadPool = ThreadPool.getThreadPool();
-
         this.lockingStuff = new HashSet<>();
 //    define BanItem
         this.lockingStuff.add(Material.TNT);
@@ -47,9 +44,8 @@ public class RecipeController implements Listener {
                 ComponentExchanger.playerAnnouncer(player,"해당 아이템은 조합할 수 없습니다.", ColorList.RED);
             }
         };
-        task.run();
-//        threadPool.addTask(task);
-//        threadPool.executorServiceOff();
+//        task.run();
+        ThreadPool.getThreadPool().addTask(task);
         e.setCancelled(true);
     }
 }
