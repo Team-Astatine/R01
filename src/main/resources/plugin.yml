@@ -20,26 +20,26 @@ commands:
   신발:
     description: 손에 든 아이템을 신발에 착용합니다.
     permission: R01.BootsArmour
-  체력초기화:
+  setHealth:
     description: 체력을 초기화 합니다.
     permission: R01.Moder
-  나:
+  vo:
     description: DebugValue
     permission: R01.debug
-  운석:
+  meteor:
     description: 운석을 떨어트립니다.
     permission: R01.Meteor
   god:
     description: 갓 모드를 활성화 합니다.
     permission: R01.god
-  dataFileRelaod:
+  dataFileReload:
     description: config를 Reload 합니다.
     permission: R01.reload
-  관리자:
+  moderator:
     description: 관리자 권한부여
-  머리:
+  hat:
     description: 손에 든 아이템을 머리에 착용합니다.
-  토템:
+  totem:
     description: 토템을 합칩니다.
   fly:
     description: 하늘을 납니다.
