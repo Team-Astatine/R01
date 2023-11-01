@@ -1,25 +1,16 @@
 package teamzesa.combat;
 
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.CreeperPowerEvent;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
 import teamzesa.ThreadPool;
-
-import java.util.concurrent.CountDownLatch;
 
 public class Explosive implements Listener {
     private ExplosionPrimeEvent event;
-    private ThreadPool threadPool;
-    public Explosive() {
-        threadPool = ThreadPool.getThreadPool();
-    }
     @EventHandler(priority = EventPriority.LOW)
     public void explosiveHandler(ExplosionPrimeEvent event) {
         this.event = event;
@@ -75,7 +66,7 @@ public class Explosive implements Listener {
 //                threadPool.executorServiceOff();
             }
         };
-//        explosiveTask.run();
-        threadPool.addTask(explosiveTask);
+        explosiveTask.run();
+//        threadPool.addTask(explosiveTask);
     }
 }
