@@ -14,45 +14,38 @@ import teamzesa.resgisterEvent.EventExecutor;
 
 public class MotdSet implements CommandExecutor, EventExecutor {
 
-    private ConfigIOHandler configIOHandler;
-
-    public MotdSet() {
-        configIOHandler = ConfigIOHandler.getConfigIOHandler();
-    }
-
-    private String finalMotd;
+    private String newMotd;
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
-        String[] commandContext = args;
-
-        if (!(sender instanceof Player)) {
-            motdSetup(commandContext);
-            Bukkit.getLogger().info("Motd Set > " + finalMotd);
-            return true;
+        if (!sender.isOp()) {
+            ComponentExchanger.playerAnnouncer((Player)sender, "해당 명령어는 플레이어가 사용할 수 없습니다.", ColorList.RED);
+            return false;
         }
 
-        else if (sender.getName().equals("JAXPLE")) {
-            motdSetup(commandContext);
-            ComponentExchanger.playerAnnouncer((Player)sender, this.finalMotd + "로 변경 됐습니다.", ColorList.YELLOW);
-            return true;
-        }
-
-        else ComponentExchanger.playerAnnouncer((Player)sender, "해당 명령어는 플레이어가 사용할 수 없습니다.", ColorList.RED);
+        setNewMotdToFieldVariable(args);
+        sendComment(sender);
+        configDataUpdate();
         return false;
     }
 
-    private void motdSetup(String[] commandContext) {
+    private void setNewMotdToFieldVariable(String @NotNull [] newMotd) {
         StringBuilder customMotd = new StringBuilder();
-        for (String motd : commandContext)
+        for (String motd : newMotd)
             customMotd.append(motd).append(" ");
 
-        this.finalMotd = customMotd.toString().trim();
-        applyMotd(this.finalMotd);
+        this.newMotd = customMotd.toString().trim();
     }
 
-    private void applyMotd(String finalMotd) {
-        this.configIOHandler.worldConfigSave(finalMotd);
-        Bukkit.motd(ComponentExchanger.componentSet(finalMotd));
+    private void sendComment(CommandSender sender) {
+        String comment = "New Motd Set > " + this.newMotd;
+        if (sender instanceof Player) {
+            ComponentExchanger.playerAnnouncer((Player)sender, comment, ColorList.YELLOW);
+        } else Bukkit.getLogger().info(comment);
+    }
+
+    private void configDataUpdate() {
+        Bukkit.motd(ComponentExchanger.componentSet(this.newMotd));
+        ConfigIOHandler.getConfigIOHandler().worldConfigSave(this.newMotd);
     }
 }
