@@ -14,32 +14,35 @@ import teamzesa.dataValue.ColorList;
 import teamzesa.dataValue.userData.UserMapHandler;
 import teamzesa.resgisterEvent.EventExecutor;
 
+import java.util.Optional;
+
 
 public class HealthSet implements CommandExecutor, EventExecutor {
+    private Player targetPlayer;
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String @NotNull [] args) {
-        Player targetPlayer = Bukkit.getPlayer(args[0]);
-        double targetPlayerHealth = Double.parseDouble(args[1]);
-        
-        if (targetPlayer == null) {
-            return false;
-        }
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String @NotNull [] args) {
+        Optional<Player> player = Optional.ofNullable(Bukkit.getPlayer(args[0]));
+        Optional<Double> targetPlayerHealth = Optional.of(Double.parseDouble(args[1]));
 
-        setPlayerHealth(targetPlayerHealth, targetPlayer);
-        updatePlayerInfo(targetPlayer);
+        player.ifPresent(optionalPlayer -> this.targetPlayer = optionalPlayer);
+        targetPlayerHealth.ifPresent(this::setPlayerHealth);
+        updatePlayerInfo();
 
         return true;
     }
 
-    private void updatePlayerInfo(@NotNull Player targetPlayer) {
+    private void updatePlayerInfo() {
         UserMapHandler userMapHandler = UserMapHandler.getUserMapHandler();
-        userMapHandler.updateUser(targetPlayer.getUniqueId(), targetPlayer.getHealthScale());
+        userMapHandler.updateUser(this.targetPlayer.getUniqueId(), this.targetPlayer.getHealthScale());
     }
 
-    private void setPlayerHealth(double targetPlayerHealth, @NotNull Player targetPlayer) {
-        targetPlayer.setHealthScale(targetPlayerHealth);
-        targetPlayer.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 40, 1));
-        targetPlayer.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(targetPlayerHealth);
-        ComponentExchanger.playerAnnouncer(targetPlayer,targetPlayer.getName() + "님의 체력이" + targetPlayerHealth + "으로 설정됐습니다.", ColorList.YELLOW);
+    private void setPlayerHealth(double setHealthValue) {
+        this.targetPlayer.setHealthScale(setHealthValue);
+        this.targetPlayer.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 40, 1));
+        this.targetPlayer.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(setHealthValue);
+        ComponentExchanger.playerAnnouncer(
+                this.targetPlayer,
+                this.targetPlayer.getName() + "님의 체력이" + setHealthValue + "으로 설정됐습니다.",
+                ColorList.YELLOW);
     }
 }
