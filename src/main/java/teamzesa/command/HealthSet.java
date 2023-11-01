@@ -30,13 +30,22 @@ public class HealthSet implements CommandExecutor, EventExecutor {
             return false;
         }
 
-        Optional<Player> player = Optional.ofNullable(Bukkit.getPlayer(args[0]));
-        Optional<Double> targetPlayerHealth = Optional.of(Double.parseDouble(args[1]));
+//        gpt
+        Optional.ofNullable(Bukkit.getPlayer(args[0]))
+                .ifPresent(optionalPlayer -> {
+                            this.targetPlayer = optionalPlayer;
+                            Optional.of(args[1])
+                                    .map(Double::parseDouble)
+                                    .ifPresent(this::setPlayerHealth);
+                        });
 
-        player.ifPresent(optionalPlayer -> this.targetPlayer = optionalPlayer);
-        targetPlayerHealth.ifPresent(this::setPlayerHealth);
+//        Optional<Player> player = Optional.ofNullable(Bukkit.getPlayer(args[0]));
+//        player.ifPresent(optionalPlayer -> this.targetPlayer = optionalPlayer);
+
+//        Optional<Double> targetPlayerHealth = Optional.of(Double.parseDouble(args[1]));
+//        targetPlayerHealth.ifPresent(this::setPlayerHealth);
+
         updatePlayerInfo();
-
         return true;
     }
 
