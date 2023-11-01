@@ -24,11 +24,14 @@ public class GodModeSet implements CommandExecutor, EventExecutor {
 
         Optional<Player>checkingPlayer = Optional.ofNullable(Bukkit.getPlayer(args[0]));
         if (checkingPlayer.isEmpty()) {
-            ComponentExchanger.playerAnnouncer(sender, "/god [플레이어 이름]", ColorList.RED);
+            if (sender instanceof Player)
+                ComponentExchanger.playerAnnouncer(sender,"/god [플레이어 이름]",ColorList.RED);
+            else
+                Bukkit.getLogger().info("[R01] /god [플레이어 이름]");
             return false;
         }
-        else setFieldVariable(checkingPlayer.get());
 
+        setFieldVariable(checkingPlayer.get());
         setPlayerGodMode();
         sendCommment(sender);
         return true;
