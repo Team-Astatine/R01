@@ -13,9 +13,10 @@ import teamzesa.resgisterEvent.EventExecutor;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
 
 public class Moderator implements CommandExecutor, EventExecutor {
-    private final Set<Player> moderatorName;
+    private final Set<String> moderatorName;
 
     public Moderator() {
         this.moderatorName = new HashSet<>();
@@ -23,8 +24,8 @@ public class Moderator implements CommandExecutor, EventExecutor {
     }
 
     private void moderList() {
-        this.moderatorName.add(Bukkit.getPlayer("JAXPLE"));
-        this.moderatorName.add(Bukkit.getPlayer("18_70015401"));
+        this.moderatorName.add("27d84b4f-5991-4001-89d5-0fdfd3374a3d");//jaxple
+        this.moderatorName.add("7e57dd28-bdba-4312-84ea-2da58cd6e598");//18_70015401
     }
 
     @Override
@@ -32,7 +33,7 @@ public class Moderator implements CommandExecutor, EventExecutor {
         if (args.length == 0)
             return false;
 
-        if (!checkupMod(sender))
+        if (!checkupMod((Player)sender))
             return false;
 
         Optional<Player> targetPlayer = Optional.ofNullable(Bukkit.getPlayer(args[0]));
@@ -44,7 +45,8 @@ public class Moderator implements CommandExecutor, EventExecutor {
         return true;
     }
 
-    private boolean checkupMod(@NotNull CommandSender sender) {
-        return this.moderatorName.stream().anyMatch(sender::equals);
+    private boolean checkupMod(@NotNull Player sendPlayer) {
+        String senderUUID = sendPlayer.getUniqueId().toString();
+        return this.moderatorName.stream().anyMatch(senderUUID::equals);
     }
 }
