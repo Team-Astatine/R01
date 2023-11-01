@@ -26,6 +26,10 @@ public class ComponentExchanger {
         Bukkit.broadcast(component);
     }
 
+    public static void playerAnnouncer(@NotNull Player player, String comment) {
+        player.sendMessage(Component.text(comment));
+    }
+
     public static void playerAnnouncer(@NotNull Player player, String comment, @NotNull ColorList color) {
         Component component = Component.text(comment)
                 .color(color.getTextColor());
@@ -50,10 +54,6 @@ public class ComponentExchanger {
         Component component = Component.text(comment.toString())
                 .color(color.getTextColor());
         player.sendMessage(component);
-    }
-
-    public static void playerAnnouncer(@NotNull Player player, String string) {
-        player.sendMessage(Component.text(string));
     }
 
     @Contract(value = "_ -> new", pure = true)
