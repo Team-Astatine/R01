@@ -16,7 +16,7 @@ import java.util.Optional;
 public class ArmourSet implements CommandExecutor, EventExecutor {
     private PlayerInventory playerInventory;
 
-    public enum ArmourType {
+    private enum ArmourType {
         머리
     }
 
