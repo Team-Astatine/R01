@@ -21,24 +21,28 @@ public class GodModeSet implements CommandExecutor, EventExecutor {
     private UserHandler targetUser;
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
-//        콘솔로 입력 시 return
-        if (!sender.isOp()) {
-            ComponentExchanger.playerAnnouncer(sender ,"권한이 없습니다.", ColorList.RED);
-            return false;
-        }
 
         Optional<Player>checkingPlayer = Optional.ofNullable(Bukkit.getPlayer(args[0]));
         if (checkingPlayer.isEmpty()) {
             ComponentExchanger.playerAnnouncer(sender, "/god [플레이어 이름]", ColorList.RED);
             return false;
-        } else setFieldVariable(checkingPlayer.get());
+        }
+        else setFieldVariable(checkingPlayer.get());
 
         setPlayerGodMode();
-
-        if (sender instanceof Player)
-            sendCommentSendUser(sender);
-        else Bukkit.getLogger().info("[R01] " + targetPlayer.getName() + "은 이제 " + targetUser.isGodMode() + "입니다.");
+        sendCommment(sender);
         return true;
+    }
+
+    private void sendCommment(@NotNull CommandSender sender) {
+        String comment = "은 이제 " + (this.targetUser.isGodMode() ? "신" : "인간") + " 입니다.";
+
+        if (sender instanceof Player && (!this.targetPlayer.equals(sender))) {
+            ComponentExchanger.playerAnnouncer(sender, this.targetPlayer.getName() + comment, ColorList.ORANGE);
+        }
+        else Bukkit.getLogger().info("[R01] " + targetPlayer.getName() + comment);
+
+        ComponentExchanger.playerAnnouncer(this.targetPlayer, "당신" + comment, ColorList.ORANGE);
     }
 
     private void setFieldVariable(@NotNull Player player) {
@@ -49,13 +53,5 @@ public class GodModeSet implements CommandExecutor, EventExecutor {
     private void setPlayerGodMode() {
         this.targetUser.setGodMode(!this.targetUser.isGodMode());
         this.targetPlayer.addPotionEffect(new PotionEffect(PotionEffectType.SATURATION,100000000,0));
-    }
-
-    private void sendCommentSendUser(CommandSender sender) {
-        String comment = "은 이제 " + (this.targetUser.isGodMode() ? "신" : "인간") + " 입니다.";
-
-        if (!this.targetPlayer.equals(sender))
-            ComponentExchanger.playerAnnouncer(sender, this.targetPlayer.getName() + comment, ColorList.ORANGE);
-        ComponentExchanger.playerAnnouncer(this.targetPlayer, "당신" + comment, ColorList.ORANGE);
     }
 }
