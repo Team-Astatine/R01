@@ -38,9 +38,9 @@ public final class R01 extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        UserIOHandler.getIOHandler().exportUserData();
         ThreadPool.getThreadPool().serviceOff();
         Bukkit.getScheduler().cancelTasks(this);
-        UserIOHandler.getIOHandler().exportUserData();
     }
 
     public void fileLoader() {
@@ -64,8 +64,7 @@ public final class R01 extends JavaPlugin {
     private void commandHandler() {
         for (CommandListup commandEnum : CommandListup.values()) {
             Objects.requireNonNull(
-                    getCommand(commandEnum.getCommand())).setExecutor(commandEnum.newInstance()
-            );
+                    getCommand(commandEnum.getCommand())).setExecutor(commandEnum.newInstance());
         }
     }
 
