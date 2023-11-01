@@ -32,7 +32,7 @@ public class Moderator implements CommandExecutor, EventExecutor {
         if (args.length == 0)
             return false;
 
-        if (checkupMod(sender))
+        if (!checkupMod(sender))
             return false;
 
         Optional<Player> targetPlayer = Optional.ofNullable(Bukkit.getPlayer(args[0]));
@@ -45,6 +45,6 @@ public class Moderator implements CommandExecutor, EventExecutor {
     }
 
     private boolean checkupMod(@NotNull CommandSender sender) {
-        return this.moderatorName.stream().noneMatch(sender::equals);
+        return this.moderatorName.stream().anyMatch(sender::equals);
     }
 }
