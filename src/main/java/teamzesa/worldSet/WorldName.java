@@ -11,7 +11,7 @@ public enum WorldName {
         exchangeString = worldName;
     }
 
-    public String getWorld() {
+    public String getWorldName() {
         return exchangeString;
     }
 }
