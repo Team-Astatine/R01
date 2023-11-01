@@ -16,11 +16,6 @@ import teamzesa.resgisterEvent.EventExecutor;
 public class SaveUserData implements CommandExecutor, EventExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, Command command, String label, String[] args) {
-        if (!sender.isOp()) {
-            ComponentExchanger.playerAnnouncer(sender, "권한이 없습니다.", ColorList.RED);
-            return false;
-        }
-
         UserIOHandler.getIOHandler().exportUserData();
         sendComment(sender, "Success to saving UserData");
         return true;
