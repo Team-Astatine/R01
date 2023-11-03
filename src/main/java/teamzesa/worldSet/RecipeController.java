@@ -27,7 +27,7 @@ public class RecipeController implements Listener {
 
     private boolean stuffChecking(ItemStack item) {
         return lockingStuff.stream()
-                .noneMatch(banStuff -> banStuff == item.getType());
+                .noneMatch(banStuff -> item.getType().equals(banStuff));
     }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
