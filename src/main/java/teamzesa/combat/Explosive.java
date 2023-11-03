@@ -56,7 +56,6 @@ public class Explosive implements Listener {
     }
 
     private void cartBoom() {
-        this.event.setCancelled(true);
         Location location = this.event.getEntity().getLocation();
 
         Runnable explosiveTask = new BukkitRunnable() {
@@ -67,6 +66,6 @@ public class Explosive implements Listener {
             }
         };
         explosiveTask.run();
-//        threadPool.addTask(explosiveTask);
+//        ThreadPool.getThreadPool().addTask(explosiveTask);
     }
 }
