@@ -7,8 +7,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
+import teamzesa.ThreadPool;
 import teamzesa.dataValue.ColorList;
 import teamzesa.resgisterEvent.EventExecutor;
 
@@ -25,13 +27,21 @@ public class TotemStacking implements CommandExecutor, EventExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender,@NotNull Command command,@NotNull String label, String[] args) {
-        this.player = (Player) sender;
-        this.playerInventory = this.player.getInventory();
-        getAllOfPlayerTotems();
+        BukkitRunnable executeTotemSupply = new BukkitRunnable() {
+            @Override
+            public void run() {
+                TotemStacking.this.player = (Player) sender;
+                TotemStacking.this.playerInventory = TotemStacking.this.player.getInventory();
+                getAllOfPlayerTotems();
 
-        if (validationInventory()) return false;
-        removeTotemInInv();
-        supplyTotems();
+                if (!validationInventory())
+                    return;
+
+                removeTotemInInv();
+                supplyTotems();
+            }
+        };
+        ThreadPool.getThreadPool().addTask(executeTotemSupply);
         return true;
     }
 
@@ -92,10 +102,10 @@ public class TotemStacking implements CommandExecutor, EventExecutor {
             message = "2개 이상의 토템을 가지고 있으셔야 합니다.";
 
         if (message.isEmpty())
-            return false;
+            return true;
 
         ComponentExchanger.playerAnnouncer(this.player, message, ColorList.RED);
-        return true;
+        return false;
     }
 
     private long maxTotemCnt() {
