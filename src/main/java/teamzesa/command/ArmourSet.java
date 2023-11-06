@@ -17,7 +17,7 @@ public class ArmourSet implements CommandExecutor, EventExecutor {
     private PlayerInventory playerInventory;
 
     private enum ArmourType {
-        머리
+        hat
     }
 
     @Override
@@ -33,7 +33,7 @@ public class ArmourSet implements CommandExecutor, EventExecutor {
 
         ArmourType armourType = ArmourType.valueOf(label);
         switch (armourType) {
-            case 머리 -> headSet(tmpItemInHand.get());
+            case hat -> headSet(tmpItemInHand.get());
         }
         return true;
     }
