@@ -90,15 +90,22 @@ public class TotemStacking implements CommandExecutor, EventExecutor {
     }
 
     private boolean validationInventory() {
-        String message = "";
+        long maxCnt = this.totemCountData.stream()
+                .filter(cnt -> cnt >= MINIMUM && cnt < STACK)
+                .count();
 
+        long minCnt = this.totemCountData.stream()
+                .filter(cnt -> cnt == MINIMUM)
+                .count();
+
+        String message = "";
         if (this.totemCountData.isEmpty())
             message = "인벤토리에 토템이 없습니다.";
 
-        else if (maxTotemCnt() < 2 && minTotemCnt() < 1)
+        else if (maxCnt < 2 && minCnt < 1)
             message = "합칠 토템이 없습니다.";
 
-        else if (maxTotemCnt() < 2 && minTotemCnt() < 2)
+        else if (maxCnt < 2 && minCnt < 2)
             message = "2개 이상의 토템을 가지고 있으셔야 합니다.";
 
         if (message.isEmpty())
@@ -106,17 +113,5 @@ public class TotemStacking implements CommandExecutor, EventExecutor {
 
         ComponentExchanger.playerAnnouncer(this.player, message, ColorList.RED);
         return false;
-    }
-
-    private long maxTotemCnt() {
-        return this.totemCountData.stream()
-                .filter(cnt -> cnt >= MINIMUM && cnt < STACK)
-                .count();
-    }
-
-    private long minTotemCnt() {
-        return this.totemCountData.stream()
-                .filter(cnt -> cnt == MINIMUM)
-                .count();
     }
 }
