@@ -1,5 +1,6 @@
 package teamzesa.userEvent;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -41,7 +42,6 @@ public class JoinAndQuit implements Listener {
     public void onJoin(@NotNull PlayerJoinEvent event) {
 
         init(event);
-        addUserData(); //User Object 추가
         addUserJoinCount(); //접속횟수
         userIPCheckUp(); //접속 IP 확인
         supplyUserKit();
@@ -57,18 +57,16 @@ public class JoinAndQuit implements Listener {
 
     private void init(@NotNull PlayerJoinEvent e) {
         this.joinPlayer = e.getPlayer();
-        this.userHandler = new UserHandler(this.joinPlayer);
+        UserMapHandler userData = UserMapHandler.getUserMapHandler();
+        if (Optional.ofNullable(userData.getUser(this.joinPlayer)).isEmpty()) {
+            this.userMapHandler.addUser(this.joinPlayer);
+            this.userHandler = new UserHandler(this.joinPlayer);
+        }
     }
 
     private void playerFlight() {
         this.joinPlayer.setAllowFlight(true);
         ComponentExchanger.playerAnnouncer(this.joinPlayer,"플라이 활성화",ColorList.YELLOW);
-    }
-
-    private void addUserData() {
-        UserMapHandler userData = UserMapHandler.getUserMapHandler();
-        if (Optional.ofNullable(userData.getUser(this.joinPlayer)).isEmpty())
-            userMapHandler.addUser(this.joinPlayer);
     }
 
     private void supplyUserKit() {
@@ -141,13 +139,16 @@ public class JoinAndQuit implements Listener {
     private void userIPCheckUp() {
         String message = newSubscribers() ? "신규 IP를 등록합니다." : "새로운 IP로 접속하셨습니다.";
 
-        if (newSubscribers())
+//        접속유저의 IP가 이미 존재하면 Return
+        if (userHandler.existsIP(this.joinPlayer.getAddress())) {
+            if (newSubscribers()) ComponentExchanger.playerAnnouncer(this.joinPlayer,message, ColorList.YELLOW);
+            else return;
+        }
+
+        if (userHandler.addIP(this.joinPlayer.getAddress()))
             ComponentExchanger.playerAnnouncer(this.joinPlayer, message, ColorList.YELLOW);
 
-        if (this.userHandler.existsNotIP(this.joinPlayer.getAddress())) {
-            this.userHandler.addIP(this.joinPlayer.getAddress());
-            ComponentExchanger.playerAnnouncer(this.joinPlayer, message, ColorList.YELLOW);
-        }
+        else Bukkit.getLogger().info(this.joinPlayer.getName() + " IP 추가 실패");
     }
 
     private boolean newSubscribers() {
