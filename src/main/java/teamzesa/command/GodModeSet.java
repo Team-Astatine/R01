@@ -9,6 +9,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
 import teamzesa.dataValue.ColorList;
+import teamzesa.dataValue.userData.User;
 import teamzesa.dataValue.userData.UserHandler;
 import teamzesa.dataValue.userData.UserMapHandler;
 import teamzesa.resgisterEvent.EventExecutor;
@@ -18,7 +19,7 @@ import java.util.Optional;
 
 public class GodModeSet implements CommandExecutor, EventExecutor {
     private Player targetPlayer;
-    private UserHandler targetUser;
+    private User targetUser;
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
 
@@ -52,7 +53,7 @@ public class GodModeSet implements CommandExecutor, EventExecutor {
 
     private void setFieldVariable(@NotNull Player player) {
         this.targetPlayer = player;
-        this.targetUser = new UserHandler(UserMapHandler.getUserMapHandler().getUser(player));
+        this.targetUser = UserMapHandler.getUserMapHandler().getUser(player);
     }
 
     private void setPlayerGodMode() {

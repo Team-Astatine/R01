@@ -10,23 +10,11 @@ import java.util.UUID;
 public class UserHandler {
     private final UserMapHandler userMapHandler = UserMapHandler.getUserMapHandler();
     private User user;
-    private UUID uuid;
-    private String name;
     private Set<String> ip;
-    private int joinCount;
-    private int level;
-    private double healthScale;
-    private boolean godMode;
 
     public UserHandler(Player player) {
         this.user = this.userMapHandler.getUser(player);
         this.ip = user.getIPList();
-    }
-
-    public UserHandler(@NotNull User user) {
-        this.user = user;
-        this.ip = user.getIPList();
-        this.godMode = user.isGodMode();
     }
 
     public Boolean existsIP(InetSocketAddress ip) {
@@ -39,11 +27,10 @@ public class UserHandler {
                 .noneMatch(listIP -> listIP.equals(ip.getAddress().getHostAddress()));
     }
 
-    public boolean addIP(@NotNull InetSocketAddress ip) {
+    public void addIP(@NotNull InetSocketAddress ip) {
         this.ip.add(ip.getAddress().getHostAddress());
         this.user.setIp(this.ip);
         updateUser();
-        return true;
     }
 
     public void addJoinCnt() {
@@ -51,25 +38,12 @@ public class UserHandler {
         updateUser();
     }
 
-    public boolean isGodMode() {
-        return godMode;
-    }
-
-    public void setGodMode(boolean enable) {
-        user.setGodMode(enable);
-        updateUser();
-    }
-
-    public void setHealthScale(double healthScale) {
-        user.setHealthScale(healthScale);
-        updateUser();
-    }
 
     public void updateUser() {
-        userMapHandler.updateUser(user);
+        this.userMapHandler.updateUser(this.user);
     }
 
     public User getUser() {
-        return user;
+        return this.user;
     }
 }
