@@ -19,7 +19,7 @@ public class UserHandler {
     private boolean godMode;
 
     public UserHandler(Player player) {
-        this.user = userMapHandler.getUser(player);
+        this.user = this.userMapHandler.getUser(player);
         this.ip = user.getIPList();
     }
 
@@ -39,10 +39,11 @@ public class UserHandler {
                 .noneMatch(listIP -> listIP.equals(ip.getAddress().getHostAddress()));
     }
 
-    public void addIP(@NotNull InetSocketAddress ip) {
+    public boolean addIP(@NotNull InetSocketAddress ip) {
         this.ip.add(ip.getAddress().getHostAddress());
         this.user.setIp(this.ip);
         updateUser();
+        return true;
     }
 
     public void addJoinCnt() {
