@@ -30,20 +30,23 @@ public class UserHandler {
     }
 
     public Boolean existsIP(InetSocketAddress ip) {
-        return this.ip
-                .stream()
+        return this.ip.stream()
                 .anyMatch(listIP -> listIP.equals(ip.getAddress().getHostAddress()));
     }
 
-    public boolean addIP(@NotNull InetSocketAddress ip) {
+    public Boolean existsNotIP(InetSocketAddress ip) {
+        return this.ip.stream()
+                .noneMatch(listIP -> listIP.equals(ip.getAddress().getHostAddress()));
+    }
+
+    public void addIP(@NotNull InetSocketAddress ip) {
         this.ip.add(ip.getAddress().getHostAddress());
-        user.setIp(this.ip);
+        this.user.setIp(this.ip);
         updateUser();
-        return true;
     }
 
     public void addJoinCnt() {
-        user.setJoinCount(user.getJoinCount() + 1);
+        this.user.setJoinCount(this.user.getJoinCount() + 1);
         updateUser();
     }
 
