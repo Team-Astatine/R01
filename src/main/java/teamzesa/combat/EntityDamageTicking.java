@@ -22,15 +22,15 @@ public class EntityDamageTicking implements Listener {
         if (!e.getEntityType().equals(EntityType.PLAYER))
             return;
 
-        Player heater = (Player) e.getDamager();
+        Player damager = (Player) e.getDamager();
         Player target = (Player) e.getEntity();
 
 //        default 20
 //        ((LivingEntity) e.getEntity()).setMaximumNoDamageTicks(1);
         int hurtTick = 20;
         boolean stuffCheck = handStuffChecker(
-                heater.getInventory().getItemInMainHand(),
-                heater.getInventory().getItemInOffHand());
+                damager.getInventory().getItemInMainHand(),
+                damager.getInventory().getItemInOffHand());
 
         if (!stuffCheck) //One Hand Sword
             hurtTick = 10;
