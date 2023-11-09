@@ -20,6 +20,7 @@ import teamzesa.dataValue.userData.UserHandler;
 import teamzesa.dataValue.userData.UserMapHandler;
 import teamzesa.worldSet.Announcer;
 
+import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -137,18 +138,16 @@ public class JoinAndQuit implements Listener {
     }
 
     private void userIPCheckUp() {
+        InetSocketAddress ip = null;
+        if (Optional.ofNullable(this.joinPlayer.getAddress()).isPresent())
+            ip = this.joinPlayer.getAddress();
+
         String message = newSubscribers() ? "신규 IP를 등록합니다." : "새로운 IP로 접속하셨습니다.";
+        if (newSubscribers() && userHandler.existsIP(ip))// 접속유저의 IP가 이미 존재하면 Return
+            ComponentExchanger.playerAnnouncer(this.joinPlayer,message, ColorList.YELLOW);
 
-//        접속유저의 IP가 이미 존재하면 Return
-        if (userHandler.existsIP(this.joinPlayer.getAddress())) {
-            if (newSubscribers()) ComponentExchanger.playerAnnouncer(this.joinPlayer,message, ColorList.YELLOW);
-            else return;
-        }
-
-        if (userHandler.addIP(this.joinPlayer.getAddress()))
-            ComponentExchanger.playerAnnouncer(this.joinPlayer, message, ColorList.YELLOW);
-
-        else Bukkit.getLogger().info(this.joinPlayer.getName() + " IP 추가 실패");
+        userHandler.addIP(this.joinPlayer.getAddress());
+        ComponentExchanger.playerAnnouncer(this.joinPlayer, message, ColorList.YELLOW);
     }
 
     private boolean newSubscribers() {
