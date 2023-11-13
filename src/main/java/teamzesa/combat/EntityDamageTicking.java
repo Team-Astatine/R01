@@ -1,6 +1,7 @@
 package teamzesa.combat;
 
 import org.bukkit.Material;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -11,26 +12,28 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
+import java.util.function.Predicate;
 
 public class EntityDamageTicking implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void entityHit(@NotNull EntityDamageByEntityEvent e) {
-        if (!e.getDamager().getType().equals(EntityType.PLAYER))
+
+        Entity damagerEntity = e.getDamager();
+        if (!damagerEntity.getType().equals(EntityType.PLAYER))
             return;
 
-        if (!e.getEntityType().equals(EntityType.PLAYER))
+        Entity targetEntity = e.getEntity();
+        if (!targetEntity.getType().equals(EntityType.PLAYER))
             return;
 
-        Player damager = (Player) e.getDamager();
-        Player target = (Player) e.getEntity();
+        Player damager = (Player) damagerEntity;
+        Player target = (Player) targetEntity;
 
-//        default 20
-//        ((LivingEntity) e.getEntity()).setMaximumNoDamageTicks(1);
         int hurtTick = 20;
         boolean stuffCheck = handStuffChecker(
-                damager.getInventory().getItemInMainHand(),
-                damager.getInventory().getItemInOffHand());
+                damager.getInventory().getItemInMainHand().getType(),
+                damager.getInventory().getItemInOffHand().getType());
 
         if (!stuffCheck) //One Hand Sword
             hurtTick = 10;
@@ -38,19 +41,23 @@ public class EntityDamageTicking implements Listener {
         if (stuffCheck) //Two Hand Sword
             hurtTick = 1;
 
+//        default 20
+//        ((LivingEntity) e.getEntity()).setMaximumNoDamageTicks(1);
         target.setMaximumNoDamageTicks(hurtTick);
     }
 
-    private @NotNull Boolean handStuffChecker(@NotNull ItemStack mainStuff , @NotNull ItemStack offStuff) {
+    private @NotNull Boolean handStuffChecker(@NotNull Material mainStuff , @NotNull Material offStuff) {
+        Predicate<Material> netheriteToolChecker = tool ->
+                tool.equals(Material.NETHERITE_SWORD) || tool.equals(Material.NETHERITE_AXE);
 
-        boolean mainHand = Optional.of(mainStuff.getType()).filter(stuff ->
-            stuff.equals(Material.NETHERITE_SWORD) || stuff.equals(Material.NETHERITE_AXE)
-        ).isPresent();
-
-        boolean offHand = Optional.of(offStuff.getType()).filter(stuff ->
-                stuff.equals(Material.NETHERITE_SWORD) || stuff.equals(Material.NETHERITE_AXE)
-        ).isPresent();
-
-        return mainHand && offHand;
+        return netheriteToolChecker.test(mainStuff) && netheriteToolChecker.test(offStuff);
     }
+    /*private @NotNull Boolean handStuffChecker(@NotNull ItemStack mainStuff, @NotNull ItemStack offStuff) {
+        Predicate<Material> isNetheriteSword = material -> material.equals(Material.NETHERITE_SWORD);
+        Predicate<Material> isNetheriteAxe = material -> material.equals(Material.NETHERITE_AXE);
+
+        Predicate<Material> isNetheriteTool = isNetheriteSword.or(isNetheriteAxe);
+
+        return isNetheriteTool.test(mainStuff.getType()) && isNetheriteTool.test(offStuff.getType());
+    }*/
 }
