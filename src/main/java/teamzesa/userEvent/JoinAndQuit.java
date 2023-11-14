@@ -1,6 +1,5 @@
 package teamzesa.userEvent;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -15,14 +14,15 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
 import teamzesa.dataValue.ColorList;
+import teamzesa.dataValue.kit.ArmourKit;
+import teamzesa.dataValue.kit.FoodKit;
+import teamzesa.dataValue.kit.ToolKit;
 import teamzesa.dataValue.userData.User;
 import teamzesa.dataValue.userData.UserHandler;
 import teamzesa.dataValue.userData.UserMapHandler;
 import teamzesa.worldSet.Announcer;
 
 import java.net.InetSocketAddress;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 
@@ -86,55 +86,25 @@ public class JoinAndQuit implements Listener {
     }
 
     private void supplyKit() {
-        List<ItemStack> kit = new ArrayList<>();
-        ItemStack fork = new ItemStack(Material.COOKED_BEEF, 20);
-        ItemStack apple = new ItemStack(Material.GOLDEN_APPLE, 2);
+        for (FoodKit kit : FoodKit.values()){
+            this.joinPlayer.getInventory().addItem(kit.getFood());
+        }
 
-        kit.add(fork);
-        kit.add(apple);
+        for (ArmourKit kit : ArmourKit.values()) {
+            ItemStack armour = kit.getArmour();
+            armour.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+            armour.addEnchantment(Enchantment.DURABILITY, 2);
+            this.joinPlayer.getInventory().addItem(kit.getArmour());
+        }
 
-        ItemStack netheriteHat = new ItemStack(Material.NETHERITE_HELMET);
-        netheriteHat.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
-        netheriteHat.addEnchantment(Enchantment.DURABILITY, 2);
-        kit.add(netheriteHat);
-
-        ItemStack netheriteChestPlate = new ItemStack(Material.NETHERITE_CHESTPLATE);
-        netheriteChestPlate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
-        netheriteChestPlate.addEnchantment(Enchantment.DURABILITY, 2);
-        kit.add(netheriteChestPlate);
-
-        ItemStack netheriteLeggings = new ItemStack(Material.NETHERITE_LEGGINGS);
-        netheriteLeggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
-        netheriteLeggings.addEnchantment(Enchantment.DURABILITY, 2);
-        kit.add(netheriteLeggings);
-
-        ItemStack netheriteBoots = new ItemStack(Material.NETHERITE_BOOTS);
-        netheriteBoots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
-        netheriteBoots.addEnchantment(Enchantment.DURABILITY, 2);
-        kit.add(netheriteBoots);
-
-        ItemStack netheriteSword = new ItemStack(Material.NETHERITE_SWORD);
-        netheriteSword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
-        netheriteSword.addEnchantment(Enchantment.DURABILITY, 2);
-        kit.add(netheriteSword);
-
-        ItemStack netheritePickaxe = new ItemStack(Material.NETHERITE_PICKAXE);
-        netheritePickaxe.addEnchantment(Enchantment.DIG_SPEED, 2);
-        netheritePickaxe.addEnchantment(Enchantment.DURABILITY, 2);
-        kit.add(netheritePickaxe);
-
-        ItemStack netheriteAxe = new ItemStack(Material.NETHERITE_AXE);
-        netheriteAxe.addEnchantment(Enchantment.DIG_SPEED, 2);
-        netheriteAxe.addEnchantment(Enchantment.DURABILITY, 2);
-        kit.add(netheriteAxe);
-
-        ItemStack netheriteShovel = new ItemStack(Material.NETHERITE_SHOVEL);
-        netheriteShovel.addEnchantment(Enchantment.DIG_SPEED, 2);
-        netheriteShovel.addEnchantment(Enchantment.DURABILITY, 2);
-        kit.add(netheriteShovel);
-
-        for (ItemStack newTool : kit)
-            this.joinPlayer.getInventory().addItem(newTool);
+        for (ToolKit kit : ToolKit.values()) {
+            ItemStack tool = kit.getToolKit();
+            if (tool.getType().equals(Material.NETHERITE_SWORD))
+                tool.addEnchantment(Enchantment.DAMAGE_ALL, 2);
+            else tool.addEnchantment(Enchantment.DIG_SPEED, 2);
+            tool.addEnchantment(Enchantment.DURABILITY, 2);
+            this.joinPlayer.getInventory().addItem(tool);
+        }
     }
 
     private void userIPCheckUp() {
