@@ -63,8 +63,7 @@ public final class R01 extends JavaPlugin {
 
     private void commandHandler() {
         for (CommandListup commandEnum : CommandListup.values()) {
-            Objects.requireNonNull(
-                    getCommand(commandEnum.getCommand())).setExecutor(commandEnum.newInstance());
+            getCommand(commandEnum.getCommand()).setExecutor(commandEnum.newInstance());
         }
     }
 
