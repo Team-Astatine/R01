@@ -9,7 +9,6 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
 import teamzesa.IOHandler.UserIOHandler;
 import teamzesa.dataValue.ColorList;
-import teamzesa.dataValue.userData.UserMapHandler;
 import teamzesa.resgisterEvent.EventExecutor;
 
 

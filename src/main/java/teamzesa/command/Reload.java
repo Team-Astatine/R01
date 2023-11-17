@@ -7,7 +7,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.ComponentExchanger;
-import teamzesa.IOHandler.ConfigIOHandler;
 import teamzesa.R01;
 import teamzesa.dataValue.ColorList;
 import teamzesa.resgisterEvent.EventExecutor;
