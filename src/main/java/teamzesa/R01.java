@@ -8,7 +8,9 @@ import teamzesa.resgisterEvent.CommandListup;
 import teamzesa.resgisterEvent.EventListup;
 import teamzesa.worldSet.*;
 
+
 public final class R01 extends JavaPlugin {
+    private static final double PLUGIN_VERSION = 3.0;
 
     @Override
     public void onEnable() {
@@ -51,6 +53,7 @@ public final class R01 extends JavaPlugin {
     }
 
     public void updateCheck() {
+        Bukkit.getLogger().info("[R01]Current Version -> " + PLUGIN_VERSION);
         UpdateChecker.getUpdateChecker().fileLoader();
         UpdateChecker.getUpdateChecker().fileManager(); //checking update
     }
