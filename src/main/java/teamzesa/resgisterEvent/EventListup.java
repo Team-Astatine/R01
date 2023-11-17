@@ -7,6 +7,7 @@ import teamzesa.combat.HandSwing;
 import teamzesa.userEvent.Death;
 import teamzesa.userEvent.Respawn;
 import teamzesa.userEvent.JoinAndQuit;
+import teamzesa.worldSet.Anvil;
 import teamzesa.worldSet.RaidAnnouncer;
 import teamzesa.worldSet.RecipeController;
 
@@ -22,7 +23,9 @@ public enum EventListup {
     JOIN_AND_QUIT(new JoinAndQuit()),
     RAID_ANNOUNCER(new RaidAnnouncer()),
     RECIPE_CONTROLLER(new RecipeController()),
-    ENTITY_DAMAGE_TICKING(new EntityDamageTicking());
+    ENTITY_DAMAGE_TICKING(new EntityDamageTicking()),
+
+    ANVIL(new Anvil());
 
     private final Listener eventListener;
 
