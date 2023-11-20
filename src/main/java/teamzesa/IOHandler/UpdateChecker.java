@@ -28,14 +28,16 @@ public class UpdateChecker {
 
     public void fileLoader() {
         this.folder = DataFile.ABSOLUTE_PATH.getFileInstance();
-        Optional.ofNullable(this.folder.listFiles()).ifPresent(file -> this.fileList = List.of(file));
+        Optional.ofNullable(this.folder.listFiles()).ifPresent(
+                file -> this.fileList = List.of(file)
+        );
     }
 
     public void fileManager() {
         gitUpdateCheck();
         localPluginCheck();
 
-        Bukkit.getLogger().info("[R01] Github Plugin Version > " + gitVersion);
+        Bukkit.getLogger().info("[R01] Github Releases Version > " + gitVersion);
         Bukkit.getLogger().info("[R01] Local Plugin Version > " + localVersion);
 
         if (gitVersion == localVersion) {
@@ -44,6 +46,7 @@ public class UpdateChecker {
         }
         if (gitVersion > localVersion) {
             Bukkit.getLogger().info("[R01] 구버전 입니다. 자동 업데이트 합니다.");
+            Bukkit.getPluginManager().disablePlugins();
             removeLegacyPlugin();
             installNewPlugin();
         }
@@ -70,13 +73,14 @@ public class UpdateChecker {
     }
 
     private void removeLegacyPlugin() {
-        fileList.stream()
+        System.out.println(fileList);
+        this.fileList.stream()
                 .filter(file -> file.getName().contains("R01-") && file.getName().contains(".jar"))
                 .forEach(File::delete);
     }
 
     private void localPluginCheck() {
-        fileList.stream()
+        this.fileList.stream()
                 .filter(file -> file.getName().contains("R01-") && file.getName().contains(".jar"))
                 .forEach(file -> localVersion = Double.parseDouble(
                         file.getName()

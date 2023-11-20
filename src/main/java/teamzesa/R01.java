@@ -10,7 +10,11 @@ import teamzesa.worldSet.*;
 
 
 public final class R01 extends JavaPlugin {
-    private static final double PLUGIN_VERSION = 3.0;
+    private final long RUNNING_TIME;
+
+    public R01() {
+        this.RUNNING_TIME = System.currentTimeMillis();
+    }
 
     @Override
     public void onEnable() {
@@ -24,6 +28,16 @@ public final class R01 extends JavaPlugin {
 
 //        configSet
         fileLoader(); // config set File
+
+//        loading Time
+        pluginLoadTime();
+    }
+
+    private void pluginLoadTime() {
+        String blockingTime = String.format("(%.3fs)",
+                (System.currentTimeMillis() - this.RUNNING_TIME)/1000.0
+        );
+        Bukkit.getLogger().info("[R01] Done" + blockingTime);
     }
 
     private void generationDataFile() {
@@ -53,7 +67,6 @@ public final class R01 extends JavaPlugin {
     }
 
     public void updateCheck() {
-        Bukkit.getLogger().info("[R01]Current Version -> " + PLUGIN_VERSION);
         UpdateChecker.getUpdateChecker().fileLoader();
         UpdateChecker.getUpdateChecker().fileManager(); //checking update
     }
