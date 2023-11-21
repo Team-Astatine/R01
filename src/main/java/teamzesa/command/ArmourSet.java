@@ -7,9 +7,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.ComponentExchanger;
-import teamzesa.dataValue.ColorList;
-import teamzesa.resgisterEvent.EventExecutor;
+import teamzesa.util.ComponentExchanger;
+import teamzesa.util.Enum.ColorList;
+import teamzesa.event.EventExecutor;
 
 import java.util.Optional;
 

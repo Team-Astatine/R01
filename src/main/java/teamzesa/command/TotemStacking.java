@@ -9,10 +9,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.ComponentExchanger;
-import teamzesa.ThreadPool;
-import teamzesa.dataValue.ColorList;
-import teamzesa.resgisterEvent.EventExecutor;
+import teamzesa.util.ComponentExchanger;
+import teamzesa.util.ThreadPool;
+import teamzesa.util.Enum.ColorList;
+import teamzesa.event.EventExecutor;
 
 import java.util.*;
 import java.util.List;

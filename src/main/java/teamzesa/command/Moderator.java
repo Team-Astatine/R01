@@ -6,14 +6,13 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.ComponentExchanger;
-import teamzesa.dataValue.ColorList;
-import teamzesa.resgisterEvent.EventExecutor;
+import teamzesa.util.ComponentExchanger;
+import teamzesa.util.Enum.ColorList;
+import teamzesa.event.EventExecutor;
 
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import java.util.UUID;
 
 public class Moderator implements CommandExecutor, EventExecutor {
     private final Set<String> moderatorName;
