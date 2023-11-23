@@ -33,7 +33,7 @@ public class UserUtil {
         updateUser();
     }
 
-    public void addJoinCnt() {
+    public void increaseJoinCnt() {
         this.user.setJoinCount(this.user.getJoinCount() + 1);
         updateUser();
     }

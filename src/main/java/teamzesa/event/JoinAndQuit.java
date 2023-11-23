@@ -42,7 +42,7 @@ public class JoinAndQuit implements Listener {
     public void onJoin(@NotNull PlayerJoinEvent event) {
 
         init(event);
-        addUserJoinCount(); //접속횟수
+        increasePlayerJoinCnt(); //접속횟수
         userIPCheckUp(); //접속 IP 확인
         supplyUserKit();
 
@@ -119,13 +119,13 @@ public class JoinAndQuit implements Listener {
         ComponentExchanger.playerAnnouncer(this.joinPlayer, message, ColorList.YELLOW);
     }
 
-    private boolean newSubscribers() {
+    private boolean newSubscribers () {
         int joinCnt =  this.userUtil.getUser().getJoinCount();
         return joinCnt == 1;
     }
 
-    private void addUserJoinCount() {
-        this.userUtil.addJoinCnt();
+    private void increasePlayerJoinCnt() {
+        this.userUtil.increaseJoinCnt();
     }
 
     private void setHealthScale() {
