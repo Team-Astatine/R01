@@ -10,7 +10,7 @@ https://jaxple.notion.site/d1ef58aa889d4b8ba1342fc09c0249b4?pvs=4
 
 ## refactor List
 * 커멘드를 consol에서 보낸건지 player가 보낸건지 체크하는 로직 만들기
-* 
+* synchronized 테스트하기 
 
 ## Debug List
 *  joinEvent
