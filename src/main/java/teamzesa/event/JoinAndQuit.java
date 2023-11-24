@@ -41,8 +41,8 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public synchronized void onJoin(@NotNull PlayerJoinEvent event) {
 
-        init(event);
-        increasePlayerJoinCnt(); //접속횟수
+        init(event.getPlayer());
+        this.userUtil.increaseJoinCnt(); //접속횟수
         userIPCheckUp(); //접속 IP 확인
         supplyUserKit();
 
@@ -55,12 +55,17 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
         setHealthScale();
     }
 
-    private void init(@NotNull PlayerJoinEvent e) {
-        this.joinPlayer = e.getPlayer();
+    private void init(Player player) {
+        this.joinPlayer = player;
 
-        UserMapHandler userData = UserMapHandler.getUserMapHandler();
-        this.userMapHandler.addUser(this.joinPlayer);
-        this.userUtil = new UserUtil(this.joinPlayer);
+        User user = this.userMapHandler.getUser(player);
+        Optional.ofNullable(user).ifPresentOrElse(
+                existUser -> this.userUtil = new UserUtil(existUser),
+                () -> {
+                    this.userMapHandler.addUser(player);
+                    this.userUtil = new UserUtil(player);
+                }
+        );
     }
 
     private void playerFlight() {
@@ -111,20 +116,16 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
             ip = this.joinPlayer.getAddress();
 
         String message = newSubscribers() ? "신규 IP를 등록합니다." : "새로운 IP로 접속하셨습니다.";
-        if (newSubscribers() && userUtil.existsIP(ip))// 접속유저의 IP가 이미 존재하면 Return
-            playerSendMsgComponentExchanger(this.joinPlayer,message, ColorList.YELLOW);
-
-        userUtil.addIP(this.joinPlayer.getAddress());
-        playerSendMsgComponentExchanger(this.joinPlayer, message, ColorList.YELLOW);
+        if (newSubscribers() || this.userUtil.nonExistsIP(ip)) {
+            this.userUtil.addIP(ip);
+            this.userMapHandler.updateUser(this.userUtil.getUser());
+            playerSendMsgComponentExchanger(this.joinPlayer, message, ColorList.YELLOW);
+        }
     }
 
     private boolean newSubscribers () {
         int joinCnt =  this.userUtil.getUser().getJoinCount();
         return joinCnt == 1;
-    }
-
-    private void increasePlayerJoinCnt() {
-        this.userUtil.increaseJoinCnt();
     }
 
     private void setHealthScale() {
