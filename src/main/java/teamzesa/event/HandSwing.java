@@ -15,7 +15,7 @@ import teamzesa.R01;
 
 public class HandSwing implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onSwing(@NotNull PlayerArmSwingEvent e) {
+    public synchronized void onSwing(@NotNull PlayerArmSwingEvent e) {
         Player player = e.getPlayer();
 
         if (player.getInventory().getItemInMainHand().getType() != Material.AIR) {

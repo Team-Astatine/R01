@@ -39,7 +39,7 @@ public class JoinAndQuit implements Listener {
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onJoin(@NotNull PlayerJoinEvent event) {
+    public synchronized void onJoin(@NotNull PlayerJoinEvent event) {
 
         init(event);
         increasePlayerJoinCnt(); //접속횟수

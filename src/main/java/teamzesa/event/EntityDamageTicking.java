@@ -15,7 +15,7 @@ import java.util.function.Predicate;
 public class EntityDamageTicking implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void entityHit(@NotNull EntityDamageByEntityEvent e) {
+    public synchronized void entityHit(@NotNull EntityDamageByEntityEvent e) {
 
         Entity damagerEntity = e.getDamager();
         if (!damagerEntity.getType().equals(EntityType.PLAYER))

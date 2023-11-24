@@ -24,7 +24,6 @@ public enum EventListup {
     RAID_ANNOUNCER(new RaidAnnouncer()),
     RECIPE_CONTROLLER(new RecipeController()),
     ENTITY_DAMAGE_TICKING(new EntityDamageTicking()),
-
     ANVIL(new Anvil());
 
     private final Listener eventListener;

@@ -23,7 +23,7 @@ public class Death extends ComponentExchanger implements Listener {
     }
 
     @EventHandler
-    public void onPlayerDeath(PlayerDeathEvent e) {
+    public synchronized void onPlayerDeath(PlayerDeathEvent e) {
         this.event = e;
         if (checkingGodMod())
             return;

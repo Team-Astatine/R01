@@ -3,6 +3,7 @@ package teamzesa.event;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import teamzesa.util.ComponentExchanger;
@@ -12,8 +13,8 @@ import teamzesa.util.Enum.ColorList;
 public class Respawn implements Listener {
     private PlayerRespawnEvent event;
 
-    @EventHandler
-    public void onRespawn(PlayerRespawnEvent e) {
+    @EventHandler(priority = EventPriority.LOW)
+    public synchronized void onRespawn(PlayerRespawnEvent e) {
         this.event = e;
         deathRandomTeleport();
     }

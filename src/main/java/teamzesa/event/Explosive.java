@@ -11,7 +11,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class Explosive implements Listener {
     private ExplosionPrimeEvent event;
     @EventHandler(priority = EventPriority.LOW)
-    public void explosiveHandler(ExplosionPrimeEvent event) {
+    public synchronized void explosiveHandler(ExplosionPrimeEvent event) {
         this.event = event;
 //        TNT: 4 blocks
 //        Creeper:

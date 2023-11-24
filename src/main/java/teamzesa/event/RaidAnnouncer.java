@@ -11,7 +11,7 @@ import teamzesa.util.Enum.WorldName;
 
 public class RaidAnnouncer implements Listener {
     @EventHandler
-    public void raidAnnouncer(@NotNull RaidTriggerEvent e) {
+    public synchronized void raidAnnouncer(@NotNull RaidTriggerEvent e) {
         Location loc = e.getRaid().getLocation();
         String activeWorld = e.getWorld().getName();
         String activeWorldKorean = WorldName.valueOf(activeWorld).getKoreanWorldName();

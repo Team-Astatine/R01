@@ -31,7 +31,7 @@ public class RecipeController implements Listener {
     }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public void onCraft(CraftItemEvent e) {
+    public synchronized void onCraft(CraftItemEvent e) {
         BukkitRunnable task = new BukkitRunnable() {
             @Override
             public void run() {
