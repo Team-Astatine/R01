@@ -69,8 +69,8 @@ public class Death extends ComponentExchanger implements Listener {
     private @NotNull Boolean checkingGodMod() {
         User user = this.userMapHandler.getUser(this.event.getPlayer());
 
-        if (user.isGodMode())
-            return true;
+        if (!user.isGodMode())
+            return false;
 
         Location playerLocation = this.event.getPlayer().getLocation();
         playerLocation.setY(playerLocation.getY() + 2.0);
@@ -85,6 +85,6 @@ public class Death extends ComponentExchanger implements Listener {
         task.run();
 //        ThreadPool.getThreadPool().addTask(task);
         this.event.setCancelled(true);
-        return false;
+        return true;
     }
 }
