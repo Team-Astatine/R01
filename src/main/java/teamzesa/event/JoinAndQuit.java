@@ -57,11 +57,10 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
 
     private void init(@NotNull PlayerJoinEvent e) {
         this.joinPlayer = e.getPlayer();
+
         UserMapHandler userData = UserMapHandler.getUserMapHandler();
-        if (Optional.ofNullable(userData.getUser(this.joinPlayer)).isEmpty()) {
-            this.userMapHandler.addUser(this.joinPlayer);
-            this.userUtil = new UserUtil(this.joinPlayer);
-        }
+        this.userMapHandler.addUser(this.joinPlayer);
+        this.userUtil = new UserUtil(this.joinPlayer);
     }
 
     private void playerFlight() {
