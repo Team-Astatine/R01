@@ -13,9 +13,9 @@ import teamzesa.event.RecipeController;
 
 
 public enum EventListup {
-//    ANVIL(new Anvil()),
 //    DISPLAY_ENTITY(new DisplayEntity()),
 
+    ANVIL(new Anvil()),
     DEATH(new Death()),
     RESPAWN(new Respawn()),
     EXPLOSIVE(new Explosive()),
@@ -23,8 +23,7 @@ public enum EventListup {
     JOIN_AND_QUIT(new JoinAndQuit()),
     RAID_ANNOUNCER(new RaidAnnouncer()),
     RECIPE_CONTROLLER(new RecipeController()),
-    ENTITY_DAMAGE_TICKING(new EntityDamageTicking()),
-    ANVIL(new Anvil());
+    ENTITY_DAMAGE_TICKING(new EntityDamageTicking());
 
     private final Listener eventListener;
 
