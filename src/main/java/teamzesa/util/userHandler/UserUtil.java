@@ -9,12 +9,17 @@ import java.util.Set;
 
 public class UserUtil {
     private final UserMapHandler userMapHandler = UserMapHandler.getUserMapHandler();
-    private User user;
-    private Set<String> ip;
+    private final User user;
+    private final Set<String> ip;
+
+    public UserUtil(User user) {
+        this.user = user;
+        this.ip = user.getIPList();
+    }
 
     public UserUtil(Player player) {
         this.user = this.userMapHandler.getUser(player);
-        this.ip = user.getIPList();
+        this.ip = this.user.getIPList();
     }
 
     public Boolean existsIP(InetSocketAddress ip) {
@@ -22,15 +27,16 @@ public class UserUtil {
                 .anyMatch(listIP -> listIP.equals(ip.getAddress().getHostAddress()));
     }
 
-    public Boolean existsNotIP(InetSocketAddress ip) {
+    public Boolean nonExistsIP(InetSocketAddress ip) {
         return this.ip.stream()
                 .noneMatch(listIP -> listIP.equals(ip.getAddress().getHostAddress()));
     }
 
-    public void addIP(@NotNull InetSocketAddress ip) {
+    public boolean addIP(@NotNull InetSocketAddress ip) {
         this.ip.add(ip.getAddress().getHostAddress());
         this.user.setIp(this.ip);
         updateUser();
+        return true;
     }
 
     public void increaseJoinCnt() {

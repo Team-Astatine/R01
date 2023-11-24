@@ -39,6 +39,11 @@ public class UserMapHandler extends ComponentExchanger {
         userData.put(player.getUniqueId(), new User(player));
     }
 
+    public void addUser(@NotNull User user) {
+        Bukkit.getLogger().info(user.getName() + "님이 신규유저 등록됐습니다.");
+        userData.put(user.getUuid(),user);
+    }
+
     public User getUser(@NotNull Player player) {
         return userData.get(player.getUniqueId());
     }

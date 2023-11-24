@@ -6,6 +6,14 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 
 public class User {
+//                           UUID uuid,
+//                           String name,
+//                           Set<String>ip,
+//                            int joinCount,
+//                            int level,
+//                            double healthScale,
+//                           boolean godMode
+//                           ) {}
     private UUID uuid;
     private String name;
     private Set<String> ip = new HashSet<>();

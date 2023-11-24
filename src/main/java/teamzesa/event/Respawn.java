@@ -14,12 +14,12 @@ public class Respawn extends ComponentExchanger implements Listener {
     private PlayerRespawnEvent event;
 
     @EventHandler(priority = EventPriority.LOW)
-    public synchronized void onRespawn(PlayerRespawnEvent e) {
+    public void onRespawn(PlayerRespawnEvent e) {
         this.event = e;
         deathRandomTeleport();
     }
 
-    public void deathRandomTeleport() {
+    public synchronized void deathRandomTeleport() {
         Player player = this.event.getPlayer();
 
         if (player.getBedSpawnLocation() != null) {

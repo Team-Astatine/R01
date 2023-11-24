@@ -13,7 +13,7 @@ import teamzesa.util.ComponentExchanger;
 public class DisplayEntity extends ComponentExchanger implements Listener {
 
     @EventHandler
-    public void onEntity(@NotNull BlockPlaceEvent e) {
+    public synchronized void onEntity(@NotNull BlockPlaceEvent e) {
         Location position = e.getBlock().getLocation().add(0,10,0);
         Player player = e.getPlayer();
         HoverEvent<Component> hoverEvent = HoverEvent.showText(

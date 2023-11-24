@@ -15,15 +15,32 @@ public class RanNumGenerator {
         }
 
     public static int groundChecker(World world) {
+        Block block = null;
+        boolean checkLegRoom = false;
+        boolean checkBodyRoom = false;
+        boolean checkGround = false;
+
         int maxHigh = world.getMaxHeight() - 1; //320 > Material_VOID_AIR
         int minHigh = world.getMinHeight(); //-64
+
         int x = numGenerator();
         int z = numGenerator();
 
         for (int y = maxHigh; y > minHigh; y--) {
-        Block block = world.getBlockAt(x, y, z);
-        if (block.getType() != Material.AIR)
-            return y;
+            block = world.getBlockAt(x, y, z);
+            if (block.getType() != Material.AIR)
+                checkGround = true;
+
+            block = world.getBlockAt(x,y+1,z);
+            if (block.getType() == Material.AIR)
+                checkLegRoom = true;
+
+            block = world.getBlockAt(x,y+2,z);
+            if (block.getType() == Material.AIR)
+                checkBodyRoom = true;
+
+            if (checkGround && checkBodyRoom && checkLegRoom)
+                return y;
         }
         return 0;
     }
