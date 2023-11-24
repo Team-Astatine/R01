@@ -12,7 +12,7 @@ import teamzesa.util.Enum.ColorList;
 import teamzesa.event.EventExecutor;
 
 
-public class MotdSet implements CommandExecutor, EventExecutor {
+public class MotdSet extends ComponentExchanger implements CommandExecutor, EventExecutor {
 
     private String newMotd;
 
@@ -35,12 +35,12 @@ public class MotdSet implements CommandExecutor, EventExecutor {
     private void sendComment(CommandSender sender) {
         String comment = "New Motd Set > " + this.newMotd;
         if (sender instanceof Player) {
-            ComponentExchanger.playerAnnouncer((Player)sender, comment, ColorList.YELLOW);
+            playerSendMsgComponentExchanger((Player)sender, comment, ColorList.YELLOW);
         } else Bukkit.getLogger().info(comment);
     }
 
     private void configDataUpdate() {
-        Bukkit.motd(ComponentExchanger.componentSet(this.newMotd));
+        Bukkit.motd(componentExchanger(this.newMotd));
         ConfigIOHandler.getConfigIOHandler().worldConfigSave(this.newMotd);
     }
 }

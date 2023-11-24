@@ -12,7 +12,7 @@ import teamzesa.util.Enum.ColorList;
 import teamzesa.event.EventExecutor;
 
 
-public class SaveUserData implements CommandExecutor, EventExecutor {
+public class SaveUserData extends ComponentExchanger implements CommandExecutor, EventExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, Command command, String label, String[] args) {
         UserIOHandler.getIOHandler().exportUserData();
@@ -22,7 +22,7 @@ public class SaveUserData implements CommandExecutor, EventExecutor {
 
     private void sendComment(CommandSender sender, String comment) {
         if (sender instanceof Player)
-            ComponentExchanger.playerAnnouncer(sender,comment, ColorList.YELLOW);
+            playerSendMsgComponentExchanger(sender,comment, ColorList.YELLOW);
         else Bukkit.getLogger().info("[R01] " + comment);
     }
 }

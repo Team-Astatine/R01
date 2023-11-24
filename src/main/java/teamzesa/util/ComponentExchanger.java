@@ -10,9 +10,9 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.util.Enum.ColorList;
 
-public class ComponentExchanger {
+public abstract class ComponentExchanger {
 
-    public static @NotNull Component createLinkComponent(String text, String url, @NotNull ColorList color) {
+    public @NotNull Component createLinkComponentExchanger(String text, String url, @NotNull ColorList color) {
         TextComponent.Builder component = Component.text()
                 .content(text)
                 .color(color.getTextColor())
@@ -20,36 +20,36 @@ public class ComponentExchanger {
         return component.build();
     }
 
-    public static void serverAnnouncer(String comment, @NotNull ColorList color) {
+    public void sendAnnouncerComponentExchanger(String comment, @NotNull ColorList color) {
         Component component = Component.text(comment)
                 .color(color.getTextColor());
         Bukkit.broadcast(component);
     }
 
-    public static void playerAnnouncer(@NotNull Player player, String comment) {
+    public void playerSendMsgComponentExchanger(@NotNull Player player, String comment) {
         player.sendMessage(Component.text(comment));
     }
 
-    public static void playerAnnouncer(@NotNull Player player, String comment, @NotNull ColorList color) {
+    public void playerSendMsgComponentExchanger(@NotNull Player player, String comment, @NotNull ColorList color) {
         Component component = Component.text(comment)
                 .color(color.getTextColor());
         player.sendMessage(component);
     }
 
-    public static void playerAnnouncer(@NotNull Player player, @NotNull StringBuilder comment, @NotNull ColorList color) {
+    public void playerSendMsgComponentExchanger(@NotNull Player player, @NotNull StringBuilder comment, @NotNull ColorList color) {
         Component component = Component.text(comment.toString())
                 .color(color.getTextColor());
         player.sendMessage(component);
     }
 
-    public static void playerAnnouncer(@NotNull CommandSender sender, @NotNull String comment, @NotNull ColorList color) {
+    public void playerSendMsgComponentExchanger(@NotNull CommandSender sender, @NotNull String comment, @NotNull ColorList color) {
         Player player = (Player) sender;
         Component component = Component.text(comment)
                 .color(color.getTextColor());
         player.sendMessage(component);
     }
 
-    public static void playerAnnouncer(@NotNull CommandSender sender, @NotNull StringBuilder comment, @NotNull ColorList color) {
+    public void playerSendMsgComponentExchanger(@NotNull CommandSender sender, @NotNull StringBuilder comment, @NotNull ColorList color) {
         Player player = (Player) sender;
         Component component = Component.text(comment.toString())
                 .color(color.getTextColor());
@@ -57,11 +57,11 @@ public class ComponentExchanger {
     }
 
     @Contract(value = "_ -> new", pure = true)
-    public static @NotNull Component componentSet(String comment) {
+    public @NotNull Component componentExchanger(String comment) {
         return Component.text(comment);
     }
 
-    public static @NotNull Component componentSet(String comment, @NotNull ColorList color) {
+    public @NotNull Component componentExchanger(String comment, @NotNull ColorList color) {
         return Component.text(comment)
                 .color(color.getTextColor());
     }

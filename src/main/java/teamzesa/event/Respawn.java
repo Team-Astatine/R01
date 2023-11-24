@@ -10,7 +10,7 @@ import teamzesa.util.ComponentExchanger;
 import teamzesa.util.Enum.ColorList;
 
 
-public class Respawn implements Listener {
+public class Respawn extends ComponentExchanger implements Listener {
     private PlayerRespawnEvent event;
 
     @EventHandler(priority = EventPriority.LOW)
@@ -23,7 +23,7 @@ public class Respawn implements Listener {
         Player player = this.event.getPlayer();
 
         if (player.getBedSpawnLocation() != null) {
-            ComponentExchanger.playerAnnouncer(player, "침대로 텔레포트 됩니다.", ColorList.YELLOW);
+            playerSendMsgComponentExchanger(player, "침대로 텔레포트 됩니다.", ColorList.YELLOW);
             return;
         }
 
@@ -32,6 +32,6 @@ public class Respawn implements Listener {
         int y = RanNumGenerator.groundChecker(player.getWorld());
 
         this.event.setRespawnLocation(new Location(player.getWorld(),x,y,z));
-        ComponentExchanger.playerAnnouncer(player,"침대가 없어 랜덤 텔레포트 되었습니다.", ColorList.ORANGE);
+        playerSendMsgComponentExchanger(player,"침대가 없어 랜덤 텔레포트 되었습니다.", ColorList.ORANGE);
     }
 }

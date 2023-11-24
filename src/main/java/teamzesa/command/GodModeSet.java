@@ -16,7 +16,7 @@ import teamzesa.event.EventExecutor;
 import java.util.Optional;
 
 
-public class GodModeSet implements CommandExecutor, EventExecutor {
+public class GodModeSet extends ComponentExchanger implements CommandExecutor, EventExecutor {
     private Player targetPlayer;
     private User targetUser;
     @Override
@@ -25,7 +25,7 @@ public class GodModeSet implements CommandExecutor, EventExecutor {
         Optional<Player>checkingPlayer = Optional.ofNullable(Bukkit.getPlayer(args[0]));
         if (checkingPlayer.isEmpty()) {
             if (sender instanceof Player)
-                ComponentExchanger.playerAnnouncer(sender,"/god [플레이어 이름]",ColorList.RED);
+                playerSendMsgComponentExchanger(sender,"/god [플레이어 이름]",ColorList.RED);
             else
                 Bukkit.getLogger().info("[R01] /god [플레이어 이름]");
             return false;
@@ -42,12 +42,12 @@ public class GodModeSet implements CommandExecutor, EventExecutor {
         String comment = "은 이제 " + (this.targetUser.isGodMode() ? "신" : "인간") + " 입니다.";
 
         if (!this.targetPlayer.equals(sender) && senderInstance)
-            ComponentExchanger.playerAnnouncer(sender, this.targetPlayer.getName() + comment, ColorList.ORANGE);
+            playerSendMsgComponentExchanger(sender, this.targetPlayer.getName() + comment, ColorList.ORANGE);
 
         if (!senderInstance)
             Bukkit.getLogger().info("[R01] " + targetPlayer.getName() + comment);
 
-        ComponentExchanger.playerAnnouncer(this.targetPlayer, "당신" + comment, ColorList.ORANGE);
+        playerSendMsgComponentExchanger(this.targetPlayer, "당신" + comment, ColorList.ORANGE);
     }
 
     private void setFieldVariable(@NotNull Player player) {

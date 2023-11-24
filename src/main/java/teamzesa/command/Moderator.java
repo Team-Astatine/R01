@@ -14,7 +14,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-public class Moderator implements CommandExecutor, EventExecutor {
+public class Moderator extends ComponentExchanger implements CommandExecutor, EventExecutor {
     private final Set<String> moderatorName;
 
     public Moderator() {
@@ -31,7 +31,7 @@ public class Moderator implements CommandExecutor, EventExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
         if (args.length == 0){
             if (sender instanceof Player)
-                ComponentExchanger.playerAnnouncer(sender,"/관리자 [닉네임]",ColorList.RED);
+                playerSendMsgComponentExchanger(sender,"/관리자 [닉네임]",ColorList.RED);
             else
                 Bukkit.getLogger().info("[R01] /관리자 [닉네임]");
             return false;
@@ -41,7 +41,7 @@ public class Moderator implements CommandExecutor, EventExecutor {
                 .ifPresent(player -> {
                     if (checkupMod(player)){
                         player.setOp(true);
-                        ComponentExchanger.playerAnnouncer(player,"지금부터 관리자 입니다.", ColorList.ORANGE);
+                        playerSendMsgComponentExchanger(player,"지금부터 관리자 입니다.", ColorList.ORANGE);
                     }
                 });
 

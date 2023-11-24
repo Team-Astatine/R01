@@ -16,7 +16,7 @@ import teamzesa.util.Enum.ColorList;
 import teamzesa.event.EventExecutor;
 
 
-public class Meteor implements CommandExecutor, EventExecutor {
+public class Meteor extends ComponentExchanger implements CommandExecutor, EventExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (!sender.isOp()) {
@@ -24,7 +24,7 @@ public class Meteor implements CommandExecutor, EventExecutor {
         }
 
         if (args.length < 3) {
-            ComponentExchanger.playerAnnouncer((Player)sender, "x y z 좌표를 입력하세요.", ColorList.RED);
+            playerSendMsgComponentExchanger((Player)sender, "x y z 좌표를 입력하세요.", ColorList.RED);
             return false;
         }
 

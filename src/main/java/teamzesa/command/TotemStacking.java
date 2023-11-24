@@ -17,7 +17,7 @@ import teamzesa.event.EventExecutor;
 import java.util.*;
 import java.util.List;
 
-public class TotemStacking implements CommandExecutor, EventExecutor {
+public class TotemStacking extends ComponentExchanger implements CommandExecutor, EventExecutor {
     private final Material TOTEM = Material.TOTEM_OF_UNDYING;
     private final int STACK = 64;
     private final int MINIMUM = 1; // 합칠 수 있는 최소 단위 +1
@@ -67,7 +67,7 @@ public class TotemStacking implements CommandExecutor, EventExecutor {
             this.playerInventory.addItem(new ItemStack(TOTEM, totalAmount - STACK));
         }
 
-       ComponentExchanger.playerAnnouncer(this.player,"토템을 합쳤습니다.", ColorList.YELLOW);
+       playerSendMsgComponentExchanger(this.player,"토템을 합쳤습니다.", ColorList.YELLOW);
     }
 
     private void removeTotemInInv() {
@@ -111,7 +111,7 @@ public class TotemStacking implements CommandExecutor, EventExecutor {
         if (message.isEmpty())
             return true;
 
-        ComponentExchanger.playerAnnouncer(this.player, message, ColorList.RED);
+        playerSendMsgComponentExchanger(this.player, message, ColorList.RED);
         return false;
     }
 }

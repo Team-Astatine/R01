@@ -15,7 +15,7 @@ import teamzesa.util.Enum.ColorList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class RecipeController implements Listener {
+public class RecipeController extends ComponentExchanger implements Listener {
     private final Set<Material> lockingStuff;
 
     public RecipeController() {
@@ -41,7 +41,7 @@ public class RecipeController implements Listener {
                     return;
 
                 Player player = (Player)e.getWhoClicked();
-                ComponentExchanger.playerAnnouncer(player,"해당 아이템은 조합할 수 없습니다.", ColorList.RED);
+                playerSendMsgComponentExchanger(player,"해당 아이템은 조합할 수 없습니다.", ColorList.RED);
             }
         };
 //        task.run();

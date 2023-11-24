@@ -61,7 +61,7 @@ public class ConfigIOHandler {
 
 
     public void setWorldSettingMotd() {
-        Bukkit.motd(ComponentExchanger.componentSet(config.getString(WORLD_SETTING_MOTD)));
+        Bukkit.motd(ComponentExchanger.componentExchanger(config.getString(WORLD_SETTING_MOTD)));
     }
 
     public String getWorldMotdConfig() {

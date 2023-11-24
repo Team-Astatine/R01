@@ -17,14 +17,14 @@ import teamzesa.event.EventExecutor;
 import java.util.Optional;
 
 
-public class HealthSet implements CommandExecutor, EventExecutor {
+public class HealthSet extends ComponentExchanger implements CommandExecutor, EventExecutor {
     private Player targetPlayer;
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String @NotNull [] args) {
 
         if (args.length < 2) {
             if (sender instanceof Player)
-                ComponentExchanger.playerAnnouncer(sender,"/체력초기화 [닉네임] [체력값]",ColorList.RED);
+                playerSendMsgComponentExchanger(sender,"/체력초기화 [닉네임] [체력값]",ColorList.RED);
             else
                 Bukkit.getLogger().info("[R01] /체력초기화 [닉네임] [체력값]");
             return false;
@@ -58,7 +58,7 @@ public class HealthSet implements CommandExecutor, EventExecutor {
         this.targetPlayer.setHealthScale(setHealthValue);
         this.targetPlayer.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 40, 1));
         this.targetPlayer.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(setHealthValue);
-        ComponentExchanger.playerAnnouncer(
+        playerSendMsgComponentExchanger(
                 this.targetPlayer,
                 this.targetPlayer.getName() + "님의 체력이" + setHealthValue + "으로 설정됐습니다.",
                 ColorList.YELLOW);

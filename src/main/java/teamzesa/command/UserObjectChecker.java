@@ -14,7 +14,7 @@ import teamzesa.event.EventExecutor;
 
 import java.util.Optional;
 
-public class UserObjectChecker implements CommandExecutor, EventExecutor {
+public class UserObjectChecker extends ComponentExchanger implements CommandExecutor, EventExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
         Optional.ofNullable(UserMapHandler.getUserMapHandler().getUser(args[0]))
@@ -27,13 +27,13 @@ public class UserObjectChecker implements CommandExecutor, EventExecutor {
 
     private void sendComment(CommandSender sender, User user) {
         if (sender instanceof Player)
-            ComponentExchanger.playerAnnouncer(sender, user.toString(), ColorList.YELLOW);
+            playerSendMsgComponentExchanger(sender, user.toString(), ColorList.YELLOW);
         else Bukkit.getLogger().info(user.toString());
     }
 
     private void sendComment(CommandSender sender, String comment) {
         if (sender instanceof Player)
-            ComponentExchanger.playerAnnouncer(sender, comment, ColorList.YELLOW);
+            playerSendMsgComponentExchanger(sender, comment, ColorList.YELLOW);
         else Bukkit.getLogger().info(comment);
     }
 }

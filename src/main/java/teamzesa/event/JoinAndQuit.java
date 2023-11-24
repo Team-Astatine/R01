@@ -25,7 +25,7 @@ import java.net.InetSocketAddress;
 import java.util.Optional;
 
 
-public class JoinAndQuit implements Listener {
+public class JoinAndQuit extends ComponentExchanger implements Listener {
     private final UserMapHandler userMapHandler;
     private final Announcer announcer;
 
@@ -66,7 +66,7 @@ public class JoinAndQuit implements Listener {
 
     private void playerFlight() {
         this.joinPlayer.setAllowFlight(true);
-        ComponentExchanger.playerAnnouncer(this.joinPlayer,"플라이 활성화",ColorList.YELLOW);
+        playerSendMsgComponentExchanger(this.joinPlayer,"플라이 활성화",ColorList.YELLOW);
     }
 
     private void supplyUserKit() {
@@ -113,10 +113,10 @@ public class JoinAndQuit implements Listener {
 
         String message = newSubscribers() ? "신규 IP를 등록합니다." : "새로운 IP로 접속하셨습니다.";
         if (newSubscribers() && userUtil.existsIP(ip))// 접속유저의 IP가 이미 존재하면 Return
-            ComponentExchanger.playerAnnouncer(this.joinPlayer,message, ColorList.YELLOW);
+            playerSendMsgComponentExchanger(this.joinPlayer,message, ColorList.YELLOW);
 
         userUtil.addIP(this.joinPlayer.getAddress());
-        ComponentExchanger.playerAnnouncer(this.joinPlayer, message, ColorList.YELLOW);
+        playerSendMsgComponentExchanger(this.joinPlayer, message, ColorList.YELLOW);
     }
 
     private boolean newSubscribers () {

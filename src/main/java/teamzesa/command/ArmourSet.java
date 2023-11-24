@@ -13,7 +13,7 @@ import teamzesa.event.EventExecutor;
 
 import java.util.Optional;
 
-public class ArmourSet implements CommandExecutor, EventExecutor {
+public class ArmourSet extends ComponentExchanger implements CommandExecutor, EventExecutor {
     private PlayerInventory playerInventory;
 
     private enum ArmourType {
@@ -27,7 +27,7 @@ public class ArmourSet implements CommandExecutor, EventExecutor {
 
         Optional<ItemStack> tmpItemInHand = Optional.of(playerInventory.getItemInMainHand());
         if (tmpItemInHand.isEmpty()) {
-            ComponentExchanger.playerAnnouncer(player,"손에 아이템이 없습니다.", ColorList.RED);
+            playerSendMsgComponentExchanger(player,"손에 아이템이 없습니다.", ColorList.RED);
             return false;
         }
 
