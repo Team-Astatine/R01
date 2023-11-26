@@ -73,6 +73,19 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
         playerSendMsgComponentExchanger(this.joinPlayer,"플라이 활성화",ColorList.YELLOW);
     }
 
+    private void userIPCheckUp() {
+        InetSocketAddress ip = null;
+        if (Optional.ofNullable(this.joinPlayer.getAddress()).isPresent())
+            ip = this.joinPlayer.getAddress();
+
+        String message = newSubscribers() ? "신규 IP를 등록합니다." : "새로운 IP로 접속하셨습니다.";
+        if (newSubscribers() || this.userUtil.nonExistsIP(ip)) {
+            this.userUtil.addIP(ip);
+            this.userMapHandler.updateUser(this.userUtil.getUser());
+            playerSendMsgComponentExchanger(this.joinPlayer, message, ColorList.YELLOW);
+        }
+    }
+
     private void supplyUserKit() {
         if (!newSubscribers())
             return;
@@ -107,19 +120,6 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
             else tool.addEnchantment(Enchantment.DIG_SPEED, 2);
             tool.addEnchantment(Enchantment.DURABILITY, 2);
             this.joinPlayer.getInventory().addItem(tool);
-        }
-    }
-
-    private void userIPCheckUp() {
-        InetSocketAddress ip = null;
-        if (Optional.ofNullable(this.joinPlayer.getAddress()).isPresent())
-            ip = this.joinPlayer.getAddress();
-
-        String message = newSubscribers() ? "신규 IP를 등록합니다." : "새로운 IP로 접속하셨습니다.";
-        if (newSubscribers() || this.userUtil.nonExistsIP(ip)) {
-            this.userUtil.addIP(ip);
-            this.userMapHandler.updateUser(this.userUtil.getUser());
-            playerSendMsgComponentExchanger(this.joinPlayer, message, ColorList.YELLOW);
         }
     }
 
