@@ -32,11 +32,10 @@ public class UserUtil {
                 .noneMatch(listIP -> listIP.equals(ip.getAddress().getHostAddress()));
     }
 
-    public boolean addIP(@NotNull InetSocketAddress ip) {
+    public void addIP(@NotNull InetSocketAddress ip) {
         this.ip.add(ip.getAddress().getHostAddress());
         this.user.setIp(this.ip);
         updateUser();
-        return true;
     }
 
     public void increaseJoinCnt() {
