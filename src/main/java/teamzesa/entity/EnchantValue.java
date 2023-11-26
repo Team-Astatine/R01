@@ -1,4 +1,4 @@
-package teamzesa.dataValue;
+package teamzesa.entity;
 
 import org.bukkit.enchantments.Enchantment;
 

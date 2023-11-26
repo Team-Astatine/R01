@@ -1,15 +1,9 @@
 package teamzesa.event;
 
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Item;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.purpurmc.purpur.event.inventory.AnvilUpdateResultEvent;
-import teamzesa.dataValue.EnchantValue;
-
-import java.util.*;
 
 public class Anvil implements Listener {
 

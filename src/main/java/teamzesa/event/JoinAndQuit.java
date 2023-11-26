@@ -17,7 +17,7 @@ import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.ArmourKit;
 import teamzesa.util.Enum.FoodKit;
 import teamzesa.util.Enum.ToolKit;
-import teamzesa.dataValue.User;
+import teamzesa.entity.User;
 import teamzesa.util.userHandler.UserUtil;
 import teamzesa.util.userHandler.UserMapHandler;
 

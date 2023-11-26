@@ -2,7 +2,7 @@ package teamzesa.util.userHandler;
 
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.dataValue.User;
+import teamzesa.entity.User;
 
 import java.net.InetSocketAddress;
 import java.util.Set;

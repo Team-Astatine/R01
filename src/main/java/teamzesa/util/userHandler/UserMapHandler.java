@@ -4,7 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.dataValue.User;
+import teamzesa.entity.User;
 import teamzesa.util.ComponentExchanger;
 
 import java.util.*;

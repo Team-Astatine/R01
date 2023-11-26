@@ -1,4 +1,4 @@
-package teamzesa.dataValue;
+package teamzesa.entity;
 
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
