@@ -3,6 +3,7 @@ package teamzesa.entity;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.net.InetSocketAddress;
 import java.util.*;
 
 //public record User (
@@ -18,7 +19,7 @@ import java.util.*;
     public class User {
     private UUID uuid;
     private String name;
-    private Set<String> ip = new HashSet<>();
+    private Set<String> connectionIPList = new HashSet<>();
     private int joinCount;
     private int level;
     private double healthScale;
@@ -27,7 +28,7 @@ import java.util.*;
     public User(@NotNull Player player) {
         this.uuid = player.getUniqueId();
         this.name = player.getName();
-        this.ip.add(player.getAddress().getAddress().getHostAddress());
+        this.connectionIPList.add(player.getAddress().getAddress().getHostAddress());
         this.joinCount = 0; //join Event 에서 1회 ++ 증가시킴
         this.level = player.getLevel();
         this.healthScale = player.getHealthScale();
@@ -48,7 +49,7 @@ import java.util.*;
     }
 
     public Set<String> getIPList() {
-        return ip;
+        return connectionIPList;
     }
 
     public int getJoinCount() {
@@ -64,12 +65,17 @@ import java.util.*;
         this.healthScale = healthScale;
     }
 
-    public void setIp(Set<String> ip) {
-        this.ip = ip;
+    public Boolean nonExistsIP(InetSocketAddress ip) {
+        return this.connectionIPList.stream()
+                .noneMatch(listIP -> listIP.equals(ip.getAddress().getHostAddress()));
     }
 
-    public void setJoinCount(int count) {
-        this.joinCount = count;
+    public void addIP(@NotNull InetSocketAddress ip) {
+        this.connectionIPList.add(ip.getAddress().getHostAddress());
+    }
+
+    public void increaseUserJoinCnt() {
+        this.joinCount += 1;
     }
 
     public void setGodMode(boolean godMode) {
@@ -81,7 +87,7 @@ import java.util.*;
         return "User{" +
                 "uuid=" + uuid +
                 ", name='" + name + '\'' +
-                ", ip=" + ip +
+                ", ip=" + connectionIPList +
                 ", joinCount=" + joinCount +
                 ", level=" + level +
                 ", healthScale=" + healthScale +

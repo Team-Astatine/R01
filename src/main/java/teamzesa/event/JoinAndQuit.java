@@ -18,7 +18,6 @@ import teamzesa.util.Enum.ArmourKit;
 import teamzesa.util.Enum.FoodKit;
 import teamzesa.util.Enum.ToolKit;
 import teamzesa.entity.User;
-import teamzesa.util.userHandler.UserUtil;
 import teamzesa.util.userHandler.UserMapHandler;
 
 import java.net.InetSocketAddress;
@@ -30,7 +29,7 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
     private final Announcer announcer;
 
     private Player joinPlayer;
-    private UserUtil userUtil;
+    private User user;
 //    private Player quitPlayer;
 
     public JoinAndQuit() {
@@ -42,7 +41,7 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
     public synchronized void onJoin(@NotNull PlayerJoinEvent event) {
 
         init(event.getPlayer());
-        this.userUtil.increaseJoinCnt(); //접속횟수
+        this.user.increaseUserJoinCnt(); //접속횟수
         userIPCheckUp(); //접속 IP 확인
         supplyUserKit();
 
@@ -60,10 +59,10 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
 
         User user = this.userMapHandler.getUser(player);
         Optional.ofNullable(user).ifPresentOrElse(
-                existUser -> this.userUtil = new UserUtil(existUser),
+                existUser -> this.user = existUser,
                 () -> {
+                    this.user = new User(player);
                     this.userMapHandler.addUser(player);
-                    this.userUtil = new UserUtil(player);
                 }
         );
     }
@@ -79,9 +78,9 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
             ip = this.joinPlayer.getAddress();
 
         String message = newSubscribers() ? "신규 IP를 등록합니다." : "새로운 IP로 접속하셨습니다.";
-        if (newSubscribers() || this.userUtil.nonExistsIP(ip)) {
-            this.userUtil.addIP(ip);
-            this.userMapHandler.updateUser(this.userUtil.getUser());
+        if (newSubscribers() || this.user.nonExistsIP(ip)) {
+            this.user.addIP(ip);
+            this.userMapHandler.updateUser(this.user);
             playerSendMsgComponentExchanger(this.joinPlayer, message, ColorList.YELLOW);
         }
     }
@@ -124,7 +123,7 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
     }
 
     private boolean newSubscribers () {
-        int joinCnt =  this.userUtil.getUser().getJoinCount();
+        int joinCnt =  this.user.getJoinCount();
         return joinCnt == 1;
     }
 
