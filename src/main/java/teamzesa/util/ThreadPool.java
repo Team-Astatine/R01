@@ -22,9 +22,11 @@ public class ThreadPool {
     }
 
     private ThreadPool() {
+//        https://engineerinsight.tistory.com/197
 //        executorService = Executors.newFixedThreadPool(4);
         executorService =  new ThreadPoolExecutor(
-                1, Integer.MAX_VALUE, //기본 thread core 1개 유지
+                1, //기본 thread core 1개 유지
+                Integer.MAX_VALUE,  // 최대 쓰레딩 wait 갯수 21억 ㅋ
                 10L, TimeUnit.SECONDS,
                 new SynchronousQueue<>());
 
@@ -43,7 +45,7 @@ public class ThreadPool {
         executorService.shutdown();
     }
 
-    public void serviceOff() {
+    public void allServiceOff() {
         executorService.shutdownNow();
         scheduledExecutorService.shutdownNow();
     }
