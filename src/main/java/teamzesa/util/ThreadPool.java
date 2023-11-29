@@ -5,12 +5,17 @@ import java.util.concurrent.*;
 
 
 public class ThreadPool {
+    private static final int CORE_POOL_SIZE = 5;
+    private static final int MAXIMUM_POOL_SIZE = 5;
+    private static final int KEEP_ALIVE_TIME = 10;
+    private static final TimeUnit TIME_UNIT = TimeUnit.MILLISECONDS;
+    private static final int QUEUE_CAPACITY = 10;
+    private final ExecutorService executorService;
+    private final ScheduledExecutorService scheduledExecutorService;
+
     private static class ThreadPoolHolder {
         private static final ThreadPool INSTANCE = new ThreadPool();
     }
-
-    private final ThreadPoolExecutor executorService;
-    private final ScheduledExecutorService scheduledExecutorService;
 
     public static ThreadPool getThreadPool() {
         return ThreadPoolHolder.INSTANCE;
@@ -19,14 +24,11 @@ public class ThreadPool {
     private ThreadPool() {
 //        executorService = Executors.newFixedThreadPool(4);
         executorService =  new ThreadPoolExecutor(
-                5,
-                5,
-                10,
-                TimeUnit.MILLISECONDS,
-                new LinkedBlockingQueue<>(10)
-        );
+                1, Integer.MAX_VALUE, //기본 thread core 1개 유지
+                10L, TimeUnit.SECONDS,
+                new SynchronousQueue<>());
 
-        scheduledExecutorService = Executors.newScheduledThreadPool(4);
+        scheduledExecutorService = Executors.newScheduledThreadPool(5);
     }
 
     public void addTask(Runnable task) {

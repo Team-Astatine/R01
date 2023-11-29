@@ -13,7 +13,7 @@ https://jaxple.notion.site/d1ef58aa889d4b8ba1342fc09c0249b4?pvs=4
 * synchronized 테스트하기 
 
 ## Debug List
-*  joinEvent
+*  ThreadPool Check
 
 
 ## Plugin
