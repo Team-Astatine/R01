@@ -123,7 +123,7 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
     }
 
     private boolean newSubscribers () {
-        return this.user.getJoinCount() == 1;
+        return this.user.getJoinCount() == 0;
     }
 
     private void setHealthScale() {
