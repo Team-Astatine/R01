@@ -48,10 +48,6 @@ import java.util.*;
         return name;
     }
 
-    public Set<String> getIPList() {
-        return connectionIPList;
-    }
-
     public int getJoinCount() {
         return joinCount;
     }
