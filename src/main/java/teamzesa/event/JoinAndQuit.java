@@ -41,9 +41,10 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
     public synchronized void onJoin(@NotNull PlayerJoinEvent event) {
 
         init(event.getPlayer());
-        this.user.increaseUserJoinCnt(); //접속횟수
-        userIPCheckUp(); //접속 IP 확인
         supplyUserKit();
+        userIPCheckUp(); //접속 IP 확인
+        this.user.increaseUserJoinCnt(); //접속횟수
+        this.userMapHandler.updateUser(this.user);
 
         this.announcer.playerTab(this.joinPlayer);
         this.announcer.joinAnnouncer(this.joinPlayer);
@@ -80,7 +81,6 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
         String message = newSubscribers() ? "신규 IP를 등록합니다." : "새로운 IP로 접속하셨습니다.";
         if (newSubscribers() || this.user.nonExistsIP(ip)) {
             this.user.addIP(ip);
-            this.userMapHandler.updateUser(this.user);
             playerSendMsgComponentExchanger(this.joinPlayer, message, ColorList.YELLOW);
         }
     }
@@ -123,8 +123,7 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
     }
 
     private boolean newSubscribers () {
-        int joinCnt =  this.user.getJoinCount();
-        return joinCnt == 1;
+        return this.user.getJoinCount() == 1;
     }
 
     private void setHealthScale() {
