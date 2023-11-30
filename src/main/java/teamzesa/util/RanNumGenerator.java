@@ -1,4 +1,4 @@
-package teamzesa.event;
+package teamzesa.util;
 
 import org.bukkit.Material;
 import org.bukkit.World;
