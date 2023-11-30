@@ -18,6 +18,7 @@ import teamzesa.util.Enum.ArmourKit;
 import teamzesa.util.Enum.FoodKit;
 import teamzesa.util.Enum.ToolKit;
 import teamzesa.entity.User;
+import teamzesa.util.RanNumGenerator;
 import teamzesa.util.userHandler.UserMapHandler;
 
 import java.net.InetSocketAddress;

@@ -8,6 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import teamzesa.util.ComponentExchanger;
 import teamzesa.util.Enum.ColorList;
+import teamzesa.util.RanNumGenerator;
 
 
 public class Respawn extends ComponentExchanger implements Listener {

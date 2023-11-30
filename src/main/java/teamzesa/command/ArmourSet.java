@@ -25,7 +25,7 @@ public class ArmourSet extends ComponentExchanger implements CommandExecutor, Ev
         Player player = (Player) sender;
         this.playerInventory = player.getInventory();
 
-        Optional<ItemStack> tmpItemInHand = Optional.of(playerInventory.getItemInMainHand());
+        ItemStack tmpItemInHand = playerInventory.getItemInMainHand();
         if (tmpItemInHand.isEmpty()) {
             playerSendMsgComponentExchanger(player,"손에 아이템이 없습니다.", ColorList.RED);
             return false;
@@ -33,7 +33,7 @@ public class ArmourSet extends ComponentExchanger implements CommandExecutor, Ev
 
         ArmourType armourType = ArmourType.valueOf(label);
         switch (armourType) {
-            case hat -> headSet(tmpItemInHand.get());
+            case hat -> headSet(tmpItemInHand);
         }
         return true;
     }
