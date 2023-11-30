@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.util.ComponentExchanger;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.entity.User;
+import teamzesa.util.ThreadPool;
 import teamzesa.util.userHandler.UserMapHandler;
 
 
@@ -82,8 +83,8 @@ public class Death extends ComponentExchanger implements Listener {
 //                playerLocation.createExplosion(60);
             }
         };
-        task.run();
-//        ThreadPool.getThreadPool().addTask(task);
+//        task.run();
+        ThreadPool.getThreadPool().addTask(task);
         this.event.setCancelled(true);
         return true;
     }
