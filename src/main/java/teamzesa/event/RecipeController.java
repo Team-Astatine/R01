@@ -32,20 +32,13 @@ public class RecipeController extends ComponentExchanger implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public synchronized void onCraft(CraftItemEvent e) {
-        BukkitRunnable task = new BukkitRunnable() {
-            @Override
-            public void run() {
-                ItemStack item = e.getCurrentItem();
+        ItemStack item = e.getCurrentItem();
 
-                if (stuffChecking(item))
-                    return;
+        if (stuffChecking(item))
+            return;
 
-                Player player = (Player)e.getWhoClicked();
-                playerSendMsgComponentExchanger(player,"해당 아이템은 조합할 수 없습니다.", ColorList.RED);
-            }
-        };
-//        task.run();
-        ThreadPool.getThreadPool().addTask(task);
+        Player player = (Player)e.getWhoClicked();
+        playerSendMsgComponentExchanger(player,"해당 아이템은 조합할 수 없습니다.", ColorList.RED);
         e.setCancelled(true);
     }
 }
