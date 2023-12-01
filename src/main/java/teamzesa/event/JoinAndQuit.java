@@ -137,7 +137,7 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
         this.joinPlayer.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(40.0);
     }
 
-    @EventHandler
+    /*@EventHandler
     public void onQuit(PlayerQuitEvent e) {
         /*
         Player quitPlayer = e.getPlayer();
@@ -146,6 +146,6 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
 //        valid healthScale
         if (healthScale != 20.0)
             userMapHandler.updateUser(quitPlayer.getUniqueId(), healthScale);
-        */
-    }
+
+    }*/
 }
