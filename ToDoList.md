@@ -10,7 +10,9 @@ https://jaxple.notion.site/d1ef58aa889d4b8ba1342fc09c0249b4?pvs=4
 
 ## refactor List
 * 커멘드를 consol에서 보낸건지 player가 보낸건지 체크하는 로직 만들기
-* synchronized 테스트하기 
+* Optional 사용에 대한 이해 진행하기
+  * 망나니개발자 203번 게시글 참고
+* randomTeleport 확인하기
 
 ## Debug List
 *  ThreadPool Check
