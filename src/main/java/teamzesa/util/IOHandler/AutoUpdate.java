@@ -9,9 +9,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 
-public class UpdateChecker {
+public class AutoUpdate {
     private static class UpdateCheckerHolder {
-        private static final UpdateChecker INSTANCE = new UpdateChecker();
+        private static final AutoUpdate INSTANCE = new AutoUpdate();
     }
 
     private static double gitVersion;
@@ -19,9 +19,9 @@ public class UpdateChecker {
     private File folder;
     private List<File> fileList;
 
-    private UpdateChecker() {}
+    private AutoUpdate() {}
 
-    public static UpdateChecker getUpdateChecker() {
+    public static AutoUpdate getUpdateChecker() {
         return UpdateCheckerHolder.INSTANCE;
     }
 
@@ -46,8 +46,10 @@ public class UpdateChecker {
         if (gitVersion > localVersion) {
             Bukkit.getLogger().info("[R01] 구버전 입니다. 자동 업데이트 합니다.");
             Bukkit.getPluginManager().disablePlugins();
-            removeLegacyPlugin();
             installNewPlugin();
+            removeLegacyPlugin();
+
+            Bukkit.getServer().reload();
         }
     }
 
@@ -75,7 +77,11 @@ public class UpdateChecker {
         System.out.println(fileList);
         this.fileList.stream()
                 .filter(file -> file.getName().contains("R01-") && file.getName().contains(".jar"))
-                .forEach(File::delete);
+                .forEach(file -> {
+                    boolean deleteExecutor = file.delete();
+                    if (deleteExecutor) Bukkit.getLogger().info("[R01] Success Remove LegacyPlugin");
+                    else Bukkit.getLogger().info("[R01] Fail to Remove");
+                });
     }
 
     private void localPluginCheck() {

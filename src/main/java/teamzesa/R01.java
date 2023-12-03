@@ -7,7 +7,7 @@ import teamzesa.event.Announcer;
 import teamzesa.util.Enum.CommandListup;
 import teamzesa.util.Enum.EventListup;
 import teamzesa.util.IOHandler.ConfigIOHandler;
-import teamzesa.util.IOHandler.UpdateChecker;
+import teamzesa.util.IOHandler.AutoUpdate;
 import teamzesa.util.userHandler.UserIOHandler;
 import teamzesa.util.ThreadPool;
 
@@ -70,8 +70,8 @@ public final class R01 extends JavaPlugin {
     }
 
     public void updateCheck() {
-        UpdateChecker.getUpdateChecker().fileLoader();
-        UpdateChecker.getUpdateChecker().fileManager(); //checking update
+        AutoUpdate.getUpdateChecker().fileLoader();
+        AutoUpdate.getUpdateChecker().fileManager(); //checking update
     }
 
     private void commandHandler() {
