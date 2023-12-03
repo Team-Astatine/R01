@@ -35,7 +35,7 @@ public class Respawn extends ComponentExchanger implements Listener {
         int z = RanNumGenerator.numGenerator();
         int y = RanNumGenerator.groundChecker(player.getWorld());
 
-        this.event.setRespawnLocation(new Location(Bukkit.getWorld(WorldName.world.getKoreanWorldName()),x,y,z));
+        this.event.setRespawnLocation(new Location(Bukkit.getWorld("world"),x,y,z));
         playerSendMsgComponentExchanger(player,"침대가 없어 랜덤 텔레포트 되었습니다.", ColorList.ORANGE);
     }
 }
