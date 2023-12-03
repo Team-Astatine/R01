@@ -2,6 +2,7 @@ package teamzesa.util.IOHandler;
 
 import org.bukkit.Bukkit;
 import teamzesa.util.Enum.DataFile;
+import teamzesa.util.userHandler.UserIOHandler;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -45,7 +46,7 @@ public class AutoUpdate {
         }
         if (gitVersion > localVersion) {
             Bukkit.getLogger().info("[R01] 구버전 입니다. 자동 업데이트 합니다.");
-            Bukkit.getPluginManager().disablePlugins();
+            UserIOHandler.getIOHandler().exportUserData();
             installNewPlugin();
             removeLegacyPlugin();
 
@@ -74,9 +75,12 @@ public class AutoUpdate {
     }
 
     private void removeLegacyPlugin() {
-        System.out.println(fileList);
+//        System.out.println(fileList);
         this.fileList.stream()
-                .filter(file -> file.getName().contains("R01-") && file.getName().contains(".jar"))
+                .filter(file ->
+                        file.getName().contains("R01-") &&
+                        file.getName().contains(".jar") &&
+                        !file.getPath().contains(File.separator + "R01" + File.separator))
                 .forEach(file -> {
                     boolean deleteExecutor = file.delete();
                     if (deleteExecutor) Bukkit.getLogger().info("[R01] Success Remove LegacyPlugin");
