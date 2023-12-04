@@ -50,7 +50,7 @@ public class AutoUpdate {
             installNewPlugin();
             removeLegacyPlugin();
 
-//            Bukkit.getServer().reload();
+            Bukkit.getServer().reload();
         }
     }
 
@@ -79,8 +79,7 @@ public class AutoUpdate {
         this.fileList.stream()
                 .filter(file ->
                         file.getName().contains("R01-") &&
-                        file.getName().contains(".jar") &&
-                        !file.getPath().contains(File.separator + "R01" + File.separator))
+                        file.getName().contains(".jar"))
                 .forEach(file -> {
                     boolean deleteExecutor = file.delete();
                     if (deleteExecutor) Bukkit.getLogger().info("[R01] Success Remove LegacyPlugin");
