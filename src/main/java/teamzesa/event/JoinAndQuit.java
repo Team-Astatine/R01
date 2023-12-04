@@ -54,7 +54,7 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
     }
 
     private void announcingJoinMsg() {
-        this.announcer.playerTab(this.joinPlayer);
+        this.announcer.setPlayerTabHeader(this.joinPlayer);
         this.announcer.joinAnnouncer(this.joinPlayer);
         this.announcer.countAnnouncer(this.joinPlayer);
         this.announcer.joinKillStatusAnnouncer(this.user);

@@ -47,8 +47,8 @@ public class Announcer extends ComponentExchanger {
         );
     }
 
-    public void playerTab(@NotNull Audience player) {
-        player.sendPlayerListHeader(
+    public void setPlayerTabHeader(@NotNull Audience audience) {
+        audience.sendPlayerListHeader(
                 componentExchanger(configIOHandler.getWorldMotdConfig(),ColorList.PURPLE)
         );
     }
