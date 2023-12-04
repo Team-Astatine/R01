@@ -81,6 +81,7 @@ public class UserMapHandler extends ComponentExchanger {
 
     public void updateAllUserData(User[] newUserData) {
         userData.clear();
+
         List<User> userList = Arrays.asList(newUserData);
         userList.forEach(user -> userData.put(user.getUuid(), user));
     }

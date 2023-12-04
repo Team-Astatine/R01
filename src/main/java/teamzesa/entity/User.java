@@ -19,7 +19,7 @@ import java.util.*;
     public class User {
     private UUID uuid;
     private String name;
-    private List<String> connectionIPList = new ArrayList<>();
+    private Set<String> connectionIPList = new HashSet<>();
     private int joinCount;
     private int level;
     private double healthScale;
@@ -34,7 +34,6 @@ import java.util.*;
         this.healthScale = player.getHealthScale();
         this.godMode = false;
     }
-
 //    getter
     public UUID getUuid() {
         return uuid;
