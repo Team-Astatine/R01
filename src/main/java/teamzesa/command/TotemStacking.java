@@ -1,5 +1,6 @@
 package teamzesa.command;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -41,6 +42,7 @@ public class TotemStacking extends ComponentExchanger implements CommandExecutor
                 supplyTotems();
             }
         };
+
         ThreadPool.getThreadPool().addTask(executeTotemSupply);
         return true;
     }
@@ -74,16 +76,19 @@ public class TotemStacking extends ComponentExchanger implements CommandExecutor
         this.playerInventory.remove(TOTEM);
 
 //        전체 아이템 창 정보 다 가져옴 armour , offHand Whatever
-        ItemStack helmet = this.playerInventory.getHelmet();
-        if (helmet.getType().equals(TOTEM))
-            this.playerInventory.setHelmet(null);
+        Optional <ItemStack> tempHelmetStuff = Optional.ofNullable(this.playerInventory.getHelmet());
+        tempHelmetStuff.ifPresent(helmet -> {
+            if (helmet.getType() == TOTEM)
+                this.playerInventory.setHelmet(null);
+        });
 
-
-        ItemStack offhandStuff = this.playerInventory.getItemInOffHand();
-        if (offhandStuff.getType().equals(TOTEM))
-            this.playerInventory.setItemInOffHand(null);
-        else
-            this.playerInventory.setItemInOffHand(offhandStuff);
+        Optional <ItemStack> tempOffHandStuff = Optional.of(this.playerInventory.getItemInOffHand());
+        tempOffHandStuff.ifPresent(offhand -> {
+            if (offhand.getType() == TOTEM)
+                this.playerInventory.setItemInOffHand(null);
+            else
+                this.playerInventory.addItem(tempOffHandStuff.get());
+        });
     }
 
     private boolean validationInventory() {
