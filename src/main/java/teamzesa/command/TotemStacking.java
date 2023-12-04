@@ -76,18 +76,18 @@ public class TotemStacking extends ComponentExchanger implements CommandExecutor
         this.playerInventory.remove(TOTEM);
 
 //        전체 아이템 창 정보 다 가져옴 armour , offHand Whatever
-        Optional <ItemStack> tempHelmetStuff = Optional.ofNullable(this.playerInventory.getHelmet());
-        tempHelmetStuff.ifPresent(helmet -> {
-            if (helmet.getType() == TOTEM)
-                this.playerInventory.setHelmet(null);
-        });
+        Optional.ofNullable(this.playerInventory.getHelmet()).ifPresent(
+            helmet -> {
+                if (helmet.getType() == TOTEM)
+                    this.playerInventory.setHelmet(new ItemStack(Material.AIR));
+            });
 
-        Optional <ItemStack> tempOffHandStuff = Optional.of(this.playerInventory.getItemInOffHand());
-        tempOffHandStuff.ifPresent(offhand -> {
-            if (offhand.getType() == TOTEM)
-                this.playerInventory.setItemInOffHand(null);
-            else
-                this.playerInventory.addItem(tempOffHandStuff.get());
+        Optional.of(this.playerInventory.getItemInOffHand()).ifPresent(
+            offhand -> {
+                if (offhand.getType() == TOTEM)
+                    this.playerInventory.setItemInOffHand(new ItemStack(Material.AIR));
+                else
+                    this.playerInventory.addItem(this.playerInventory.getItemInOffHand());
         });
     }
 
