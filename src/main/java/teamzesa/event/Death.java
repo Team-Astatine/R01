@@ -1,6 +1,7 @@
 package teamzesa.event;
 
 import org.bukkit.*;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -34,6 +35,9 @@ public class Death extends ComponentExchanger implements Listener {
     }
 
     private void increaseKillingCnt() {
+        if (!(this.event.getEntity().getKiller().equals(EntityType.PLAYER)))
+            return;
+
         User user = userMapHandler.getUser(this.event.getEntity().getKiller());
         user.increaseKillingCnt();
         userMapHandler.updateUser(user);
