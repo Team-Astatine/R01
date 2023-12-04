@@ -21,7 +21,7 @@ public final class R01 extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        updateCheck(); // update check
+//        updateCheck(); // update check
         commandHandler(); // command set
         functionHandler(); // function set
 
