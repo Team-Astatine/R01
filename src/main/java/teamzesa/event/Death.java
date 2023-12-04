@@ -30,6 +30,13 @@ public class Death extends ComponentExchanger implements Listener {
             return;
 
         lifeSteel();
+        increaseKillingCnt();
+    }
+
+    private void increaseKillingCnt() {
+        User user = userMapHandler.getUser(this.event.getEntity().getKiller());
+        user.increaseKillingCnt();
+        userMapHandler.updateUser(user);
     }
 
     private void lifeSteel() {

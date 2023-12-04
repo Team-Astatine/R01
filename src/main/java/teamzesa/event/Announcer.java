@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
+import teamzesa.entity.User;
 import teamzesa.util.ComponentExchanger;
 import teamzesa.util.IOHandler.ConfigIOHandler;
 import teamzesa.util.ThreadPool;
@@ -26,6 +27,15 @@ public class Announcer extends ComponentExchanger {
 
     public static Announcer getAnnouncer() {
         return AnnouncerHolder.INSTANCE;
+    }
+
+    public void joinKillStatusAnnouncer(User user) {
+        if (user.getKillStatus() == 0)
+            return;
+
+        Bukkit.broadcast(
+                componentExchanger(user.getKillStatus() + "킬 " + user.getName() + "님 접속!",ColorList.RED)
+        );
     }
 
     public void countAnnouncer(Player player) {

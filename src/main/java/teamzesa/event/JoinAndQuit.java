@@ -9,7 +9,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.util.ComponentExchanger;
@@ -47,13 +46,18 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
         this.user.increaseUserJoinCnt(); //접속횟수
         this.userMapHandler.updateUser(this.user);
 
-        this.announcer.playerTab(this.joinPlayer);
-        this.announcer.joinAnnouncer(this.joinPlayer);
-        this.announcer.countAnnouncer(this.joinPlayer);
+        announcingJoinMsg();
 
         attackSpeed();
         playerFlight(); //flight Set
         setHealthScale();
+    }
+
+    private void announcingJoinMsg() {
+        this.announcer.playerTab(this.joinPlayer);
+        this.announcer.joinAnnouncer(this.joinPlayer);
+        this.announcer.countAnnouncer(this.joinPlayer);
+        this.announcer.joinKillStatusAnnouncer(this.user);
     }
 
     private void init(Player player) {

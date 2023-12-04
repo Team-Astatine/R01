@@ -16,13 +16,14 @@ import java.util.*;
 //        boolean godMode
 //        ) {}
 
-    public class User {
+public class User {
     private UUID uuid;
     private String name;
     private Set<String> connectionIPList = new HashSet<>();
     private int joinCount;
     private int level;
     private double healthScale;
+    private int killStatus;
     private boolean godMode;
 
     public User(@NotNull Player player) {
@@ -31,6 +32,7 @@ import java.util.*;
         this.connectionIPList.add(player.getAddress().getAddress().getHostAddress());
         this.joinCount = 0; //join Event 에서 1회 ++ 증가시킴
         this.level = player.getLevel();
+        this.killStatus = 0;
         this.healthScale = player.getHealthScale();
         this.godMode = false;
     }
@@ -49,6 +51,10 @@ import java.util.*;
 
     public int getJoinCount() {
         return joinCount;
+    }
+
+    public int getKillStatus(){
+        return this.killStatus;
     }
 
     public boolean isGodMode() {
@@ -77,15 +83,20 @@ import java.util.*;
         this.godMode = godMode;
     }
 
+    public void increaseKillingCnt() {
+        this.killStatus += 1;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "uuid=" + uuid +
                 ", name='" + name + '\'' +
-                ", ip=" + connectionIPList +
+                ", connectionIPList=" + connectionIPList +
                 ", joinCount=" + joinCount +
                 ", level=" + level +
                 ", healthScale=" + healthScale +
+                ", killStatus=" + killStatus +
                 ", godMode=" + godMode +
                 '}';
     }
