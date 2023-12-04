@@ -91,7 +91,8 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
             return;
 
         supplyKit();
-        randomTeleport();
+//        스폰범위 변경으로 해결
+//        randomTeleport();
     }
 
     private void randomTeleport() {
