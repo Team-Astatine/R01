@@ -16,13 +16,13 @@ public class Reload extends ComponentExchanger implements CommandExecutor, Event
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        Player player = (Player)sender;
+        /*Player player = (Player)sender;
         if (!player.isOp()) {
             playerSendMsgComponentExchanger(player,"해당 명령어는 플레이어가 사용할 수 없습니다.", ColorList.RED);
             return false;
         }
-
-        sendComment(sender, "Reload Done");
+*/
+//        sendComment(sender, "Reload Done");
         R01.getPlugin(R01.class).fileLoader();
         return true;
     }

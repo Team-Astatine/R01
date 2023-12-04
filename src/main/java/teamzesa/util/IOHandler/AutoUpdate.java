@@ -50,7 +50,7 @@ public class AutoUpdate {
             installNewPlugin();
             removeLegacyPlugin();
 
-            Bukkit.getServer().reload();
+//            Bukkit.getServer().reload();
         }
     }
 

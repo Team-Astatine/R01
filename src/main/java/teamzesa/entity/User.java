@@ -19,7 +19,7 @@ import java.util.*;
     public class User {
     private UUID uuid;
     private String name;
-    private Set<String> connectionIPList = new HashSet<>();
+    private List<String> connectionIPList = new ArrayList<>();
     private int joinCount;
     private int level;
     private double healthScale;
