@@ -14,6 +14,7 @@ import teamzesa.entity.User;
 import teamzesa.util.ThreadPool;
 import teamzesa.util.userHandler.UserMapHandler;
 
+import java.util.Optional;
 
 
 public class Death extends ComponentExchanger implements Listener {
@@ -35,12 +36,13 @@ public class Death extends ComponentExchanger implements Listener {
     }
 
     private void increaseKillingCnt() {
-        if (!(this.event.getEntity().getKiller().equals(EntityType.PLAYER)))
-            return;
-
-        User user = userMapHandler.getUser(this.event.getEntity().getKiller());
-        user.increaseKillingCnt();
-        userMapHandler.updateUser(user);
+        Optional.ofNullable(this.event.getEntity().getKiller()).ifPresent(
+                playerType -> {
+                    User user = userMapHandler.getUser(playerType);
+                    user.increaseKillingCnt();
+                    userMapHandler.updateUser(user);
+                }
+        );
     }
 
     private void lifeSteel() {
