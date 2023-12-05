@@ -18,7 +18,8 @@ public enum CommandListup {
     USER_OBJECT_CHECKER("vo", new UserObjectChecker()),
     SAVE_USER_DATA("SaveUserData", new SaveUserData()),
     CONFIG_RELOAD("dataFileReload", new Reload()),
-    VANISH("vanish", new Vanish());
+    VANISH("vanish", new Vanish()),
+    SHOW("show", new Show());
 
     private final String command;
     private final CommandExecutor executor;

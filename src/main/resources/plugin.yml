@@ -38,6 +38,9 @@ commands:
   vanish:
     description: Player를 숨깁니다.
     permission: R01.vanish
+  show:
+    description: Player를 보이게 합니다.
+    permission: R01.show
   moderator:
     description: 관리자 권한부여
   hat:
