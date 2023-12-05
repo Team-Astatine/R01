@@ -35,6 +35,9 @@ commands:
   dataFileReload:
     description: config를 Reload 합니다.
     permission: R01.reload
+  vanish:
+    description: Player를 숨깁니다.
+    permission: R01.vanish
   moderator:
     description: 관리자 권한부여
   hat:

@@ -17,7 +17,8 @@ public enum CommandListup {
     HEALTH_RESET("setHealth", new HealthSet()),
     USER_OBJECT_CHECKER("vo", new UserObjectChecker()),
     SAVE_USER_DATA("SaveUserData", new SaveUserData()),
-    CONFIG_RELOAD("dataFileReload", new Reload());
+    CONFIG_RELOAD("dataFileReload", new Reload()),
+    VANISH("vanish", new Vanish());
 
     private final String command;
     private final CommandExecutor executor;
