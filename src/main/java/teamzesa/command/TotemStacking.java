@@ -28,9 +28,7 @@ public class TotemStacking extends ComponentExchanger implements CommandExecutor
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender,@NotNull Command command,@NotNull String label, String[] args) {
-        BukkitRunnable executeTotemSupply = new BukkitRunnable() {
-            @Override
-            public void run() {
+        Runnable executeTotemSupply = () -> {
                 TotemStacking.this.player = (Player) sender;
                 TotemStacking.this.playerInventory = TotemStacking.this.player.getInventory();
                 getAllOfPlayerTotems();
@@ -40,7 +38,6 @@ public class TotemStacking extends ComponentExchanger implements CommandExecutor
 
                 removeTotemInInv();
                 supplyTotems();
-            }
         };
 
         ThreadPool.getThreadPool().addTask(executeTotemSupply);
