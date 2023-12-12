@@ -69,7 +69,9 @@ public class Announcer extends ComponentExchanger {
 //        long interval = 1; // 3분마다 (1초 = 20틱)
 
         Runnable commentSendTask = () -> Bukkit.getOnlinePlayers()
-                        .forEach(player -> sendComment(player,createComponents()));
+                        .forEach(
+                                player -> sendComment(player,createComponents())
+                        );
 
         ThreadPool.getThreadPool().addSchedulingTask(commentSendTask,delay,interval);
     }
