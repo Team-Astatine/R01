@@ -3,6 +3,7 @@ package teamzesa.event;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
+import org.bukkit.command.PluginCommandYamlParser;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
@@ -12,6 +13,9 @@ import teamzesa.util.IOHandler.ConfigIOHandler;
 import teamzesa.util.ThreadPool;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.util.userHandler.UserMapHandler;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Announcer extends ComponentExchanger {
 
@@ -64,15 +68,15 @@ public class Announcer extends ComponentExchanger {
         long interval = 3600; // 3분마다 (1초 = 20틱)
 //        long interval = 1; // 3분마다 (1초 = 20틱)
 
-        Component[] components = createComponents();
-        Runnable task = new BukkitRunnable() {
-            @Override
-            public void run() {
-                for (Component component : components)
-                    Bukkit.broadcast(component);
-            }
-        };
-        ThreadPool.getThreadPool().addSchedulingTask(task,delay,interval);
+        Runnable commentSendTask = () -> Bukkit.getOnlinePlayers()
+                        .forEach(player -> sendComment(player,createComponents()));
+
+        ThreadPool.getThreadPool().addSchedulingTask(commentSendTask,delay,interval);
+    }
+
+    private void sendComment(Player player, Component[] component) {
+        for (Component commentList : component)
+            player.sendMessage(commentList);
     }
 
     private Component @NotNull [] createComponents() {

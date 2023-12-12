@@ -1,5 +1,6 @@
 package teamzesa.event;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -7,6 +8,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.scheduler.BukkitRunnable;
+import teamzesa.util.ThreadPool;
 
 public class Explosive implements Listener {
     private ExplosionPrimeEvent event;
@@ -55,14 +57,11 @@ public class Explosive implements Listener {
     }
 
     private void cartBoom() {
-        BukkitRunnable tntCartTask = new BukkitRunnable() {
-            @Override
-            public void run() {
+        Runnable tntCartTask = () -> {
                 Location location = Explosive.this.event.getEntity().getLocation();
                 location.createExplosion(200,true);
-            }
         };
-        tntCartTask.run();
-//        ThreadPool.getThreadPool().addTask(tntCartTask);
+//        tntCartTask.run();
+        ThreadPool.getThreadPool().addTask(tntCartTask);
     }
 }

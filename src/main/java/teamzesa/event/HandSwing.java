@@ -1,6 +1,7 @@
 package teamzesa.event;
 
 import io.papermc.paper.event.player.PlayerArmSwingEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -31,12 +32,18 @@ public class HandSwing implements Listener {
         if (e.getAnimationType() == PlayerAnimationType.OFF_ARM_SWING)
             return;
 
-        BukkitTask offHandSwingTask = new BukkitRunnable() {
+        /*BukkitTask offHandSwingTask = new BukkitRunnable() {
             @Override
             public void run() {
 //                playerAnnouncer(player,"Start Off Hand Swing");
                 e.getPlayer().swingOffHand();
             }
-        }.runTaskLater(R01.getPlugin(R01.class), 7L);
+        }.runTaskLater(R01.getPlugin(R01.class), 7L);*/
+
+        BukkitTask offHandSwing = Bukkit.getScheduler().runTaskLater(
+                R01.getPlugin(R01.class),
+                () -> e.getPlayer().swingOffHand(),
+                7L
+        );
     }
 }

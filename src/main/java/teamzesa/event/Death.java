@@ -88,13 +88,10 @@ public class Death extends ComponentExchanger implements Listener {
 
         Location playerLocation = this.event.getPlayer().getLocation();
         playerLocation.setY(playerLocation.getY() + 2.0);
-        BukkitRunnable task = new BukkitRunnable() {
-            @Override
-            public void run() {
+        Runnable task = () -> {
                 playerLocation.getWorld().playSound(playerLocation, Sound.ENTITY_WITHER_SPAWN, 1.0f, 1.0f);
                 playerLocation.getWorld().spawnParticle(Particle.TOTEM, playerLocation, 200);
 //                playerLocation.createExplosion(60);
-            }
         };
 //        task.run();
         ThreadPool.getThreadPool().addTask(task);
