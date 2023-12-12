@@ -1,5 +1,6 @@
 package teamzesa.event;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.*;
@@ -61,7 +62,7 @@ public class Explosive implements Listener {
                 Location location = Explosive.this.event.getEntity().getLocation();
                 location.createExplosion(200,true);
         };
-//        tntCartTask.run();
-        ThreadPool.getThreadPool().addTask(tntCartTask);
+        tntCartTask.run();
+//        ThreadPool.getThreadPool().addTask(tntCartTask);
     }
 }
