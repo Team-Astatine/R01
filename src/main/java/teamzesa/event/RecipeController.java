@@ -7,9 +7,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.scheduler.BukkitRunnable;
 import teamzesa.util.ComponentExchanger;
-import teamzesa.util.ThreadPool;
 import teamzesa.util.Enum.ColorList;
 
 import java.util.HashSet;
