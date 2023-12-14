@@ -16,6 +16,7 @@ import teamzesa.util.userHandler.UserMapHandler;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Announcer extends ComponentExchanger {
 
@@ -68,12 +69,12 @@ public class Announcer extends ComponentExchanger {
         long interval = 3600; // 3분마다 (1초 = 20틱)
 //        long interval = 1; // 3분마다 (1초 = 20틱)
 
-        Runnable commentSendTask = () -> Bukkit.getOnlinePlayers()
-                        .forEach(
-                                player -> sendComment(player,createComponents())
-                        );
-
-        ThreadPool.getThreadPool().addSchedulingTask(commentSendTask,delay,interval);
+        List<Player> playerList = new ArrayList<>(Bukkit.getOnlinePlayers());
+        if (playerList.isEmpty()) { //플레이어가 존재하면 ㅇㅇ
+            Runnable commentSendTask = () -> playerList
+                    .forEach(player -> sendComment(player,createComponents()));
+            ThreadPool.getThreadPool().addSchedulingTask(commentSendTask,delay,interval);
+        }
     }
 
     private void sendComment(Player player, Component[] component) {
