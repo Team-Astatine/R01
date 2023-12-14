@@ -18,9 +18,7 @@ https://jaxple.notion.site/d1ef58aa889d4b8ba1342fc09c0249b4?pvs=4
 *  ThreadPool Check
 *  Update Totem Stacker
 
-* Explosive
-* Death (god mod)
-* TotemStacking
+* Announcer
 
 
 ## Plugin
