@@ -69,12 +69,15 @@ public class Announcer extends ComponentExchanger {
         long interval = 3600; // 3분마다 (1초 = 20틱)
 //        long interval = 1; // 3분마다 (1초 = 20틱)
 
-        List<Player> playerList = new ArrayList<>(Bukkit.getOnlinePlayers());
-        if (playerList.isEmpty()) { //플레이어가 존재하면 ㅇㅇ
-            Runnable commentSendTask = () -> playerList
-                    .forEach(player -> sendComment(player,createComponents()));
-            ThreadPool.getThreadPool().addSchedulingTask(commentSendTask,delay,interval);
-        }
+        Runnable commentSendTask = () -> {
+            List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
+            if (players.isEmpty())
+                return;
+
+            players.forEach(player -> sendComment(player,createComponents()));
+        };
+
+        ThreadPool.getThreadPool().addSchedulingTask(commentSendTask,delay,interval);
     }
 
     private void sendComment(Player player, Component[] component) {
