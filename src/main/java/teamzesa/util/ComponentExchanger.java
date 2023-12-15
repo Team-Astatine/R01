@@ -11,58 +11,58 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.util.Enum.ColorList;
 
 public abstract class ComponentExchanger {
-
-    public @NotNull Component createLinkComponentExchanger(String text, String url, @NotNull ColorList color) {
-        TextComponent.Builder component = Component.text()
-                .content(text)
-                .color(color.getTextColor())
-                .clickEvent(ClickEvent.openUrl(url));
-        return component.build();
-    }
-
-    public void sendAnnouncerComponentExchanger(String comment, @NotNull ColorList color) {
-        Component component = Component.text(comment)
-                .color(color.getTextColor());
-        Bukkit.broadcast(component);
-    }
-
-    public void playerSendMsgComponentExchanger(@NotNull Player player, String comment) {
-        player.sendMessage(Component.text(comment));
-    }
-
-    public void playerSendMsgComponentExchanger(@NotNull Player player, String comment, @NotNull ColorList color) {
-        Component component = Component.text(comment)
-                .color(color.getTextColor());
-        player.sendMessage(component);
-    }
-
-    public void playerSendMsgComponentExchanger(@NotNull Player player, @NotNull StringBuilder comment, @NotNull ColorList color) {
-        Component component = Component.text(comment.toString())
-                .color(color.getTextColor());
-        player.sendMessage(component);
-    }
-
-    public void playerSendMsgComponentExchanger(@NotNull CommandSender sender, @NotNull String comment, @NotNull ColorList color) {
-        Player player = (Player) sender;
-        Component component = Component.text(comment)
-                .color(color.getTextColor());
-        player.sendMessage(component);
-    }
-
-    public void playerSendMsgComponentExchanger(@NotNull CommandSender sender, @NotNull StringBuilder comment, @NotNull ColorList color) {
-        Player player = (Player) sender;
-        Component component = Component.text(comment.toString())
-                .color(color.getTextColor());
-        player.sendMessage(component);
-    }
-
-    @Contract(value = "_ -> new", pure = true)
-    public @NotNull Component componentExchanger(String comment) {
+    private Component exchangerStringToComponent(String comment) {
         return Component.text(comment);
     }
 
-    public @NotNull Component componentExchanger(String comment, @NotNull ColorList color) {
-        return Component.text(comment)
+    private Component exchangerStringToComponentAndColor(String comment, ColorList color) {
+        return Component
+                .text(comment)
                 .color(color.getTextColor());
     }
+
+    public @NotNull Component createLinkComponentExchanger(String comment, String url, @NotNull ColorList color) {
+        return Component.text()
+                .content(comment)
+                .color(color.getTextColor())
+                .clickEvent(ClickEvent.openUrl(url))
+                .build();
+    }
+
+    public void sendAnnouncerComponentExchanger(String comment, @NotNull ColorList color) {
+        Bukkit.broadcast(exchangerStringToComponentAndColor(comment,color));
+    }
+
+    public void playerSendMsgComponentExchanger(@NotNull Player player, String comment) {
+        player.sendMessage(exchangerStringToComponent(comment));
+    }
+
+    public void playerSendMsgComponentExchanger(@NotNull Player player, String comment, @NotNull ColorList color) {
+        player.sendMessage(exchangerStringToComponentAndColor(comment,color));
+    }
+
+    public void playerSendMsgComponentExchanger(@NotNull CommandSender sender, @NotNull String comment, @NotNull ColorList color) {
+        playerSendMsgComponentExchanger((Player) sender,comment,color);
+    }
+
+
+    public void playerSendMsgComponentExchanger(@NotNull Player player, @NotNull StringBuilder comment, @NotNull ColorList color) {
+        playerSendMsgComponentExchanger(player,comment.toString(),color);
+    }
+
+    public void playerSendMsgComponentExchanger(@NotNull CommandSender sender, @NotNull StringBuilder comment, @NotNull ColorList color) {
+        playerSendMsgComponentExchanger((Player) sender,comment.toString(),color);
+    }
+
+
+    @Contract(value = "_ -> new", pure = true)
+    public @NotNull Component componentExchanger(String comment) {
+        return exchangerStringToComponent(comment);
+    }
+
+    public @NotNull Component componentExchanger(String comment, @NotNull ColorList color) {
+        return exchangerStringToComponentAndColor(comment,color)
+    }
+
+
 }
