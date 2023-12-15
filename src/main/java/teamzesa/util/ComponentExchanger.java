@@ -61,8 +61,6 @@ public abstract class ComponentExchanger {
     }
 
     public @NotNull Component componentExchanger(String comment, @NotNull ColorList color) {
-        return exchangerStringToComponentAndColor(comment,color)
+        return exchangerStringToComponentAndColor(comment,color);
     }
-
-
 }
