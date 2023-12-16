@@ -8,16 +8,17 @@ import teamzesa.entity.User;
 import teamzesa.util.ComponentExchanger;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class UserMapHandler extends ComponentExchanger {
     private static class UserMapHandlerHolder {
         private static final UserMapHandler INSTANCE = new UserMapHandler();
     }
 
-    private static Map<UUID, User> userData;
+    private static ConcurrentHashMap<UUID, User> userData;
 
     private UserMapHandler() {
-        userData = new HashMap<>();
+        userData = new ConcurrentHashMap<>();
     }
 
     public Map<UUID,User> getUserMap() {
