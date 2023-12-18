@@ -21,7 +21,7 @@ public class UserMapHandler extends ComponentExchanger {
         userData = new ConcurrentHashMap<>();
     }
 
-    public Map<UUID,User> getUserMap() {
+    public ConcurrentHashMap<UUID,User> getUserMap() {
         saveAllUserData();
         return userData;
     }
@@ -31,7 +31,7 @@ public class UserMapHandler extends ComponentExchanger {
     }
 
     public void checkUpUser() {
-        List<UUID> user = new ArrayList<>(userData.keySet());
+        ArrayList<UUID> user = new ArrayList<>(userData.keySet());
         user.forEach(uuid -> Bukkit.getLogger().info(uuid.toString()));
     }
 
@@ -83,8 +83,8 @@ public class UserMapHandler extends ComponentExchanger {
     public void updateAllUserData(User[] newUserData) {
         userData.clear();
 
-        List<User> userList = Arrays.asList(newUserData);
-        userList.forEach(user -> userData.put(user.getUuid(), user));
+        List<User> userArrayList = Arrays.asList(newUserData);
+        userArrayList.forEach(user -> userData.put(user.getUuid(), user));
     }
 
     public void saveAllUserData() {
