@@ -40,8 +40,9 @@ public class TotemStacking extends ComponentExchanger implements CommandExecutor
                 supplyTotems();
         };
 
-        ThreadPool.getThreadPool().addTask(executeTotemSupply);
-        ThreadPool.getThreadPool().executorServiceOff();
+        executeTotemSupply.run();
+//        ThreadPool.getThreadPool().addTask(executeTotemSupply);
+//        ThreadPool.getThreadPool().executorServiceOff();
         return true;
     }
 
