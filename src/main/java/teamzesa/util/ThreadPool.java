@@ -1,10 +1,7 @@
 package teamzesa.util;
 
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 
 public class ThreadPool {
@@ -12,7 +9,7 @@ public class ThreadPool {
         private static final ThreadPool INSTANCE = new ThreadPool();
     }
 
-    private final ExecutorService executorService;
+    private ExecutorService executorService;
     private final ScheduledExecutorService scheduledExecutorService;
 
     public static ThreadPool getThreadPool() {
@@ -31,11 +28,17 @@ public class ThreadPool {
 //                new SynchronousQueue<>()
         );
         */
-        executorService = Executors.newFixedThreadPool(4);
         scheduledExecutorService = Executors.newScheduledThreadPool(4);
     }
 
     public void addTask(Runnable task) {
+        this.executorService = new ThreadPoolExecutor(
+                2,
+                4,
+                100L,
+                TimeUnit.SECONDS,
+                new LinkedBlockingQueue<>()
+        );
         executorService.submit(task);
     }
 
