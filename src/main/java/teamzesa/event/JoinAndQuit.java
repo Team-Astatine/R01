@@ -11,6 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
+import teamzesa.command.GodModeSet;
 import teamzesa.util.ComponentExchanger;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.ArmourKit;
@@ -51,6 +52,11 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
         attackSpeed();
         playerFlight(); //flight Set
         setHealthScale();
+        checkGodMode();
+    }
+
+    private void checkGodMode() {
+        new GodModeSet().setGodEffect(this.joinPlayer,this.user);
     }
 
     private void announcingJoinMsg() {

@@ -1,5 +1,8 @@
 package teamzesa.command;
 import org.bukkit.Bukkit;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -33,6 +36,7 @@ public class GodModeSet extends ComponentExchanger implements CommandExecutor, E
 
         setFieldVariable(checkingPlayer.get());
         setPlayerGodMode();
+        setGodEffect(this.targetPlayer,this.targetUser);
         sendCommment(sender);
         return true;
     }
@@ -57,10 +61,19 @@ public class GodModeSet extends ComponentExchanger implements CommandExecutor, E
 
     private void setPlayerGodMode() {
         this.targetUser.setGodMode(!this.targetUser.isGodMode());
+    }
 
-        Runnable godModTask = this.targetUser.isGodMode()
-            ? () -> this.targetPlayer.addPotionEffect(new PotionEffect(PotionEffectType.SATURATION,100000000,0))
-            : () -> this.targetPlayer.removePotionEffect(PotionEffectType.SATURATION);
+    public void setGodEffect(Player player,User user) {
+        BossBar bossBar = Bukkit.createBossBar("당신은 신입니다.", BarColor.RED, BarStyle.SEGMENTED_6);
+        Runnable godModTask = user.isGodMode()
+                ? () -> {
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SATURATION,100000000,0));
+            bossBar.addPlayer(player);
+        }
+                : () -> {
+            player.removePotionEffect(PotionEffectType.SATURATION);
+            bossBar.removePlayer(player);
+        };
         godModTask.run();
     }
 }
