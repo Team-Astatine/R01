@@ -63,17 +63,9 @@ public class GodModeSet extends ComponentExchanger implements CommandExecutor, E
         this.targetUser.setGodMode(!this.targetUser.isGodMode());
     }
 
-    public void setGodEffect(Player player,User user) {
-        BossBar bossBar = Bukkit.createBossBar("당신은 신입니다.", BarColor.RED, BarStyle.SEGMENTED_6);
-        Runnable godModTask = user.isGodMode()
-                ? () -> {
+    public void setGodEffect(Player player, User user) {
+        if (user.isGodMode())
             player.addPotionEffect(new PotionEffect(PotionEffectType.SATURATION,100000000,0));
-            bossBar.addPlayer(player);
-        }
-                : () -> {
-            player.removePotionEffect(PotionEffectType.SATURATION);
-            bossBar.removePlayer(player);
-        };
-        godModTask.run();
+        else player.removePotionEffect(PotionEffectType.SATURATION);
     }
 }
