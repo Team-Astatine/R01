@@ -105,7 +105,7 @@ public class Announcer extends ComponentExchanger {
                 componentExchanger(configIOHandler.getRaidTip(), commonColor),
                 componentExchanger(configIOHandler.getWeaponTip(), commonColor),
                 componentExchanger(configIOHandler.getExplosiveTip(), commonColor),
-                componentExchanger(configIOHandler.getCommandFly(), commandColor),
+//                componentExchanger(configIOHandler.getCommandFly(), commandColor),
                 componentExchanger(configIOHandler.getCommandHat(), commandColor),
                 componentExchanger(configIOHandler.getCommandTotem(), commandColor)
         };

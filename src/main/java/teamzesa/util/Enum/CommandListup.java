@@ -4,7 +4,7 @@ import org.bukkit.command.CommandExecutor;
 import teamzesa.command.*;
 
 public enum CommandListup {
-    FLY("fly", new Fly()),
+//    FLY("fly", new Fly()),
     METEOR("meteor", new Meteor()),
     MOTD("Motd", new MotdSet()),
     ARMOUR_HEAD("hat", new ArmourSet()),
