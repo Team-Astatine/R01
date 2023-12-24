@@ -57,6 +57,10 @@ public class GodModeSet extends ComponentExchanger implements CommandExecutor, E
 
     private void setPlayerGodMode() {
         this.targetUser.setGodMode(!this.targetUser.isGodMode());
-        this.targetPlayer.addPotionEffect(new PotionEffect(PotionEffectType.SATURATION,100000000,0));
+
+        Runnable godModTask = this.targetUser.isGodMode()
+            ? () -> this.targetPlayer.addPotionEffect(new PotionEffect(PotionEffectType.SATURATION,100000000,0))
+            : () -> this.targetPlayer.removePotionEffect(PotionEffectType.SATURATION);
+        godModTask.run();
     }
 }
