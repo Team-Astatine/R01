@@ -22,6 +22,7 @@ public class UserObjectChecker extends ComponentExchanger implements CommandExec
                     existUser -> sendComment(sender, existUser),
                     () -> sendComment(sender, "존재하지 않는 유저")
                 );
+
         return true;
     }
 

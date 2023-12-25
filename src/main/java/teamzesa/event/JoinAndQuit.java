@@ -139,7 +139,7 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
     }
 
     private void setHealthScale() {
-        User user = userMapHandler.getUser(this.joinPlayer.getUniqueId());
+        User user = userMapHandler.getUser(this.joinPlayer);
         this.joinPlayer.setHealthScale(user.getHealthScale());
         this.joinPlayer.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(user.getHealthScale());
     }
