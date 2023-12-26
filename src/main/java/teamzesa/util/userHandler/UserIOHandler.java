@@ -1,15 +1,12 @@
 package teamzesa.util.userHandler;
 
 import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
 import teamzesa.entity.User;
 import teamzesa.util.Enum.DataFile;
 
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Reader;
-import java.lang.reflect.Type;
 import java.util.*;
 
 public class UserIOHandler {
@@ -42,7 +39,7 @@ public class UserIOHandler {
     }
 
     public void exportUserData() {
-        List<User> userData = new ArrayList<>(userMapHandler.getUserMap().values());
+        List<User> userData = new ArrayList<>(userMapHandler.getAllUserMap().values());
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
                 .create();

@@ -21,7 +21,7 @@ public class UserMapHandler extends ComponentExchanger {
         userData = new ConcurrentHashMap<>();
     }
 
-    public ConcurrentHashMap<UUID,User> getUserMap() {
+    public ConcurrentHashMap<UUID,User> getAllUserMap() {
         saveAllUserData();
         return userData;
     }
