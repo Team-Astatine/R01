@@ -51,9 +51,9 @@ public class UserMapHandler extends ComponentExchanger {
     }
 
     public void updateUser(UUID uuid,double healthScale) {
-        Optional.ofNullable(userData.get(uuid)).ifPresentOrElse(
+        Player player = Bukkit.getPlayer(userData.get(uuid).getUuid());
+        Optional.ofNullable(player).ifPresentOrElse(
                 user -> {
-                    Player player = Bukkit.getPlayer(user.getUuid());
                     player.setHealthScale(healthScale);
                     player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(healthScale);
                     user.setHealthScale(healthScale);
@@ -65,8 +65,8 @@ public class UserMapHandler extends ComponentExchanger {
     public void updateAllUserData(User[] newUserData) {
         userData.clear();
 
-        List<User> userArrayList = Arrays.asList(newUserData);
-        userArrayList.forEach(user -> userData.put(user.getUuid(), user));
+        Arrays.asList(newUserData)
+                .forEach(user -> userData.put(user.getUuid(), user));
     }
 
     public void saveAllUserData() {
