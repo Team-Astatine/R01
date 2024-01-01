@@ -1,4 +1,3 @@
 package teamzesa.event;
 
-public interface EventExecutor {
-}
+public interface EventExecutor {}
