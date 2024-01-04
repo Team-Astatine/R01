@@ -19,23 +19,23 @@ import teamzesa.util.Enum.FoodKit;
 import teamzesa.util.Enum.ToolKit;
 import teamzesa.entity.User;
 import teamzesa.util.RanNumGenerator;
-import teamzesa.util.userHandler.UserMapHandler;
+import teamzesa.util.userHandler.UserController;
 
 import java.net.InetSocketAddress;
 import java.util.Optional;
 
 
 public class JoinAndQuit extends ComponentExchanger implements Listener {
-    private final UserMapHandler userMapHandler;
     private final Announcer announcer;
 
     private Player joinPlayer;
+    private UserController userController;
     private User user;
 //    private Player quitPlayer;
 
     public JoinAndQuit() {
         this.announcer = Announcer.getAnnouncer();
-        this.userMapHandler = UserMapHandler.getUserMapHandler();
+        this.userController = new UserController();
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -45,7 +45,7 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
         supplyUserKit();
         userIPCheckUp(); //접속 IP 확인
         this.user.increaseUserJoinCnt(); //접속횟수
-        this.userMapHandler.updateUser(this.user);
+        this.userController.updateUser(this.user.getUniqueId(), this.user.getHealthScale());
 
         announcingJoinMsg();
 
@@ -69,13 +69,10 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
     private void init(Player player) {
         this.joinPlayer = player;
 
-        User user = this.userMapHandler.getUser(player);
+        User user = this.userController.readUser(player);
         Optional.ofNullable(user).ifPresentOrElse(
                 existUser -> this.user = existUser,
-                () -> {
-                    this.user = new User(player);
-                    this.userMapHandler.addUser(player);
-                }
+                ()        -> this.userController.createUser(player)
         );
     }
 
@@ -139,7 +136,7 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
     }
 
     private void setHealthScale() {
-        User user = userMapHandler.getUser(this.joinPlayer);
+        User user = this.userController.readUser(this.joinPlayer);
         this.joinPlayer.setHealthScale(user.getHealthScale());
         this.joinPlayer.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(user.getHealthScale());
     }
@@ -147,16 +144,4 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
     private void attackSpeed() {
         this.joinPlayer.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(40.0);
     }
-
-    /*@EventHandler
-    public void onQuit(PlayerQuitEvent e) {
-        /*
-        Player quitPlayer = e.getPlayer();
-        double healthScale = quitPlayer.getHealthScale();
-
-//        valid healthScale
-        if (healthScale != 20.0)
-            userMapHandler.updateUser(quitPlayer.getUniqueId(), healthScale);
-
-    }*/
 }

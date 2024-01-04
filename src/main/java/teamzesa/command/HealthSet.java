@@ -11,7 +11,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.util.ComponentExchanger;
 import teamzesa.util.Enum.ColorList;
-import teamzesa.util.userHandler.UserMapHandler;
+import teamzesa.util.userHandler.UserController;
 import teamzesa.event.EventExecutor;
 
 import java.util.Optional;
@@ -31,27 +31,19 @@ public class HealthSet extends ComponentExchanger implements CommandExecutor, Ev
         }
 
 //        gpt
-        Optional.ofNullable(Bukkit.getPlayer(args[0]))
-                .ifPresent(optionalPlayer -> {
-                            this.targetPlayer = optionalPlayer;
-                            Optional.of(args[1])
-                                    .map(Double::parseDouble)
-                                    .ifPresent(this::setPlayerHealth);
-                        });
-
-//        Optional<Player> player = Optional.ofNullable(Bukkit.getPlayer(args[0]));
-//        player.ifPresent(optionalPlayer -> this.targetPlayer = optionalPlayer);
-
-//        Optional<Double> targetPlayerHealth = Optional.of(Double.parseDouble(args[1]));
-//        targetPlayerHealth.ifPresent(this::setPlayerHealth);
+        Optional.ofNullable(Bukkit.getPlayer(args[0])).ifPresent(optionalPlayer -> {
+            this.targetPlayer = optionalPlayer;
+            Optional.of(args[1])
+                    .map(Double::parseDouble)
+                    .ifPresent(this::setPlayerHealth);
+        });
 
         updatePlayerInfo();
         return true;
     }
 
     private void updatePlayerInfo() {
-        UserMapHandler userMapHandler = UserMapHandler.getUserMapHandler();
-        userMapHandler.updateUser(this.targetPlayer.getUniqueId(), this.targetPlayer.getHealthScale());
+        new UserController().updateUser(this.targetPlayer.getUniqueId(), this.targetPlayer.getHealthScale());
     }
 
     private void setPlayerHealth(double setHealthValue) {

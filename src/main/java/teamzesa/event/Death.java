@@ -1,29 +1,22 @@
 package teamzesa.event;
 
 import org.bukkit.*;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.util.ComponentExchanger;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.entity.User;
-import teamzesa.util.ThreadPool;
-import teamzesa.util.userHandler.UserMapHandler;
+import teamzesa.util.userHandler.UserController;
 
 import java.util.Optional;
 
 
 public class Death extends ComponentExchanger implements Listener {
-    private final UserMapHandler userMapHandler;
+    private final UserController userController = new UserController();
     private PlayerDeathEvent event;
-
-    public Death() {
-        this.userMapHandler = UserMapHandler.getUserMapHandler();
-    }
 
     @EventHandler
     public synchronized void onPlayerDeath(PlayerDeathEvent e) {
@@ -38,9 +31,9 @@ public class Death extends ComponentExchanger implements Listener {
     private void increaseKillingCnt() {
         Optional.ofNullable(this.event.getEntity().getKiller()).ifPresent(
                 playerType -> {
-                    User user = userMapHandler.getUser(playerType);
+                    User user = this.userController.readUser(playerType);
                     user.increaseKillingCnt();
-                    userMapHandler.updateUser(user);
+                    this.userController.updateUser(user.getUniqueId(),user.getHealthScale());
                 }
         );
     }
@@ -71,8 +64,8 @@ public class Death extends ComponentExchanger implements Listener {
         double killedHealth = killed.getHealthScale() - STEP_SIZE;
         double killerHealth = killer.getHealthScale() + STEP_SIZE;
 
-        this.userMapHandler.updateUser(killed.getUniqueId(),killedHealth);
-        this.userMapHandler.updateUser(killer.getUniqueId(),killerHealth);
+        this.userController.updateUser(killed.getUniqueId(),killedHealth);
+        this.userController.updateUser(killer.getUniqueId(),killerHealth);
     }
 
     private void talking(Player killed, @NotNull Player killer) {
@@ -81,7 +74,7 @@ public class Death extends ComponentExchanger implements Listener {
     }
 
     private @NotNull Boolean checkingGodMod() {
-        User user = this.userMapHandler.getUser(this.event.getPlayer());
+        User user = this.userController.readUser(this.event.getPlayer());
 
         if (!user.isGodMode())
             return false;

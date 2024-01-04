@@ -3,20 +3,17 @@ package teamzesa.event;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
-import org.bukkit.command.PluginCommandYamlParser;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.entity.User;
 import teamzesa.util.ComponentExchanger;
 import teamzesa.util.IOHandler.ConfigIOHandler;
 import teamzesa.util.ThreadPool;
 import teamzesa.util.Enum.ColorList;
-import teamzesa.util.userHandler.UserMapHandler;
+import teamzesa.util.userHandler.UserController;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class Announcer extends ComponentExchanger {
 
@@ -44,7 +41,7 @@ public class Announcer extends ComponentExchanger {
     }
 
     public void countAnnouncer(Player player) {
-        int joinCnt = UserMapHandler.getUserMapHandler().getUser(player).getJoinCount();
+        int joinCnt = new UserController().readUser(player).getJoinCount();
         player.sendMessage(
                 componentExchanger(configIOHandler.getWorldMotdConfig(),ColorList.SKY_BLUE)
                         .append(componentExchanger(" " + joinCnt ,ColorList.PINK))
