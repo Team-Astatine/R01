@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.util.ComponentExchanger;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.entity.User;
-import teamzesa.util.userHandler.UserMapHandler;
+import teamzesa.util.userHandler.UserController;
 import teamzesa.event.EventExecutor;
 
 import java.util.Optional;
@@ -17,7 +17,7 @@ import java.util.Optional;
 public class UserObjectChecker extends ComponentExchanger implements CommandExecutor, EventExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
-        Optional.ofNullable(UserMapHandler.getUserMapHandler().getUser(args[0]))
+        Optional.ofNullable(new UserController().readUser(args[0]))
                 .ifPresentOrElse(
                     existUser -> sendComment(sender, existUser),
                     () -> sendComment(sender, "존재하지 않는 유저")

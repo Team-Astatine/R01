@@ -36,8 +36,20 @@ public class User {
         this.healthScale = player.getHealthScale();
         this.godMode = false;
     }
-//    getter
-    public UUID getUuid() {
+
+    public User(User user) {
+        this.uuid = user.uuid;
+        this.name = user.name;
+        this.connectionIPList = user.connectionIPList;
+        this.joinCount = user.joinCount;
+        this.level = user.level;
+        this.healthScale = user.healthScale;
+        this.killStatus = user.killStatus;
+        this.godMode = user.godMode;
+    }
+
+    //    getter
+    public UUID getUniqueId() {
         return uuid;
     }
 
@@ -61,7 +73,8 @@ public class User {
         return godMode;
     }
 
-//    setter userHandler
+
+    //    setter userHandler
     public void setHealthScale(double healthScale) {
         this.healthScale = healthScale;
     }
