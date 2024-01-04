@@ -1,8 +1,5 @@
 package teamzesa.command;
 import org.bukkit.Bukkit;
-import org.bukkit.boss.BarColor;
-import org.bukkit.boss.BarStyle;
-import org.bukkit.boss.BossBar;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -13,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.util.ComponentExchanger;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.entity.User;
-import teamzesa.util.userHandler.UserMapHandler;
+import teamzesa.util.userHandler.UserController;
 import teamzesa.event.EventExecutor;
 
 import java.util.Optional;
@@ -56,7 +53,7 @@ public class GodModeSet extends ComponentExchanger implements CommandExecutor, E
 
     private void setFieldVariable(@NotNull Player player) {
         this.targetPlayer = player;
-        this.targetUser = UserMapHandler.getUserMapHandler().getUser(player);
+        this.targetUser = new UserController().readUser(player);
     }
 
     private void setPlayerGodMode() {

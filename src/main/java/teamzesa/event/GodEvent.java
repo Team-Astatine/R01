@@ -11,7 +11,7 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.util.Vector;
 import teamzesa.entity.User;
-import teamzesa.util.userHandler.UserMapHandler;
+import teamzesa.util.userHandler.UserController;
 
 
 public class GodEvent implements Listener {
@@ -56,6 +56,6 @@ public class GodEvent implements Listener {
     }
 
     private User getUser(Player player) {
-        return UserMapHandler.getUserMapHandler().getUser(player);
+        return new UserController().readUser(player);
     }
 }

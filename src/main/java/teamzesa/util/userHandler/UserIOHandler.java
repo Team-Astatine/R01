@@ -1,15 +1,12 @@
 package teamzesa.util.userHandler;
 
 import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
 import teamzesa.entity.User;
 import teamzesa.util.Enum.DataFile;
 
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Reader;
-import java.lang.reflect.Type;
 import java.util.*;
 
 public class UserIOHandler {
@@ -17,59 +14,28 @@ public class UserIOHandler {
         private static final UserIOHandler INSTANCE = new UserIOHandler();
     }
 
-    private final UserMapHandler userMapHandler;
-
-    private UserIOHandler() {
-        userMapHandler = UserMapHandler.getUserMapHandler();
-    }
+    private final UserController userController = new UserController();
 
     public static UserIOHandler getIOHandler() {
         return UserIOHandlerHolder.INSTANCE;
     }
 
     public void importUserData() {
-//        Gson gson = new GsonBuilder();
-//                .registerTypeAdapter(User.class,new UserDeserializer())
-//                .create();
-
         Gson gson = new Gson();
+
         try (FileReader reader = new FileReader(DataFile.USER_DATA.getFileInstance())) {
-            userMapHandler.updateAllUserData(gson.fromJson(reader, User[].class));
-        } catch (IOException e) {
-            System.err.println("InputUserData err");
-            e.printStackTrace();
-        }
+            this.userController.updateAllUserData(gson.fromJson(reader, User[].class));
+        } catch (IOException e) {System.err.println("InputUserData err");}
     }
 
     public void exportUserData() {
-        List<User> userData = new ArrayList<>(userMapHandler.getUserMap().values());
+        List<User> userData = new ArrayList<>(this.userController.getAllUserTable().values());
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
                 .create();
 
         try (FileWriter writer = new FileWriter(DataFile.USER_DATA.getFileInstance())) {
             gson.toJson(userData, writer);
-        } catch (IOException e) {
-            System.err.println("OutPutUserData err");
-            e.printStackTrace();
-        }
+        } catch (IOException e) {System.err.println("ExportUserData err");}
     }
 }
-
-/*
-class UserDeserializer implements JsonDeserializer<User> {
-    @Override
-    public User deserialize(JsonElement json, java.lang.reflect.Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-        JsonObject  jsonObject = json.getAsJsonObject();
-        UUID uuid = UUID.fromString(jsonObject.get("uuid").getAsString());
-        String      name = jsonObject.get("name").getAsString();
-        Set<String> connectionIP = context.deserialize(jsonObject.getAsJsonArray("ip"), Set.class);
-        int         joinCnt = jsonObject.get("joinCount").getAsInt();
-        int         level = jsonObject.get("level").getAsInt();
-        double      healthScale = jsonObject.get("healthScale").getAsDouble();
-        boolean     godMode = jsonObject.get("godMode").getAsBoolean();
-
-        return new User(uuid, name, connectionIP, joinCnt, level, healthScale, godMode);
-    }
-}
-*/
