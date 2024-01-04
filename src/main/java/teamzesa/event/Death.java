@@ -33,7 +33,7 @@ public class Death extends ComponentExchanger implements Listener {
                 playerType -> {
                     User user = this.userController.readUser(playerType);
                     user.increaseKillingCnt();
-                    this.userController.updateUser(user.getUniqueId(),user.getHealthScale());
+                    this.userController.updateUser(user);
                 }
         );
     }
@@ -59,17 +59,14 @@ public class Death extends ComponentExchanger implements Listener {
             return;
         }
 
-        talking(killed,killer);
-
-        double killedHealth = killed.getHealthScale() - STEP_SIZE;
-        double killerHealth = killer.getHealthScale() + STEP_SIZE;
-
-        this.userController.updateUser(killed.getUniqueId(),killedHealth);
-        this.userController.updateUser(killer.getUniqueId(),killerHealth);
-    }
-
-    private void talking(Player killed, @NotNull Player killer) {
+        User killedUser = this.userController.readUser(killed);
+        killedUser.setHealthScale(killed.getHealthScale() - STEP_SIZE);
+        this.userController.updateUser(killedUser);
         playerSendMsgComponentExchanger(killed,killer.getName() + "님이 체력을 약탈했습니다.", ColorList.RED);
+
+        User killerUser = this.userController.readUser(killed);
+        killerUser.setHealthScale(killer.getHealthScale() - STEP_SIZE);
+        this.userController.updateUser(killerUser);
         playerSendMsgComponentExchanger(killer,killed.getName() + "님이 체력을 약탈했습니다.", ColorList.RED);
     }
 

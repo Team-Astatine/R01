@@ -27,11 +27,10 @@ import java.util.Optional;
 
 public class JoinAndQuit extends ComponentExchanger implements Listener {
     private final Announcer announcer;
+    private final UserController userController;
 
     private Player joinPlayer;
-    private UserController userController;
     private User user;
-//    private Player quitPlayer;
 
     public JoinAndQuit() {
         this.announcer = Announcer.getAnnouncer();
@@ -45,7 +44,7 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
         supplyUserKit();
         userIPCheckUp(); //접속 IP 확인
         this.user.increaseUserJoinCnt(); //접속횟수
-        this.userController.updateUser(this.user.getUniqueId(), this.user.getHealthScale());
+        this.userController.updateUser(this.user);
 
         announcingJoinMsg();
 
@@ -69,10 +68,13 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
     private void init(Player player) {
         this.joinPlayer = player;
 
-        User user = this.userController.readUser(player);
-        Optional.ofNullable(user).ifPresentOrElse(
+        Optional.ofNullable(this.userController.readUser(player)).ifPresentOrElse(
                 existUser -> this.user = existUser,
-                ()        -> this.userController.createUser(player)
+                ()        -> {
+                    this.userController.createUser(player);
+                    this.user = this.userController.readUser(player);
+                    System.out.println("init user > " + this.user);
+                }
         );
     }
 

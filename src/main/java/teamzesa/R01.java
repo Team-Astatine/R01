@@ -52,7 +52,7 @@ public final class R01 extends JavaPlugin {
     @Override
     public void onDisable() {
         UserIOHandler.getIOHandler().exportUserData();
-//        ThreadPool.getThreadPool().allServiceOff();
+        ThreadPool.getThreadPool().allServiceOff();
         Bukkit.getScheduler().cancelTasks(this);
     }
 

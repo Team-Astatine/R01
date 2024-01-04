@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
+import teamzesa.entity.User;
 import teamzesa.util.ComponentExchanger;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.util.userHandler.UserController;
@@ -43,7 +44,10 @@ public class HealthSet extends ComponentExchanger implements CommandExecutor, Ev
     }
 
     private void updatePlayerInfo() {
-        new UserController().updateUser(this.targetPlayer.getUniqueId(), this.targetPlayer.getHealthScale());
+        UserController userController = new UserController();
+        User user = userController.readUser(this.targetPlayer);
+        user.setHealthScale(this.targetPlayer.getHealthScale());
+        userController.updateUser(user);
     }
 
     private void setPlayerHealth(double setHealthValue) {

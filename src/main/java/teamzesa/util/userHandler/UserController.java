@@ -39,24 +39,23 @@ public class UserController {
                 .orElse(null);
     }
 
-    public void updateUser(UUID uuid,double healthScale) {
-        Player player = Bukkit.getPlayer(uuid);
-        player.setHealthScale(healthScale);
-        player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(healthScale);
+    public void updateUser(@NotNull User user) {
+        Player player = Bukkit.getPlayer(user.getUniqueId());
+        player.setHealthScale(user.getHealthScale());
+        player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(user.getHealthScale());
 
-        userData.update(new User(player));
+        userData.update(user);
     }
 
     public void updateAllUserData(User[] newUserData) {
         userData.clear();
-
         List<User> userArrayList = Arrays.asList(newUserData);
         userArrayList.forEach(this::createUser);
     }
 
     public ConcurrentHashMap<UUID,User> getAllUserTable() {
         Bukkit.getLogger().info("Saving User Data..");
-        Bukkit.getOnlinePlayers().forEach(player -> updateUser(player.getUniqueId(),player.getHealthScale()));
-        return getAllUserTable();
+        Bukkit.getOnlinePlayers().forEach(player -> readUser(player.getUniqueId()));
+        return userData.getAllUserTable();
     }
 }

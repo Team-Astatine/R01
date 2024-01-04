@@ -34,7 +34,7 @@ public class UserDataBase extends ComponentExchanger {
     }
 
     public User select(UUID uuid) {
-        return  USER_DATA.get(uuid);
+        return USER_DATA.get(uuid);
     }
 
     public Boolean update(User user) {

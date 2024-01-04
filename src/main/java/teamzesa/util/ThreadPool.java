@@ -51,7 +51,7 @@ public class ThreadPool {
     }
 
     public void allServiceOff() {
-        executorService.shutdownNow();
+//        executorService.shutdownNow();
         scheduledExecutorService.shutdownNow();
     }
 }
