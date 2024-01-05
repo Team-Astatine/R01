@@ -19,10 +19,13 @@ import teamzesa.util.Enum.FoodKit;
 import teamzesa.util.Enum.ToolKit;
 import teamzesa.entity.User;
 import teamzesa.util.RanNumGenerator;
+import teamzesa.util.userHandler.UserBuilder;
 import teamzesa.util.userHandler.UserController;
 
 import java.net.InetSocketAddress;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 
 public class JoinAndQuit extends ComponentExchanger implements Listener {
@@ -39,12 +42,12 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public synchronized void onJoin(@NotNull PlayerJoinEvent event) {
+        this.joinPlayer = event.getPlayer();
 
-        init(event.getPlayer());
+        init();
         supplyUserKit();
         userIPCheckUp(); //접속 IP 확인
-        this.user.increaseUserJoinCnt(); //접속횟수
-        this.userController.updateUser(this.user);
+        increaseUserJoinCnt();
 
         announcingJoinMsg();
 
@@ -52,6 +55,13 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
         playerFlight(); //flight Set
         setHealthScale();
         checkGodMode();
+    }
+
+    private void increaseUserJoinCnt() {
+        this.user = new UserBuilder(this.user)
+                .joinCount(this.user.joinCount() + 1)
+                .build();
+        this.userController.updateUser(this.user);
     }
 
     private void checkGodMode() {
@@ -65,14 +75,13 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
         this.announcer.joinKillStatusAnnouncer(this.user);
     }
 
-    private void init(Player player) {
-        this.joinPlayer = player;
+    private void init() {
 
-        Optional.ofNullable(this.userController.readUser(player)).ifPresentOrElse(
+        Optional.ofNullable(this.userController.readUser(this.joinPlayer)).ifPresentOrElse(
                 existUser -> this.user = existUser,
                 ()        -> {
-                    this.userController.createUser(player);
-                    this.user = this.userController.readUser(player);
+                    this.userController.createUser(this.joinPlayer);
+                    this.user = this.userController.readUser(this.joinPlayer);
                     System.out.println("init user > " + this.user);
                 }
         );
@@ -89,10 +98,22 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
             ip = this.joinPlayer.getAddress();
 
         String message = newSubscribers() ? "신규 IP를 등록합니다." : "새로운 IP로 접속하셨습니다.";
-        if (newSubscribers() || this.user.nonExistsIP(ip)) {
-            this.user.addIP(ip);
+        if (newSubscribers() || nonExistsIP()) {
+            HashSet<String> ipList = this.user.ipList();
+            ipList.add(ip.getHostName());
+
+            this.userController.updateUser(new UserBuilder(this.user)
+                    .ipList(ipList)
+                    .build());
+
             playerSendMsgComponentExchanger(this.joinPlayer, message, ColorList.YELLOW);
         }
+    }
+
+    private boolean nonExistsIP() {
+        String accessIP = this.joinPlayer.getAddress().getHostName();
+        return this.user.ipList().stream().noneMatch(
+                ip -> ip.equals(accessIP));
     }
 
     private void supplyUserKit() {
@@ -134,13 +155,13 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
     }
 
     private boolean newSubscribers () {
-        return this.user.getJoinCount() == 0;
+        return this.user.joinCount() == 0;
     }
 
     private void setHealthScale() {
         User user = this.userController.readUser(this.joinPlayer);
-        this.joinPlayer.setHealthScale(user.getHealthScale());
-        this.joinPlayer.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(user.getHealthScale());
+        this.joinPlayer.setHealthScale(user.healthScale());
+        this.joinPlayer.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(user.healthScale());
     }
 
     private void attackSpeed() {

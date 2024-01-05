@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.util.ComponentExchanger;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.entity.User;
+import teamzesa.util.userHandler.UserBuilder;
 import teamzesa.util.userHandler.UserController;
 import teamzesa.event.EventExecutor;
 
@@ -40,7 +41,7 @@ public class GodModeSet extends ComponentExchanger implements CommandExecutor, E
 
     private void sendCommment(@NotNull CommandSender sender) {
         boolean senderInstance = sender instanceof Player; //true == player , false == consol
-        String comment = "은 이제 " + (this.targetUser.isGodMode() ? "신" : "인간") + " 입니다.";
+        String comment = "은 이제 " + (this.targetUser.godMode() ? "신" : "인간") + " 입니다.";
 
         if (!this.targetPlayer.equals(sender) && senderInstance)
             playerSendMsgComponentExchanger(sender, this.targetPlayer.getName() + comment, ColorList.ORANGE);
@@ -57,11 +58,15 @@ public class GodModeSet extends ComponentExchanger implements CommandExecutor, E
     }
 
     private void setPlayerGodMode() {
-        this.targetUser.setGodMode(!this.targetUser.isGodMode());
+        this.targetUser = new UserBuilder(this.targetUser)
+                .godMode(!this.targetUser.godMode()) //godMode 변경
+                .build();
+
+        new UserController().updateUser(this.targetUser);
     }
 
     public void setGodEffect(Player player, User user) {
-        if (user.isGodMode())
+        if (user.godMode())
             player.addPotionEffect(new PotionEffect(PotionEffectType.SATURATION,100000000,0));
         else player.removePotionEffect(PotionEffectType.SATURATION);
     }

@@ -23,13 +23,8 @@ public class UserDataBase extends ComponentExchanger {
         return USER_DATA;
     }
 
-    public boolean insert(@NotNull Player player) {
-        USER_DATA.put(player.getUniqueId(), new User(player));
-        return Boolean.TRUE;
-    }
-
     public boolean insert(User user) {
-        USER_DATA.put(user.getUniqueId(), user);
+        USER_DATA.put(user.uuid(), user);
         return Boolean.TRUE;
     }
 
@@ -38,7 +33,7 @@ public class UserDataBase extends ComponentExchanger {
     }
 
     public Boolean update(User user) {
-        USER_DATA.replace(user.getUniqueId(), user);
+        USER_DATA.replace(user.uuid(), user);
         return Boolean.TRUE;
     }
 

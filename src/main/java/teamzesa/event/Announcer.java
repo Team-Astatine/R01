@@ -32,16 +32,16 @@ public class Announcer extends ComponentExchanger {
     }
 
     public void joinKillStatusAnnouncer(User user) {
-        if (user.getKillStatus() == 0)
+        if (user.killStatus() == 0)
             return;
 
         Bukkit.broadcast(
-                componentExchanger(user.getKillStatus() + "킬 " + user.getName() + "님 접속!",ColorList.RED)
+                componentExchanger(user.killStatus() + "킬 " + user.name() + "님 접속!",ColorList.RED)
         );
     }
 
     public void countAnnouncer(Player player) {
-        int joinCnt = new UserController().readUser(player).getJoinCount();
+        int joinCnt = new UserController().readUser(player).joinCount();
         player.sendMessage(
                 componentExchanger(configIOHandler.getWorldMotdConfig(),ColorList.SKY_BLUE)
                         .append(componentExchanger(" " + joinCnt ,ColorList.PINK))

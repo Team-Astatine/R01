@@ -10,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
 import teamzesa.entity.User;
 import teamzesa.util.userHandler.UserController;
 
@@ -18,11 +19,11 @@ public class GodEvent implements Listener {
     Trident trident;
     Runnable tridentTask;
     @EventHandler
-    public void moderatorEvent(ProjectileHitEvent e) {
+    public void moderatorEvent(@NotNull ProjectileHitEvent e) {
         if (!(e.getEntity().getShooter() instanceof Player shooter))
             return;
 
-        if (!getUser(shooter).isGodMode())
+        if (!getUser(shooter).godMode())
             return;
 
         if (e.getEntity() instanceof Trident trident) {
@@ -45,11 +46,11 @@ public class GodEvent implements Listener {
     }
 
     @EventHandler
-    public void moderatorShooter(ProjectileLaunchEvent e) {
+    public void moderatorShooter(@NotNull ProjectileLaunchEvent e) {
         if (!(e.getEntity().getShooter() instanceof Player shooter))
             return;
 
-        if (getUser(shooter).isGodMode()) {
+        if (getUser(shooter).godMode()) {
             Vector projectile = e.getEntity().getVelocity(); //현재속도 get
             e.getEntity().setVelocity(projectile.multiply(3)); //속도 set
         }

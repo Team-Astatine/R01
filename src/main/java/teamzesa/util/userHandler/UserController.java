@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.entity.User;
 
+import java.net.InetSocketAddress;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -15,12 +16,12 @@ public class UserController {
     private final UserDataBase userData = UserDataBase.getUserMapHandler();
 
     public boolean createUser(@NotNull Player player) {
-        Bukkit.getLogger().info(player.getName() + "님이 신규유저 등록됐습니다.");
-        return userData.insert(player);
+        return createUser(new UserBuilder(player)
+                .build());
     }
 
     public boolean createUser(@NotNull User user) {
-        Bukkit.getLogger().info(user.getName() + "님이 신규유저 등록됐습니다.");
+        Bukkit.getLogger().info(user.name() + "님이 신규유저 등록됐습니다.");
         return userData.insert(user);
     }
 
@@ -34,15 +35,15 @@ public class UserController {
 
     public User readUser(String userName) {
         return userData.getAllUserTable().values().stream()
-                .filter(data -> data.getName().equals(userName))
+                .filter(data -> data.name().equals(userName))
                 .findFirst()
                 .orElse(null);
     }
 
     public void updateUser(@NotNull User user) {
-        Player player = Bukkit.getPlayer(user.getUniqueId());
-        player.setHealthScale(user.getHealthScale());
-        player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(user.getHealthScale());
+        Player player = Bukkit.getPlayer(user.uuid());
+        player.setHealthScale(user.healthScale());
+        player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(user.healthScale());
 
         userData.update(user);
     }
@@ -58,4 +59,5 @@ public class UserController {
         Bukkit.getOnlinePlayers().forEach(player -> readUser(player.getUniqueId()));
         return userData.getAllUserTable();
     }
+
 }

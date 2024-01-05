@@ -9,33 +9,34 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.util.ComponentExchanger;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.entity.User;
+import teamzesa.util.userHandler.UserBuilder;
 import teamzesa.util.userHandler.UserController;
-
-import java.util.Optional;
 
 
 public class Death extends ComponentExchanger implements Listener {
     private final UserController userController = new UserController();
+    private Player deather;
+    private Player killer;
+    private User deatherUser;
+    private User killerUser;
     private PlayerDeathEvent event;
 
     @EventHandler
     public synchronized void onPlayerDeath(PlayerDeathEvent e) {
         this.event = e;
+        init();
+
         if (checkingGodMod())
             return;
 
         lifeSteel();
-        increaseKillingCnt();
     }
 
-    private void increaseKillingCnt() {
-        Optional.ofNullable(this.event.getEntity().getKiller()).ifPresent(
-                playerType -> {
-                    User user = this.userController.readUser(playerType);
-                    user.increaseKillingCnt();
-                    this.userController.updateUser(user);
-                }
-        );
+    private void init() {
+        this.deather = this.event.getEntity();
+        this.killer = deather.getKiller();
+        this.deatherUser = this.userController.readUser(this.deather);
+        this.killerUser = this.userController.readUser(this.killer);
     }
 
     private void lifeSteel() {
@@ -43,40 +44,41 @@ public class Death extends ComponentExchanger implements Listener {
         double MIN_HEALTH_SCALE = 4.0;
         double STEP_SIZE = 2.0;
 
-        Player killed = this.event.getEntity();
-        Player killer = killed.getKiller();
 
-        if (killer == null)
+        if (this.killer == null)
             return;
 
-        if (killed.getHealthScale() <= MIN_HEALTH_SCALE)
+        if (this.deather.getHealthScale() <= MIN_HEALTH_SCALE)
             return;
 
-        if (killer.getHealthScale() >= MAX_HEALTH_SCALE)
+        if (this.killer.getHealthScale() >= MAX_HEALTH_SCALE)
             return;
 
-        if (killed == killer) {
+        if (this.deather == killer) {
             return;
         }
 
-        User killedUser = this.userController.readUser(killed);
-        killedUser.setHealthScale(killed.getHealthScale() - STEP_SIZE);
-        this.userController.updateUser(killedUser);
-        playerSendMsgComponentExchanger(killed,killer.getName() + "님이 체력을 약탈했습니다.", ColorList.RED);
+        this.deatherUser = new UserBuilder()
+                .healthScale(this.deather.getHealthScale() - STEP_SIZE)
+                .build();
 
-        User killerUser = this.userController.readUser(killed);
-        killerUser.setHealthScale(killer.getHealthScale() - STEP_SIZE);
-        this.userController.updateUser(killerUser);
-        playerSendMsgComponentExchanger(killer,killed.getName() + "님이 체력을 약탈했습니다.", ColorList.RED);
+        this.killerUser = new UserBuilder()
+                .healthScale(this.killer.getHealthScale() - STEP_SIZE)
+                .killStatus(this.killerUser.killStatus() + 1)
+                .build();
+
+        this.userController.updateUser(this.deatherUser);
+        this.userController.updateUser(this.killerUser);
+
+        playerSendMsgComponentExchanger(this.deather,killer.getName() + "님이 체력을 약탈했습니다.", ColorList.RED);
+        playerSendMsgComponentExchanger(this.killer,this.deather.getName() + "님이 체력을 약탈했습니다.", ColorList.RED);
     }
 
     private @NotNull Boolean checkingGodMod() {
-        User user = this.userController.readUser(this.event.getPlayer());
-
-        if (!user.isGodMode())
+        if (!this.deatherUser.godMode())
             return false;
 
-        Location playerLocation = this.event.getPlayer().getLocation();
+        Location playerLocation = this.deather.getLocation();
         playerLocation.setY(playerLocation.getY() + 2.0);
         Runnable undyingEventTask = () -> {
                 playerLocation.getWorld().playSound(playerLocation, Sound.ENTITY_WITHER_SPAWN, 1.0f, 1.0f);
@@ -85,8 +87,6 @@ public class Death extends ComponentExchanger implements Listener {
         };
 
         undyingEventTask.run();
-//        ThreadPool.getThreadPool().addTask(task);
-//        ThreadPool.getThreadPool().executorServiceOff();
         this.event.setCancelled(true);
         return true;
     }

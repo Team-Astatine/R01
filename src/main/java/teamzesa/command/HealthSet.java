@@ -12,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.entity.User;
 import teamzesa.util.ComponentExchanger;
 import teamzesa.util.Enum.ColorList;
+import teamzesa.util.userHandler.UserBuilder;
 import teamzesa.util.userHandler.UserController;
 import teamzesa.event.EventExecutor;
 
@@ -45,9 +46,11 @@ public class HealthSet extends ComponentExchanger implements CommandExecutor, Ev
 
     private void updatePlayerInfo() {
         UserController userController = new UserController();
-        User user = userController.readUser(this.targetPlayer);
-        user.setHealthScale(this.targetPlayer.getHealthScale());
-        userController.updateUser(user);
+        userController.updateUser(
+                new UserBuilder(userController.readUser(this.targetPlayer))
+                .healthScale(this.targetPlayer.getHealthScale())
+                .build()
+        );
     }
 
     private void setPlayerHealth(double setHealthValue) {

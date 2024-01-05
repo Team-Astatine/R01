@@ -6,16 +6,18 @@ import org.jetbrains.annotations.NotNull;
 import java.net.InetSocketAddress;
 import java.util.*;
 
-//public record User (
-//        UUID uuid,
-//        String name,
-//        Set<String> ip,
-//        int joinCount,
-//        int level,
-//        double healthScale,
-//        boolean godMode
-//        ) {}
+public record User (
+        UUID uuid,
+        String name,
+        HashSet<String> ipList,
+        int joinCount,
+        int level,
+        double healthScale,
+        int killStatus,
+        boolean godMode
+        ) {}
 
+/*
 public class User {
     private UUID uuid;
     private String name;
@@ -114,3 +116,4 @@ public class User {
                 '}';
     }
 }
+ */
