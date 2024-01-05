@@ -33,7 +33,7 @@ public class Death extends ComponentExchanger implements Listener {
     }
 
     private void init() {
-        this.deather = this.event.getEntity();
+        this.deather = this.event.getPlayer();
         this.killer = deather.getKiller();
         this.deatherUser = this.userController.readUser(this.deather);
         this.killerUser = this.userController.readUser(this.killer);
@@ -58,12 +58,12 @@ public class Death extends ComponentExchanger implements Listener {
             return;
         }
 
-        this.deatherUser = new UserBuilder()
+        this.deatherUser = new UserBuilder(this.deatherUser)
                 .healthScale(this.deather.getHealthScale() - STEP_SIZE)
                 .build();
 
-        this.killerUser = new UserBuilder()
-                .healthScale(this.killer.getHealthScale() - STEP_SIZE)
+        this.killerUser = new UserBuilder(this.killerUser)
+                .healthScale(this.killer.getHealthScale() + STEP_SIZE)
                 .killStatus(this.killerUser.killStatus() + 1)
                 .build();
 
