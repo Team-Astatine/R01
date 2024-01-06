@@ -22,17 +22,18 @@ public class GodModeSet extends ComponentExchanger implements CommandExecutor, E
     private User targetUser;
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
+        Optional.ofNullable(Bukkit.getPlayer(args[0])).ifPresentOrElse(
+            player  -> {
+                this.targetPlayer = player;
+                this.targetUser = new UserController().readUser(player);
+            },
+            ()      -> {
+                if (sender instanceof Player)
+                    playerSendMsgComponentExchanger(sender,"/god [플레이어 이름]",ColorList.RED);
+                else Bukkit.getLogger().info("[R01] /god [플레이어 이름]");
+            }
+        );
 
-        Optional<Player>checkingPlayer = Optional.ofNullable(Bukkit.getPlayer(args[0]));
-        if (checkingPlayer.isEmpty()) {
-            if (sender instanceof Player)
-                playerSendMsgComponentExchanger(sender,"/god [플레이어 이름]",ColorList.RED);
-            else
-                Bukkit.getLogger().info("[R01] /god [플레이어 이름]");
-            return false;
-        }
-
-        setFieldVariable(checkingPlayer.get());
         setPlayerGodMode();
         setGodEffect(this.targetPlayer,this.targetUser);
         sendCommment(sender);
@@ -50,11 +51,6 @@ public class GodModeSet extends ComponentExchanger implements CommandExecutor, E
             Bukkit.getLogger().info("[R01] " + targetPlayer.getName() + comment);
 
         playerSendMsgComponentExchanger(this.targetPlayer, "당신" + comment, ColorList.ORANGE);
-    }
-
-    private void setFieldVariable(@NotNull Player player) {
-        this.targetPlayer = player;
-        this.targetUser = new UserController().readUser(player);
     }
 
     private void setPlayerGodMode() {
