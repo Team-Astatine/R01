@@ -22,7 +22,7 @@ public class UserBuilder {
     public UserBuilder(@NotNull User user) {
         this.uuid = user.uuid();
         this.name = user.name();
-        this.connectionIPList = user.ipList();
+        this.connectionIPList = user.connectionIPList();
         this.joinCount = user.joinCount();
         this.level = user.level();
         this.healthScale = user.healthScale();
