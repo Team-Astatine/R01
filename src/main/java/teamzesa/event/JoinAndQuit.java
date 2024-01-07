@@ -1,6 +1,5 @@
 package teamzesa.event;
 
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.enchantments.Enchantment;
@@ -18,14 +17,11 @@ import teamzesa.util.Enum.ArmourKit;
 import teamzesa.util.Enum.FoodKit;
 import teamzesa.util.Enum.ToolKit;
 import teamzesa.entity.User;
-import teamzesa.util.RanNumGenerator;
 import teamzesa.util.userHandler.UserBuilder;
 import teamzesa.util.userHandler.UserController;
 
-import java.net.InetSocketAddress;
 import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 
 
 public class JoinAndQuit extends ComponentExchanger implements Listener {
@@ -57,6 +53,48 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
         checkGodMode();
     }
 
+    private void init() {
+        Optional.ofNullable(this.userController.readUser(this.joinPlayer)).ifPresentOrElse(
+            existUser -> this.user = existUser,
+            ()        -> {
+                this.userController.createUser(this.joinPlayer);
+                this.user = this.userController.readUser(this.joinPlayer);
+            }
+        );
+    }
+
+    private boolean ifFirstTimeJoinUser() {
+        return this.user.joinCount() == 0;
+    }
+
+    private void supplyUserKit() {
+        if (!ifFirstTimeJoinUser())
+            return;
+
+        supplyKit();
+    }
+
+    private void userIPCheckUp() {
+        String ip = this.joinPlayer.getAddress().getHostName();
+        String message = ifFirstTimeJoinUser() ? "신규 IP를 등록합니다." : "새로운 IP로 접속하셨습니다.";
+        System.out.println(this.user);
+        boolean nonExistsIP = this.user.connectionIPList().stream().noneMatch(
+                ipAddress -> ipAddress.equals(ip));
+
+        if (ifFirstTimeJoinUser() || nonExistsIP) {
+            HashSet<String> ipList = this.user.connectionIPList();
+            ipList.add(ip);
+
+            this.userController.updateUser(
+                    new UserBuilder(this.user)
+                    .ipList(ipList)
+                    .build()
+            );
+
+            playerSendMsgComponentExchanger(this.joinPlayer, message, ColorList.YELLOW);
+        }
+    }
+
     private void increaseUserJoinCnt() {
         this.user = new UserBuilder(this.user)
                 .joinCount(this.user.joinCount() + 1)
@@ -64,73 +102,18 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
         this.userController.updateUser(this.user);
     }
 
-    private void checkGodMode() {
-        new GodModeSet().setGodEffect(this.joinPlayer,this.user);
-    }
-
     private void announcingJoinMsg() {
-//        this.announcer.setPlayerTabHeader(this.joinPlayer);
         this.announcer.joinAnnouncer(this.joinPlayer);
         this.announcer.countAnnouncer(this.joinPlayer);
         this.announcer.joinKillStatusAnnouncer(this.user);
     }
 
-    private void init() {
-
-        Optional.ofNullable(this.userController.readUser(this.joinPlayer)).ifPresentOrElse(
-                existUser -> this.user = existUser,
-                ()        -> {
-                    this.userController.createUser(this.joinPlayer);
-                    this.user = this.userController.readUser(this.joinPlayer);
-                    System.out.println("init user > " + this.user);
-                }
-        );
-    }
 
     private void playerFlight() {
         this.joinPlayer.setAllowFlight(true);
         playerSendMsgComponentExchanger(this.joinPlayer,"플라이 활성화",ColorList.YELLOW);
     }
 
-    private void userIPCheckUp() {
-        InetSocketAddress ip = null;
-        if (Optional.ofNullable(this.joinPlayer.getAddress()).isPresent())
-            ip = this.joinPlayer.getAddress();
-
-        String message = newSubscribers() ? "신규 IP를 등록합니다." : "새로운 IP로 접속하셨습니다.";
-        if (newSubscribers() || nonExistsIP()) {
-            HashSet<String> ipList = this.user.ipList();
-            ipList.add(ip.getHostName());
-
-            this.userController.updateUser(new UserBuilder(this.user)
-                    .ipList(ipList)
-                    .build());
-
-            playerSendMsgComponentExchanger(this.joinPlayer, message, ColorList.YELLOW);
-        }
-    }
-
-    private boolean nonExistsIP() {
-        String accessIP = this.joinPlayer.getAddress().getHostName();
-        return this.user.ipList().stream().noneMatch(
-                ip -> ip.equals(accessIP));
-    }
-
-    private void supplyUserKit() {
-        if (!newSubscribers())
-            return;
-
-        supplyKit();
-//        스폰범위 변경으로 해결
-//        randomTeleport();
-    }
-
-    private void randomTeleport() {
-        int x = RanNumGenerator.numGenerator();
-        int z = RanNumGenerator.numGenerator();
-        int y = RanNumGenerator.groundChecker(this.joinPlayer.getWorld());
-        this.joinPlayer.teleport(new Location(this.joinPlayer.getWorld(),x,y,z));
-    }
 
     private void supplyKit() {
         for (FoodKit kit : FoodKit.values()){
@@ -154,10 +137,6 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
         }
     }
 
-    private boolean newSubscribers () {
-        return this.user.joinCount() == 0;
-    }
-
     private void setHealthScale() {
         User user = this.userController.readUser(this.joinPlayer);
         this.joinPlayer.setHealthScale(user.healthScale());
@@ -166,5 +145,9 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
 
     private void attackSpeed() {
         this.joinPlayer.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(40.0);
+    }
+
+    private void checkGodMode() {
+        new GodModeSet().setGodEffect(this.joinPlayer,this.user);
     }
 }

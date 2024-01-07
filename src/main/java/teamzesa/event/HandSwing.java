@@ -20,25 +20,15 @@ public class HandSwing implements Listener {
         Player player = e.getPlayer();
 
         if (player.getInventory().getItemInMainHand().getType() != Material.AIR) {
-//            playerAnnouncer(player,"mainHandReturn");
             return;
         }
 
         if (player.getInventory().getItemInOffHand().getType() != Material.AIR) {
-//            playerAnnouncer(player, "offHandReturn");
             return;
         }
 
         if (e.getAnimationType() == PlayerAnimationType.OFF_ARM_SWING)
             return;
-
-        /*BukkitTask offHandSwingTask = new BukkitRunnable() {
-            @Override
-            public void run() {
-//                playerAnnouncer(player,"Start Off Hand Swing");
-                e.getPlayer().swingOffHand();
-            }
-        }.runTaskLater(R01.getPlugin(R01.class), 7L);*/
 
         BukkitTask offHandSwing = Bukkit.getScheduler().runTaskLater(
                 R01.getPlugin(R01.class),
