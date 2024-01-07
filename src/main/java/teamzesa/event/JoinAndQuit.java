@@ -77,7 +77,6 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
     private void userIPCheckUp() {
         String ip = this.joinPlayer.getAddress().getHostName();
         String message = ifFirstTimeJoinUser() ? "신규 IP를 등록합니다." : "새로운 IP로 접속하셨습니다.";
-        System.out.println(this.user);
         boolean nonExistsIP = this.user.connectionIPList().stream().noneMatch(
                 ipAddress -> ipAddress.equals(ip));
 
