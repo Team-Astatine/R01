@@ -74,9 +74,11 @@ public final class R01 extends JavaPlugin {
     private void autoSaveSchedule() {
         long delay = 0;
         long interval = 720; // 12hour term auto save
-        Runnable autoSaveTask = () -> UserIOHandler.getIOHandler().exportUserData();
-
-        ThreadPool.getThreadPool().addSchedulingTask(autoSaveTask,delay,interval);
+        ThreadPool.getThreadPool().addSchedulingTask(
+                () -> UserIOHandler.getIOHandler().exportUserData(),
+                delay,
+                interval
+        );
         Bukkit.getLogger().info(PLUGIN_NAME + " Success All User Data Save");
     }
 
