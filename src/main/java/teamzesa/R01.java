@@ -26,7 +26,7 @@ public final class R01 extends JavaPlugin {
     public void onEnable() {
         commandHandler();   // command set
         functionHandler();  // function set
-        autoSaveSchedule(); // User Data Auto Save Scheduling
+//        autoSaveSchedule(); // User Data Auto Save Scheduling
 
 //        saveDefaultSource
         if (!getDataFolder().exists())
@@ -79,7 +79,7 @@ public final class R01 extends JavaPlugin {
                 delay,
                 interval
         );
-        Bukkit.getLogger().info(PLUGIN_NAME + " Success All User Data Save");
+        Bukkit.getLogger().info(PLUGIN_NAME + " Success Scheduling All User Data Save");
     }
 
     private void pluginLoadTime() {
