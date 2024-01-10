@@ -29,20 +29,18 @@ public class TotemStacking extends ComponentExchanger implements CommandExecutor
     @Override
     public boolean onCommand(@NotNull CommandSender sender,@NotNull Command command,@NotNull String label, String[] args) {
         Runnable executeTotemSupply = () -> {
-                TotemStacking.this.player = (Player) sender;
-                TotemStacking.this.playerInventory = TotemStacking.this.player.getInventory();
-                getAllOfPlayerTotems();
+            TotemStacking.this.player = (Player) sender;
+            TotemStacking.this.playerInventory = TotemStacking.this.player.getInventory();
+            getAllOfPlayerTotems();
 
-                if (!validationInventory())
-                    return;
+            if (!validationInventory())
+                return;
 
-                removeTotemInInv();
-                supplyTotems();
+            removeTotemInInv();
+            supplyTotems();
         };
 
         executeTotemSupply.run();
-//        ThreadPool.getThreadPool().addTask(executeTotemSupply);
-//        ThreadPool.getThreadPool().executorServiceOff();
         return true;
     }
 

@@ -50,12 +50,4 @@ public class EntityDamageByEntity implements Listener {
 
         return netheriteToolChecker.test(mainStuff) && netheriteToolChecker.test(offStuff);
     }
-    /*private @NotNull Boolean handStuffChecker(@NotNull ItemStack mainStuff, @NotNull ItemStack offStuff) {
-        Predicate<Material> isNetheriteSword = material -> material.equals(Material.NETHERITE_SWORD);
-        Predicate<Material> isNetheriteAxe = material -> material.equals(Material.NETHERITE_AXE);
-
-        Predicate<Material> isNetheriteTool = isNetheriteSword.or(isNetheriteAxe);
-
-        return isNetheriteTool.test(mainStuff.getType()) && isNetheriteTool.test(offStuff.getType());
-    }*/
 }
