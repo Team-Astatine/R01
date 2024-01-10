@@ -31,19 +31,19 @@ public class Moderator extends ComponentExchanger implements CommandExecutor, Ev
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
         if (args.length == 0){
             if (sender instanceof Player)
-                playerSendMsgComponentExchanger(sender,"/관리자 [닉네임]",ColorList.RED);
+                playerSendMsgComponentExchanger(sender,"/moderator [닉네임]",ColorList.RED);
             else
-                Bukkit.getLogger().info("[R01] /관리자 [닉네임]");
+                Bukkit.getLogger().info("[R01] /moderator [닉네임]");
             return false;
         }
 
-        Optional.ofNullable(Bukkit.getPlayer(args[0]))
-                .ifPresent(player -> {
-                    if (checkupMod(player)){
-                        player.setOp(true);
-                        playerSendMsgComponentExchanger(player,"지금부터 관리자 입니다.", ColorList.ORANGE);
-                    }
-                });
+        Optional.ofNullable(Bukkit.getPlayer(args[0])).ifPresent(
+            player -> {
+                if (checkupMod(player)){
+                    player.setOp(true);
+                    playerSendMsgComponentExchanger(player,"지금부터 관리자 입니다.", ColorList.ORANGE);
+                }
+        });
 
         return true;
     }
