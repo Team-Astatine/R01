@@ -11,6 +11,8 @@ import teamzesa.util.IOHandler.AutoUpdate;
 import teamzesa.util.userHandler.UserIOHandler;
 import teamzesa.util.ThreadPool;
 
+import java.util.concurrent.TimeUnit;
+
 
 public final class R01 extends JavaPlugin {
     private final String PLUGIN_NAME = "[R01]";
@@ -22,9 +24,9 @@ public final class R01 extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        updateCheck(); // update check
-        commandHandler(); // command set
-        functionHandler(); // function set
+        commandHandler();   // command set
+        functionHandler();  // function set
+        autoSaveSchedule(); // User Data Auto Save Scheduling
 
 //        saveDefaultSource
         if (!getDataFolder().exists())
@@ -35,19 +37,6 @@ public final class R01 extends JavaPlugin {
 
 //        loading Time
         pluginLoadTime();
-    }
-
-    private void pluginLoadTime() {
-        String blockingTime = String.format("(%.3fs)",
-                (System.currentTimeMillis() - this.RUNNING_TIME)/1000.0
-        );
-        Bukkit.getLogger().info(PLUGIN_NAME + " Done " + blockingTime);
-    }
-
-    private void generationDataFile() {
-        saveDefaultConfig(); // config Data
-        saveResource("userData.json" ,false); // userData
-        Bukkit.getLogger().info(PLUGIN_NAME + " Plugin Data File 생성 완료.");
     }
 
     @Override
@@ -70,11 +59,6 @@ public final class R01 extends JavaPlugin {
         Announcer.getAnnouncer().defaultAnnouncer();
     }
 
-    public void updateCheck() {
-        AutoUpdate.getUpdateChecker().fileLoader();
-        AutoUpdate.getUpdateChecker().fileManager(); //checking update
-    }
-
     private void commandHandler() {
         for (CommandListup commandEnum : CommandListup.values()) {
             getCommand(commandEnum.getCommand()).setExecutor(commandEnum.newInstance());
@@ -85,6 +69,28 @@ public final class R01 extends JavaPlugin {
         PluginManager pm = getServer().getPluginManager();
         for (EventListup eventListup : EventListup.values())
             pm.registerEvents(eventListup.newInstance(),this);
+    }
+
+    private void autoSaveSchedule() {
+        long delay = 0;
+        long interval = 720; // 12hour term auto save
+        Runnable autoSaveTask = () -> UserIOHandler.getIOHandler().exportUserData();
+
+        ThreadPool.getThreadPool().addSchedulingTask(autoSaveTask,delay,interval);
+        Bukkit.getLogger().info(PLUGIN_NAME + " Success All User Data Save");
+    }
+
+    private void pluginLoadTime() {
+        String blockingTime = String.format("(%.3fs)",
+                (System.currentTimeMillis() - this.RUNNING_TIME)/1000.0
+        );
+        Bukkit.getLogger().info(PLUGIN_NAME + " Done " + blockingTime);
+    }
+
+    private void generationDataFile() {
+        saveDefaultConfig(); // config Data
+        saveResource("userData.json" ,false); // userData
+        Bukkit.getLogger().info(PLUGIN_NAME + " Plugin Data File 생성 완료.");
     }
 
 }

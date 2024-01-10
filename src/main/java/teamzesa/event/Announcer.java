@@ -63,8 +63,7 @@ public class Announcer extends ComponentExchanger {
 
     public void defaultAnnouncer() {
         long delay = 0;
-        long interval = 3600; // 3분마다 (1초 = 20틱)
-//        long interval = 20; // 3분마다 (1초 = 20틱)
+        long interval = 5; //minutes
 
         Runnable commentSendTask = () -> {
             List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
