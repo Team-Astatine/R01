@@ -24,27 +24,28 @@ public class GodModeSet extends ComponentExchanger implements CommandExecutor, E
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
         Optional.ofNullable(Bukkit.getPlayer(args[0])).ifPresentOrElse(
             player  -> {
-                UserController userController = new UserController();
                 this.targetPlayer = player;
-                this.targetUser = new UserBuilder(userController.readUser(player))
-                        .godMode(!this.targetUser.godMode()) //godMode 변경
+                UserController userController = new UserController();
+                User user = userController.readUser(player);
+
+                this.targetUser = new UserBuilder(user)
+                        .godMode(!user.godMode()) //godMode 변경
                         .buildAndUpdate();
 
                 setGodEffect(this.targetPlayer,this.targetUser);
                 sendCommment(sender);
             },
             ()  -> {
-                if (sender instanceof Player)
-                    playerSendMsgComponentExchanger(sender,"/god [플레이어 이름]",ColorList.RED);
+                if (sender instanceof Player player)
+                    playerSendMsgComponentExchanger(player,"/god [플레이어 이름]",ColorList.RED);
                 else Bukkit.getLogger().info("[R01] /god [플레이어 이름]");
             }
         );
-
         return true;
     }
 
     private void sendCommment(@NotNull CommandSender sender) {
-        boolean senderInstance = sender instanceof Player; //true == player , false == consol
+        boolean senderInstance = sender instanceof Player;//true == player , false == consol
         String comment = "은 이제 " + (this.targetUser.godMode() ? "신" : "인간") + " 입니다.";
 
         if (!this.targetPlayer.equals(sender) && senderInstance)
