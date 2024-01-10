@@ -13,6 +13,7 @@ import teamzesa.util.ThreadPool;
 
 
 public final class R01 extends JavaPlugin {
+    private final String PLUGIN_NAME = "[R01]";
     private final long RUNNING_TIME;
 
     public R01() {
@@ -40,13 +41,13 @@ public final class R01 extends JavaPlugin {
         String blockingTime = String.format("(%.3fs)",
                 (System.currentTimeMillis() - this.RUNNING_TIME)/1000.0
         );
-        Bukkit.getLogger().info("[R01] Done" + blockingTime);
+        Bukkit.getLogger().info(PLUGIN_NAME + " Done " + blockingTime);
     }
 
     private void generationDataFile() {
         saveDefaultConfig(); // config Data
         saveResource("userData.json" ,false); // userData
-        Bukkit.getLogger().info("[R01] Plugin Data File 생성 완료.");
+        Bukkit.getLogger().info(PLUGIN_NAME + " Plugin Data File 생성 완료.");
     }
 
     @Override
