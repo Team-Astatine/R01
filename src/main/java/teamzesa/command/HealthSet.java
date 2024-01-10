@@ -25,9 +25,9 @@ public class HealthSet extends ComponentExchanger implements CommandExecutor, Ev
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String @NotNull [] args) {
         if (args.length < 2) {
             if (sender instanceof Player)
-                playerSendMsgComponentExchanger(sender,"/체력초기화 [닉네임] [체력값]",ColorList.RED);
+                playerSendMsgComponentExchanger(sender,"/sethealth [닉네임] [체력값]",ColorList.RED);
             else
-                Bukkit.getLogger().info("[R01] /체력초기화 [닉네임] [체력값]");
+                Bukkit.getLogger().info("[R01] /sethealth [닉네임] [체력값]");
             return false;
         }
 

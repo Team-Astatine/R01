@@ -1,6 +1,8 @@
 package teamzesa.util.userHandler;
 
 import com.google.gson.*;
+import org.bukkit.Bukkit;
+import teamzesa.R01;
 import teamzesa.entity.User;
 import teamzesa.util.Enum.DataFile;
 
@@ -29,6 +31,7 @@ public class UserIOHandler {
     }
 
     public void exportUserData() {
+        Bukkit.getLogger().info("[R01] Saving User Data..");
         List<User> userData = new ArrayList<>(this.userController.getAllUserTable().values());
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()

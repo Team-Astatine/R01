@@ -21,7 +21,6 @@ public class UserController {
     }
 
     public boolean createUser(@NotNull User user) {
-        Bukkit.getLogger().info(user.name() + "님이 신규유저 등록됐습니다.");
         return userData.insert(user);
     }
 
@@ -55,7 +54,6 @@ public class UserController {
     }
 
     public ConcurrentHashMap<UUID,User> getAllUserTable() {
-        Bukkit.getLogger().info("Saving User Data..");
         Bukkit.getOnlinePlayers().forEach(player -> readUser(player.getUniqueId()));
         return userData.getAllUserTable();
     }

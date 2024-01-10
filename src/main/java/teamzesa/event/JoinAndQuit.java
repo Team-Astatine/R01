@@ -1,5 +1,6 @@
 package teamzesa.event;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.enchantments.Enchantment;
@@ -59,6 +60,7 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
             ()        -> {
                 this.userController.createUser(this.joinPlayer);
                 this.user = this.userController.readUser(this.joinPlayer);
+                Bukkit.getLogger().info(this.user.name() + "님이 신규유저 등록됐습니다.");
             }
         );
     }
