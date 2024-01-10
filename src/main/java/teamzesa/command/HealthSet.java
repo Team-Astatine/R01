@@ -23,7 +23,6 @@ public class HealthSet extends ComponentExchanger implements CommandExecutor, Ev
     private Player targetPlayer;
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String @NotNull [] args) {
-
         if (args.length < 2) {
             if (sender instanceof Player)
                 playerSendMsgComponentExchanger(sender,"/체력초기화 [닉네임] [체력값]",ColorList.RED);
@@ -39,24 +38,14 @@ public class HealthSet extends ComponentExchanger implements CommandExecutor, Ev
                     .map(Double::parseDouble)
                     .ifPresent(this::setPlayerHealth);
         });
-
-        updatePlayerInfo();
         return true;
     }
 
-    private void updatePlayerInfo() {
-        UserController userController = new UserController();
-        userController.updateUser(
-                new UserBuilder(userController.readUser(this.targetPlayer))
-                .healthScale(this.targetPlayer.getHealthScale())
-                .build()
-        );
-    }
-
     private void setPlayerHealth(double setHealthValue) {
-        this.targetPlayer.setHealthScale(setHealthValue);
-        this.targetPlayer.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 40, 1));
-        this.targetPlayer.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(setHealthValue);
+        new UserBuilder(new UserController().readUser(this.targetPlayer))
+                .healthScale(setHealthValue)
+                .buildAndUpdate();
+
         playerSendMsgComponentExchanger(
                 this.targetPlayer,
                 this.targetPlayer.getName() + "님의 체력이" + setHealthValue + "으로 설정됐습니다.",

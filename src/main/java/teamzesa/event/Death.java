@@ -44,31 +44,24 @@ public class Death extends ComponentExchanger implements Listener {
         double MIN_HEALTH_SCALE = 4.0;
         double STEP_SIZE = 2.0;
 
-
-        if (this.killer == null)
+        //valid Logic
+        if (this.deather.getHealthScale() <= MIN_HEALTH_SCALE ||
+            this.killer.getHealthScale() >= MAX_HEALTH_SCALE  ||
+            this.deather == killer)
             return;
 
-        if (this.deather.getHealthScale() <= MIN_HEALTH_SCALE)
-            return;
+        updateUserHealthScaleData(STEP_SIZE);
+    }
 
-        if (this.killer.getHealthScale() >= MAX_HEALTH_SCALE)
-            return;
-
-        if (this.deather == killer) {
-            return;
-        }
-
-        this.deatherUser = new UserBuilder(this.deatherUser)
+    private void updateUserHealthScaleData(double STEP_SIZE) {
+        new UserBuilder(this.deatherUser)
                 .healthScale(this.deather.getHealthScale() - STEP_SIZE)
-                .build();
+                .buildAndUpdate();
 
-        this.killerUser = new UserBuilder(this.killerUser)
+        new UserBuilder(this.killerUser)
                 .healthScale(this.killer.getHealthScale() + STEP_SIZE)
                 .killStatus(this.killerUser.killStatus() + 1)
-                .build();
-
-        this.userController.updateUser(this.deatherUser);
-        this.userController.updateUser(this.killerUser);
+                .buildAndUpdate();
 
         playerSendMsgComponentExchanger(this.deather,killer.getName() + "님이 체력을 약탈했습니다.", ColorList.RED);
         playerSendMsgComponentExchanger(this.killer,this.deather.getName() + "님이 체력을 약탈했습니다.", ColorList.RED);

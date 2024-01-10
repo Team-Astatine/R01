@@ -92,4 +92,10 @@ public class UserBuilder {
                 godMode
         );
     }
+
+    public User buildAndUpdate() {
+        User user = build();
+        new UserController().updateUser(user);
+        return user;
+    }
 }

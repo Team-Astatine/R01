@@ -84,11 +84,9 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
             HashSet<String> ipList = this.user.connectionIPList();
             ipList.add(ip);
 
-            this.userController.updateUser(
-                    new UserBuilder(this.user)
+            new UserBuilder(this.user)
                     .ipList(ipList)
-                    .build()
-            );
+                    .buildAndUpdate();
 
             playerSendMsgComponentExchanger(this.joinPlayer, message, ColorList.YELLOW);
         }
@@ -97,8 +95,7 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
     private void increaseUserJoinCnt() {
         this.user = new UserBuilder(this.user)
                 .joinCount(this.user.joinCount() + 1)
-                .build();
-        this.userController.updateUser(this.user);
+                .buildAndUpdate();
     }
 
     private void announcingJoinMsg() {

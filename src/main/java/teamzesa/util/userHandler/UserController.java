@@ -3,12 +3,12 @@ package teamzesa.util.userHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.entity.User;
 
-import java.net.InetSocketAddress;
 import java.util.Arrays;
-import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -44,14 +44,14 @@ public class UserController {
         Player player = Bukkit.getPlayer(user.uuid());
         player.setHealthScale(user.healthScale());
         player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(user.healthScale());
+        player.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 40, 1));
 
         userData.update(user);
     }
 
     public void updateAllUserData(User[] newUserData) {
         userData.clear();
-        List<User> userArrayList = Arrays.asList(newUserData);
-        userArrayList.forEach(this::createUser);
+        Arrays.asList(newUserData).forEach(this::createUser);
     }
 
     public ConcurrentHashMap<UUID,User> getAllUserTable() {
