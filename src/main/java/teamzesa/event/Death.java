@@ -46,7 +46,7 @@ public class Death extends ComponentExchanger implements Listener {
 
         //valid Logic
         if (this.deather.getHealthScale() <= MIN_HEALTH_SCALE ||
-            this.killer.getHealthScale() >= MAX_HEALTH_SCALE  ||
+            this.killer.getHealthScale()  >= MAX_HEALTH_SCALE ||
             this.deather == killer)
             return;
 
