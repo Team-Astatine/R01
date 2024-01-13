@@ -12,6 +12,9 @@ import teamzesa.entity.User;
 import teamzesa.util.userHandler.UserBuilder;
 import teamzesa.util.userHandler.UserController;
 
+import javax.swing.text.html.Option;
+import java.util.Optional;
+
 
 public class Death extends ComponentExchanger implements Listener {
     private final UserController userController = new UserController();
@@ -26,6 +29,16 @@ public class Death extends ComponentExchanger implements Listener {
         this.event = e;
         init();
 
+        //무조건 플레이어가 죽여야함
+        if (this.killer == null)
+            return;
+
+        //스스로가 스스로를 죽이면 무시함
+        if (this.deather.equals(this.killer)) {
+            playerSendMsgComponentExchanger(this.deather, "자살하셨습니다!", ColorList.RED);
+            return;
+        }
+
         if (checkingGodMod())
             return;
 
@@ -35,11 +48,12 @@ public class Death extends ComponentExchanger implements Listener {
     private void init() {
         this.deather = this.event.getPlayer();
         this.killer = deather.getKiller();
-        this.deatherUser = this.userController.readUser(this.deather);
-        this.killerUser = this.userController.readUser(this.killer);
     }
 
     private void lifeSteel() {
+        this.deatherUser = this.userController.readUser(this.deather);
+        this.killerUser = this.userController.readUser(this.killer);
+
         double MAX_HEALTH_SCALE = 60.0;
         double MIN_HEALTH_SCALE = 4.0;
         double STEP_SIZE = 2.0;
