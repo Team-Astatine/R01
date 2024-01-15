@@ -21,7 +21,7 @@ public class UserController {
     }
 
     public boolean createUser(@NotNull User user) {
-        return userData.insert(user);
+        return this.userData.insert(user);
     }
 
     public User readUser(@NotNull Player player) {
@@ -29,11 +29,11 @@ public class UserController {
     }
 
     public User readUser(UUID uuid) {
-        return  userData.select(uuid);
+        return this.userData.select(uuid);
     }
 
     public User readUser(String userName) {
-        return userData.getAllUserTable().values().stream()
+        return this.userData.getAllUserTable().values().stream()
                 .filter(data -> data.name().equals(userName))
                 .findFirst()
                 .orElse(null);
@@ -45,17 +45,17 @@ public class UserController {
         player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(user.healthScale());
         player.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 40, 1));
 
-        userData.update(user);
+        this.userData.update(user);
     }
 
     public void updateAllUserData(User[] newUserData) {
-        userData.clear();
+        this.userData.clear();
         Arrays.asList(newUserData).forEach(this::createUser);
     }
 
     public ConcurrentHashMap<UUID,User> getAllUserTable() {
         Bukkit.getOnlinePlayers().forEach(player -> readUser(player.getUniqueId()));
-        return userData.getAllUserTable();
+        return this.userData.getAllUserTable();
     }
 
 }
