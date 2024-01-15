@@ -19,12 +19,11 @@ public class Death extends ComponentExchanger implements Listener {
     private Player killer;
     private User deatherUser;
     private User killerUser;
-    private PlayerDeathEvent event;
 
     @EventHandler
     public synchronized void onPlayerDeath(PlayerDeathEvent e) {
-        this.event = e;
-        init();
+        this.deather = e.getPlayer();
+        this.killer = deather.getKiller();
 
         //무조건 플레이어가 죽여야함
         if (this.killer == null)
@@ -36,6 +35,9 @@ public class Death extends ComponentExchanger implements Listener {
             return;
         }
 
+        this.deatherUser = this.userController.readUser(this.deather);
+        this.killerUser = this.userController.readUser(this.killer);
+
         if (checkingGodMod())
             return;
 
@@ -43,14 +45,9 @@ public class Death extends ComponentExchanger implements Listener {
     }
 
     private void init() {
-        this.deather = this.event.getPlayer();
-        this.killer = deather.getKiller();
     }
 
     private void lifeSteel() {
-        this.deatherUser = this.userController.readUser(this.deather);
-        this.killerUser = this.userController.readUser(this.killer);
-
         double MAX_HEALTH_SCALE = 60.0;
         double MIN_HEALTH_SCALE = 4.0;
         double STEP_SIZE = 2.0;
@@ -93,7 +90,6 @@ public class Death extends ComponentExchanger implements Listener {
         };
 
         undyingEventTask.run();
-        this.event.setCancelled(true);
         return true;
     }
 }
