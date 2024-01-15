@@ -25,7 +25,13 @@ public class UserController {
     }
 
     public User readUser(@NotNull Player player) {
-        return readUser(player.getUniqueId());
+        User user = readUser(player.getUniqueId());
+        if (!(player.getName().equals(user.name()))) {
+            user = new UserBuilder(player)
+                    .name(player.getName())
+                    .build();
+        }
+        return user;
     }
 
     public User readUser(UUID uuid) {
@@ -39,12 +45,15 @@ public class UserController {
                 .orElse(null);
     }
 
-    public void updateUser(@NotNull User user) {
+    public void healthUpdate(@NotNull User user) {
         Player player = Bukkit.getPlayer(user.uuid());
         player.setHealthScale(user.healthScale());
         player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(user.healthScale());
         player.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 40, 1));
+        update(user);
+    }
 
+    public void update(@NotNull User user) {
         this.userData.update(user);
     }
 
