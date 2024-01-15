@@ -86,7 +86,7 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
             HashSet<String> ipList = this.user.connectionIPList();
             ipList.add(ip);
 
-            new UserBuilder(this.user)
+            this.user = new UserBuilder(this.user)
                     .ipList(ipList)
                     .buildAndUpdate();
 

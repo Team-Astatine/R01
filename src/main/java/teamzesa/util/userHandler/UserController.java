@@ -50,10 +50,10 @@ public class UserController {
         player.setHealthScale(user.healthScale());
         player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(user.healthScale());
         player.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 40, 1));
-        update(user);
+        updateUser(user);
     }
 
-    public void update(@NotNull User user) {
+    public void updateUser(@NotNull User user) {
         this.userData.update(user);
     }
 
