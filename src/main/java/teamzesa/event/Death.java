@@ -12,9 +12,6 @@ import teamzesa.entity.User;
 import teamzesa.util.userHandler.UserBuilder;
 import teamzesa.util.userHandler.UserController;
 
-import javax.swing.text.html.Option;
-import java.util.Optional;
-
 
 public class Death extends ComponentExchanger implements Listener {
     private final UserController userController = new UserController();
@@ -68,14 +65,16 @@ public class Death extends ComponentExchanger implements Listener {
     }
 
     private void updateUserHealthScaleData(double STEP_SIZE) {
-        new UserBuilder(this.deatherUser)
+        new UserController().healthUpdate(
+                new UserBuilder(this.deatherUser)
                 .healthScale(this.deather.getHealthScale() - STEP_SIZE)
-                .buildAndUpdate();
+                .build());
 
-        new UserBuilder(this.killerUser)
+        new UserController().healthUpdate(
+                new UserBuilder(this.killerUser)
                 .healthScale(this.killer.getHealthScale() + STEP_SIZE)
                 .killStatus(this.killerUser.killStatus() + 1)
-                .buildAndUpdate();
+                .build());
 
         playerSendMsgComponentExchanger(this.deather,killer.getName() + "님이 체력을 약탈했습니다.", ColorList.RED);
         playerSendMsgComponentExchanger(this.killer,this.deather.getName() + "님이 체력을 약탈했습니다.", ColorList.RED);
