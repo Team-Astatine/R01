@@ -26,12 +26,13 @@ public class UserController {
 
     public User readUser(@NotNull Player player) {
         User user = readUser(player.getUniqueId());
-        if (!(player.getName().equals(user.name()))) {
-            user = new UserBuilder(player)
-                    .name(player.getName())
-                    .build();
-        }
-        return user;
+
+        if (player.getName().equals(user.name()))
+            return user;
+
+        return new UserBuilder(user)
+                .name(player.getName())
+                .buildAndUpdate();
     }
 
     public User readUser(UUID uuid) {
