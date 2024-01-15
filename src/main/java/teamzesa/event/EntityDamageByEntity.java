@@ -13,9 +13,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.function.Predicate;
 
 public class EntityDamageByEntity implements Listener {
-
     @EventHandler(priority = EventPriority.LOWEST)
-    public synchronized void entityHit(@NotNull EntityDamageByEntityEvent e) {
+    public void entityHit(@NotNull EntityDamageByEntityEvent e) {
 
         Entity damagerEntity = e.getDamager();
         if (!damagerEntity.getType().equals(EntityType.PLAYER))

@@ -44,7 +44,7 @@ public class Anvil implements Listener {
     */
 
     @EventHandler
-    public synchronized void onAnvil(@NotNull AnvilUpdateResultEvent e) {
+    public void onAnvil(@NotNull AnvilUpdateResultEvent e) {
         e.getInventory().setMaximumRepairCost(1000);
     }
 }

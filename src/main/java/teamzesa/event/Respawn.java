@@ -23,7 +23,7 @@ public class Respawn extends ComponentExchanger implements Listener {
         deathRandomTeleport();
     }
 
-    public synchronized void deathRandomTeleport() {
+    public void deathRandomTeleport() {
         Player player = this.event.getPlayer();
 
         if (player.getBedSpawnLocation() != null) {

@@ -21,7 +21,7 @@ public class Death extends ComponentExchanger implements Listener {
     private User killerUser;
 
     @EventHandler
-    public synchronized void onPlayerDeath(PlayerDeathEvent e) {
+    public void onPlayerDeath(PlayerDeathEvent e) {
         this.deather = e.getPlayer();
         this.killer = deather.getKiller();
 

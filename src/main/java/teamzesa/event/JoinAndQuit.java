@@ -9,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.GodModeSet;
@@ -29,8 +30,11 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
     private final Announcer announcer;
     private final UserController userController;
 
+    private PlayerJoinEvent joinEvent;
+    private PlayerQuitEvent quitEvent;
     private Player joinPlayer;
-    private User user;
+    private User joinUser;
+    private User quitUser;
 
     public JoinAndQuit() {
         this.announcer = Announcer.getAnnouncer();
@@ -38,8 +42,23 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public synchronized void onJoin(@NotNull PlayerJoinEvent event) {
-        this.joinPlayer = event.getPlayer();
+    public void onQuit(PlayerQuitEvent event) {
+        this.quitEvent = event;
+        this.quitUser = this.userController.readUser(this.quitEvent.getPlayer());
+
+        if (this.quitUser.killStatus() == 0)
+            this.quitEvent.quitMessage(
+                    componentExchanger("- " + this.quitUser.name() ,ColorList.RED)
+            );
+
+        else this.quitEvent.quitMessage(
+                componentExchanger(quitUser.killStatus() + "킬 " + quitUser.name() + "님 퇴장!",ColorList.RED)
+        );
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void onJoin(@NotNull PlayerJoinEvent event) {
+        this.joinEvent = event;
 
         init();
         supplyUserKit();
@@ -55,18 +74,19 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
     }
 
     private void init() {
+        this.joinPlayer = this.joinEvent.getPlayer();
         Optional.ofNullable(this.userController.readUser(this.joinPlayer)).ifPresentOrElse(
-            existUser -> this.user = existUser,
+            existUser -> this.joinUser = existUser,
             ()        -> {
                 this.userController.createUser(this.joinPlayer);
-                this.user = this.userController.readUser(this.joinPlayer);
-                Bukkit.getLogger().info(this.user.name() + "님이 신규유저 등록됐습니다.");
+                this.joinUser = this.userController.readUser(this.joinPlayer);
+                Bukkit.getLogger().info(this.joinUser.name() + "님이 신규유저 등록됐습니다.");
             }
         );
     }
 
     private boolean ifFirstTimeJoinUser() {
-        return this.user.joinCount() == 0;
+        return this.joinUser.joinCount() == 0;
     }
 
     private void supplyUserKit() {
@@ -79,14 +99,14 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
     private void userIPCheckUp() {
         String ip = this.joinPlayer.getAddress().getHostName();
         String message = ifFirstTimeJoinUser() ? "신규 IP를 등록합니다." : "새로운 IP로 접속하셨습니다.";
-        boolean nonExistsIP = this.user.connectionIPList().stream().noneMatch(
+        boolean nonExistsIP = this.joinUser.connectionIPList().stream().noneMatch(
                 ipAddress -> ipAddress.equals(ip));
 
         if (ifFirstTimeJoinUser() || nonExistsIP) {
-            HashSet<String> ipList = this.user.connectionIPList();
+            HashSet<String> ipList = this.joinUser.connectionIPList();
             ipList.add(ip);
 
-            this.user = new UserBuilder(this.user)
+            this.joinUser = new UserBuilder(this.joinUser)
                     .ipList(ipList)
                     .buildAndUpdate();
 
@@ -95,15 +115,23 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
     }
 
     private void increaseUserJoinCnt() {
-        this.user = new UserBuilder(this.user)
-                .joinCount(this.user.joinCount() + 1)
+        this.joinUser = new UserBuilder(this.joinUser)
+                .joinCount(this.joinUser.joinCount() + 1)
                 .buildAndUpdate();
     }
 
     private void announcingJoinMsg() {
         this.announcer.joinAnnouncer(this.joinPlayer);
         this.announcer.countAnnouncer(this.joinPlayer);
-        this.announcer.joinKillStatusAnnouncer(this.user);
+
+        if (this.joinUser.killStatus() == 0)
+            this.joinEvent.joinMessage(
+                componentExchanger("+ " + this.joinUser.name() ,ColorList.RED)
+            );
+
+        else this.joinEvent.joinMessage(
+                componentExchanger(joinUser.killStatus() + "킬 " + joinUser.name() + "님 접속!",ColorList.RED)
+        );
     }
 
 
@@ -146,6 +174,6 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
     }
 
     private void checkGodMode() {
-        new GodModeSet().setGodEffect(this.joinPlayer,this.user);
+        new GodModeSet().setGodEffect(this.joinPlayer,this.joinUser);
     }
 }

@@ -12,7 +12,7 @@ public class Explosive implements Listener {
     private Location location;
 
     @EventHandler(priority = EventPriority.LOW)
-    public synchronized void explosiveHandler(EntityExplodeEvent event) {
+    public void explosiveHandler(EntityExplodeEvent event) {
         this.event = event;
         this.location = this.event.getLocation();
 

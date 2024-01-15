@@ -31,15 +31,6 @@ public class Announcer extends ComponentExchanger {
         return AnnouncerHolder.INSTANCE;
     }
 
-    public void joinKillStatusAnnouncer(User user) {
-        if (user.killStatus() == 0)
-            return;
-
-        Bukkit.broadcast(
-                componentExchanger(user.killStatus() + "킬 " + user.name() + "님 접속!",ColorList.RED)
-        );
-    }
-
     public void countAnnouncer(Player player) {
         int joinCnt = new UserController().readUser(player).joinCount();
         player.sendMessage(
