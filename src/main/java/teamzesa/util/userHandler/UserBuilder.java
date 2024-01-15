@@ -98,4 +98,9 @@ public class UserBuilder {
         new UserController().updateUser(user);
         return user;
     }
+
+    public void update() {
+        User user = build();
+        new UserController().updateUser(user);
+    }
 }
