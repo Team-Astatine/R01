@@ -17,6 +17,7 @@ import java.util.Optional;
 
 public class HealthSet extends ComponentExchanger implements CommandExecutor, EventExecutor {
     private Player targetPlayer;
+    private Player senderPlayer;
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String @NotNull [] args) {
         if (args.length < 2) {
@@ -27,23 +28,33 @@ public class HealthSet extends ComponentExchanger implements CommandExecutor, Ev
             return false;
         }
 
-//        gpt
-        Optional.ofNullable(Bukkit.getPlayer(args[0])).ifPresent(optionalPlayer -> {
-            this.targetPlayer = optionalPlayer;
-            Optional.of(args[1])
-                    .map(Double::parseDouble)
-                    .ifPresent(this::setPlayerHealth);
-        });
+        Optional.ofNullable(Bukkit.getPlayer(args[0])).ifPresent(
+                player -> {
+                    this.targetPlayer = player;
+                    this.senderPlayer = (Player)sender;
+
+                    setPlayerHealth(Double.parseDouble(args[1]));
+                }
+            );
+
         return true;
     }
 
     private void setPlayerHealth(double setHealthValue) {
-        new UserBuilder(new UserController().readUser(this.targetPlayer))
-                .healthScale(setHealthValue)
-                .update();
+        UserController userController = new UserController();
+        userController.healthUpdate(
+                new UserBuilder(userController.readUser(this.targetPlayer))
+                        .healthScale(setHealthValue)
+                        .buildAndUpdate()
+        );
 
         playerSendMsgComponentExchanger(
                 this.targetPlayer,
+                this.targetPlayer.getName() + "님의 체력이" + setHealthValue + "으로 설정됐습니다.",
+                ColorList.YELLOW);
+
+        playerSendMsgComponentExchanger(
+                this.senderPlayer,
                 this.targetPlayer.getName() + "님의 체력이" + setHealthValue + "으로 설정됐습니다.",
                 ColorList.YELLOW);
     }
