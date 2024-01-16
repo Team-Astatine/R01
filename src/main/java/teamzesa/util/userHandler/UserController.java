@@ -16,11 +16,10 @@ public class UserController {
     private final UserDataBase userData = UserDataBase.getUserMapHandler();
 
     public boolean createUser(@NotNull Player player) {
-        System.out.println("1-1");
-        User user = new UserBuilder(player)
-                .buildAndUpdate();
-        System.out.println(user);
-        return createUser(user);
+        return createUser(
+                new UserBuilder(player)
+                .buildAndUpdate()
+        );
     }
 
     public boolean createUser(@NotNull User user) {
@@ -30,7 +29,9 @@ public class UserController {
     public User readUser(@NotNull Player player) {
         User user = readUser(player.getUniqueId());
 
-        System.out.println("readUser > " + user);
+        if (user == null) //진입한 유저가 존재하지 않는다면 ㅇㅇ
+            return null;
+
         if (player.getName().equals(user.name()))
             return user;
 

@@ -68,23 +68,21 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
                     componentExchanger("- " + this.quitUser.name() ,ColorList.RED)
             );
 
-        else this.quitEvent.quitMessage(
+        else
+            this.quitEvent.quitMessage(
                 componentExchanger(quitUser.killStatus() + "킬 " + quitUser.name() + "님 퇴장!",ColorList.RED)
-        );
+            );
     }
 
     private void init() {
         this.joinPlayer = this.joinEvent.getPlayer();
+        User user = this.userController.readUser(this.joinPlayer);
 
-        System.out.println(this.joinPlayer);
-        Optional.ofNullable(this.userController.readUser(this.joinPlayer)).ifPresentOrElse(
+        Optional.ofNullable(user).ifPresentOrElse(
             existUser -> this.joinUser = existUser,
             ()        -> {
-                System.out.println(1);
-                new UserController().createUser(this.joinPlayer);
-                System.out.println(2);
+                this.userController.createUser(this.joinPlayer);
                 this.joinUser = this.userController.readUser(this.joinPlayer);
-                System.out.println(3);
                 Bukkit.getLogger().info(this.joinUser.name() + "님이 신규유저 등록됐습니다.");
             }
         );
