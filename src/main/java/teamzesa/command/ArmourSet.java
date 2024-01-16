@@ -9,11 +9,8 @@ import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.util.ComponentExchanger;
 import teamzesa.util.Enum.ColorList;
-import teamzesa.event.EventExecutor;
 
-import java.util.Optional;
-
-public class ArmourSet extends ComponentExchanger implements CommandExecutor, EventExecutor {
+public class ArmourSet extends ComponentExchanger implements CommandExecutor {
     private PlayerInventory playerInventory;
 
     private enum ArmourType {

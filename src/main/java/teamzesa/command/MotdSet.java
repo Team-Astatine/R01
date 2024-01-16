@@ -9,10 +9,9 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.util.ComponentExchanger;
 import teamzesa.util.IOHandler.ConfigIOHandler;
 import teamzesa.util.Enum.ColorList;
-import teamzesa.event.EventExecutor;
 
 
-public class MotdSet extends ComponentExchanger implements CommandExecutor, EventExecutor {
+public class MotdSet extends ComponentExchanger implements CommandExecutor {
 
     private String newMotd;
 

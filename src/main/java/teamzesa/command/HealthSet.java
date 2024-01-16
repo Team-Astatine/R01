@@ -10,12 +10,11 @@ import teamzesa.util.ComponentExchanger;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.util.userHandler.UserBuilder;
 import teamzesa.util.userHandler.UserController;
-import teamzesa.event.EventExecutor;
 
 import java.util.Optional;
 
 
-public class HealthSet extends ComponentExchanger implements CommandExecutor, EventExecutor {
+public class HealthSet extends ComponentExchanger implements CommandExecutor {
     private Player targetPlayer;
     private Player senderPlayer;
     @Override

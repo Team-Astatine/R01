@@ -9,10 +9,9 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.util.ComponentExchanger;
 import teamzesa.R01;
 import teamzesa.util.Enum.ColorList;
-import teamzesa.event.EventExecutor;
 
 
-public class Reload extends ComponentExchanger implements CommandExecutor, EventExecutor {
+public class Reload extends ComponentExchanger implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {

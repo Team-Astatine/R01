@@ -9,10 +9,9 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.util.ComponentExchanger;
 import teamzesa.util.userHandler.UserIOHandler;
 import teamzesa.util.Enum.ColorList;
-import teamzesa.event.EventExecutor;
 
 
-public class SaveUserData extends ComponentExchanger implements CommandExecutor, EventExecutor {
+public class SaveUserData extends ComponentExchanger implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, Command command, String label, String[] args) {
         UserIOHandler.getIOHandler().exportUserData();

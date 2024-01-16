@@ -12,12 +12,11 @@ import teamzesa.util.Enum.ColorList;
 import teamzesa.entity.User;
 import teamzesa.util.userHandler.UserBuilder;
 import teamzesa.util.userHandler.UserController;
-import teamzesa.event.EventExecutor;
 
 import java.util.Optional;
 
 
-public class GodModeSet extends ComponentExchanger implements CommandExecutor, EventExecutor {
+public class GodModeSet extends ComponentExchanger implements CommandExecutor {
     private Player targetPlayer;
     private User targetUser;
     @Override

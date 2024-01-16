@@ -42,22 +42,7 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onQuit(PlayerQuitEvent event) {
-        this.quitEvent = event;
-        this.quitUser = this.userController.readUser(this.quitEvent.getPlayer());
-
-        if (this.quitUser.killStatus() == 0)
-            this.quitEvent.quitMessage(
-                    componentExchanger("- " + this.quitUser.name() ,ColorList.RED)
-            );
-
-        else this.quitEvent.quitMessage(
-                componentExchanger(quitUser.killStatus() + "킬 " + quitUser.name() + "님 퇴장!",ColorList.RED)
-        );
-    }
-
-    @EventHandler(priority = EventPriority.LOWEST)
-    public void onJoin(@NotNull PlayerJoinEvent event) {
+    public  void onJoin(@NotNull PlayerJoinEvent event) {
         this.joinEvent = event;
 
         init();
@@ -73,13 +58,33 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
         checkGodMode();
     }
 
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void onQuit(PlayerQuitEvent event) {
+        this.quitEvent = event;
+        this.quitUser = this.userController.readUser(this.quitEvent.getPlayer());
+
+        if (this.quitUser.killStatus() == 0)
+            this.quitEvent.quitMessage(
+                    componentExchanger("- " + this.quitUser.name() ,ColorList.RED)
+            );
+
+        else this.quitEvent.quitMessage(
+                componentExchanger(quitUser.killStatus() + "킬 " + quitUser.name() + "님 퇴장!",ColorList.RED)
+        );
+    }
+
     private void init() {
         this.joinPlayer = this.joinEvent.getPlayer();
+
+        System.out.println(this.joinPlayer);
         Optional.ofNullable(this.userController.readUser(this.joinPlayer)).ifPresentOrElse(
             existUser -> this.joinUser = existUser,
             ()        -> {
-                this.userController.createUser(this.joinPlayer);
+                System.out.println(1);
+                new UserController().createUser(this.joinPlayer);
+                System.out.println(2);
                 this.joinUser = this.userController.readUser(this.joinPlayer);
+                System.out.println(3);
                 Bukkit.getLogger().info(this.joinUser.name() + "님이 신규유저 등록됐습니다.");
             }
         );

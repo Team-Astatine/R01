@@ -7,10 +7,9 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.util.ComponentExchanger;
 import teamzesa.util.Enum.ColorList;
-import teamzesa.event.EventExecutor;
 
 
-public class Fly extends ComponentExchanger implements CommandExecutor, EventExecutor {
+public class Fly extends ComponentExchanger implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         Player targetPlayer = (Player) sender;

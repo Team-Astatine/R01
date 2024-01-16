@@ -10,11 +10,10 @@ import teamzesa.util.ComponentExchanger;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.entity.User;
 import teamzesa.util.userHandler.UserController;
-import teamzesa.event.EventExecutor;
 
 import java.util.Optional;
 
-public class UserObjectChecker extends ComponentExchanger implements CommandExecutor, EventExecutor {
+public class UserObjectChecker extends ComponentExchanger implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
         Optional.ofNullable(new UserController().readUser(args[0]))

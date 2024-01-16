@@ -8,13 +8,12 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.util.ComponentExchanger;
 import teamzesa.util.Enum.ColorList;
-import teamzesa.event.EventExecutor;
 
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-public class Moderator extends ComponentExchanger implements CommandExecutor, EventExecutor {
+public class Moderator extends ComponentExchanger implements CommandExecutor {
     private final Set<String> moderatorName;
 
     public Moderator() {
