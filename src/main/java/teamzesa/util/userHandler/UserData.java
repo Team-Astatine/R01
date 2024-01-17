@@ -1,21 +1,19 @@
 package teamzesa.util.userHandler;
 
-import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
 import teamzesa.entity.User;
 import teamzesa.util.ComponentExchanger;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class UserDataBase extends ComponentExchanger {
+public class UserData extends ComponentExchanger {
     private static class UserMapHandlerHolder {
-        private static final UserDataBase INSTANCE = new UserDataBase();
+        private static final UserData INSTANCE = new UserData();
     }
 
     private final static ConcurrentHashMap<UUID, User> USER_DATA = new ConcurrentHashMap<>();
 
-    public static UserDataBase getUserMapHandler() {
+    public static UserData getUserMapHandler() {
         return UserMapHandlerHolder.INSTANCE;
     }
 
