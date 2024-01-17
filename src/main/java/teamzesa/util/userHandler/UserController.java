@@ -13,7 +13,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class UserController {
-    private final UserDataBase userData = UserDataBase.getUserMapHandler();
+    private final UserData userData = UserData.getUserMapHandler();
 
     public boolean createUser(@NotNull Player player) {
         return createUser(
@@ -32,10 +32,10 @@ public class UserController {
         if (user == null) //진입한 유저가 존재하지 않는다면 ㅇㅇ
             return null;
 
-        if (player.getName().equals(user.name()))
+        if (player.getName().equals(user.name())) // 기존 유저의 이름과 변함이 없다면
             return user;
 
-        return new UserBuilder(user)
+        return new UserBuilder(user) //닉네임을 변경했다면
                 .name(player.getName())
                 .buildAndUpdate();
     }
