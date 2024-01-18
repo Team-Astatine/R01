@@ -79,7 +79,12 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
         User user = this.userController.readUser(this.joinPlayer);
 
         Optional.ofNullable(user).ifPresentOrElse(
-            existUser -> this.joinUser = existUser,
+            existUser -> {
+                this.joinUser = new UserBuilder(existUser)
+                        .level(this.joinPlayer.getLevel())
+                        .build();
+            },
+
             ()        -> {
                 this.userController.createUser(this.joinPlayer);
                 this.joinUser = this.userController.readUser(this.joinPlayer);
