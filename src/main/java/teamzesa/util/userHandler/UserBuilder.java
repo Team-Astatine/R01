@@ -35,7 +35,7 @@ public class UserBuilder {
         this.name = player.getName();
         this.connectionIPList.add(player.getAddress().getAddress().getHostAddress());
         this.joinCount = 0;
-        this.level = 0;
+        this.level = player.getLevel();
         this.killStatus = 0;
         this.healthScale = player.getHealthScale();
         this.godMode = false;
