@@ -43,19 +43,17 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public  void onJoin(@NotNull PlayerJoinEvent event) {
-        this.joinEvent = event;
-
-        init();
+        init(event);
         supplyUserKit();
-        userIPCheckUp(); //접속 IP 확인
-        increaseUserJoinCnt();
 
         announcingJoinMsg();
 
         attackSpeed();
         playerFlight(); //flight Set
-        setHealthScale();
         checkGodMode();
+        userIPCheckUp(); //접속 IP 확인
+        setHealthScale();
+        increaseUserJoinCnt();
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -70,11 +68,12 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
 
         else
             this.quitEvent.quitMessage(
-                componentExchanger(quitUser.killStatus() + "킬 " + quitUser.name() + "님 퇴장!",ColorList.RED)
+                componentExchanger(quitUser.killStatus() + "킬 " + quitUser.name() + "님 퇴장!", ColorList.RED)
             );
     }
 
-    private void init() {
+    private void init(PlayerJoinEvent event) {
+        this.joinEvent = event;
         this.joinPlayer = this.joinEvent.getPlayer();
         User user = this.userController.readUser(this.joinPlayer);
 
@@ -101,7 +100,25 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
         if (!ifFirstTimeJoinUser())
             return;
 
-        supplyKit();
+        for (FoodKit kit : FoodKit.values()){
+            this.joinPlayer.getInventory().addItem(kit.getFood());
+        }
+
+        for (ArmourKit kit : ArmourKit.values()) {
+            ItemStack armour = kit.getArmour();
+            armour.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+            armour.addEnchantment(Enchantment.DURABILITY, 2);
+            this.joinPlayer.getInventory().addItem(kit.getArmour());
+        }
+
+        for (ToolKit kit : ToolKit.values()) {
+            ItemStack tool = kit.getToolKit();
+            if (tool.getType().equals(Material.NETHERITE_SWORD))
+                tool.addEnchantment(Enchantment.DAMAGE_ALL, 2);
+            else tool.addEnchantment(Enchantment.DIG_SPEED, 2);
+            tool.addEnchantment(Enchantment.DURABILITY, 2);
+            this.joinPlayer.getInventory().addItem(tool);
+        }
     }
 
     private void userIPCheckUp() {
@@ -146,29 +163,6 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
     private void playerFlight() {
         this.joinPlayer.setAllowFlight(true);
         playerSendMsgComponentExchanger(this.joinPlayer,"플라이 활성화",ColorList.YELLOW);
-    }
-
-
-    private void supplyKit() {
-        for (FoodKit kit : FoodKit.values()){
-            this.joinPlayer.getInventory().addItem(kit.getFood());
-        }
-
-        for (ArmourKit kit : ArmourKit.values()) {
-            ItemStack armour = kit.getArmour();
-            armour.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
-            armour.addEnchantment(Enchantment.DURABILITY, 2);
-            this.joinPlayer.getInventory().addItem(kit.getArmour());
-        }
-
-        for (ToolKit kit : ToolKit.values()) {
-            ItemStack tool = kit.getToolKit();
-            if (tool.getType().equals(Material.NETHERITE_SWORD))
-                tool.addEnchantment(Enchantment.DAMAGE_ALL, 2);
-            else tool.addEnchantment(Enchantment.DIG_SPEED, 2);
-            tool.addEnchantment(Enchantment.DURABILITY, 2);
-            this.joinPlayer.getInventory().addItem(tool);
-        }
     }
 
     private void setHealthScale() {
