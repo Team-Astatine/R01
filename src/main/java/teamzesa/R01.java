@@ -7,11 +7,8 @@ import teamzesa.event.Announcer;
 import teamzesa.util.Enum.CommandListup;
 import teamzesa.util.Enum.EventListup;
 import teamzesa.util.IOHandler.ConfigIOHandler;
-import teamzesa.util.IOHandler.AutoUpdate;
 import teamzesa.util.userHandler.UserIOHandler;
 import teamzesa.util.ThreadPool;
-
-import java.util.concurrent.TimeUnit;
 
 
 public final class R01 extends JavaPlugin {
