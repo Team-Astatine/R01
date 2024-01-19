@@ -1,5 +1,6 @@
 package teamzesa.event;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -19,10 +20,12 @@ public class Death extends ComponentExchanger implements Listener {
     private Player killer;
     private User deatherUser;
     private User killerUser;
+    private PlayerDeathEvent event;
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent e) {
-        this.deather = e.getPlayer();
+        this.event = e;
+        this.deather = this.event.getPlayer();
         this.killer = deather.getKiller();
 
         //무조건 플레이어가 죽여야함
@@ -31,20 +34,17 @@ public class Death extends ComponentExchanger implements Listener {
 
         //스스로가 스스로를 죽이면 무시함
         if (this.deather.equals(this.killer)) {
-            playerSendMsgComponentExchanger(this.deather, "자살하셨습니다!", ColorList.RED);
+            e.deathMessage(componentExchanger(this.deather.name() + " 님이 자살했습니다.", ColorList.RED));
             return;
         }
 
-        this.deatherUser = this.userController.readUser(this.deather);
         this.killerUser = this.userController.readUser(this.killer);
+        this.deatherUser = this.userController.readUser(this.deather);
 
         if (checkingGodMod())
             return;
 
         lifeSteel();
-    }
-
-    private void init() {
     }
 
     private void lifeSteel() {
@@ -75,6 +75,7 @@ public class Death extends ComponentExchanger implements Listener {
 
         playerSendMsgComponentExchanger(this.deather,killer.getName() + "님이 체력을 약탈했습니다.", ColorList.RED);
         playerSendMsgComponentExchanger(this.killer,this.deather.getName() + "님이 체력을 약탈했습니다.", ColorList.RED);
+        this.event.deathMessage(componentExchanger("[KILL]" + this.killer.name() + " -> " + this.deather.name(), ColorList.PINK));
     }
 
     private @NotNull Boolean checkingGodMod() {
