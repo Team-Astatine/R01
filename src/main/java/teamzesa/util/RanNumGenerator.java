@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 
+@Deprecated
 public class RanNumGenerator {
     private static final int MAX_RANDOM_TP = 1000;
     private static final int MIN_RANDOM_TP = -1000;
