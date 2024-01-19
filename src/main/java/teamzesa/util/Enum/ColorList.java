@@ -8,6 +8,7 @@ public enum ColorList{
     ORANGE(TextColor.color(255, 142, 0)),
     YELLOW(TextColor.color(255, 228, 0)),
     PURPLE(TextColor.color(139, 0, 255)),
+    GREEN(TextColor.color(47, 255, 0)),
     SKY_BLUE(TextColor.color(173,216,230)),
     VOTE_COLOR(TextColor.color(167, 123, 202)),
     COMMAND_COLOR(TextColor.color(139, 195, 74)),
