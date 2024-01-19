@@ -62,12 +62,12 @@ public class Death extends ComponentExchanger implements Listener {
     }
 
     private void updateUserHealthScaleData(double STEP_SIZE) {
-        new UserController().healthUpdate(
+        this.userController.healthUpdate(
                 new UserBuilder(this.deatherUser)
                 .healthScale(this.deather.getHealthScale() - STEP_SIZE)
                 .build());
 
-        new UserController().healthUpdate(
+        this.userController.healthUpdate(
                 new UserBuilder(this.killerUser)
                 .healthScale(this.killer.getHealthScale() + STEP_SIZE)
                 .killStatus(this.killerUser.killStatus() + 1)
