@@ -24,32 +24,38 @@ public class Death extends ComponentExchanger implements Listener {
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent e) {
-        this.event = e;
-        this.deather = this.event.getPlayer();
-        this.killer = deather.getKiller();
-
-        //무조건 플레이어가 죽여야함
-        if (this.killer == null)
+        init(e);
+        if (checkingGodMod())
             return;
-
-        //스스로가 스스로를 죽이면 무시함
-        if (this.deather.equals(this.killer)) {
-            e.deathMessage(componentExchanger(this.deather.name() + " 님이 자살했습니다.", ColorList.RED));
+        if (validKiller())
             return;
-        }
-
-        this.killerUser = this.userController.readUser(this.killer);
-        this.deatherUser = this.userController.readUser(this.deather);
-
-        if (checkingGodMod()) {
-            e.setCancelled(true);
-            return;
-        }
-
         lifeSteel();
     }
 
+    private boolean validKiller() {
+        //무조건 플레이어가 죽여야함
+        if (this.killer == null)
+            return true;
+
+        //스스로가 스스로를 죽이면 무시함
+        if (this.deather.equals(this.killer)) {
+            this.event.deathMessage(componentExchanger(this.deatherUser.name() + " 님이 자살했습니다.", ColorList.RED));
+            return true;
+        }
+
+        return false;
+    }
+
+    private void init(PlayerDeathEvent e) {
+        this.event = e;
+        this.deather = this.event.getPlayer();
+        this.killer = deather.getKiller();
+        this.deatherUser = this.userController.readUser(this.deather);
+    }
+
     private void lifeSteel() {
+        this.killerUser = this.userController.readUser(this.killer);
+
         double MAX_HEALTH_SCALE = 60.0;
         double MIN_HEALTH_SCALE = 4.0;
         double STEP_SIZE = 2.0;
@@ -77,10 +83,12 @@ public class Death extends ComponentExchanger implements Listener {
 
         playerSendMsgComponentExchanger(this.deather,killer.getName() + "님이 체력을 약탈했습니다.", ColorList.RED);
         playerSendMsgComponentExchanger(this.killer,this.deather.getName() + "님이 체력을 약탈했습니다.", ColorList.RED);
-        this.event.deathMessage(componentExchanger("[KILL]" + this.killer.name() + " -> " + this.deather.name(), ColorList.PINK));
+        this.event.deathMessage(
+                componentExchanger("[KILL]" + this.killerUser.name() + " -> " + this.deatherUser.name(), ColorList.PINK)
+        );
     }
 
-    private @NotNull Boolean checkingGodMod() {
+    private boolean checkingGodMod() {
         if (!this.deatherUser.godMode())
             return false;
 
@@ -93,6 +101,7 @@ public class Death extends ComponentExchanger implements Listener {
         };
 
         undyingEventTask.run();
+        this.event.setCancelled(true);
         return true;
     }
 }
