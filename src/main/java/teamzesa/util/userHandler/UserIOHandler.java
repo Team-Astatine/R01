@@ -24,24 +24,21 @@ public class UserIOHandler {
 
     public void importUserData() {
         Bukkit.getLogger().info("[R01] Importing User Data..");
-        Gson gson = new Gson();
-
         try (FileReader reader = new FileReader(DataFile.USER_DATA.getFileInstance())) {
-            this.userController.updateAllUserData(gson.fromJson(reader, User[].class));
+            this.userController.updateAllUserData(new Gson().fromJson(reader, User[].class));
         } catch (IOException e) {System.err.println("Import UserData Error");}
     }
 
     public void exportUserData() {
         Bukkit.getLogger().info("[R01] Exporting User Data..");
-        Gson gson = new GsonBuilder()
-                .setPrettyPrinting()
-                .create();
-
         try (FileWriter writer = new FileWriter(DataFile.USER_DATA.getFileInstance())) {
-            gson.toJson(
-                    new ArrayList<>(this.userController.getAllUserTable().values()),
-                    writer
-            );
+            new GsonBuilder()
+                    .setPrettyPrinting()
+                    .create()
+                    .toJson(
+                        new ArrayList<>(this.userController.getAllUserTable().values()),
+                        writer
+                    );
         } catch (IOException e) {System.err.println("Export UserData Error");}
     }
 }
