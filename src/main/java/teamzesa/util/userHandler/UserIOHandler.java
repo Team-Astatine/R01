@@ -32,9 +32,7 @@ public class UserIOHandler {
     public void exportUserData() {
         Bukkit.getLogger().info("[R01] Exporting User Data..");
         try (FileWriter writer = new FileWriter(DataFile.USER_DATA.getFileInstance())) {
-            new GsonBuilder()
-                    .setPrettyPrinting()
-                    .create()
+            new GsonBuilder().setPrettyPrinting().create()
                     .toJson(
                         new ArrayList<>(this.userController.getAllUserTable().values()),
                         writer
