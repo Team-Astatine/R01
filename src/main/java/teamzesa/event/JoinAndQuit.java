@@ -155,7 +155,7 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
             );
 
         else this.joinEvent.joinMessage(
-                componentExchanger(joinUser.killStatus() + "킬 " + joinUser.name() + "님 접속!",ColorList.RED)
+                componentExchanger("+ " + this.joinUser.name() + " " + joinUser.killStatus() + "KILL" ,ColorList.RED)
         );
     }
 
