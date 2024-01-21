@@ -41,8 +41,10 @@ public class Death extends ComponentExchanger implements Listener {
         this.killerUser = this.userController.readUser(this.killer);
         this.deatherUser = this.userController.readUser(this.deather);
 
-        if (checkingGodMod())
+        if (checkingGodMod()) {
+            e.setCancelled(true);
             return;
+        }
 
         lifeSteel();
     }

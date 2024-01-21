@@ -7,6 +7,7 @@ import teamzesa.event.*;
 public enum EventListup {
 //    DISPLAY_ENTITY(new DisplayEntity()),
 
+//    MENU(new Menu()),
     ANVIL(new Anvil()),
     DEATH(new Death()),
     RESPAWN(new Respawn()),
