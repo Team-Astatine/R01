@@ -4,7 +4,7 @@ import org.bukkit.event.Listener;
 import teamzesa.event.*;
 
 
-public enum EventListup {
+public enum EventList {
 //    DISPLAY_ENTITY(new DisplayEntity()),
 
 //    MENU(new Menu()),
@@ -21,7 +21,7 @@ public enum EventListup {
 
     private final Listener eventListener;
 
-    EventListup(Listener eventListener) {
+    EventList(Listener eventListener) {
         this.eventListener = eventListener;
     }
 
