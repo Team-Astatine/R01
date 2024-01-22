@@ -68,7 +68,7 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
 
         else
             this.quitEvent.quitMessage(
-                componentExchanger("- " + this.joinUser.name() + " " + joinUser.killStatus() + "KILL" ,ColorList.RED)
+                componentExchanger("- " + this.quitUser.name() + " " + quitUser.killStatus() + "KILL" ,ColorList.RED)
             );
     }
 
@@ -81,7 +81,7 @@ public class JoinAndQuit extends ComponentExchanger implements Listener {
             existUser -> {
                 this.joinUser = new UserBuilder(existUser)
                         .level(this.joinPlayer.getLevel())
-                        .build();
+                        .buildAndUpdate();
             },
 
             ()        -> {
