@@ -4,8 +4,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import teamzesa.event.Announcer;
+import teamzesa.event.JoinAndQuit;
 import teamzesa.util.Enum.CommandListup;
-import teamzesa.util.Enum.EventListup;
+import teamzesa.util.Enum.EventList;
 import teamzesa.util.IOHandler.ConfigIOHandler;
 import teamzesa.util.userHandler.UserIOHandler;
 import teamzesa.util.ThreadPool;
@@ -57,15 +58,14 @@ public final class R01 extends JavaPlugin {
     }
 
     private void commandHandler() {
-        for (CommandListup commandEnum : CommandListup.values()) {
+        for (CommandListup commandEnum : CommandListup.values())
             getCommand(commandEnum.getCommand()).setExecutor(commandEnum.newInstance());
-        }
     }
 
     private void functionHandler() {
         PluginManager pm = getServer().getPluginManager();
-        for (EventListup eventListup : EventListup.values())
-            pm.registerEvents(eventListup.newInstance(),this);
+        for (EventList eventList : EventList.values())
+            pm.registerEvents(eventList.newInstance(),this);
     }
 
     private void autoSaveSchedule() {
