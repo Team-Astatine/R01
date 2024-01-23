@@ -81,7 +81,7 @@ public class Death extends ComponentExchanger implements Listener {
                 .killStatus(this.killerUser.killStatus() + 1)
                 .build());
 
-        playerSendMsgComponentExchanger(this.deather,killer.getName() + "님이 체력을 약탈했습니다.", ColorList.RED);
+        playerSendMsgComponentExchanger(this.deather,this.killer.getName() + "님이 체력을 약탈했습니다.", ColorList.RED);
         playerSendMsgComponentExchanger(this.killer,this.deather.getName() + "님이 체력을 약탈했습니다.", ColorList.RED);
         this.event.deathMessage(
                 componentExchanger("[KILL]" + this.killerUser.name() + " -> " + this.deatherUser.name(), ColorList.PINK)
