@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.DoubleChestInventory;
@@ -23,5 +24,10 @@ public class Menu extends ComponentExchanger implements Listener {
 
         Inventory inventory = Bukkit.createInventory(player, 9, "강화 시스템");
         player.openInventory(inventory);
+    }
+
+    @EventHandler
+    public void onInv(InventoryOpenEvent e) {
+        
     }
 }
