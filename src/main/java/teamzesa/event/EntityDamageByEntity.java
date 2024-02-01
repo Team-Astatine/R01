@@ -17,15 +17,12 @@ public class EntityDamageByEntity implements Listener {
     public void entityHit(@NotNull EntityDamageByEntityEvent e) {
 
         Entity damagerEntity = e.getDamager();
-        if (!damagerEntity.getType().equals(EntityType.PLAYER))
+        if (!(damagerEntity instanceof Player damager))
             return;
 
         Entity targetEntity = e.getEntity();
-        if (!targetEntity.getType().equals(EntityType.PLAYER))
+        if (!(targetEntity instanceof Player target))
             return;
-
-        Player damager = (Player) damagerEntity;
-        Player target = (Player) targetEntity;
 
         int hurtTick = 20;
         boolean stuffCheck = handStuffChecker(
