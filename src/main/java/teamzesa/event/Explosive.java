@@ -24,13 +24,13 @@ public class Explosive implements Listener {
 //        Wither Skull:
 //        Blue Skull: 1 block
 //        Black Skull: Varies depending on difficulty
-        this.event.setCancelled(true);
         switch (this.event.getEntityType()) {
             case CREEPER -> creeperBoom();
             case FIREBALL -> ghastBoom();
             case WITHER_SKULL -> witherBoom();
             case PRIMED_TNT -> boomBer();
             case MINECART_TNT -> cartBoom();
+            case ENDER_CRYSTAL -> endCrystal();
             default -> this.event.setCancelled(true);
         }
     }
@@ -64,5 +64,12 @@ public class Explosive implements Listener {
         };
         tntCartTask.run();
 //        ThreadPool.getThreadPool().addTask(tntCartTask);
+    }
+
+    private void endCrystal() {
+        Runnable crystalTask = () -> {
+            this.location.createExplosion(7,true);
+        };
+        crystalTask.run();
     }
 }
