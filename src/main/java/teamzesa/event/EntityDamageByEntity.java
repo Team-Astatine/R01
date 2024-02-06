@@ -12,19 +12,32 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Predicate;
 
-public class EntityDamageByEntity implements Listener {
-    @EventHandler(priority = EventPriority.LOWEST)
-    public void entityHit(@NotNull EntityDamageByEntityEvent e) {
+public class EntityDamageByEntity implements EventRegister {
+    private Entity damagerEntity;
+    private Entity targetEntity;
+    private final EntityDamageByEntityEvent event;
 
-        Entity damagerEntity = e.getDamager();
-        if (!(damagerEntity instanceof Player damager))
+    public EntityDamageByEntity(EntityDamageByEntityEvent event) {
+        this.event = event;
+        init();
+        execute();
+    }
+
+    @Override
+    public void init() {
+        this.damagerEntity = this.event.getDamager();
+        this.targetEntity = this.event.getEntity();
+    }
+
+    @Override
+    public void execute() {
+        if (!(this.damagerEntity instanceof Player damager))
             return;
 
-        Entity targetEntity = e.getEntity();
-        if (!(targetEntity instanceof Player target))
+        if (!(this.targetEntity instanceof Player target))
             return;
 
-        int hurtTick = 20;
+        int hurtTick = 20; //default 20
         boolean stuffCheck = handStuffChecker(
                 damager.getInventory().getItemInMainHand().getType(),
                 damager.getInventory().getItemInOffHand().getType());
@@ -35,12 +48,11 @@ public class EntityDamageByEntity implements Listener {
         if (stuffCheck) //Two Hand Sword
             hurtTick = 1;
 
-//        default 20
 //        ((LivingEntity) e.getEntity()).setMaximumNoDamageTicks(1);
         target.setMaximumNoDamageTicks(hurtTick);
     }
 
-    private @NotNull Boolean handStuffChecker(@NotNull Material mainStuff , @NotNull Material offStuff) {
+    private @NotNull Boolean handStuffChecker(@NotNull Material mainStuff, @NotNull Material offStuff) {
         Predicate<Material> netheriteToolChecker = tool ->
                 tool.equals(Material.NETHERITE_SWORD) || tool.equals(Material.NETHERITE_AXE);
 

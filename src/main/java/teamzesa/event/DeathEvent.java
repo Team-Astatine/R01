@@ -1,12 +1,9 @@
 package teamzesa.event;
 
-import net.kyori.adventure.text.Component;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.jetbrains.annotations.NotNull;
 import teamzesa.util.ComponentExchanger;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.entity.User;
@@ -14,22 +11,51 @@ import teamzesa.util.userHandler.UserBuilder;
 import teamzesa.util.userHandler.UserController;
 
 
-public class Death extends ComponentExchanger implements Listener {
+public class DeathEvent extends ComponentExchanger implements EventRegister {
     private final UserController userController = new UserController();
     private Player deather;
     private Player killer;
     private User deatherUser;
     private User killerUser;
-    private PlayerDeathEvent event;
+    private final PlayerDeathEvent event;
 
-    @EventHandler
-    public void onPlayerDeath(PlayerDeathEvent e) {
-        init(e);
+    public DeathEvent(PlayerDeathEvent event) {
+        this.event = event;
+        init();
+        execute();
+    }
+
+    @Override
+    public void init() {
+        this.deather = this.event.getPlayer();
+        this.killer = deather.getKiller();
+        this.deatherUser = this.userController.readUser(this.deather);
+    }
+
+    @Override
+    public void execute() {
         if (checkingGodMod())
             return;
         if (validKiller())
             return;
         lifeSteel();
+    }
+
+    private boolean checkingGodMod() {
+        if (!this.deatherUser.godMode())
+            return false;
+
+        Location playerLocation = this.deather.getLocation();
+        playerLocation.setY(playerLocation.getY() + 2.0);
+        Runnable undyingEventTask = () -> {
+            playerLocation.getWorld().playSound(playerLocation, Sound.ENTITY_WITHER_SPAWN, 1.0f, 1.0f);
+            playerLocation.getWorld().spawnParticle(Particle.TOTEM, playerLocation, 200);
+//                playerLocation.createExplosion(60);
+        };
+
+        undyingEventTask.run();
+        this.event.setCancelled(true);
+        return true;
     }
 
     private boolean validKiller() {
@@ -46,13 +72,6 @@ public class Death extends ComponentExchanger implements Listener {
         return false;
     }
 
-    private void init(PlayerDeathEvent e) {
-        this.event = e;
-        this.deather = this.event.getPlayer();
-        this.killer = deather.getKiller();
-        this.deatherUser = this.userController.readUser(this.deather);
-    }
-
     private void lifeSteel() {
         this.killerUser = this.userController.readUser(this.killer);
 
@@ -62,8 +81,8 @@ public class Death extends ComponentExchanger implements Listener {
 
         //valid Logic
         if (this.deather.getHealthScale() <= MIN_HEALTH_SCALE ||
-            this.killer.getHealthScale()  >= MAX_HEALTH_SCALE ||
-            this.deather == killer)
+                this.killer.getHealthScale() >= MAX_HEALTH_SCALE ||
+                this.deather == killer)
             return;
 
         updateUserHealthScaleData(STEP_SIZE);
@@ -72,36 +91,19 @@ public class Death extends ComponentExchanger implements Listener {
     private void updateUserHealthScaleData(double STEP_SIZE) {
         this.userController.healthUpdate(
                 new UserBuilder(this.deatherUser)
-                .healthScale(this.deather.getHealthScale() - STEP_SIZE)
-                .build());
+                        .healthScale(this.deather.getHealthScale() - STEP_SIZE)
+                        .build());
 
         this.userController.healthUpdate(
                 new UserBuilder(this.killerUser)
-                .healthScale(this.killer.getHealthScale() + STEP_SIZE)
-                .killStatus(this.killerUser.killStatus() + 1)
-                .build());
+                        .healthScale(this.killer.getHealthScale() + STEP_SIZE)
+                        .killStatus(this.killerUser.killStatus() + 1)
+                        .build());
 
-        playerSendMsgComponentExchanger(this.deather,this.killer.getName() + "님이 체력을 약탈했습니다.", ColorList.RED);
-        playerSendMsgComponentExchanger(this.killer,this.deather.getName() + "님이 체력을 약탈했습니다.", ColorList.RED);
+        playerSendMsgComponentExchanger(this.deather, this.killer.getName() + "님이 체력을 약탈했습니다.", ColorList.RED);
+        playerSendMsgComponentExchanger(this.killer, this.deather.getName() + "님이 체력을 약탈했습니다.", ColorList.RED);
         this.event.deathMessage(
                 componentExchanger("[KILL]" + this.killerUser.name() + " -> " + this.deatherUser.name(), ColorList.PINK)
         );
-    }
-
-    private boolean checkingGodMod() {
-        if (!this.deatherUser.godMode())
-            return false;
-
-        Location playerLocation = this.deather.getLocation();
-        playerLocation.setY(playerLocation.getY() + 2.0);
-        Runnable undyingEventTask = () -> {
-                playerLocation.getWorld().playSound(playerLocation, Sound.ENTITY_WITHER_SPAWN, 1.0f, 1.0f);
-                playerLocation.getWorld().spawnParticle(Particle.TOTEM, playerLocation, 200);
-//                playerLocation.createExplosion(60);
-        };
-
-        undyingEventTask.run();
-        this.event.setCancelled(true);
-        return true;
     }
 }

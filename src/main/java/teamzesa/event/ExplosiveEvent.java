@@ -2,20 +2,25 @@ package teamzesa.event;
 
 import org.bukkit.Location;
 import org.bukkit.entity.*;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityExplodeEvent;
 
-public class Explosive implements Listener {
-    private EntityExplodeEvent event;
+public class ExplosiveEvent implements EventRegister {
     private Location location;
+    private final EntityExplodeEvent event;
 
-    @EventHandler(priority = EventPriority.LOW)
-    public void explosiveHandler(EntityExplodeEvent event) {
+    public ExplosiveEvent(EntityExplodeEvent event) {
         this.event = event;
-        this.location = this.event.getLocation();
+        init();
+        execute();
+    }
 
+    @Override
+    public void init() {
+        this.location = this.event.getLocation();
+    }
+
+    @Override
+    public void execute() {
 //        TNT: 4 blocks
 //        Creeper:
 //        Normal: 3 blocks
@@ -35,24 +40,24 @@ public class Explosive implements Listener {
         }
     }
 
-    private void boomBer() {
-        this.location.createExplosion(25,true);
-    }
-
     private void creeperBoom() {
         Creeper creeper = (Creeper) this.event.getEntity();
         int explosiveRadius = creeper.isPowered() ? 100 : 10;
-        this.location.createExplosion(explosiveRadius,true);
+        this.location.createExplosion(explosiveRadius, true);
     }
 
     private void ghastBoom() {
-        this.location.createExplosion(20,true);
+        this.location.createExplosion(20, true);
     }
 
     private void witherBoom() {
         WitherSkull witherSkull = (WitherSkull) this.event.getEntity();
         int explosiveRadius = witherSkull.isCharged() ? 130 : 40;
-        this.location.createExplosion(explosiveRadius,true);
+        this.location.createExplosion(explosiveRadius, true);
+    }
+
+    private void boomBer() {
+        this.location.createExplosion(25, true);
     }
 
     private void cartBoom() {
@@ -60,7 +65,7 @@ public class Explosive implements Listener {
 //            this.event.blockList().stream()
 //                    .filter(block -> block.getType().equals(Material.OBSIDIAN))
 //                    .forEach(block -> block.setType(Material.AIR));
-            this.location.createExplosion(200,true);
+            this.location.createExplosion(200, true);
         };
         tntCartTask.run();
 //        ThreadPool.getThreadPool().addTask(tntCartTask);
@@ -68,7 +73,7 @@ public class Explosive implements Listener {
 
     private void endCrystal() {
         Runnable crystalTask = () -> {
-            this.location.createExplosion(7,true);
+            this.location.createExplosion(7, true);
         };
         crystalTask.run();
     }

@@ -14,25 +14,35 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.R01;
 
 
-public class HandSwing implements Listener {
-    @EventHandler(priority = EventPriority.LOWEST)
-    public void onSwing(@NotNull PlayerArmSwingEvent e) {
-        Player player = e.getPlayer();
+public class HandSwing implements EventRegister {
+    private Player player;
+    private final PlayerArmSwingEvent event;
 
-        if (player.getInventory().getItemInMainHand().getType() != Material.AIR) {
+    public HandSwing(PlayerArmSwingEvent event) {
+        this.event = event;
+        init();
+        execute();
+    }
+
+    @Override
+    public void init() {
+        this.player = this.event.getPlayer();
+    }
+
+    @Override
+    public void execute() {
+        if (this.player.getInventory().getItemInMainHand().getType() != Material.AIR)
             return;
-        }
 
-        if (player.getInventory().getItemInOffHand().getType() != Material.AIR) {
+        if (this.player.getInventory().getItemInOffHand().getType() != Material.AIR)
             return;
-        }
 
-        if (e.getAnimationType() == PlayerAnimationType.OFF_ARM_SWING)
+        if (this.event.getAnimationType() == PlayerAnimationType.OFF_ARM_SWING)
             return;
 
         BukkitTask offHandSwing = Bukkit.getScheduler().runTaskLater(
                 R01.getPlugin(R01.class),
-                () -> e.getPlayer().swingOffHand(),
+                () -> this.event.getPlayer().swingOffHand(),
                 7L
         );
     }

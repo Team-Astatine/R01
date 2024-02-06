@@ -4,9 +4,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import teamzesa.event.Announcer;
-import teamzesa.event.JoinAndQuit;
+import teamzesa.event.EventSection;
 import teamzesa.util.Enum.CommandListup;
-import teamzesa.util.Enum.EventList;
 import teamzesa.util.IOHandler.ConfigIOHandler;
 import teamzesa.util.userHandler.UserIOHandler;
 import teamzesa.util.ThreadPool;
@@ -64,8 +63,7 @@ public final class R01 extends JavaPlugin {
 
     private void functionHandler() {
         PluginManager pm = getServer().getPluginManager();
-        for (EventList eventList : EventList.values())
-            pm.registerEvents(eventList.newInstance(),this);
+        pm.registerEvents(new EventSection(), this);
     }
 
     private void autoSaveSchedule() {
