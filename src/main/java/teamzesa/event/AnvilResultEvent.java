@@ -1,13 +1,24 @@
 package teamzesa.event;
 
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.jetbrains.annotations.NotNull;
 import org.purpurmc.purpur.event.inventory.AnvilUpdateResultEvent;
 
-public class Anvil implements Listener {
+public class AnvilResultEvent implements EventRegister {
+    private final AnvilUpdateResultEvent event;
 
-    /*
+    public AnvilResultEvent(AnvilUpdateResultEvent event) {
+        this.event = event;
+        init();
+        execute();
+    }
+
+    @Override
+    public void init() {
+
+    }
+
+        /*
     getRenameText(): 수리된 아이템에 적용될 이름을 가져옵니다. 빈 문자열은 기본 아이템 이름을 나타냅니다.
 
     getRepairCostAmount(): 현재 수리를 완료하는 데 필요한 아이템 비용(양)을 가져옵니다.
@@ -43,8 +54,8 @@ public class Anvil implements Listener {
     setDoUnsafeEnchants(boolean canDoUnsafeEnchants): 안전하지 않은 인챈트 수행 여부를 설정합니다.
     */
 
-    @EventHandler
-    public void onAnvil(@NotNull AnvilUpdateResultEvent e) {
-        e.getInventory().setMaximumRepairCost(1000);
+    @Override
+    public void execute() {
+        this.event.getInventory().setMaximumRepairCost(1000);
     }
 }

@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
@@ -27,7 +28,7 @@ public class Menu extends ComponentExchanger implements Listener {
     }
 
     @EventHandler
-    public void onInv(InventoryOpenEvent e) {
-        
+    public void onInv(InventoryClickEvent e) {
+        e.getWhoClicked();
     }
 }

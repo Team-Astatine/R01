@@ -34,15 +34,15 @@ public class Announcer extends ComponentExchanger {
     public void countAnnouncer(Player player) {
         int joinCnt = new UserController().readUser(player).joinCount();
         player.sendMessage(
-                componentExchanger(configIOHandler.getWorldMotdConfig(),ColorList.SKY_BLUE)
-                        .append(componentExchanger(" " + joinCnt ,ColorList.PINK))
-                        .append(componentExchanger("번째 접속!",ColorList.SKY_BLUE))
+                componentExchanger(configIOHandler.getWorldMotdConfig(), ColorList.SKY_BLUE)
+                        .append(componentExchanger(" " + joinCnt, ColorList.PINK))
+                        .append(componentExchanger("번째 접속!", ColorList.SKY_BLUE))
         );
     }
 
     public void setPlayerTabHeader(@NotNull Audience audience) {
         audience.sendPlayerListHeader(
-                componentExchanger(configIOHandler.getWorldMotdConfig(),ColorList.PURPLE)
+                componentExchanger(configIOHandler.getWorldMotdConfig(), ColorList.PURPLE)
         );
     }
 
@@ -61,10 +61,10 @@ public class Announcer extends ComponentExchanger {
             if (players.isEmpty())
                 return;
 
-            players.forEach(player -> sendComment(player,createComponents()));
+            players.forEach(player -> sendComment(player, createComponents()));
         };
 
-        ThreadPool.getThreadPool().addSchedulingTask(commentSendTask,delay,interval);
+        ThreadPool.getThreadPool().addSchedulingTask(commentSendTask, delay, interval);
     }
 
     private void sendComment(Player player, Component[] component) {
@@ -83,7 +83,7 @@ public class Announcer extends ComponentExchanger {
         ColorList commandColor = ColorList.COMMAND_COLOR;
         ColorList discordColor = ColorList.DISCORD_COLOR;
 
-        return new Component[] {
+        return new Component[]{
                 createLinkComponentExchanger(configIOHandler.getMineListVote(), mineListLink, voteColor),
                 createLinkComponentExchanger(configIOHandler.getDiscordInvite(), discordLink, discordColor),
                 createLinkComponentExchanger(configIOHandler.getServerGuideNotion(), notionLink, notionColor),
