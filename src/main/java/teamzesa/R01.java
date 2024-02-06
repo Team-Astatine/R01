@@ -14,15 +14,17 @@ import teamzesa.util.ThreadPool;
 public final class R01 extends JavaPlugin {
     private final String PLUGIN_NAME = "[R01]";
     private final long RUNNING_TIME;
+    private final PluginManager pluginManager;
 
     public R01() {
         this.RUNNING_TIME = System.currentTimeMillis();
+        this.pluginManager = getServer().getPluginManager();
     }
 
     @Override
     public void onEnable() {
-        commandHandler();   // command set
-        functionHandler();  // function set
+        commandHandler();   //command set
+        this.pluginManager.registerEvents(new EventSection(), this); //function set
 //        autoSaveSchedule(); // User Data Auto Save Scheduling
 
 //        saveDefaultSource
@@ -59,11 +61,6 @@ public final class R01 extends JavaPlugin {
     private void commandHandler() {
         for (CommandListup commandEnum : CommandListup.values())
             getCommand(commandEnum.getCommand()).setExecutor(commandEnum.newInstance());
-    }
-
-    private void functionHandler() {
-        PluginManager pm = getServer().getPluginManager();
-        pm.registerEvents(new EventSection(), this);
     }
 
     private void autoSaveSchedule() {

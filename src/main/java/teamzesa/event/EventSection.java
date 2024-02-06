@@ -58,20 +58,17 @@ public class EventSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void playerSwapStuffEvent(@NotNull PlayerSwapHandItemsEvent event) {
+
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void menuClickEvent(@NotNull InventoryClickEvent event) {
+
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void raidEvent(@NotNull RaidTriggerEvent event) {
         new RaidAnnouncer(event);
-    }
-
-    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public void craftStuffEvent(CraftItemEvent event) {
-        new CraftEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -82,5 +79,10 @@ public class EventSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void weaponThrowEvent(ProjectileLaunchEvent event) {
         new GodModeTridentThrowEvent(event);
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+    public void craftStuffEvent(CraftItemEvent event) {
+        new CraftEvent(event);
     }
 }
