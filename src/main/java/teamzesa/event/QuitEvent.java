@@ -5,6 +5,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import teamzesa.entity.User;
 import teamzesa.util.ComponentExchanger;
 import teamzesa.util.Enum.ColorList;
+import teamzesa.util.IOHandler.Announcer;
 import teamzesa.util.userHandler.UserController;
 
 public class QuitEvent extends ComponentExchanger implements EventRegister {
