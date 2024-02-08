@@ -14,7 +14,7 @@ import teamzesa.util.Enum.ColorList;
 public class SaveUserData extends ComponentExchanger implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, Command command, String label, String[] args) {
-        UserIOHandler.getIOHandler().exportUserData();
+        UserIOHandler.exportUserData();
         sendComment(sender, "Success to saving UserData");
         return true;
     }

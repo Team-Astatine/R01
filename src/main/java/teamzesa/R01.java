@@ -40,7 +40,7 @@ public final class R01 extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        UserIOHandler.getIOHandler().exportUserData();
+        UserIOHandler.exportUserData();
         ThreadPool.getThreadPool().allServiceOff();
         Bukkit.getScheduler().cancelTasks(this);
     }
@@ -52,7 +52,7 @@ public final class R01 extends JavaPlugin {
         configIOHandler.allConfigLoad(); //config Load
 
 //        import userData
-        UserIOHandler.getIOHandler().importUserData();
+        UserIOHandler.importUserData();
 
 //        Announcer Set
         Announcer.getAnnouncer().defaultAnnouncer();
@@ -67,7 +67,7 @@ public final class R01 extends JavaPlugin {
         long delay = 0;
         long interval = 720; // 12hour term auto save
         ThreadPool.getThreadPool().addSchedulingTask(
-                () -> UserIOHandler.getIOHandler().exportUserData(),
+                UserIOHandler::exportUserData,
                 delay,
                 interval
         );

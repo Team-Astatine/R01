@@ -12,29 +12,20 @@ import java.io.IOException;
 import java.util.*;
 
 public class UserIOHandler {
-    private static class UserIOHandlerHolder {
-        private static final UserIOHandler INSTANCE = new UserIOHandler();
-    }
 
-    private final UserController userController = new UserController();
-
-    public static UserIOHandler getIOHandler() {
-        return UserIOHandlerHolder.INSTANCE;
-    }
-
-    public void importUserData() {
+    public static void importUserData() {
         Bukkit.getLogger().info("[R01] Importing User Data..");
         try (FileReader reader = new FileReader(DataFile.USER_DATA.getFileInstance())) {
-            this.userController.updateAllUserData(new Gson().fromJson(reader, User[].class));
+            new UserController().updateAllUserData(new Gson().fromJson(reader, User[].class));
         } catch (IOException e) {System.err.println("Import UserData Error");}
     }
 
-    public void exportUserData() {
+    public static void exportUserData() {
         Bukkit.getLogger().info("[R01] Exporting User Data..");
         try (FileWriter writer = new FileWriter(DataFile.USER_DATA.getFileInstance())) {
             new GsonBuilder().setPrettyPrinting().create()
                     .toJson(
-                        new ArrayList<>(this.userController.getAllUserTable().values()),
+                        new ArrayList<>(new UserController().getAllUserTable().values()),
                         writer
                     );
         } catch (IOException e) {System.err.println("Export UserData Error");}
