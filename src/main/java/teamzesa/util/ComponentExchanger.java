@@ -16,9 +16,10 @@ public abstract class ComponentExchanger {
     }
 
     private Component exchangerStringToComponentAndColor(String comment, ColorList color) {
-        return Component
-                .text(comment)
-                .color(color.getTextColor());
+        return Component.text()
+                .content(comment)
+                .color(color.getTextColor())
+                .build();
     }
 
     public @NotNull Component createLinkComponentExchanger(String comment, String url, @NotNull ColorList color) {
@@ -45,7 +46,6 @@ public abstract class ComponentExchanger {
         playerSendMsgComponentExchanger((Player) sender,comment,color);
     }
 
-
     public void playerSendMsgComponentExchanger(@NotNull Player player, @NotNull StringBuilder comment, @NotNull ColorList color) {
         playerSendMsgComponentExchanger(player,comment.toString(),color);
     }
@@ -53,7 +53,6 @@ public abstract class ComponentExchanger {
     public void playerSendMsgComponentExchanger(@NotNull CommandSender sender, @NotNull StringBuilder comment, @NotNull ColorList color) {
         playerSendMsgComponentExchanger((Player) sender,comment.toString(),color);
     }
-
 
     @Contract(value = "_ -> new", pure = true)
     public @NotNull Component componentExchanger(String comment) {
