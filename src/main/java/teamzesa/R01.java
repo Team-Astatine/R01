@@ -1,7 +1,6 @@
 package teamzesa;
 
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import teamzesa.util.IOHandler.Announcer;
 import teamzesa.event.EventSection;
@@ -14,17 +13,14 @@ import teamzesa.util.ThreadPool;
 public final class R01 extends JavaPlugin {
     private final String PLUGIN_NAME = "[R01]";
     private final long RUNNING_TIME;
-    private final PluginManager pluginManager;
 
     public R01() {
         this.RUNNING_TIME = System.currentTimeMillis();
-        this.pluginManager = getServer().getPluginManager();
     }
 
     @Override
     public void onEnable() {
-        commandHandler();   //command set
-        this.pluginManager.registerEvents(new EventSection(), this); //function set
+        eventAndFunctionRegister();   //command set
 //        autoSaveSchedule(); // User Data Auto Save Scheduling
 
 //        saveDefaultSource
@@ -58,8 +54,10 @@ public final class R01 extends JavaPlugin {
         Announcer.getAnnouncer().defaultAnnouncer();
     }
 
-    private void commandHandler() {
-        for (CommandListup commandEnum : CommandListup.values())
+    private void eventAndFunctionRegister() {
+        getServer().getPluginManager().registerEvents(new EventSection(), this); //function set
+
+        for (CommandListup commandEnum : CommandListup.values()) //command set
             getCommand(commandEnum.getCommand()).setExecutor(commandEnum.newInstance());
     }
 
