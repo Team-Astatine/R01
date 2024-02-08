@@ -1,8 +1,6 @@
 package teamzesa.event;
 
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerQuitEvent;
 import teamzesa.entity.User;
 import teamzesa.util.ComponentExchanger;
