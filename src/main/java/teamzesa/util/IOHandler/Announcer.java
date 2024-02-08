@@ -32,7 +32,7 @@ public class Announcer extends ComponentExchanger {
     public void countAnnouncer(Player player) {
         int joinCnt = new UserController().readUser(player).joinCount();
         player.sendMessage(
-                componentExchanger(configIOHandler.getWorldMotdConfig(), ColorList.SKY_BLUE)
+                componentExchanger(this.configIOHandler.getWorldMotdConfig(), ColorList.SKY_BLUE)
                         .append(componentExchanger(" " + joinCnt, ColorList.PINK))
                         .append(componentExchanger("번째 접속!", ColorList.SKY_BLUE))
         );
@@ -40,7 +40,7 @@ public class Announcer extends ComponentExchanger {
 
     public void setPlayerTabHeader(@NotNull Audience audience) {
         audience.sendPlayerListHeader(
-                componentExchanger(configIOHandler.getWorldMotdConfig(), ColorList.PURPLE)
+                componentExchanger(this.configIOHandler.getWorldMotdConfig(), ColorList.PURPLE)
         );
     }
 
@@ -71,9 +71,9 @@ public class Announcer extends ComponentExchanger {
     }
 
     private Component @NotNull [] createComponents() {
-        String notionLink = configIOHandler.getNotionConfig();
-        String discordLink = configIOHandler.getDiscordConfig();
-        String mineListLink = configIOHandler.getMineListConfig();
+        String notionLink = this.configIOHandler.getNotionConfig();
+        String discordLink = this.configIOHandler.getDiscordConfig();
+        String mineListLink = this.configIOHandler.getMineListConfig();
 
         ColorList commonColor = ColorList.RED;
         ColorList voteColor = ColorList.VOTE_COLOR;
@@ -82,17 +82,17 @@ public class Announcer extends ComponentExchanger {
         ColorList discordColor = ColorList.DISCORD_COLOR;
 
         return new Component[]{
-                createLinkComponentExchanger(configIOHandler.getMineListVote(), mineListLink, voteColor),
-                createLinkComponentExchanger(configIOHandler.getDiscordInvite(), discordLink, discordColor),
-                createLinkComponentExchanger(configIOHandler.getServerGuideNotion(), notionLink, notionColor),
+                createLinkComponentExchanger(this.configIOHandler.getMineListVote(), mineListLink, voteColor),
+                createLinkComponentExchanger(this.configIOHandler.getDiscordInvite(), discordLink, discordColor),
+                createLinkComponentExchanger(this.configIOHandler.getServerGuideNotion(), notionLink, notionColor),
 
-                componentExchanger(configIOHandler.getSteelLifeTip(), commonColor),
-                componentExchanger(configIOHandler.getRaidTip(), commonColor),
-                componentExchanger(configIOHandler.getWeaponTip(), commonColor),
-                componentExchanger(configIOHandler.getExplosiveTip(), commonColor),
-                componentExchanger(configIOHandler.getCommandFly(), commandColor),
-                componentExchanger(configIOHandler.getCommandHat(), commandColor),
-                componentExchanger(configIOHandler.getCommandTotem(), commandColor)
+                componentExchanger(this.configIOHandler.getSteelLifeTip(), commonColor),
+                componentExchanger(this.configIOHandler.getRaidTip(), commonColor),
+                componentExchanger(this.configIOHandler.getWeaponTip(), commonColor),
+                componentExchanger(this.configIOHandler.getExplosiveTip(), commonColor),
+                componentExchanger(this.configIOHandler.getCommandFly(), commandColor),
+                componentExchanger(this.configIOHandler.getCommandHat(), commandColor),
+                componentExchanger(this.configIOHandler.getCommandTotem(), commandColor)
         };
     }
 
