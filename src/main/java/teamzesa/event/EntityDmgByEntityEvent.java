@@ -2,22 +2,18 @@ package teamzesa.event;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Predicate;
 
-public class EntityDamageByEntity implements EventRegister {
+public class EntityDmgByEntityEvent implements EventRegister {
     private Entity damagerEntity;
     private Entity targetEntity;
     private final EntityDamageByEntityEvent event;
 
-    public EntityDamageByEntity(EntityDamageByEntityEvent event) {
+    public EntityDmgByEntityEvent(EntityDamageByEntityEvent event) {
         this.event = event;
         init();
         execute();

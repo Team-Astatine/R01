@@ -1,20 +1,17 @@
 package teamzesa.event;
 
 import org.bukkit.Location;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.raid.RaidTriggerEvent;
-import org.jetbrains.annotations.NotNull;
 import teamzesa.util.ComponentExchanger;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.WorldName;
 
-public class RaidAnnouncer extends ComponentExchanger implements EventRegister {
+public class RaidAnnouncerEvent extends ComponentExchanger implements EventRegister {
     private Location location;
     private String activeWorld;
     private final RaidTriggerEvent event;
 
-    public RaidAnnouncer(RaidTriggerEvent event) {
+    public RaidAnnouncerEvent(RaidTriggerEvent event) {
         this.event = event;
         init();
         execute();

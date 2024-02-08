@@ -4,21 +4,16 @@ import io.papermc.paper.event.player.PlayerArmSwingEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerAnimationType;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
-import org.jetbrains.annotations.NotNull;
 import teamzesa.R01;
 
 
-public class HandSwing implements EventRegister {
+public class HandSwingEvent implements EventRegister {
     private Player player;
     private final PlayerArmSwingEvent event;
 
-    public HandSwing(PlayerArmSwingEvent event) {
+    public HandSwingEvent(PlayerArmSwingEvent event) {
         this.event = event;
         init();
         execute();
