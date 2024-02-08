@@ -26,6 +26,10 @@ public class ConfigIOHandler extends ComponentExchanger {
         this.config = YamlConfiguration.loadConfiguration(DataFile.CONFIG.getFileInstance());
     }
 
+    public String getString(ConfigMenu msgPath) {
+        return this.config.getString(msgPath.getConfigMessage());
+    }
+
     public void allConfigLoad() {
         setWorldSettingMotd();
         getMineListConfig();
@@ -43,65 +47,64 @@ public class ConfigIOHandler extends ComponentExchanger {
         getCommandTotem();
     }
 
-
     public void setWorldSettingMotd() {
-        Bukkit.motd(componentExchanger(ConfigMenu.WORLD_SETTING_MOTD));
+        Bukkit.motd(componentExchanger(getString(ConfigMenu.WORLD_SETTING_MOTD)));
     }
 
     public String getWorldMotdConfig() {
-        return ConfigMenu.WORLD_SETTING_MOTD.getConfigMessage();
+        return getString(ConfigMenu.WORLD_SETTING_MOTD);
     }
 
     public String getMineListConfig() {
-        return ConfigMenu.WORLD_SETTING_MINELIST.getConfigMessage();
+        return getString(ConfigMenu.WORLD_SETTING_MINELIST);
     }
 
     public String getDiscordConfig() {
-        return ConfigMenu.WORLD_SETTING_DISCORD.getConfigMessage();
+        return getString(ConfigMenu.WORLD_SETTING_DISCORD);
     }
 
     public String getNotionConfig() {
-        return ConfigMenu.WORLD_SETTING_NOTION.getConfigMessage();
+        return getString(ConfigMenu.WORLD_SETTING_NOTION);
     }
 
     public String getMineListVote() {
-        return ConfigMenu.MESSAGE_MINELIST_VOTE.getConfigMessage();
+        return getString(ConfigMenu.MESSAGE_MINELIST_VOTE);
     }
 
     public String getDiscordInvite() {
-        return ConfigMenu.MESSAGE_DISCORD_INVITE.getConfigMessage();
+        return getString(ConfigMenu.MESSAGE_DISCORD_INVITE);
     }
 
     public String getServerGuideNotion() {
-        return ConfigMenu.MESSAGE_SERVER_GUID_NOTION.getConfigMessage();
+        return getString(ConfigMenu.MESSAGE_SERVER_GUID_NOTION);
     }
 
     public String getSteelLifeTip() {
-        return ConfigMenu.MESSAGE_STEEL_LIFE_TIP.getConfigMessage();
+        return getString(ConfigMenu.MESSAGE_STEEL_LIFE_TIP);
     }
 
     public String getRaidTip() {
-        return ConfigMenu.MESSAGE_RAID_TIP.getConfigMessage();
+        return getString(ConfigMenu.MESSAGE_RAID_TIP);
     }
 
     public String getWeaponTip() {
-        return ConfigMenu.MESSAGE_WEAPON_TIP.getConfigMessage();
+        return getString(ConfigMenu.MESSAGE_WEAPON_TIP);
     }
 
     public String getExplosiveTip() {
-        return ConfigMenu.MESSAGE_EXPLOSIVE_TIP.getConfigMessage();
+        return getString(ConfigMenu.MESSAGE_EXPLOSIVE_TIP);
     }
 
     public String getCommandFly() {
-        return ConfigMenu.MESSAGE_COMMAND_FLY.getConfigMessage();
+        return getString(ConfigMenu.MESSAGE_COMMAND_FLY);
     }
 
     public String getCommandHat() {
-        return ConfigMenu.MESSAGE_COMMAND_HAT.getConfigMessage();
+        return getString(ConfigMenu.MESSAGE_COMMAND_HAT);
     }
 
     public String getCommandTotem() {
-        return ConfigMenu.MESSAGE_COMMAND_TOTEM.getConfigMessage();
+        return getString(ConfigMenu.MESSAGE_COMMAND_TOTEM);
     }
 
     public void worldConfigSave(String motd) {
