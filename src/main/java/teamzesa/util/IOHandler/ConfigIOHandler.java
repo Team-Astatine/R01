@@ -3,29 +3,13 @@ package teamzesa.util.IOHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import teamzesa.util.ComponentExchanger;
+import teamzesa.util.Enum.ConfigMenu;
 import teamzesa.util.Enum.DataFile;
 
 import java.io.File;
 import java.io.IOException;
 
-public class ConfigIOHandler extends  ComponentExchanger {
-    private static final String WORLD_SETTING_MOTD = "world_setting.motd";
-    private static final String WORLD_SETTING_MINELIST = "world_setting.minelist";
-    private static final String WORLD_SETTING_DISCORD = "world_setting.discord";
-    private static final String WORLD_SETTING_NOTION = "world_setting.notion";
-
-    private static final String MESSAGE_MINELIST_VOTE = "message.mineListVote";
-    private static final String MESSAGE_DISCORD_INVITE = "message.discordInvite";
-    private static final String MESSAGE_SERVER_GUID_NOTION = "message.serverGuideNotion";
-    private static final String MESSAGE_STEEL_LIFE_TIP = "message.steelLifeTip";
-    private static final String MESSAGE_RAID_TIP = "message.raidTip";
-    private static final String MESSAGE_WEAPON_TIP = "message.weaponTip";
-    private static final String MESSAGE_EXPLOSIVE_TIP = "message.explosiveTip";
-    private static final String MESSAGE_COMMAND_FLY = "message.commandFly";
-    private static final String MESSAGE_COMMAND_HAT = "message.commandHat";
-    private static final String MESSAGE_COMMAND_TOTEM = "message.commandTotem";
-
-
+public class ConfigIOHandler extends ComponentExchanger {
     private static class ConfigIOHandlerHolder {
         private static final ConfigIOHandler INSTANCE = new ConfigIOHandler();
     }
@@ -61,72 +45,71 @@ public class ConfigIOHandler extends  ComponentExchanger {
 
 
     public void setWorldSettingMotd() {
-        Bukkit.motd(componentExchanger(config.getString(WORLD_SETTING_MOTD)));
+        Bukkit.motd(componentExchanger(ConfigMenu.WORLD_SETTING_MOTD));
     }
 
     public String getWorldMotdConfig() {
-        return config.getString(WORLD_SETTING_MOTD);
+        return ConfigMenu.WORLD_SETTING_MOTD.getConfigMessage();
     }
 
     public String getMineListConfig() {
-        return config.getString(WORLD_SETTING_MINELIST);
+        return ConfigMenu.WORLD_SETTING_MINELIST.getConfigMessage();
     }
 
     public String getDiscordConfig() {
-        return config.getString(WORLD_SETTING_DISCORD);
+        return ConfigMenu.WORLD_SETTING_DISCORD.getConfigMessage();
     }
 
     public String getNotionConfig() {
-        return config.getString(WORLD_SETTING_NOTION);
+        return ConfigMenu.WORLD_SETTING_NOTION.getConfigMessage();
     }
 
     public String getMineListVote() {
-        return config.getString(MESSAGE_MINELIST_VOTE);
+        return ConfigMenu.MESSAGE_MINELIST_VOTE.getConfigMessage();
     }
 
     public String getDiscordInvite() {
-        return config.getString(MESSAGE_DISCORD_INVITE);
+        return ConfigMenu.MESSAGE_DISCORD_INVITE.getConfigMessage();
     }
 
     public String getServerGuideNotion() {
-        return config.getString(MESSAGE_SERVER_GUID_NOTION);
+        return ConfigMenu.MESSAGE_SERVER_GUID_NOTION.getConfigMessage();
     }
 
     public String getSteelLifeTip() {
-        return config.getString(MESSAGE_STEEL_LIFE_TIP);
+        return ConfigMenu.MESSAGE_STEEL_LIFE_TIP.getConfigMessage();
     }
 
     public String getRaidTip() {
-        return config.getString(MESSAGE_RAID_TIP);
+        return ConfigMenu.MESSAGE_RAID_TIP.getConfigMessage();
     }
 
     public String getWeaponTip() {
-        return config.getString(MESSAGE_WEAPON_TIP);
+        return ConfigMenu.MESSAGE_WEAPON_TIP.getConfigMessage();
     }
 
     public String getExplosiveTip() {
-        return config.getString(MESSAGE_EXPLOSIVE_TIP);
+        return ConfigMenu.MESSAGE_EXPLOSIVE_TIP.getConfigMessage();
     }
 
     public String getCommandFly() {
-        return config.getString(MESSAGE_COMMAND_FLY);
+        return ConfigMenu.MESSAGE_COMMAND_FLY.getConfigMessage();
     }
 
     public String getCommandHat() {
-        return config.getString(MESSAGE_COMMAND_HAT);
+        return ConfigMenu.MESSAGE_COMMAND_HAT.getConfigMessage();
     }
 
     public String getCommandTotem() {
-        return config.getString(MESSAGE_COMMAND_TOTEM);
+        return ConfigMenu.MESSAGE_COMMAND_TOTEM.getConfigMessage();
     }
 
     public void worldConfigSave(String motd) {
-        config.set(WORLD_SETTING_MOTD, motd);
+        this.config.set(ConfigMenu.WORLD_SETTING_MOTD.getConfigMessage(), motd);
         try {
-            config.save(file);
+            this.config.save(this.file);
         } catch (IOException e) {
-            // Consider logging this exception or alerting the user in a more friendly manner.
-            e.printStackTrace();
+            System.err.println("Saving World Config Fail!");
         }
     }
 }

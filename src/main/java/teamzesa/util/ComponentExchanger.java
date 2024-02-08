@@ -1,14 +1,13 @@
 package teamzesa.util;
 
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.event.ClickEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.util.Enum.ColorList;
+import teamzesa.util.Enum.ConfigMenu;
 
 public abstract class ComponentExchanger {
     private Component exchangerStringToComponent(String comment) {
@@ -54,9 +53,12 @@ public abstract class ComponentExchanger {
         playerSendMsgComponentExchanger((Player) sender,comment.toString(),color);
     }
 
-    @Contract(value = "_ -> new", pure = true)
-    public @NotNull Component componentExchanger(String comment) {
-        return exchangerStringToComponent(comment);
+    public Component componentExchanger(Object comment) {
+        if (comment instanceof String stringMsg)
+            return exchangerStringToComponent(stringMsg);
+        if (comment instanceof ConfigMenu configMsg)
+            return exchangerStringToComponent(configMsg.getConfigMessage());
+        return null;
     }
 
     public @NotNull Component componentExchanger(String comment, @NotNull ColorList color) {
