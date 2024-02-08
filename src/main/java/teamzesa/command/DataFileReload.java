@@ -11,7 +11,7 @@ import teamzesa.R01;
 import teamzesa.util.Enum.ColorList;
 
 
-public class Reload extends ComponentExchanger implements CommandExecutor {
+public class DataFileReload extends ComponentExchanger implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {

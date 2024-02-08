@@ -7,7 +7,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
-import teamzesa.command.GodModeSet;
+import teamzesa.command.God;
 import teamzesa.util.ComponentExchanger;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.ArmourKit;
@@ -116,7 +116,7 @@ public class JoinEvent extends ComponentExchanger implements EventRegister {
     }
 
     private void checkGodMode() {
-        new GodModeSet().setGodEffect(this.joinPlayer, this.joinUser);
+        new God().setGodEffect(this.joinPlayer, this.joinUser);
     }
 
     private void userIPCheckUp() {

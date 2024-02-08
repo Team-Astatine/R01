@@ -16,7 +16,7 @@ import teamzesa.util.userHandler.UserController;
 import java.util.Optional;
 
 
-public class GodModeSet extends ComponentExchanger implements CommandExecutor {
+public class God extends ComponentExchanger implements CommandExecutor {
     private Player targetPlayer;
     private User targetUser;
     @Override

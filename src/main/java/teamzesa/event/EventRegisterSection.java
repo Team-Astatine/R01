@@ -12,7 +12,7 @@ import org.bukkit.event.raid.RaidTriggerEvent;
 import org.jetbrains.annotations.NotNull;
 import org.purpurmc.purpur.event.inventory.AnvilUpdateResultEvent;
 
-public class EventSection implements Listener {
+public class EventRegisterSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void joinEvent(@NotNull PlayerJoinEvent event) {
         new JoinEvent(event);

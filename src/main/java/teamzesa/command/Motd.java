@@ -11,7 +11,7 @@ import teamzesa.util.IOHandler.ConfigIOHandler;
 import teamzesa.util.Enum.ColorList;
 
 
-public class MotdSet extends ComponentExchanger implements CommandExecutor {
+public class Motd extends ComponentExchanger implements CommandExecutor {
 
     private String newMotd;
 

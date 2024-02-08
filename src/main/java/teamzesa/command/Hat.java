@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.util.ComponentExchanger;
 import teamzesa.util.Enum.ColorList;
 
-public class ArmourSet extends ComponentExchanger implements CommandExecutor {
+public class Hat extends ComponentExchanger implements CommandExecutor {
     private PlayerInventory playerInventory;
 
     private enum ArmourType {

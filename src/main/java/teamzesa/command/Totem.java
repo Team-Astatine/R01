@@ -14,7 +14,7 @@ import teamzesa.util.Enum.ColorList;
 import java.util.*;
 import java.util.List;
 
-public class TotemStacking extends ComponentExchanger implements CommandExecutor {
+public class Totem extends ComponentExchanger implements CommandExecutor {
     private final Material TOTEM = Material.TOTEM_OF_UNDYING;
     private final int STACK = 64;
     private final int MINIMUM = 1; // 합칠 수 있는 최소 단위 +1
@@ -25,8 +25,8 @@ public class TotemStacking extends ComponentExchanger implements CommandExecutor
     @Override
     public boolean onCommand(@NotNull CommandSender sender,@NotNull Command command,@NotNull String label, String[] args) {
         Runnable executeTotemSupply = () -> {
-            TotemStacking.this.player = (Player) sender;
-            TotemStacking.this.playerInventory = TotemStacking.this.player.getInventory();
+            Totem.this.player = (Player) sender;
+            Totem.this.playerInventory = Totem.this.player.getInventory();
             getAllOfPlayerTotems();
 
             if (!validationInventory())

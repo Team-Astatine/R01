@@ -14,7 +14,7 @@ import teamzesa.util.userHandler.UserController;
 import java.util.Optional;
 
 
-public class HealthSet extends ComponentExchanger implements CommandExecutor {
+public class SetHealth extends ComponentExchanger implements CommandExecutor {
     private Player targetPlayer;
     private Player senderPlayer;
     @Override

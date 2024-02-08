@@ -3,7 +3,7 @@ package teamzesa;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import teamzesa.util.IOHandler.Announcer;
-import teamzesa.event.EventSection;
+import teamzesa.event.EventRegisterSection;
 import teamzesa.util.Enum.CommandListup;
 import teamzesa.util.IOHandler.ConfigIOHandler;
 import teamzesa.util.userHandler.UserIOHandler;
@@ -55,7 +55,7 @@ public final class R01 extends JavaPlugin {
     }
 
     private void eventAndFunctionRegister() {
-        getServer().getPluginManager().registerEvents(new EventSection(), this); //function set
+        getServer().getPluginManager().registerEvents(new EventRegisterSection(), this); //function set
 
         for (CommandListup commandEnum : CommandListup.values()) //command set
             getCommand(commandEnum.getCommand()).setExecutor(commandEnum.newInstance());

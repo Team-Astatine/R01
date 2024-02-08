@@ -13,7 +13,7 @@ import teamzesa.util.userHandler.UserController;
 
 import java.util.Optional;
 
-public class UserObjectChecker extends ComponentExchanger implements CommandExecutor {
+public class ValueObjectChecker extends ComponentExchanger implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
         Optional.ofNullable(new UserController().readUser(args[0]))
