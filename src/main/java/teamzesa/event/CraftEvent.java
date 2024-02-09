@@ -12,7 +12,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class CraftEvent extends ComponentExchanger implements EventRegister {
-    private final Set<Material> lockingStuff = new HashSet<>();
+    private Material currentStuff;
+    private Set<Material> lockingStuff;
     private final CraftItemEvent event;
 
     public CraftEvent(CraftItemEvent event) {
@@ -23,24 +24,21 @@ public class CraftEvent extends ComponentExchanger implements EventRegister {
 
     @Override
     public void init() {
-        //    define BanItem
+        this.currentStuff = this.event.getCurrentItem().getType();
+        this.lockingStuff = new HashSet<>();
         this.lockingStuff.add(Material.TNT);
         this.lockingStuff.add(Material.TNT_MINECART);
     }
 
     @Override
     public void execute() {
-        if (stuffChecking(this.event.getCurrentItem()))
-            return;
+        boolean typeChecker = this.lockingStuff.stream()
+                .anyMatch(banningStuffMaterial -> banningStuffMaterial.equals(this.currentStuff));
 
-        Player player = (Player) this.event.getWhoClicked();
-        playerSendMsgComponentExchanger(player, "해당 아이템은 조합할 수 없습니다.", ColorList.RED);
-        this.event.setCancelled(true);
+        if (typeChecker) {
+            Player player = (Player) this.event.getWhoClicked();
+            playerSendMsgComponentExchanger(player, "해당 아이템은 조합할 수 없습니다.", ColorList.RED);
+            this.event.setCancelled(true);
+        }
     }
-
-    private boolean stuffChecking(ItemStack item) {
-        return lockingStuff.stream()
-                .noneMatch(banStuff -> item.getType().equals(banStuff));
-    }
-
 }
