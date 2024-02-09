@@ -1,8 +1,7 @@
 package teamzesa.event;
 
-import org.bukkit.event.EventHandler;
-import org.jetbrains.annotations.NotNull;
 import org.purpurmc.purpur.event.inventory.AnvilUpdateResultEvent;
+import teamzesa.event.register.EventRegister;
 
 public class AnvilResultEvent implements EventRegister {
     private final AnvilUpdateResultEvent event;

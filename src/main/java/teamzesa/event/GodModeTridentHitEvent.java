@@ -1,16 +1,12 @@
 package teamzesa.event;
 
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Trident;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.ProjectileHitEvent;
-import org.bukkit.event.entity.ProjectileLaunchEvent;
-import org.bukkit.util.Vector;
-import org.jetbrains.annotations.NotNull;
 import teamzesa.entity.User;
+import teamzesa.event.register.EventRegister;
 import teamzesa.util.userHandler.UserController;
 
 

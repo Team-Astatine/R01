@@ -4,9 +4,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import teamzesa.event.register.EventRegister;
 import teamzesa.util.ComponentExchanger;
 
-public class EnhanceStuffEvent extends ComponentExchanger implements EventRegister{
+public class EnhanceStuffEvent extends ComponentExchanger implements EventRegister {
     private Action action;
     private Player player;
     private ItemStack itemStack;
@@ -29,5 +30,6 @@ public class EnhanceStuffEvent extends ComponentExchanger implements EventRegist
     public void execute() {
         playerSendMsgComponentExchanger(this.player, this.action.name());
         playerSendMsgComponentExchanger(this.player, this.itemStack.toString());
+        playerSendMsgComponentExchanger(this.player, this.event.useItemInHand().name());
     }
 }

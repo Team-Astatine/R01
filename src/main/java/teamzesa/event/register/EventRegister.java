@@ -1,4 +1,4 @@
-package teamzesa.event;
+package teamzesa.event.register;
 
 import org.bukkit.event.Event;
 

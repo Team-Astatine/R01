@@ -3,7 +3,7 @@ package teamzesa;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import teamzesa.util.IOHandler.Announcer;
-import teamzesa.event.EventRegisterSection;
+import teamzesa.event.register.EventRegisterSection;
 import teamzesa.util.Enum.CommandListup;
 import teamzesa.util.IOHandler.ConfigIOHandler;
 import teamzesa.util.userHandler.UserIOHandler;
