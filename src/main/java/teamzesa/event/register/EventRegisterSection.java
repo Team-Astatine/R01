@@ -54,9 +54,10 @@ public class EventRegisterSection implements Listener {
     public void invClickEvent(@NotNull InventoryClickEvent event) {
 
     }
+
     @EventHandler(priority = EventPriority.LOWEST)
     public void invClickEvent(@NotNull BlockPistonExtendEvent event) {
-
+        new PistonPushEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -69,7 +70,6 @@ public class EventRegisterSection implements Listener {
         new HandSwingEvent(event);
     }
 
-
     @EventHandler(priority = EventPriority.LOWEST)
     public void anvilResult(@NotNull AnvilUpdateResultEvent event) {
         new AnvilResultEvent(event);
@@ -77,7 +77,7 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void playerInteractEvent(@NotNull PlayerInteractEvent event) {
-        new EnhanceStuffEvent(event);
+//        new EnhanceStuffEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
