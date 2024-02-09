@@ -56,11 +56,6 @@ public class EventRegisterSection implements Listener {
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void invClickEvent(@NotNull BlockPistonExtendEvent event) {
-        new PistonPushEvent(event);
-    }
-
-    @EventHandler(priority = EventPriority.LOWEST)
     public void explosiveEvent(@NotNull EntityExplodeEvent event) {
         new ExplosiveEvent(event);
     }
@@ -78,6 +73,16 @@ public class EventRegisterSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void playerInteractEvent(@NotNull PlayerInteractEvent event) {
 //        new EnhanceStuffEvent(event);
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void entityPortalTouchingEvent(@NotNull EntityPortalEvent event) {
+        new AntiPortalChunkRenderingEvent(event);
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void pistonExtendBlockEvent(@NotNull BlockPistonExtendEvent event) {
+        new PistonPushEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
