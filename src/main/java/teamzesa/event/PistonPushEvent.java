@@ -26,9 +26,9 @@ public class PistonPushEvent implements EventRegister {
     @Override
     public void execute() {
         boolean typeChecker = this.targetBlockList.stream()
-                .anyMatch(block ->
-                        block.getType().equals(Material.SAND) ||
-                        block.getType().equals(Material.GRAVEL)
+                .anyMatch(banningBlockMaterial ->
+                        banningBlockMaterial.getType().equals(Material.SAND) ||
+                        banningBlockMaterial.getType().equals(Material.GRAVEL)
                 );
 
         if (typeChecker)
