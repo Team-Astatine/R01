@@ -28,6 +28,7 @@ public class CraftEvent extends ComponentExchanger implements EventRegister {
         this.lockingStuff = new HashSet<>();
         this.lockingStuff.add(Material.TNT);
         this.lockingStuff.add(Material.TNT_MINECART);
+        this.lockingStuff.add(Material.ARMOR_STAND);
     }
 
     @Override
