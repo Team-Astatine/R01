@@ -4,7 +4,9 @@ import io.papermc.paper.event.player.PlayerArmSwingEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockPhysicsEvent;
 import org.bukkit.event.block.BlockPistonExtendEvent;
+import org.bukkit.event.block.BlockRedstoneEvent;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -13,8 +15,25 @@ import org.bukkit.event.raid.RaidTriggerEvent;
 import org.jetbrains.annotations.NotNull;
 import org.purpurmc.purpur.event.inventory.AnvilUpdateResultEvent;
 import teamzesa.event.*;
+import teamzesa.event.AntiExploit.AntiPortalChunkRenderingEvent;
 
 public class EventRegisterSection implements Listener {
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void redStoneEvent(@NotNull BlockRedstoneEvent event) {
+//        new AntiRedStoneCrash(event);
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void blockFallingEvent(@NotNull BlockPhysicsEvent event) {
+//        new AntiGravityCrash(event);
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void commandSendEvent(@NotNull PlayerCommandPreprocessEvent event) {
+//        new CommandSendEvent(event);
+    }
+
+
     @EventHandler(priority = EventPriority.LOWEST)
     public void joinEvent(@NotNull PlayerJoinEvent event) {
         new JoinEvent(event);
