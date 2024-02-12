@@ -42,8 +42,12 @@ public class ThreadPool {
         executorService.submit(task);
     }
 
-    public void addSchedulingTask(Runnable task, long delay , long interval) {
+    public void addSchedulingTaskMin(Runnable task, long delay , long interval) {
         scheduledExecutorService.scheduleWithFixedDelay(task,delay,interval,TimeUnit.MINUTES);
+    }
+
+    public synchronized void addSchedulingTaskSec(Runnable task, long delay , long interval) {
+        scheduledExecutorService.scheduleWithFixedDelay(task,delay,interval,TimeUnit.SECONDS);
     }
 
     public void executorServiceOff() {

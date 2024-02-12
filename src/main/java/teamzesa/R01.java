@@ -64,7 +64,7 @@ public final class R01 extends JavaPlugin {
     private void autoSaveSchedule() {
         long delay = 0;
         long interval = 720; // 12hour term auto save
-        ThreadPool.getThreadPool().addSchedulingTask(
+        ThreadPool.getThreadPool().addSchedulingTaskMin(
                 UserIOHandler::exportUserData,
                 delay,
                 interval

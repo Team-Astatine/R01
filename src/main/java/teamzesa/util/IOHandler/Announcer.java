@@ -52,17 +52,17 @@ public class Announcer extends ComponentExchanger {
 
     public void defaultAnnouncer() {
         long delay = 0;
-        long interval = 5; //minutes
-
-        Runnable commentSendTask = () -> {
+        long interval = 5;
+        ThreadPool.getThreadPool().addSchedulingTaskMin(() -> {
             List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
             if (players.isEmpty())
                 return;
 
             players.forEach(player -> sendComment(player, createComponents()));
-        };
-
-        ThreadPool.getThreadPool().addSchedulingTask(commentSendTask, delay, interval);
+        },
+        delay,
+        interval
+        );
     }
 
     private void sendComment(Player player, Component[] component) {
