@@ -4,6 +4,7 @@ import io.papermc.paper.event.player.PlayerArmSwingEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockFertilizeEvent;
 import org.bukkit.event.block.BlockPhysicsEvent;
 import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.block.BlockRedstoneEvent;
@@ -12,10 +13,11 @@ import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.event.raid.RaidTriggerEvent;
+import org.bukkit.event.world.ChunkLoadEvent;
 import org.jetbrains.annotations.NotNull;
 import org.purpurmc.purpur.event.inventory.AnvilUpdateResultEvent;
 import teamzesa.event.*;
-import teamzesa.event.AntiExploit.AntiPortalChunkRenderingEvent;
+import teamzesa.event.AntiExploit.*;
 
 public class EventRegisterSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
@@ -29,8 +31,8 @@ public class EventRegisterSection implements Listener {
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void commandSendEvent(@NotNull PlayerCommandPreprocessEvent event) {
-//        new CommandSendEvent(event);
+    public void blockFallingEvent(@NotNull ChunkLoadEvent event) {
+//        new AntiExploitFromChunkEvent(event);
     }
 
 
@@ -92,6 +94,7 @@ public class EventRegisterSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void playerInteractEvent(@NotNull PlayerInteractEvent event) {
 //        new EnhanceStuffEvent(event);
+        new AntiLeverAutoClicker(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -101,7 +104,12 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void pistonExtendBlockEvent(@NotNull BlockPistonExtendEvent event) {
-        new PistonPushEvent(event);
+        new AntiPistonPushGravityBlockEvent(event);
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void commandSendEvent(@NotNull PlayerCommandPreprocessEvent event) {
+        new CommandSendEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
