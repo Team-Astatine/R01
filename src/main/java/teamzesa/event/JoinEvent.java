@@ -3,6 +3,7 @@ package teamzesa.event;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -108,7 +109,9 @@ public class JoinEvent extends ComponentExchanger implements EventRegister {
     }
 
     private void attackSpeed() {
-        this.joinPlayer.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(40.0);
+        Optional.ofNullable(this.joinPlayer.getAttribute(Attribute.GENERIC_ATTACK_SPEED)).ifPresent(
+                attackSpeed -> attackSpeed.setBaseValue(40.0)
+        );
     }
 
     private void playerFlight() {
