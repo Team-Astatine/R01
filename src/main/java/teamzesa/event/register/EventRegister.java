@@ -1,7 +1,5 @@
 package teamzesa.event.register;
 
-import org.bukkit.event.Event;
-
 public interface EventRegister {
 
     /*
