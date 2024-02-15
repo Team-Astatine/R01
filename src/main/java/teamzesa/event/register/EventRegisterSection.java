@@ -34,16 +34,16 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void blockFallingEvent(@NotNull ChunkLoadEvent event) {
-//        methodmethodImplement
+//        methodImplement
 //        new AntiExploitFromChunkEvent(event);
     }
 
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void joinEvent(@NotNull PlayerJoinEvent event) {
-//        refactoring
-//        function split
+//        refactoring need Split class
         new JoinEvent(event);
+        new FirstJoinKitEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
