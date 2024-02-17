@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.entity.User;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -29,7 +30,7 @@ public class UserController {
     public User readUser(@NotNull Player player) {
         User user = readUser(player.getUniqueId());
 
-        if (user == null) //진입한 유저가 존재하지 않는다면 ㅇㅇ
+        if (Optional.ofNullable(user).isEmpty())
             return null;
 
         if (player.getName().equals(user.name())) // 기존 유저의 이름과 변함이 없다면
