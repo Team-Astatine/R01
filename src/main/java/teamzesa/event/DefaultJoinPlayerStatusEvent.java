@@ -3,7 +3,6 @@ package teamzesa.event;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -16,7 +15,6 @@ import teamzesa.util.Enum.ArmourKit;
 import teamzesa.util.Enum.FoodKit;
 import teamzesa.util.Enum.ToolKit;
 import teamzesa.entity.User;
-import teamzesa.util.IOHandler.Announcer;
 import teamzesa.util.userHandler.UserBuilder;
 import teamzesa.util.userHandler.UserController;
 
@@ -24,13 +22,13 @@ import java.util.HashSet;
 import java.util.Optional;
 
 
-public class JoinEvent extends ComponentExchanger implements EventRegister {
+public class DefaultJoinPlayerStatusEvent extends ComponentExchanger implements EventRegister {
     private User joinUser;
     private Player joinPlayer;
     private  UserController userController;
     private final PlayerJoinEvent joinEvent;
 
-    public JoinEvent(PlayerJoinEvent event) {
+    public DefaultJoinPlayerStatusEvent(PlayerJoinEvent event) {
         this.joinEvent = event;
         init();
         execute();
@@ -64,31 +62,6 @@ public class JoinEvent extends ComponentExchanger implements EventRegister {
         checkGodMode();
         userIPCheckUp(); //접속 IP 확인
         setHealthScale();
-    }
-
-    private void supplyUserKit() {
-        if (!ifFirstTimeJoinUser())
-            return;
-
-        for (FoodKit kit : FoodKit.values()) {
-            this.joinPlayer.getInventory().addItem(kit.getFood());
-        }
-
-        for (ArmourKit kit : ArmourKit.values()) {
-            ItemStack armour = kit.getArmour();
-            armour.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
-            armour.addEnchantment(Enchantment.DURABILITY, 2);
-            this.joinPlayer.getInventory().addItem(kit.getArmour());
-        }
-
-        for (ToolKit kit : ToolKit.values()) {
-            ItemStack tool = kit.getToolKit();
-            if (tool.getType().equals(Material.NETHERITE_SWORD))
-                tool.addEnchantment(Enchantment.DAMAGE_ALL, 2);
-            else tool.addEnchantment(Enchantment.DIG_SPEED, 2);
-            tool.addEnchantment(Enchantment.DURABILITY, 2);
-            this.joinPlayer.getInventory().addItem(tool);
-        }
     }
 
     private void attackSpeed() {
