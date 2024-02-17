@@ -22,23 +22,28 @@ import teamzesa.event.AntiExploit.*;
 public class EventRegisterSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void redStoneEvent(@NotNull BlockRedstoneEvent event) {
+//        methodImplement
 //        new AntiRedStoneCrash(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void blockFallingEvent(@NotNull BlockPhysicsEvent event) {
+//        methodImplement
 //        new AntiGravityCrash(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void blockFallingEvent(@NotNull ChunkLoadEvent event) {
+//        methodImplement
 //        new AntiExploitFromChunkEvent(event);
     }
 
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void joinEvent(@NotNull PlayerJoinEvent event) {
+//        refactoring need Split class
         new JoinEvent(event);
+        new FirstJoinKitEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -73,7 +78,7 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void invClickEvent(@NotNull InventoryClickEvent event) {
-
+//        methodImplement
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -93,7 +98,9 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void playerInteractEvent(@NotNull PlayerInteractEvent event) {
+//        methodImplement
 //        new EnhanceStuffEvent(event);
+//        methodImplement
         new AntiLeverAutoClicker(event);
     }
 
@@ -114,7 +121,7 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void playerSwapStuffEvent(@NotNull PlayerSwapHandItemsEvent event) {
-
+//        methodImplement
     }
 
     @EventHandler(priority = EventPriority.LOWEST)

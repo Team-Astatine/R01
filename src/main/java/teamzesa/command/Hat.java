@@ -11,6 +11,7 @@ import teamzesa.util.ComponentExchanger;
 import teamzesa.util.Enum.ColorList;
 
 public class Hat extends ComponentExchanger implements CommandExecutor {
+    private Player player;
     private PlayerInventory playerInventory;
 
     private enum ArmourType {
@@ -19,12 +20,12 @@ public class Hat extends ComponentExchanger implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
-        Player player = (Player) sender;
-        this.playerInventory = player.getInventory();
+        this.player = (Player) sender;
+        this.playerInventory = this.player.getInventory();
 
-        ItemStack tmpItemInHand = playerInventory.getItemInMainHand();
+        ItemStack tmpItemInHand = this.playerInventory.getItemInMainHand();
         if (tmpItemInHand.isEmpty()) {
-            playerSendMsgComponentExchanger(player,"손에 아이템이 없습니다.", ColorList.RED);
+            playerSendMsgComponentExchanger(this.player,"손에 아이템이 없습니다.", ColorList.RED);
             return false;
         }
 
@@ -36,8 +37,9 @@ public class Hat extends ComponentExchanger implements CommandExecutor {
     }
 
     private void headSet(ItemStack temp){
-        ItemStack armourHead = playerInventory.getHelmet();
-        playerInventory.setHelmet(temp);
-        playerInventory.setItemInMainHand(armourHead);
+        ItemStack armourHead = this.playerInventory.getHelmet();
+        this.playerInventory.setHelmet(temp);
+        this.playerInventory.setItemInMainHand(armourHead);
+        playerSendMsgComponentExchanger(this.player,"머리에 썼어요!", ColorList.YELLOW);
     }
 }
