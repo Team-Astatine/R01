@@ -30,11 +30,12 @@ public class UserBuilder {
         this.godMode = user.godMode();
     }
 
+//    First Time add User
     public UserBuilder(Player player) {
         this.uuid = player.getUniqueId();
         this.name = player.getName();
         this.connectionIPList.add(player.getAddress().getAddress().getHostAddress());
-        this.joinCount = 0;
+        this.joinCount = 1;
         this.level = player.getLevel();
         this.killStatus = 0;
         this.healthScale = player.getHealthScale();

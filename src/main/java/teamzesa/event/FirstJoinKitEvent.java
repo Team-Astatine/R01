@@ -38,15 +38,16 @@ public class FirstJoinKitEvent extends ComponentExchanger implements EventRegist
         this.playerJoinCnt = this.user.joinCount();
     }
 
+//    methodImplement
     @Override
     public void execute() {
         supplyKit();
-        increaseUserJoinCnt();
         announcingJoinMsg();
+        increaseUserJoinCnt();
     }
 
     private void supplyKit() {
-        if (this.playerJoinCnt != 0) return;
+        if (this.playerJoinCnt > 1) return;
 
         for (FoodKit kit : FoodKit.values()) {
             this.player.getInventory().addItem(kit.getFood());
