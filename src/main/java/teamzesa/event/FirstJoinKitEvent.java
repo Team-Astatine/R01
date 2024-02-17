@@ -38,7 +38,6 @@ public class FirstJoinKitEvent extends ComponentExchanger implements EventRegist
         this.playerJoinCnt = this.user.joinCount();
     }
 
-//    methodImplement
     @Override
     public void execute() {
         supplyKit();
