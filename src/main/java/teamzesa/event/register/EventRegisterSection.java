@@ -4,7 +4,6 @@ import io.papermc.paper.event.player.PlayerArmSwingEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockFertilizeEvent;
 import org.bukkit.event.block.BlockPhysicsEvent;
 import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.block.BlockRedstoneEvent;
@@ -42,7 +41,7 @@ public class EventRegisterSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void joinEvent(@NotNull PlayerJoinEvent event) {
 //        refactoring need Split class
-        new JoinEvent(event);
+        new DefaultJoinPlayerStatusEvent(event);
         new FirstJoinKitEvent(event);
     }
 
