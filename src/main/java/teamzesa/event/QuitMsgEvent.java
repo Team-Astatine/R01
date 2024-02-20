@@ -22,8 +22,8 @@ public class QuitMsgEvent extends ComponentExchanger implements EventRegister {
 
     @Override
     public void init() {
-        this.quitUser = this.userController.readUser(this.quitEvent.getPlayer());
         this.userController = new UserController();
+        this.quitUser = this.userController.readUser(this.quitEvent.getPlayer());
     }
 
     @Override
