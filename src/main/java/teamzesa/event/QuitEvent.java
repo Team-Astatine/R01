@@ -32,12 +32,12 @@ public class QuitEvent extends ComponentExchanger implements EventRegister {
     public void execute() {
         if (this.quitUser.killStatus() == 0)
             this.quitEvent.quitMessage(
-                    componentExchanger("- " + this.quitUser.name(), ColorList.RED)
+                    componentExchanger(" - " + this.quitUser.name(), ColorList.RED)
             );
 
         else
             this.quitEvent.quitMessage(
-                    componentExchanger("- " + this.quitUser.name() + " " + quitUser.killStatus() + "KILL", ColorList.RED)
+                    componentExchanger(" - [ " + this.quitUser.killStatus() + "KILL ] " + this.quitUser.name(), ColorList.RED)
             );
     }
 }
