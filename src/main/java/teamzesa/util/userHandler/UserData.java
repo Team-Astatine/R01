@@ -11,11 +11,12 @@ public class UserData extends ComponentExchanger {
         private static final UserData INSTANCE = new UserData();
     }
 
-    private final static ConcurrentHashMap<UUID, User> USER_DATA = new ConcurrentHashMap<>();
-
     public static UserData getUserMapHandler() {
         return UserMapHandlerHolder.INSTANCE;
     }
+
+
+    private final static ConcurrentHashMap<UUID, User> USER_DATA = new ConcurrentHashMap<>();
 
     public synchronized ConcurrentHashMap<UUID,User> getAllUserTable() {
         return USER_DATA;

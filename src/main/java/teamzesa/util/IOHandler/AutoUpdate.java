@@ -15,16 +15,17 @@ public class AutoUpdate {
         private static final AutoUpdate INSTANCE = new AutoUpdate();
     }
 
+    public static AutoUpdate getUpdateChecker() {
+        return UpdateCheckerHolder.INSTANCE;
+    }
+
+
     private static double gitVersion;
     private static double localVersion;
     private File folder;
     private List<File> fileList;
 
     private AutoUpdate() {}
-
-    public static AutoUpdate getUpdateChecker() {
-        return UpdateCheckerHolder.INSTANCE;
-    }
 
     public void fileLoader() {
         this.folder = DataFile.ABSOLUTE_PATH.getFileInstance();

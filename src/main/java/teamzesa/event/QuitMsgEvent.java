@@ -9,14 +9,12 @@ import teamzesa.util.Enum.ColorList;
 import teamzesa.util.IOHandler.Announcer;
 import teamzesa.util.userHandler.UserController;
 
-public class QuitEvent extends ComponentExchanger implements EventRegister {
-    private final Announcer announcer = Announcer.getAnnouncer();
-    private final UserController userController = new UserController();
+public class QuitMsgEvent extends ComponentExchanger implements EventRegister {
     private User quitUser;
-    private Player quitPlayer;
+    private UserController userController;
     private final PlayerQuitEvent quitEvent;
 
-    public QuitEvent(PlayerQuitEvent event) {
+    public QuitMsgEvent(PlayerQuitEvent event) {
         this.quitEvent = event;
         init();
         execute();
@@ -24,8 +22,8 @@ public class QuitEvent extends ComponentExchanger implements EventRegister {
 
     @Override
     public void init() {
-        this.quitPlayer = this.quitEvent.getPlayer();
         this.quitUser = this.userController.readUser(this.quitEvent.getPlayer());
+        this.userController = new UserController();
     }
 
     @Override

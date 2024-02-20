@@ -14,12 +14,13 @@ public class ConfigIOHandler extends ComponentExchanger {
         private static final ConfigIOHandler INSTANCE = new ConfigIOHandler();
     }
 
-    private File file;
-    private YamlConfiguration config;
-
     public static ConfigIOHandler getConfigIOHandler() {
         return ConfigIOHandlerHolder.INSTANCE;
     }
+
+
+    private File file;
+    private YamlConfiguration config;
 
     public void fileLoader() {
         this.file = DataFile.CONFIG.getFileInstance();

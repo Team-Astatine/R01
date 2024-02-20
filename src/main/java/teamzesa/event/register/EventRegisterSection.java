@@ -40,14 +40,13 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void joinEvent(@NotNull PlayerJoinEvent event) {
-//        refactoring need Split class
         new DefaultJoinPlayerStatusEvent(event);
         new FirstJoinKitEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void quitEvent(@NotNull PlayerQuitEvent event) {
-        new QuitEvent(event);
+        new QuitMsgEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)

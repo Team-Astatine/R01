@@ -9,12 +9,13 @@ public class ThreadPool {
         private static final ThreadPool INSTANCE = new ThreadPool();
     }
 
-    private ExecutorService executorService;
-    private final ScheduledExecutorService scheduledExecutorService;
-
     public static ThreadPool getThreadPool() {
         return ThreadPoolHolder.INSTANCE;
     }
+
+
+    private ExecutorService executorService;
+    private final ScheduledExecutorService scheduledExecutorService;
 
     private ThreadPool() {
         /*

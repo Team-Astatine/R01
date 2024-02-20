@@ -19,14 +19,15 @@ public class Announcer extends ComponentExchanger {
         private static final Announcer INSTANCE = new Announcer();
     }
 
+    public static Announcer getAnnouncer() {
+        return AnnouncerHolder.INSTANCE;
+    }
+
+
     private final ConfigIOHandler configIOHandler;
 
     private Announcer() {
         this.configIOHandler = ConfigIOHandler.getConfigIOHandler();
-    }
-
-    public static Announcer getAnnouncer() {
-        return AnnouncerHolder.INSTANCE;
     }
 
     public void countAnnouncer(Player player) {
