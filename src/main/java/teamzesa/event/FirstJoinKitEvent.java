@@ -75,11 +75,11 @@ public class FirstJoinKitEvent extends ComponentExchanger implements EventRegist
 
         if (this.user.killStatus() == 0)
             this.event.joinMessage(
-                    componentExchanger("+ " + this.user.name(), ColorList.RED)
+                componentExchanger("+ " + this.user.name(), ColorList.RED)
             );
 
         else this.event.joinMessage(
-                componentExchanger("+ " + this.user.name() + " " + user.killStatus() + "KILL", ColorList.RED)
+            componentExchanger("[ " + user.killStatus() + "KILL ] " + user.name(), ColorList.RED)
         );
     }
 
