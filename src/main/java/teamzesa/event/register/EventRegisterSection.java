@@ -99,7 +99,6 @@ public class EventRegisterSection implements Listener {
     public void playerInteractEvent(@NotNull PlayerInteractEvent event) {
 //        methodImplement
 //        new EnhanceStuffEvent(event);
-//        methodImplement
         new AntiLeverAutoClicker(event);
     }
 

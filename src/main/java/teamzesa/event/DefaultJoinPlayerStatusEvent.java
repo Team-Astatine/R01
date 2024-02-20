@@ -41,18 +41,17 @@ public class DefaultJoinPlayerStatusEvent extends ComponentExchanger implements 
         User user = this.userController.readUser(this.joinPlayer);
 
         Optional.ofNullable(user).ifPresentOrElse(
-                existUser -> {
-                    this.joinUser = new UserBuilder(existUser)
-                            .level(this.joinPlayer.getLevel())
-                            .buildAndUpdate();
-                },
+            existUser -> {
+                this.joinUser = new UserBuilder(existUser)
+                        .level(this.joinPlayer.getLevel())
+                        .buildAndUpdate();
+            },
 
-                () -> {
-                    this.userController.createUser(this.joinPlayer);
-                    this.joinUser = this.userController.readUser(this.joinPlayer);
-                    Bukkit.getLogger().info(this.joinUser.name() + "님이 신규유저 등록됐습니다.");
-                }
-        );
+            () -> {
+                this.userController.createUser(this.joinPlayer);
+                this.joinUser = this.userController.readUser(this.joinPlayer);
+                Bukkit.getLogger().info(this.joinUser.name() + "님이 신규유저 등록됐습니다.");
+            });
     }
 
     @Override
@@ -82,8 +81,8 @@ public class DefaultJoinPlayerStatusEvent extends ComponentExchanger implements 
     private void userIPCheckUp() {
         String ip = this.joinPlayer.getAddress().getHostName();
         String message = ifFirstTimeJoinUser() ? "신규 IP를 등록합니다." : "새로운 IP로 접속하셨습니다.";
-        boolean nonExistsIP = this.joinUser.connectionIPList().stream().noneMatch(
-                ipAddress -> ipAddress.equals(ip));
+        boolean nonExistsIP = this.joinUser.connectionIPList().stream()
+                .noneMatch(ipAddress -> ipAddress.equals(ip));
 
         if (ifFirstTimeJoinUser() || nonExistsIP) {
             HashSet<String> ipList = this.joinUser.connectionIPList();
