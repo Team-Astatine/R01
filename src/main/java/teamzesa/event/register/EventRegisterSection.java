@@ -10,6 +10,7 @@ import org.bukkit.event.block.BlockRedstoneEvent;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.event.raid.RaidTriggerEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
@@ -76,6 +77,11 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void invClickEvent(@NotNull InventoryClickEvent event) {
+//        methodImplement
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void invClickEvent(@NotNull InventoryEvent event) {
 //        methodImplement
     }
 
