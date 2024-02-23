@@ -19,7 +19,7 @@ public class UserData extends ComponentExchanger {
     private final static ConcurrentHashMap<UUID, User> USER_DATA = new ConcurrentHashMap<>();
 
     public synchronized ConcurrentHashMap<UUID,User> getAllUserTable() {
-        return USER_DATA;
+        return new ConcurrentHashMap<>(USER_DATA);
     }
 
     public synchronized boolean insert(User user) {
