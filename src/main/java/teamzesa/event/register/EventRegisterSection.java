@@ -8,9 +8,7 @@ import org.bukkit.event.block.BlockPhysicsEvent;
 import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.block.BlockRedstoneEvent;
 import org.bukkit.event.entity.*;
-import org.bukkit.event.inventory.CraftItemEvent;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryEvent;
+import org.bukkit.event.inventory.*;
 import org.bukkit.event.player.*;
 import org.bukkit.event.raid.RaidTriggerEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
@@ -42,6 +40,7 @@ public class EventRegisterSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void joinEvent(@NotNull PlayerJoinEvent event) {
         new DefaultJoinPlayerStatusEvent(event);
+        new PlayerFlyEnableEvent(event);
         new FirstJoinKitEvent(event);
     }
 
@@ -58,6 +57,7 @@ public class EventRegisterSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void deathEvent(@NotNull PlayerDeathEvent event) {
         new DeathEvent(event);
+        new PlayerFlyEnableEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -81,8 +81,10 @@ public class EventRegisterSection implements Listener {
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void invClickEvent(@NotNull InventoryEvent event) {
+    public void invMoveItemEvent(@NotNull InventoryMoveItemEvent event) {
 //        methodImplement
+        System.out.println("working");
+        new EnhanceStuffEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -105,6 +107,11 @@ public class EventRegisterSection implements Listener {
 //        methodImplement
 //        new EnhanceStuffEvent(event);
         new AntiLeverAutoClicker(event);
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void entityPortalTouchingEvent(@NotNull PlayerChangedWorldEvent event) {
+        new PlayerFlyEnableEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)

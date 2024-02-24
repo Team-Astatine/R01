@@ -57,7 +57,6 @@ public class DefaultJoinPlayerStatusEvent extends ComponentExchanger implements 
     @Override
     public void execute() {
         attackSpeed();
-        playerFlight(); //flight Set
         checkGodMode();
         userIPCheckUp(); //접속 IP 확인
         setHealthScale();
@@ -67,11 +66,6 @@ public class DefaultJoinPlayerStatusEvent extends ComponentExchanger implements 
         Optional.ofNullable(this.joinPlayer.getAttribute(Attribute.GENERIC_ATTACK_SPEED)).ifPresent(
                 attackSpeed -> attackSpeed.setBaseValue(40.0)
         );
-    }
-
-    private void playerFlight() {
-        this.joinPlayer.setAllowFlight(true);
-        playerSendMsgComponentExchanger(this.joinPlayer, "플라이 활성화", ColorList.YELLOW);
     }
 
     private void checkGodMode() {
