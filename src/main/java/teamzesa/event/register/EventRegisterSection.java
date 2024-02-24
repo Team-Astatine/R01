@@ -1,6 +1,7 @@
 package teamzesa.event.register;
 
 import io.papermc.paper.event.player.PlayerArmSwingEvent;
+import io.papermc.paper.event.player.PlayerInventorySlotChangeEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -16,6 +17,12 @@ import org.jetbrains.annotations.NotNull;
 import org.purpurmc.purpur.event.inventory.AnvilUpdateResultEvent;
 import teamzesa.event.*;
 import teamzesa.event.AntiExploit.*;
+//todo
+//fixme
+//refactoring
+//methodImplement
+//funImplement
+//debug
 
 public class EventRegisterSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
@@ -81,7 +88,7 @@ public class EventRegisterSection implements Listener {
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void invMoveItemEvent(@NotNull InventoryMoveItemEvent event) {
+    public void invMoveItemEvent(@NotNull PlayerInventorySlotChangeEvent event) {
 //        methodImplement
         System.out.println("working");
         new EnhanceStuffEvent(event);
@@ -110,11 +117,6 @@ public class EventRegisterSection implements Listener {
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void entityPortalTouchingEvent(@NotNull PlayerChangedWorldEvent event) {
-        new PlayerFlyEnableEvent(event);
-    }
-
-    @EventHandler(priority = EventPriority.LOWEST)
     public void entityPortalTouchingEvent(@NotNull EntityPortalEvent event) {
         new AntiPortalChunkRenderingEvent(event);
     }
@@ -132,6 +134,11 @@ public class EventRegisterSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void playerSwapStuffEvent(@NotNull PlayerSwapHandItemsEvent event) {
 //        methodImplement
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void entityPortalTouchingEvent(@NotNull PlayerChangedWorldEvent event) {
+        new PlayerFlyEnableEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
