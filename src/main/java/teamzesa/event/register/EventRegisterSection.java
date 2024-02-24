@@ -46,9 +46,9 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void joinEvent(@NotNull PlayerJoinEvent event) {
-        new DefaultJoinPlayerStatusEvent(event);
+        new PlayerInfoHandler(event);
         new PlayerFlyEnableEvent(event);
-        new FirstJoinKitEvent(event);
+        new ImportPlayerStatusEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -63,7 +63,7 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void deathEvent(@NotNull PlayerDeathEvent event) {
-        new DeathEvent(event);
+        new LifeSteelEvent(event);
         new PlayerFlyEnableEvent(event);
     }
 
@@ -90,8 +90,7 @@ public class EventRegisterSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void invMoveItemEvent(@NotNull PlayerInventorySlotChangeEvent event) {
 //        methodImplement
-        System.out.println("working");
-        new EnhanceStuffEvent(event);
+//        new EnhanceStuffEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -106,7 +105,7 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void anvilResult(@NotNull AnvilUpdateResultEvent event) {
-        new AnvilResultEvent(event);
+        new AnvilLimitHandler(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -128,7 +127,7 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void commandSendEvent(@NotNull PlayerCommandPreprocessEvent event) {
-        new CommandSendEvent(event);
+        new BanCommandHandler(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -148,6 +147,6 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void craftStuffEvent(CraftItemEvent event) {
-        new CraftEvent(event);
+        new BanItemHandler(event);
     }
 }
