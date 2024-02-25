@@ -21,7 +21,6 @@ public final class R01 extends JavaPlugin {
     @Override
     public void onEnable() {
         eventAndFunctionRegister();   //command set
-//        autoSaveSchedule(); // User Data Auto Save Scheduling
 
 //        saveDefaultSource
         if (!getDataFolder().exists())
@@ -32,6 +31,7 @@ public final class R01 extends JavaPlugin {
 
 //        loading Time
         pluginLoadTime();
+        autoSaveSchedule(); // User Data Auto Save Scheduling
     }
 
     @Override
