@@ -3,6 +3,7 @@ package teamzesa.util.IOHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import teamzesa.util.ComponentExchanger;
+import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.ConfigMenu;
 import teamzesa.util.Enum.DataFile;
 
@@ -49,7 +50,8 @@ public class ConfigIOHandler extends ComponentExchanger {
     }
 
     public void setWorldSettingMotd() {
-        Bukkit.motd(componentExchanger(getString(ConfigMenu.WORLD_SETTING_MOTD)));
+        String motd = getString(ConfigMenu.WORLD_SETTING_MOTD);
+        Bukkit.motd(componentExchanger(motd, ColorList.VOTE_COLOR));
     }
 
     public String getWorldMotdConfig() {
