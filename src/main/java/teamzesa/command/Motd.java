@@ -39,7 +39,7 @@ public class Motd extends ComponentExchanger implements CommandExecutor {
     }
 
     private void configDataUpdate() {
-        Bukkit.motd(componentExchanger(this.newMotd,ColorList.PURPLE));
+        Bukkit.motd(componentExchanger(this.newMotd,ColorList.VOTE_COLOR));
         ConfigIOHandler.getConfigIOHandler().worldConfigSave(this.newMotd);
     }
 }
