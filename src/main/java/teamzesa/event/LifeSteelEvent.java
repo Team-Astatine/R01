@@ -11,7 +11,7 @@ import teamzesa.util.userHandler.UserBuilder;
 import teamzesa.util.userHandler.UserController;
 
 
-public class DeathEvent extends ComponentExchanger implements EventRegister {
+public class LifeSteelEvent extends ComponentExchanger implements EventRegister {
     private final UserController userController = new UserController();
     private Player deather;
     private Player killer;
@@ -19,7 +19,7 @@ public class DeathEvent extends ComponentExchanger implements EventRegister {
     private User killerUser;
     private final PlayerDeathEvent event;
 
-    public DeathEvent(PlayerDeathEvent event) {
+    public LifeSteelEvent(PlayerDeathEvent event) {
         this.event = event;
         init();
         execute();

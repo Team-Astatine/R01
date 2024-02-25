@@ -1,10 +1,12 @@
 package teamzesa.event;
 
 import org.bukkit.Material;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
+import teamzesa.command.God;
 import teamzesa.entity.User;
 import teamzesa.event.register.EventRegister;
 import teamzesa.util.ComponentExchanger;
@@ -16,7 +18,9 @@ import teamzesa.util.IOHandler.Announcer;
 import teamzesa.util.userHandler.UserBuilder;
 import teamzesa.util.userHandler.UserController;
 
-public class FirstJoinKitEvent extends ComponentExchanger implements EventRegister {
+import java.util.Optional;
+
+public class ImportPlayerStatusEvent extends ComponentExchanger implements EventRegister {
 
     private int playerJoinCnt;
     private User user;
@@ -24,7 +28,7 @@ public class FirstJoinKitEvent extends ComponentExchanger implements EventRegist
     private Announcer announcer;
     private final PlayerJoinEvent event;
 
-    public FirstJoinKitEvent(PlayerJoinEvent event) {
+    public ImportPlayerStatusEvent(PlayerJoinEvent event) {
         this.event = event;
         init();
         execute();
@@ -40,12 +44,30 @@ public class FirstJoinKitEvent extends ComponentExchanger implements EventRegist
 
     @Override
     public void execute() {
-        supplyKit();
-        announcingJoinMsg();
+        supplyUserKit();
+        checkingUserStatusGod();
+        checkingUserStatusAttackSpeed();
+        checkingUserStatusHealth();
         increaseUserJoinCnt();
+        announcingJoinMsg();
     }
 
-    private void supplyKit() {
+    private void checkingUserStatusGod() {
+        new God().setGodEffect(this.player, this.user);
+    }
+
+    private void checkingUserStatusAttackSpeed() {
+        Optional.ofNullable(this.player.getAttribute(Attribute.GENERIC_ATTACK_SPEED)).ifPresent(
+                attackSpeed -> attackSpeed.setBaseValue(40.0)
+        );
+    }
+
+    private void checkingUserStatusHealth() {
+        this.player.setHealthScale(this.user.healthScale());
+        this.player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(this.user.healthScale());
+    }
+
+    private void supplyUserKit() {
         if (this.playerJoinCnt > 1) return;
 
         for (FoodKit kit : FoodKit.values()) {

@@ -1,7 +1,11 @@
 package teamzesa.event;
 
+import io.papermc.paper.event.player.PlayerInventorySlotChangeEvent;
+import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.event.register.EventRegister;
@@ -11,9 +15,9 @@ public class EnhanceStuffEvent extends ComponentExchanger implements EventRegist
     private Action action;
     private Player player;
     private ItemStack itemStack;
-    private final PlayerInteractEvent event;
+    private final PlayerInventorySlotChangeEvent event;
 
-    public EnhanceStuffEvent(PlayerInteractEvent event) {
+    public EnhanceStuffEvent(PlayerInventorySlotChangeEvent event) {
         this.event = event;
         init();
         execute();
@@ -21,15 +25,20 @@ public class EnhanceStuffEvent extends ComponentExchanger implements EventRegist
 
     @Override
     public void init() {
-        this.action = this.event.getAction();
-        this.player = this.event.getPlayer();
-        this.itemStack = this.event.getItem();
     }
 
     @Override
     public void execute() {
-        playerSendMsgComponentExchanger(this.player, this.action.name());
-        playerSendMsgComponentExchanger(this.player, this.itemStack.toString());
-        playerSendMsgComponentExchanger(this.player, this.event.useItemInHand().name());
+        System.out.println("getHandlers > " + this.event.getHandlers());
+//        funImplement
+        /*
+        새로운 아이템 -> 주문서
+        기존 아이템 -> 강화템
+         */
+        System.out.println("getNewItemStack > " + this.event.getNewItemStack());
+        System.out.println("getOldItemStack > " + this.event.getOldItemStack());
+
+        System.out.println("getRawSlot > " + this.event.getRawSlot());
+        System.out.println("getSlot > " + this.event.getSlot());
     }
 }
