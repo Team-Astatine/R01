@@ -28,7 +28,7 @@ public class God extends ComponentExchanger implements CommandExecutor {
                 User user = userController.readUser(player);
 
                 this.targetUser = new UserBuilder(user)
-                        .godMode(!user.godMode()) //godMode 변경
+                        .godMode(!user.isGodMode()) //isGodMode 변경
                         .buildAndUpdate();
 
                 setGodEffect(this.targetPlayer,this.targetUser);
@@ -45,7 +45,7 @@ public class God extends ComponentExchanger implements CommandExecutor {
 
     private void sendCommment(@NotNull CommandSender sender) {
         boolean senderInstance = sender instanceof Player;//true == player , false == consol
-        String comment = "은 이제 " + (this.targetUser.godMode() ? "신" : "인간") + " 입니다.";
+        String comment = "은 이제 " + (this.targetUser.isGodMode() ? "신" : "인간") + " 입니다.";
 
         if (!this.targetPlayer.equals(sender) && senderInstance)
             playerSendMsgComponentExchanger(sender, this.targetPlayer.getName() + comment, ColorList.ORANGE);
@@ -57,7 +57,7 @@ public class God extends ComponentExchanger implements CommandExecutor {
     }
 
     public void setGodEffect(Player player, User user) {
-        if (user.godMode())
+        if (user.isGodMode())
             player.addPotionEffect(new PotionEffect(PotionEffectType.SATURATION,100000000,0));
         else player.removePotionEffect(PotionEffectType.SATURATION);
     }

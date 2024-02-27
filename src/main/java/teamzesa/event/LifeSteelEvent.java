@@ -42,7 +42,7 @@ public class LifeSteelEvent extends ComponentExchanger implements EventRegister 
     }
 
     private boolean checkingGodMod() {
-        if (!this.deatherUser.godMode())
+        if (!this.deatherUser.isGodMode())
             return false;
 
         Location playerLocation = this.deather.getLocation();

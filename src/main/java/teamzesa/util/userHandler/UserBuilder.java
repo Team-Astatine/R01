@@ -28,7 +28,7 @@ public class UserBuilder {
         this.level = user.level();
         this.healthScale = user.healthScale();
         this.killStatus = user.killStatus();
-        this.isGodMode = user.godMode();
+        this.isGodMode = user.isGodMode();
         this.isAnnouncing = user.isAnnouncing();
     }
 

@@ -1,13 +1,10 @@
 package teamzesa.event;
 
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.bukkit.event.entity.EntityPortalEnterEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerPortalEvent;
 import teamzesa.entity.User;
 import teamzesa.event.register.EventRegister;
 import teamzesa.util.ComponentExchanger;
@@ -46,6 +43,6 @@ public class PlayerFlyEnableEvent extends ComponentExchanger implements EventReg
     public void execute() {
         this.player.setAllowFlight(true);
         User user = new UserController().readUser(this.player);
-        if (!user.godMode()) playerSendMsgComponentExchanger(this.player, this.comment, ColorList.YELLOW);
+        if (!user.isGodMode()) playerSendMsgComponentExchanger(this.player, this.comment, ColorList.YELLOW);
     }
 }
