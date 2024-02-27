@@ -5,6 +5,7 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import teamzesa.entity.User;
 import teamzesa.util.ComponentExchanger;
 import teamzesa.util.ThreadPool;
 import teamzesa.util.Enum.ColorList;
@@ -59,7 +60,11 @@ public class Announcer extends ComponentExchanger {
             if (players.isEmpty())
                 return;
 
-            players.forEach(player -> sendComment(player, createComponents()));
+            players.forEach(player -> {
+                User user = new UserController().readUser(player);
+                if (user.isAnnouncing())
+                    sendComment(player, createComponents());
+            });
         },
         delay,
         interval
@@ -93,7 +98,8 @@ public class Announcer extends ComponentExchanger {
                 componentExchanger(this.configIOHandler.getExplosiveTip(), commonColor),
                 componentExchanger(this.configIOHandler.getCommandFly(), commandColor),
                 componentExchanger(this.configIOHandler.getCommandHat(), commandColor),
-                componentExchanger(this.configIOHandler.getCommandTotem(), commandColor)
+                componentExchanger(this.configIOHandler.getCommandTotem(), commandColor),
+                componentExchanger(this.configIOHandler.getCommandAnnouncing(), commandColor)
         };
     }
 

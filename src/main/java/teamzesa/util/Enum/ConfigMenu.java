@@ -14,7 +14,8 @@ public enum ConfigMenu {
     MESSAGE_EXPLOSIVE_TIP("message.explosiveTip"),
     MESSAGE_COMMAND_FLY("message.commandFly"),
     MESSAGE_COMMAND_HAT("message.commandHat"),
-    MESSAGE_COMMAND_TOTEM("message.commandTotem");
+    MESSAGE_COMMAND_TOTEM("message.commandTotem"),
+    MESSAGE_COMMAND_ANNOUNCING("message.announcing");
 
     private final String configMessage;
 

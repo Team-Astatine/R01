@@ -43,3 +43,5 @@ commands:
     description: 토템을 합칩니다.
   fly:
     description: 하늘을 납니다.
+  공지:
+    description: 공지를 키거나 끕니다.

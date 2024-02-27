@@ -12,6 +12,7 @@ message:
   raidTip: '습격 발생시 해당 좌표 지점이 공지됩니다.'
   weaponTip: '네더라이트 검 or 도끼를 양손에 들시 공격 속도가 매우 빨라 집니다.'
   explosiveTip: '모든 기존의 폭팔을 조심하세요. 크리퍼, 가스트, 위더, TNT 모든게 "매우" 위험 합니다.'
-  commandFly: '플라이는 항상 활성화 되어 있습니다.'
+  commandFly: '/fly - 플라이는 항상 활성화 되어 있으며 필요시 입력해주세요.'
   commandHat: '/hat - 손에 든 아이템을 머리에 씁니다.'
   commandTotem: '/totem - 인벤토리의 토템을 모두 합칩니다.'
+  announcing: '/공지 - 공지사항 채팅을 끄거나 킵니다.'

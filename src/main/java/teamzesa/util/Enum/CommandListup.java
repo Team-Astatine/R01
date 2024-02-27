@@ -16,7 +16,8 @@ public enum CommandListup {
     TOTEM_STACKING("totem", new Totem()),
     USER_OBJECT_CHECKER("vo", new ValueObjectChecker()),
     SAVE_USER_DATA("SaveUserData", new SaveUserData()),
-    CONFIG_RELOAD("dataFileReload", new DataFileReload());
+    CONFIG_RELOAD("dataFileReload", new DataFileReload()),
+    ANNOUNCING("공지", new AnnouncingOnOff());
 
     private final String command;
     private final CommandExecutor executor;

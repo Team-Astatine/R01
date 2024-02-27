@@ -10,5 +10,6 @@ public record User (
         int level,
         double healthScale,
         int killStatus,
-        boolean godMode
+        boolean godMode,
+        boolean isAnnouncing
         ) {}

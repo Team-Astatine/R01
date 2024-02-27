@@ -15,7 +15,8 @@ public class UserBuilder {
     private int level;
     private double healthScale;
     private int killStatus;
-    private boolean godMode;
+    private boolean isGodMode;
+    private boolean isAnnouncing;
 
     public UserBuilder(){}
 
@@ -27,7 +28,8 @@ public class UserBuilder {
         this.level = user.level();
         this.healthScale = user.healthScale();
         this.killStatus = user.killStatus();
-        this.godMode = user.godMode();
+        this.isGodMode = user.godMode();
+        this.isAnnouncing = user.isAnnouncing();
     }
 
 //    First Time add User
@@ -39,7 +41,7 @@ public class UserBuilder {
         this.level = player.getLevel();
         this.killStatus = 0;
         this.healthScale = player.getHealthScale();
-        this.godMode = false;
+        this.isGodMode = false;
     }
 
     public UserBuilder uuid(UUID uuid) {
@@ -76,8 +78,13 @@ public class UserBuilder {
         return this;
     }
 
-    public UserBuilder godMode(boolean godMode) {
-        this.godMode = godMode;
+    public UserBuilder godMode(boolean currentGodMode) {
+        this.isGodMode = currentGodMode;
+        return this;
+    }
+
+    public UserBuilder announcing(boolean currentAnnouncing) {
+        this.isAnnouncing = currentAnnouncing;
         return this;
     }
 
@@ -90,7 +97,8 @@ public class UserBuilder {
                 level,
                 healthScale,
                 killStatus,
-                godMode
+                isGodMode,
+                isAnnouncing
         );
     }
 
