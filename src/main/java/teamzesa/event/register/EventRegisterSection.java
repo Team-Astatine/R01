@@ -84,12 +84,13 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void invClickEvent(@NotNull InventoryClickEvent event) {
-//        methodImplement
+//        debug
+        new RestrictedShulkerChest(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void invMoveItemEvent(@NotNull PlayerInventorySlotChangeEvent event) {
-        new EnhanceStuffEvent(event);
+//        new EnhanceStuffEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -130,6 +131,7 @@ public class EventRegisterSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void playerSwapStuffEvent(@NotNull PlayerSwapHandItemsEvent event) {
 //        methodImplement
+
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
