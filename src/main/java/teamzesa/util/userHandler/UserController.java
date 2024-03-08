@@ -14,7 +14,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class UserController {
-    private final UserData userData = UserData.getUserMapHandler();
+    private final UserDataBase userDataBase = UserDataBase.getUserMapHandler();
 
     public boolean createUser(@NotNull Player player) {
         return createUser(
@@ -24,7 +24,7 @@ public class UserController {
     }
 
     public boolean createUser(@NotNull User user) {
-        return this.userData.insert(user);
+        return this.userDataBase.insert(user);
     }
 
     public User readUser(@NotNull Player player) {
@@ -42,11 +42,11 @@ public class UserController {
     }
 
     public User readUser(UUID uuid) {
-        return this.userData.select(uuid);
+        return this.userDataBase.select(uuid);
     }
 
     public User readUser(String userName) {
-        return this.userData.getAllUserTable().values().stream()
+        return this.userDataBase.getAllUserTable().values().stream()
                 .filter(data -> data.name().equals(userName))
                 .findFirst()
                 .orElse(null);
@@ -61,17 +61,17 @@ public class UserController {
     }
 
     public void updateUser(@NotNull User user) {
-        this.userData.update(user);
+        this.userDataBase.update(user);
     }
 
     public void updateAllUserData(User[] newUserData) {
-        this.userData.clear();
+        this.userDataBase.clear();
         Arrays.asList(newUserData).forEach(this::createUser);
     }
 
     public ConcurrentHashMap<UUID,User> getAllUserTable() {
         Bukkit.getOnlinePlayers().forEach(player -> readUser(player.getUniqueId()));
-        return this.userData.getAllUserTable();
+        return this.userDataBase.getAllUserTable();
     }
 
 }

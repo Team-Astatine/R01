@@ -6,12 +6,12 @@ import teamzesa.util.ComponentExchanger;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class UserData extends ComponentExchanger {
+public class UserDataBase extends ComponentExchanger {
     private static class UserMapHandlerHolder {
-        private static final UserData INSTANCE = new UserData();
+        private static final UserDataBase INSTANCE = new UserDataBase();
     }
 
-    public static UserData getUserMapHandler() {
+    public static UserDataBase getUserMapHandler() {
         return UserMapHandlerHolder.INSTANCE;
     }
 
