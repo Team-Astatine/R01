@@ -8,8 +8,8 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.command.God;
 import teamzesa.entity.User;
-import teamzesa.event.register.EventRegister;
-import teamzesa.util.ComponentExchanger;
+import teamzesa.util.Interface.EventRegister;
+import teamzesa.util.Interface.ComponentExchanger;
 import teamzesa.util.Enum.ArmourKit;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.FoodKit;
@@ -53,7 +53,7 @@ public class ImportPlayerStatusEvent extends ComponentExchanger implements Event
     }
 
     private void checkingUserStatusGod() {
-        new God().setGodEffect(this.player, this.user);
+        new God().setPotionEffect(this.player, this.user);
     }
 
     private void checkingUserStatusAttackSpeed() {

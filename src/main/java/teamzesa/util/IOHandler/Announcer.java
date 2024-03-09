@@ -6,7 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.entity.User;
-import teamzesa.util.ComponentExchanger;
+import teamzesa.util.Interface.ComponentExchanger;
 import teamzesa.util.ThreadPool;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.util.userHandler.UserController;

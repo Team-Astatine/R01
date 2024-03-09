@@ -2,8 +2,9 @@ package teamzesa.util.Enum;
 
 import org.bukkit.command.CommandExecutor;
 import teamzesa.command.*;
+import teamzesa.command.register.CommandRegister;
 
-public enum CommandListup {
+public enum CommandExecutorMap {
     FLY("fly", new Fly()),
     MOTD("motd", new Motd()),
     GOD_MODE("god", new God()),
@@ -22,7 +23,7 @@ public enum CommandListup {
     private final String command;
     private final CommandExecutor executor;
 
-    CommandListup(String command, CommandExecutor executor) {
+    CommandExecutorMap(String command, CommandExecutor executor) {
         this.command = command;
         this.executor = executor;
     }

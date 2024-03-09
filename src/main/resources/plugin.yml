@@ -7,34 +7,24 @@ authors: [ JAXPLE ]
 commands:
   SaveUserData:
     description: 유저 데이터를 저장합니다.
-    permission: R01.SaveData
   Motd:
     description: Motd를 설정합니다.
-    permission: R01.MotdSet
   몸통:
     description: 손에 든 아이템을 몸통에 착용합니다.
-    permission: R01.ChestArmour
   바지:
     description: 손에 든 아이템을 바지에 착용합니다.
-    permission: R01.PantsArmour
   신발:
     description: 손에 든 아이템을 신발에 착용합니다.
-    permission: R01.BootsArmour
   setHealth:
     description: 체력을 초기화 합니다.
-    permission: R01.Moder
   vo:
     description: DebugValue
-    permission: R01.debug
   meteor:
     description: 운석을 떨어트립니다.
-    permission: R01.Meteor
   god:
     description: 갓 모드를 활성화 합니다.
-    permission: R01.god
   dataFileReload:
     description: config를 Reload 합니다.
-    permission: R01.reload
   moderator:
     description: 관리자 권한부여
   hat:

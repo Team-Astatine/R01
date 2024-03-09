@@ -7,12 +7,18 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.util.ComponentExchanger;
+import teamzesa.command.register.CommandRegister;
+import teamzesa.util.Enum.CommandExecutorMap;
+import teamzesa.util.Interface.ComponentExchanger;
 import teamzesa.util.Enum.ColorList;
 
-public class Hat extends ComponentExchanger implements CommandExecutor {
+public class Hat extends CommandRegister {
     private Player player;
     private PlayerInventory playerInventory;
+
+    public Hat() {
+        super(CommandExecutorMap.ARMOUR_HEAD);
+    }
 
     private enum ArmourType {
         hat

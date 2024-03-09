@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.util.ComponentExchanger;
+import teamzesa.util.Interface.ComponentExchanger;
 import teamzesa.util.Enum.ColorList;
 
 import java.util.*;

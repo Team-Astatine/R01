@@ -1,4 +1,4 @@
-package teamzesa.event.register;
+package teamzesa.util.Interface;
 
 public interface EventRegister {
 

@@ -1,20 +1,14 @@
 package teamzesa.event;
 
-import io.papermc.paper.event.player.PlayerInventorySlotChangeEvent;
-import org.apache.commons.lang3.reflect.InheritanceUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import teamzesa.event.register.EventRegister;
-import teamzesa.util.ComponentExchanger;
+import teamzesa.util.Interface.EventRegister;
+import teamzesa.util.Interface.ComponentExchanger;
 import teamzesa.util.Enum.ColorList;
-
-import java.util.Optional;
-import java.util.function.Predicate;
 
 public class RestrictedShulkerChest extends ComponentExchanger implements EventRegister {
 

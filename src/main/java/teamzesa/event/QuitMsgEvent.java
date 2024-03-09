@@ -1,12 +1,10 @@
 package teamzesa.event;
 
-import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerQuitEvent;
 import teamzesa.entity.User;
-import teamzesa.event.register.EventRegister;
-import teamzesa.util.ComponentExchanger;
+import teamzesa.util.Interface.EventRegister;
+import teamzesa.util.Interface.ComponentExchanger;
 import teamzesa.util.Enum.ColorList;
-import teamzesa.util.IOHandler.Announcer;
 import teamzesa.util.userHandler.UserController;
 
 public class QuitMsgEvent extends ComponentExchanger implements EventRegister {

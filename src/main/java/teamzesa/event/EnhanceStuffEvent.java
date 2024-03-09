@@ -1,17 +1,11 @@
 package teamzesa.event;
 
 import io.papermc.paper.event.player.PlayerInventorySlotChangeEvent;
-import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import teamzesa.event.register.EventRegister;
-import teamzesa.util.ComponentExchanger;
-import teamzesa.util.Enum.ColorList;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
+import teamzesa.util.Interface.EventRegister;
+import teamzesa.util.Interface.ComponentExchanger;
 
 public class EnhanceStuffEvent extends ComponentExchanger implements EventRegister {
     private Player player;
@@ -48,12 +42,15 @@ public class EnhanceStuffEvent extends ComponentExchanger implements EventRegist
         this.cube.setAmount(this.cube.getAmount() - 1);
         this.targetItem.setCustomModelData(1);
 
-        System.out.println(this.event.getSlot());;
-        System.out.println(this.targetItem);
+
+        System.out.println("slot index > " + this.event.getSlot());;
+        System.out.println("targetItemInfo > " + this.targetItem);
+
 
 //        methodImplement
 //        손에 든 아이템이 증발해버림
-        this.player.getInventory().setItem(this.event.getSlot(), this.targetItem);
+        this.player.getInventory().setItem(this.event.getSlot(), null);
+//        this.player.getInventory().setItem(this.event.getSlot(), this.targetItem);
 
 //        List<Component> targetItemLore = new ArrayList<>(this.targetItem.lore());
 //        targetItemLore.add(componentExchanger("1강",ColorList.GREEN));

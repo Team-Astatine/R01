@@ -2,8 +2,8 @@ package teamzesa.event;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerRespawnEvent;
-import teamzesa.event.register.EventRegister;
-import teamzesa.util.ComponentExchanger;
+import teamzesa.util.Interface.EventRegister;
+import teamzesa.util.Interface.ComponentExchanger;
 import teamzesa.util.Enum.ColorList;
 
 

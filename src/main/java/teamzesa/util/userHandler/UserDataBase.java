@@ -1,7 +1,7 @@
 package teamzesa.util.userHandler;
 
 import teamzesa.entity.User;
-import teamzesa.util.ComponentExchanger;
+import teamzesa.util.Interface.ComponentExchanger;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;

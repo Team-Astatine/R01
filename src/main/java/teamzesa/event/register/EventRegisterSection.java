@@ -89,7 +89,7 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void invMoveItemEvent(@NotNull PlayerInventorySlotChangeEvent event) {
-//        new EnhanceStuffEvent(event);
+        new EnhanceStuffEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)

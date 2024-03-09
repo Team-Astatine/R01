@@ -1,4 +1,4 @@
-package teamzesa.util;
+package teamzesa.util.Interface;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
