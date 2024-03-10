@@ -18,7 +18,7 @@ import java.util.Optional;
 public class DataFileReload extends CommandRegisterSection {
 
     private Player player;
-    private boolean consoleSender = false;
+    private boolean isConsoleSend = false;
 
     public DataFileReload() {
         super(CommandExecutorMap.CONFIG_RELOAD);
@@ -29,11 +29,11 @@ public class DataFileReload extends CommandRegisterSection {
         User user = new UserController().readUser(sender.getName());
         Optional.ofNullable(user).ifPresentOrElse(
                 existUser -> this.player = Bukkit.getPlayer(existUser.uuid()),
-                ()        -> this.consoleSender = true
+                ()        -> this.isConsoleSend = true
         );
 
 //        operation Check
-        if (!player.isOp() && !this.consoleSender) {
+        if (!player.isOp() && !this.isConsoleSend) {
             playerSendMsgComponentExchanger(player,"해당 명령어는 플레이어가 사용할 수 없습니다.", ColorList.RED);
             return false;
         }
@@ -45,7 +45,7 @@ public class DataFileReload extends CommandRegisterSection {
 
     private void sendComment() {
         String comment = "Reload Done";
-        if (this.consoleSender)
+        if (this.isConsoleSend)
             Bukkit.getLogger().info("[R01] " + comment);
         else playerSendMsgComponentExchanger(this.player, comment, ColorList.YELLOW);
     }
