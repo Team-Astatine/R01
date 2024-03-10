@@ -6,7 +6,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import teamzesa.util.Interface.EventRegister;
+import teamzesa.event.register.EventRegister;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.ColorList;
 

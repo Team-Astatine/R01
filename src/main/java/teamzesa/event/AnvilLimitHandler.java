@@ -1,7 +1,7 @@
 package teamzesa.event;
 
 import org.purpurmc.purpur.event.inventory.AnvilUpdateResultEvent;
-import teamzesa.util.Interface.EventRegister;
+import teamzesa.event.register.EventRegister;
 
 public class AnvilLimitHandler implements EventRegister {
     private final AnvilUpdateResultEvent event;

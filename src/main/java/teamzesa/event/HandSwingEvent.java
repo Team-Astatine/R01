@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerAnimationType;
 import org.bukkit.scheduler.BukkitTask;
 import teamzesa.R01;
-import teamzesa.util.Interface.EventRegister;
+import teamzesa.event.register.EventRegister;
 
 
 public class HandSwingEvent implements EventRegister {

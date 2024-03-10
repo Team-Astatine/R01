@@ -2,7 +2,7 @@ package teamzesa.event;
 
 import org.bukkit.Location;
 import org.bukkit.event.raid.RaidTriggerEvent;
-import teamzesa.util.Interface.EventRegister;
+import teamzesa.event.register.EventRegister;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.WorldName;

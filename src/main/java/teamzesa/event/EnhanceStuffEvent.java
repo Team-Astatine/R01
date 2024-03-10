@@ -4,7 +4,7 @@ import io.papermc.paper.event.player.PlayerInventorySlotChangeEvent;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import teamzesa.util.Interface.EventRegister;
+import teamzesa.event.register.EventRegister;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 public class EnhanceStuffEvent extends StringComponentExchanger implements EventRegister {

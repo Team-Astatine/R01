@@ -4,7 +4,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.util.Vector;
 import teamzesa.entity.User;
-import teamzesa.util.Interface.EventRegister;
+import teamzesa.event.register.EventRegister;
 import teamzesa.util.userHandler.UserController;
 
 public class GodModeTridentThrowEvent implements EventRegister {

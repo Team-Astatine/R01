@@ -6,7 +6,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import teamzesa.entity.User;
-import teamzesa.util.Interface.EventRegister;
+import teamzesa.event.register.EventRegister;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.util.userHandler.UserController;

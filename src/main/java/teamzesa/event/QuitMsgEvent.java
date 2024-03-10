@@ -2,7 +2,7 @@ package teamzesa.event;
 
 import org.bukkit.event.player.PlayerQuitEvent;
 import teamzesa.entity.User;
-import teamzesa.util.Interface.EventRegister;
+import teamzesa.event.register.EventRegister;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.util.userHandler.UserController;

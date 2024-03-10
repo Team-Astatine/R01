@@ -3,7 +3,7 @@ package teamzesa.event;
 import org.bukkit.Location;
 import org.bukkit.entity.*;
 import org.bukkit.event.entity.EntityExplodeEvent;
-import teamzesa.util.Interface.EventRegister;
+import teamzesa.event.register.EventRegister;
 
 public class ExplosiveEvent implements EventRegister {
     private Location location;

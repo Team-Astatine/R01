@@ -1,8 +1,6 @@
 package teamzesa.event;
 
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import teamzesa.util.Interface.EventRegister;
+import teamzesa.event.register.EventRegister;
 
 public class AutoCraftEvent implements EventRegister {
 
