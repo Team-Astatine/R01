@@ -4,12 +4,12 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.command.register.CommandRegister;
+import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.CommandExecutorMap;
 import teamzesa.util.Enum.ColorList;
 
 
-public class Fly extends CommandRegister {
+public class Fly extends CommandRegisterSection {
 
     public Fly() {
         super(CommandExecutorMap.FLY);

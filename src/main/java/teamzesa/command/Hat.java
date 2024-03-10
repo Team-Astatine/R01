@@ -6,11 +6,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.command.register.CommandRegister;
+import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.CommandExecutorMap;
 import teamzesa.util.Enum.ColorList;
 
-public class Hat extends CommandRegister {
+public class Hat extends CommandRegisterSection {
     private Player player;
     private PlayerInventory playerInventory;
 

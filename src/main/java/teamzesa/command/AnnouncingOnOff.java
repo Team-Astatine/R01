@@ -4,14 +4,14 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.command.register.CommandRegister;
+import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.entity.User;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.CommandExecutorMap;
 import teamzesa.util.userHandler.UserBuilder;
 import teamzesa.util.userHandler.UserController;
 
-public class AnnouncingOnOff extends CommandRegister {
+public class AnnouncingOnOff extends CommandRegisterSection {
 
     public AnnouncingOnOff() {
         super(CommandExecutorMap.ANNOUNCING);

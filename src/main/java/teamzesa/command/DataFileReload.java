@@ -5,7 +5,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.command.register.CommandRegister;
+import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.entity.User;
 import teamzesa.util.Enum.CommandExecutorMap;
 import teamzesa.R01;
@@ -15,7 +15,7 @@ import teamzesa.util.userHandler.UserController;
 import java.util.Optional;
 
 
-public class DataFileReload extends CommandRegister {
+public class DataFileReload extends CommandRegisterSection {
 
     private Player player;
     private boolean consoleSender = false;

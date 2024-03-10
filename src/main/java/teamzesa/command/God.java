@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.command.register.CommandRegister;
+import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.CommandExecutorMap;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.entity.User;
@@ -16,7 +16,7 @@ import teamzesa.util.userHandler.UserController;
 import java.util.Optional;
 
 
-public class God extends CommandRegister {
+public class God extends CommandRegisterSection {
     private User senderUser;
     private Player senderPlayer;
     private boolean consoleSender = false;

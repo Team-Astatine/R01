@@ -7,10 +7,10 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.CommandExecutorMap;
 
-public abstract class CommandRegister extends StringComponentExchanger implements CommandExecutor {
+public abstract class CommandRegisterSection extends StringComponentExchanger implements CommandExecutor {
     private final CommandExecutorMap typeOfCommand;
 
-    public CommandRegister(CommandExecutorMap typeOfCommand) {
+    public CommandRegisterSection(CommandExecutorMap typeOfCommand) {
         this.typeOfCommand = typeOfCommand;
     }
 
