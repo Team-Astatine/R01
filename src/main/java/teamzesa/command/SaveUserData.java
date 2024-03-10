@@ -6,12 +6,12 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.util.Interface.ComponentExchanger;
+import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.userHandler.UserIOHandler;
 import teamzesa.util.Enum.ColorList;
 
 
-public class SaveUserData extends ComponentExchanger implements CommandExecutor {
+public class SaveUserData extends StringComponentExchanger implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, Command command, String label, String[] args) {
         UserIOHandler.exportUserData();

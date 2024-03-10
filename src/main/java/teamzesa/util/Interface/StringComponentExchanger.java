@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.ConfigMenu;
 
-public abstract class ComponentExchanger {
+public abstract class StringComponentExchanger {
     private Component exchangerStringToComponent(String comment) {
         return Component.text(comment);
     }

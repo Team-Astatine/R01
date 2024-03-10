@@ -6,14 +6,14 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.util.Interface.ComponentExchanger;
+import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.entity.User;
 import teamzesa.util.userHandler.UserController;
 
 import java.util.Optional;
 
-public class ValueObjectChecker extends ComponentExchanger implements CommandExecutor {
+public class ValueObjectChecker extends StringComponentExchanger implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
         Optional.ofNullable(new UserController().readUser(args[0]))

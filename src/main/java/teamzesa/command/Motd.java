@@ -6,12 +6,12 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.util.Interface.ComponentExchanger;
+import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.IOHandler.ConfigIOHandler;
 import teamzesa.util.Enum.ColorList;
 
 
-public class Motd extends ComponentExchanger implements CommandExecutor {
+public class Motd extends StringComponentExchanger implements CommandExecutor {
 
     private String newMotd;
 

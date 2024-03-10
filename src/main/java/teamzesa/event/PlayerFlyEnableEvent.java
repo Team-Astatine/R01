@@ -7,11 +7,11 @@ import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import teamzesa.entity.User;
 import teamzesa.util.Interface.EventRegister;
-import teamzesa.util.Interface.ComponentExchanger;
+import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.util.userHandler.UserController;
 
-public class PlayerFlyEnableEvent extends ComponentExchanger implements EventRegister {
+public class PlayerFlyEnableEvent extends StringComponentExchanger implements EventRegister {
     private Player player;
     private User user;
     private String comment;

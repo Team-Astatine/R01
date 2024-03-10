@@ -8,13 +8,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.util.Interface.ComponentExchanger;
+import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.ColorList;
 
 import java.util.*;
 import java.util.List;
 
-public class Totem extends ComponentExchanger implements CommandExecutor {
+public class Totem extends StringComponentExchanger implements CommandExecutor {
     private final Material TOTEM = Material.TOTEM_OF_UNDYING;
     private final int STACK = 64;
     private final int MINIMUM = 1; // 합칠 수 있는 최소 단위 +1

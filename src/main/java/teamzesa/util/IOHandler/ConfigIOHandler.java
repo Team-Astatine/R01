@@ -2,7 +2,7 @@ package teamzesa.util.IOHandler;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
-import teamzesa.util.Interface.ComponentExchanger;
+import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.ConfigMenu;
 import teamzesa.util.Enum.DataFile;
@@ -10,7 +10,7 @@ import teamzesa.util.Enum.DataFile;
 import java.io.File;
 import java.io.IOException;
 
-public class ConfigIOHandler extends ComponentExchanger {
+public class ConfigIOHandler extends StringComponentExchanger {
     private static class ConfigIOHandlerHolder {
         private static final ConfigIOHandler INSTANCE = new ConfigIOHandler();
     }

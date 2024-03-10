@@ -3,11 +3,11 @@ package teamzesa.event;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import teamzesa.util.Interface.EventRegister;
-import teamzesa.util.Interface.ComponentExchanger;
+import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.ColorList;
 
 
-public class RespawnEvent extends ComponentExchanger implements EventRegister {
+public class RespawnEvent extends StringComponentExchanger implements EventRegister {
     private Player player;
     private final PlayerRespawnEvent event;
 

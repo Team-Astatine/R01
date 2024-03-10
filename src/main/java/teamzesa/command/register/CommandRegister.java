@@ -4,11 +4,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.util.Interface.EventRegister;
-import teamzesa.util.Interface.ComponentExchanger;
+import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.CommandExecutorMap;
 
-public abstract class CommandRegister extends ComponentExchanger implements CommandExecutor {
+public abstract class CommandRegister extends StringComponentExchanger implements CommandExecutor {
     private final CommandExecutorMap typeOfCommand;
 
     public CommandRegister(CommandExecutorMap typeOfCommand) {

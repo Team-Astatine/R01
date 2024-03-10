@@ -7,10 +7,10 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.util.Interface.EventRegister;
-import teamzesa.util.Interface.ComponentExchanger;
+import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.ColorList;
 
-public class RestrictedShulkerChest extends ComponentExchanger implements EventRegister {
+public class RestrictedShulkerChest extends StringComponentExchanger implements EventRegister {
 
     private Player player;
     private ItemStack itemStack;

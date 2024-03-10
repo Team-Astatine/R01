@@ -6,7 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.util.Interface.ComponentExchanger;
+import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.util.userHandler.UserBuilder;
 import teamzesa.util.userHandler.UserController;
@@ -14,7 +14,7 @@ import teamzesa.util.userHandler.UserController;
 import java.util.Optional;
 
 
-public class SetHealth extends ComponentExchanger implements CommandExecutor {
+public class SetHealth extends StringComponentExchanger implements CommandExecutor {
     private Player targetPlayer;
     private Player senderPlayer;
     @Override

@@ -1,12 +1,12 @@
 package teamzesa.util.userHandler;
 
 import teamzesa.entity.User;
-import teamzesa.util.Interface.ComponentExchanger;
+import teamzesa.util.Interface.StringComponentExchanger;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class UserDataBase extends ComponentExchanger {
+public class UserDataBase extends StringComponentExchanger {
     private static class UserMapHandlerHolder {
         private static final UserDataBase INSTANCE = new UserDataBase();
     }

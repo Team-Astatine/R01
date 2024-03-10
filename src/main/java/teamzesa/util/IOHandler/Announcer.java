@@ -6,7 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.entity.User;
-import teamzesa.util.Interface.ComponentExchanger;
+import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.ThreadPool;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.util.userHandler.UserController;
@@ -14,7 +14,7 @@ import teamzesa.util.userHandler.UserController;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Announcer extends ComponentExchanger {
+public class Announcer extends StringComponentExchanger {
 
     private static class AnnouncerHolder {
         private static final Announcer INSTANCE = new Announcer();

@@ -4,7 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
 import teamzesa.util.Interface.EventRegister;
-import teamzesa.util.Interface.ComponentExchanger;
+import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.entity.User;
 import teamzesa.util.userHandler.UserBuilder;
@@ -14,7 +14,7 @@ import java.util.HashSet;
 import java.util.Optional;
 
 
-public class PlayerInfoHandler extends ComponentExchanger implements EventRegister {
+public class PlayerInfoHandler extends StringComponentExchanger implements EventRegister {
     private User joinUser;
     private Player joinPlayer;
     private  UserController userController;

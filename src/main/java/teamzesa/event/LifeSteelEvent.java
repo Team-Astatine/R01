@@ -4,14 +4,14 @@ import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import teamzesa.util.Interface.EventRegister;
-import teamzesa.util.Interface.ComponentExchanger;
+import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.entity.User;
 import teamzesa.util.userHandler.UserBuilder;
 import teamzesa.util.userHandler.UserController;
 
 
-public class LifeSteelEvent extends ComponentExchanger implements EventRegister {
+public class LifeSteelEvent extends StringComponentExchanger implements EventRegister {
     private final UserController userController = new UserController();
     private Player deather;
     private Player killer;

@@ -6,14 +6,14 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.util.Interface.ComponentExchanger;
+import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.ColorList;
 
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-public class Moderator extends ComponentExchanger implements CommandExecutor {
+public class Moderator extends StringComponentExchanger implements CommandExecutor {
     private final Set<String> moderatorName;
 
     public Moderator() {

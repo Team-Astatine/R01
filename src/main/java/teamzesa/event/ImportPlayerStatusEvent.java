@@ -9,7 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import teamzesa.command.God;
 import teamzesa.entity.User;
 import teamzesa.util.Interface.EventRegister;
-import teamzesa.util.Interface.ComponentExchanger;
+import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.ArmourKit;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.FoodKit;
@@ -20,7 +20,7 @@ import teamzesa.util.userHandler.UserController;
 
 import java.util.Optional;
 
-public class ImportPlayerStatusEvent extends ComponentExchanger implements EventRegister {
+public class ImportPlayerStatusEvent extends StringComponentExchanger implements EventRegister {
 
     private int playerJoinCnt;
     private User user;

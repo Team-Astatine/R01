@@ -5,9 +5,9 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.util.Interface.EventRegister;
-import teamzesa.util.Interface.ComponentExchanger;
+import teamzesa.util.Interface.StringComponentExchanger;
 
-public class EnhanceStuffEvent extends ComponentExchanger implements EventRegister {
+public class EnhanceStuffEvent extends StringComponentExchanger implements EventRegister {
     private Player player;
     private ItemStack cube;
     private ItemStack targetItem;
