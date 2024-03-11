@@ -13,15 +13,15 @@ import java.util.*;
 
 public class UserIOHandler {
 
-    public static void importUserData() {
-        Bukkit.getLogger().info("[R01] Importing User Data..");
+    public static void importUserData(String reason) {
+        Bukkit.getLogger().info("[R01] Importing User Data.. " + reason);
         try (FileReader reader = new FileReader(DataFile.USER_DATA.getFileInstance())) {
             new UserController().updateAllUserData(new Gson().fromJson(reader, User[].class));
         } catch (IOException e) {System.err.println("Import UserData Error");}
     }
 
-    public static void exportUserData() {
-        Bukkit.getLogger().info("[R01] Exporting User Data..");
+    public static void exportUserData(String reason) {
+        Bukkit.getLogger().info("[R01] Exporting User Data.. " + reason);
         try (FileWriter writer = new FileWriter(DataFile.USER_DATA.getFileInstance())) {
             new GsonBuilder().setPrettyPrinting().create()
                     .toJson(

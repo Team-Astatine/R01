@@ -47,7 +47,7 @@ public class AutoUpdate {
         }
         if (gitVersion > localVersion) {
             Bukkit.getLogger().info("[R01] 구버전 입니다. 자동 업데이트 합니다.");
-            UserIOHandler.exportUserData();
+            UserIOHandler.exportUserData("for Update plugin Version");
             installNewPlugin();
             removeLegacyPlugin();
 
