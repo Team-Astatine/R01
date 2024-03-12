@@ -6,14 +6,21 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import teamzesa.command.register.CommandRegisterSection;
+import teamzesa.util.Enum.CommandExecutorMap;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.IOHandler.ConfigIOHandler;
 import teamzesa.util.Enum.ColorList;
 
 
-public class Motd extends StringComponentExchanger implements CommandExecutor {
+public class Motd extends CommandRegisterSection {
 
     private String newMotd;
+
+    public Motd() {
+        super(CommandExecutorMap.MOTD);
+        this.newMotd = newMotd;
+    }
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
