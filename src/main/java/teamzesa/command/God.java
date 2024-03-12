@@ -1,5 +1,6 @@
 package teamzesa.command;
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -33,7 +34,7 @@ public class God extends CommandRegisterSection {
                 ()        -> this.isConsoleSend = true
         );
 
-        if (!this.isConsoleSend && !this.senderPlayer.isOp()) {
+        if (this.senderUser != null && !this.senderPlayer.isOp()) {
             playerSendMsgComponentExchanger(this.senderPlayer,"해당 명령어는 플레이어가 사용할 수 없습니다.", ColorList.RED);
             return false;
         }
@@ -45,6 +46,7 @@ public class God extends CommandRegisterSection {
         }
 
         changeUserStatus(targetPlayer);
+        isConsoleSend = false;
         return true;
     }
 
@@ -55,14 +57,18 @@ public class God extends CommandRegisterSection {
                 .buildAndUpdate();
         setPotionEffect(targetPlayer,targetUser);
 
-        String targetName = this.isConsoleSend ?
-                targetUser.name()
-                : this.senderUser.equals(targetUser) ? "당신" : targetUser.name();
-        String targetStatus = targetUser.isGodMode() ? "신" : "인간";
-        String comment = targetName + "은 이제 " + targetStatus + " 입니다.";
 
-        sendComment(this.senderPlayer ,comment, ColorList.ORANGE);
-        sendComment(targetPlayer,comment, ColorList.ORANGE);
+        String targetStatus = targetUser.isGodMode() ? "신" : "인간";
+        String comment = "은(는) 이제 " + targetStatus + " 입니다.";
+
+        if (isConsoleSend)
+            Bukkit.getLogger().info("[R01] " + targetUser.name() + comment);
+
+        else if (!this.senderPlayer.equals(targetPlayer))
+            playerSendMsgComponentExchanger(this.senderPlayer, targetUser.name() + comment, ColorList.ORANGE);
+
+        playerSendMsgComponentExchanger(targetPlayer, "당신" + comment, ColorList.ORANGE);
+
     }
 
     private void sendComment(Player senderPlayer, String comment, ColorList color) {
