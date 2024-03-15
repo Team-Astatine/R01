@@ -8,19 +8,27 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
+import teamzesa.command.register.CommandRegisterSection;
+import teamzesa.util.Enum.CommandExecutorMap;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.ColorList;
 
 import java.util.*;
 import java.util.List;
 
-public class Totem extends StringComponentExchanger implements CommandExecutor {
+public class Totem extends CommandRegisterSection {
     private final Material TOTEM = Material.TOTEM_OF_UNDYING;
+
     private final int STACK = 64;
     private final int MINIMUM = 1; // 합칠 수 있는 최소 단위 +1
+
     private Player player;
     private PlayerInventory playerInventory;
     private List<Integer> totemCountData;
+
+    public Totem() {
+        super(CommandExecutorMap.TOTEM_STACKING);
+    }
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender,@NotNull Command command,@NotNull String label, String[] args) {

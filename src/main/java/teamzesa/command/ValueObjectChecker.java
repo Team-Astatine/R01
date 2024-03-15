@@ -19,21 +19,16 @@ public class ValueObjectChecker extends StringComponentExchanger implements Comm
         Optional.ofNullable(new UserController().readUser(args[0]))
                 .ifPresentOrElse(
                     existUser -> sendComment(sender, existUser),
-                    () -> sendComment(sender, "존재하지 않는 유저")
+                    () ->        sendComment(sender, null)
                 );
 
         return true;
     }
 
     private void sendComment(CommandSender sender, User user) {
-        if (sender instanceof Player)
-            playerSendMsgComponentExchanger(sender, user.toString(), ColorList.YELLOW);
+        String userInfo = user == null ? "존재하지 않는 유저" : user.toString();
+        if (sender instanceof Player player)
+            playerSendMsgComponentExchanger(player, userInfo, ColorList.YELLOW);
         else Bukkit.getLogger().info(user.toString());
-    }
-
-    private void sendComment(CommandSender sender, String comment) {
-        if (sender instanceof Player)
-            playerSendMsgComponentExchanger(sender, comment, ColorList.YELLOW);
-        else Bukkit.getLogger().info(comment);
     }
 }

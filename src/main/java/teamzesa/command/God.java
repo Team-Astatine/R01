@@ -41,7 +41,11 @@ public class God extends CommandRegisterSection {
 
         Player targetPlayer = Bukkit.getPlayer(args[0]);
         if (targetPlayer == null) {
-            sendComment(this.senderPlayer ,"해당 유저는 존재하지 않습니다.", ColorList.RED);
+            String comment = "해당 유저는 존재하지 않습니다.";
+
+            if (this.isConsoleSend)
+                Bukkit.getLogger().info("[R01] " + comment);
+            else playerSendMsgComponentExchanger(senderPlayer, comment, ColorList.RED);
             return false;
         }
 
@@ -69,12 +73,6 @@ public class God extends CommandRegisterSection {
 
         playerSendMsgComponentExchanger(targetPlayer, "당신" + comment, ColorList.ORANGE);
 
-    }
-
-    private void sendComment(Player senderPlayer, String comment, ColorList color) {
-        if (this.isConsoleSend)
-            Bukkit.getLogger().info("[R01] " + comment);
-        else playerSendMsgComponentExchanger(senderPlayer, comment, color);
     }
 
     public void setPotionEffect(Player targetPlayer, User targetUser) {

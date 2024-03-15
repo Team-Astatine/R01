@@ -6,6 +6,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import teamzesa.command.register.CommandRegisterSection;
+import teamzesa.entity.User;
+import teamzesa.util.Enum.CommandExecutorMap;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.util.userHandler.UserBuilder;
@@ -14,28 +17,34 @@ import teamzesa.util.userHandler.UserController;
 import java.util.Optional;
 
 
-public class SetHealth extends StringComponentExchanger implements CommandExecutor {
-    private Player targetPlayer;
+public class SetHealth extends CommandRegisterSection {
     private Player senderPlayer;
+    private Player targetPlayer;
+    private boolean isConsoleSend = false;
+
+    public SetHealth() {
+        super(CommandExecutorMap.HEALTH_RESET);
+    }
+
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String @NotNull [] args) {
-        if (args.length < 2) {
-            if (sender instanceof Player)
-                playerSendMsgComponentExchanger(sender,"/sethealth [닉네임] [체력값]",ColorList.RED);
-            else
-                Bukkit.getLogger().info("[R01] /sethealth [닉네임] [체력값]");
+        User senderUser = new UserController().readUser(sender.getName());
+        Optional.ofNullable(senderUser).ifPresentOrElse(
+                existUser -> this.senderPlayer = Bukkit.getPlayer(existUser.uuid()),
+                ()        -> this.isConsoleSend = true
+        );
+
+        if (senderUser != null && !this.senderPlayer.isOp()) {
+            playerSendMsgComponentExchanger(this.senderPlayer,"해당 명령어는 플레이어가 사용할 수 없습니다.", ColorList.RED);
             return false;
         }
 
         Optional.ofNullable(Bukkit.getPlayer(args[0])).ifPresent(
                 player -> {
                     this.targetPlayer = player;
-                    this.senderPlayer = (Player)sender;
-
                     setPlayerHealth(Double.parseDouble(args[1]));
                 }
             );
-
         return true;
     }
 
@@ -47,14 +56,18 @@ public class SetHealth extends StringComponentExchanger implements CommandExecut
                         .buildAndUpdate()
         );
 
-        playerSendMsgComponentExchanger(
-                this.targetPlayer,
-                this.targetPlayer.getName() + "님의 체력이" + setHealthValue + "으로 설정됐습니다.",
-                ColorList.YELLOW);
+        sendComment(setHealthValue);
+    }
 
-        playerSendMsgComponentExchanger(
-                this.senderPlayer,
-                this.targetPlayer.getName() + "님의 체력이" + setHealthValue + "으로 설정됐습니다.",
-                ColorList.YELLOW);
+    private void sendComment(double setHealthValue) {
+        String comment = this.targetPlayer.getName() + "님의 체력이" + setHealthValue + "으로 설정됐습니다.";
+        if (isConsoleSend) {
+            Bukkit.getLogger().info("[R01] " + comment);
+            return;
+        }
+
+        if (!this.senderPlayer.equals(this.targetPlayer))
+            playerSendMsgComponentExchanger(this.senderPlayer, comment, ColorList.YELLOW);
+        playerSendMsgComponentExchanger(this.targetPlayer, comment, ColorList.YELLOW);
     }
 }

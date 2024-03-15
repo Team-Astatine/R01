@@ -2,35 +2,41 @@ package teamzesa.command;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.CommandExecutorMap;
-import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.IOHandler.ConfigIOHandler;
 import teamzesa.util.Enum.ColorList;
+
+import java.util.Arrays;
 
 
 public class Motd extends CommandRegisterSection {
 
+    private static final String DEFAULT_SERVER_MOTD = "Astatine Online";
     private String newMotd;
 
     public Motd() {
         super(CommandExecutorMap.MOTD);
-        this.newMotd = newMotd;
+        this.newMotd = DEFAULT_SERVER_MOTD;
     }
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
-        setNewMotdToFieldVariable(args);
+        getteringNewMotd(args);
         sendComment(sender);
         configDataUpdate();
         return false;
     }
 
-    private void setNewMotdToFieldVariable(String @NotNull [] newMotd) {
+    private void getteringNewMotd(String @NotNull [] newMotd) {
+        if (newMotd.length == 0) {
+            this.newMotd = DEFAULT_SERVER_MOTD;
+            return;
+        }
+
         StringBuilder customMotd = new StringBuilder();
         for (String motd : newMotd)
             customMotd.append(motd).append(" ");
@@ -39,9 +45,9 @@ public class Motd extends CommandRegisterSection {
     }
 
     private void sendComment(CommandSender sender) {
-        String comment = "New Motd Set > " + this.newMotd;
-        if (sender instanceof Player) {
-            playerSendMsgComponentExchanger((Player)sender, comment, ColorList.YELLOW);
+        String comment = "New Motd Set -> " + this.newMotd;
+        if (sender instanceof Player player) {
+            playerSendMsgComponentExchanger(player, comment, ColorList.YELLOW);
         } else Bukkit.getLogger().info(comment);
     }
 
