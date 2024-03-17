@@ -2,6 +2,7 @@ package teamzesa.util.Enum;
 
 import org.bukkit.command.CommandExecutor;
 import teamzesa.command.*;
+import teamzesa.event.EnhanceStuffEvent;
 
 public enum CommandExecutorMap {
     FLY("fly", new Fly()),
@@ -17,7 +18,8 @@ public enum CommandExecutorMap {
     USER_OBJECT_CHECKER("vo", new ValueObjectChecker()),
     SAVE_USER_DATA("SaveUserData", new SaveUserData()),
     CONFIG_RELOAD("dataFileReload", new DataFileReload()),
-    ANNOUNCING("공지", new AnnouncingOnOff());
+    ANNOUNCING("공지", new AnnouncingOnOff()),
+    ENHANCE("강화", new EnhanceStuff());
 
     private final String command;
     private final CommandExecutor executor;
