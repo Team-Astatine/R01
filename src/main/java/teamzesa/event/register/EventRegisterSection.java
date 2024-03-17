@@ -85,6 +85,7 @@ public class EventRegisterSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void invClickEvent(@NotNull InventoryClickEvent event) {
         new RestrictedShulkerChest(event);
+        new EnhanceInventoryClickEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
