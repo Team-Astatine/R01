@@ -9,7 +9,7 @@ import teamzesa.util.userHandler.UserController;
 
 public class EnhanceInventoryClickEvent extends StringComponentExchanger implements EventRegister {
     private User targetUser;
-    private Player targetPlayer;
+    private Player ownerPlayer;
     private final InventoryClickEvent event;
 
     public EnhanceInventoryClickEvent(InventoryClickEvent event) {
@@ -20,12 +20,13 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
 
     @Override
     public void init() {
-        this.targetPlayer = this.event.getWhoClicked() instanceof Player player ? player : null;
-        this.targetUser = new UserController().readUser(this.targetPlayer);
+        this.ownerPlayer = this.event.getWhoClicked() instanceof Player player ? player : null;
+        this.targetUser = new UserController().readUser(this.ownerPlayer);
     }
 
     @Override
     public void execute() {
-
+//        Implement
+//        아이템 꺼낼시 캔슬시키기
     }
 }

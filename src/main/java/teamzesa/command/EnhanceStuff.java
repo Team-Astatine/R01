@@ -6,9 +6,12 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
+import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.CommandExecutorMap;
 
 public class EnhanceStuff extends CommandRegisterSection {
@@ -27,27 +30,32 @@ public class EnhanceStuff extends CommandRegisterSection {
     private void init() {
 //        panel
         this.spaceStuff = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
-        this.spaceStuff.setDisplayName("X");
+        itemMetaSet(this.spaceStuff, "X", ColorList.RED);
 
-//        weaponSpace
         this.weaponStuff = new ItemStack(Material.NETHERITE_SWORD);
-        this.weaponStuff.setDisplayName("강화할 아래슬롯에 무기를 올려주세요");
+        itemMetaSet(this.weaponStuff, "강화할 아래슬롯에 무기를 올려주세요", ColorList.ORANGE);
 
-//        scrollSpace
         this.scrollStuff = new ItemStack(Material.ANVIL);
-        this.weaponStuff.setDisplayName("강화할 아래슬롯에 재료를 넣어주세요");
+        itemMetaSet(this.scrollStuff, "아이템에 들어갈 재료를 아래슬롯에 넣어주세요", ColorList.ORANGE);
 
-//        unbreakableScrollSpace
         this.protectScrollStuff = new ItemStack(Material.HEART_OF_THE_SEA);
-        this.protectScrollStuff.setDisplayName("파괴방어 스크롤을 아래슬롯에 넣어주세요");
+        itemMetaSet(this.protectScrollStuff, "파괴방어 스크롤을 아래슬롯에 넣어주세요", ColorList.ORANGE);
+    }
+
+    private void itemMetaSet(ItemStack targetItem, String comment, ColorList color) {
+        ItemMeta itemMeta = targetItem.getItemMeta();
+
+        itemMeta.displayName(componentExchanger(comment, color));
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ITEM_SPECIFICS);
+
+        targetItem.setItemMeta(itemMeta);
     }
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
-//        methodimplement
-//        InventoryType 구별 어떤 인벤토리일경우 해당 이벤트를 발생시킬지 확인
         this.sendPlayer = (Player) commandSender;
-        Inventory inventory = Bukkit.createInventory(sendPlayer , 4 * 9, componentExchanger("강화"));
+        Inventory inventory = Bukkit.createInventory(sendPlayer, 4 * 9, componentExchanger("강화"));
 
         for (int i = 0; i < inventory.getSize(); i++)
             inventory.setItem(i, this.spaceStuff);
