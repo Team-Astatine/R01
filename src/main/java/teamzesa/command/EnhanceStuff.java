@@ -22,6 +22,7 @@ public class EnhanceStuff extends CommandRegisterSection {
     private ItemStack scrollStuff;
     private ItemStack protectScrollStuff;
     private ItemStack executeButton;
+    public final static int PANEL_STUFF_CUSTOM_DATA = 20000;
 
     public EnhanceStuff() {
         super(CommandExecutorMap.ENHANCE);
@@ -55,7 +56,7 @@ public class EnhanceStuff extends CommandRegisterSection {
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         itemMeta.addItemFlags(ItemFlag.HIDE_ITEM_SPECIFICS);
         itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        itemMeta.setCustomModelData(200); // 강화창 디스플레이 아이템코드
+        itemMeta.setCustomModelData(PANEL_STUFF_CUSTOM_DATA); // 강화창 디스플레이 아이템코드
 
         targetItem.setItemMeta(itemMeta);
     }
