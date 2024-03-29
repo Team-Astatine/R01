@@ -1,5 +1,6 @@
 package teamzesa.command;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -10,10 +11,14 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.checkerframework.checker.units.qual.A;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.CommandExecutorMap;
+
+import java.awt.*;
+import java.util.ArrayList;
 
 public class EnhanceStuff extends CommandRegisterSection {
     private Player sendPlayer;
@@ -57,8 +62,6 @@ public class EnhanceStuff extends CommandRegisterSection {
         itemMeta.addItemFlags(ItemFlag.HIDE_ITEM_SPECIFICS);
         itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         itemMeta.setCustomModelData(PANEL_STUFF_CUSTOM_DATA); // 강화창 디스플레이 아이템코드
-
-        targetItem.setItemMeta(itemMeta);
     }
 
     @Override

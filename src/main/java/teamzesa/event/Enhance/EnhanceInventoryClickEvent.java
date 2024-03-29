@@ -36,7 +36,7 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
 
     private boolean valid() {
         System.out.println(1);
-        if (this.currentStuff.getType() == Material.AIR)
+        if (this.currentStuff == null)
             return true;
 
         System.out.println(2);

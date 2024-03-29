@@ -3,6 +3,10 @@ package teamzesa.util.Enum;
 import net.kyori.adventure.text.format.TextColor;
 
 public enum ColorList {
+    WHITE(TextColor.color(255, 255, 255)),
+    WHITE_TO_RED1(TextColor.color(255, 191, 191)),
+    WHITE_TO_RED2(TextColor.color(255, 127, 127)),
+    WHITE_TO_RED3(TextColor.color(255, 63, 63)),
     RED(TextColor.color(233, 30, 100)),
     PINK(TextColor.color(255, 182, 193)),
     ORANGE(TextColor.color(255, 142, 0)),
@@ -22,6 +26,6 @@ public enum ColorList {
     }
 
     public TextColor getTextColor() {
-        return textColor;
+        return this.textColor;
     }
 }
