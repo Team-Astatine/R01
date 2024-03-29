@@ -1,5 +1,6 @@
-package teamzesa.event;
+package teamzesa.event.Enhance;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
@@ -10,14 +11,14 @@ import teamzesa.event.register.EventRegister;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.userHandler.UserController;
 
+import java.util.Optional;
+
 import static teamzesa.command.EnhanceStuff.PANEL_STUFF_CUSTOM_DATA;
 
 public class EnhanceInventoryClickEvent extends StringComponentExchanger implements EventRegister {
-    private ItemStack currentStuff;
     private User targetUser;
     private Player ownerPlayer;
-    private Inventory playerInventory;
-    private Inventory currentOpeningContainerInventory;
+    private ItemStack currentStuff;
     private final InventoryClickEvent event;
 
     public EnhanceInventoryClickEvent(InventoryClickEvent event) {
@@ -29,24 +30,25 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
     @Override
     public void init() {
         this.currentStuff = this.event.getCurrentItem();
-        this.playerInventory = this.event.getClickedInventory();
-        this.currentOpeningContainerInventory = this.event.getInventory();
-
         this.ownerPlayer = this.event.getWhoClicked() instanceof Player player ? player : null;
         this.targetUser = new UserController().readUser(this.ownerPlayer);
     }
 
-    public boolean valid() {
-        System.out.println("valid 1");
-        if (this.currentStuff == null)
+    private boolean valid() {
+        System.out.println(1);
+        if (this.currentStuff.getType() == Material.AIR)
+            return true;
+
+        System.out.println(2);
+        if (this.currentStuff.getItemMeta() == null)
             return false;
 
-        System.out.println("valid 2");
+        System.out.println(3);
         if (this.currentStuff.hasCustomModelData())
             return false;
 
-        System.out.println("valid 3");
-        if (this.currentStuff.getCustomModelData() == PANEL_STUFF_CUSTOM_DATA)
+        System.out.println(4);
+        if (this.currentStuff.getCustomModelData() != PANEL_STUFF_CUSTOM_DATA)
             return true;
 
         return false;
@@ -54,12 +56,21 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
 
     @Override
     public void execute() {
-        System.out.println(1);
-        boolean test = valid();
-        System.out.println(test);
-        if (test)
+        System.out.println("valid 1");
+        if (valid()) {
+            System.out.println("valid1 return");
             this.event.setCancelled(true);
+            return;
+        }
+
+
 
         System.out.println(2);
+
+
+
+        ItemStack resultStuff = new Algorithm()
+                .addWeaponStuff(this.currentStuff)
+                .executeEnhance();
     }
 }

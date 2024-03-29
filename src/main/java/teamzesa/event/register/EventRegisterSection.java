@@ -17,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
 import org.purpurmc.purpur.event.inventory.AnvilUpdateResultEvent;
 import teamzesa.event.*;
 import teamzesa.event.AntiExploit.*;
+import teamzesa.event.Enhance.EnhanceInventoryClickEvent;
 //todo
 //fixme
 //refactoring
@@ -91,7 +92,7 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void invMoveItemEvent(@NotNull PlayerInventorySlotChangeEvent event) {
-        new EnhanceStuffEvent(event);
+//        methodImplement
     }
 
     @EventHandler(priority = EventPriority.LOWEST)

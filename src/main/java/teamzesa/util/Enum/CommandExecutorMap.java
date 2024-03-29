@@ -2,7 +2,6 @@ package teamzesa.util.Enum;
 
 import org.bukkit.command.CommandExecutor;
 import teamzesa.command.*;
-import teamzesa.event.EnhanceStuffEvent;
 
 public enum CommandExecutorMap {
     FLY("fly", new Fly()),
