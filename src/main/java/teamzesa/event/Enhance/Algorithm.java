@@ -2,11 +2,15 @@ package teamzesa.event.Enhance;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.entity.Damageable;
+import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import teamzesa.util.Enum.EnhanceComment;
 import teamzesa.util.Interface.StringComponentExchanger;
 
-import java.util.ArrayList;
+import java.util.Collections;
 
 public class Algorithm extends StringComponentExchanger {
     /*
@@ -54,45 +58,60 @@ public class Algorithm extends StringComponentExchanger {
 
     private void EnhanceCal() {
         boolean isSuccessEnhance = Math.random() * 10 < getCurrentStuffPercentage();
+        if (isSuccessEnhance) successEnhanceScenario();
+        else                  failEnhanceScenario();
+    }
 
-        if (true) {
-//            methodImplement
+    private void failEnhanceScenario() {
+        
+    }
+    
+    private void successEnhanceScenario() {
+        //            methodImplement
 //            debug
             /*
             기존 current stuff custom model data +1,
             이름에 +1로 수정
              */
 //            customModelData ++
-            this.weaponStuff.setCustomModelData(this.weaponStuff.getCustomModelData() + 1);
-            
-            ArrayList<Component> lore = new ArrayList<>();
-            lore.add(getComponent());
-            this.weaponStuff.lore(lore);
-        } else {
-            /*
-            파괴관련 스크롤 확인
-             */
-        }
+        this.weaponStuff.setCustomModelData(this.weaponStuff.getCustomModelData() + 1);
+//            lore reload
+        this.weaponStuff.lore(null);
+        this.weaponStuff.lore(Collections.singletonList(getLoreCommentComponent()));
+
+//            weapon Damage Set
+//            여기 데미지설정에 세팅해야함
+        Damageable damageable = (Damageable) this.weaponStuff.getItemMeta();
+        this.weaponStuff.setItemMeta((ItemMeta) damageable);
     }
 
     private double getCurrentStuffPercentage() {
         return switch (this.currentStuffPercentage) {
-            case 1 -> 9.0; //90%
-            case 2 -> 7.0; //70%
-            case 3 -> 5.0; //50%
-            case 4 -> 3.0; //30%
-            case 5 -> 1.0; //10%
+            case 1-> 9.0; //90%
+            case 2-> 8.0; //80%
+            case 3-> 7.0; //70%
+            case 4-> 6.0; //60%
+            case 5-> 5.0; //50%
+            case 6-> 4.0; //40%
+            case 7-> 3.0; //30%
+            case 8-> 2.0; //20%
+            case 9-> 1.0; //10%
             default -> 0.0;
         };
     }
 
-    private Component getComponent() {
+    private Component getLoreCommentComponent() {
         return switch (this.weaponStuff.getCustomModelData()) {
             case 1 -> EnhanceComment.ONE_STEP.getLoreComment();
             case 2 -> EnhanceComment.TWO_STEP.getLoreComment();
             case 3 -> EnhanceComment.THREE_STEP.getLoreComment();
             case 4 -> EnhanceComment.FOUR_STEP.getLoreComment();
             case 5 -> EnhanceComment.FIVE_STEP.getLoreComment();
+            case 6 -> EnhanceComment.SIX_STEP.getLoreComment();
+            case 7 -> EnhanceComment.SEVEN_STEP.getLoreComment();
+            case 8 -> EnhanceComment.EIGHT_STEP.getLoreComment();
+            case 9 -> EnhanceComment.NINE_STEP.getLoreComment();
+            case 10 -> EnhanceComment.TEN_STEP.getLoreComment();
             default -> null;
         };
     }

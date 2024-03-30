@@ -4,9 +4,14 @@ import net.kyori.adventure.text.format.TextColor;
 
 public enum ColorList {
     WHITE(TextColor.color(255, 255, 255)),
-    WHITE_TO_RED1(TextColor.color(255, 191, 191)),
-    WHITE_TO_RED2(TextColor.color(255, 127, 127)),
-    WHITE_TO_RED3(TextColor.color(255, 63, 63)),
+    WHITE_TO_RED1(TextColor.color(255, 227, 242)),
+    WHITE_TO_RED2(TextColor.color(255, 204, 226)),
+    WHITE_TO_RED3(TextColor.color(255, 181, 210)),
+    WHITE_TO_RED4(TextColor.color(255, 158, 194)),
+    WHITE_TO_RED5(TextColor.color(255, 135, 178)),
+    WHITE_TO_RED6(TextColor.color(255, 112, 162)),
+    WHITE_TO_RED7(TextColor.color(255, 89, 146)),
+    WHITE_TO_RED8(TextColor.color(255, 66, 130)),
     RED(TextColor.color(233, 30, 100)),
     PINK(TextColor.color(255, 182, 193)),
     ORANGE(TextColor.color(255, 142, 0)),

@@ -18,6 +18,21 @@ public enum EnhanceComment {
             .color(ColorList.WHITE_TO_RED3.getTextColor())
     ),
     FIVE_STEP(Component.text("★★★★★")
+            .color(ColorList.WHITE_TO_RED4.getTextColor())
+    ),
+    SIX_STEP(Component.text("★★★★★★")
+            .color(ColorList.WHITE_TO_RED5.getTextColor())
+    ),
+    SEVEN_STEP(Component.text("★★★★★★★")
+            .color(ColorList.WHITE_TO_RED6.getTextColor())
+    ),
+    EIGHT_STEP(Component.text("★★★★★★★★")
+            .color(ColorList.WHITE_TO_RED7.getTextColor())
+    ),
+    NINE_STEP(Component.text("★★★★★★★★★")
+            .color(ColorList.WHITE_TO_RED8.getTextColor())
+    ),
+    TEN_STEP(Component.text("★★★★★★★★★★")
             .color(ColorList.RED.getTextColor())
     );
 
