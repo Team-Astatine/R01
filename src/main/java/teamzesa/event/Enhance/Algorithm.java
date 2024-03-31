@@ -3,6 +3,7 @@ package teamzesa.event.Enhance;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Damageable;
 import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.ItemStack;
@@ -11,6 +12,7 @@ import teamzesa.util.Enum.EnhanceComment;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 import java.util.Collections;
+import java.util.Map;
 
 public class Algorithm extends StringComponentExchanger {
     /*
@@ -53,21 +55,20 @@ public class Algorithm extends StringComponentExchanger {
 
     public ItemStack executeEnhance() {
 //        methodImplement
-        return new ItemStack(Material.AIR);
-    }
-
-    private void EnhanceCal() {
         boolean isSuccessEnhance = Math.random() * 10 < getCurrentStuffPercentage();
         if (isSuccessEnhance) successEnhanceScenario();
         else                  failEnhanceScenario();
+
+        return new ItemStack(Material.AIR);
     }
 
     private void failEnhanceScenario() {
-        
-    }
+//            methodImplement
+//            debug
+}
     
     private void successEnhanceScenario() {
-        //            methodImplement
+//            methodImplement
 //            debug
             /*
             기존 current stuff custom model data +1,
@@ -79,12 +80,10 @@ public class Algorithm extends StringComponentExchanger {
         this.weaponStuff.lore(null);
         this.weaponStuff.lore(Collections.singletonList(getLoreCommentComponent()));
 
-//            weapon Damage Set
-//            여기 데미지설정에 세팅해야함
-        Damageable damageable = (Damageable) this.weaponStuff.getItemMeta();
-        this.weaponStuff.setItemMeta((ItemMeta) damageable);
-    }
+//            weapon Option Set
+        Map<Enchantment, Integer> currentStuffEnchant = this.weaponStuff.getEnchantments();
 
+    }
     private double getCurrentStuffPercentage() {
         return switch (this.currentStuffPercentage) {
             case 1-> 9.0; //90%

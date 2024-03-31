@@ -61,7 +61,10 @@ public class EnhanceStuff extends CommandRegisterSection {
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         itemMeta.addItemFlags(ItemFlag.HIDE_ITEM_SPECIFICS);
         itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+
         itemMeta.setCustomModelData(PANEL_STUFF_CUSTOM_DATA); // 강화창 디스플레이 아이템코드
+
+        targetItem.setItemMeta(itemMeta);
     }
 
     @Override

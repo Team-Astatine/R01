@@ -91,8 +91,9 @@ public class EventRegisterSection implements Listener {
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void invMoveItemEvent(@NotNull PlayerInventorySlotChangeEvent event) {
+    public void invMoveItemEvent(@NotNull InventoryCloseEvent event) {
 //        methodImplement
+//        enhanceInv close event 추가할것
     }
 
     @EventHandler(priority = EventPriority.LOWEST)

@@ -44,11 +44,11 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
             return false;
 
         System.out.println(3);
-        if (this.currentStuff.hasCustomModelData())
+        if (!this.currentStuff.hasCustomModelData())
             return false;
 
         System.out.println(4);
-        if (this.currentStuff.getCustomModelData() != PANEL_STUFF_CUSTOM_DATA)
+        if (this.currentStuff.getCustomModelData() == PANEL_STUFF_CUSTOM_DATA)
             return true;
 
         return false;
@@ -56,7 +56,7 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
 
     @Override
     public void execute() {
-        System.out.println("valid 1");
+        System.out.println("execute 1");
         if (valid()) {
             System.out.println("valid1 return");
             this.event.setCancelled(true);
@@ -64,13 +64,10 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
         }
 
 
+        System.out.println("execute 2");
 
-        System.out.println(2);
-
-
-
-        ItemStack resultStuff = new Algorithm()
-                .addWeaponStuff(this.currentStuff)
-                .executeEnhance();
+//        ItemStack resultStuff = new Algorithm()
+//                .addWeaponStuff(this.currentStuff)
+//                .executeEnhance();
     }
 }
