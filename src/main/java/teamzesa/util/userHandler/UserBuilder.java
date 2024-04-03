@@ -42,7 +42,7 @@ public class UserBuilder {
         this.killStatus = 0;
         this.healthScale = player.getHealthScale();
         this.isGodMode = false;
-        this.isAnnouncing = false;
+        this.isAnnouncing = true;
     }
 
     public UserBuilder uuid(UUID uuid) {
