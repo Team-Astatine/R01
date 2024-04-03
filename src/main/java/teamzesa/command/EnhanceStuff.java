@@ -28,6 +28,7 @@ public class EnhanceStuff extends CommandRegisterSection {
     private ItemStack protectScrollStuff;
     private ItemStack executeButton;
     public final static int PANEL_STUFF_CUSTOM_DATA = 20000;
+    public final static int EXECUTE_STUFF_DATA = 30000;
 
     public EnhanceStuff() {
         super(CommandExecutorMap.ENHANCE);
@@ -36,35 +37,29 @@ public class EnhanceStuff extends CommandRegisterSection {
 
     private void init() {
 //        panel
-        this.spaceStuff = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
-        itemMetaSet(this.spaceStuff, "X", ColorList.RED);
-
-        this.weaponStuff = new ItemStack(Material.NETHERITE_SWORD);
-        itemMetaSet(this.weaponStuff, "강화할 아래슬롯에 무기를 올려주세요", ColorList.ORANGE);
-
-        this.scrollStuff = new ItemStack(Material.ANVIL);
-        itemMetaSet(this.scrollStuff, "아이템에 들어갈 재료를 아래슬롯에 넣어주세요", ColorList.ORANGE);
-
-        this.protectScrollStuff = new ItemStack(Material.HEART_OF_THE_SEA);
-        itemMetaSet(this.protectScrollStuff, "파괴방어 스크롤을 아래슬롯에 넣어주세요", ColorList.ORANGE);
-
-        this.executeButton = new ItemStack(Material.RED_STAINED_GLASS_PANE);
-        itemMetaSet(this.executeButton, "강화 실행", ColorList.DISCORD_COLOR);
+        this.spaceStuff         = createItem(Material.GRAY_STAINED_GLASS_PANE, "X",                                     ColorList.RED);
+        this.weaponStuff        = createItem(Material.NETHERITE_SWORD,         "강화할 아래슬롯에 무기를 올려주세요",         ColorList.ORANGE);
+        this.scrollStuff        = createItem(Material.ANVIL,                   "아이템에 들어갈 재료를 아래슬롯에 넣어주세요",  ColorList.ORANGE);
+        this.protectScrollStuff = createItem(Material.HEART_OF_THE_SEA,        "파괴방어 스크롤을 아래슬롯에 넣어주세요",      ColorList.ORANGE);
+        this.executeButton      = createItem(Material.RED_STAINED_GLASS_PANE,  "강화 실행",                               ColorList.DISCORD_COLOR);
+        this.executeButton.getItemMeta().setCustomModelData(EXECUTE_STUFF_DATA);
     }
 
-    private void itemMetaSet(ItemStack targetItem, String comment, ColorList color) {
-        ItemMeta itemMeta = targetItem.getItemMeta();
+    private ItemStack createItem(Material material, String comment, ColorList color) {
+        ItemStack item = new ItemStack(material);
+        ItemMeta meta = item.getItemMeta();
 
-        itemMeta.displayName(componentExchanger(comment, color));
-        itemMeta.addEnchant(Enchantment.CHANNELING, 1 ,true);
+        meta.displayName(componentExchanger(comment, color));
 
-        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-        itemMeta.addItemFlags(ItemFlag.HIDE_ITEM_SPECIFICS);
-        itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        meta.addEnchant(Enchantment.CHANNELING, 1 ,true);
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        meta.addItemFlags(ItemFlag.HIDE_ITEM_SPECIFICS);
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
-        itemMeta.setCustomModelData(PANEL_STUFF_CUSTOM_DATA); // 강화창 디스플레이 아이템코드
+        meta.setCustomModelData(PANEL_STUFF_CUSTOM_DATA); // 강화창 디스플레이 아이템코드
 
-        targetItem.setItemMeta(itemMeta);
+        item.setItemMeta(meta);
+        return item;
     }
 
     @Override

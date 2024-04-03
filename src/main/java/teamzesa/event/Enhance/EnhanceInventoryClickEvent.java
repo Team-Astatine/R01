@@ -35,6 +35,10 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
     }
 
     private boolean valid() {
+        System.out.println(0);
+        if (this.event.getInventory().getType() != InventoryType.CHEST)
+            return true;
+
         System.out.println(1);
         if (this.currentStuff == null)
             return true;
