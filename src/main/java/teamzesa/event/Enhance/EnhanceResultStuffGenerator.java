@@ -2,19 +2,15 @@ package teamzesa.event.Enhance;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Damageable;
-import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import teamzesa.util.Enum.EnhanceComment;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 import java.util.Collections;
 import java.util.Map;
 
-public class Algorithm extends StringComponentExchanger {
+public class EnhanceResultStuffGenerator extends StringComponentExchanger {
     /*
     최대 강화 가능 횟수는 10회
     현재 클래스에선 강화에 대한 알고리즘만 처리할 예정
@@ -26,10 +22,10 @@ public class Algorithm extends StringComponentExchanger {
     private ItemStack scrollStuff;
     private ItemStack protectScrollStuff;
 
-    public Algorithm() {
+    public EnhanceResultStuffGenerator() {
     }
 
-    public Algorithm(ItemStack weaponStuff, ItemStack scrollStuff, ItemStack protectScrollStuff) {
+    public EnhanceResultStuffGenerator(ItemStack weaponStuff, ItemStack scrollStuff, ItemStack protectScrollStuff) {
         this.weaponStuff = weaponStuff;
         this.scrollStuff = scrollStuff;
         this.protectScrollStuff = protectScrollStuff;
@@ -37,18 +33,18 @@ public class Algorithm extends StringComponentExchanger {
         this.currentStuffPercentage = this.weaponStuff.getCustomModelData();
     }
 
-    public Algorithm addWeaponStuff(ItemStack weaponStuff) {
+    public EnhanceResultStuffGenerator addWeaponStuff(ItemStack weaponStuff) {
         this.weaponStuff = weaponStuff;
         this.currentStuffPercentage = weaponStuff.getCustomModelData();
         return this;
     }
 
-    public Algorithm addScrollStuff(ItemStack scrollStuff) {
+    public EnhanceResultStuffGenerator addScrollStuff(ItemStack scrollStuff) {
         this.scrollStuff = scrollStuff;
         return this;
     }
 
-    public Algorithm addProtectScrollStuff(ItemStack protectScrollStuff) {
+    public EnhanceResultStuffGenerator addProtectScrollStuff(ItemStack protectScrollStuff) {
         this.protectScrollStuff = protectScrollStuff;
         return this;
     }
