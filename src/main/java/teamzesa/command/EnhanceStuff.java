@@ -71,14 +71,20 @@ public class EnhanceStuff extends CommandRegisterSection {
         this.sendPlayer = (Player) commandSender;
         Inventory inventory = Bukkit.createInventory(sendPlayer, InventoryType.DROPPER, componentExchanger("강화", ColorList.RED));
 
-//        //4,13,22,31
+        /*
+        0 1 2
+        3 4 5
+        6 7 8
+         */
 //        🔪📜📜
         inventory.setItem(0, this.weaponStuff);
         inventory.setItem(1, this.scrollStuff);
         inventory.setItem(2, this.protectScrollStuff);
 
-        for (int i = 6; i < 9; i++)
-            inventory.setItem(i, this.executeButton);
+//        🔘🔘🔘
+        inventory.setItem(6, this.executeButton);
+        inventory.setItem(7, this.executeButton);
+        inventory.setItem(8, this.executeButton);
 
         sendPlayer.openInventory(inventory);
         return true;

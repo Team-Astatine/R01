@@ -3,6 +3,7 @@ package teamzesa.event.Enhance;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.entity.User;
 import teamzesa.event.register.EventRegister;
@@ -31,7 +32,7 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
         this.targetUser = new UserController().readUser(this.ownerPlayer);
     }
 
-    private boolean interactingInfoItem(int modelData) {
+    private boolean interactingInfoItemValidation(int modelData) {
         boolean valid1 = this.event.getInventory().getType() == InventoryType.DROPPER;
         boolean valid2 = this.currentStuff != null;
         boolean valid3 = valid2 && this.currentStuff.getItemMeta() != null;
@@ -43,18 +44,21 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
     @Override
     public void execute() {
         System.out.println("execute 1");
-        if (interactingInfoItem(PANEL_STUFF_CUSTOM_DATA)) {
+        if (interactingInfoItemValidation(PANEL_STUFF_CUSTOM_DATA)) {
             this.event.setCancelled(true);
             return;
         }
 
-
+//        debug
         System.out.println("execute 2");
-        if (interactingInfoItem(EXECUTE_STUFF_DATA))
-            System.out.println(1);
+        if (interactingInfoItemValidation(EXECUTE_STUFF_DATA))
+            enhanceStuffGeneratorExecute();
+    }
 
-//        ItemStack resultStuff = new Algorithm()
-//                .addWeaponStuff(this.currentStuff)
-//                .executeEnhance();
+    private void enhanceStuffGeneratorExecute() {
+//        인벤토리슬롯의특정 아이템을 가져올수있음
+        InventoryView inventoryView = this.event.getView();
+//        inventoryView.
+
     }
 }
