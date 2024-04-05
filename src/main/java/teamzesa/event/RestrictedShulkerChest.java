@@ -14,7 +14,7 @@ public class RestrictedShulkerChest extends StringComponentExchanger implements 
 
     private Player player;
     private ItemStack itemStack;
-    private Inventory playerInventory;
+    private Inventory clickerInventory;
     private Inventory currentOpeningContainerInventory;
     private final InventoryClickEvent event;
 
@@ -28,14 +28,14 @@ public class RestrictedShulkerChest extends StringComponentExchanger implements 
     public void init() {
         this.player = (Player) this.event.getWhoClicked();
         this.itemStack = this.event.getCurrentItem();
-        this.playerInventory = this.event.getClickedInventory();
+        this.clickerInventory = this.event.getClickedInventory();
         this.currentOpeningContainerInventory = this.event.getInventory();
     }
 
     @Override
     public void execute() {
 //        System.out.println("null check");
-        if (this.playerInventory == null)
+        if (this.clickerInventory == null)
             return;
 
 //        System.out.println("getClickedInv > " + this.playerInventory.getType());
@@ -46,7 +46,7 @@ public class RestrictedShulkerChest extends StringComponentExchanger implements 
             return;
 
 //        System.out.println("clicker container Typing Check");
-        if (this.playerInventory.getType() != InventoryType.PLAYER)
+        if (this.clickerInventory.getType() != InventoryType.PLAYER)
             return;
 
 //        System.out.println("itemStack Type Check");
