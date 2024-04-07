@@ -17,6 +17,9 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
     private User targetUser;
     private Player ownerPlayer;
     private ItemStack currentStuff;
+    private ItemStack weaponStuff;
+    private ItemStack scrollStuff;
+    private ItemStack protectScroll;
     private final InventoryClickEvent event;
 
     public EnhanceInventoryClickEvent(InventoryClickEvent event) {
@@ -30,6 +33,10 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
         this.currentStuff = this.event.getCurrentItem();
         this.ownerPlayer = this.event.getWhoClicked() instanceof Player player ? player : null;
         this.targetUser = new UserController().readUser(this.ownerPlayer);
+
+        this.weaponStuff = this.event.getView().getItem(3);
+        this.scrollStuff = this.event.getView().getItem(4);
+        this.protectScroll = this.event.getView().getItem(5);
     }
 
     private boolean interactingInfoItemValidation(int modelData) {
@@ -49,16 +56,19 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
             return;
         }
 
-//        debug
         System.out.println("execute 2");
-        if (interactingInfoItemValidation(EXECUTE_STUFF_DATA))
-            enhanceStuffGeneratorExecute();
+        if (interactingInfoItemValidation(EXECUTE_STUFF_DATA)) {
+            if (this.weaponStuff != null && this.scrollStuff != null)
+                enhanceStuffGeneratorExecute();
+            this.event.setCancelled(true);
+        }
     }
 
     private void enhanceStuffGeneratorExecute() {
-//        인벤토리슬롯의특정 아이템을 가져올수있음
-        InventoryView inventoryView = this.event.getView();
-//        inventoryView.
-
+        new EnhanceResultStuffGenerator()
+            .addWeaponStuff(this.weaponStuff)
+            .addScrollStuff(this.scrollStuff)
+            .addProtectScrollStuff(this.protectScroll)
+            .executeEnhance();
     }
 }

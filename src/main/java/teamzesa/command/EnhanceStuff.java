@@ -23,11 +23,11 @@ import java.util.ArrayList;
 
 public class EnhanceStuff extends CommandRegisterSection {
     private Player sendPlayer;
-    private ItemStack spaceStuff;
     private ItemStack weaponStuff;
     private ItemStack scrollStuff;
     private ItemStack protectScrollStuff;
     private ItemStack executeButton;
+
     public final static int PANEL_STUFF_CUSTOM_DATA = 20000;
     public final static int EXECUTE_STUFF_DATA = 30000;
 
@@ -75,7 +75,8 @@ public class EnhanceStuff extends CommandRegisterSection {
         0 1 2
         3 4 5
         6 7 8
-         */
+        */
+
 //        🔪📜📜
         inventory.setItem(0, this.weaponStuff);
         inventory.setItem(1, this.scrollStuff);
