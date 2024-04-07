@@ -20,9 +20,9 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'junit:junit:4.13.1'
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
-    testImplementation 'junit:junit:4.13.1'
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.1'
+    testImplementation 'junit:junit:4.13.2'
     compileOnly "org.purpurmc.purpur:purpur-api:1.20.4-R0.1-SNAPSHOT"
 //    compileOnly "io.papermc.paper:paper-api:1.20.2-R0.1-SNAPSHOT"
 }
