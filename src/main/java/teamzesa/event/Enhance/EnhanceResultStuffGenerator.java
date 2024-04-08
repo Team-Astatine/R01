@@ -35,7 +35,7 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
         this.weaponStuff = weaponStuff;
         if (weaponStuff.hasCustomModelData())
             this.currentStuffPercentage = weaponStuff.getCustomModelData();
-        else this.currentStuffPercentage = 0;
+        else this.currentStuffPercentage = 1;
         return this;
     }
 
@@ -82,17 +82,16 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
     }
     private int getCurrentStuffPercentage() {
         return switch (this.currentStuffPercentage) {
-            case 0-> 10; //100%
-            case 1-> 9; //90%
-            case 2-> 8; //80%
-            case 3-> 7; //70%
-            case 4-> 6; //60%
-            case 5-> 5; //50%
-            case 6-> 4; //40%
-            case 7-> 3; //30%
-            case 8-> 2; //20%
-            case 9-> 1; //10%
-            case 10-> 1;
+            case 1-> 10;//100%
+            case 2-> 9; //90%
+            case 3-> 8; //80%
+            case 4-> 7; //70%
+            case 5-> 6; //60%
+            case 6-> 5; //50%
+            case 7-> 4; //40%
+            case 8-> 3; //30%
+            case 9-> 2; //20%
+            case 10-> 1;//10%
             default -> 0;
         };
     }
