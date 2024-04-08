@@ -36,7 +36,6 @@ public class UserBuilder {
     public UserBuilder(Player player) {
         uuid(player.getUniqueId());
         name(player.getName());
-        //debug
         ipList(player.getAddress().getHostName());
         joinCount(1);
         level(player.getLevel());
