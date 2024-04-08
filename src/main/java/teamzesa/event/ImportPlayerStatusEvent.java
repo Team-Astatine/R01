@@ -78,7 +78,6 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
             ItemStack armour = kit.getArmour();
             armour.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
             armour.addEnchantment(Enchantment.DURABILITY, 2);
-//            armour.setCustomModelData(1);
             this.player.getInventory().addItem(kit.getArmour());
         }
 
