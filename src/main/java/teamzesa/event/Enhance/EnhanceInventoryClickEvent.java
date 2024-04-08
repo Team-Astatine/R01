@@ -66,6 +66,7 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
 
     private void enhanceStuffGeneratorExecute() {
         new EnhanceResultStuffGenerator()
+            .addWeaponOwner((Player)this.event.getWhoClicked())
             .addWeaponStuff(this.weaponStuff)
             .addScrollStuff(this.scrollStuff)
             .addProtectScrollStuff(this.protectScroll)

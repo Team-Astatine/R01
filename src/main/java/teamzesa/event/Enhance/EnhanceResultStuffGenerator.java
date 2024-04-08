@@ -4,7 +4,9 @@ import net.kyori.adventure.text.Component;
 import org.apache.maven.model.InputLocation;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.EnhanceComment;
 import teamzesa.util.Interface.StringComponentExchanger;
 
@@ -17,25 +19,30 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
     현재 클래스에선 강화에 대한 알고리즘만 처리할 예정
     */
 
+    private final int LOW_LEVEL = 1;
+    private final int MAX_LEVEL = 10;
     private int currentStuffPercentage;
 
+    private Player weaponsOwner;
     private ItemStack weaponStuff;
     private ItemStack scrollStuff;
     private ItemStack protectScrollStuff;
 
     public EnhanceResultStuffGenerator() {}
 
-    public EnhanceResultStuffGenerator(ItemStack weaponStuff, ItemStack scrollStuff, ItemStack protectScrollStuff) {
-        addWeaponStuff(weaponStuff);
-        addScrollStuff(scrollStuff);
-        addProtectScrollStuff(protectScrollStuff);
+    public EnhanceResultStuffGenerator addWeaponOwner(Player player) {
+        this.weaponsOwner = player;
+        return this;
     }
 
     public EnhanceResultStuffGenerator addWeaponStuff(ItemStack weaponStuff) {
         this.weaponStuff = weaponStuff;
         if (weaponStuff.hasCustomModelData())
             this.currentStuffPercentage = weaponStuff.getCustomModelData();
-        else this.currentStuffPercentage = 1;
+        else {
+            this.weaponStuff.setCustomModelData(this.LOW_LEVEL);
+            this.currentStuffPercentage = this.weaponStuff.getCustomModelData();
+        }
         return this;
     }
 
@@ -49,15 +56,17 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
         return this;
     }
 
-    public ItemStack executeEnhance() {
+    public void executeEnhance() {
 //        methodImplement
+        if (this.currentStuffPercentage > this.MAX_LEVEL) {
+            playerSendMsgComponentExchanger(this.weaponsOwner, "이미 최고 레벨입니다.", ColorList.RED);
+            return;
+        }
+
         int ranNum = Integer.parseInt(String.valueOf(String.format("%1.0f", Math.random() * 10)));
         boolean isSuccessEnhance = ranNum < getCurrentStuffPercentage();
-        System.out.println(isSuccessEnhance);
         if (isSuccessEnhance) successEnhanceScenario();
         else                  failEnhanceScenario();
-
-        return new ItemStack(Material.AIR);
     }
 
     private void failEnhanceScenario() {
@@ -72,12 +81,15 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
             기존 current stuff custom model data +1,
             이름에 +1로 수정
              */
-//            customModelData ++
-        this.weaponStuff.setCustomModelData(this.currentStuffPercentage + 1);
-
 //            lore reload
         this.weaponStuff.lore(null);
         this.weaponStuff.lore(Collections.singletonList(getLoreCommentComponent()));
+
+//            customModelData ++
+        this.weaponStuff.setCustomModelData(this.currentStuffPercentage + 1);
+
+//        Item Status Setup
+
 
     }
     private int getCurrentStuffPercentage() {
