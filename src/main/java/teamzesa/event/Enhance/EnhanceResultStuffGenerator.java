@@ -23,8 +23,7 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
     private ItemStack scrollStuff;
     private ItemStack protectScrollStuff;
 
-    public EnhanceResultStuffGenerator() {
-    }
+    public EnhanceResultStuffGenerator() {}
 
     public EnhanceResultStuffGenerator(ItemStack weaponStuff, ItemStack scrollStuff, ItemStack protectScrollStuff) {
         addWeaponStuff(weaponStuff);

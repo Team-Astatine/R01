@@ -1,6 +1,5 @@
 package teamzesa.command;
 import org.bukkit.Bukkit;
-import org.bukkit.Color;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -57,7 +56,7 @@ public class God extends CommandRegisterSection {
     private void changeUserStatus(Player targetPlayer) {
         User targetUser = new UserController().readUser(targetPlayer);
         targetUser = new UserBuilder(targetUser)
-                .godMode(!targetUser.isGodMode())
+                .isGodMode(!targetUser.isGodMode())
                 .buildAndUpdate();
         setPotionEffect(targetPlayer,targetUser);
 

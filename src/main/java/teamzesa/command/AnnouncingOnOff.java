@@ -4,12 +4,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.command.register.CommandRegister;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.entity.User;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.CommandExecutorMap;
-import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.userHandler.UserBuilder;
 import teamzesa.util.userHandler.UserController;
 
@@ -27,7 +25,7 @@ public class AnnouncingOnOff extends CommandRegisterSection {
         playerSendMsgComponentExchanger(commandSender, "공지 " + comment + " 완료", ColorList.YELLOW);
 
         new UserBuilder(targetUser)
-                .announcing(!targetUser.isAnnouncing())
+                .isAnnouncing(!targetUser.isAnnouncing())
                 .buildAndUpdate();
         return true;
     }

@@ -9,7 +9,7 @@ public record User (
         int joinCount,
         int level,
         double healthScale,
-        int killStatus,
+        int killCount,
         boolean isGodMode,
         boolean isAnnouncing
         ) {}

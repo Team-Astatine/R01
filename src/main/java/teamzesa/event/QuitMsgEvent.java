@@ -25,21 +25,21 @@ public class QuitMsgEvent extends StringComponentExchanger implements EventRegis
 
     @Override
     public void execute() {
-        if (this.quitUser.killStatus() == 0)
+        if (this.quitUser.killCount() == 0)
             this.quitEvent.quitMessage(
                     componentExchanger(" - " + this.quitUser.name(), ColorList.RED)
             );
 
         else
             this.quitEvent.quitMessage(
-                    componentExchanger(" - [ " + this.quitUser.killStatus() + "KILL ] " + this.quitUser.name(), ColorList.RED)
+                    componentExchanger(" - [ " + this.quitUser.killCount() + "KILL ] " + this.quitUser.name(), ColorList.RED)
             );
     }
 }
 //debug
 /*
 [06:41:13 ERROR]: Could not pass event PlayerQuitEvent to R01 v4.3
-java.lang.NullPointerException: Cannot invoke "teamzesa.entity.User.killStatus()" because "this.quitUser" is null
+java.lang.NullPointerException: Cannot invoke "teamzesa.entity.User.killCount()" because "this.quitUser" is null
         at teamzesa.event.QuitMsgEvent.execute(QuitMsgEvent.java:29) ~[R01-4.3.jar:?]
         at teamzesa.event.QuitMsgEvent.<init>(QuitMsgEvent.java:18) ~[R01-4.3.jar:?]
         at teamzesa.event.register.EventRegisterSection.quitEvent(EventRegisterSection.java:58) ~[R01-4.3.jar:?]

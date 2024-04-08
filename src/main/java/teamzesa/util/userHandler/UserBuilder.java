@@ -14,35 +14,36 @@ public class UserBuilder {
     private int joinCount;
     private int level;
     private double healthScale;
-    private int killStatus;
+    private int killCount;
     private boolean isGodMode;
     private boolean isAnnouncing;
 
     public UserBuilder(){}
 
     public UserBuilder(@NotNull User user) {
-        this.uuid = user.uuid();
-        this.name = user.name();
-        this.connectionIPList = user.connectionIPList();
-        this.joinCount = user.joinCount();
-        this.level = user.level();
-        this.healthScale = user.healthScale();
-        this.killStatus = user.killStatus();
-        this.isGodMode = user.isGodMode();
-        this.isAnnouncing = user.isAnnouncing();
+        uuid(user.uuid());
+        name(user.name());
+        ipList(user.connectionIPList());
+        joinCount(user.joinCount());
+        level(user.level());
+        healthScale(user.healthScale());
+        killCount(user.killCount());
+        isGodMode(user.isGodMode());
+        isAnnouncing(user.isAnnouncing());
     }
 
 //    First Time add User
     public UserBuilder(Player player) {
-        this.uuid = player.getUniqueId();
-        this.name = player.getName();
-        this.connectionIPList.add(player.getAddress().getAddress().getHostAddress());
-        this.joinCount = 1;
-        this.level = player.getLevel();
-        this.killStatus = 0;
-        this.healthScale = player.getHealthScale();
-        this.isGodMode = false;
-        this.isAnnouncing = true;
+        uuid(player.getUniqueId());
+        name(player.getName());
+        //debug
+        ipList(player.getAddress().getHostName());
+        joinCount(1);
+        level(player.getLevel());
+        healthScale(player.getHealthScale());
+        killCount(0);
+        isGodMode(false);
+        isAnnouncing(false);
     }
 
     public UserBuilder uuid(UUID uuid) {
@@ -60,12 +61,18 @@ public class UserBuilder {
         return this;
     }
 
+    public UserBuilder ipList(String ip) {
+        this.connectionIPList.add(ip);
+        return this;
+    }
+
     public UserBuilder joinCount(int joinCnt) {
         this.joinCount = joinCnt;
         return this;
     }
 
     public UserBuilder level(int level) {
+        this.level = level;
         return this;
     }
 
@@ -74,18 +81,18 @@ public class UserBuilder {
         return this;
     }
 
-    public UserBuilder killStatus(int killStatus) {
-        this.killStatus = killStatus;
+    public UserBuilder killCount(int currentKillCount) {
+        this.killCount = currentKillCount;
         return this;
     }
 
-    public UserBuilder godMode(boolean currentGodMode) {
+    public UserBuilder isGodMode(boolean currentGodMode) {
         this.isGodMode = currentGodMode;
         return this;
     }
 
-    public UserBuilder announcing(boolean currentAnnouncing) {
-        this.isAnnouncing = currentAnnouncing;
+    public UserBuilder isAnnouncing(boolean currentAnnouncingStatus) {
+        this.isAnnouncing = currentAnnouncingStatus;
         return this;
     }
 
@@ -97,7 +104,7 @@ public class UserBuilder {
                 joinCount,
                 level,
                 healthScale,
-                killStatus,
+                killCount,
                 isGodMode,
                 isAnnouncing
         );

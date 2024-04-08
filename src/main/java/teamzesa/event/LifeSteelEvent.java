@@ -97,7 +97,7 @@ public class LifeSteelEvent extends StringComponentExchanger implements EventReg
         this.userController.healthUpdate(
                 new UserBuilder(this.killerUser)
                         .healthScale(this.killer.getHealthScale() + STEP_SIZE)
-                        .killStatus(this.killerUser.killStatus() + 1)
+                        .killCount(this.killerUser.killCount() + 1)
                         .build());
 
         playerSendMsgComponentExchanger(this.deather, this.killer.getName() + "님이 체력을 약탈했습니다.", ColorList.RED);

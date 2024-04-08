@@ -95,13 +95,13 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
         this.announcer.joinAnnouncer(this.player);
         this.announcer.countAnnouncer(this.player);
 
-        if (this.user.killStatus() == 0)
+        if (this.user.killCount() == 0)
             this.event.joinMessage(
                 componentExchanger(" + " + this.user.name(), ColorList.RED)
             );
 
         else this.event.joinMessage(
-            componentExchanger(" + [ " + user.killStatus() + "KILL ] " + user.name(), ColorList.RED)
+            componentExchanger(" + [ " + user.killCount() + "KILL ] " + user.name(), ColorList.RED)
         );
     }
 
