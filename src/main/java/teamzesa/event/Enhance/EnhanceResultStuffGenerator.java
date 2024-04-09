@@ -7,6 +7,7 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.EnhanceComment;
@@ -23,6 +24,7 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
 
     private final int LOW_LEVEL = 1;
     private final int MAX_LEVEL = 10;
+    private final double DAMAGE_INCREASE_PERCENTAGE = 0.5;
     private int currentStuffPercentage;
 
     private Player weaponsOwner;
@@ -87,11 +89,15 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
         this.weaponStuff.setCustomModelData(this.currentStuffPercentage + 1);
 
 //        Item Status Setup
-        this.weaponStuff.getDamage();
-        this.weaponStuff.getItemMeta().
-        ItemMeta itemMeta = this.weaponStuff.getItemMeta();
-        itemMeta.getAttributeModifiers(Attribute.GENERIC_ARMOR).;
+        System.out.println(getWeaponDamage(this.weaponStuff));
+    }
 
+    private double getWeaponDamage(ItemStack weapon) {
+        ItemMeta weaponItemMeta = weapon.getItemMeta();
+        if (weaponItemMeta instanceof Damageable damageable) {
+            return damageable.getDamage();
+        }
+        return 0.0;
     }
 
     private int getCurrentStuffPercentage() {
