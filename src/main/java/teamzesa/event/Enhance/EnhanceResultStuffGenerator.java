@@ -3,9 +3,11 @@ package teamzesa.event.Enhance;
 import net.kyori.adventure.text.Component;
 import org.apache.maven.model.InputLocation;
 import org.bukkit.Material;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.EnhanceComment;
 import teamzesa.util.Interface.StringComponentExchanger;
@@ -77,21 +79,21 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
     private void successEnhanceScenario() {
 //            methodImplement
 //            debug
-            /*
-            기존 current stuff custom model data +1,
-            이름에 +1로 수정
-             */
-//            lore reload
+//        lore reload
         this.weaponStuff.lore(null);
         this.weaponStuff.lore(Collections.singletonList(getLoreCommentComponent()));
 
-//            customModelData ++
+//        customModelData ++
         this.weaponStuff.setCustomModelData(this.currentStuffPercentage + 1);
 
 //        Item Status Setup
-
+        this.weaponStuff.getDamage();
+        this.weaponStuff.getItemMeta().
+        ItemMeta itemMeta = this.weaponStuff.getItemMeta();
+        itemMeta.getAttributeModifiers(Attribute.GENERIC_ARMOR).;
 
     }
+
     private int getCurrentStuffPercentage() {
         return switch (this.currentStuffPercentage) {
             case 1-> 10;//100%
