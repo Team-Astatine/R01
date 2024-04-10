@@ -3,7 +3,6 @@ package teamzesa.event.Enhance;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.entity.User;
 import teamzesa.event.register.EventRegister;
@@ -17,7 +16,7 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
     private User targetUser;
     private Player ownerPlayer;
     private ItemStack currentStuff;
-    private ItemStack weaponStuff;
+    private ItemStack targetStuff;
     private ItemStack scrollStuff;
     private ItemStack protectScroll;
     private final InventoryClickEvent event;
@@ -34,7 +33,7 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
         this.ownerPlayer = this.event.getWhoClicked() instanceof Player player ? player : null;
         this.targetUser = new UserController().readUser(this.ownerPlayer);
 
-        this.weaponStuff = this.event.getView().getItem(3);
+        this.targetStuff = this.event.getView().getItem(3);
         this.scrollStuff = this.event.getView().getItem(4);
         this.protectScroll = this.event.getView().getItem(5);
     }
@@ -58,7 +57,7 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
 
         System.out.println("execute 2");
         if (interactingInfoItemValidation(EXECUTE_STUFF_DATA)) {
-            if (this.weaponStuff != null && this.scrollStuff != null)
+            if (this.targetStuff != null && this.scrollStuff != null)
                 enhanceStuffGeneratorExecute();
             this.event.setCancelled(true);
         }
@@ -67,7 +66,7 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
     private void enhanceStuffGeneratorExecute() {
         new EnhanceResultStuffGenerator()
             .addWeaponOwner((Player)this.event.getWhoClicked())
-            .addWeaponStuff(this.weaponStuff)
+            .addWeaponStuff(this.targetStuff)
             .addScrollStuff(this.scrollStuff)
             .addProtectScrollStuff(this.protectScroll)
             .executeEnhance();

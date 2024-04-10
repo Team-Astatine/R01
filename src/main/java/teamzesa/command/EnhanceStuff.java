@@ -1,6 +1,5 @@
 package teamzesa.command;
 
-import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -12,18 +11,14 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.checkerframework.checker.units.qual.A;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.CommandExecutorMap;
 
-import java.awt.*;
-import java.util.ArrayList;
-
 public class EnhanceStuff extends CommandRegisterSection {
     private Player sendPlayer;
-    private ItemStack weaponStuff;
+    private ItemStack targetStuff;
     private ItemStack scrollStuff;
     private ItemStack protectScrollStuff;
     private ItemStack executeButton;
@@ -38,7 +33,7 @@ public class EnhanceStuff extends CommandRegisterSection {
 
     private void init() {
 //        panel
-        this.weaponStuff = createItem(Material.NETHERITE_SWORD, "강화할 아래슬롯에 무기를 올려주세요", ColorList.ORANGE);
+        this.targetStuff = createItem(Material.NETHERITE_SWORD, "강화할 아래슬롯에 무기를 올려주세요", ColorList.ORANGE);
         this.scrollStuff = createItem(Material.ANVIL, "아이템에 들어갈 재료를 아래슬롯에 넣어주세요", ColorList.ORANGE);
         this.protectScrollStuff = createItem(Material.HEART_OF_THE_SEA, "파괴방어 스크롤을 아래슬롯에 넣어주세요", ColorList.ORANGE);
         this.executeButton = createExecuteItem(Material.RED_STAINED_GLASS_PANE, "강화 실행", ColorList.DISCORD_COLOR);
@@ -78,7 +73,7 @@ public class EnhanceStuff extends CommandRegisterSection {
         */
 
 //        🔪📜📜
-        inventory.setItem(0, this.weaponStuff);
+        inventory.setItem(0, this.targetStuff);
         inventory.setItem(1, this.scrollStuff);
         inventory.setItem(2, this.protectScrollStuff);
 

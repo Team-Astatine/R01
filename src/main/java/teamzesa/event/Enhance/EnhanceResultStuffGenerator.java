@@ -1,10 +1,7 @@
 package teamzesa.event.Enhance;
 
 import net.kyori.adventure.text.Component;
-import org.apache.maven.model.InputLocation;
 import org.bukkit.Material;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
@@ -14,7 +11,6 @@ import teamzesa.util.Enum.EnhanceComment;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 import java.util.Collections;
-import java.util.Map;
 
 public class EnhanceResultStuffGenerator extends StringComponentExchanger {
     /*
@@ -28,7 +24,7 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
     private int currentStuffPercentage;
 
     private Player weaponsOwner;
-    private ItemStack weaponStuff;
+    private ItemStack targetStuff;
     private ItemStack scrollStuff;
     private ItemStack protectScrollStuff;
 
@@ -40,12 +36,12 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
     }
 
     public EnhanceResultStuffGenerator addWeaponStuff(ItemStack weaponStuff) {
-        this.weaponStuff = weaponStuff;
+        this.targetStuff = weaponStuff;
         if (weaponStuff.hasCustomModelData())
             this.currentStuffPercentage = weaponStuff.getCustomModelData();
         else {
-            this.weaponStuff.setCustomModelData(this.LOW_LEVEL);
-            this.currentStuffPercentage = this.weaponStuff.getCustomModelData();
+            this.targetStuff.setCustomModelData(this.LOW_LEVEL);
+            this.currentStuffPercentage = this.targetStuff.getCustomModelData();
         }
         return this;
     }
@@ -82,21 +78,20 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
 //            methodImplement
 //            debug
 //        lore reload
-        this.weaponStuff.lore(null);
-        this.weaponStuff.lore(Collections.singletonList(getLoreCommentComponent()));
+        this.targetStuff.lore(null);
+        this.targetStuff.lore(Collections.singletonList(getLoreCommentComponent()));
 
 //        customModelData ++
-        this.weaponStuff.setCustomModelData(this.currentStuffPercentage + 1);
+        this.targetStuff.setCustomModelData(this.currentStuffPercentage + 1);
 
 //        Item Status Setup
-        System.out.println(getWeaponDamage(this.weaponStuff));
+        System.out.println(getWeaponDamage());
     }
 
-    private double getWeaponDamage(ItemStack weapon) {
-        ItemMeta weaponItemMeta = weapon.getItemMeta();
-        if (weaponItemMeta instanceof Damageable damageable) {
+    private double getWeaponDamage() {
+        System.out.println(this.targetStuff.damage());
+        if (this.targetStuff instanceof Damageable damageable)
             return damageable.getDamage();
-        }
         return 0.0;
     }
 
@@ -117,7 +112,7 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
     }
 
     private Component getLoreCommentComponent() {
-        return switch (this.weaponStuff.getCustomModelData()) {
+        return switch (this.targetStuff.getCustomModelData()) {
             case 1 -> EnhanceComment.ONE_STEP.getLoreComment();
             case 2 -> EnhanceComment.TWO_STEP.getLoreComment();
             case 3 -> EnhanceComment.THREE_STEP.getLoreComment();
