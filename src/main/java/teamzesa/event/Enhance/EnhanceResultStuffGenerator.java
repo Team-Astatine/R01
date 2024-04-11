@@ -1,14 +1,12 @@
 package teamzesa.event.Enhance;
 
 import net.kyori.adventure.text.Component;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
-import teamzesa.util.Enum.ColorList;
-import teamzesa.util.Enum.EnhanceComment;
+import org.jetbrains.annotations.Nullable;
 import teamzesa.util.Interface.StringComponentExchanger;
+import teamzesa.util.Enum.*;
 
 import java.util.Collections;
 
@@ -75,24 +73,25 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
 }
     
     private void successEnhanceScenario() {
-//            methodImplement
-//            debug
-//        lore reload
+//            methodImplemente
+        double damage = 0;
+        int sharpnessEnchantLevel = this.targetStuff.getEnchantLevel(Enchantment.DAMAGE_ALL);
+        for (WeaponMap weaponMap : WeaponMap.values()) {
+            if (this.targetStuff.getType().equals(weaponMap.getMaterial())) {
+                damage = sharpnessEnchantLevel + weaponMap.getDamage();
+                break;
+            }
+        }
+
         this.targetStuff.lore(null);
         this.targetStuff.lore(Collections.singletonList(getLoreCommentComponent()));
+        this.targetStuff.addEnchantment(
+                Enchantment.DAMAGE_ALL, sharpnessEnchantLevel + this.currentStuffPercentage);
 
-//        customModelData ++
-        this.targetStuff.setCustomModelData(this.currentStuffPercentage + 1);
+        ItemMeta itemMeta = this.targetStuff.getItemMeta();
+        itemMeta.setCustomModelData(++ this.currentStuffPercentage);
 
-//        Item Status Setup
-        System.out.println(getWeaponDamage());
-    }
-
-    private double getWeaponDamage() {
-        System.out.println(this.targetStuff.damage());
-        if (this.targetStuff instanceof Damageable damageable)
-            return damageable.getDamage();
-        return 0.0;
+        this.targetStuff.setItemMeta(itemMeta);
     }
 
     private int getCurrentStuffPercentage() {
@@ -111,7 +110,7 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
         };
     }
 
-    private Component getLoreCommentComponent() {
+    private @Nullable Component getLoreCommentComponent() {
         return switch (this.targetStuff.getCustomModelData()) {
             case 1 -> EnhanceComment.ONE_STEP.getLoreComment();
             case 2 -> EnhanceComment.TWO_STEP.getLoreComment();
