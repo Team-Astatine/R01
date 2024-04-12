@@ -9,12 +9,12 @@ import teamzesa.event.register.EventRegister;
 
 import java.util.function.Predicate;
 
-public class EntityDmgByEntityEvent implements EventRegister {
+public class EntityAttackSpeedHandler implements EventRegister {
     private Entity damagerEntity;
     private Entity targetEntity;
     private final EntityDamageByEntityEvent event;
 
-    public EntityDmgByEntityEvent(EntityDamageByEntityEvent event) {
+    public EntityAttackSpeedHandler(EntityDamageByEntityEvent event) {
         this.event = event;
         init();
         execute();

@@ -1,6 +1,7 @@
 package teamzesa.event.Enhance;
 
 import net.kyori.adventure.text.Component;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -73,25 +74,10 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
 }
     
     private void successEnhanceScenario() {
-//            methodImplemente
-        double damage = 0;
-        int sharpnessEnchantLevel = this.targetStuff.getEnchantLevel(Enchantment.DAMAGE_ALL);
-        for (WeaponMap weaponMap : WeaponMap.values()) {
-            if (this.targetStuff.getType().equals(weaponMap.getMaterial())) {
-                damage = sharpnessEnchantLevel + weaponMap.getDamage();
-                break;
-            }
-        }
-
+//            methodImplement
         this.targetStuff.lore(null);
         this.targetStuff.lore(Collections.singletonList(getLoreCommentComponent()));
-        this.targetStuff.addEnchantment(
-                Enchantment.DAMAGE_ALL, sharpnessEnchantLevel + this.currentStuffPercentage);
-
-        ItemMeta itemMeta = this.targetStuff.getItemMeta();
-        itemMeta.setCustomModelData(++ this.currentStuffPercentage);
-
-        this.targetStuff.setItemMeta(itemMeta);
+        this.targetStuff.setCustomModelData(++ this.currentStuffPercentage);
     }
 
     private int getCurrentStuffPercentage() {
