@@ -5,16 +5,19 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.jetbrains.annotations.NotNull;
+import teamzesa.entity.User;
 import teamzesa.event.register.EventRegister;
+import teamzesa.util.userHandler.UserController;
 
 import java.util.function.Predicate;
 
-public class EntityDmgByEntityEvent implements EventRegister {
+public class EntityAttackSpeedHandler implements EventRegister {
     private Entity damagerEntity;
     private Entity targetEntity;
+    private User damagerUser;
     private final EntityDamageByEntityEvent event;
 
-    public EntityDmgByEntityEvent(EntityDamageByEntityEvent event) {
+    public EntityAttackSpeedHandler(EntityDamageByEntityEvent event) {
         this.event = event;
         init();
         execute();
@@ -24,6 +27,7 @@ public class EntityDmgByEntityEvent implements EventRegister {
     public void init() {
         this.damagerEntity = this.event.getDamager();
         this.targetEntity = this.event.getEntity();
+        this.damagerUser = new UserController().readUser(this.damagerUser.uuid());
     }
 
     @Override
@@ -42,7 +46,7 @@ public class EntityDmgByEntityEvent implements EventRegister {
         if (!stuffCheck) //One Hand Sword
             hurtTick = 10;
 
-        if (stuffCheck) //Two Hand Sword
+        if (stuffCheck || this.damagerUser.isGodMode()) //Two Hand Sword
             hurtTick = 1;
 
 //        ((LivingEntity) e.getEntity()).setMaximumNoDamageTicks(1);

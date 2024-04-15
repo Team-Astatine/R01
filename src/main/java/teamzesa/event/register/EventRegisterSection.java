@@ -1,7 +1,6 @@
 package teamzesa.event.register;
 
 import io.papermc.paper.event.player.PlayerArmSwingEvent;
-import io.papermc.paper.event.player.PlayerInventorySlotChangeEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -144,7 +143,7 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void entityToEntityDamageEvent(@NotNull EntityDamageByEntityEvent event) {
-        new EntityDmgByEntityEvent(event);
+        new EntityAttackSpeedHandler(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
