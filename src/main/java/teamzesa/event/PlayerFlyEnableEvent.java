@@ -13,9 +13,8 @@ import teamzesa.util.userHandler.UserController;
 
 public class PlayerFlyEnableEvent extends StringComponentExchanger implements EventRegister {
     private Player player;
-    private User user;
     private String comment;
-    private Event event;
+    private final Event event;
 
     public PlayerFlyEnableEvent(Event event) {
         this.event = event;
