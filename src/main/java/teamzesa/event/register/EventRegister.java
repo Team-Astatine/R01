@@ -1,5 +1,7 @@
 package teamzesa.event.register;
 
+import org.bukkit.event.entity.EntityDamageEvent;
+
 public interface EventRegister {
 
     /*
@@ -11,4 +13,6 @@ public interface EventRegister {
     이벤트 실행
     */
     void execute();
+
+    void entityDmg(EntityDamageEvent event);
 }

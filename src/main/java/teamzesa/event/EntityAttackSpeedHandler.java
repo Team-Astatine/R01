@@ -27,13 +27,13 @@ public class EntityAttackSpeedHandler implements EventRegister {
     public void init() {
         this.damagerEntity = this.event.getDamager();
         this.targetEntity = this.event.getEntity();
-        this.damagerUser = new UserController().readUser(this.damagerUser.uuid());
     }
 
     @Override
     public void execute() {
         if (!(this.damagerEntity instanceof Player damager))
             return;
+        this.damagerUser = new UserController().readUser(this.damagerEntity.getUniqueId());
 
         if (!(this.targetEntity instanceof Player target))
             return;
