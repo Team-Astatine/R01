@@ -49,13 +49,11 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
 
     @Override
     public void execute() {
-        System.out.println("execute 1");
         if (interactingInfoItemValidation(PANEL_STUFF_CUSTOM_DATA)) {
             this.event.setCancelled(true);
             return;
         }
 
-        System.out.println("execute 2");
         if (interactingInfoItemValidation(EXECUTE_STUFF_DATA)) {
             if (this.targetStuff != null && this.scrollStuff != null)
                 enhanceStuffGeneratorExecute();
