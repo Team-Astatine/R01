@@ -85,11 +85,9 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
 
         this.targetStuff.lore(null);
         this.targetStuff.lore(Collections.singletonList(getLoreCommentComponent()));
-        this.targetStuff.addEnchantment(
-                Enchantment.DAMAGE_ALL, sharpnessEnchantLevel + this.currentStuffPercentage);
 
         ItemMeta itemMeta = this.targetStuff.getItemMeta();
-        itemMeta.setCustomModelData(++ this.currentStuffPercentage);
+        itemMeta.setCustomModelData(++this.currentStuffPercentage);
 
         this.targetStuff.setItemMeta(itemMeta);
     }
