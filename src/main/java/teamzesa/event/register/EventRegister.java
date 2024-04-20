@@ -14,5 +14,4 @@ public interface EventRegister {
     */
     void execute();
 
-    void entityDmg(EntityDamageEvent event);
 }
