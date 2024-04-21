@@ -18,7 +18,6 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
 
     private final int LOW_LEVEL = 1;
     private final int MAX_LEVEL = 10;
-    private final double DAMAGE_INCREASE_PERCENTAGE = 0.5;
     private int currentStuffPercentage;
 
     private Player weaponsOwner;
@@ -63,6 +62,7 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
 
         int ranNum = Integer.parseInt(String.valueOf(String.format("%1.0f", Math.random() * 10)));
         boolean isSuccessEnhance = ranNum < getCurrentStuffPercentage();
+
         if (isSuccessEnhance) successEnhanceScenario();
         else                  failEnhanceScenario();
     }
@@ -70,26 +70,18 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
     private void failEnhanceScenario() {
 //            methodImplement
 //            debug
-}
+
+    }
     
     private void successEnhanceScenario() {
-//            methodImplemente
-        double damage = 0;
-        int sharpnessEnchantLevel = this.targetStuff.getEnchantLevel(Enchantment.DAMAGE_ALL);
-        for (WeaponMap weaponMap : WeaponMap.values()) {
-            if (this.targetStuff.getType().equals(weaponMap.getMaterial())) {
-                damage = sharpnessEnchantLevel + weaponMap.getDamage();
-                break;
-            }
-        }
+        playerSendMsgComponentExchanger(
+                this.weaponsOwner,
+                this.targetStuff.getDisplayName()
+                        +  " " + --this.currentStuffPercentage + " -> " + ++this.currentStuffPercentage + "강 강화성공",
+                ColorList.YELLOW);
 
-        this.targetStuff.lore(null);
         this.targetStuff.lore(Collections.singletonList(getLoreCommentComponent()));
-
-        ItemMeta itemMeta = this.targetStuff.getItemMeta();
-        itemMeta.setCustomModelData(++this.currentStuffPercentage);
-
-        this.targetStuff.setItemMeta(itemMeta);
+        this.targetStuff.setCustomModelData(++this.currentStuffPercentage);
     }
 
     private int getCurrentStuffPercentage() {
@@ -108,19 +100,11 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
         };
     }
 
-    private @Nullable Component getLoreCommentComponent() {
-        return switch (this.targetStuff.getCustomModelData()) {
-            case 1 -> EnhanceComment.ONE_STEP.getLoreComment();
-            case 2 -> EnhanceComment.TWO_STEP.getLoreComment();
-            case 3 -> EnhanceComment.THREE_STEP.getLoreComment();
-            case 4 -> EnhanceComment.FOUR_STEP.getLoreComment();
-            case 5 -> EnhanceComment.FIVE_STEP.getLoreComment();
-            case 6 -> EnhanceComment.SIX_STEP.getLoreComment();
-            case 7 -> EnhanceComment.SEVEN_STEP.getLoreComment();
-            case 8 -> EnhanceComment.EIGHT_STEP.getLoreComment();
-            case 9 -> EnhanceComment.NINE_STEP.getLoreComment();
-            case 10 -> EnhanceComment.TEN_STEP.getLoreComment();
-            default -> null;
-        };
+    private Component getLoreCommentComponent() {
+        for (EnhanceComment enhanceComment : EnhanceComment.values()) {
+            if (this.targetStuff.getCustomModelData() == enhanceComment.getStep())
+                return enhanceComment.getLoreComment();
+        }
+        return null;
     }
 }
