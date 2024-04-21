@@ -18,7 +18,8 @@ public enum CommandExecutorMap {
     SAVE_USER_DATA("SaveUserData", new SaveUserData()),
     CONFIG_RELOAD("dataFileReload", new DataFileReload()),
     ANNOUNCING("공지", new AnnouncingOnOff()),
-    ENHANCE("강화", new EnhanceStuff());
+    ENHANCE("강화", new EnhanceStuff()),
+    ENHANCE_SET("enhance", new EnhnaceSet());
 
     private final String command;
     private final CommandExecutor executor;
