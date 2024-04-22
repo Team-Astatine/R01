@@ -16,8 +16,8 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
     현재 클래스에선 강화에 대한 알고리즘만 처리할 예정
     */
 
-    private final int LOW_LEVEL = 1;
-    private final int MAX_LEVEL = 10;
+    private final int LOW_LEVEL = 0;
+    private final int MAX_LEVEL = 9;
     private int currentStuffPercentage;
 
     private Player weaponsOwner;
@@ -68,34 +68,47 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
     }
 
     private void failEnhanceScenario() {
-//            methodImplement
-//            debug
+//            methodImplement 무기파괴 구현
 
+        playerSendMsgComponentExchanger(
+                this.weaponsOwner,
+                this.targetStuff.getDisplayName()
+                        +  " " + this.currentStuffPercentage + "강 -> " + --this.currentStuffPercentage + "강 강화실패",
+                ColorList.PINK);
+
+        this.targetStuff.setCustomModelData(this.currentStuffPercentage);
+        this.targetStuff.lore(Collections.singletonList(getLoreCommentComponent()));
+
+//        debug
+        playerSendMsgComponentExchanger(this.weaponsOwner, String.valueOf(this.currentStuffPercentage), ColorList.RED);
     }
     
     private void successEnhanceScenario() {
         playerSendMsgComponentExchanger(
                 this.weaponsOwner,
                 this.targetStuff.getDisplayName()
-                        +  " " + --this.currentStuffPercentage + " -> " + ++this.currentStuffPercentage + "강 강화성공",
-                ColorList.YELLOW);
+                        +  " " + this.currentStuffPercentage + "강 -> " + ++this.currentStuffPercentage + "강 강화성공",
+                ColorList.DISCORD_COLOR);
 
+        this.targetStuff.setCustomModelData(this.currentStuffPercentage);
         this.targetStuff.lore(Collections.singletonList(getLoreCommentComponent()));
-        this.targetStuff.setCustomModelData(++this.currentStuffPercentage);
+
+//        debug
+        playerSendMsgComponentExchanger(this.weaponsOwner, String.valueOf(this.currentStuffPercentage), ColorList.RED);
     }
 
     private int getCurrentStuffPercentage() {
         return switch (this.currentStuffPercentage) {
-            case 1-> 10;//100%
-            case 2-> 9; //90%
-            case 3-> 8; //80%
-            case 4-> 7; //70%
-            case 5-> 6; //60%
-            case 6-> 5; //50%
-            case 7-> 4; //40%
-            case 8-> 3; //30%
-            case 9-> 2; //20%
-            case 10-> 1;//10%
+            case 0-> 10;//100%
+            case 1-> 9; //90%
+            case 2-> 8; //80%
+            case 3-> 7; //70%
+            case 4-> 6; //60%
+            case 5-> 5; //50%
+            case 6-> 4; //40%
+            case 7-> 3; //30%
+            case 8-> 2; //20%
+            case 9-> 1; //10%
             default -> 0;
         };
     }
