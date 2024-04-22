@@ -1,11 +1,9 @@
 package teamzesa.command;
 
 import net.kyori.adventure.text.Component;
-import org.bukkit.block.data.type.Fence;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.help.GenericCommandHelpTopic;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
@@ -42,19 +40,16 @@ public class EnhnaceSet extends CommandRegisterSection {
         targetStuff.setCustomModelData(enhanceLevel);
         targetStuff.lore(Collections.singletonList(getLoreCommentComponent(targetStuff)));
 
-        sendComment(enhanceLevel, player);
+        playerSendMsgComponentExchanger(player, getComment(enhanceLevel) , ColorList.GREEN);
         return true;
     }
 
-    private void sendComment(int enhanceLevel, Player player) {
-        String comment;
-        switch (enhanceLevel) {
-            case 0 -> comment = "강화를 초기화 했습니다.";
-            case 10 -> comment = "최고 레벨로 강화했습니다.";
-            default -> comment = enhanceLevel + "강 으로 강화했습니다.";
-        }
-
-        playerSendMsgComponentExchanger(player, comment, ColorList.GREEN);
+    private String getComment(int enhanceLevel) {
+        return switch (enhanceLevel) {
+            case 0 -> "강화를 초기화 했습니다.";
+            case 10 -> "최고 레벨로 강화했습니다.";
+            default -> enhanceLevel + "강 으로 강화했습니다.";
+        };
     }
 
     private Component getLoreCommentComponent(ItemStack item) {
