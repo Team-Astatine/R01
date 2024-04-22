@@ -37,12 +37,15 @@ public class EnhanceItemDmgEvent implements EventRegister {
         if (!this.weapon.hasCustomModelData())
             return;
 
-        double baseDamage = getBaseDamage();
-        double enchantmentDamage = calculateEnchantmentDamage();
-        double modelDataDamage = calculateModelDataDamage();
-        double totalDamage = baseDamage + enchantmentDamage + modelDataDamage;
+        double modelData = this.weapon.getCustomModelData();
+        double currentWeaponDamage = getBaseDamage() + calculateEnchantmentDamage();
 
-        this.event.setDamage(totalDamage);
+        for (int i = 0; i < modelData; i++) {
+            double increasePercentage = ENHANCE_INCREASE_DAMAGE_PERCENTAGE + i;
+            currentWeaponDamage += currentWeaponDamage * (increasePercentage / 100);
+        }
+
+        this.event.setDamage(currentWeaponDamage);
     }
 
     private double getBaseDamage() {
@@ -54,8 +57,8 @@ public class EnhanceItemDmgEvent implements EventRegister {
     }
 
     private double calculateEnchantmentDamage() {
-        int enchantLevel = this.weapon.getEnchantLevel(Enchantment.DAMAGE_ALL);
         double enchantmentDamage = 0;
+        int enchantLevel = this.weapon.getEnchantLevel(Enchantment.DAMAGE_ALL);
         for (int i = 0; i < enchantLevel; i++) {
             switch (i) {
                 case 0 -> enchantmentDamage += 1;
@@ -64,17 +67,4 @@ public class EnhanceItemDmgEvent implements EventRegister {
         }
         return enchantmentDamage;
     }
-
-    private double calculateModelDataDamage() {
-        double damage = getBaseDamage();
-        double modelData = this.weapon.getCustomModelData();
-        double modelDataDamage = 0;
-
-        for (int i = 1; i < modelData; i++) {
-            double increaseDmg = damage * (ENHANCE_INCREASE_DAMAGE_PERCENTAGE + i) / 100;
-            modelDataDamage += increaseDmg;
-        }
-        return modelDataDamage;
-    }
-
 }
