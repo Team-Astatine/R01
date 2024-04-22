@@ -1,7 +1,6 @@
 package teamzesa.event.Enhance;
 
 import net.kyori.adventure.text.Component;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -17,9 +16,8 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
     현재 클래스에선 강화에 대한 알고리즘만 처리할 예정
     */
 
-    private final int LOW_LEVEL = 1;
-    private final int MAX_LEVEL = 10;
-    private final double DAMAGE_INCREASE_PERCENTAGE = 0.5;
+    private final int LOW_LEVEL = 0;
+    private final int MAX_LEVEL = 9;
     private int currentStuffPercentage;
 
     private Player weaponsOwner;
@@ -64,51 +62,62 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
 
         int ranNum = Integer.parseInt(String.valueOf(String.format("%1.0f", Math.random() * 10)));
         boolean isSuccessEnhance = ranNum < getCurrentStuffPercentage();
+
         if (isSuccessEnhance) successEnhanceScenario();
         else                  failEnhanceScenario();
     }
 
     private void failEnhanceScenario() {
-//            methodImplement
-//            debug
-}
+//            methodImplement 무기파괴 구현
+
+        playerSendMsgComponentExchanger(
+                this.weaponsOwner,
+                this.targetStuff.getDisplayName()
+                        +  " " + this.currentStuffPercentage + "강 -> " + --this.currentStuffPercentage + "강 강화실패",
+                ColorList.PINK);
+
+        this.targetStuff.setCustomModelData(this.currentStuffPercentage);
+        this.targetStuff.lore(Collections.singletonList(getLoreCommentComponent()));
+
+//        debug
+        playerSendMsgComponentExchanger(this.weaponsOwner, String.valueOf(this.currentStuffPercentage), ColorList.RED);
+    }
     
     private void successEnhanceScenario() {
-//            methodImplement
-        this.targetStuff.lore(null);
+        playerSendMsgComponentExchanger(
+                this.weaponsOwner,
+                this.targetStuff.getDisplayName()
+                        +  " " + this.currentStuffPercentage + "강 -> " + ++this.currentStuffPercentage + "강 강화성공",
+                ColorList.DISCORD_COLOR);
+
+        this.targetStuff.setCustomModelData(this.currentStuffPercentage);
         this.targetStuff.lore(Collections.singletonList(getLoreCommentComponent()));
-        this.targetStuff.setCustomModelData(++ this.currentStuffPercentage);
+
+//        debug
+        playerSendMsgComponentExchanger(this.weaponsOwner, String.valueOf(this.currentStuffPercentage), ColorList.RED);
     }
 
     private int getCurrentStuffPercentage() {
         return switch (this.currentStuffPercentage) {
-            case 1-> 10;//100%
-            case 2-> 9; //90%
-            case 3-> 8; //80%
-            case 4-> 7; //70%
-            case 5-> 6; //60%
-            case 6-> 5; //50%
-            case 7-> 4; //40%
-            case 8-> 3; //30%
-            case 9-> 2; //20%
-            case 10-> 1;//10%
+            case 0-> 10;//100%
+            case 1-> 9; //90%
+            case 2-> 8; //80%
+            case 3-> 7; //70%
+            case 4-> 6; //60%
+            case 5-> 5; //50%
+            case 6-> 4; //40%
+            case 7-> 3; //30%
+            case 8-> 2; //20%
+            case 9-> 1; //10%
             default -> 0;
         };
     }
 
-    private @Nullable Component getLoreCommentComponent() {
-        return switch (this.targetStuff.getCustomModelData()) {
-            case 1 -> EnhanceComment.ONE_STEP.getLoreComment();
-            case 2 -> EnhanceComment.TWO_STEP.getLoreComment();
-            case 3 -> EnhanceComment.THREE_STEP.getLoreComment();
-            case 4 -> EnhanceComment.FOUR_STEP.getLoreComment();
-            case 5 -> EnhanceComment.FIVE_STEP.getLoreComment();
-            case 6 -> EnhanceComment.SIX_STEP.getLoreComment();
-            case 7 -> EnhanceComment.SEVEN_STEP.getLoreComment();
-            case 8 -> EnhanceComment.EIGHT_STEP.getLoreComment();
-            case 9 -> EnhanceComment.NINE_STEP.getLoreComment();
-            case 10 -> EnhanceComment.TEN_STEP.getLoreComment();
-            default -> null;
-        };
+    private Component getLoreCommentComponent() {
+        for (EnhanceComment enhanceComment : EnhanceComment.values()) {
+            if (this.targetStuff.getCustomModelData() == enhanceComment.getStep())
+                return enhanceComment.getLoreComment();
+        }
+        return null;
     }
 }

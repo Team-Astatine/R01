@@ -17,7 +17,10 @@ public enum WeaponMap {
     STONE_SWORD(Material.STONE_SWORD, 5.0),
     IRON_SWORD(Material.IRON_SWORD, 6.0),
     DIAMOND_SWORD(Material.DIAMOND_SWORD, 7.0),
-    NETHER_SWORD(Material.NETHERITE_SWORD, 8.0);
+    NETHER_SWORD(Material.NETHERITE_SWORD, 8.0),
+
+//    trident
+    TRIDENT(Material.TRIDENT, 9.0);
 
     private final Material material;
     private final double damage;
