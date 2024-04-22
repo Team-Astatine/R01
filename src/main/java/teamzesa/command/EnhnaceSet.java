@@ -50,11 +50,11 @@ public class EnhnaceSet extends CommandRegisterSection {
         String comment;
         switch (enhanceLevel) {
             case 0 -> comment = "강화를 초기화 했습니다.";
-            case 10 -> comment = "최고 레밸로 강화했습니다.";
-            default -> comment = "(으)로 강화했습니다.";
+            case 10 -> comment = "최고 레벨로 강화했습니다.";
+            default -> comment = enhanceLevel + "강 으로 강화했습니다.";
         }
 
-        playerSendMsgComponentExchanger(player, enhanceLevel + comment, ColorList.YELLOW);
+        playerSendMsgComponentExchanger(player, comment, ColorList.GREEN);
     }
 
     private Component getLoreCommentComponent(ItemStack item) {
