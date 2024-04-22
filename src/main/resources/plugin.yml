@@ -37,3 +37,5 @@ commands:
     description: 공지를 키거나 끕니다.
   강화:
     description: 강화창을 엽니다.
+  enhance:
+    description: 강화를 설정합니다.
