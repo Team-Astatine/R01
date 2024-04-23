@@ -17,6 +17,7 @@ import org.purpurmc.purpur.event.inventory.AnvilUpdateResultEvent;
 import teamzesa.event.*;
 import teamzesa.event.AntiExploit.*;
 import teamzesa.event.Enhance.EnhanceInventoryClickEvent;
+import teamzesa.event.Enhance.EnhanceItemDmgEvent;
 //todo
 //fixme
 //refactoring
@@ -27,127 +28,132 @@ import teamzesa.event.Enhance.EnhanceInventoryClickEvent;
 
 public class EventRegisterSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
-    public void redStoneEvent(@NotNull BlockRedstoneEvent event) {
+    public static void BlockRedstoneEvent(BlockRedstoneEvent event) {
 //        methodImplement
 //        new AntiRedStoneCrash(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void blockFallingEvent(@NotNull BlockPhysicsEvent event) {
+    public static void BlockPhysicsEvent(BlockPhysicsEvent event) {
 //        methodImplement
 //        new AntiGravityCrash(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void blockFallingEvent(@NotNull ChunkLoadEvent event) {
+    public static void ChunkLoadEvent(ChunkLoadEvent event) {
 //        methodImplement
 //        new AntiExploitFromChunkEvent(event);
     }
 
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void joinEvent(@NotNull PlayerJoinEvent event) {
+    public static void PlayerJoinEvent(PlayerJoinEvent event) {
         new PlayerInfoHandler(event);
         new PlayerFlyEnableEvent(event);
         new ImportPlayerStatusEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void quitEvent(@NotNull PlayerQuitEvent event) {
+    public static void PlayerQuitEvent(PlayerQuitEvent event) {
         new QuitMsgEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void raidEvent(@NotNull RaidTriggerEvent event) {
+    public static void RaidTriggerEvent(RaidTriggerEvent event) {
         new RaidAnnouncerEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void deathEvent(@NotNull PlayerDeathEvent event) {
+    public static void PlayerDeathEvent(PlayerDeathEvent event) {
         new LifeSteelEvent(event);
         new PlayerFlyEnableEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void throwWeaponHitEvent(ProjectileHitEvent event) {
+    public static void ProjectileHitEvent(ProjectileHitEvent event) {
         new GodModeTridentHitEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void weaponThrowEvent(ProjectileLaunchEvent event) {
+    public static void ProjectileLaunchEvent(ProjectileLaunchEvent event) {
         new GodModeTridentThrowEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void respawnEvent(@NotNull PlayerRespawnEvent event) {
+    public static void PlayerRespawnEvent(PlayerRespawnEvent event) {
         new RespawnEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void invClickEvent(@NotNull InventoryClickEvent event) {
+    public static void InventoryClickEvent(InventoryClickEvent event) {
         new RestrictedShulkerChest(event);
         new EnhanceInventoryClickEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void invMoveItemEvent(@NotNull InventoryCloseEvent event) {
+    public static void InventoryCloseEvent(InventoryCloseEvent event) {
 //        methodImplement
 //        enhanceInv close event 추가할것
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void explosiveEvent(@NotNull EntityExplodeEvent event) {
+    public static void EntityExplodeEvent(EntityExplodeEvent event) {
         new ExplosiveEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void armSwingEvent(@NotNull PlayerArmSwingEvent event) {
+    public static void PlayerArmSwingEvent(PlayerArmSwingEvent event) {
         new HandSwingEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void anvilResult(@NotNull AnvilUpdateResultEvent event) {
+    public static void AnvilUpdateResultEvent(AnvilUpdateResultEvent event) {
         new AnvilLimitHandler(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void playerInteractEvent(@NotNull PlayerInteractEvent event) {
+    public static void EntityDamageEvent(EntityDamageEvent event) {
+        new EnhanceItemDmgEvent(event);
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    public static void PlayerInteractEvent(PlayerInteractEvent event) {
         new AntiLeverAutoClicker(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void entityPortalTouchingEvent(@NotNull EntityPortalEvent event) {
+    public static void EntityPortalEvent(EntityPortalEvent event) {
         new AntiPortalChunkRenderingEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void pistonExtendBlockEvent(@NotNull BlockPistonExtendEvent event) {
+    public static void BlockPistonExtendEvent(BlockPistonExtendEvent event) {
         new AntiPistonPushGravityBlockEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void commandSendEvent(@NotNull PlayerCommandPreprocessEvent event) {
+    public static void PlayerCommandPreprocessEvent(PlayerCommandPreprocessEvent event) {
         new BanCommandHandler(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void playerSwapStuffEvent(@NotNull PlayerSwapHandItemsEvent event) {
+    public static void PlayerSwapHandItemsEvent(PlayerSwapHandItemsEvent event) {
 //        methodImplement
 
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void entityPortalTouchingEvent(@NotNull PlayerChangedWorldEvent event) {
+    public static void PlayerChangedWorldEvent(PlayerChangedWorldEvent event) {
         new PlayerFlyEnableEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void entityToEntityDamageEvent(@NotNull EntityDamageByEntityEvent event) {
+    public static void EntityDamageByEntityEvent(EntityDamageByEntityEvent event) {
         new EntityAttackSpeedHandler(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public void craftStuffEvent(CraftItemEvent event) {
+    public static void CraftItemEvent(CraftItemEvent event) {
         new BanItemHandler(event);
     }
 }
