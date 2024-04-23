@@ -144,7 +144,6 @@ public class EventRegisterSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void entityToEntityDamageEvent(@NotNull EntityDamageByEntityEvent event) {
         new EntityAttackSpeedHandler(event);
-        new EnhanceIncreaseDamageHandler(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
