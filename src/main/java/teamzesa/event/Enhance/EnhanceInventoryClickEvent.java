@@ -1,13 +1,21 @@
 package teamzesa.event.Enhance;
 
+import it.unimi.dsi.fastutil.Hash;
+import org.bukkit.Color;
+import org.bukkit.Material;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.entity.User;
 import teamzesa.event.register.EventRegister;
+import teamzesa.util.Enum.ColorList;
+import teamzesa.util.Enum.WeaponMap;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.userHandler.UserController;
+
+import java.util.HashSet;
 
 import static teamzesa.command.EnhanceStuff.EXECUTE_STUFF_DATA;
 import static teamzesa.command.EnhanceStuff.PANEL_STUFF_CUSTOM_DATA;
@@ -19,6 +27,11 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
     private ItemStack targetStuff;
     private ItemStack scrollStuff;
     private ItemStack protectScroll;
+
+    private HashSet<ItemStack> allowedItem;
+    private HashSet<ItemStack> allowedScroll;
+    private HashSet<ItemStack> allowedProtectScroll;
+
     private final InventoryClickEvent event;
 
     public EnhanceInventoryClickEvent(InventoryClickEvent event) {
@@ -36,6 +49,16 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
         this.targetStuff = this.event.getView().getItem(3);
         this.scrollStuff = this.event.getView().getItem(4);
         this.protectScroll = this.event.getView().getItem(5);
+
+        this.allowedItem = new HashSet<>();
+        for (WeaponMap weaponMap : WeaponMap.values())
+            this.allowedItem.add(new ItemStack(weaponMap.getMaterial()));
+
+//        methodImplement
+        this.allowedScroll = new HashSet<>();
+
+
+        this.allowedProtectScroll = new HashSet<>();
     }
 
     private boolean interactingInfoItemValidation(int modelData) {
@@ -54,19 +77,30 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
             return;
         }
 
-        if (interactingInfoItemValidation(EXECUTE_STUFF_DATA)) {
-            if (this.targetStuff != null && this.scrollStuff != null)
-                enhanceStuffGeneratorExecute();
+        if (interactingInfoItemValidation(EXECUTE_STUFF_DATA) && stuffScrollValid()) {
+            new EnhanceResultStuffGenerator()
+                    .addWeaponOwner((Player)this.event.getWhoClicked())
+                    .addWeaponStuff(this.targetStuff)
+                    .addScrollStuff(this.scrollStuff)
+                    .addProtectScrollStuff(this.protectScroll)
+                    .executeEnhance();
+
             this.event.setCancelled(true);
         }
     }
 
-    private void enhanceStuffGeneratorExecute() {
-        new EnhanceResultStuffGenerator()
-            .addWeaponOwner((Player)this.event.getWhoClicked())
-            .addWeaponStuff(this.targetStuff)
-            .addScrollStuff(this.scrollStuff)
-            .addProtectScrollStuff(this.protectScroll)
-            .executeEnhance();
+    private boolean stuffScrollValid() {
+        if (this.targetStuff == null) {
+            playerSendMsgComponentExchanger(this.ownerPlayer, "무기를 올려주세요.", ColorList.RED);
+            this.event.setCancelled(true);
+            return false;
+        }
+
+        if (this.scrollStuff == null) {
+            playerSendMsgComponentExchanger(this.ownerPlayer, "강화 주문서가 부족합니다.", ColorList.RED);
+            this.event.setCancelled(true);
+            return false;
+        }
+        return true;
     }
 }
