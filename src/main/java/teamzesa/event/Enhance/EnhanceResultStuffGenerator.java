@@ -1,14 +1,15 @@
 package teamzesa.event.Enhance;
 
 import net.kyori.adventure.text.Component;
+import org.bukkit.Material;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.jetbrains.annotations.Nullable;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.*;
 
 import java.util.Collections;
+import java.util.Optional;
 
 public class EnhanceResultStuffGenerator extends StringComponentExchanger {
     /*
@@ -21,7 +22,7 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
     private int currentStuffPercentage;
 
     private Player weaponsOwner;
-    private ItemStack targetStuff;
+    private ItemStack enhanceItem;
     private ItemStack scrollStuff;
     private ItemStack protectScrollStuff;
 
@@ -33,13 +34,12 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
     }
 
     public EnhanceResultStuffGenerator addWeaponStuff(ItemStack weaponStuff) {
-        this.targetStuff = weaponStuff;
-        if (weaponStuff.hasCustomModelData())
-            this.currentStuffPercentage = weaponStuff.getCustomModelData();
-        else {
-            this.targetStuff.setCustomModelData(this.LOW_LEVEL);
-            this.currentStuffPercentage = this.targetStuff.getCustomModelData();
-        }
+        this.enhanceItem = weaponStuff;
+
+        if (!this.enhanceItem.hasCustomModelData())
+            this.enhanceItem.setCustomModelData(this.LOW_LEVEL);
+        this.currentStuffPercentage = this.enhanceItem.getCustomModelData();
+
         return this;
     }
 
@@ -54,47 +54,44 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
     }
 
     public void executeEnhance() {
-//        methodImplement
         if (this.currentStuffPercentage > this.MAX_LEVEL) {
-            playerSendMsgComponentExchanger(this.weaponsOwner, "이미 최고 레벨입니다.", ColorList.RED);
+            playerSendMessage(2, ColorList.RED);
             return;
         }
 
-        int ranNum = Integer.parseInt(String.valueOf(String.format("%1.0f", Math.random() * 10)));
-        boolean isSuccessEnhance = ranNum < getCurrentStuffPercentage();
+//        Using Scroll
+        if (this.protectScrollStuff != null)
+            this.protectScrollStuff.setAmount(this.protectScrollStuff.getAmount() - 1);
+        this.scrollStuff.setAmount(this.scrollStuff.getAmount() - 1);
 
-        if (isSuccessEnhance) successEnhanceScenario();
-        else                  failEnhanceScenario();
+//        Generator Item
+        if (getJudgementPercentage(getCurrentStuffPercentage())) successEnhanceScenario();
+        else                                                     failEnhanceScenario();
+    }
+
+    private boolean getJudgementPercentage(int standardValue) {
+        int ranNum = Integer.parseInt(String.valueOf(String.format("%1.0f", Math.random() * 10)));
+        return ranNum < standardValue;
     }
 
     private void failEnhanceScenario() {
-//            methodImplement 무기파괴 구현
+        boolean isDestructionResult = getJudgementPercentage(this.currentStuffPercentage);
+        if (isDestructionResult && this.protectScrollStuff == null) {
+            this.enhanceItem.setAmount(0);
+            playerSendMessage(3, ColorList.RED);
+            return;
+        } else playerSendMessage(4, ColorList.ORANGE);
 
-        playerSendMsgComponentExchanger(
-                this.weaponsOwner,
-                this.targetStuff.getDisplayName()
-                        +  " " + this.currentStuffPercentage + "강 -> " + --this.currentStuffPercentage + "강 강화실패",
-                ColorList.PINK);
-
-        this.targetStuff.setCustomModelData(this.currentStuffPercentage);
-        this.targetStuff.lore(Collections.singletonList(getLoreCommentComponent()));
-
-//        debug
-        playerSendMsgComponentExchanger(this.weaponsOwner, String.valueOf(this.currentStuffPercentage), ColorList.RED);
+//        DownGrade
+        playerSendMessage(5, ColorList.PINK);
+        this.enhanceItem.setCustomModelData(--this.currentStuffPercentage);
+        this.enhanceItem.lore(Collections.singletonList(getLoreCommentComponent()));
     }
     
     private void successEnhanceScenario() {
-        playerSendMsgComponentExchanger(
-                this.weaponsOwner,
-                this.targetStuff.getDisplayName()
-                        +  " " + this.currentStuffPercentage + "강 -> " + ++this.currentStuffPercentage + "강 강화성공",
-                ColorList.DISCORD_COLOR);
-
-        this.targetStuff.setCustomModelData(this.currentStuffPercentage);
-        this.targetStuff.lore(Collections.singletonList(getLoreCommentComponent()));
-
-//        debug
-        playerSendMsgComponentExchanger(this.weaponsOwner, String.valueOf(this.currentStuffPercentage), ColorList.RED);
+        playerSendMessage(6, ColorList.DISCORD_COLOR);
+        this.enhanceItem.setCustomModelData(++this.currentStuffPercentage);
+        this.enhanceItem.lore(Collections.singletonList(getLoreCommentComponent()));
     }
 
     private int getCurrentStuffPercentage() {
@@ -115,9 +112,29 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
 
     private Component getLoreCommentComponent() {
         for (EnhanceComment enhanceComment : EnhanceComment.values()) {
-            if (this.targetStuff.getCustomModelData() == enhanceComment.getStep())
+            if (this.enhanceItem.getCustomModelData() == enhanceComment.getStep())
                 return enhanceComment.getLoreComment();
         }
         return null;
+    }
+
+    private void playerSendMessage(int commentCode, ColorList commentColor) {
+        String comment = "";
+        switch (commentCode) {
+            case 0 -> comment = "무기를 올려주세요.";
+            case 1 -> comment = "강화 주문서가 부족합니다.";
+            case 2 -> comment = "이미 최고 레벨입니다.";
+            case 3 -> comment = "강화에 실패하여 무기가 파괴 되었습니다.";
+            case 4 -> comment = "파괴방어 스크롤을 사용하여 파괴방지 성공!";
+            case 5 -> comment = this.enhanceItem.getDisplayName()
+                    +  " " + this.currentStuffPercentage + "강 -> " + --this.currentStuffPercentage + "강 강화실패";
+            case 6 -> comment = this.enhanceItem.getDisplayName()
+                    +  " " + this.currentStuffPercentage + "강 -> " + ++this.currentStuffPercentage + "강 강화성공";
+        }
+
+        if (commentCode == 5) ++this.currentStuffPercentage;
+        if (commentCode == 6) --this.currentStuffPercentage;
+
+        playerSendMsgComponentExchanger(this.weaponsOwner, comment, commentColor);
     }
 }
