@@ -1,19 +1,13 @@
 package teamzesa.event.Enhance;
 
-import it.unimi.dsi.fastutil.Hash;
-import org.bukkit.Color;
-import org.bukkit.Material;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
-import teamzesa.entity.User;
 import teamzesa.event.register.EventRegister;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.WeaponMap;
 import teamzesa.util.Interface.StringComponentExchanger;
-import teamzesa.util.userHandler.UserController;
 
 import java.util.HashSet;
 
@@ -21,7 +15,6 @@ import static teamzesa.command.EnhanceStuff.EXECUTE_STUFF_DATA;
 import static teamzesa.command.EnhanceStuff.PANEL_STUFF_CUSTOM_DATA;
 
 public class EnhanceInventoryClickEvent extends StringComponentExchanger implements EventRegister {
-    private User targetUser;
     private Player ownerPlayer;
     private ItemStack currentStuff;
     private ItemStack targetStuff;
@@ -44,7 +37,6 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
     public void init() {
         this.currentStuff = this.event.getCurrentItem();
         this.ownerPlayer = this.event.getWhoClicked() instanceof Player player ? player : null;
-        this.targetUser = new UserController().readUser(this.ownerPlayer);
 
         this.targetStuff = this.event.getView().getItem(3);
         this.scrollStuff = this.event.getView().getItem(4);
@@ -61,23 +53,14 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
         this.allowedProtectScroll = new HashSet<>();
     }
 
-    private boolean interactingInfoItemValidation(int modelData) {
-        boolean valid1 = this.event.getInventory().getType() == InventoryType.DROPPER;
-        boolean valid2 = this.currentStuff != null;
-        boolean valid3 = valid2 && this.currentStuff.getItemMeta() != null;
-        boolean valid4 = valid2 && this.currentStuff.hasCustomModelData();
-        boolean valid5 = valid4 && this.currentStuff.getCustomModelData() == modelData;
-        return valid1 && valid2 && valid3 && valid4 && valid5;
-    }
-
     @Override
     public void execute() {
-        if (interactingInfoItemValidation(PANEL_STUFF_CUSTOM_DATA)) {
+        if (isInteractingInfoItemValidation(PANEL_STUFF_CUSTOM_DATA)) {
             this.event.setCancelled(true);
             return;
         }
 
-        if (interactingInfoItemValidation(EXECUTE_STUFF_DATA) && stuffScrollValid()) {
+        if (isInteractingInfoItemValidation(EXECUTE_STUFF_DATA) && isStuffScrollValid()) {
             new EnhanceResultStuffGenerator()
                     .addWeaponOwner((Player)this.event.getWhoClicked())
                     .addWeaponStuff(this.targetStuff)
@@ -89,7 +72,16 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
         }
     }
 
-    private boolean stuffScrollValid() {
+    private boolean isInteractingInfoItemValidation(int modelData) {
+        boolean valid1 = this.event.getInventory().getType() == InventoryType.DROPPER;
+        boolean valid2 = this.currentStuff != null;
+        boolean valid3 = valid2 && this.currentStuff.getItemMeta() != null;
+        boolean valid4 = valid2 && this.currentStuff.hasCustomModelData();
+        boolean valid5 = valid4 && this.currentStuff.getCustomModelData() == modelData;
+        return valid1 && valid2 && valid3 && valid4 && valid5;
+    }
+
+    private boolean isStuffScrollValid() {
         if (this.targetStuff == null) {
             playerSendMsgComponentExchanger(this.ownerPlayer, "무기를 올려주세요.", ColorList.RED);
             this.event.setCancelled(true);
