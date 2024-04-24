@@ -21,7 +21,9 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
     private Player weaponsOwner;
     private ItemStack enhanceItem;
     private ItemStack scrollStuff;
+    private ScrollMap allowedScrollStuff;
     private ItemStack protectScrollStuff;
+    private ScrollMap allowedProtectScrollStuff;
 
     public EnhanceResultStuffGenerator() {}
 
@@ -42,11 +44,21 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
 
     public EnhanceResultStuffGenerator addScrollStuff(ItemStack scrollStuff) {
         this.scrollStuff = scrollStuff;
+
+         for (ScrollMap scrollMap : ScrollMap.values()) {
+             if (scrollMap.getMaterial().equals(scrollStuff.getType()))
+                 this.allowedScrollStuff = scrollMap;
+         }
         return this;
     }
 
     public EnhanceResultStuffGenerator addProtectScrollStuff(ItemStack protectScrollStuff) {
         this.protectScrollStuff = protectScrollStuff;
+
+        for (ScrollMap scrollMap : ScrollMap.values()) {
+            if (scrollMap.getMaterial().equals(protectScrollStuff.getType()))
+                this.allowedProtectScrollStuff = scrollMap;
+        }
         return this;
     }
 
@@ -57,9 +69,10 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
         }
 
 //        Using Scroll
-        if (this.protectScrollStuff != null)
-            this.protectScrollStuff.setAmount(this.protectScrollStuff.getAmount() - 1);
-        this.scrollStuff.setAmount(this.scrollStuff.getAmount() - 1);
+        if (this.protectScrollStuff != null && this.protectScrollStuff.getAmount() > this.allowedProtectScrollStuff.getDiscountProtectValue())
+            this.protectScrollStuff.setAmount(
+                    this.protectScrollStuff.getAmount() - this.allowedProtectScrollStuff.getDiscountProtectValue());
+        this.scrollStuff.setAmount(this.scrollStuff.getAmount() - this.allowedScrollStuff.getDiscountValue());
 
 //        Generator Item
         if (getJudgementPercentage(getCurrentStuffPercentage())) successEnhanceScenario();

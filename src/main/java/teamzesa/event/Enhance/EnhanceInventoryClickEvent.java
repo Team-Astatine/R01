@@ -1,11 +1,13 @@
 package teamzesa.event.Enhance;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.event.register.EventRegister;
 import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.ScrollMap;
 import teamzesa.util.Enum.WeaponMap;
 import teamzesa.util.Interface.StringComponentExchanger;
 
@@ -16,14 +18,13 @@ import static teamzesa.command.EnhanceStuff.PANEL_STUFF_CUSTOM_DATA;
 
 public class EnhanceInventoryClickEvent extends StringComponentExchanger implements EventRegister {
     private Player ownerPlayer;
-    private ItemStack currentStuff;
+    private ItemStack enhanceItem;
     private ItemStack targetStuff;
     private ItemStack scrollStuff;
     private ItemStack protectScroll;
 
     private HashSet<ItemStack> allowedItem;
     private HashSet<ItemStack> allowedScroll;
-    private HashSet<ItemStack> allowedProtectScroll;
 
     private final InventoryClickEvent event;
 
@@ -35,7 +36,7 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
 
     @Override
     public void init() {
-        this.currentStuff = this.event.getCurrentItem();
+        this.enhanceItem = this.event.getCurrentItem();
         this.ownerPlayer = this.event.getWhoClicked() instanceof Player player ? player : null;
 
         this.targetStuff = this.event.getView().getItem(3);
@@ -48,9 +49,8 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
 
 //        methodImplement
         this.allowedScroll = new HashSet<>();
-
-
-        this.allowedProtectScroll = new HashSet<>();
+        for (ScrollMap scrollMap : ScrollMap.values())
+            this.allowedScroll.add(new ItemStack(scrollMap.getMaterial()));
     }
 
     @Override
@@ -60,7 +60,12 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
             return;
         }
 
-        if (isInteractingInfoItemValidation(EXECUTE_STUFF_DATA) && isStuffScrollValid()) {
+        if (isEnhanceItemMaterialTypeValid()) {
+            this.event.setCancelled(true);
+            return;
+        }
+
+        if (isStuffScrollValid() && isInteractingInfoItemValidation(EXECUTE_STUFF_DATA)) {
             new EnhanceResultStuffGenerator()
                     .addWeaponOwner((Player)this.event.getWhoClicked())
                     .addWeaponStuff(this.targetStuff)
@@ -74,11 +79,35 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
 
     private boolean isInteractingInfoItemValidation(int modelData) {
         boolean valid1 = this.event.getInventory().getType() == InventoryType.DROPPER;
-        boolean valid2 = this.currentStuff != null;
-        boolean valid3 = valid2 && this.currentStuff.getItemMeta() != null;
-        boolean valid4 = valid2 && this.currentStuff.hasCustomModelData();
-        boolean valid5 = valid4 && this.currentStuff.getCustomModelData() == modelData;
+        boolean valid2 = this.enhanceItem != null;
+        boolean valid3 = valid2 && this.enhanceItem.getItemMeta() != null;
+        boolean valid4 = valid2 && this.enhanceItem.hasCustomModelData();
+        boolean valid5 = valid4 && this.enhanceItem.getCustomModelData() == modelData;
         return valid1 && valid2 && valid3 && valid4 && valid5;
+    }
+
+    private boolean isEnhanceItemMaterialTypeValid() {
+        boolean isEnhanceItemValid = this.allowedItem.stream()
+                .allMatch(item -> this.enhanceItem.getType().equals(item.getType()));
+
+        boolean isScrollValid = this.allowedScroll.stream()
+                .allMatch(scroll ->
+                        this.scrollStuff.getType().equals(scroll.getType())
+                        && this.scrollStuff.getType().equals(protectScroll.getType())
+                );
+
+        String comment = "";
+        if (!isEnhanceItemValid)
+            comment = "허용된 아이템을 넣어주세요";
+        else if (!isScrollValid)
+            comment = "허용된 주문서를 넣어주세요";
+
+        if (!isEnhanceItemValid || !isScrollValid) {
+            playerSendMsgComponentExchanger(this.ownerPlayer, comment, ColorMap.RED);
+            return true;
+        }
+
+        return false;
     }
 
     private boolean isStuffScrollValid() {
