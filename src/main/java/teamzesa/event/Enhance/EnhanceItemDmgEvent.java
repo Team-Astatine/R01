@@ -41,7 +41,7 @@ public class EnhanceItemDmgEvent implements EventRegister {
         double currentWeaponDamage = getBaseDamage() + calculateEnchantmentDamage();
 
         for (int i = 0; i < modelData; i++) {
-            double increasePercentage = ENHANCE_INCREASE_DAMAGE_PERCENTAGE + i;
+            double increasePercentage = ENHANCE_INCREASE_DAMAGE_PERCENTAGE + (i * 2);
             currentWeaponDamage += currentWeaponDamage * (increasePercentage / 100);
         }
 

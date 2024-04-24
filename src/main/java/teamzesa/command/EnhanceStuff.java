@@ -13,7 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.util.Enum.ColorList;
+import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.CommandExecutorMap;
 
 public class EnhanceStuff extends CommandRegisterSection {
@@ -33,17 +33,17 @@ public class EnhanceStuff extends CommandRegisterSection {
 
     private void init() {
 //        panel
-        this.targetStuff = createItem(Material.NETHERITE_SWORD, "강화할 아래슬롯에 무기를 올려주세요", ColorList.ORANGE);
-        this.scrollStuff = createItem(Material.ANVIL, "아이템에 들어갈 재료를 아래슬롯에 넣어주세요", ColorList.ORANGE);
-        this.protectScrollStuff = createItem(Material.HEART_OF_THE_SEA, "파괴방어 스크롤을 아래슬롯에 넣어주세요", ColorList.ORANGE);
-        this.executeButton = createExecuteItem(Material.RED_STAINED_GLASS_PANE, "강화 실행", ColorList.DISCORD_COLOR);
+        this.targetStuff = createItem(Material.NETHERITE_SWORD, "강화할 아래슬롯에 무기를 올려주세요", ColorMap.ORANGE);
+        this.scrollStuff = createItem(Material.ANVIL, "아이템에 들어갈 재료를 아래슬롯에 넣어주세요", ColorMap.ORANGE);
+        this.protectScrollStuff = createItem(Material.HEART_OF_THE_SEA, "파괴방어 스크롤을 아래슬롯에 넣어주세요", ColorMap.ORANGE);
+        this.executeButton = createExecuteItem(Material.RED_STAINED_GLASS_PANE, "강화 실행", ColorMap.DISCORD_COLOR);
     }
 
-    private ItemStack createExecuteItem(Material material, String comment, ColorList color) {
+    private ItemStack createExecuteItem(Material material, String comment, ColorMap color) {
         return createItem(material, comment, color);
     }
 
-    private ItemStack createItem(Material material, String comment, ColorList color) {
+    private ItemStack createItem(Material material, String comment, ColorMap color) {
         ItemStack item = new ItemStack(material);
         ItemMeta meta = item.getItemMeta();
 
@@ -64,7 +64,7 @@ public class EnhanceStuff extends CommandRegisterSection {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         this.sendPlayer = (Player) commandSender;
-        Inventory inventory = Bukkit.createInventory(sendPlayer, InventoryType.DROPPER, componentExchanger("강화", ColorList.RED));
+        Inventory inventory = Bukkit.createInventory(sendPlayer, InventoryType.DROPPER, componentExchanger("강화", ColorMap.RED));
 
         /*
         0 1 2

@@ -8,7 +8,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.CommandExecutorMap;
-import teamzesa.util.Enum.ColorList;
+import teamzesa.util.Enum.ColorMap;
 import teamzesa.entity.User;
 import teamzesa.util.userHandler.UserBuilder;
 import teamzesa.util.userHandler.UserController;
@@ -34,7 +34,7 @@ public class God extends CommandRegisterSection {
         );
 
         if (this.senderUser != null && !this.senderPlayer.isOp()) {
-            playerSendMsgComponentExchanger(this.senderPlayer,"해당 명령어는 플레이어가 사용할 수 없습니다.", ColorList.RED);
+            playerSendMsgComponentExchanger(this.senderPlayer,"해당 명령어는 플레이어가 사용할 수 없습니다.", ColorMap.RED);
             return false;
         }
 
@@ -44,7 +44,7 @@ public class God extends CommandRegisterSection {
 
             if (this.isConsoleSend)
                 Bukkit.getLogger().info("[R01] " + comment);
-            else playerSendMsgComponentExchanger(senderPlayer, comment, ColorList.RED);
+            else playerSendMsgComponentExchanger(senderPlayer, comment, ColorMap.RED);
             return false;
         }
 
@@ -68,9 +68,9 @@ public class God extends CommandRegisterSection {
             Bukkit.getLogger().info("[R01] " + targetUser.name() + comment);
 
         else if (!this.senderPlayer.equals(targetPlayer))
-            playerSendMsgComponentExchanger(this.senderPlayer, targetUser.name() + comment, ColorList.ORANGE);
+            playerSendMsgComponentExchanger(this.senderPlayer, targetUser.name() + comment, ColorMap.ORANGE);
 
-        playerSendMsgComponentExchanger(targetPlayer, "당신" + comment, ColorList.ORANGE);
+        playerSendMsgComponentExchanger(targetPlayer, "당신" + comment, ColorMap.ORANGE);
 
     }
 

@@ -4,7 +4,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import teamzesa.event.register.EventRegister;
 import teamzesa.util.Interface.StringComponentExchanger;
-import teamzesa.util.Enum.ColorList;
+import teamzesa.util.Enum.ColorMap;
 
 
 public class RespawnEvent extends StringComponentExchanger implements EventRegister {
@@ -29,7 +29,7 @@ public class RespawnEvent extends StringComponentExchanger implements EventRegis
 
     public void deathRandomTeleport() {
         if (this.player.getPotentialBedLocation() == null)
-            playerSendMsgComponentExchanger(this.player, "침대가 없어 랜덤 텔레포트 되었습니다", ColorList.ORANGE);
-        else playerSendMsgComponentExchanger(this.player, "침대로 텔레포트 됩니다", ColorList.YELLOW);
+            playerSendMsgComponentExchanger(this.player, "침대가 없어 랜덤 텔레포트 되었습니다", ColorMap.ORANGE);
+        else playerSendMsgComponentExchanger(this.player, "침대로 텔레포트 됩니다", ColorMap.YELLOW);
     }
 }

@@ -2,7 +2,6 @@ package teamzesa.command;
 
 import org.bukkit.Material;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -10,8 +9,7 @@ import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.CommandExecutorMap;
-import teamzesa.util.Interface.StringComponentExchanger;
-import teamzesa.util.Enum.ColorList;
+import teamzesa.util.Enum.ColorMap;
 
 import java.util.*;
 import java.util.List;
@@ -70,7 +68,7 @@ public class Totem extends CommandRegisterSection {
             this.playerInventory.addItem(new ItemStack(TOTEM, totalAmount - STACK));
         }
 
-       playerSendMsgComponentExchanger(this.player,"토템을 합쳤습니다.", ColorList.YELLOW);
+       playerSendMsgComponentExchanger(this.player,"토템을 합쳤습니다.", ColorMap.YELLOW);
     }
 
     private void removeTotemInInv() {
@@ -114,7 +112,7 @@ public class Totem extends CommandRegisterSection {
         if (message.isEmpty())
             return true;
 
-        playerSendMsgComponentExchanger(this.player, message, ColorList.RED);
+        playerSendMsgComponentExchanger(this.player, message, ColorMap.RED);
         return false;
     }
 }

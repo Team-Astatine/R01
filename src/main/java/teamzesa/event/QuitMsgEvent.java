@@ -4,7 +4,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import teamzesa.entity.User;
 import teamzesa.event.register.EventRegister;
 import teamzesa.util.Interface.StringComponentExchanger;
-import teamzesa.util.Enum.ColorList;
+import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.userHandler.UserController;
 
 public class QuitMsgEvent extends StringComponentExchanger implements EventRegister {
@@ -27,12 +27,12 @@ public class QuitMsgEvent extends StringComponentExchanger implements EventRegis
     public void execute() {
         if (this.quitUser.killCount() == 0)
             this.quitEvent.quitMessage(
-                    componentExchanger(" - " + this.quitUser.name(), ColorList.RED)
+                    componentExchanger(" - " + this.quitUser.name(), ColorMap.RED)
             );
 
         else
             this.quitEvent.quitMessage(
-                    componentExchanger(" - [ " + this.quitUser.killCount() + "KILL ] " + this.quitUser.name(), ColorList.RED)
+                    componentExchanger(" - [ " + this.quitUser.killCount() + "KILL ] " + this.quitUser.name(), ColorMap.RED)
             );
     }
 }
