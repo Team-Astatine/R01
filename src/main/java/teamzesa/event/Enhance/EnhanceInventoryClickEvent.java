@@ -18,13 +18,13 @@ import static teamzesa.command.EnhanceStuff.PANEL_STUFF_CUSTOM_DATA;
 
 public class EnhanceInventoryClickEvent extends StringComponentExchanger implements EventRegister {
     private Player ownerPlayer;
+    private ItemStack currentItem;
     private ItemStack enhanceItem;
-    private ItemStack targetStuff;
     private ItemStack scrollStuff;
     private ItemStack protectScroll;
 
-    private HashSet<ItemStack> allowedItem;
-    private HashSet<ItemStack> allowedScroll;
+    private HashSet<Material> allowedItem;
+    private HashSet<Material> allowedScroll;
 
     private final InventoryClickEvent event;
 
@@ -36,21 +36,20 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
 
     @Override
     public void init() {
-        this.enhanceItem = this.event.getCurrentItem();
+        this.currentItem = this.event.getCurrentItem();
         this.ownerPlayer = this.event.getWhoClicked() instanceof Player player ? player : null;
 
-        this.targetStuff = this.event.getView().getItem(3);
+        this.enhanceItem = this.event.getView().getItem(3);
         this.scrollStuff = this.event.getView().getItem(4);
         this.protectScroll = this.event.getView().getItem(5);
 
         this.allowedItem = new HashSet<>();
         for (WeaponMap weaponMap : WeaponMap.values())
-            this.allowedItem.add(new ItemStack(weaponMap.getMaterial()));
+            this.allowedItem.add(weaponMap.getMaterial());
 
-//        methodImplement
         this.allowedScroll = new HashSet<>();
         for (ScrollMap scrollMap : ScrollMap.values())
-            this.allowedScroll.add(new ItemStack(scrollMap.getMaterial()));
+            this.allowedScroll.add(scrollMap.getMaterial());
     }
 
     @Override
@@ -60,18 +59,14 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
             return;
         }
 
-        if (isEnhanceItemMaterialTypeValid()) {
-            this.event.setCancelled(true);
-            return;
-        }
-
-        if (isStuffScrollValid() && isInteractingInfoItemValidation(EXECUTE_STUFF_DATA)) {
-            new EnhanceResultStuffGenerator()
-                    .addWeaponOwner((Player)this.event.getWhoClicked())
-                    .addWeaponStuff(this.targetStuff)
-                    .addScrollStuff(this.scrollStuff)
-                    .addProtectScrollStuff(this.protectScroll)
-                    .executeEnhance();
+        if (isInteractingInfoItemValidation(EXECUTE_STUFF_DATA)) {
+            if (isEnhanceInvStuffValid())
+//                new EnhanceResultStuffGenerator()
+//                        .addWeaponOwner((Player)this.event.getWhoClicked())
+//                        .addWeaponStuff(this.enhanceItem)
+//                        .addScrollStuff(this.scrollStuff)
+//                        .addProtectScrollStuff(this.protectScroll)
+//                        .executeEnhance();
 
             this.event.setCancelled(true);
         }
@@ -79,49 +74,31 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
 
     private boolean isInteractingInfoItemValidation(int modelData) {
         boolean valid1 = this.event.getInventory().getType() == InventoryType.DROPPER;
-        boolean valid2 = this.enhanceItem != null;
-        boolean valid3 = valid2 && this.enhanceItem.getItemMeta() != null;
-        boolean valid4 = valid2 && this.enhanceItem.hasCustomModelData();
-        boolean valid5 = valid4 && this.enhanceItem.getCustomModelData() == modelData;
+        boolean valid2 = this.currentItem != null;
+        boolean valid3 = valid2 && this.currentItem.getItemMeta() != null;
+        boolean valid4 = valid2 && this.currentItem.hasCustomModelData();
+        boolean valid5 = valid4 && this.currentItem.getCustomModelData() == modelData;
         return valid1 && valid2 && valid3 && valid4 && valid5;
     }
 
-    private boolean isEnhanceItemMaterialTypeValid() {
-        boolean isEnhanceItemValid = this.allowedItem.stream()
-                .allMatch(item -> this.enhanceItem.getType().equals(item.getType()));
-
-        boolean isScrollValid = this.allowedScroll.stream()
-                .allMatch(scroll ->
-                        this.scrollStuff.getType().equals(scroll.getType())
-                        && this.scrollStuff.getType().equals(protectScroll.getType())
-                );
-
+    private boolean isEnhanceInvStuffValid() {
         String comment = "";
-        if (!isEnhanceItemValid)
-            comment = "허용된 아이템을 넣어주세요";
-        else if (!isScrollValid)
+        if (this.enhanceItem == null || this.enhanceItem.isEmpty())
+            comment = "무기를 올려주세요.";
+
+        else if (this.scrollStuff == null || this.scrollStuff.isEmpty())
+            comment = "강화 주문서가 부족합니다.";
+
+        else if (!this.allowedItem.contains(this.enhanceItem.getType()))
+            comment = "허용된 아이템을 넣어주세요.";
+
+        else if (!this.allowedScroll.contains(this.scrollStuff.getType()))
             comment = "허용된 주문서를 넣어주세요";
 
-        if (!isEnhanceItemValid || !isScrollValid) {
-            playerSendMsgComponentExchanger(this.ownerPlayer, comment, ColorMap.RED);
-            return true;
-        }
+        else if (this.protectScroll != null && !this.allowedScroll.contains(this.protectScroll.getType()))
+            comment = "허용된 주문서를 넣어주세요";
 
-        return false;
-    }
-
-    private boolean isStuffScrollValid() {
-        if (this.targetStuff == null) {
-            playerSendMsgComponentExchanger(this.ownerPlayer, "무기를 올려주세요.", ColorMap.RED);
-            this.event.setCancelled(true);
-            return false;
-        }
-
-        if (this.scrollStuff == null) {
-            playerSendMsgComponentExchanger(this.ownerPlayer, "강화 주문서가 부족합니다.", ColorMap.RED);
-            this.event.setCancelled(true);
-            return false;
-        }
-        return true;
+        playerSendMsgComponentExchanger(this.ownerPlayer, comment, ColorMap.RED);
+        return comment.isBlank();
     }
 }
