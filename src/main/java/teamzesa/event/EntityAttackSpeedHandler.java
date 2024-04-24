@@ -4,12 +4,10 @@ import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.jetbrains.annotations.NotNull;
 import teamzesa.entity.User;
 import teamzesa.event.register.EventRegister;
+ import teamzesa.util.Enum.WeaponMap;
 import teamzesa.util.userHandler.UserController;
-
-import java.util.function.Predicate;
 
 public class EntityAttackSpeedHandler implements EventRegister {
     private Entity damagerEntity;
@@ -39,7 +37,7 @@ public class EntityAttackSpeedHandler implements EventRegister {
             return;
 
         int hurtTick = 20; //default 20
-        boolean stuffCheck = handStuffChecker(
+        boolean stuffCheck = isDualWeaponChecker(
                 damager.getInventory().getItemInMainHand().getType(),
                 damager.getInventory().getItemInOffHand().getType());
 
@@ -53,10 +51,12 @@ public class EntityAttackSpeedHandler implements EventRegister {
         target.setMaximumNoDamageTicks(hurtTick);
     }
 
-    private @NotNull Boolean handStuffChecker(@NotNull Material mainStuff, @NotNull Material offStuff) {
-        Predicate<Material> netheriteToolChecker = tool ->
-                tool.equals(Material.NETHERITE_SWORD) || tool.equals(Material.NETHERITE_AXE);
-
-        return netheriteToolChecker.test(mainStuff) && netheriteToolChecker.test(offStuff);
+    private Boolean isDualWeaponChecker(Material mainStuff, Material offStuff) {
+        for (WeaponMap weaponMapInfo : WeaponMap.values()) {
+            Material material = weaponMapInfo.getMaterial();
+            if (material.equals(mainStuff) && material.equals(offStuff))
+                return true;
+        }
+        return false;
     }
 }
