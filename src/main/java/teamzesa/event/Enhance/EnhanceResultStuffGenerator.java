@@ -1,6 +1,7 @@
 package teamzesa.event.Enhance;
 
 import net.kyori.adventure.text.Component;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.util.Interface.StringComponentExchanger;
@@ -19,11 +20,14 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
     private int currentStuffPercentage;
 
     private Player weaponsOwner;
+
     private ItemStack enhanceItem;
     private ItemStack scrollStuff;
-    private ScrollMap allowedScrollStuff;
     private ItemStack protectScrollStuff;
-    private ScrollMap allowedProtectScrollStuff;
+
+    private boolean isEnhanceResult;
+    private boolean isScrollResult;
+    private boolean isProtectScrollResult;
 
     public EnhanceResultStuffGenerator() {}
 
@@ -38,27 +42,16 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
         if (!this.enhanceItem.hasCustomModelData())
             this.enhanceItem.setCustomModelData(this.LOW_LEVEL);
         this.currentStuffPercentage = this.enhanceItem.getCustomModelData();
-
         return this;
     }
 
     public EnhanceResultStuffGenerator addScrollStuff(ItemStack scrollStuff) {
         this.scrollStuff = scrollStuff;
-
-         for (ScrollMap scrollMap : ScrollMap.values()) {
-             if (scrollMap.getMaterial().equals(scrollStuff.getType()))
-                 this.allowedScrollStuff = scrollMap;
-         }
         return this;
     }
 
     public EnhanceResultStuffGenerator addProtectScrollStuff(ItemStack protectScrollStuff) {
         this.protectScrollStuff = protectScrollStuff;
-
-        for (ScrollMap scrollMap : ScrollMap.values()) {
-            if (scrollMap.getMaterial().equals(protectScrollStuff.getType()))
-                this.allowedProtectScrollStuff = scrollMap;
-        }
         return this;
     }
 
@@ -68,15 +61,36 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
             return;
         }
 
-//        Using Scroll
-        if (this.protectScrollStuff != null && this.protectScrollStuff.getAmount() > this.allowedProtectScrollStuff.getDiscountProtectValue())
-            this.protectScrollStuff.setAmount(
-                    this.protectScrollStuff.getAmount() - this.allowedProtectScrollStuff.getDiscountProtectValue());
-        this.scrollStuff.setAmount(this.scrollStuff.getAmount() - this.allowedScrollStuff.getDiscountValue());
+        ScrollMap currentScroll = getScrollType(this.scrollStuff);
+        ScrollMap currentProtectScroll = getScrollType(this.protectScrollStuff);
 
-//        Generator Item
-        if (getJudgementPercentage(getCurrentStuffPercentage())) successEnhanceScenario();
-        else                                                     failEnhanceScenario();
+        this.isEnhanceResult = getJudgementPercentage(getCurrentStuffPercentage());
+        this.isScrollResult = this.scrollStuff.getAmount() >= currentScroll.getDiscountProtectValue();
+        this.isProtectScrollResult = false;
+        if (this.protectScrollStuff != null && currentProtectScroll != null)
+            this.isProtectScrollResult = this.protectScrollStuff.getAmount() >= currentProtectScroll.getDiscountProtectValue();
+
+        if (!isScrollResult) {
+            playerSendMessage(8, ColorMap.RED);
+            return;
+        }
+
+        if (this.isProtectScrollResult)
+            this.protectScrollStuff.setAmount(this.protectScrollStuff.getAmount() - currentProtectScroll.getDiscountProtectValue());
+        this.scrollStuff.setAmount(this.scrollStuff.getAmount() - currentScroll.getDiscountValue());
+
+//        if (isEnhanceResult) successEnhanceScenario();
+//        else
+//        else {
+//            if (this.protectScrollStuff == null)
+//                return;
+//
+//            if (currentProtectScroll != null && ) {
+//                this.protectScrollStuff.setAmount(this.protectScrollStuff.getAmount() - currentProtectScroll.getDiscountProtectValue());
+//                failEnhanceScenario();
+//            } else playerSendMessage(7, ColorMap.RED);
+//        }
+
     }
 
     private boolean getJudgementPercentage(int standardValue) {
@@ -86,7 +100,7 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
 
     private void failEnhanceScenario() {
         boolean isDestructionResult = getJudgementPercentage(this.currentStuffPercentage);
-        if (isDestructionResult && this.protectScrollStuff == null) {
+        if (isDestructionResult && !this.isProtectScrollResult) {
             this.enhanceItem.setAmount(0);
             playerSendMessage(3, ColorMap.RED);
             return;
@@ -128,6 +142,15 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
         return null;
     }
 
+    private ScrollMap getScrollType(ItemStack targetItem) {
+        for (ScrollMap scrollMap : ScrollMap.values()) {
+            Material scrollMapMaterial = scrollMap.getMaterial();
+            if (scrollMapMaterial.equals(targetItem.getType()))
+                return scrollMap;
+        }
+        return null;
+    }
+
     private void playerSendMessage(int commentCode, ColorMap commentColor) {
         String comment = "";
         switch (commentCode) {
@@ -140,6 +163,8 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
                     +  " " + this.currentStuffPercentage + "강 -> " + --this.currentStuffPercentage + "강 강화실패";
             case 6 -> comment = this.enhanceItem.getDisplayName()
                     +  " " + this.currentStuffPercentage + "강 -> " + ++this.currentStuffPercentage + "강 강화성공";
+            case 7 -> comment = "파괴방지 주문서가 부족하여 강화가 실행되지 않았습니다.";
+            case 8 -> comment = "강화 주문서가 부족하여 실행되지 않았습니다.";
         }
 
         if (commentCode == 5) ++this.currentStuffPercentage;
