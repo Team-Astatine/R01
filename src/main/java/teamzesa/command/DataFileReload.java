@@ -9,7 +9,7 @@ import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.entity.User;
 import teamzesa.util.Enum.CommandExecutorMap;
 import teamzesa.R01;
-import teamzesa.util.Enum.ColorList;
+import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.userHandler.UserController;
 
 import java.util.Optional;
@@ -34,7 +34,7 @@ public class DataFileReload extends CommandRegisterSection {
 
 //        operation Check
         if (!player.isOp() && !this.isConsoleSend) {
-            playerSendMsgComponentExchanger(player,"해당 명령어는 플레이어가 사용할 수 없습니다.", ColorList.RED);
+            playerSendMsgComponentExchanger(player,"해당 명령어는 플레이어가 사용할 수 없습니다.", ColorMap.RED);
             return false;
         }
 
@@ -47,6 +47,6 @@ public class DataFileReload extends CommandRegisterSection {
         String comment = "Reload Done";
         if (this.isConsoleSend)
             Bukkit.getLogger().info("[R01] " + comment);
-        else playerSendMsgComponentExchanger(this.player, comment, ColorList.YELLOW);
+        else playerSendMsgComponentExchanger(this.player, comment, ColorMap.YELLOW);
     }
 }

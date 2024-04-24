@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.CommandExecutorMap;
-import teamzesa.util.Enum.ColorList;
+import teamzesa.util.Enum.ColorMap;
 
 
 public class Fly extends CommandRegisterSection {
@@ -21,7 +21,7 @@ public class Fly extends CommandRegisterSection {
 
         targetPlayer.setAllowFlight(!targetPlayer.getAllowFlight());
         String comment = targetPlayer.getAllowFlight() ? "활성화" : "비활성화";
-        playerSendMsgComponentExchanger(targetPlayer,"플라이 " + comment, ColorList.YELLOW);
+        playerSendMsgComponentExchanger(targetPlayer,"플라이 " + comment, ColorMap.YELLOW);
         return true;
     }
 }

@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.util.Interface.StringComponentExchanger;
-import teamzesa.util.Enum.ColorList;
+import teamzesa.util.Enum.ColorMap;
 import teamzesa.entity.User;
 import teamzesa.util.userHandler.UserController;
 
@@ -28,7 +28,7 @@ public class ValueObjectChecker extends StringComponentExchanger implements Comm
     private void sendComment(CommandSender sender, User user) {
         String userInfo = user == null ? "존재하지 않는 유저" : user.toString();
         if (sender instanceof Player player)
-            playerSendMsgComponentExchanger(player, userInfo, ColorList.YELLOW);
+            playerSendMsgComponentExchanger(player, userInfo, ColorMap.YELLOW);
         else Bukkit.getLogger().info(user.toString());
     }
 }

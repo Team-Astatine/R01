@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
 import teamzesa.event.register.EventRegister;
 import teamzesa.util.Interface.StringComponentExchanger;
-import teamzesa.util.Enum.ColorList;
+import teamzesa.util.Enum.ColorMap;
 import teamzesa.entity.User;
 import teamzesa.util.userHandler.UserBuilder;
 import teamzesa.util.userHandler.UserController;
@@ -61,7 +61,7 @@ public class PlayerInfoHandler extends StringComponentExchanger implements Event
                     .ipList(ipList)
                     .buildAndUpdate();
 
-            playerSendMsgComponentExchanger(this.joinPlayer, message, ColorList.YELLOW);
+            playerSendMsgComponentExchanger(this.joinPlayer, message, ColorMap.YELLOW);
         }
     }
 

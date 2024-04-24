@@ -5,7 +5,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.event.register.EventRegister;
-import teamzesa.util.Enum.ColorList;
+import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.WeaponMap;
 import teamzesa.util.Interface.StringComponentExchanger;
 
@@ -83,13 +83,13 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
 
     private boolean isStuffScrollValid() {
         if (this.targetStuff == null) {
-            playerSendMsgComponentExchanger(this.ownerPlayer, "무기를 올려주세요.", ColorList.RED);
+            playerSendMsgComponentExchanger(this.ownerPlayer, "무기를 올려주세요.", ColorMap.RED);
             this.event.setCancelled(true);
             return false;
         }
 
         if (this.scrollStuff == null) {
-            playerSendMsgComponentExchanger(this.ownerPlayer, "강화 주문서가 부족합니다.", ColorList.RED);
+            playerSendMsgComponentExchanger(this.ownerPlayer, "강화 주문서가 부족합니다.", ColorMap.RED);
             this.event.setCancelled(true);
             return false;
         }

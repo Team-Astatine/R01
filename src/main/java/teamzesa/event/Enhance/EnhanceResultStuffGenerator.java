@@ -1,15 +1,12 @@
 package teamzesa.event.Enhance;
 
 import net.kyori.adventure.text.Component;
-import org.bukkit.Material;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.*;
 
 import java.util.Collections;
-import java.util.Optional;
 
 public class EnhanceResultStuffGenerator extends StringComponentExchanger {
     /*
@@ -55,7 +52,7 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
 
     public void executeEnhance() {
         if (this.currentStuffPercentage > this.MAX_LEVEL) {
-            playerSendMessage(2, ColorList.RED);
+            playerSendMessage(2, ColorMap.RED);
             return;
         }
 
@@ -78,18 +75,18 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
         boolean isDestructionResult = getJudgementPercentage(this.currentStuffPercentage);
         if (isDestructionResult && this.protectScrollStuff == null) {
             this.enhanceItem.setAmount(0);
-            playerSendMessage(3, ColorList.RED);
+            playerSendMessage(3, ColorMap.RED);
             return;
-        } else playerSendMessage(4, ColorList.ORANGE);
+        } else playerSendMessage(4, ColorMap.ORANGE);
 
 //        DownGrade
-        playerSendMessage(5, ColorList.PINK);
+        playerSendMessage(5, ColorMap.PINK);
         this.enhanceItem.setCustomModelData(--this.currentStuffPercentage);
         this.enhanceItem.lore(Collections.singletonList(getLoreCommentComponent()));
     }
     
     private void successEnhanceScenario() {
-        playerSendMessage(6, ColorList.DISCORD_COLOR);
+        playerSendMessage(6, ColorMap.DISCORD_COLOR);
         this.enhanceItem.setCustomModelData(++this.currentStuffPercentage);
         this.enhanceItem.lore(Collections.singletonList(getLoreCommentComponent()));
     }
@@ -118,7 +115,7 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
         return null;
     }
 
-    private void playerSendMessage(int commentCode, ColorList commentColor) {
+    private void playerSendMessage(int commentCode, ColorMap commentColor) {
         String comment = "";
         switch (commentCode) {
             case 0 -> comment = "무기를 올려주세요.";

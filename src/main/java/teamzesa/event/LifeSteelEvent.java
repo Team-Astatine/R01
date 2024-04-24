@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import teamzesa.event.register.EventRegister;
 import teamzesa.util.Interface.StringComponentExchanger;
-import teamzesa.util.Enum.ColorList;
+import teamzesa.util.Enum.ColorMap;
 import teamzesa.entity.User;
 import teamzesa.util.userHandler.UserBuilder;
 import teamzesa.util.userHandler.UserController;
@@ -65,7 +65,7 @@ public class LifeSteelEvent extends StringComponentExchanger implements EventReg
 
         //스스로가 스스로를 죽이면 무시함
         if (this.deather.equals(this.killer)) {
-            this.event.deathMessage(componentExchanger(this.deatherUser.name() + " 님이 자살했습니다.", ColorList.RED));
+            this.event.deathMessage(componentExchanger(this.deatherUser.name() + " 님이 자살했습니다.", ColorMap.RED));
             return true;
         }
 
@@ -100,10 +100,10 @@ public class LifeSteelEvent extends StringComponentExchanger implements EventReg
                         .killCount(this.killerUser.killCount() + 1)
                         .build());
 
-        playerSendMsgComponentExchanger(this.deather, this.killer.getName() + "님이 체력을 약탈했습니다.", ColorList.RED);
-        playerSendMsgComponentExchanger(this.killer, this.deather.getName() + "님이 체력을 약탈했습니다.", ColorList.RED);
+        playerSendMsgComponentExchanger(this.deather, this.killer.getName() + "님이 체력을 약탈했습니다.", ColorMap.RED);
+        playerSendMsgComponentExchanger(this.killer, this.deather.getName() + "님이 체력을 약탈했습니다.", ColorMap.RED);
         this.event.deathMessage(
-                componentExchanger("[KILL]" + this.killerUser.name() + " -> " + this.deatherUser.name(), ColorList.PINK)
+                componentExchanger("[KILL]" + this.killerUser.name() + " -> " + this.deatherUser.name(), ColorMap.PINK)
         );
     }
 }

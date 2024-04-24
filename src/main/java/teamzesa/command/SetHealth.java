@@ -2,15 +2,13 @@ package teamzesa.command;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.entity.User;
 import teamzesa.util.Enum.CommandExecutorMap;
-import teamzesa.util.Interface.StringComponentExchanger;
-import teamzesa.util.Enum.ColorList;
+import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.userHandler.UserBuilder;
 import teamzesa.util.userHandler.UserController;
 
@@ -35,7 +33,7 @@ public class SetHealth extends CommandRegisterSection {
         );
 
         if (senderUser != null && !this.senderPlayer.isOp()) {
-            playerSendMsgComponentExchanger(this.senderPlayer,"해당 명령어는 플레이어가 사용할 수 없습니다.", ColorList.RED);
+            playerSendMsgComponentExchanger(this.senderPlayer,"해당 명령어는 플레이어가 사용할 수 없습니다.", ColorMap.RED);
             return false;
         }
 
@@ -67,7 +65,7 @@ public class SetHealth extends CommandRegisterSection {
         }
 
         if (!this.senderPlayer.equals(this.targetPlayer))
-            playerSendMsgComponentExchanger(this.senderPlayer, comment, ColorList.YELLOW);
-        playerSendMsgComponentExchanger(this.targetPlayer, comment, ColorList.YELLOW);
+            playerSendMsgComponentExchanger(this.senderPlayer, comment, ColorMap.YELLOW);
+        playerSendMsgComponentExchanger(this.targetPlayer, comment, ColorMap.YELLOW);
     }
 }

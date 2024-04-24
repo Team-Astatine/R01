@@ -11,7 +11,7 @@ import teamzesa.entity.User;
 import teamzesa.event.register.EventRegister;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.ArmourKit;
-import teamzesa.util.Enum.ColorList;
+import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.FoodKit;
 import teamzesa.util.Enum.ToolKit;
 import teamzesa.util.IOHandler.Announcer;
@@ -96,11 +96,11 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
 
         if (this.user.killCount() == 0)
             this.event.joinMessage(
-                componentExchanger(" + " + this.user.name(), ColorList.RED)
+                componentExchanger(" + " + this.user.name(), ColorMap.RED)
             );
 
         else this.event.joinMessage(
-            componentExchanger(" + [ " + user.killCount() + "KILL ] " + user.name(), ColorList.RED)
+            componentExchanger(" + [ " + user.killCount() + "KILL ] " + user.name(), ColorMap.RED)
         );
     }
 

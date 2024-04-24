@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.entity.User;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.ThreadPool;
-import teamzesa.util.Enum.ColorList;
+import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.userHandler.UserController;
 
 import java.util.ArrayList;
@@ -34,15 +34,15 @@ public class Announcer extends StringComponentExchanger {
     public void countAnnouncer(Player player) {
         int joinCnt = new UserController().readUser(player).joinCount();
         player.sendMessage(
-                componentExchanger(this.configIOHandler.getWorldMotdConfig(), ColorList.SKY_BLUE)
-                        .append(componentExchanger(" " + joinCnt, ColorList.PINK))
-                        .append(componentExchanger("번째 접속!", ColorList.SKY_BLUE))
+                componentExchanger(this.configIOHandler.getWorldMotdConfig(), ColorMap.SKY_BLUE)
+                        .append(componentExchanger(" " + joinCnt, ColorMap.PINK))
+                        .append(componentExchanger("번째 접속!", ColorMap.SKY_BLUE))
         );
     }
 
     public void setPlayerTabHeader(@NotNull Audience audience) {
         audience.sendPlayerListHeader(
-                componentExchanger(this.configIOHandler.getWorldMotdConfig(), ColorList.PURPLE)
+                componentExchanger(this.configIOHandler.getWorldMotdConfig(), ColorMap.PURPLE)
         );
     }
 
@@ -81,11 +81,11 @@ public class Announcer extends StringComponentExchanger {
         String discordLink = this.configIOHandler.getDiscordConfig();
         String mineListLink = this.configIOHandler.getMineListConfig();
 
-        ColorList commonColor = ColorList.RED;
-        ColorList voteColor = ColorList.VOTE_COLOR;
-        ColorList notionColor = ColorList.NOTIOIN_COLOR;
-        ColorList commandColor = ColorList.COMMAND_COLOR;
-        ColorList discordColor = ColorList.DISCORD_COLOR;
+        ColorMap commonColor = ColorMap.RED;
+        ColorMap voteColor = ColorMap.VOTE_COLOR;
+        ColorMap notionColor = ColorMap.NOTIOIN_COLOR;
+        ColorMap commandColor = ColorMap.COMMAND_COLOR;
+        ColorMap discordColor = ColorMap.DISCORD_COLOR;
 
         return new Component[]{
                 createLinkComponentExchanger(this.configIOHandler.getMineListVote(), mineListLink, voteColor),

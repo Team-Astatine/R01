@@ -8,7 +8,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import teamzesa.entity.User;
 import teamzesa.event.register.EventRegister;
 import teamzesa.util.Interface.StringComponentExchanger;
-import teamzesa.util.Enum.ColorList;
+import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.userHandler.UserController;
 
 public class PlayerFlyEnableEvent extends StringComponentExchanger implements EventRegister {
@@ -42,6 +42,6 @@ public class PlayerFlyEnableEvent extends StringComponentExchanger implements Ev
     public void execute() {
         this.player.setAllowFlight(true);
         User user = new UserController().readUser(this.player);
-        if (!user.isGodMode()) playerSendMsgComponentExchanger(this.player, this.comment, ColorList.YELLOW);
+        if (!user.isGodMode()) playerSendMsgComponentExchanger(this.player, this.comment, ColorMap.YELLOW);
     }
 }

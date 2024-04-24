@@ -6,10 +6,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.util.Enum.ColorList;
+import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.CommandExecutorMap;
 
-import java.sql.Struct;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -36,7 +35,7 @@ public class Moderator extends CommandRegisterSection {
         Optional.ofNullable(Bukkit.getPlayer(args[0])).ifPresent(
                 player -> {
                     if (checkUPModerator(player)) {
-                        playerSendMsgComponentExchanger(player, successComment, ColorList.ORANGE);
+                        playerSendMsgComponentExchanger(player, successComment, ColorMap.ORANGE);
                         player.setOp(true);
                     }
                 }
