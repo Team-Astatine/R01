@@ -17,6 +17,7 @@ import org.purpurmc.purpur.event.inventory.AnvilUpdateResultEvent;
 import teamzesa.event.*;
 import teamzesa.event.AntiExploit.*;
 import teamzesa.event.Enhance.EnhanceInventoryClickEvent;
+import teamzesa.event.Enhance.EnhanceInventoryCloseEvent;
 import teamzesa.event.Enhance.EnhanceItemDmgEvent;
 //todo
 //fixme
@@ -92,8 +93,7 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public static void InventoryCloseEvent(InventoryCloseEvent event) {
-//        methodImplement
-//        enhanceInv close event 추가할것
+        new EnhanceInventoryCloseEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
