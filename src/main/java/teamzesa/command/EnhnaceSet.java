@@ -54,7 +54,7 @@ public class EnhnaceSet extends CommandRegisterSection {
 
     private Component getLoreCommentComponent(ItemStack item) {
         for (EnhanceComment enhanceComment : EnhanceComment.values()) {
-            if (item.getCustomModelData() == enhanceComment.getStep())
+            if (item.getCustomModelData() == enhanceComment.getEnhanceStack())
                 return enhanceComment.getLoreComment();
         }
         return null;
