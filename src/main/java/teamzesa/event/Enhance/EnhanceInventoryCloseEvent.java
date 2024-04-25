@@ -2,20 +2,21 @@ package teamzesa.event.Enhance;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.inventory.Inventory;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.event.register.EventRegister;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+
+import static teamzesa.command.EnhanceStuff.EXECUTE_STUFF_DATA;
 
 public class EnhanceInventoryCloseEvent implements EventRegister {
+    private final int MINIMUM_INVENTORY_SLOT = 5;
 
-    private Player player;
-    private ItemStack weaponItem;
-    private ItemStack scrollItem;
-    private ItemStack scrollProtectItem;
-    private InventoryCloseEvent event;
+    private Player itemOwner;
+    private ArrayList<ItemStack> slot;
+
+    private final InventoryCloseEvent event;
     public EnhanceInventoryCloseEvent(InventoryCloseEvent event) {
         this.event = event;
         init();
@@ -24,24 +25,50 @@ public class EnhanceInventoryCloseEvent implements EventRegister {
 
     @Override
     public void init() {
-        this.player = this.event.getPlayer().getKiller();
-        this.weaponItem = this.event.getInventory().getItem(3);
-        this.scrollItem = this.event.getInventory().getItem(4);
-        this.scrollProtectItem = this.event.getInventory().getItem(5);
+        this.itemOwner = (Player) this.event.getPlayer();
+        this.slot = new ArrayList<>();
     }
 
     @Override
     public void execute() {
-        int cnt = 0;
-        ItemStack[] currentInv = this.player.getInventory().getContents();
-        for (int i = 0; i < currentInv.length; i++) {
-            if (currentInv[i] == null)
-                cnt++;
-        }
+        if (validation())
+            return;
 
-        if (cnt < 1) {
+        this.slot.add(this.event.getInventory().getItem(3));
+        this.slot.add(this.event.getInventory().getItem(4));
+        this.slot.add(this.event.getInventory().getItem(5));
 
+        long receiveItemCount = this.slot.stream()
+                .filter(Objects::nonNull)
+                .count();
 
-        }
+        long blankInventoryCount = Arrays.stream(this.itemOwner.getInventory().getContents())
+                .filter(Objects::isNull)
+                .count();
+
+        if (blankInventoryCount >= MINIMUM_INVENTORY_SLOT + receiveItemCount)
+            this.slot.stream()
+                    .filter(Objects::nonNull)
+                    .forEach(item -> this.itemOwner.getInventory().addItem(item));
+        else
+            this.slot.stream()
+                    .filter(Objects::nonNull)
+                    .forEach(item -> this.itemOwner.getWorld().dropItem(this.itemOwner.getLocation(), item));
+    }
+
+    private boolean validation() {
+        if (this.event.getInventory().getType() != InventoryType.DROPPER)
+            return true;
+
+        ItemStack slotSevenItem = this.event.getView().getItem(7);
+        if (slotSevenItem == null)
+            return true;
+
+        if (!slotSevenItem.hasCustomModelData())
+            return true;
+
+        if (slotSevenItem.getCustomModelData() != EXECUTE_STUFF_DATA)
+            return true;
+        return false;
     }
 }
