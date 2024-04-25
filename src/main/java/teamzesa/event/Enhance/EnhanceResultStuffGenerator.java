@@ -79,15 +79,16 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
             successEnhanceScenario();
         else {
             boolean isDestructionResult = getJudgementPercentage(this.currentStuffPercentage);
-            if (isDestructionResult && this.protectScrollStuff == null && !isProtectScrollAmountResult) {
+
+            if (isDestructionResult && this.protectScrollStuff == null) {
                 this.enhanceItem.setAmount(0);
                 playerSendMessage(3, ColorMap.RED);
-                return;
-            } else playerSendMessage(4, ColorMap.ORANGE);
+            }
+            if (isDestructionResult && this.protectScrollStuff != null)
+                playerSendMessage(4, ColorMap.ORANGE);
 
             failEnhanceScenario();
         }
-
         decreaseScrollAmount();
     }
 
@@ -111,7 +112,7 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
         this.enhanceItem.setCustomModelData(--this.currentStuffPercentage);
         this.enhanceItem.lore(Collections.singletonList(getLoreCommentComponent()));
     }
-    
+
     private void successEnhanceScenario() {
         playerSendMessage(6, ColorMap.DISCORD_COLOR);
         this.enhanceItem.setCustomModelData(++this.currentStuffPercentage);
@@ -152,9 +153,9 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
             case 3 -> "강화에 실패하여 무기가 파괴 되었습니다.";
             case 4 -> "파괴방어 스크롤을 사용하여 파괴방지 성공!";
             case 5 -> this.enhanceItem.getDisplayName()
-                        + " " + this.currentStuffPercentage + "강 -> " + --this.currentStuffPercentage + "강 강화실패";
+                    + " " + this.currentStuffPercentage + "강 -> " + --this.currentStuffPercentage + "강 강화실패";
             case 6 -> this.enhanceItem.getDisplayName()
-                        + " " + this.currentStuffPercentage + "강 -> " + ++this.currentStuffPercentage + "강 강화성공";
+                    + " " + this.currentStuffPercentage + "강 -> " + ++this.currentStuffPercentage + "강 강화성공";
             case 7 -> "파괴방지 주문서가 부족하여 강화가 실행되지 않았습니다.";
             case 8 -> "강화 주문서가 부족하여 실행되지 않았습니다.";
 
