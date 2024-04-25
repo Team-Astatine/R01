@@ -16,7 +16,7 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
     */
 
     private final int LOW_LEVEL = 0;
-    private final int MAX_LEVEL = 9;
+    private final int MAX_LEVEL = 10;
     private int currentStuffPercentage;
 
     private Player weaponsOwner;
@@ -25,11 +25,21 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
     private ItemStack scrollStuff;
     private ItemStack protectScrollStuff;
 
-    private boolean isEnhanceResult;
-    private boolean isScrollResult;
-    private boolean isProtectScrollResult;
+    private ScrollMap scrollInfo;
+    private ScrollMap protectScrollInfo;
 
-    public EnhanceResultStuffGenerator() {}
+    private boolean isScrollAmountResult;
+    private boolean isProtectScrollAmountResult;
+
+    public EnhanceResultStuffGenerator() {
+        this.scrollInfo = getScrollType(this.scrollStuff);
+        this.protectScrollInfo = getScrollType(this.protectScrollStuff);
+
+        this.isScrollAmountResult = this.scrollStuff.getAmount() >= this.scrollInfo.getDiscountProtectValue();
+        this.isProtectScrollAmountResult = false;
+        if (this.protectScrollStuff != null && this.protectScrollInfo != null)
+            this.isProtectScrollAmountResult = this.protectScrollStuff.getAmount() >= this.protectScrollInfo.getDiscountProtectValue();
+    }
 
     public EnhanceResultStuffGenerator addWeaponOwner(Player player) {
         this.weaponsOwner = player;
@@ -56,41 +66,35 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
     }
 
     public void executeEnhance() {
-        if (this.currentStuffPercentage > this.MAX_LEVEL) {
+        if (this.currentStuffPercentage >= this.MAX_LEVEL) {
             playerSendMessage(2, ColorMap.RED);
             return;
         }
 
-        ScrollMap currentScroll = getScrollType(this.scrollStuff);
-        ScrollMap currentProtectScroll = getScrollType(this.protectScrollStuff);
-
-        this.isEnhanceResult = getJudgementPercentage(getCurrentStuffPercentage());
-        this.isScrollResult = this.scrollStuff.getAmount() >= currentScroll.getDiscountProtectValue();
-        this.isProtectScrollResult = false;
-        if (this.protectScrollStuff != null && currentProtectScroll != null)
-            this.isProtectScrollResult = this.protectScrollStuff.getAmount() >= currentProtectScroll.getDiscountProtectValue();
-
-        if (!isScrollResult) {
+        if (!this.isScrollAmountResult) {
             playerSendMessage(8, ColorMap.RED);
             return;
         }
 
-        if (this.isProtectScrollResult)
-            this.protectScrollStuff.setAmount(this.protectScrollStuff.getAmount() - currentProtectScroll.getDiscountProtectValue());
-        this.scrollStuff.setAmount(this.scrollStuff.getAmount() - currentScroll.getDiscountValue());
+        if (this.protectScrollStuff != null && !this.isProtectScrollAmountResult) {
+            playerSendMessage(7, ColorMap.RED);
+            return;
+        }
 
-//        if (isEnhanceResult) successEnhanceScenario();
-//        else
-//        else {
-//            if (this.protectScrollStuff == null)
-//                return;
-//
-//            if (currentProtectScroll != null && ) {
-//                this.protectScrollStuff.setAmount(this.protectScrollStuff.getAmount() - currentProtectScroll.getDiscountProtectValue());
-//                failEnhanceScenario();
-//            } else playerSendMessage(7, ColorMap.RED);
-//        }
+        if (getJudgementPercentage(MAX_LEVEL - this.currentStuffPercentage))
+            successEnhanceScenario();
+        else {
+            boolean isDestructionResult = getJudgementPercentage(this.currentStuffPercentage);
+            if (isDestructionResult) {
+                this.enhanceItem.setAmount(0);
+                playerSendMessage(3, ColorMap.RED);
+                return;
+            } else playerSendMessage(4, ColorMap.ORANGE);
 
+            failEnhanceScenario();
+        }
+
+        decreaseScrollAmount();
     }
 
     private boolean getJudgementPercentage(int standardValue) {
@@ -99,14 +103,6 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
     }
 
     private void failEnhanceScenario() {
-        boolean isDestructionResult = getJudgementPercentage(this.currentStuffPercentage);
-        if (isDestructionResult && !this.isProtectScrollResult) {
-            this.enhanceItem.setAmount(0);
-            playerSendMessage(3, ColorMap.RED);
-            return;
-        } else playerSendMessage(4, ColorMap.ORANGE);
-
-//        DownGrade
         playerSendMessage(5, ColorMap.PINK);
         this.enhanceItem.setCustomModelData(--this.currentStuffPercentage);
         this.enhanceItem.lore(Collections.singletonList(getLoreCommentComponent()));
@@ -118,20 +114,10 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
         this.enhanceItem.lore(Collections.singletonList(getLoreCommentComponent()));
     }
 
-    private int getCurrentStuffPercentage() {
-        return switch (this.currentStuffPercentage) {
-            case 0-> 10;//100%
-            case 1-> 9; //90%
-            case 2-> 8; //80%
-            case 3-> 7; //70%
-            case 4-> 6; //60%
-            case 5-> 5; //50%
-            case 6-> 4; //40%
-            case 7-> 3; //30%
-            case 8-> 2; //20%
-            case 9-> 1; //10%
-            default -> 0;
-        };
+    private void decreaseScrollAmount() {
+        if (this.protectScrollStuff != null)
+            this.protectScrollStuff.setAmount(this.protectScrollStuff.getAmount() - this.protectScrollInfo.getDiscountProtectValue());
+        this.scrollStuff.setAmount(this.scrollStuff.getAmount() - this.scrollInfo.getDiscountProtectValue());
     }
 
     private Component getLoreCommentComponent() {
@@ -152,23 +138,26 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
     }
 
     private void playerSendMessage(int commentCode, ColorMap commentColor) {
-        String comment = "";
-        switch (commentCode) {
-            case 0 -> comment = "무기를 올려주세요.";
-            case 1 -> comment = "강화 주문서가 부족합니다.";
-            case 2 -> comment = "이미 최고 레벨입니다.";
-            case 3 -> comment = "강화에 실패하여 무기가 파괴 되었습니다.";
-            case 4 -> comment = "파괴방어 스크롤을 사용하여 파괴방지 성공!";
-            case 5 -> comment = this.enhanceItem.getDisplayName()
-                    +  " " + this.currentStuffPercentage + "강 -> " + --this.currentStuffPercentage + "강 강화실패";
-            case 6 -> comment = this.enhanceItem.getDisplayName()
-                    +  " " + this.currentStuffPercentage + "강 -> " + ++this.currentStuffPercentage + "강 강화성공";
-            case 7 -> comment = "파괴방지 주문서가 부족하여 강화가 실행되지 않았습니다.";
-            case 8 -> comment = "강화 주문서가 부족하여 실행되지 않았습니다.";
-        }
+        String comment = switch (commentCode) {
+            case 0 -> "무기를 올려주세요.";
+            case 1 -> "강화 주문서가 부족합니다.";
+            case 2 -> "이미 최고 레벨입니다.";
+            case 3 -> "강화에 실패하여 무기가 파괴 되었습니다.";
+            case 4 -> "파괴방어 스크롤을 사용하여 파괴방지 성공!";
+            case 5 -> this.enhanceItem.getDisplayName()
+                        + " " + this.currentStuffPercentage + "강 -> " + --this.currentStuffPercentage + "강 강화실패";
+            case 6 -> this.enhanceItem.getDisplayName()
+                        + " " + this.currentStuffPercentage + "강 -> " + ++this.currentStuffPercentage + "강 강화성공";
+            case 7 -> "파괴방지 주문서가 부족하여 강화가 실행되지 않았습니다.";
+            case 8 -> "강화 주문서가 부족하여 실행되지 않았습니다.";
 
-        if (commentCode == 5) ++this.currentStuffPercentage;
-        if (commentCode == 6) --this.currentStuffPercentage;
+            default -> throw new IllegalStateException("Unexpected value: " + commentCode);
+        };
+
+        if (commentCode == 5)
+            ++ this.currentStuffPercentage;
+        if (commentCode == 6)
+            -- this.currentStuffPercentage;
 
         playerSendMsgComponentExchanger(this.weaponsOwner, comment, commentColor);
     }
