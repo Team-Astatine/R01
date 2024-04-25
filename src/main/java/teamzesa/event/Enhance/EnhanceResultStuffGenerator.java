@@ -85,7 +85,7 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
                 playerSendMessage(3, ColorMap.RED);
             }
             if (isDestructionResult && this.protectScrollStuff != null)
-                playerSendMessage(4, ColorMap.ORANGE);
+                playerSendMessage(4, ColorMap.VOTE_COLOR);
 
             failEnhanceScenario();
         }
@@ -96,7 +96,8 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
         this.scrollInfo = getScrollType(this.scrollStuff);
         this.protectScrollInfo = getScrollType(this.protectScrollStuff);
 
-        this.isScrollAmountResult = this.scrollStuff.getAmount() >= this.scrollInfo.getDiscountProtectValue();
+        this.isScrollAmountResult = this.scrollStuff.getAmount() >= this.scrollInfo.getDiscountValue();
+
         this.isProtectScrollAmountResult = false;
         if (this.protectScrollStuff != null && this.protectScrollInfo != null)
             this.isProtectScrollAmountResult = this.protectScrollStuff.getAmount() >= this.protectScrollInfo.getDiscountProtectValue();
@@ -104,7 +105,7 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
 
     private boolean getJudgementPercentage(int standardValue) {
         int ranNum = Integer.parseInt(String.valueOf(String.format("%1.0f", Math.random() * 10)));
-        return ranNum < standardValue;
+        return ranNum <= standardValue;
     }
 
     private void failEnhanceScenario() {
@@ -122,12 +123,13 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
     private void decreaseScrollAmount() {
         if (this.protectScrollStuff != null)
             this.protectScrollStuff.setAmount(this.protectScrollStuff.getAmount() - this.protectScrollInfo.getDiscountProtectValue());
-        this.scrollStuff.setAmount(this.scrollStuff.getAmount() - this.scrollInfo.getDiscountProtectValue());
+
+        this.scrollStuff.setAmount(this.scrollStuff.getAmount() - this.scrollInfo.getDiscountValue());
     }
 
     private Component getLoreCommentComponent() {
         for (EnhanceComment enhanceComment : EnhanceComment.values()) {
-            if (this.enhanceItem.getCustomModelData() == enhanceComment.getStep())
+            if (this.enhanceItem.getCustomModelData() == enhanceComment.getEnhanceStack())
                 return enhanceComment.getLoreComment();
         }
         return null;
@@ -159,7 +161,7 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
             case 7 -> "파괴방지 주문서가 부족하여 강화가 실행되지 않았습니다.";
             case 8 -> "강화 주문서가 부족하여 실행되지 않았습니다.";
 
-            default -> throw new IllegalStateException("Unexpected value: " + commentCode);
+            default -> throw new IllegalStateException("UnKnown CommentCode: " + commentCode);
         };
 
         if (commentCode == 5)
