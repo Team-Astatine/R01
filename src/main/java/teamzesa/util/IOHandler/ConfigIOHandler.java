@@ -47,6 +47,7 @@ public class ConfigIOHandler extends StringComponentExchanger {
         getCommandFly();
         getCommandHat();
         getCommandTotem();
+        getCommandEnhance();
         getCommandAnnouncing();
     }
 
@@ -109,6 +110,10 @@ public class ConfigIOHandler extends StringComponentExchanger {
 
     public String getCommandTotem() {
         return getString(ConfigMenu.MESSAGE_COMMAND_TOTEM);
+    }
+
+    public String getCommandEnhance() {
+        return getString(ConfigMenu.MESSAGE_COMMAND_ENHANCE);
     }
 
     public String getCommandAnnouncing() {
