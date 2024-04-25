@@ -61,12 +61,12 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
 
         if (isInteractingInfoItemValidation(EXECUTE_STUFF_DATA)) {
             if (isEnhanceInvStuffValid())
-//                new EnhanceResultStuffGenerator()
-//                        .addWeaponOwner((Player)this.event.getWhoClicked())
-//                        .addWeaponStuff(this.enhanceItem)
-//                        .addScrollStuff(this.scrollStuff)
-//                        .addProtectScrollStuff(this.protectScroll)
-//                        .executeEnhance();
+                new EnhanceResultStuffGenerator()
+                        .addWeaponOwner((Player)this.event.getWhoClicked())
+                        .addWeaponStuff(this.enhanceItem)
+                        .addScrollStuff(this.scrollStuff)
+                        .addProtectScrollStuff(this.protectScroll)
+                        .executeEnhance();
 
             this.event.setCancelled(true);
         }
@@ -98,7 +98,8 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
         else if (this.protectScroll != null && !this.allowedScroll.contains(this.protectScroll.getType()))
             comment = "허용된 주문서를 넣어주세요";
 
-        playerSendMsgComponentExchanger(this.ownerPlayer, comment, ColorMap.RED);
+        if (!comment.isBlank())
+            playerSendMsgComponentExchanger(this.ownerPlayer, comment, ColorMap.RED);
         return comment.isBlank();
     }
 }

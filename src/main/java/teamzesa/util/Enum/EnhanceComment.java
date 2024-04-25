@@ -34,16 +34,16 @@ public enum EnhanceComment {
             .color(ColorMap.RED.getTextColor())
     );
 
-    private final int step;
+    private final int enhanceStack;
     private final Component component;
 
-    EnhanceComment(int step, Component component) {
-        this.step = step;
+    EnhanceComment(int enhanceStack, Component component) {
+        this.enhanceStack = enhanceStack;
         this.component = component;
     }
 
-    public int getStep() {
-        return step;
+    public int getEnhanceStack() {
+        return enhanceStack;
     }
 
     public Component getLoreComment() {

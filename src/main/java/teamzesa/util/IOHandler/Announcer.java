@@ -86,6 +86,7 @@ public class Announcer extends StringComponentExchanger {
         ColorMap notionColor = ColorMap.NOTIOIN_COLOR;
         ColorMap commandColor = ColorMap.COMMAND_COLOR;
         ColorMap discordColor = ColorMap.DISCORD_COLOR;
+        ColorMap enhanceColor = ColorMap.PINK;
 
         return new Component[]{
                 createLinkComponentExchanger(this.configIOHandler.getMineListVote(), mineListLink, voteColor),
@@ -99,6 +100,7 @@ public class Announcer extends StringComponentExchanger {
                 componentExchanger(this.configIOHandler.getCommandFly(), commandColor),
                 componentExchanger(this.configIOHandler.getCommandHat(), commandColor),
                 componentExchanger(this.configIOHandler.getCommandTotem(), commandColor),
+                componentExchanger(this.configIOHandler.getCommandEnhance(), enhanceColor),
                 componentExchanger(this.configIOHandler.getCommandAnnouncing(), commandColor)
         };
     }
