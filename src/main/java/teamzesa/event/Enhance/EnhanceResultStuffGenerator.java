@@ -31,15 +31,7 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
     private boolean isScrollAmountResult;
     private boolean isProtectScrollAmountResult;
 
-    public EnhanceResultStuffGenerator() {
-        this.scrollInfo = getScrollType(this.scrollStuff);
-        this.protectScrollInfo = getScrollType(this.protectScrollStuff);
-
-        this.isScrollAmountResult = this.scrollStuff.getAmount() >= this.scrollInfo.getDiscountProtectValue();
-        this.isProtectScrollAmountResult = false;
-        if (this.protectScrollStuff != null && this.protectScrollInfo != null)
-            this.isProtectScrollAmountResult = this.protectScrollStuff.getAmount() >= this.protectScrollInfo.getDiscountProtectValue();
-    }
+    public EnhanceResultStuffGenerator() {}
 
     public EnhanceResultStuffGenerator addWeaponOwner(Player player) {
         this.weaponsOwner = player;
@@ -66,6 +58,8 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
     }
 
     public void executeEnhance() {
+        init();
+
         if (this.currentStuffPercentage >= this.MAX_LEVEL) {
             playerSendMessage(2, ColorMap.RED);
             return;
@@ -85,7 +79,7 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
             successEnhanceScenario();
         else {
             boolean isDestructionResult = getJudgementPercentage(this.currentStuffPercentage);
-            if (isDestructionResult) {
+            if (isDestructionResult && this.protectScrollStuff == null && !isProtectScrollAmountResult) {
                 this.enhanceItem.setAmount(0);
                 playerSendMessage(3, ColorMap.RED);
                 return;
@@ -95,6 +89,16 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
         }
 
         decreaseScrollAmount();
+    }
+
+    private void init() {
+        this.scrollInfo = getScrollType(this.scrollStuff);
+        this.protectScrollInfo = getScrollType(this.protectScrollStuff);
+
+        this.isScrollAmountResult = this.scrollStuff.getAmount() >= this.scrollInfo.getDiscountProtectValue();
+        this.isProtectScrollAmountResult = false;
+        if (this.protectScrollStuff != null && this.protectScrollInfo != null)
+            this.isProtectScrollAmountResult = this.protectScrollStuff.getAmount() >= this.protectScrollInfo.getDiscountProtectValue();
     }
 
     private boolean getJudgementPercentage(int standardValue) {
@@ -129,6 +133,9 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
     }
 
     private ScrollMap getScrollType(ItemStack targetItem) {
+        if (targetItem == null)
+            return null;
+
         for (ScrollMap scrollMap : ScrollMap.values()) {
             Material scrollMapMaterial = scrollMap.getMaterial();
             if (scrollMapMaterial.equals(targetItem.getType()))
