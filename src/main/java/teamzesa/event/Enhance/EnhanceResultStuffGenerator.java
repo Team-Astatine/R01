@@ -10,11 +10,6 @@ import teamzesa.util.Enum.*;
 import java.util.Collections;
 
 public class EnhanceResultStuffGenerator extends StringComponentExchanger {
-    /*
-    최대 강화 가능 횟수는 10회
-    현재 클래스에선 강화에 대한 알고리즘만 처리할 예정
-    */
-
     private final int LOW_LEVEL = 0;
     private final int MAX_LEVEL = 10;
     private int currentStuffPercentage;
