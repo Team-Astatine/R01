@@ -5,6 +5,7 @@ import org.bukkit.Material;
 public enum ScrollMap {
     DRAGON_EGG(Material.DRAGON_EGG,0, 0),
     END_CRYSTAL(Material.END_CRYSTAL, 1,1),
+    ENCHANTED_GOLDEN_APPLE(Material.ENCHANTED_GOLDEN_APPLE, 1,1),
     NETHER_STAR(Material.NETHER_STAR, 1,1),
     TNT(Material.TNT, 1,2),
     CONDUIT(Material.CONDUIT, 1,2),
