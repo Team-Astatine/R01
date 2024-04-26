@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Trident;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import teamzesa.entity.User;
-import teamzesa.event.register.EventRegister;
+import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.userHandler.UserController;
 
 

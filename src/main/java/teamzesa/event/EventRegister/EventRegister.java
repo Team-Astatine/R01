@@ -1,6 +1,4 @@
-package teamzesa.event.register;
-
-import org.bukkit.event.entity.EntityDamageEvent;
+package teamzesa.event.EventRegister;
 
 public interface EventRegister {
 

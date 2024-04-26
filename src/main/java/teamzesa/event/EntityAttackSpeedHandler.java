@@ -5,7 +5,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import teamzesa.entity.User;
-import teamzesa.event.register.EventRegister;
+import teamzesa.event.EventRegister.EventRegister;
  import teamzesa.util.Enum.WeaponMap;
 import teamzesa.util.userHandler.UserController;
 

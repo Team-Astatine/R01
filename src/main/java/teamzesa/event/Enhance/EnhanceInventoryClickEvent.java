@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
-import teamzesa.event.register.EventRegister;
+import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.ScrollMap;
 import teamzesa.util.Enum.WeaponMap;

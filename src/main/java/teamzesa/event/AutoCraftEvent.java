@@ -1,6 +1,6 @@
 package teamzesa.event;
 
-import teamzesa.event.register.EventRegister;
+import teamzesa.event.EventRegister.EventRegister;
 
 public class AutoCraftEvent implements EventRegister {
 

@@ -1,4 +1,4 @@
-package teamzesa.event.register;
+package teamzesa.event.EventRegister;
 
 import io.papermc.paper.event.player.PlayerArmSwingEvent;
 import org.bukkit.event.EventHandler;
@@ -12,7 +12,6 @@ import org.bukkit.event.inventory.*;
 import org.bukkit.event.player.*;
 import org.bukkit.event.raid.RaidTriggerEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
-import org.jetbrains.annotations.NotNull;
 import org.purpurmc.purpur.event.inventory.AnvilUpdateResultEvent;
 import teamzesa.event.*;
 import teamzesa.event.AntiExploit.*;

@@ -5,7 +5,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
-import teamzesa.event.register.EventRegister;
+import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Enum.WeaponMap;
 
 public class EnhanceItemDmgEvent implements EventRegister {
