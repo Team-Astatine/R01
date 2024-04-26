@@ -12,7 +12,6 @@ import teamzesa.util.userHandler.UserController;
 public class EntityAttackSpeedHandler implements EventRegister {
     private Entity damagerEntity;
     private Entity targetEntity;
-    private User damagerUser;
     private final EntityDamageByEntityEvent event;
 
     public EntityAttackSpeedHandler(EntityDamageByEntityEvent event) {
@@ -31,7 +30,6 @@ public class EntityAttackSpeedHandler implements EventRegister {
     public void execute() {
         if (!(this.damagerEntity instanceof Player damager))
             return;
-        this.damagerUser = new UserController().readUser(this.damagerEntity.getUniqueId());
 
         if (!(this.targetEntity instanceof Player target))
             return;
@@ -44,7 +42,7 @@ public class EntityAttackSpeedHandler implements EventRegister {
         if (!stuffCheck) //One Hand Sword
             hurtTick = 10;
 
-        if (stuffCheck || this.damagerUser.isGodMode()) //Two Hand Sword
+        if (stuffCheck) //Two Hand Sword
             hurtTick = 1;
 
 //        ((LivingEntity) e.getEntity()).setMaximumNoDamageTicks(1);
