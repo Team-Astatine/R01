@@ -8,7 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Enum.Enhance.WeaponMap;
 
-public class EnhanceItemDmgEvent implements EventRegister {
+public class EnhanceWeaponHurtEvent implements EventRegister {
     private static final double ENHANCE_INCREASE_DAMAGE_PERCENTAGE = 10;
 
     private Player damager;
@@ -16,7 +16,7 @@ public class EnhanceItemDmgEvent implements EventRegister {
     private Entity entity;
     private final EntityDamageEvent event;
 
-    public EnhanceItemDmgEvent(EntityDamageEvent event) {
+    public EnhanceWeaponHurtEvent(EntityDamageEvent event) {
         this.event = event;
 
         if (this.event.getDamageSource().getDirectEntity() instanceof Player player)
