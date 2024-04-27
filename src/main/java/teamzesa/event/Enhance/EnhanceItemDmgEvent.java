@@ -13,20 +13,23 @@ public class EnhanceItemDmgEvent implements EventRegister {
 
     private Player damager;
     private ItemStack weapon;
+    private Entity entity;
     private final EntityDamageEvent event;
 
     public EnhanceItemDmgEvent(EntityDamageEvent event) {
         this.event = event;
+
+        if (this.event.getDamageSource().getDirectEntity() instanceof Player player)
+            this.damager = player;
+        else return;
+
         init();
         execute();
     }
 
     @Override
     public void init() {
-        Entity entity = this.event.getDamageSource().getDirectEntity();
-        if (!(entity instanceof Player))
-            return;
-        this.damager = (Player) entity;
+        this.damager = (Player) this.entity;
         this.weapon = this.damager.getInventory().getItemInMainHand();
     }
 
