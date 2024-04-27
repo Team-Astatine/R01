@@ -112,6 +112,7 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public static void EntityDamageEvent(EntityDamageEvent event) {
+//        Event Cancelled 하면안됌
         new EnhanceItemDmgEvent(event);
     }
 
