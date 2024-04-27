@@ -17,7 +17,7 @@ import teamzesa.event.*;
 import teamzesa.event.AntiExploit.*;
 import teamzesa.event.Enhance.EnhanceInventoryClickEvent;
 import teamzesa.event.Enhance.EnhanceInventoryCloseEvent;
-import teamzesa.event.Enhance.EnhanceItemDmgEvent;
+import teamzesa.event.Enhance.EnhanceWeaponHurtEvent;
 //todo
 //fixme
 //refactoring
@@ -113,7 +113,7 @@ public class EventRegisterSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public static void EntityDamageEvent(EntityDamageEvent event) {
 //        Event Cancelled 하면안됌
-        new EnhanceItemDmgEvent(event);
+        new EnhanceWeaponHurtEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
