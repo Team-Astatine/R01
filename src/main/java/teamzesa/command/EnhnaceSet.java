@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.CommandExecutorMap;
-import teamzesa.util.Enum.EnhanceComment;
+import teamzesa.util.Enum.Enhance.EnhanceComment;
 
 import java.util.Collections;
 

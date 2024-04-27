@@ -4,10 +4,8 @@ import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import teamzesa.entity.User;
 import teamzesa.event.EventRegister.EventRegister;
- import teamzesa.util.Enum.WeaponMap;
-import teamzesa.util.userHandler.UserController;
+ import teamzesa.util.Enum.Enhance.WeaponMap;
 
 public class EntityAttackSpeedHandler implements EventRegister {
     private Entity damagerEntity;

@@ -7,8 +7,8 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Enum.ColorMap;
-import teamzesa.util.Enum.ScrollMap;
-import teamzesa.util.Enum.WeaponMap;
+import teamzesa.util.Enum.Enhance.ScrollMap;
+import teamzesa.util.Enum.Enhance.WeaponMap;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 import java.util.HashSet;

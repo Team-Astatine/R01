@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.event.EventRegister.EventRegister;
-import teamzesa.util.Enum.WeaponMap;
+import teamzesa.util.Enum.Enhance.WeaponMap;
 
 public class EnhanceItemDmgEvent implements EventRegister {
     private static final double ENHANCE_INCREASE_DAMAGE_PERCENTAGE = 10;

@@ -4,6 +4,8 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import teamzesa.util.Enum.Enhance.EnhanceComment;
+import teamzesa.util.Enum.Enhance.ScrollMap;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.*;
 

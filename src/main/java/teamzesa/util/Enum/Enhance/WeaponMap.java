@@ -1,4 +1,4 @@
-package teamzesa.util.Enum;
+package teamzesa.util.Enum.Enhance;
 
 import org.bukkit.Material;
 
