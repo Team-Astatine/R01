@@ -53,7 +53,7 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
     }
 
     public void executeEnhance() {
-        init();
+        scrollAmmountInit();
 
         if (this.currentStuffPercentage >= this.MAX_LEVEL) {
             playerSendMessage(2, ColorMap.RED);
@@ -87,7 +87,7 @@ public class EnhanceResultStuffGenerator extends StringComponentExchanger {
         decreaseScrollAmount();
     }
 
-    private void init() {
+    public void scrollAmmountInit() {
         this.scrollInfo = getScrollType(this.scrollStuff);
         this.protectScrollInfo = getScrollType(this.protectScrollStuff);
 
