@@ -8,9 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Enum.Enhance.WeaponMap;
 
-public class EnhanceWeaponHurtEvent implements EventRegister {
-    private static final double ENHANCE_INCREASE_DAMAGE_PERCENTAGE = 10;
-
+public class EnhanceWeaponHurtEvent extends EnhanceUtil implements EventRegister {
     private Player damager;
     private ItemStack weapon;
     private Entity entity;
@@ -29,7 +27,6 @@ public class EnhanceWeaponHurtEvent implements EventRegister {
 
     @Override
     public void init() {
-        this.damager = (Player) this.entity;
         this.weapon = this.damager.getInventory().getItemInMainHand();
     }
 
@@ -41,34 +38,10 @@ public class EnhanceWeaponHurtEvent implements EventRegister {
         if (!this.weapon.hasCustomModelData())
             return;
 
-        double modelData = this.weapon.getCustomModelData();
-        double currentWeaponDamage = getBaseDamage() + calculateEnchantmentDamage();
+        double weaponDamage = getWeaponDamage(this.weapon);
+        double enchantWeaponDamage = getSharpnessDamage(this.weapon, weaponDamage);
+        double enhance = getEnhanceState(this.weapon, enchantWeaponDamage);
 
-        for (int i = 0; i < modelData; i++) {
-            double increasePercentage = ENHANCE_INCREASE_DAMAGE_PERCENTAGE + (i * 2);
-            currentWeaponDamage += currentWeaponDamage * (increasePercentage / 100);
-        }
-
-        this.event.setDamage(currentWeaponDamage);
-    }
-
-    private double getBaseDamage() {
-        for (WeaponMap weaponInfo : WeaponMap.values()) {
-            if (weaponInfo.getMaterial().equals(this.weapon.getType()))
-                return weaponInfo.getDamage();
-        }
-        return 0;
-    }
-
-    private double calculateEnchantmentDamage() {
-        double enchantmentDamage = 0;
-        int enchantLevel = this.weapon.getEnchantLevel(Enchantment.DAMAGE_ALL);
-        for (int i = 0; i < enchantLevel; i++) {
-            switch (i) {
-                case 0 -> enchantmentDamage += 1;
-                case 1, 2, 3, 4 -> enchantmentDamage += 0.5;
-            }
-        }
-        return enchantmentDamage;
+        this.event.setDamage(enhance);
     }
 }

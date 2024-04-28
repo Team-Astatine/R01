@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
+import teamzesa.event.Enhance.EnhanceUtil;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.CommandExecutorMap;
 import teamzesa.util.Enum.Enhance.EnhanceComment;
@@ -36,9 +37,8 @@ public class EnhnaceSet extends CommandRegisterSection {
             return false;
         }
 
-        ItemStack targetStuff = player.getInventory().getItemInMainHand();
-        targetStuff.setCustomModelData(enhanceLevel);
-        targetStuff.lore(Collections.singletonList(getLoreCommentComponent(targetStuff)));
+        ItemStack targetItem = player.getInventory().getItemInMainHand();
+        EnhanceUtil.modifyEnhanceItemModelData(targetItem, enhanceLevel - targetItem.getCustomModelData());
 
         playerSendMsgComponentExchanger(player, getComment(enhanceLevel) , ColorMap.GREEN);
         return true;
@@ -50,13 +50,5 @@ public class EnhnaceSet extends CommandRegisterSection {
             case 10 -> "최고 레벨로 강화했습니다.";
             default -> enhanceLevel + "강 으로 강화했습니다.";
         };
-    }
-
-    private Component getLoreCommentComponent(ItemStack item) {
-        for (EnhanceComment enhanceComment : EnhanceComment.values()) {
-            if (item.getCustomModelData() == enhanceComment.getEnhanceStack())
-                return enhanceComment.getLoreComment();
-        }
-        return null;
     }
 }
