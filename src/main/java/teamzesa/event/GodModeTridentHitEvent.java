@@ -15,7 +15,6 @@ public class GodModeTridentHitEvent implements EventRegister {
 
     public GodModeTridentHitEvent(ProjectileHitEvent event) {
         this.event = event;
-        init();
         execute();
     }
 

@@ -17,8 +17,8 @@ import teamzesa.event.*;
 import teamzesa.event.AntiExploit.*;
 import teamzesa.event.Enhance.EnhanceInventoryClickEvent;
 import teamzesa.event.Enhance.EnhanceInventoryCloseEvent;
-import teamzesa.event.Enhance.LongRange.EnhanceLongRangeWeaponHitEvent;
-import teamzesa.event.Enhance.LongRange.EnhanceLongRangeWeaponShotEvent;
+import teamzesa.event.Enhance.LongRange.EnhanceTridentHitEvent;
+import teamzesa.event.Enhance.LongRange.EnhanceTridentShotEvent;
 import teamzesa.event.Enhance.ShortRange.EnhanceShortLangeWeaponHurtEvent;
 //todo
 //fixme
@@ -73,13 +73,13 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public static void ProjectileHitEvent(ProjectileHitEvent event) {
-        new EnhanceLongRangeWeaponHitEvent(event);
+        new EnhanceTridentHitEvent(event);
         new GodModeTridentHitEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
     public static void ProjectileLaunchEvent(ProjectileLaunchEvent event) {
-        new EnhanceLongRangeWeaponShotEvent(event);
+        new EnhanceTridentShotEvent(event);
         new GodModeTridentShotEvent(event);
     }
 
