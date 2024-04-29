@@ -38,6 +38,7 @@ public class EnhnaceSet extends CommandRegisterSection {
         }
 
         ItemStack targetItem = player.getInventory().getItemInMainHand();
+        targetItem.setCustomModelData(0);
         EnhanceUtil.modifyEnhanceItemModelData(targetItem, enhanceLevel - targetItem.getCustomModelData());
 
         playerSendMsgComponentExchanger(player, getComment(enhanceLevel) , ColorMap.GREEN);
