@@ -22,9 +22,9 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         return ranNum <= standardValue;
     }
 
-    public static void modifyEnhanceItemModelData(ItemStack enhanceItem, int updateModifyData) {
+     public static void modifyEnhanceItemModelData(ItemStack enhanceItem, int updateCustomModelData) {
         if (enhanceItem.hasCustomModelData()) {
-            enhanceItem.setCustomModelData(enhanceItem.getCustomModelData() + updateModifyData);
+            enhanceItem.setCustomModelData(enhanceItem.getCustomModelData() + updateCustomModelData);
 
             List<Component> lore = new ArrayList<>();
             lore.add(getEnhanceStatusComponent(enhanceItem));
@@ -107,13 +107,16 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
     }
 
     public static double getEnhanceState(ItemStack enhanceItem, double finalItemStatus) {
-        double currentEnhanceItemStatus = finalItemStatus;
         if (enhanceItem.hasCustomModelData()) {
             for (int i = 0; i < enhanceItem.getCustomModelData(); i++) {
                 double increasePercentage = ENHANCE_BASE_PERCENTAGE + (i * 2);
-                currentEnhanceItemStatus += currentEnhanceItemStatus * (increasePercentage / 100);
+                finalItemStatus += finalItemStatus * (increasePercentage / 100);
             }
         }
-        return currentEnhanceItemStatus;
+        return finalItemStatus;
+    }
+
+    public int getItemCustomModelData(ItemStack item) {
+        return checkModelData(item).getCustomModelData();
     }
 }
