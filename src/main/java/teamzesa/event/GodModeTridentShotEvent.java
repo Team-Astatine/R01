@@ -7,10 +7,10 @@ import teamzesa.entity.User;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.userHandler.UserController;
 
-public class GodModeTridentThrowEvent implements EventRegister {
+public class GodModeTridentShotEvent implements EventRegister {
     private final ProjectileLaunchEvent event;
 
-    public GodModeTridentThrowEvent(ProjectileLaunchEvent event) {
+    public GodModeTridentShotEvent(ProjectileLaunchEvent event) {
         this.event = event;
         init();
         execute();
