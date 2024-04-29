@@ -1,4 +1,4 @@
-package teamzesa.event.Enhance;
+package teamzesa.event.Enhance.Armor;
 
 import org.bukkit.event.entity.EntityDamageEvent;
 import teamzesa.event.EventRegister.EventRegister;
