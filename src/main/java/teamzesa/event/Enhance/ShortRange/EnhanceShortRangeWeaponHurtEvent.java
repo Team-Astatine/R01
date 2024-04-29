@@ -1,20 +1,17 @@
 package teamzesa.event.Enhance.ShortRange;
 
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Trident;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.event.Enhance.EnhanceUtil;
 import teamzesa.event.EventRegister.EventRegister;
 
-public class EnhanceShortLangeWeaponHurtEvent extends EnhanceUtil implements EventRegister {
+public class EnhanceShortRangeWeaponHurtEvent extends EnhanceUtil implements EventRegister {
     private Player damager;
     private ItemStack weapon;
     private final EntityDamageEvent event;
 
-    public EnhanceShortLangeWeaponHurtEvent(EntityDamageEvent event) {
+    public EnhanceShortRangeWeaponHurtEvent(EntityDamageEvent event) {
         this.event = event;
 
         if (this.event.getDamageSource().getDirectEntity() instanceof Player player) {

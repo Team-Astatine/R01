@@ -19,7 +19,8 @@ import teamzesa.event.Enhance.EnhanceInventoryClickEvent;
 import teamzesa.event.Enhance.EnhanceInventoryCloseEvent;
 import teamzesa.event.Enhance.LongRange.EnhanceTridentHitEvent;
 import teamzesa.event.Enhance.LongRange.EnhanceTridentShotEvent;
-import teamzesa.event.Enhance.ShortRange.EnhanceShortLangeWeaponHurtEvent;
+import teamzesa.event.Enhance.ShortRange.EnhanceLongRangeWeaponHurtEvent;
+import teamzesa.event.Enhance.ShortRange.EnhanceShortRangeWeaponHurtEvent;
 //todo
 //fixme
 //refactoring
@@ -119,7 +120,8 @@ public class EventRegisterSection implements Listener {
 //        methodImplement
 //        Event Cancelled 하면안됌
 //        new EnhanceResistanceEvent(event);
-        new EnhanceShortLangeWeaponHurtEvent(event);
+        new EnhanceLongRangeWeaponHurtEvent(event);
+        new EnhanceShortRangeWeaponHurtEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
