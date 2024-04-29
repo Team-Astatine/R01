@@ -47,7 +47,6 @@ public class EnhanceTridentHitEvent extends EnhanceUtil implements EventRegister
             case 4,5,6 -> executeEnhanceState(Sound.ENTITY_ENDER_DRAGON_HURT, 1F, false);
             case 7,8,9 -> executeEnhanceState(Sound.ENTITY_ENDER_DRAGON_AMBIENT, 3F, false);
             case 10 ->    executeEnhanceState(Sound.BLOCK_CONDUIT_ACTIVATE, 6F, true);
-
         }
     }
 

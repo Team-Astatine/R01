@@ -7,6 +7,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.Enhance.LongRangeWeaponMap;
 import teamzesa.util.Enum.Enhance.ScrollMap;
 import teamzesa.util.Enum.Enhance.ShortRangeWeaponMap;
 import teamzesa.util.Interface.StringComponentExchanger;
@@ -46,6 +47,9 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
         this.allowedItem = new HashSet<>();
         for (ShortRangeWeaponMap shortRangeWeaponMap : ShortRangeWeaponMap.values())
             this.allowedItem.add(shortRangeWeaponMap.getMaterial());
+
+        for (LongRangeWeaponMap longRangeWeaponMap : LongRangeWeaponMap.values())
+            this.allowedScroll.add(longRangeWeaponMap.getMaterial());
 
         this.allowedScroll = new HashSet<>();
         for (ScrollMap scrollMap : ScrollMap.values())
