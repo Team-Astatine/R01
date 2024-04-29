@@ -2,7 +2,7 @@ package teamzesa.util.Enum.Enhance;
 
 import org.bukkit.Material;
 
-public enum WeaponMap {
+public enum ShortRangeWeaponMap {
 //    axe
     WOOD_AXE(Material.WOODEN_AXE, 7.0),
     GOLD_AXE(Material.GOLDEN_AXE, 7.0),
@@ -25,7 +25,7 @@ public enum WeaponMap {
     private final Material material;
     private final double damage;
 
-    WeaponMap(Material material, double damage) {
+    ShortRangeWeaponMap(Material material, double damage) {
         this.material = material;
         this.damage = damage;
     }

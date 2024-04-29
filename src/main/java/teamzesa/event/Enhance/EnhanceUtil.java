@@ -8,7 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.Enhance.EnhanceComment;
 import teamzesa.util.Enum.Enhance.ScrollMap;
-import teamzesa.util.Enum.Enhance.WeaponMap;
+import teamzesa.util.Enum.Enhance.ShortRangeWeaponMap;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 import java.util.ArrayList;
@@ -88,7 +88,7 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
 
     public static double getWeaponDamage(ItemStack weapon) {
         double damage = 0.0;
-        for (WeaponMap weaponInfo : WeaponMap.values()) {
+        for (ShortRangeWeaponMap weaponInfo : ShortRangeWeaponMap.values()) {
             if (weaponInfo.getMaterial().equals(weapon.getType()))
                 damage = weaponInfo.getDamage();
         }

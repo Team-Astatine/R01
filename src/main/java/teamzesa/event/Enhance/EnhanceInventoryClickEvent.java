@@ -8,7 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.Enhance.ScrollMap;
-import teamzesa.util.Enum.Enhance.WeaponMap;
+import teamzesa.util.Enum.Enhance.ShortRangeWeaponMap;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 import java.util.HashSet;
@@ -44,8 +44,8 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
         this.protectScroll = this.event.getView().getItem(5);
 
         this.allowedItem = new HashSet<>();
-        for (WeaponMap weaponMap : WeaponMap.values())
-            this.allowedItem.add(weaponMap.getMaterial());
+        for (ShortRangeWeaponMap shortRangeWeaponMap : ShortRangeWeaponMap.values())
+            this.allowedItem.add(shortRangeWeaponMap.getMaterial());
 
         this.allowedScroll = new HashSet<>();
         for (ScrollMap scrollMap : ScrollMap.values())
