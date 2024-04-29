@@ -17,9 +17,7 @@ public class GodModeTridentThrowEvent implements EventRegister {
     }
 
     @Override
-    public void init() {
-
-    }
+    public void init() {}
 
     @Override
     public void execute() {

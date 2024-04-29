@@ -20,19 +20,17 @@ public class GodModeTridentHitEvent implements EventRegister {
     }
 
     @Override
-    public void init() {
-
-    }
+    public void init() {}
 
     @Override
     public void execute() {
+        if (!(this.event.getEntity() instanceof Trident trident))
+            return;
+
         if (!(this.event.getEntity().getShooter() instanceof Player shooter))
             return;
 
         if (!getUser(shooter).isGodMode())
-            return;
-
-        if (!(this.event.getEntity() instanceof Trident trident))
             return;
 
         Runnable tridentTask = () -> {
