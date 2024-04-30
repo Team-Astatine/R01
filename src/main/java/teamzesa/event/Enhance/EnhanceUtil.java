@@ -7,6 +7,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.Enhance.EnhanceComment;
+import teamzesa.util.Enum.Enhance.LongRangeWeaponMap;
 import teamzesa.util.Enum.Enhance.ScrollMap;
 import teamzesa.util.Enum.Enhance.ShortRangeWeaponMap;
 import teamzesa.util.Interface.StringComponentExchanger;
@@ -91,6 +92,15 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         for (ShortRangeWeaponMap weaponInfo : ShortRangeWeaponMap.values()) {
             if (weaponInfo.getMaterial().equals(weapon.getType()))
                 damage = weaponInfo.getDamage();
+        }
+        return damage;
+    }
+
+    public static double getProjectileDamage(ItemStack weapon) {
+        double damage = 0.0;
+        for (LongRangeWeaponMap weaponInfo : LongRangeWeaponMap.values()) {
+            if (weaponInfo.getMaterial().equals(weapon.getType()))
+                damage = weaponInfo.getLongRangeDamage();
         }
         return damage;
     }

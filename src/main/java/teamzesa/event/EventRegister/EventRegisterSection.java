@@ -17,9 +17,9 @@ import teamzesa.event.*;
 import teamzesa.event.AntiExploit.*;
 import teamzesa.event.Enhance.EnhanceInventoryClickEvent;
 import teamzesa.event.Enhance.EnhanceInventoryCloseEvent;
+import teamzesa.event.Enhance.LongRange.EnhanceLongRangeWeaponHurtEvent;
 import teamzesa.event.Enhance.LongRange.EnhanceTridentHitEvent;
 import teamzesa.event.Enhance.LongRange.EnhanceTridentShotEvent;
-import teamzesa.event.Enhance.ShortRange.EnhanceLongRangeWeaponHurtEvent;
 import teamzesa.event.Enhance.ShortRange.EnhanceShortRangeWeaponHurtEvent;
 //todo
 //fixme
