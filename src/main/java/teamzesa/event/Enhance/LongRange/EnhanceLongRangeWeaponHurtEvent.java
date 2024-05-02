@@ -1,6 +1,6 @@
 package teamzesa.event.Enhance.LongRange;
 
-import org.bukkit.entity.Arrow;
+import org.bukkit.damage.DamageSource;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -9,36 +9,37 @@ import teamzesa.event.Enhance.EnhanceUtil;
 import teamzesa.event.EventRegister.EventRegister;
 
 public class EnhanceLongRangeWeaponHurtEvent extends EnhanceUtil implements EventRegister {
-    private Player damager;
-    private ItemStack weapon;
-    private Projectile projectile;
+    private DamageSource damageSource;
     private final EntityDamageEvent event;
 
     public EnhanceLongRangeWeaponHurtEvent(EntityDamageEvent event) {
         this.event = event;
-
-        if (this.event.getDamageSource().getDirectEntity() instanceof Player player) {
-            this.damager = player;
-            this.weapon = player.getInventory().getItemInMainHand();
-        }
-        else return;
-
         init();
         execute();
     }
 
     @Override
-    public void init() {}
+    public void init() {
+        this.damageSource = this.event.getDamageSource();
+    }
 
     @Override
     public void execute() {
-        if (this.damager == null)
+        if (!(this.damageSource.getDirectEntity() instanceof Projectile projectile))
             return;
 
-        if (!this.weapon.hasCustomModelData())
+        if (!(this.damageSource.getCausingEntity() instanceof Player player))
             return;
 
-        double projectileDamage = getProjectileDamage(this.weapon);
+        ItemStack weapon = player.getInventory().getItemInMainHand();
+        if (!weapon.hasCustomModelData())
+            return;
+
+        double projectileDamage = getProjectileDamage(weapon);
+
+        System.out.println(projectileDamage);
+        System.out.println(projectile);
+
+        this.event.setDamage(100);
     }
-
 }
