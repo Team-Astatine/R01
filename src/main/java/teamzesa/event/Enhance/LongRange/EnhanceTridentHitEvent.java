@@ -39,14 +39,15 @@ public class EnhanceTridentHitEvent extends EnhanceUtil implements EventRegister
 
     @Override
     public void execute() {
-        Vector vector = this.event.getEntity().getVelocity();
         this.tridentHitLocation = this.trident.getLocation();
         switch (getItemCustomModelData(this.playerHandTrident)) {
-            case 0 ->     executeEnhanceState(Sound.ITEM_TRIDENT_HIT, 0, false);
             case 1,2,3 -> executeEnhanceState(Sound.ENTITY_GHAST_DEATH, 0, false);
             case 4,5,6 -> executeEnhanceState(Sound.ENTITY_ENDER_DRAGON_HURT, 1F, false);
             case 7,8,9 -> executeEnhanceState(Sound.ENTITY_ENDER_DRAGON_AMBIENT, 3F, false);
             case 10 ->    executeEnhanceState(Sound.BLOCK_CONDUIT_ACTIVATE, 6F, true);
+            default -> {
+                return;
+            }
         }
     }
 
