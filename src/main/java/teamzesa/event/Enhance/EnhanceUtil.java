@@ -93,6 +93,12 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
             if (weaponInfo.getMaterial().equals(weapon.getType()))
                 damage = weaponInfo.getDamage();
         }
+
+        for (LongRangeWeaponMap weaponInfo : LongRangeWeaponMap.values()) {
+            if (weaponInfo.getMaterial().equals(weapon.getType()))
+                damage = weaponInfo.getShortRangeDamage();
+        }
+
         return damage;
     }
 
