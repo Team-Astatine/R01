@@ -4,8 +4,8 @@ import org.bukkit.Material;
 
 public enum LongRangeWeaponMap implements Weapon {
     TRIDENT(Material.TRIDENT, 9.0, 8.0),
-    CROSSBOW(Material.CROSSBOW, 1.0, 7.0),
-    BOW(Material.BOW, 1.0, 6.0);
+    CROSSBOW(Material.CROSSBOW, 0.0, 7.0),
+    BOW(Material.BOW, 0.0, 6.0);
 
     private final Material material;
     private final double shortRangeDamage;
