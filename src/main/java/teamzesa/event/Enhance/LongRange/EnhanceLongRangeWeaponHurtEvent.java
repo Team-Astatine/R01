@@ -37,11 +37,12 @@ public class EnhanceLongRangeWeaponHurtEvent extends EnhanceUtil implements Even
             return;
 
         double projectileDamage = getLongRangeDamage(weapon);
-        double projectilePowerDmg = getArrowPowerDamage(weapon, projectileDamage);
-        double totalDamage = getEnhanceState(weapon, projectilePowerDmg);
+        double projectilePowerIncreaseDmg = getArrowPowerDamage(weapon, projectileDamage);
+//        10,11,12%
+        double totalDamage = getEnhanceState(weapon, projectileDamage + projectilePowerIncreaseDmg);
 
         System.out.println("projectileDamage > " + projectileDamage);
-        System.out.println("projectilePowerDmg > " + projectilePowerDmg);
+        System.out.println("projectilePowerDmg > " + projectilePowerIncreaseDmg);
         System.out.println("totalDamage > " + totalDamage);
 
         this.event.setDamage(totalDamage);

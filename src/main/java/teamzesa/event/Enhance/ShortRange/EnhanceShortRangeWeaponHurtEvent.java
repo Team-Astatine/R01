@@ -37,7 +37,7 @@ public class EnhanceShortRangeWeaponHurtEvent extends EnhanceUtil implements Eve
             return;
 
         double weaponDmg = getShortRangeDamage(weapon) + getSharpnessDamage(weapon);
-        double totalDmg = getEnhanceState(weapon, weaponDmg);
+        double totalDmg = getEnhanceState(weapon, weaponDmg); // 10,12,14%
         this.event.setDamage(totalDmg);
     }
 }
