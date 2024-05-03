@@ -1,6 +1,7 @@
 package teamzesa.event.Enhance.LongRange;
 
 import org.bukkit.damage.DamageSource;
+  import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -25,21 +26,24 @@ public class EnhanceLongRangeWeaponHurtEvent extends EnhanceUtil implements Even
 
     @Override
     public void execute() {
-        if (!(this.damageSource.getDirectEntity() instanceof Projectile projectile))
+        if (!(this.damageSource.getCausingEntity() instanceof Player player))
             return;
 
-        if (!(this.damageSource.getCausingEntity() instanceof Player player))
+        if (!(this.damageSource.getDirectEntity() instanceof Projectile))
             return;
 
         ItemStack weapon = player.getInventory().getItemInMainHand();
         if (!weapon.hasCustomModelData())
             return;
 
-        double projectileDamage = getProjectileDamage(weapon);
+        double projectileDamage = getLongRangeDamage(weapon);
+        double projectilePowerDmg = getArrowPowerDamage(weapon, projectileDamage);
+        double totalDamage = getEnhanceState(weapon, projectilePowerDmg);
 
-        System.out.println(projectileDamage);
-        System.out.println(projectile);
+        System.out.println("projectileDamage > " + projectileDamage);
+        System.out.println("projectilePowerDmg > " + projectilePowerDmg);
+        System.out.println("totalDamage > " + totalDamage);
 
-        this.event.setDamage(100);
+        this.event.setDamage(totalDamage);
     }
 }
