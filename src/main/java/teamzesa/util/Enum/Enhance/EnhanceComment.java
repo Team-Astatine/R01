@@ -1,6 +1,7 @@
-package teamzesa.util.Enum;
+package teamzesa.util.Enum.Enhance;
 
 import net.kyori.adventure.text.Component;
+import teamzesa.util.Enum.ColorMap;
 
 public enum EnhanceComment {
     ONE_STEP(1, Component.text("★ +1")

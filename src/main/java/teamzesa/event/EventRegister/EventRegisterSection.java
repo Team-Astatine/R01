@@ -1,4 +1,4 @@
-package teamzesa.event.register;
+package teamzesa.event.EventRegister;
 
 import io.papermc.paper.event.player.PlayerArmSwingEvent;
 import org.bukkit.event.EventHandler;
@@ -12,13 +12,16 @@ import org.bukkit.event.inventory.*;
 import org.bukkit.event.player.*;
 import org.bukkit.event.raid.RaidTriggerEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
-import org.jetbrains.annotations.NotNull;
 import org.purpurmc.purpur.event.inventory.AnvilUpdateResultEvent;
 import teamzesa.event.*;
 import teamzesa.event.AntiExploit.*;
 import teamzesa.event.Enhance.EnhanceInventoryClickEvent;
 import teamzesa.event.Enhance.EnhanceInventoryCloseEvent;
-import teamzesa.event.Enhance.EnhanceItemDmgEvent;
+import teamzesa.event.Enhance.LongRange.EnhanceArrowHitEvent;
+import teamzesa.event.Enhance.LongRange.EnhanceArrowShotEvent;
+import teamzesa.event.Enhance.LongRange.EnhanceTridentHitEvent;
+import teamzesa.event.Enhance.LongRange.EnhanceTridentShotEvent;
+import teamzesa.event.Enhance.ShortRange.EnhanceShortRangeWeaponHurtEvent;
 //todo
 //fixme
 //refactoring
@@ -72,12 +75,16 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public static void ProjectileHitEvent(ProjectileHitEvent event) {
+        new EnhanceArrowHitEvent(event);
+        new EnhanceTridentHitEvent(event);
         new GodModeTridentHitEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
     public static void ProjectileLaunchEvent(ProjectileLaunchEvent event) {
-        new GodModeTridentThrowEvent(event);
+        new EnhanceArrowShotEvent(event);
+        new EnhanceTridentShotEvent(event);
+        new GodModeTridentShotEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -113,7 +120,9 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public static void EntityDamageEvent(EntityDamageEvent event) {
-        new EnhanceItemDmgEvent(event);
+//        Event Cancelled 하면안됌
+//        new EnhanceResistanceEvent(event);
+        new EnhanceShortRangeWeaponHurtEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)

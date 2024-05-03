@@ -4,15 +4,12 @@ import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import teamzesa.entity.User;
-import teamzesa.event.register.EventRegister;
- import teamzesa.util.Enum.WeaponMap;
-import teamzesa.util.userHandler.UserController;
+import teamzesa.event.EventRegister.EventRegister;
+ import teamzesa.util.Enum.Enhance.ShortRangeWeaponMap;
 
 public class EntityAttackSpeedHandler implements EventRegister {
     private Entity damagerEntity;
     private Entity targetEntity;
-    private User damagerUser;
     private final EntityDamageByEntityEvent event;
 
     public EntityAttackSpeedHandler(EntityDamageByEntityEvent event) {
@@ -31,7 +28,6 @@ public class EntityAttackSpeedHandler implements EventRegister {
     public void execute() {
         if (!(this.damagerEntity instanceof Player damager))
             return;
-        this.damagerUser = new UserController().readUser(this.damagerEntity.getUniqueId());
 
         if (!(this.targetEntity instanceof Player target))
             return;
@@ -44,7 +40,7 @@ public class EntityAttackSpeedHandler implements EventRegister {
         if (!stuffCheck) //One Hand Sword
             hurtTick = 10;
 
-        if (stuffCheck || this.damagerUser.isGodMode()) //Two Hand Sword
+        if (stuffCheck) //Two Hand Sword
             hurtTick = 1;
 
 //        ((LivingEntity) e.getEntity()).setMaximumNoDamageTicks(1);
@@ -52,8 +48,8 @@ public class EntityAttackSpeedHandler implements EventRegister {
     }
 
     private Boolean isDualWeaponChecker(Material mainStuff, Material offStuff) {
-        for (WeaponMap weaponMapInfo : WeaponMap.values()) {
-            Material material = weaponMapInfo.getMaterial();
+        for (ShortRangeWeaponMap shortRangeWeaponMapInfo : ShortRangeWeaponMap.values()) {
+            Material material = shortRangeWeaponMapInfo.getMaterial();
             if (material.equals(mainStuff) && material.equals(offStuff))
                 return true;
         }

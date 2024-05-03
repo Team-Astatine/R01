@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Trident;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import teamzesa.entity.User;
-import teamzesa.event.register.EventRegister;
+import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.userHandler.UserController;
 
 
@@ -15,24 +15,21 @@ public class GodModeTridentHitEvent implements EventRegister {
 
     public GodModeTridentHitEvent(ProjectileHitEvent event) {
         this.event = event;
-        init();
         execute();
     }
 
     @Override
-    public void init() {
-
-    }
+    public void init() {}
 
     @Override
     public void execute() {
+        if (!(this.event.getEntity() instanceof Trident trident))
+            return;
+
         if (!(this.event.getEntity().getShooter() instanceof Player shooter))
             return;
 
         if (!getUser(shooter).isGodMode())
-            return;
-
-        if (!(this.event.getEntity() instanceof Trident trident))
             return;
 
         Runnable tridentTask = () -> {

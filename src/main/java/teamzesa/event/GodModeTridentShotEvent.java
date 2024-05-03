@@ -4,22 +4,19 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.util.Vector;
 import teamzesa.entity.User;
-import teamzesa.event.register.EventRegister;
+import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.userHandler.UserController;
 
-public class GodModeTridentThrowEvent implements EventRegister {
+public class GodModeTridentShotEvent implements EventRegister {
     private final ProjectileLaunchEvent event;
 
-    public GodModeTridentThrowEvent(ProjectileLaunchEvent event) {
+    public GodModeTridentShotEvent(ProjectileLaunchEvent event) {
         this.event = event;
-        init();
         execute();
     }
 
     @Override
-    public void init() {
-
-    }
+    public void init() {}
 
     @Override
     public void execute() {

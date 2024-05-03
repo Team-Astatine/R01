@@ -5,10 +5,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
-import teamzesa.event.register.EventRegister;
+import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Enum.ColorMap;
-import teamzesa.util.Enum.ScrollMap;
-import teamzesa.util.Enum.WeaponMap;
+import teamzesa.util.Enum.Enhance.LongRangeWeaponMap;
+import teamzesa.util.Enum.Enhance.ScrollMap;
+import teamzesa.util.Enum.Enhance.ShortRangeWeaponMap;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 import java.util.HashSet;
@@ -44,12 +45,7 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
         this.protectScroll = this.event.getView().getItem(5);
 
         this.allowedItem = new HashSet<>();
-        for (WeaponMap weaponMap : WeaponMap.values())
-            this.allowedItem.add(weaponMap.getMaterial());
-
         this.allowedScroll = new HashSet<>();
-        for (ScrollMap scrollMap : ScrollMap.values())
-            this.allowedScroll.add(scrollMap.getMaterial());
     }
 
     @Override
@@ -57,6 +53,18 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
         if (isInteractingInfoItemValidation(PANEL_STUFF_CUSTOM_DATA)) {
             this.event.setCancelled(true);
             return;
+        }
+
+//        Add Allowed Item
+        if (this.enhanceItem != null && this.scrollStuff != null) {
+            for (ShortRangeWeaponMap shortRangeWeaponMap : ShortRangeWeaponMap.values())
+                this.allowedItem.add(shortRangeWeaponMap.getMaterial());
+
+            for (LongRangeWeaponMap longRangeWeaponMap : LongRangeWeaponMap.values())
+                this.allowedScroll.add(longRangeWeaponMap.getMaterial());
+
+            for (ScrollMap scrollMap : ScrollMap.values())
+                this.allowedScroll.add(scrollMap.getMaterial());
         }
 
         if (isInteractingInfoItemValidation(EXECUTE_STUFF_DATA)) {
