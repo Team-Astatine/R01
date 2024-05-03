@@ -36,9 +36,8 @@ public class EnhanceShortRangeWeaponHurtEvent extends EnhanceUtil implements Eve
         if (!weapon.hasCustomModelData())
             return;
 
-        double weaponDamage = getWeaponDamage(weapon);
-        double enchantWeaponDamage = getSharpnessDamage(weapon, weaponDamage);
-        double enhance = getEnhanceState(weapon, enchantWeaponDamage);
-        this.event.setDamage(enhance);
+        double weaponDmg = getShortRangeDamage(weapon) + getSharpnessDamage(weapon);
+        double totalDmg = getEnhanceState(weapon, weaponDmg);
+        this.event.setDamage(totalDmg);
     }
 }
