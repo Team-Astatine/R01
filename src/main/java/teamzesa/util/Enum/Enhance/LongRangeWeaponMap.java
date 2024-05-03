@@ -2,7 +2,7 @@ package teamzesa.util.Enum.Enhance;
 
 import org.bukkit.Material;
 
-public enum LongRangeWeaponMap {
+public enum LongRangeWeaponMap implements Weapon {
     TRIDENT(Material.TRIDENT, 9.0, 8.0),
     CROSSBOW(Material.CROSSBOW, 1.0, 8.0),
     BOW(Material.BOW, 1.0, 8.0);
@@ -17,14 +17,17 @@ public enum LongRangeWeaponMap {
         this.longRangeDamage = longRangeDamage;
     }
 
+    @Override
     public Material getMaterial() {
         return material;
     }
 
+    @Override
     public double getShortRangeDamage() {
         return shortRangeDamage;
     }
 
+    @Override
     public double getLongRangeDamage() {
         return longRangeDamage;
     }
