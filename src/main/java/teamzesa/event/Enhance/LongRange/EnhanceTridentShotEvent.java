@@ -31,18 +31,21 @@ public class EnhanceTridentShotEvent extends EnhanceUtil implements EventRegiste
     }
 
     @Override
-    public void init() {}
+    public void init() {
+
+    }
 
     @Override
     public void execute() {
         Vector vector = this.event.getEntity().getVelocity();
         switch (getItemCustomModelData(this.playerHandTrident)) {
-            case 0 -> this.event.getEntity().setVelocity(vector.multiply(1));
             case 1,2,3 -> executeEnhanceState(1,1, 1, Sound.ENTITY_GHAST_DEATH, vector);
             case 4,5,6 -> executeEnhanceState(1,2, 3, Sound.ENTITY_ENDER_DRAGON_HURT, vector);
             case 7,8,9 -> executeEnhanceState(2,3, 6, Sound.ENTITY_ENDER_DRAGON_AMBIENT, vector);
             case 10 -> executeEnhanceState(3,5, 10, Sound.BLOCK_CONDUIT_ACTIVATE, vector);
-
+            default -> {
+                return;
+            }
         }
     }
 
