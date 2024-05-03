@@ -20,7 +20,20 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         return ranNum <= standardValue;
     }
 
-     public static void modifyEnhanceItemModelData(ItemStack enhanceItem, int updateCustomModelData) {
+    public static double getArrowPowerDamage(ItemStack weapon, double baseDmg) {
+//        increaseDamagePercentage
+//        25% × (level + 1)
+        double percentage = 0.25 * (weapon.getEnchantLevel(Enchantment.ARROW_DAMAGE) + 1);
+        return baseDmg * percentage;
+    }
+
+    public static double getSharpnessDamage(ItemStack weapon) {
+//        increaseDamage
+//        0.5 * sharpnessLevel + 0.5
+        return 0.5 * weapon.getEnchantLevel(Enchantment.DAMAGE_ALL) + 0.5;
+    }
+
+    public static void modifyEnhanceItemModelData(ItemStack enhanceItem, int updateCustomModelData) {
         if (enhanceItem.hasCustomModelData()) {
             enhanceItem.setCustomModelData(enhanceItem.getCustomModelData() + updateCustomModelData);
 
@@ -51,15 +64,8 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
                 .decorate(TextDecoration.BOLD);
     }
 
-    public static ScrollMap getScrollType(ItemStack scroll) {
-        if (scroll != null) {
-            for (ScrollMap scrollMap : ScrollMap.values()) {
-                Material scrollMapMaterial = scrollMap.getMaterial();
-                if (scrollMapMaterial.equals(scroll.getType()))
-                    return scrollMap;
-            }
-        }
-        return null;
+    public int getItemCustomModelData(ItemStack item) {
+        return checkModelData(item).getCustomModelData();
     }
 
     public static ItemStack checkModelData(ItemStack item) {
@@ -81,6 +87,17 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
 
     public static int getProtectScrollDiscount(ItemStack scroll) {
         return getScrollType(scroll).getDiscountProtectValue();
+    }
+
+    public static ScrollMap getScrollType(ItemStack scroll) {
+        if (scroll != null) {
+            for (ScrollMap scrollMap : ScrollMap.values()) {
+                Material scrollMapMaterial = scrollMap.getMaterial();
+                if (scrollMapMaterial.equals(scroll.getType()))
+                    return scrollMap;
+            }
+        }
+        return null;
     }
 
     public static double getShortRangeDamage(ItemStack weapon) {
@@ -107,27 +124,13 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         return damage;
     }
 
-    public static double getArrowPowerDamage(ItemStack weapon) {
-//        25% × (level + 1)
-        return 0.25 * (weapon.getEnchantLevel(Enchantment.ARROW_DAMAGE) + 1);
-    }
-
-    public static double getSharpnessDamage(ItemStack weapon) {
-//        0.5 * sharpnessLevel + 0.5
-        return 0.5 * weapon.getEnchantLevel(Enchantment.DAMAGE_ALL) + 0.5;
-    }
-
-    public static double getEnhanceState(ItemStack enhanceItem, double finalItemStatus) {
+    public static double getEnhanceState(ItemStack enhanceItem, double itemFinalDamage) {
         if (enhanceItem.hasCustomModelData()) {
             for (int i = 0; i < enhanceItem.getCustomModelData(); i++) {
                 double increasePercentage = ENHANCE_BASE_PERCENTAGE + (i * 2);
-                finalItemStatus += finalItemStatus * (increasePercentage / 100);
+                itemFinalDamage += itemFinalDamage * (increasePercentage / 100);
             }
         }
-        return finalItemStatus;
-    }
-
-    public int getItemCustomModelData(ItemStack item) {
-        return checkModelData(item).getCustomModelData();
+        return itemFinalDamage;
     }
 }
