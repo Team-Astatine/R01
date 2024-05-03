@@ -6,10 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.util.Enum.ColorMap;
-import teamzesa.util.Enum.Enhance.EnhanceComment;
-import teamzesa.util.Enum.Enhance.LongRangeWeaponMap;
-import teamzesa.util.Enum.Enhance.ScrollMap;
-import teamzesa.util.Enum.Enhance.ShortRangeWeaponMap;
+import teamzesa.util.Enum.Enhance.*;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 import java.util.ArrayList;
@@ -45,10 +42,9 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
     }
 
     public static Component getEnhanceDisplayComponent(ItemStack enhanceItem) {
-        double damage = getWeaponDamage(enhanceItem);
-        double sharpnessDamage = getSharpnessDamage(enhanceItem, damage);
-        double totalDamage = getEnhanceState(enhanceItem, sharpnessDamage);
-        String comment = String.format("현재 데미지 : %.3f...", totalDamage);
+        double weaponDmg = getShortRangeDamage(enhanceItem) + getSharpnessDamage(enhanceItem);
+        double totalDmg = getEnhanceState(enhanceItem, weaponDmg);
+        String comment = String.format("현재 데미지 : %.3f...", totalDmg);
 
         return Component.text(comment)
                 .color(ColorMap.GREEN.getTextColor())
@@ -87,14 +83,14 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         return getScrollType(scroll).getDiscountProtectValue();
     }
 
-    public static double getWeaponDamage(ItemStack weapon) {
+    public static double getShortRangeDamage(ItemStack weapon) {
         double damage = 0.0;
-        for (ShortRangeWeaponMap weaponInfo : ShortRangeWeaponMap.values()) {
+        for (Weapon weaponInfo : ShortRangeWeaponMap.values()) {
             if (weaponInfo.getMaterial().equals(weapon.getType()))
-                damage = weaponInfo.getDamage();
+                damage = weaponInfo.getShortRangeDamage();
         }
 
-        for (LongRangeWeaponMap weaponInfo : LongRangeWeaponMap.values()) {
+        for (Weapon weaponInfo : LongRangeWeaponMap.values()) {
             if (weaponInfo.getMaterial().equals(weapon.getType()))
                 damage = weaponInfo.getShortRangeDamage();
         }
@@ -102,24 +98,23 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         return damage;
     }
 
-    public static double getProjectileDamage(ItemStack weapon) {
+    public static double getLongRangeDamage(ItemStack weapon) {
         double damage = 0.0;
-        for (LongRangeWeaponMap weaponInfo : LongRangeWeaponMap.values()) {
+        for (Weapon weaponInfo : LongRangeWeaponMap.values()) {
             if (weaponInfo.getMaterial().equals(weapon.getType()))
                 damage = weaponInfo.getLongRangeDamage();
         }
         return damage;
     }
 
-    public static double getSharpnessDamage(ItemStack weapon, double damage) {
-        int curItemSharpnessLevel = weapon.getEnchantLevel(Enchantment.DAMAGE_ALL);
-        for (int i = 0; i < curItemSharpnessLevel; i++) {
-            switch (i) {
-                case 0 -> damage += 1;
-                case 1, 2, 3, 4 -> damage += 0.5;
-            }
-        }
-        return damage;
+    public static double getArrowPowerDamage(ItemStack weapon) {
+//        25% × (level + 1)
+        return 0.25 * (weapon.getEnchantLevel(Enchantment.ARROW_DAMAGE) + 1);
+    }
+
+    public static double getSharpnessDamage(ItemStack weapon) {
+//        0.5 * sharpnessLevel + 0.5
+        return 0.5 * weapon.getEnchantLevel(Enchantment.DAMAGE_ALL) + 0.5;
     }
 
     public static double getEnhanceState(ItemStack enhanceItem, double finalItemStatus) {
