@@ -17,7 +17,8 @@ import teamzesa.event.*;
 import teamzesa.event.AntiExploit.*;
 import teamzesa.event.Enhance.EnhanceInventoryClickEvent;
 import teamzesa.event.Enhance.EnhanceInventoryCloseEvent;
-import teamzesa.event.Enhance.LongRange.EnhanceLongRangeWeaponHurtEvent;
+import teamzesa.event.Enhance.LongRange.EnhanceArrowHitEvent;
+import teamzesa.event.Enhance.LongRange.EnhanceArrowShotEvent;
 import teamzesa.event.Enhance.LongRange.EnhanceTridentHitEvent;
 import teamzesa.event.Enhance.LongRange.EnhanceTridentShotEvent;
 import teamzesa.event.Enhance.ShortRange.EnhanceShortRangeWeaponHurtEvent;
@@ -74,12 +75,14 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public static void ProjectileHitEvent(ProjectileHitEvent event) {
+        new EnhanceArrowHitEvent(event);
         new EnhanceTridentHitEvent(event);
         new GodModeTridentHitEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
     public static void ProjectileLaunchEvent(ProjectileLaunchEvent event) {
+        new EnhanceArrowShotEvent(event);
         new EnhanceTridentShotEvent(event);
         new GodModeTridentShotEvent(event);
     }
@@ -117,10 +120,8 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public static void EntityDamageEvent(EntityDamageEvent event) {
-//        methodImplement
 //        Event Cancelled 하면안됌
 //        new EnhanceResistanceEvent(event);
-        new EnhanceLongRangeWeaponHurtEvent(event);
         new EnhanceShortRangeWeaponHurtEvent(event);
     }
 
