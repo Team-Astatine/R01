@@ -15,10 +15,9 @@ import org.bukkit.event.world.ChunkLoadEvent;
 import org.purpurmc.purpur.event.inventory.AnvilUpdateResultEvent;
 import teamzesa.event.*;
 import teamzesa.event.AntiExploit.*;
-import teamzesa.event.Enhance.EnhanceInventoryClickEvent;
-import teamzesa.event.Enhance.EnhanceInventoryCloseEvent;
-import teamzesa.event.Enhance.LongRange.EnhanceArrowHitEvent;
-import teamzesa.event.Enhance.LongRange.EnhanceArrowShotEvent;
+import teamzesa.event.Enhance.*;
+import teamzesa.event.Enhance.LongRange.EnhanceBowHitEvent;
+import teamzesa.event.Enhance.LongRange.EnhanceBowShotEvent;
 import teamzesa.event.Enhance.LongRange.EnhanceTridentHitEvent;
 import teamzesa.event.Enhance.LongRange.EnhanceTridentShotEvent;
 import teamzesa.event.Enhance.ShortRange.EnhanceShortRangeWeaponHurtEvent;
@@ -75,14 +74,14 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public static void ProjectileHitEvent(ProjectileHitEvent event) {
-        new EnhanceArrowHitEvent(event);
+        new EnhanceBowHitEvent(event);
         new EnhanceTridentHitEvent(event);
         new GodModeTridentHitEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
     public static void ProjectileLaunchEvent(ProjectileLaunchEvent event) {
-        new EnhanceArrowShotEvent(event);
+        new EnhanceBowShotEvent(event);
         new EnhanceTridentShotEvent(event);
         new GodModeTridentShotEvent(event);
     }

@@ -9,10 +9,10 @@ import org.bukkit.util.Vector;
 import teamzesa.event.Enhance.EnhanceUtil;
 import teamzesa.event.EventRegister.EventRegister;
 
-public class EnhanceArrowShotEvent extends EnhanceUtil implements EventRegister {
+public class EnhanceBowShotEvent extends EnhanceUtil implements EventRegister {
     private Arrow arrow;
     private final ProjectileLaunchEvent event;
-    public EnhanceArrowShotEvent(ProjectileLaunchEvent event) {
+    public EnhanceBowShotEvent(ProjectileLaunchEvent event) {
         this.event = event;
 
         init();

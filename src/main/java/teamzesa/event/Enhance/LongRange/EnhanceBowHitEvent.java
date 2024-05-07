@@ -4,17 +4,16 @@ import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Trident;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.event.Enhance.EnhanceUtil;
 import teamzesa.event.EventRegister.EventRegister;
 
-public class EnhanceArrowHitEvent extends EnhanceUtil implements EventRegister {
+public class EnhanceBowHitEvent extends EnhanceUtil implements EventRegister {
     private Location tridentHitLocation;
     private final ProjectileHitEvent event;
 
-    public EnhanceArrowHitEvent(ProjectileHitEvent event) {
+    public EnhanceBowHitEvent(ProjectileHitEvent event) {
         this.event = event;
         init();
         execute();
