@@ -16,10 +16,7 @@ import org.purpurmc.purpur.event.inventory.AnvilUpdateResultEvent;
 import teamzesa.event.*;
 import teamzesa.event.AntiExploit.*;
 import teamzesa.event.Enhance.*;
-import teamzesa.event.Enhance.LongRange.EnhanceBowHitEvent;
-import teamzesa.event.Enhance.LongRange.EnhanceBowShotEvent;
-import teamzesa.event.Enhance.LongRange.EnhanceTridentHitEvent;
-import teamzesa.event.Enhance.LongRange.EnhanceTridentShotEvent;
+import teamzesa.event.Enhance.LongRange.*;
 import teamzesa.event.Enhance.ShortRange.EnhanceShortRangeWeaponHurtEvent;
 //todo
 //fixme
@@ -75,6 +72,7 @@ public class EventRegisterSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public static void ProjectileHitEvent(ProjectileHitEvent event) {
         new EnhanceBowHitEvent(event);
+        new EnhanceCrossBowHitEvent(event);
         new EnhanceTridentHitEvent(event);
         new GodModeTridentHitEvent(event);
     }
@@ -82,6 +80,7 @@ public class EventRegisterSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public static void ProjectileLaunchEvent(ProjectileLaunchEvent event) {
         new EnhanceBowShotEvent(event);
+        new EnhanceCrossBowShotEvent(event);
         new EnhanceTridentShotEvent(event);
         new GodModeTridentShotEvent(event);
     }
