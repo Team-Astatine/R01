@@ -30,7 +30,8 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
     public static double getSharpnessDamage(ItemStack weapon) {
 //        increaseDamage
 //        0.5 * sharpnessLevel + 0.5
-        return 0.5 * weapon.getEnchantLevel(Enchantment.DAMAGE_ALL) + 0.5;
+        double increaseDmg = 0.5 * weapon.getEnchantLevel(Enchantment.DAMAGE_ALL) + 0.5;
+        return increaseDmg == 0.5 ? 0 : increaseDmg;
     }
 
     public static void modifyEnhanceItemModelData(ItemStack enhanceItem, int updateCustomModelData) {

@@ -9,10 +9,10 @@ import org.bukkit.util.Vector;
 import teamzesa.event.Enhance.EnhanceUtil;
 import teamzesa.event.EventRegister.EventRegister;
 
-public class EnhanceArrowShotEvent extends EnhanceUtil implements EventRegister {
+public class EnhanceCrossBowShotEvent extends EnhanceUtil implements EventRegister {
     private Arrow arrow;
     private final ProjectileLaunchEvent event;
-    public EnhanceArrowShotEvent(ProjectileLaunchEvent event) {
+    public EnhanceCrossBowShotEvent(ProjectileLaunchEvent event) {
         this.event = event;
 
         init();
@@ -27,7 +27,7 @@ public class EnhanceArrowShotEvent extends EnhanceUtil implements EventRegister 
         if (!(this.event.getEntity() instanceof Arrow arrow))
             return;
 
-        if (arrow.isShotFromCrossbow())
+        if (!arrow.isShotFromCrossbow())
             return;
 
         if (!(this.event.getEntity().getShooter() instanceof Player player))
@@ -40,7 +40,7 @@ public class EnhanceArrowShotEvent extends EnhanceUtil implements EventRegister 
         switch (getItemCustomModelData(mainHandBow)) {
             case 1,2,3 -> executeEnhanceState(1, 1, Sound.ENTITY_GHAST_DEATH, vector);
             case 4,5,6 -> executeEnhanceState(1, 3, Sound.ENTITY_ENDER_DRAGON_HURT, vector);
-            case 7,8,9 -> executeEnhanceState(2, 6, Sound.ENTITY_ENDER_DRAGON_AMBIENT, vector);
+            case 7,8,9 -> executeEnhanceState(2, 6, Sound.ENTITY_ENDER_DRAGON_SHOOT, vector);
             case 10 ->    executeEnhanceState(3, 10, Sound.BLOCK_CONDUIT_ACTIVATE, vector);
             default -> {
                 return;
@@ -50,7 +50,6 @@ public class EnhanceArrowShotEvent extends EnhanceUtil implements EventRegister 
 
     private void executeEnhanceState(int shootingSpeed, int pierceLevel, Sound sound, Vector vector) {
         Runnable tridentThrowingTask = () -> {
-            this.arrow.setGlowing(true);
             this.arrow.setPierceLevel(pierceLevel);
             this.event.getEntity().setVelocity(vector.multiply(shootingSpeed));
             this.arrow.getWorld().playSound(arrow.getLocation(), sound, 5F, 5F);
