@@ -10,7 +10,7 @@ import teamzesa.event.Enhance.EnhanceUtil;
 import teamzesa.event.EventRegister.EventRegister;
 
 public class EnhanceBowHitEvent extends EnhanceUtil implements EventRegister {
-    private Location tridentHitLocation;
+    private Location bowHitLocation;
     private final ProjectileHitEvent event;
 
     public EnhanceBowHitEvent(ProjectileHitEvent event) {
@@ -33,13 +33,13 @@ public class EnhanceBowHitEvent extends EnhanceUtil implements EventRegister {
         if (!(this.event.getEntity().getShooter() instanceof Player player))
             return;
 
-        this.tridentHitLocation = arrow.getLocation();
+        this.bowHitLocation = arrow.getLocation();
         ItemStack mainHandBow = player.getInventory().getItemInMainHand();
 
         switch (getItemCustomModelData(mainHandBow)) {
             case 1,2,3 -> executeEnhanceState(Sound.ENTITY_GHAST_DEATH, false);
             case 4,5,6 -> executeEnhanceState(Sound.ENTITY_ENDER_DRAGON_HURT, false);
-            case 7,8,9 -> executeEnhanceState(Sound.ENTITY_ENDER_DRAGON_AMBIENT, false);
+            case 7,8,9 -> executeEnhanceState(Sound.ENTITY_ENDER_DRAGON_SHOOT, false);
             case 10 ->    executeEnhanceState(Sound.BLOCK_CONDUIT_ACTIVATE, true);
             default -> {
                 return;
@@ -49,7 +49,7 @@ public class EnhanceBowHitEvent extends EnhanceUtil implements EventRegister {
 
     private void executeEnhanceState(Sound sound, boolean isFire) {
         Runnable tridentHitTask = () ->
-            this.tridentHitLocation.getWorld().playSound(this.tridentHitLocation, sound, 5F, 5F);
+            this.bowHitLocation.getWorld().playSound(this.bowHitLocation, sound, 5F, 5F);
 
         tridentHitTask.run();
     }
