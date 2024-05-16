@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
 import teamzesa.event.Enhance.EnhanceUtil;
 import teamzesa.event.EventRegister.EventRegister;
+import teamzesa.util.userHandler.UserController;
 
 public class EnhanceTridentHitEvent extends EnhanceUtil implements EventRegister {
     private Location tridentHitLocation;
@@ -29,11 +30,14 @@ public class EnhanceTridentHitEvent extends EnhanceUtil implements EventRegister
         if (!(this.event.getEntity() instanceof Trident trident))
             return;
 
-        if (!(this.event.getEntity().getShooter() instanceof Player player))
+        if (!(this.event.getEntity().getShooter() instanceof Player shooter))
+            return;
+
+        if (new UserController().readUser(shooter).isGodMode())
             return;
 
         this.tridentHitLocation = trident.getLocation();
-        ItemStack mainHandTrident = player.getInventory().getItemInMainHand();
+        ItemStack mainHandTrident = shooter.getInventory().getItemInMainHand();
 
         switch (getItemCustomModelData(mainHandTrident)) {
             case 1,2,3 -> executeEnhanceState(Sound.ENTITY_GHAST_DEATH, 0, false);
