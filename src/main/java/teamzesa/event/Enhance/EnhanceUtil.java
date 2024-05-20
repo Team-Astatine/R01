@@ -23,14 +23,14 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
     public static double getArrowPowerDamage(ItemStack weapon, double baseDmg) {
 //        increaseDamagePercentage
 //        25% × (level + 1)
-        double percentage = 0.25 * (weapon.getEnchantLevel(Enchantment.ARROW_DAMAGE) + 1);
+        double percentage = 0.25 * (weapon.getEnchantLevel(Enchantment.POWER) + 1);
         return baseDmg * percentage;
     }
 
     public static double getSharpnessDamage(ItemStack weapon) {
 //        increaseDamage
 //        0.5 * sharpnessLevel + 0.5
-        double increaseDmg = 0.5 * weapon.getEnchantLevel(Enchantment.DAMAGE_ALL) + 0.5;
+        double increaseDmg = 0.5 * weapon.getEnchantLevel(Enchantment.SHARPNESS) + 0.5;
         return increaseDmg == 0.5 ? 0 : increaseDmg;
     }
 

@@ -49,7 +49,7 @@ public class LifeSteelEvent extends StringComponentExchanger implements EventReg
         playerLocation.setY(playerLocation.getY() + 2.0);
         Runnable undyingEventTask = () -> {
             playerLocation.getWorld().playSound(playerLocation, Sound.ENTITY_WITHER_SPAWN, 1.0f, 1.0f);
-            playerLocation.getWorld().spawnParticle(Particle.TOTEM, playerLocation, 200);
+            playerLocation.getWorld().spawnParticle(Particle.TOTEM_OF_UNDYING, playerLocation, 200);
 //                playerLocation.createExplosion(60);
         };
 
