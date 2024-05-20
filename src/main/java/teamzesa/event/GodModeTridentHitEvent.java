@@ -29,7 +29,7 @@ public class GodModeTridentHitEvent implements EventRegister {
         if (!(this.event.getEntity().getShooter() instanceof Player shooter))
             return;
 
-        if (!getUser(shooter).isGodMode())
+        if (new UserController().readUser(shooter).isGodMode())
             return;
 
         Runnable tridentTask = () -> {
@@ -45,9 +45,5 @@ public class GodModeTridentHitEvent implements EventRegister {
         tridentTask.run();
 //        if (this.event.getHitBlock() != null && this.event.getHitBlock().getType() != Material.BEDROCK)
 //            tridentTask.run();
-    }
-
-    private User getUser(Player player) {
-        return new UserController().readUser(player);
     }
 }

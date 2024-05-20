@@ -34,9 +34,9 @@ public class ExplosiveEvent implements EventRegister {
             case CREEPER -> creeperBoom();
             case FIREBALL -> ghastBoom();
             case WITHER_SKULL -> witherBoom();
-            case PRIMED_TNT -> boomBer();
-            case MINECART_TNT -> cartBoom();
-            case ENDER_CRYSTAL -> endCrystal();
+            case TNT -> boomBer();
+            case TNT_MINECART -> cartBoom();
+            case END_CRYSTAL -> endCrystal();
             default -> this.event.setCancelled(true);
         }
     }

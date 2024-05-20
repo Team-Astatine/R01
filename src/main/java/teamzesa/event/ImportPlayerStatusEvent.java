@@ -76,17 +76,17 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
 
         for (ArmourKit kit : ArmourKit.values()) {
             ItemStack armour = kit.getArmour();
-            armour.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
-            armour.addEnchantment(Enchantment.DURABILITY, 2);
+            armour.addEnchantment(Enchantment.PROTECTION, 2);
+            armour.addEnchantment(Enchantment.UNBREAKING, 2);
             this.player.getInventory().addItem(kit.getArmour());
         }
 
         for (ToolKit kit : ToolKit.values()) {
             ItemStack tool = kit.getToolKit();
             if (tool.getType().equals(Material.NETHERITE_SWORD))
-                tool.addEnchantment(Enchantment.DAMAGE_ALL, 2);
-            else tool.addEnchantment(Enchantment.DIG_SPEED, 2);
-            tool.addEnchantment(Enchantment.DURABILITY, 2);
+                tool.addEnchantment(Enchantment.SHARPNESS, 2);
+            else tool.addEnchantment(Enchantment.EFFICIENCY, 2);
+            tool.addEnchantment(Enchantment.UNBREAKING, 2);
             this.player.getInventory().addItem(tool);
         }
     }

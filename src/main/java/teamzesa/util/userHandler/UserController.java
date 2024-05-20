@@ -56,7 +56,7 @@ public class UserController {
         Player player = Bukkit.getPlayer(user.uuid());
         player.setHealthScale(user.healthScale());
         player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(user.healthScale());
-        player.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 40, 1));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 40, 1));
         updateUser(user);
     }
 
