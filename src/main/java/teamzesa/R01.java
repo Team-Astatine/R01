@@ -12,9 +12,10 @@ import teamzesa.util.ThreadPool;
 
 public final class R01 extends JavaPlugin {
     private final String PLUGIN_NAME = "[R01]";
-    private final long RUNNING_TIME;
+    private long RUNNING_TIME;
 
-    public R01() {
+    @Override
+    public void onLoad() {
         this.RUNNING_TIME = System.currentTimeMillis();
     }
 
