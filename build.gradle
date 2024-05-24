@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group = 'team_zesa'
+group = 'teamzesa'
 version = '5.1'
 
 repositories {
