@@ -1,13 +1,23 @@
 package teamzesa;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.util.Vector;
 import teamzesa.util.IOHandler.Announcer;
 import teamzesa.event.EventRegister.EventRegisterSection;
 import teamzesa.util.Enum.CommandExecutorMap;
 import teamzesa.util.IOHandler.ConfigIOHandler;
+import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.userHandler.UserIOHandler;
 import teamzesa.util.ThreadPool;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 
 public final class R01 extends JavaPlugin {
@@ -29,11 +39,12 @@ public final class R01 extends JavaPlugin {
 
 //        configSet
         userDataLoader();
+        speedLimiter();
         configFileLoader(); // config set File
+        autoSaveSchedule(); // User Data Auto Save Scheduling
 
 //        loading Time
         pluginLoadTime();
-        autoSaveSchedule(); // User Data Auto Save Scheduling
     }
 
     @Override
@@ -46,6 +57,69 @@ public final class R01 extends JavaPlugin {
     public void userDataLoader() {
 //        import userData
         UserIOHandler.importUserData("Starting Server");
+    }
+
+    public void speedLimiter() {
+        ThreadPool.getThreadPool().addSchedulingTaskMin(
+                () -> {
+                    double allowedMaxMetersPerSec = 0.0;
+                    Iterator var3 = Bukkit.getOnlinePlayers().iterator();
+
+                    Set<String> tped = new HashSet();
+                    HashMap<String, Location> locs = new HashMap();
+
+                    while(true) {
+                        while(true) {
+                            Player player;
+                            do {
+                                if (!var3.hasNext()) {
+                                    return;
+                                }
+
+                                player = (Player)var3.next();
+                            } while(player.hasPermission("speedlimit.bypass"));
+
+                            if (locs.get(player.getName()) != null && !tped.contains(player.getName())) {
+                                Location prevloc = ((Location)locs.get(player.getName())).clone();
+                                Location newloc = player.getLocation().clone();
+                                if (getConfig().getBoolean("only-flying") && !player.isFlying() || getConfig().getBoolean("only-on-ground") && player.isFlying() || !getConfig().getList("worlds").contains(prevloc.getWorld().getName()) && !getConfig().getList("worlds").contains(newloc.getWorld().getName())) {
+                                    continue;
+                                }
+
+                                Vector v = newloc.subtract(prevloc).toVector();
+                                if (getConfig().getBoolean("allow-falling-bypass") && v.clone().normalize().getY() < -0.95) {
+                                    locs.remove(player.getName());
+                                    continue;
+                                }
+
+                                double distance = v.length();
+                                if (distance > allowedMaxMetersPerSec) {
+                                    if (player.isInsideVehicle()) {
+                                        Entity vehicle = player.getVehicle();
+                                        player.leaveVehicle();
+                                        Location entityLoc = prevloc.clone().add(0.0, 0.5, 0.0);
+                                        vehicle.teleport(entityLoc);
+                                        if (getConfig().getBoolean("put-back-on-vehicle")) {
+                                            vehicle.addPassenger(player);
+                                        } else {
+                                            player.teleport(prevloc);
+                                        }
+                                    } else {
+                                        player.teleport(prevloc);
+                                    }
+
+                                    continue;
+                                }
+                            }
+
+                            locs.put(player.getName(), player.getLocation().clone());
+                            tped.remove(player.getName());
+                        }
+                    }
+                },
+                0L,
+                20L
+        );
     }
 
     public void configFileLoader() {
