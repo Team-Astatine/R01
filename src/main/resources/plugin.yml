@@ -4,6 +4,11 @@ main: teamzesa.R01
 api-version: '1.20'
 authors: [ JAXPLE ]
 
+permissions:
+  SpeedLimit.bypass:
+    description: Bypass the speed limit
+    default: op
+
 commands:
   SaveUserData:
     description: 유저 데이터를 저장합니다.
