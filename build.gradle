@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'teamzesa'
-version = '5.1'
+version = '5.2'
 
 repositories {
     mavenCentral()
@@ -20,9 +20,9 @@ repositories {
 }
 
 dependencies {
+    implementation 'com.google.code.gson:gson:2.11.0'
     testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
-    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.11.0-M1'
     compileOnly "org.purpurmc.purpur:purpur-api:1.20.6-R0.1-SNAPSHOT"
 }
 

@@ -37,7 +37,7 @@ public class UserBuilder {
         uuid(player.getUniqueId());
         name(player.getName());
         ipList(player.getAddress().getHostName());
-        joinCount(1);
+        joinCount(0);
         level(player.getLevel());
         healthScale(player.getHealthScale());
         killCount(0);
