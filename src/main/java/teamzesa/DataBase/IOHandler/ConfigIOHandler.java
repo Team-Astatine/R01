@@ -1,4 +1,4 @@
-package teamzesa.util.IOHandler;
+package teamzesa.DataBase.IOHandler;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;

@@ -1,4 +1,4 @@
-package teamzesa.util.IOHandler;
+package teamzesa.util;
 
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
@@ -6,8 +6,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.entity.User;
+import teamzesa.DataBase.IOHandler.ConfigIOHandler;
 import teamzesa.util.Interface.StringComponentExchanger;
-import teamzesa.util.ThreadPool;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.DataBase.userHandler.UserController;
 

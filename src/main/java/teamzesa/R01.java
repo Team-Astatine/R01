@@ -8,10 +8,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 import teamzesa.util.Enum.ColorMap;
-import teamzesa.util.IOHandler.Announcer;
+import teamzesa.util.Announcer;
 import teamzesa.event.EventRegister.EventRegisterSection;
 import teamzesa.util.Enum.CommandExecutorMap;
-import teamzesa.util.IOHandler.ConfigIOHandler;
+import teamzesa.DataBase.IOHandler.ConfigIOHandler;
 import teamzesa.DataBase.userHandler.UserIOHandler;
 import teamzesa.util.ThreadPool;
 
