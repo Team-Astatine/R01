@@ -5,7 +5,7 @@ import teamzesa.entity.User;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.ColorMap;
-import teamzesa.util.userHandler.UserController;
+import teamzesa.DataBase.userHandler.UserController;
 
 public class QuitMsgEvent extends StringComponentExchanger implements EventRegister {
     private User quitUser;

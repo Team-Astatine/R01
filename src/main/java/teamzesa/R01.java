@@ -12,7 +12,7 @@ import teamzesa.util.IOHandler.Announcer;
 import teamzesa.event.EventRegister.EventRegisterSection;
 import teamzesa.util.Enum.CommandExecutorMap;
 import teamzesa.util.IOHandler.ConfigIOHandler;
-import teamzesa.util.userHandler.UserIOHandler;
+import teamzesa.DataBase.userHandler.UserIOHandler;
 import teamzesa.util.ThreadPool;
 
 import java.util.*;

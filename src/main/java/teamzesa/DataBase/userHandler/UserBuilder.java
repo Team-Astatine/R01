@@ -1,4 +1,4 @@
-package teamzesa.util.userHandler;
+package teamzesa.DataBase.userHandler;
 
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;

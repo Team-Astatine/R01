@@ -7,8 +7,8 @@ import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.entity.User;
-import teamzesa.util.userHandler.UserBuilder;
-import teamzesa.util.userHandler.UserController;
+import teamzesa.DataBase.userHandler.UserBuilder;
+import teamzesa.DataBase.userHandler.UserController;
 
 import java.util.HashSet;
 import java.util.Optional;

@@ -15,8 +15,8 @@ import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.Kit.FoodKit;
 import teamzesa.util.Enum.Kit.ToolKit;
 import teamzesa.util.IOHandler.Announcer;
-import teamzesa.util.userHandler.UserBuilder;
-import teamzesa.util.userHandler.UserController;
+import teamzesa.DataBase.userHandler.UserBuilder;
+import teamzesa.DataBase.userHandler.UserController;
 
 import java.util.Optional;
 

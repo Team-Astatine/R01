@@ -1,4 +1,4 @@
-package teamzesa.util.userHandler;
+package teamzesa.DataBase;
 
 import teamzesa.entity.User;
 import teamzesa.util.Interface.StringComponentExchanger;
@@ -6,12 +6,12 @@ import teamzesa.util.Interface.StringComponentExchanger;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class UserDataBase extends StringComponentExchanger {
+public class DataBase extends StringComponentExchanger {
     private static class UserMapHandlerHolder {
-        private static final UserDataBase INSTANCE = new UserDataBase();
+        private static final DataBase INSTANCE = new DataBase();
     }
 
-    public static UserDataBase getUserMapHandler() {
+    public static DataBase getUserMapHandler() {
         return UserMapHandlerHolder.INSTANCE;
     }
 

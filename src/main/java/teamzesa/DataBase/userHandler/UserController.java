@@ -1,4 +1,4 @@
-package teamzesa.util.userHandler;
+package teamzesa.DataBase.userHandler;
 
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
@@ -7,6 +7,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.entity.User;
+import teamzesa.DataBase.DataBase;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -14,7 +15,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class UserController {
-    private final UserDataBase userDataBase = UserDataBase.getUserMapHandler();
+    private final DataBase userDataBase = DataBase.getUserMapHandler();
 
     public boolean createUser(@NotNull Player player) {
         return createUser(

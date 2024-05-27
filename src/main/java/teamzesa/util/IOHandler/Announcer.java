@@ -9,7 +9,7 @@ import teamzesa.entity.User;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.ThreadPool;
 import teamzesa.util.Enum.ColorMap;
-import teamzesa.util.userHandler.UserController;
+import teamzesa.DataBase.userHandler.UserController;
 
 import java.util.ArrayList;
 import java.util.List;

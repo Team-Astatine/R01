@@ -2,7 +2,7 @@ package teamzesa.util.IOHandler;
 
 import org.bukkit.Bukkit;
 import teamzesa.util.Enum.DataFile;
-import teamzesa.util.userHandler.UserIOHandler;
+import teamzesa.DataBase.userHandler.UserIOHandler;
 
 import java.io.*;
 import java.net.MalformedURLException;
