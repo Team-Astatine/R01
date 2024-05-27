@@ -6,16 +6,23 @@ import teamzesa.R01;
 import java.io.File;
 
 public enum DataFile {
-    CONFIG(new File(R01.getPlugin(R01.class).getDataFolder(), "config.yml")),
-    USER_DATA(new File(R01.getPlugin(R01.class).getDataFolder(), "userData.json")),
-    ABSOLUTE_PATH(new File(R01.getPlugin(R01.class).getDataFolder().getParentFile().getAbsolutePath()));
-    private final File fileInstance;
+    CONFIG(new File(R01.getPlugin(R01.class).getDataFolder(), "config.yml"), "Config"),
+    USER_DATA(new File(R01.getPlugin(R01.class).getDataFolder(), "userData.json"), "UserData"),
+    ABSOLUTE_PATH(new File(R01.getPlugin(R01.class).getDataFolder().getParentFile().getAbsolutePath()), "Plugin Folder");
 
-    DataFile(File dataName) {
-        fileInstance = dataName;
+    private final File fileInstance;
+    private final String fileTypeName;
+
+    DataFile(File fileInstance, String fileTypeName) {
+        this.fileInstance = fileInstance;
+        this.fileTypeName = fileTypeName;
     }
 
     public File getFileInstance() {
         return fileInstance;
+    }
+
+    public String getFileTypeName() {
+        return fileTypeName;
     }
 }
