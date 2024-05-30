@@ -1,4 +1,4 @@
-package teamzesa.entity;
+package teamzesa.DataBase.entity;
 
 import java.util.*;
 

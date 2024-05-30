@@ -6,8 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.entity.User;
-import teamzesa.DataBase.DataBase;
+import teamzesa.DataBase.entity.User;
 
 import java.util.Arrays;
 import java.util.Optional;

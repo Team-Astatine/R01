@@ -2,7 +2,7 @@ package teamzesa.DataBase.userHandler;
 
 import com.google.gson.*;
 import org.bukkit.Bukkit;
-import teamzesa.entity.User;
+import teamzesa.DataBase.entity.User;
 import teamzesa.util.Enum.DataFile;
 
 import java.io.FileReader;

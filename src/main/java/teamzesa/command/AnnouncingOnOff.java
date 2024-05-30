@@ -5,7 +5,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.entity.User;
+import teamzesa.DataBase.entity.User;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.CommandExecutorMap;
 import teamzesa.DataBase.userHandler.UserBuilder;

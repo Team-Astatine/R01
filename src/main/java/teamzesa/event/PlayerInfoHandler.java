@@ -6,7 +6,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.ColorMap;
-import teamzesa.entity.User;
+import teamzesa.DataBase.entity.User;
 import teamzesa.DataBase.userHandler.UserBuilder;
 import teamzesa.DataBase.userHandler.UserController;
 

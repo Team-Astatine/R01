@@ -1,6 +1,6 @@
 package teamzesa.DataBase;
 
-import teamzesa.entity.User;
+import teamzesa.DataBase.entity.User;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 import java.util.*;

@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.command.God;
-import teamzesa.entity.User;
+import teamzesa.DataBase.entity.User;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.Kit.ArmourKit;

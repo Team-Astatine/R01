@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.ColorMap;
-import teamzesa.entity.User;
+import teamzesa.DataBase.entity.User;
 import teamzesa.DataBase.userHandler.UserController;
 
 import java.util.Optional;
