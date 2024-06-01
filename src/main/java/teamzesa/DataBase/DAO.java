@@ -4,9 +4,9 @@ import teamzesa.DataBase.entity.User;
 
 public interface DAO<K,E> {
 
-    boolean insert(E e);
+    Boolean insert(E e);
 
-    User select(K k);
+    E select(K k);
 
     Boolean update(E e);
 
