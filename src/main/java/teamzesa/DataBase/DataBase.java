@@ -1,6 +1,7 @@
 package teamzesa.DataBase;
 
 import teamzesa.DataBase.entity.User;
+import teamzesa.DataBase.entity.UserKillStatus;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 import java.util.*;
@@ -11,9 +12,15 @@ public class DataBase extends StringComponentExchanger {
         private final static ConcurrentHashMap<UUID, User> INSTANCE = new ConcurrentHashMap<>();
     }
 
-    private static ConcurrentHashMap<UUID,User> getUserData() {
+    public static ConcurrentHashMap<UUID,User> getUserDataInstance() {
         return UserDataHolder.INSTANCE;
     }
 
+    private static class UserKillStatusHolder {
+        private final static ConcurrentHashMap<UUID, UserKillStatus> INSTANCE = new ConcurrentHashMap<>();
+    }
 
+    public static ConcurrentHashMap<UUID, UserKillStatus> getUserKillStatusInstance() {
+        return UserKillStatusHolder.INSTANCE;
+    }
 }
