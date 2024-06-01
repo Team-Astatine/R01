@@ -1,12 +1,12 @@
 package teamzesa.DataBase.userHandler;
 
-import teamzesa.DataBase.UAO;
+import teamzesa.DataBase.DAO;
 import teamzesa.DataBase.entity.User;
 
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class UserAccessObject implements UAO<UUID,User> {
+public class UserAccessObject implements DAO<UUID,User> {
 
     private static final ConcurrentHashMap<UUID,User> USER_DATA = new ConcurrentHashMap<>();
 

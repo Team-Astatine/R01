@@ -2,7 +2,7 @@ package teamzesa.DataBase;
 
 import teamzesa.DataBase.entity.User;
 
-public interface UAO<K,E> {
+public interface DAO<K,E> {
 
     boolean insert(E e);
 
