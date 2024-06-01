@@ -1,21 +1,22 @@
 package teamzesa.DataBase.userHandler;
 
 import teamzesa.DataBase.DAO;
+import teamzesa.DataBase.DataBase;
 import teamzesa.DataBase.entity.User;
 
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class UserAccessObject implements DAO<UUID,User> {
+public class DaoUser implements DAO<UUID,User> {
 
-    private static final ConcurrentHashMap<UUID,User> USER_DATA = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<UUID,User> USER_DATA = DataBase.getUserDataInstance();
 
-    private static class UaoHolder {
-        private final static UserAccessObject INSTANCE = new UserAccessObject();
+    private static class DaoUserHolder {
+        private final static DaoUser INSTANCE = new DaoUser();
     }
 
-    public static UserAccessObject getInstance() {
-        return UaoHolder.INSTANCE;
+    public static DaoUser getInstance() {
+        return DaoUserHolder.INSTANCE;
     }
 
 
@@ -24,7 +25,7 @@ public class UserAccessObject implements DAO<UUID,User> {
     }
 
     @Override
-    public synchronized boolean insert(User user) {
+    public synchronized Boolean insert(User user) {
         USER_DATA.put(user.uuid(), user);
         return Boolean.TRUE;
     }

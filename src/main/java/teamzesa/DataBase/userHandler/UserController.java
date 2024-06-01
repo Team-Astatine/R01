@@ -14,7 +14,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class UserController {
-    private final UserAccessObject userDataBase = UserAccessObject.getInstance();
+    private final DaoUser userDataBase = DaoUser.getInstance();
 
     public boolean createUser(@NotNull Player player) {
         return createUser(
