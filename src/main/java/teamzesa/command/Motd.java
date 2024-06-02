@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.CommandExecutorMap;
-import teamzesa.util.IOHandler.ConfigIOHandler;
+import teamzesa.DataBase.IOHandler.ConfigIOHandler;
 import teamzesa.util.Enum.ColorMap;
 
 

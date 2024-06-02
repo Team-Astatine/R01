@@ -16,6 +16,7 @@ public enum CommandExecutorMap {
     TOTEM_STACKING("totem", new Totem()),
     USER_OBJECT_CHECKER("vo", new ValueObjectChecker()),
     SAVE_USER_DATA("SaveUserData", new SaveUserData()),
+    SAVE_KILL_STATUS_DATA("SaveKillStatusData", new SaveKillStatusData()),
     CONFIG_RELOAD("dataFileReload", new DataFileReload()),
     ANNOUNCING("공지", new AnnouncingOnOff()),
     ENHANCE("강화", new EnhanceStuff()),

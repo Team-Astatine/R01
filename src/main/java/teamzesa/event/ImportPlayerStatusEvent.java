@@ -6,17 +6,19 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
+import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
+import teamzesa.DataBase.entity.UserKillStatus;
 import teamzesa.command.God;
-import teamzesa.entity.User;
+import teamzesa.DataBase.entity.User;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.Kit.ArmourKit;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.Kit.FoodKit;
 import teamzesa.util.Enum.Kit.ToolKit;
-import teamzesa.util.IOHandler.Announcer;
-import teamzesa.util.userHandler.UserBuilder;
-import teamzesa.util.userHandler.UserController;
+import teamzesa.util.Announcer;
+import teamzesa.DataBase.userHandler.UserBuilder;
+import teamzesa.DataBase.userHandler.UserController;
 
 import java.util.Optional;
 
@@ -24,6 +26,7 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
 
     private int playerJoinCnt;
     private User user;
+    private UserKillStatus userKillStatus;
     private Player player;
     private Announcer announcer;
     private final PlayerJoinEvent event;
@@ -38,7 +41,8 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
     public void init() {
         this.announcer = Announcer.getAnnouncer();
         this.player = this.event.getPlayer();
-        this.user = new UserController().readUser(this.player);
+        this.user = new UserController().readUser(this.player.getUniqueId());
+        this.userKillStatus = new KillStatusController().readUser(this.player.getUniqueId());
         this.playerJoinCnt = this.user.joinCount();
     }
 
@@ -63,12 +67,12 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
     }
 
     private void checkingUserStatusHealth() {
-        this.player.setHealthScale(this.user.healthScale());
-        this.player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(this.user.healthScale());
+        this.player.setHealthScale(this.userKillStatus.healthScale());
+        this.player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(this.userKillStatus.healthScale());
     }
 
     private void supplyUserKit() {
-        if (this.playerJoinCnt > 1) return;
+        if (this.user.joinCount() != 0) return;
 
         for (FoodKit kit : FoodKit.values()) {
             this.player.getInventory().addItem(kit.getFood());
@@ -94,13 +98,13 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
         this.announcer.joinAnnouncer(this.player);
         this.announcer.countAnnouncer(this.player);
 
-        if (this.user.killCount() == 0)
+        if (this.userKillStatus.killCount() == 0)
             this.event.joinMessage(
-                componentExchanger(" + " + this.user.name(), ColorMap.RED)
+                componentExchanger(" + " + this.user.nameList().getFirst(), ColorMap.RED)
             );
 
         else this.event.joinMessage(
-            componentExchanger(" + [ " + user.killCount() + "KILL ] " + user.name(), ColorMap.RED)
+            componentExchanger(" + [ " + this.userKillStatus.killCount() + "KILL ] " + user.nameList().getFirst(), ColorMap.RED)
         );
     }
 

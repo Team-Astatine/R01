@@ -2,15 +2,13 @@ package teamzesa.event.Enhance.LongRange;
 
 import org.bukkit.Location;
 import org.bukkit.Sound;
-import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Trident;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.util.Vector;
 import teamzesa.event.Enhance.EnhanceUtil;
 import teamzesa.event.EventRegister.EventRegister;
-import teamzesa.util.userHandler.UserController;
+import teamzesa.DataBase.userHandler.UserController;
 
 public class EnhanceTridentHitEvent extends EnhanceUtil implements EventRegister {
     private Location tridentHitLocation;
@@ -33,7 +31,7 @@ public class EnhanceTridentHitEvent extends EnhanceUtil implements EventRegister
         if (!(this.event.getEntity().getShooter() instanceof Player shooter))
             return;
 
-        if (new UserController().readUser(shooter).isGodMode())
+        if (new UserController().readUser(shooter.getUniqueId()).isGodMode())
             return;
 
         this.tridentHitLocation = trident.getLocation();

@@ -5,11 +5,11 @@ import org.bukkit.event.Event;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import teamzesa.entity.User;
+import teamzesa.DataBase.entity.User;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.ColorMap;
-import teamzesa.util.userHandler.UserController;
+import teamzesa.DataBase.userHandler.UserController;
 
 public class PlayerFlyEnableEvent extends StringComponentExchanger implements EventRegister {
     private Player player;
@@ -41,7 +41,7 @@ public class PlayerFlyEnableEvent extends StringComponentExchanger implements Ev
     @Override
     public void execute() {
         this.player.setAllowFlight(true);
-        User user = new UserController().readUser(this.player);
+        User user = new UserController().readUser(this.player.getUniqueId());
         if (!user.isGodMode()) playerSendMsgComponentExchanger(this.player, this.comment, ColorMap.YELLOW);
     }
 }

@@ -9,9 +9,9 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.CommandExecutorMap;
 import teamzesa.util.Enum.ColorMap;
-import teamzesa.entity.User;
-import teamzesa.util.userHandler.UserBuilder;
-import teamzesa.util.userHandler.UserController;
+import teamzesa.DataBase.entity.User;
+import teamzesa.DataBase.userHandler.UserBuilder;
+import teamzesa.DataBase.userHandler.UserController;
 
 import java.util.Optional;
 
@@ -54,7 +54,7 @@ public class God extends CommandRegisterSection {
     }
 
     private void changeUserStatus(Player targetPlayer) {
-        User targetUser = new UserController().readUser(targetPlayer);
+        User targetUser = new UserController().readUser(targetPlayer.getUniqueId());
         targetUser = new UserBuilder(targetUser)
                 .isGodMode(!targetUser.isGodMode())
                 .buildAndUpdate();
@@ -65,10 +65,10 @@ public class God extends CommandRegisterSection {
         String comment = "은(는) 이제 " + targetStatus + " 입니다.";
 
         if (isConsoleSend)
-            Bukkit.getLogger().info("[R01] " + targetUser.name() + comment);
+            Bukkit.getLogger().info("[R01] " + targetUser.nameList() + comment);
 
         else if (!this.senderPlayer.equals(targetPlayer))
-            playerSendMsgComponentExchanger(this.senderPlayer, targetUser.name() + comment, ColorMap.ORANGE);
+            playerSendMsgComponentExchanger(this.senderPlayer, targetUser.nameList().getFirst() + comment, ColorMap.ORANGE);
 
         playerSendMsgComponentExchanger(targetPlayer, "당신" + comment, ColorMap.ORANGE);
 

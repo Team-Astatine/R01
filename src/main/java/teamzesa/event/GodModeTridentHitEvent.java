@@ -5,9 +5,8 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Trident;
 import org.bukkit.event.entity.ProjectileHitEvent;
-import teamzesa.entity.User;
 import teamzesa.event.EventRegister.EventRegister;
-import teamzesa.util.userHandler.UserController;
+import teamzesa.DataBase.userHandler.UserController;
 
 
 public class GodModeTridentHitEvent implements EventRegister {
@@ -29,7 +28,7 @@ public class GodModeTridentHitEvent implements EventRegister {
         if (!(this.event.getEntity().getShooter() instanceof Player shooter))
             return;
 
-        if (new UserController().readUser(shooter).isGodMode())
+        if (new UserController().readUser(shooter.getUniqueId()).isGodMode())
             return;
 
         Runnable tridentTask = () -> {

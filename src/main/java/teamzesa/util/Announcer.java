@@ -1,15 +1,15 @@
-package teamzesa.util.IOHandler;
+package teamzesa.util;
 
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.entity.User;
+import teamzesa.DataBase.entity.User;
+import teamzesa.DataBase.IOHandler.ConfigIOHandler;
 import teamzesa.util.Interface.StringComponentExchanger;
-import teamzesa.util.ThreadPool;
 import teamzesa.util.Enum.ColorMap;
-import teamzesa.util.userHandler.UserController;
+import teamzesa.DataBase.userHandler.UserController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,7 @@ public class Announcer extends StringComponentExchanger {
     }
 
     public void countAnnouncer(Player player) {
-        int joinCnt = new UserController().readUser(player).joinCount();
+        int joinCnt = new UserController().readUser(player.getUniqueId()).joinCount();
         player.sendMessage(
                 componentExchanger(this.configIOHandler.getWorldMotdConfig(), ColorMap.SKY_BLUE)
                         .append(componentExchanger(" " + joinCnt, ColorMap.PINK))
@@ -61,7 +61,7 @@ public class Announcer extends StringComponentExchanger {
                 return;
 
             players.forEach(player -> {
-                User user = new UserController().readUser(player);
+                User user = new UserController().readUser(player.getUniqueId());
                 if (user.isAnnouncing())
                     sendComment(player, createComponents());
             });

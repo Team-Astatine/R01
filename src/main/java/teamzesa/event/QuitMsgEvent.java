@@ -1,11 +1,13 @@
 package teamzesa.event;
 
 import org.bukkit.event.player.PlayerQuitEvent;
-import teamzesa.entity.User;
+import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
+import teamzesa.DataBase.entity.User;
+import teamzesa.DataBase.entity.UserKillStatus;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.ColorMap;
-import teamzesa.util.userHandler.UserController;
+import teamzesa.DataBase.userHandler.UserController;
 
 public class QuitMsgEvent extends StringComponentExchanger implements EventRegister {
     private User quitUser;
@@ -20,19 +22,21 @@ public class QuitMsgEvent extends StringComponentExchanger implements EventRegis
     @Override
     public void init() {
         UserController userController = new UserController();
-        this.quitUser = userController.readUser(this.quitEvent.getPlayer());
+        this.quitUser = userController.readUser(this.quitEvent.getPlayer().getUniqueId());
     }
 
     @Override
     public void execute() {
-        if (this.quitUser.killCount() == 0)
+        UserKillStatus userKillStatus = new KillStatusController().readUser(this.quitUser.uuid());
+
+        if (userKillStatus.killCount() == 0)
             this.quitEvent.quitMessage(
-                    componentExchanger(" - " + this.quitUser.name(), ColorMap.RED)
+                    componentExchanger(" - " + this.quitUser.nameList().getFirst(), ColorMap.RED)
             );
 
         else
             this.quitEvent.quitMessage(
-                    componentExchanger(" - [ " + this.quitUser.killCount() + "KILL ] " + this.quitUser.name(), ColorMap.RED)
+                    componentExchanger(" - [ " + userKillStatus.killCount() + "KILL ] " + this.quitUser.nameList().getFirst(), ColorMap.RED)
             );
     }
 }

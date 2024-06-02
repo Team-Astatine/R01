@@ -3,9 +3,9 @@ package teamzesa.event;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.util.Vector;
-import teamzesa.entity.User;
+import teamzesa.DataBase.entity.User;
 import teamzesa.event.EventRegister.EventRegister;
-import teamzesa.util.userHandler.UserController;
+import teamzesa.DataBase.userHandler.UserController;
 
 public class GodModeTridentShotEvent implements EventRegister {
     private final ProjectileLaunchEvent event;
@@ -31,6 +31,6 @@ public class GodModeTridentShotEvent implements EventRegister {
     }
 
     private User getUser(Player player) {
-        return new UserController().readUser(player);
+        return new UserController().readUser(player.getUniqueId());
     }
 }

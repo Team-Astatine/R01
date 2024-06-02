@@ -1,15 +1,14 @@
-package teamzesa.util.userHandler;
+package teamzesa.DataBase.userHandler;
 
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.entity.User;
+import teamzesa.DataBase.entity.User;
 
-import java.util.HashSet;
-import java.util.UUID;
+import java.util.*;
 
 public class UserBuilder {
     private UUID uuid;
-    private String name;
+    private List<String> nameList;
     private HashSet<String> connectionIPList = new HashSet<>();
     private int joinCount;
     private int level;
@@ -22,12 +21,10 @@ public class UserBuilder {
 
     public UserBuilder(@NotNull User user) {
         uuid(user.uuid());
-        name(user.name());
+        name(user.nameList());
         ipList(user.connectionIPList());
         joinCount(user.joinCount());
         level(user.level());
-        healthScale(user.healthScale());
-        killCount(user.killCount());
         isGodMode(user.isGodMode());
         isAnnouncing(user.isAnnouncing());
     }
@@ -35,12 +32,10 @@ public class UserBuilder {
 //    First Time add User
     public UserBuilder(Player player) {
         uuid(player.getUniqueId());
-        name(player.getName());
+        this.nameList = List.of(player.getName());
         ipList(player.getAddress().getHostName());
-        joinCount(1);
+        joinCount(0);
         level(player.getLevel());
-        healthScale(player.getHealthScale());
-        killCount(0);
         isGodMode(false);
         isAnnouncing(false);
     }
@@ -50,8 +45,13 @@ public class UserBuilder {
         return this;
     }
 
+    public UserBuilder name(List<String> name) {
+        this.nameList = name;
+        return this;
+    }
+
     public UserBuilder name(String name) {
-        this.name = name;
+        this.nameList.add(name);
         return this;
     }
 
@@ -75,16 +75,6 @@ public class UserBuilder {
         return this;
     }
 
-    public UserBuilder healthScale(double healthScale) {
-        this.healthScale = healthScale;
-        return this;
-    }
-
-    public UserBuilder killCount(int currentKillCount) {
-        this.killCount = currentKillCount;
-        return this;
-    }
-
     public UserBuilder isGodMode(boolean currentGodMode) {
         this.isGodMode = currentGodMode;
         return this;
@@ -98,12 +88,10 @@ public class UserBuilder {
     public User build() {
         return new User(
                 uuid,
-                name,
+                nameList,
                 connectionIPList,
                 joinCount,
                 level,
-                healthScale,
-                killCount,
                 isGodMode,
                 isAnnouncing
         );

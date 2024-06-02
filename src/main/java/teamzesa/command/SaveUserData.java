@@ -6,10 +6,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.entity.User;
+import teamzesa.DataBase.entity.User;
 import teamzesa.util.Enum.CommandExecutorMap;
-import teamzesa.util.userHandler.UserController;
-import teamzesa.util.userHandler.UserIOHandler;
+import teamzesa.DataBase.userHandler.UserController;
+import teamzesa.DataBase.userHandler.UserIOHandler;
 import teamzesa.util.Enum.ColorMap;
 
 import java.util.Optional;
@@ -41,7 +41,7 @@ public class SaveUserData extends CommandRegisterSection {
     }
 
     private void sendComment(String comment) {
-        if (isConsoleSend)
+        if (isConsoleSend && this.senderPlayer == null)
             Bukkit.getLogger().info("[R01] " + comment);
         else playerSendMsgComponentExchanger(this.senderPlayer, comment, ColorMap.YELLOW);
         UserIOHandler.exportUserData("Using Save User Command");
