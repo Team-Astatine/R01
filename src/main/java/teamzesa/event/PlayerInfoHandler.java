@@ -30,10 +30,11 @@ public class PlayerInfoHandler extends StringComponentExchanger implements Event
     public void init() {
         this.userController = new UserController();
         this.joinPlayer = this.joinEvent.getPlayer();
-        User user = this.userController.readUser(this.joinPlayer);
+        User user = this.userController.readUser(this.joinPlayer.getUniqueId());
 
         Optional.ofNullable(user).ifPresentOrElse(
             existUser -> {
+                System.out.println(existUser);
                 this.joinUser = new UserBuilder(existUser)
                         .level(this.joinPlayer.getLevel())
                         .buildAndUpdate();
@@ -41,8 +42,8 @@ public class PlayerInfoHandler extends StringComponentExchanger implements Event
 
             () -> {
                 this.userController.createUser(this.joinPlayer);
-                this.joinUser = this.userController.readUser(this.joinPlayer);
-                Bukkit.getLogger().info(this.joinUser.name() + "님이 신규유저 등록됐습니다.");
+                this.joinUser = this.userController.readUser(this.joinPlayer.getUniqueId());
+                Bukkit.getLogger().info(this.joinPlayer.getName() + "님이 신규유저 등록됐습니다.");
             });
     }
 

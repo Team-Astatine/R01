@@ -49,7 +49,7 @@ public class SetHealth extends CommandRegisterSection {
     private void setPlayerHealth(double setHealthValue) {
         UserController userController = new UserController();
         userController.healthUpdate(
-                new UserBuilder(userController.readUser(this.targetPlayer))
+                new UserBuilder(userController.readUser(this.targetPlayer.getUniqueId()))
                         .healthScale(setHealthValue)
                         .buildAndUpdate()
         );

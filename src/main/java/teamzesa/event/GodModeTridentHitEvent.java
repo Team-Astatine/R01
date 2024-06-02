@@ -28,7 +28,7 @@ public class GodModeTridentHitEvent implements EventRegister {
         if (!(this.event.getEntity().getShooter() instanceof Player shooter))
             return;
 
-        if (new UserController().readUser(shooter).isGodMode())
+        if (new UserController().readUser(shooter.getUniqueId()).isGodMode())
             return;
 
         Runnable tridentTask = () -> {

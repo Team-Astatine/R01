@@ -20,19 +20,19 @@ public class QuitMsgEvent extends StringComponentExchanger implements EventRegis
     @Override
     public void init() {
         UserController userController = new UserController();
-        this.quitUser = userController.readUser(this.quitEvent.getPlayer());
+        this.quitUser = userController.readUser(this.quitEvent.getPlayer().getUniqueId());
     }
 
     @Override
     public void execute() {
         if (this.quitUser.killCount() == 0)
             this.quitEvent.quitMessage(
-                    componentExchanger(" - " + this.quitUser.name(), ColorMap.RED)
+                    componentExchanger(" - " + this.quitUser.nameList().getFirst(), ColorMap.RED)
             );
 
         else
             this.quitEvent.quitMessage(
-                    componentExchanger(" - [ " + this.quitUser.killCount() + "KILL ] " + this.quitUser.name(), ColorMap.RED)
+                    componentExchanger(" - [ " + this.quitUser.killCount() + "KILL ] " + this.quitUser.nameList(), ColorMap.RED)
             );
     }
 }

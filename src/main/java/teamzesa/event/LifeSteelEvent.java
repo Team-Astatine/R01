@@ -29,7 +29,7 @@ public class LifeSteelEvent extends StringComponentExchanger implements EventReg
     public void init() {
         this.deather = this.event.getPlayer();
         this.killer = deather.getKiller();
-        this.deatherUser = this.userController.readUser(this.deather);
+        this.deatherUser = this.userController.readUser(this.deather.getUniqueId());
     }
 
     @Override
@@ -65,7 +65,7 @@ public class LifeSteelEvent extends StringComponentExchanger implements EventReg
 
         //스스로가 스스로를 죽이면 무시함
         if (this.deather.equals(this.killer)) {
-            this.event.deathMessage(componentExchanger(this.deatherUser.name() + " 님이 자살했습니다.", ColorMap.RED));
+            this.event.deathMessage(componentExchanger(this.deatherUser.nameList() + " 님이 자살했습니다.", ColorMap.RED));
             return true;
         }
 
@@ -73,7 +73,7 @@ public class LifeSteelEvent extends StringComponentExchanger implements EventReg
     }
 
     private void lifeSteel() {
-        this.killerUser = this.userController.readUser(this.killer);
+        this.killerUser = this.userController.readUser(this.killer.getUniqueId());
 
         double MAX_HEALTH_SCALE = 60.0;
         double MIN_HEALTH_SCALE = 4.0;
@@ -103,7 +103,7 @@ public class LifeSteelEvent extends StringComponentExchanger implements EventReg
         playerSendMsgComponentExchanger(this.deather, this.killer.getName() + "님이 체력을 약탈했습니다.", ColorMap.RED);
         playerSendMsgComponentExchanger(this.killer, this.deather.getName() + "님이 체력을 약탈했습니다.", ColorMap.RED);
         this.event.deathMessage(
-                componentExchanger("[KILL]" + this.killerUser.name() + " -> " + this.deatherUser.name(), ColorMap.PINK)
+                componentExchanger("[KILL]" + this.killerUser.nameList() + " -> " + this.deatherUser.nameList(), ColorMap.PINK)
         );
     }
 }

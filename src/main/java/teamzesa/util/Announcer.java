@@ -32,7 +32,7 @@ public class Announcer extends StringComponentExchanger {
     }
 
     public void countAnnouncer(Player player) {
-        int joinCnt = new UserController().readUser(player).joinCount();
+        int joinCnt = new UserController().readUser(player.getUniqueId()).joinCount();
         player.sendMessage(
                 componentExchanger(this.configIOHandler.getWorldMotdConfig(), ColorMap.SKY_BLUE)
                         .append(componentExchanger(" " + joinCnt, ColorMap.PINK))
@@ -61,7 +61,7 @@ public class Announcer extends StringComponentExchanger {
                 return;
 
             players.forEach(player -> {
-                User user = new UserController().readUser(player);
+                User user = new UserController().readUser(player.getUniqueId());
                 if (user.isAnnouncing())
                     sendComment(player, createComponents());
             });

@@ -27,27 +27,13 @@ public class UserController {
         return this.userDataBase.insert(user);
     }
 
-    public User readUser(@NotNull Player player) {
-        User user = readUser(player.getUniqueId());
-
-        if (Optional.ofNullable(user).isEmpty())
-            return null;
-
-        if (player.getName().equals(user.name())) // 기존 유저의 이름과 변함이 없다면
-            return user;
-
-        return new UserBuilder(user) //닉네임을 변경했다면
-                .name(player.getName())
-                .buildAndUpdate();
-    }
-
     public User readUser(UUID uuid) {
         return this.userDataBase.select(uuid);
     }
 
     public User readUser(String userName) {
         return this.userDataBase.getAllUserTable().values().stream()
-                .filter(data -> data.name().equals(userName))
+                .filter(data -> data.nameList().equals(userName))
                 .findFirst()
                 .orElse(null);
     }

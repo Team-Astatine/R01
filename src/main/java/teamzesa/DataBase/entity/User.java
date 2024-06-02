@@ -4,7 +4,7 @@ import java.util.*;
 
 public record User (
         UUID uuid,
-        String name,
+        List<String> nameList,
         HashSet<String> connectionIPList,
         int joinCount,
         int level,

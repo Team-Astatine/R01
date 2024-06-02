@@ -31,6 +31,6 @@ public class GodModeTridentShotEvent implements EventRegister {
     }
 
     private User getUser(Player player) {
-        return new UserController().readUser(player);
+        return new UserController().readUser(player.getUniqueId());
     }
 }

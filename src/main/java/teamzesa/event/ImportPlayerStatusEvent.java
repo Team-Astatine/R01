@@ -38,7 +38,7 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
     public void init() {
         this.announcer = Announcer.getAnnouncer();
         this.player = this.event.getPlayer();
-        this.user = new UserController().readUser(this.player);
+        this.user = new UserController().readUser(this.player.getUniqueId());
         this.playerJoinCnt = this.user.joinCount();
     }
 
@@ -96,11 +96,11 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
 
         if (this.user.killCount() == 0)
             this.event.joinMessage(
-                componentExchanger(" + " + this.user.name(), ColorMap.RED)
+                componentExchanger(" + " + this.user.nameList().getFirst(), ColorMap.RED)
             );
 
         else this.event.joinMessage(
-            componentExchanger(" + [ " + user.killCount() + "KILL ] " + user.name(), ColorMap.RED)
+            componentExchanger(" + [ " + user.killCount() + "KILL ] " + user.nameList(), ColorMap.RED)
         );
     }
 
