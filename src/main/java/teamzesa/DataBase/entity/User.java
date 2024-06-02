@@ -8,8 +8,6 @@ public record User (
         HashSet<String> connectionIPList,
         int joinCount,
         int level,
-        double healthScale,
-        int killCount,
         boolean isGodMode,
         boolean isAnnouncing
         ) {}

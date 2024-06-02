@@ -41,7 +41,7 @@ public class SaveUserData extends CommandRegisterSection {
     }
 
     private void sendComment(String comment) {
-        if (isConsoleSend)
+        if (isConsoleSend && this.senderPlayer == null)
             Bukkit.getLogger().info("[R01] " + comment);
         else playerSendMsgComponentExchanger(this.senderPlayer, comment, ColorMap.YELLOW);
         UserIOHandler.exportUserData("Using Save User Command");

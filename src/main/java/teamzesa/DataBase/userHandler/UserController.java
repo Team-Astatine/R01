@@ -1,15 +1,11 @@
 package teamzesa.DataBase.userHandler;
 
 import org.bukkit.Bukkit;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.DataBase.entity.User;
 
 import java.util.Arrays;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -33,17 +29,9 @@ public class UserController {
 
     public User readUser(String userName) {
         return this.userDataBase.getAllUserTable().values().stream()
-                .filter(data -> data.nameList().equals(userName))
+                .filter(data -> data.nameList().contains(userName))
                 .findFirst()
                 .orElse(null);
-    }
-
-    public void healthUpdate(@NotNull User user) {
-        Player player = Bukkit.getPlayer(user.uuid());
-        player.setHealthScale(user.healthScale());
-        player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(user.healthScale());
-        player.addPotionEffect(new PotionEffect(PotionEffectType.INSTANT_HEALTH, 40, 1));
-        updateUser(user);
     }
 
     public void updateUser(@NotNull User user) {

@@ -19,7 +19,7 @@ public class DaoUserKillStatus implements DAO<UUID, UserKillStatus> {
         return DaoUserKillStatusHolder.INSTANCE;
     }
 
-    private synchronized ConcurrentHashMap<UUID, UserKillStatus> getAllUserTable() {
+    public synchronized ConcurrentHashMap<UUID, UserKillStatus> getAllUserTable() {
         return new ConcurrentHashMap<>(KILL_STATUS);
     }
 

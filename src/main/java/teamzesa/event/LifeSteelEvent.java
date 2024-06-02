@@ -3,20 +3,27 @@ package teamzesa.event;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import teamzesa.DataBase.UserKillStatusHandler.KillStatusBuilder;
+import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
+import teamzesa.DataBase.entity.User;
+import teamzesa.DataBase.entity.UserKillStatus;
+import teamzesa.DataBase.userHandler.UserController;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.ColorMap;
-import teamzesa.DataBase.entity.User;
-import teamzesa.DataBase.userHandler.UserBuilder;
-import teamzesa.DataBase.userHandler.UserController;
 
 
 public class LifeSteelEvent extends StringComponentExchanger implements EventRegister {
     private final UserController userController = new UserController();
+    private final KillStatusController userKillStatus = new KillStatusController();
+
     private Player deather;
     private Player killer;
+
     private User deatherUser;
-    private User killerUser;
+    private UserKillStatus deatherUserKillStatus;
+    private UserKillStatus killerUserKillStatus;
+
     private final PlayerDeathEvent event;
 
     public LifeSteelEvent(PlayerDeathEvent event) {
@@ -30,6 +37,7 @@ public class LifeSteelEvent extends StringComponentExchanger implements EventReg
         this.deather = this.event.getPlayer();
         this.killer = deather.getKiller();
         this.deatherUser = this.userController.readUser(this.deather.getUniqueId());
+        this.deatherUserKillStatus = this.userKillStatus.readUser(this.deather.getUniqueId());
     }
 
     @Override
@@ -65,7 +73,7 @@ public class LifeSteelEvent extends StringComponentExchanger implements EventReg
 
         //스스로가 스스로를 죽이면 무시함
         if (this.deather.equals(this.killer)) {
-            this.event.deathMessage(componentExchanger(this.deatherUser.nameList() + " 님이 자살했습니다.", ColorMap.RED));
+            this.event.deathMessage(componentExchanger(this.deatherUser.nameList().getFirst() + " 님이 자살했습니다.", ColorMap.RED));
             return true;
         }
 
@@ -73,7 +81,7 @@ public class LifeSteelEvent extends StringComponentExchanger implements EventReg
     }
 
     private void lifeSteel() {
-        this.killerUser = this.userController.readUser(this.killer.getUniqueId());
+        this.killerUserKillStatus = this.userKillStatus.readUser(this.killer.getUniqueId());
 
         double MAX_HEALTH_SCALE = 60.0;
         double MIN_HEALTH_SCALE = 4.0;
@@ -89,21 +97,23 @@ public class LifeSteelEvent extends StringComponentExchanger implements EventReg
     }
 
     private void updateUserHealthScaleData(double STEP_SIZE) {
-        this.userController.healthUpdate(
-                new UserBuilder(this.deatherUser)
+        this.userKillStatus.healthUpdate(
+                new KillStatusBuilder(this.deatherUserKillStatus)
                         .healthScale(this.deather.getHealthScale() - STEP_SIZE)
                         .build());
 
-        this.userController.healthUpdate(
-                new UserBuilder(this.killerUser)
+        this.userKillStatus.healthUpdate(
+                new KillStatusBuilder(this.killerUserKillStatus)
                         .healthScale(this.killer.getHealthScale() + STEP_SIZE)
-                        .killCount(this.killerUser.killCount() + 1)
+                        .killCount(this.killerUserKillStatus.killCount() + 1)
                         .build());
 
         playerSendMsgComponentExchanger(this.deather, this.killer.getName() + "님이 체력을 약탈했습니다.", ColorMap.RED);
         playerSendMsgComponentExchanger(this.killer, this.deather.getName() + "님이 체력을 약탈했습니다.", ColorMap.RED);
+
+        String deathUserName = this.userController.readUser(this.killer.getUniqueId()).nameList().getFirst();
         this.event.deathMessage(
-                componentExchanger("[KILL]" + this.killerUser.nameList() + " -> " + this.deatherUser.nameList(), ColorMap.PINK)
+                componentExchanger("[KILL]" + deathUserName + " -> " + this.deatherUser.nameList().getFirst(), ColorMap.PINK)
         );
     }
 }

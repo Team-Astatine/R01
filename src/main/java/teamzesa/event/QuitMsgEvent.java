@@ -1,7 +1,9 @@
 package teamzesa.event;
 
 import org.bukkit.event.player.PlayerQuitEvent;
+import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
 import teamzesa.DataBase.entity.User;
+import teamzesa.DataBase.entity.UserKillStatus;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.ColorMap;
@@ -25,14 +27,16 @@ public class QuitMsgEvent extends StringComponentExchanger implements EventRegis
 
     @Override
     public void execute() {
-        if (this.quitUser.killCount() == 0)
+        UserKillStatus userKillStatus = new KillStatusController().readUser(this.quitUser.uuid());
+
+        if (userKillStatus.killCount() == 0)
             this.quitEvent.quitMessage(
                     componentExchanger(" - " + this.quitUser.nameList().getFirst(), ColorMap.RED)
             );
 
         else
             this.quitEvent.quitMessage(
-                    componentExchanger(" - [ " + this.quitUser.killCount() + "KILL ] " + this.quitUser.nameList(), ColorMap.RED)
+                    componentExchanger(" - [ " + userKillStatus.killCount() + "KILL ] " + this.quitUser.nameList().getFirst(), ColorMap.RED)
             );
     }
 }

@@ -25,8 +25,6 @@ public class UserBuilder {
         ipList(user.connectionIPList());
         joinCount(user.joinCount());
         level(user.level());
-        healthScale(user.healthScale());
-        killCount(user.killCount());
         isGodMode(user.isGodMode());
         isAnnouncing(user.isAnnouncing());
     }
@@ -38,8 +36,6 @@ public class UserBuilder {
         ipList(player.getAddress().getHostName());
         joinCount(0);
         level(player.getLevel());
-        healthScale(player.getHealthScale());
-        killCount(0);
         isGodMode(false);
         isAnnouncing(false);
     }
@@ -79,16 +75,6 @@ public class UserBuilder {
         return this;
     }
 
-    public UserBuilder healthScale(double healthScale) {
-        this.healthScale = healthScale;
-        return this;
-    }
-
-    public UserBuilder killCount(int currentKillCount) {
-        this.killCount = currentKillCount;
-        return this;
-    }
-
     public UserBuilder isGodMode(boolean currentGodMode) {
         this.isGodMode = currentGodMode;
         return this;
@@ -106,8 +92,6 @@ public class UserBuilder {
                 connectionIPList,
                 joinCount,
                 level,
-                healthScale,
-                killCount,
                 isGodMode,
                 isAnnouncing
         );

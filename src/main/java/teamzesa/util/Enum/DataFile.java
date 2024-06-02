@@ -7,7 +7,8 @@ import java.io.File;
 
 public enum DataFile {
     CONFIG(new File(R01.getPlugin(R01.class).getDataFolder(), "config.yml"), "Config"),
-    USER_DATA(new File(R01.getPlugin(R01.class).getDataFolder(), "userData.json"), "UserData"),
+    USER_DATA(new File(R01.getPlugin(R01.class).getDataFolder(), "userData.json"), "userData"),
+    KILL_STATUS(new File(R01.getPlugin(R01.class).getDataFolder(), "killStatus.json"), "killStatus"),
     ABSOLUTE_PATH(new File(R01.getPlugin(R01.class).getDataFolder().getParentFile().getAbsolutePath()), "Plugin Folder");
 
     private final File fileInstance;
@@ -20,6 +21,10 @@ public enum DataFile {
 
     public File getFileInstance() {
         return fileInstance;
+    }
+
+    public String getFileName() {
+        return fileInstance.getName();
     }
 
     public String getFileTypeName() {

@@ -6,6 +6,8 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
+import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
+import teamzesa.DataBase.entity.UserKillStatus;
 import teamzesa.command.God;
 import teamzesa.DataBase.entity.User;
 import teamzesa.event.EventRegister.EventRegister;
@@ -24,6 +26,7 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
 
     private int playerJoinCnt;
     private User user;
+    private UserKillStatus userKillStatus;
     private Player player;
     private Announcer announcer;
     private final PlayerJoinEvent event;
@@ -39,6 +42,7 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
         this.announcer = Announcer.getAnnouncer();
         this.player = this.event.getPlayer();
         this.user = new UserController().readUser(this.player.getUniqueId());
+        this.userKillStatus = new KillStatusController().readUser(this.player.getUniqueId());
         this.playerJoinCnt = this.user.joinCount();
     }
 
@@ -63,8 +67,8 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
     }
 
     private void checkingUserStatusHealth() {
-        this.player.setHealthScale(this.user.healthScale());
-        this.player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(this.user.healthScale());
+        this.player.setHealthScale(this.userKillStatus.healthScale());
+        this.player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(this.userKillStatus.healthScale());
     }
 
     private void supplyUserKit() {
@@ -94,13 +98,13 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
         this.announcer.joinAnnouncer(this.player);
         this.announcer.countAnnouncer(this.player);
 
-        if (this.user.killCount() == 0)
+        if (this.userKillStatus.killCount() == 0)
             this.event.joinMessage(
                 componentExchanger(" + " + this.user.nameList().getFirst(), ColorMap.RED)
             );
 
         else this.event.joinMessage(
-            componentExchanger(" + [ " + user.killCount() + "KILL ] " + user.nameList(), ColorMap.RED)
+            componentExchanger(" + [ " + this.userKillStatus.killCount() + "KILL ] " + user.nameList().getFirst(), ColorMap.RED)
         );
     }
 

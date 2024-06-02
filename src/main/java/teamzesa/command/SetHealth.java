@@ -4,7 +4,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.checkerframework.checker.units.qual.K;
 import org.jetbrains.annotations.NotNull;
+import teamzesa.DataBase.UserKillStatusHandler.DaoUserKillStatus;
+import teamzesa.DataBase.UserKillStatusHandler.KillStatusBuilder;
+import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
+import teamzesa.DataBase.entity.UserKillStatus;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.DataBase.entity.User;
 import teamzesa.util.Enum.CommandExecutorMap;
@@ -37,7 +42,8 @@ public class SetHealth extends CommandRegisterSection {
             return false;
         }
 
-        Optional.ofNullable(Bukkit.getPlayer(args[0])).ifPresent(
+        User targetUser = new UserController().readUser(args[0]);
+        Optional.ofNullable(Bukkit.getPlayer(targetUser.uuid())).ifPresent(
                 player -> {
                     this.targetPlayer = player;
                     setPlayerHealth(Double.parseDouble(args[1]));
@@ -47,9 +53,9 @@ public class SetHealth extends CommandRegisterSection {
     }
 
     private void setPlayerHealth(double setHealthValue) {
-        UserController userController = new UserController();
-        userController.healthUpdate(
-                new UserBuilder(userController.readUser(this.targetPlayer.getUniqueId()))
+        KillStatusController userKillStatusController = new KillStatusController();
+        userKillStatusController.healthUpdate(
+                new KillStatusBuilder(userKillStatusController.readUser(this.targetPlayer.getUniqueId()))
                         .healthScale(setHealthValue)
                         .buildAndUpdate()
         );

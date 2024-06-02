@@ -3,6 +3,9 @@ package teamzesa.event;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
+import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
+import teamzesa.DataBase.UserKillStatusHandler.KillStatusIOHandler;
+import teamzesa.DataBase.entity.UserKillStatus;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.ColorMap;
@@ -16,8 +19,10 @@ import java.util.Optional;
 
 public class PlayerInfoHandler extends StringComponentExchanger implements EventRegister {
     private User joinUser;
+    private UserKillStatus joinUserKillStatus;
     private Player joinPlayer;
-    private  UserController userController;
+    private UserController userController;
+    private KillStatusController userKillStatus;
     private final PlayerJoinEvent joinEvent;
 
     public PlayerInfoHandler(PlayerJoinEvent event) {
@@ -29,6 +34,7 @@ public class PlayerInfoHandler extends StringComponentExchanger implements Event
     @Override
     public void init() {
         this.userController = new UserController();
+        this.userKillStatus = new KillStatusController();
         this.joinPlayer = this.joinEvent.getPlayer();
         User user = this.userController.readUser(this.joinPlayer.getUniqueId());
 
@@ -42,6 +48,7 @@ public class PlayerInfoHandler extends StringComponentExchanger implements Event
 
             () -> {
                 this.userController.createUser(this.joinPlayer);
+                this.userKillStatus.createUserKillStatus(this.joinPlayer);
                 this.joinUser = this.userController.readUser(this.joinPlayer.getUniqueId());
                 Bukkit.getLogger().info(this.joinPlayer.getName() + "님이 신규유저 등록됐습니다.");
             });

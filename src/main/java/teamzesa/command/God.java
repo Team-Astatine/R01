@@ -68,7 +68,7 @@ public class God extends CommandRegisterSection {
             Bukkit.getLogger().info("[R01] " + targetUser.nameList() + comment);
 
         else if (!this.senderPlayer.equals(targetPlayer))
-            playerSendMsgComponentExchanger(this.senderPlayer, targetUser.nameList() + comment, ColorMap.ORANGE);
+            playerSendMsgComponentExchanger(this.senderPlayer, targetUser.nameList().getFirst() + comment, ColorMap.ORANGE);
 
         playerSendMsgComponentExchanger(targetPlayer, "당신" + comment, ColorMap.ORANGE);
 
