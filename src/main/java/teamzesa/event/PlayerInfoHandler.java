@@ -40,7 +40,6 @@ public class PlayerInfoHandler extends StringComponentExchanger implements Event
 
         Optional.ofNullable(user).ifPresentOrElse(
             existUser -> {
-                System.out.println(existUser);
                 this.joinUser = new UserBuilder(existUser)
                         .level(this.joinPlayer.getLevel())
                         .buildAndUpdate();
