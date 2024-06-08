@@ -24,7 +24,6 @@ import java.util.Optional;
 
 public class ImportPlayerStatusEvent extends StringComponentExchanger implements EventRegister {
 
-    private int playerJoinCnt;
     private User user;
     private UserKillStatus userKillStatus;
     private Player player;
@@ -43,7 +42,6 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
         this.player = this.event.getPlayer();
         this.user = new UserController().readUser(this.player.getUniqueId());
         this.userKillStatus = new KillStatusController().readUser(this.player.getUniqueId());
-        this.playerJoinCnt = this.user.joinCount();
     }
 
     @Override
