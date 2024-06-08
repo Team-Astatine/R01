@@ -19,6 +19,6 @@ public class EnhanceResistanceEvent implements EventRegister {
 
     @Override
     public void execute() {
-
+        
     }
 }
