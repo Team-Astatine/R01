@@ -19,22 +19,25 @@ import java.util.UUID;
 public class ValueObjectChecker extends StringComponentExchanger implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
-        Player player = Bukkit.getPlayer(args[0]);
-        Optional.ofNullable(player)
+        User user = new UserController().readUser(args[0]);
+        Optional.ofNullable(user)
                 .ifPresentOrElse(
-                    existPlayer -> sendComment(sender, existPlayer),
-                    () ->        sendComment(sender, null)
+                    existUser -> {
+                        UserKillStatus userKillStatus = new KillStatusController().readUser(existUser.uuid());
+                        sendComment(sender, existUser + "\n\n" + userKillStatus);
+                    },
+
+                    () -> {
+                        sendComment(sender, "존재하지 않는 유저");
+                    }
                 );
 
         return true;
     }
 
-    private void sendComment(CommandSender sender, Player player) {
-        User user = new UserController().readUser(player.getUniqueId());
-        UserKillStatus userKillStatus = new KillStatusController().readUser(player.getUniqueId());
-
+    private void sendComment(CommandSender sender, String comment) {
         if (sender instanceof Player)
-            playerSendMsgComponentExchanger(player, user + " " + userKillStatus, ColorMap.YELLOW);
-        else Bukkit.getLogger().info(user + " " + userKillStatus);
+            playerSendMsgComponentExchanger(sender, comment, ColorMap.YELLOW);
+        else Bukkit.getLogger().info(comment);
     }
 }
