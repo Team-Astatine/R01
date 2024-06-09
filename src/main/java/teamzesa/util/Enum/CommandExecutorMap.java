@@ -15,7 +15,7 @@ public enum CommandExecutorMap {
     HEALTH_RESET("setHealth", new SetHealth()),
     TOTEM_STACKING("totem", new Totem()),
     USER_OBJECT_CHECKER("vo", new ValueObjectChecker()),
-    SAVE_R01_OBJECT_DATA("SaveR01ObjectData", new SaveR01ObjectData()),
+    SAVE_R01_OBJECT_DATA("ExportR01Object", new SaveR01ObjectData()),
     CONFIG_RELOAD("dataFileReload", new DataFileReload()),
     ANNOUNCING("공지", new AnnouncingOnOff()),
     ENHANCE("강화", new EnhanceStuff()),
