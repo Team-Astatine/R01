@@ -4,7 +4,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
 import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
-import teamzesa.DataBase.UserKillStatusHandler.KillStatusIOHandler;
 import teamzesa.DataBase.entity.UserKillStatus;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Interface.StringComponentExchanger;

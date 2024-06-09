@@ -3,8 +3,11 @@ package teamzesa.DataBase.userHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import teamzesa.DataBase.entity.RObject;
 import teamzesa.DataBase.entity.User;
+import teamzesa.DataBase.entity.UserKillStatus;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -38,14 +41,26 @@ public class UserController {
         this.userDataBase.update(user);
     }
 
-    public void updateAllUserData(User[] newUserData) {
+    public void updateAllUserData(ArrayList<RObject> newUserData) {
         this.userDataBase.clear();
-        Arrays.asList(newUserData).forEach(this::createUser);
+
+        if (newUserData == null)
+            return;
+
+        for (RObject rObject : newUserData) {
+            if (rObject instanceof User userKillStatus)
+                createUser(userKillStatus);
+        }
     }
 
-    public ConcurrentHashMap<UUID,User> getAllUserTable() {
+    public ArrayList<RObject> getAllUserTable() {
         Bukkit.getOnlinePlayers().forEach(player -> readUser(player.getUniqueId()));
-        return this.userDataBase.getAllUserTable();
+        ArrayList<RObject> totalUserData = new ArrayList<>();
+        for (User user : this.userDataBase.getAllUserTable().values()) {
+            if (user instanceof RObject rObject)
+                totalUserData.add(rObject);
+        }
+        return totalUserData;
     }
 
 }

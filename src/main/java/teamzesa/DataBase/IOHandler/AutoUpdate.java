@@ -2,7 +2,6 @@ package teamzesa.DataBase.IOHandler;
 
 import org.bukkit.Bukkit;
 import teamzesa.util.Enum.DataFile;
-import teamzesa.DataBase.userHandler.UserIOHandler;
 
 import java.io.*;
 import java.net.MalformedURLException;
@@ -47,7 +46,7 @@ public class AutoUpdate {
         }
         if (gitVersion > localVersion) {
             Bukkit.getLogger().info("[R01] 구버전 입니다. 자동 업데이트 합니다.");
-            UserIOHandler.exportUserData("for Update plugin Version");
+//            UserIOHandler.exportUserData("for Update plugin Version");
             installNewPlugin();
             removeLegacyPlugin();
 
