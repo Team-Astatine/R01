@@ -57,7 +57,7 @@ public class RObjectIOHandler {
     private void loggingConsole(String fileName, String affiliatedFunction, boolean isError, boolean isImporting) {
         String importComment = isImporting ? "Importing" : "Exporting";
         if (!isError)
-            Bukkit.getLogger().info("[R01]" + importComment + " " + fileName + ".. " + affiliatedFunction);
+            System.out.println("[R01]" + importComment + " " + fileName + ".. " + affiliatedFunction);
         else if (isError)
             System.err.println("[R01]" + importComment + " " + fileName + ".. " + affiliatedFunction + "Error");
     }
