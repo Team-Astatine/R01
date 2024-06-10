@@ -150,20 +150,16 @@ public final class R01 extends JavaPlugin {
         long interval = 720; // 12hour term auto save
 
         ThreadPool.getThreadPool().addSchedulingTaskMin(
-                () -> this.rObjectIOHandler.exportData(DataFile.USER_DATA, getClass().getName(),
-                        new UserController().getAllUserTable()),
+                () -> {
+                    this.rObjectIOHandler.exportData(DataFile.USER_DATA, getClass().getName(),
+                            new UserController().getAllUserTable());
+                    this.rObjectIOHandler.exportData(DataFile.KILL_STATUS, getClass().getName(),
+                            new KillStatusController().getAllUserTable());
+                },
                 delay,
                 interval
         );
-        Bukkit.getLogger().info(PLUGIN_NAME + " Success Add Scheduling All User Data Save");
-
-        ThreadPool.getThreadPool().addSchedulingTaskMin(
-                () -> this.rObjectIOHandler.exportData(DataFile.KILL_STATUS, getClass().getName(),
-                        new KillStatusController().getAllUserTable()),
-                delay,
-                interval
-        );
-        Bukkit.getLogger().info(PLUGIN_NAME + " Success Add Scheduling All KillStatus Data Save");
+        Bukkit.getLogger().info(PLUGIN_NAME + " Success Add Scheduling All R01 Object Data Save");
     }
 
     private void pluginLoadTime() {
