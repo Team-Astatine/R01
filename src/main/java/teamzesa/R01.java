@@ -7,13 +7,14 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
-import teamzesa.DataBase.UserKillStatusHandler.KillStatusIOHandler;
+import teamzesa.DataBase.IOHandler.RObjectIOHandler;
+import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
+import teamzesa.DataBase.userHandler.UserController;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Announcer;
 import teamzesa.event.EventRegister.EventRegisterSection;
 import teamzesa.util.Enum.CommandExecutorMap;
 import teamzesa.DataBase.IOHandler.ConfigIOHandler;
-import teamzesa.DataBase.userHandler.UserIOHandler;
 import teamzesa.util.Enum.DataFile;
 import teamzesa.util.ThreadPool;
 
@@ -21,6 +22,7 @@ import java.util.*;
 
 
 public final class R01 extends JavaPlugin {
+    private final RObjectIOHandler rObjectIOHandler = RObjectIOHandler.getInstance();
     private final String PLUGIN_NAME = "[R01]";
     private long RUNNING_TIME;
 
@@ -38,8 +40,8 @@ public final class R01 extends JavaPlugin {
             generationDataFile();
 
 //        configSet
-        userDataLoader();
-        userKillStatusLoader();
+        RObjectLoader();
+
 //        speedLimiter();
         configFileLoader(); // config set File
         autoSaveSchedule(); // User Data Auto Save Scheduling
@@ -50,20 +52,18 @@ public final class R01 extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        UserIOHandler.exportUserData("Disable Server");
-        KillStatusIOHandler.exportKillStatusData("Disable Server");
+        this.rObjectIOHandler.exportData(DataFile.USER_DATA, getClass().getName(),
+                new UserController().getAllUserTable());
+        this.rObjectIOHandler.exportData(DataFile.KILL_STATUS, getClass().getName(),
+                new KillStatusController().getAllUserTable());
+
         ThreadPool.getThreadPool().allServiceOff();
         Bukkit.getScheduler().cancelTasks(this);
     }
 
-    public void userDataLoader() {
-//        import userData
-        UserIOHandler.importUserData("Starting Server");
-    }
-
-    public void userKillStatusLoader() {
-//        import userData
-        KillStatusIOHandler.importKillStatusData("Starting Server");
+    public void RObjectLoader() {
+        new UserController().updateAllUserData(this.rObjectIOHandler.importData(DataFile.USER_DATA, getClass().getName()));
+        new KillStatusController().updateAllUserData(this.rObjectIOHandler.importData(DataFile.KILL_STATUS, getClass().getName()));
     }
 
     public void speedLimiter() {
@@ -150,14 +150,16 @@ public final class R01 extends JavaPlugin {
         long interval = 720; // 12hour term auto save
 
         ThreadPool.getThreadPool().addSchedulingTaskMin(
-                () -> UserIOHandler.exportUserData("Auto Saving"),
+                () -> this.rObjectIOHandler.exportData(DataFile.USER_DATA, getClass().getName(),
+                        new UserController().getAllUserTable()),
                 delay,
                 interval
         );
         Bukkit.getLogger().info(PLUGIN_NAME + " Success Add Scheduling All User Data Save");
 
         ThreadPool.getThreadPool().addSchedulingTaskMin(
-                () -> KillStatusIOHandler.exportKillStatusData("Auto Saving"),
+                () -> this.rObjectIOHandler.exportData(DataFile.KILL_STATUS, getClass().getName(),
+                        new KillStatusController().getAllUserTable()),
                 delay,
                 interval
         );
