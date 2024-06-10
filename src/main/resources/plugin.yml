@@ -14,22 +14,14 @@ commands:
     description: R01프로젝트에 모든 Object가 Export 됩니다.
   Motd:
     description: Motd를 설정합니다.
-  몸통:
-    description: 손에 든 아이템을 몸통에 착용합니다.
-  바지:
-    description: 손에 든 아이템을 바지에 착용합니다.
-  신발:
-    description: 손에 든 아이템을 신발에 착용합니다.
   setHealth:
     description: 체력을 초기화 합니다.
   vo:
     description: DebugValue
-  meteor:
-    description: 운석을 떨어트립니다.
   god:
-    description: 갓 모드를 활성화 합니다.
+    description: 무적을 활성화 합니다.
   dataFileReload:
-    description: config를 Reload 합니다.
+    description: config 을 Reload 합니다.
   moderator:
     description: 관리자 권한부여
   hat:
