@@ -1,6 +1,5 @@
 package teamzesa.command;
 
-import net.kyori.adventure.text.Component;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -10,9 +9,7 @@ import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.event.Enhance.EnhanceUtil;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.CommandExecutorMap;
-import teamzesa.util.Enum.Enhance.EnhanceComment;
 
-import java.util.Collections;
 
 public class EnhnaceSet extends CommandRegisterSection {
 
@@ -38,8 +35,8 @@ public class EnhnaceSet extends CommandRegisterSection {
         }
 
         ItemStack targetItem = player.getInventory().getItemInMainHand();
-        targetItem.setCustomModelData(0);
-        EnhanceUtil.modifyEnhanceItemModelData(targetItem, enhanceLevel - targetItem.getCustomModelData());
+        targetItem.getItemMeta().setCustomModelData(0);
+        EnhanceUtil.modifyEnhanceItemModelData(targetItem, enhanceLevel - targetItem.getItemMeta().getCustomModelData());
 
         playerSendMsgComponentExchanger(player, getComment(enhanceLevel) , ColorMap.GREEN);
         return true;
