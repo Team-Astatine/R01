@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.DataBase.IOHandler.RObjectIOHandler;
 import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
+import teamzesa.DataBase.entity.UserKillStatus;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.DataBase.entity.User;
 import teamzesa.util.Enum.CommandExecutorMap;
@@ -20,7 +21,6 @@ import java.util.Optional;
 public class SaveR01ObjectData extends CommandRegisterSection {
     private Player senderPlayer;
     private boolean isConsoleSend = false;
-    private final RObjectIOHandler rObjectIOHandler = new RObjectIOHandler();
 
     public SaveR01ObjectData() {
         super(CommandExecutorMap.SAVE_R01_OBJECT_DATA);
@@ -39,10 +39,10 @@ public class SaveR01ObjectData extends CommandRegisterSection {
             return false;
         }
 
-        this.rObjectIOHandler.exportData(DataFile.USER_DATA, getClass().getName(),
+        new RObjectIOHandler<User>().exportData(DataFile.USER_DATA, getClass().getName(),
                 new UserController().getAllUserTable());
 
-        this.rObjectIOHandler.exportData(DataFile.KILL_STATUS, getClass().getName(),
+        new RObjectIOHandler<UserKillStatus>().exportData(DataFile.KILL_STATUS, getClass().getName(),
                 new KillStatusController().getAllUserTable());
 /*
         if (args == null || args[0].isEmpty()) {

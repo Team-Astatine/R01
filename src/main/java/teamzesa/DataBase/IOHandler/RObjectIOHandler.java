@@ -4,33 +4,21 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import org.bukkit.Bukkit;
-import teamzesa.DataBase.entity.*;
-import teamzesa.DataBase.userHandler.UserController;
 import teamzesa.util.Enum.DataFile;
 
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 
-public class RObjectIOHandler {
-    private static class RObjectIOHandlerHolder {
-        private final static RObjectIOHandler INSTANCE = new RObjectIOHandler();
-    }
+public class RObjectIOHandler<E> {
 
-    public static RObjectIOHandler getInstance() {
-        return RObjectIOHandlerHolder.INSTANCE;
-    }
-
-
-    public ArrayList<RObject> importData(DataFile dataFile, String affiliatedFunction) {
+    public ArrayList<E> importData(DataFile dataFile, String affiliatedFunction) {
         loggingConsole(dataFile.getFileTypeName(), affiliatedFunction, false, true);
-        ArrayList<RObject> resultData = new ArrayList<>();
+        ArrayList<E> resultData = new ArrayList<>();
 
         try (FileReader reader = new FileReader(dataFile.getFileInstance())) {
-            resultData = new Gson().fromJson(reader, new TypeToken<ArrayList<RObject>>(){}.getType());
+            resultData = new Gson().fromJson(reader, new TypeToken<ArrayList<E>>(){}.getType());
         } catch (IOException e) {
             loggingConsole(dataFile.getFileTypeName(), affiliatedFunction, true, true);
             e.printStackTrace();
@@ -39,7 +27,7 @@ public class RObjectIOHandler {
         return resultData;
     }
 
-    public void exportData(DataFile dataFile, String affiliatedFunction, ArrayList<RObject> totalDataValue) {
+    public void exportData(DataFile dataFile, String affiliatedFunction, ArrayList<E> totalDataValue) {
         loggingConsole(dataFile.getFileTypeName(), affiliatedFunction, false, false);
 
         try (FileWriter writer = new FileWriter(dataFile.getFileInstance())) {
@@ -57,8 +45,8 @@ public class RObjectIOHandler {
     private void loggingConsole(String fileName, String affiliatedFunction, boolean isError, boolean isImporting) {
         String importComment = isImporting ? "Importing" : "Exporting";
         if (!isError)
-            System.out.println("[R01]" + importComment + " " + fileName + ".. " + affiliatedFunction);
+            Bukkit.getLogger().info("[R01]" + importComment + " " + fileName + ".. " + affiliatedFunction);
         else if (isError)
-            System.err.println("[R01]" + importComment + " " + fileName + ".. " + affiliatedFunction + "Error");
+            Bukkit.getLogger().info("[R01]" + importComment + " " + fileName + ".. " + affiliatedFunction + "Error");
     }
 }
