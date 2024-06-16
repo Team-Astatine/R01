@@ -9,6 +9,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 import teamzesa.DataBase.IOHandler.RObjectIOHandler;
 import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
+import teamzesa.DataBase.entity.User;
+import teamzesa.DataBase.entity.UserKillStatus;
 import teamzesa.DataBase.userHandler.UserController;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Announcer;
@@ -22,7 +24,6 @@ import java.util.*;
 
 
 public final class R01 extends JavaPlugin {
-    private final RObjectIOHandler rObjectIOHandler = RObjectIOHandler.getInstance();
     private final String PLUGIN_NAME = "[R01]";
     private long RUNNING_TIME;
 
@@ -52,9 +53,9 @@ public final class R01 extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        this.rObjectIOHandler.exportData(DataFile.USER_DATA, getClass().getName(),
+        new RObjectIOHandler<User>().exportData(DataFile.USER_DATA, getClass().getName(),
                 new UserController().getAllUserTable());
-        this.rObjectIOHandler.exportData(DataFile.KILL_STATUS, getClass().getName(),
+        new RObjectIOHandler<UserKillStatus>().exportData(DataFile.KILL_STATUS, getClass().getName(),
                 new KillStatusController().getAllUserTable());
 
         ThreadPool.getThreadPool().allServiceOff();
@@ -62,8 +63,8 @@ public final class R01 extends JavaPlugin {
     }
 
     public void RObjectLoader() {
-        new UserController().updateAllUserData(this.rObjectIOHandler.importData(DataFile.USER_DATA, getClass().getName()));
-        new KillStatusController().updateAllUserData(this.rObjectIOHandler.importData(DataFile.KILL_STATUS, getClass().getName()));
+        new UserController().updateAllUserData(new RObjectIOHandler<User>().importData(DataFile.USER_DATA, getClass().getName()));
+        new KillStatusController().updateAllUserData(new RObjectIOHandler<UserKillStatus>().importData(DataFile.KILL_STATUS, getClass().getName()));
     }
 
     public void speedLimiter() {
@@ -150,20 +151,16 @@ public final class R01 extends JavaPlugin {
         long interval = 720; // 12hour term auto save
 
         ThreadPool.getThreadPool().addSchedulingTaskMin(
-                () -> this.rObjectIOHandler.exportData(DataFile.USER_DATA, getClass().getName(),
-                        new UserController().getAllUserTable()),
+                () -> {
+                    new RObjectIOHandler<User>().exportData(DataFile.USER_DATA, getClass().getName(),
+                            new UserController().getAllUserTable());
+                    new RObjectIOHandler<UserKillStatus>().exportData(DataFile.KILL_STATUS, getClass().getName(),
+                            new KillStatusController().getAllUserTable());
+                },
                 delay,
                 interval
         );
-        Bukkit.getLogger().info(PLUGIN_NAME + " Success Add Scheduling All User Data Save");
-
-        ThreadPool.getThreadPool().addSchedulingTaskMin(
-                () -> this.rObjectIOHandler.exportData(DataFile.KILL_STATUS, getClass().getName(),
-                        new KillStatusController().getAllUserTable()),
-                delay,
-                interval
-        );
-        Bukkit.getLogger().info(PLUGIN_NAME + " Success Add Scheduling All KillStatus Data Save");
+        Bukkit.getLogger().info(PLUGIN_NAME + " Success Add Scheduling All R01 Object Data Save");
     }
 
     private void pluginLoadTime() {

@@ -7,7 +7,7 @@ import teamzesa.util.Interface.StringComponentExchanger;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class DataBase extends StringComponentExchanger {
+public class DataBase {
     private static class UserDataHolder {
         private final static ConcurrentHashMap<UUID, User> INSTANCE = new ConcurrentHashMap<>();
     }

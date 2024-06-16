@@ -6,17 +6,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.DataBase.IOHandler.RObjectIOHandler;
 import teamzesa.DataBase.entity.RObject;
-import teamzesa.DataBase.entity.User;
 import teamzesa.DataBase.entity.UserKillStatus;
-import teamzesa.command.SaveR01ObjectData;
-import teamzesa.util.Enum.DataFile;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class KillStatusController {
     private final DaoUserKillStatus userKillStatus = DaoUserKillStatus.getInstance();
@@ -48,25 +42,17 @@ public class KillStatusController {
         updateKillStatus(userKillStatus);
     }
 
-    public void updateAllUserData(ArrayList<RObject> newUserData) {
+    public void updateAllUserData(ArrayList<UserKillStatus> newUserData) {
         this.userKillStatus.clear();
 
         if (newUserData == null)
             return;
 
-        for (RObject rObject : newUserData) {
-            if (rObject instanceof UserKillStatus userKillStatus)
-                createUserKillStatus(userKillStatus);
-        }
+        newUserData.forEach(this::createUserKillStatus);
     }
 
-    public ArrayList<RObject> getAllUserTable() {
+    public ArrayList<UserKillStatus> getAllUserTable() {
         Bukkit.getOnlinePlayers().forEach(player -> readUser(player.getUniqueId()));
-        ArrayList<RObject> totalKillStatusData = new ArrayList<>();
-        for (UserKillStatus killStatus : this.userKillStatus.getAllUserTable().values()) {
-            if (killStatus instanceof RObject rObject)
-                totalKillStatusData.add(rObject);
-        }
-        return totalKillStatusData;
+        return new ArrayList<>(this.userKillStatus.getAllUserTable().values());
     }
 }

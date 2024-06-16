@@ -23,20 +23,20 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
     public static double getArrowPowerDamage(ItemStack weapon, double baseDmg) {
 //        increaseDamagePercentage
 //        25% × (level + 1)
-        double percentage = 0.25 * (weapon.getEnchantLevel(Enchantment.POWER) + 1);
+        double percentage = 0.25 * (weapon.getItemMeta().getEnchantLevel(Enchantment.POWER) + 1);
         return baseDmg * percentage;
     }
 
     public static double getSharpnessDamage(ItemStack weapon) {
 //        increaseDamage
 //        0.5 * sharpnessLevel + 0.5
-        double increaseDmg = 0.5 * weapon.getEnchantLevel(Enchantment.SHARPNESS) + 0.5;
+        double increaseDmg = 0.5 * weapon.getItemMeta().getEnchantLevel(Enchantment.SHARPNESS) + 0.5;
         return increaseDmg == 0.5 ? 0 : increaseDmg;
     }
 
     public static void modifyEnhanceItemModelData(ItemStack enhanceItem, int updateCustomModelData) {
-        if (enhanceItem.hasCustomModelData()) {
-            enhanceItem.setCustomModelData(enhanceItem.getCustomModelData() + updateCustomModelData);
+        if (enhanceItem.getItemMeta().hasCustomModelData()) {
+            enhanceItem.getItemMeta().setCustomModelData(enhanceItem.getItemMeta().getCustomModelData() + updateCustomModelData);
 
             List<Component> lore = new ArrayList<>();
             lore.add(getEnhanceStatusComponent(enhanceItem));
@@ -47,9 +47,9 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
     }
 
     public static Component getEnhanceStatusComponent(ItemStack enhanceItem) {
-        if (enhanceItem.hasCustomModelData())
+        if (enhanceItem.getItemMeta().hasCustomModelData())
             for (EnhanceComment enhanceComment : EnhanceComment.values()) {
-                if (enhanceItem.getCustomModelData() == enhanceComment.getEnhanceStack())
+                if (enhanceItem.getItemMeta().getCustomModelData() == enhanceComment.getEnhanceStack())
                     return enhanceComment.getLoreComment();
             }
         return null;
@@ -66,12 +66,12 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
     }
 
     public int getItemCustomModelData(ItemStack item) {
-        return checkModelData(item).getCustomModelData();
+        return checkModelData(item).getItemMeta().getCustomModelData();
     }
 
     public static ItemStack checkModelData(ItemStack item) {
-        if (!item.hasCustomModelData())
-            item.setCustomModelData(0);
+        if (!item.getItemMeta().hasCustomModelData())
+            item.getItemMeta().setCustomModelData(0);
         return item;
     }
 
@@ -126,8 +126,8 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
     }
 
     public static double getEnhanceState(ItemStack enhanceItem, double itemFinalDamage) {
-        if (enhanceItem.hasCustomModelData()) {
-            for (int i = 0; i < enhanceItem.getCustomModelData(); i++) {
+        if (enhanceItem.getItemMeta().hasCustomModelData()) {
+            for (int i = 0; i < enhanceItem.getItemMeta().getCustomModelData(); i++) {
                 double increasePercentage = ENHANCE_BASE_PERCENTAGE + (i * 2);
                 itemFinalDamage += itemFinalDamage * (increasePercentage / 100);
             }

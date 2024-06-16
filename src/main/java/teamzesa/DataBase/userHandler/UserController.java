@@ -41,26 +41,18 @@ public class UserController {
         this.userDataBase.update(user);
     }
 
-    public void updateAllUserData(ArrayList<RObject> newUserData) {
+    public void updateAllUserData(ArrayList<User> newUserData) {
         this.userDataBase.clear();
 
         if (newUserData == null)
             return;
 
-        for (RObject rObject : newUserData) {
-            if (rObject instanceof User userKillStatus)
-                createUser(userKillStatus);
-        }
+        newUserData.forEach(this::createUser);
     }
 
-    public ArrayList<RObject> getAllUserTable() {
+    public ArrayList<User> getAllUserTable() {
         Bukkit.getOnlinePlayers().forEach(player -> readUser(player.getUniqueId()));
-        ArrayList<RObject> totalUserData = new ArrayList<>();
-        for (User user : this.userDataBase.getAllUserTable().values()) {
-            if (user instanceof RObject rObject)
-                totalUserData.add(rObject);
-        }
-        return totalUserData;
+        return new ArrayList<>(this.userDataBase.getAllUserTable().values());
     }
 
 }

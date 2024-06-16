@@ -12,7 +12,6 @@ import org.bukkit.event.inventory.*;
 import org.bukkit.event.player.*;
 import org.bukkit.event.raid.RaidTriggerEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
-import org.purpurmc.purpur.event.inventory.AnvilUpdateResultEvent;
 import teamzesa.event.*;
 import teamzesa.event.AntiExploit.*;
 import teamzesa.event.Enhance.*;
@@ -109,11 +108,6 @@ public class EventRegisterSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public static void PlayerArmSwingEvent(PlayerArmSwingEvent event) {
         new HandSwingEvent(event);
-    }
-
-    @EventHandler(priority = EventPriority.LOWEST)
-    public static void AnvilUpdateResultEvent(AnvilUpdateResultEvent event) {
-        new AnvilLimitHandler(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)

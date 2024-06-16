@@ -64,10 +64,10 @@ public class EnhanceInventoryCloseEvent implements EventRegister {
         if (slotSevenItem == null)
             return true;
 
-        if (!slotSevenItem.hasCustomModelData())
+        if (!slotSevenItem.getItemMeta().hasCustomModelData())
             return true;
 
-        if (slotSevenItem.getCustomModelData() != EXECUTE_STUFF_DATA)
+        if (slotSevenItem.getItemMeta().getCustomModelData() != EXECUTE_STUFF_DATA)
             return true;
         return false;
     }
