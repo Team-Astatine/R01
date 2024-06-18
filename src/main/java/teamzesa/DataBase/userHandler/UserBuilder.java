@@ -46,13 +46,11 @@ public class UserBuilder {
     }
 
     public UserBuilder nameList(List<String> name) {
-        System.out.println("nameListAdd");
         this.nameList = name;
         return this;
     }
 
     public UserBuilder nameList(String name) {
-        System.out.println("nameListStringAdd");
         this.nameList.add(name);
         return this;
     }
