@@ -63,8 +63,11 @@ public final class R01 extends JavaPlugin {
     }
 
     public void RObjectLoader() {
-        new UserController().updateAllUserData(new RObjectIOHandler<User>().importData(DataFile.USER_DATA, getClass().getName()));
-        new KillStatusController().updateAllUserData(new RObjectIOHandler<UserKillStatus>().importData(DataFile.KILL_STATUS, getClass().getName()));
+        new UserController().updateAllUserData(new RObjectIOHandler<User>()
+                .importData(DataFile.USER_DATA, getClass().getName()));
+
+        new KillStatusController().updateAllUserData(new RObjectIOHandler<UserKillStatus>()
+                .importData(DataFile.KILL_STATUS, getClass().getName()));
     }
 
     public void speedLimiter() {
