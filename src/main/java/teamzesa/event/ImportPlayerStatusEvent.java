@@ -70,7 +70,8 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
     }
 
     private void supplyUserKit() {
-        if (this.user.joinCount() != 0) return;
+        if (this.player.hasPlayedBefore())
+            return;
 
         for (FoodKit kit : FoodKit.values()) {
             this.player.getInventory().addItem(kit.getFood());
