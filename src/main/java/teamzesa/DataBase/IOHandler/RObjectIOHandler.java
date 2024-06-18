@@ -1,24 +1,32 @@
 package teamzesa.DataBase.IOHandler;
 
+import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import org.bukkit.Bukkit;
+import teamzesa.DataBase.entity.User;
 import teamzesa.util.Enum.DataFile;
 
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class RObjectIOHandler<E> {
+    private final Type listType;
+
+    public RObjectIOHandler() {
+        this.listType = new TypeToken<ArrayList<E>>(){}.getType();
+    }
 
     public ArrayList<E> importData(DataFile dataFile, String affiliatedFunction) {
         loggingConsole(dataFile.getFileTypeName(), affiliatedFunction, false, true);
         ArrayList<E> resultData = new ArrayList<>();
 
         try (FileReader reader = new FileReader(dataFile.getFileInstance())) {
-            resultData = new Gson().fromJson(reader, new TypeToken<ArrayList<E>>(){}.getType());
+            resultData = new Gson().fromJson(reader, this.listType);
         } catch (IOException e) {
             loggingConsole(dataFile.getFileTypeName(), affiliatedFunction, true, true);
             e.printStackTrace();
