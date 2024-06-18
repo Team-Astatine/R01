@@ -8,7 +8,7 @@ import java.util.*;
 
 public class UserBuilder {
     private UUID uuid;
-    private List<String> nameList;
+    private List<String> nameList = new ArrayList<>();
     private HashSet<String> connectionIPList = new HashSet<>();
     private int joinCount;
     private int level;
@@ -21,7 +21,7 @@ public class UserBuilder {
 
     public UserBuilder(@NotNull User user) {
         uuid(user.uuid());
-        name(user.nameList());
+        nameList(user.nameList());
         ipList(user.connectionIPList());
         joinCount(user.joinCount());
         level(user.level());
@@ -32,7 +32,7 @@ public class UserBuilder {
 //    First Time add User
     public UserBuilder(Player player) {
         uuid(player.getUniqueId());
-        this.nameList = List.of(player.getName());
+        nameList(player.getName());
         ipList(player.getAddress().getHostName());
         joinCount(0);
         level(player.getLevel());
@@ -45,12 +45,14 @@ public class UserBuilder {
         return this;
     }
 
-    public UserBuilder name(List<String> name) {
+    public UserBuilder nameList(List<String> name) {
+        System.out.println("nameListAdd");
         this.nameList = name;
         return this;
     }
 
-    public UserBuilder name(String name) {
+    public UserBuilder nameList(String name) {
+        System.out.println("nameListStringAdd");
         this.nameList.add(name);
         return this;
     }
