@@ -65,7 +65,7 @@ public class God extends CommandRegisterSection {
         String comment = "은(는) 이제 " + targetStatus + " 입니다.";
 
         if (isConsoleSend)
-            Bukkit.getLogger().info("[R01] " + targetUser.nameList() + comment);
+            Bukkit.getLogger().info("[R01] " + targetUser.nameList().getFirst() + comment);
 
         else if (!this.senderPlayer.equals(targetPlayer))
             playerSendMsgComponentExchanger(this.senderPlayer, targetUser.nameList().getFirst() + comment, ColorMap.ORANGE);
