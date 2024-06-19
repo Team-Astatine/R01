@@ -53,21 +53,26 @@ public final class R01 extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        new RObjectIOHandler<User>().exportData(DataFile.USER_DATA, getClass().getName(),
-                new UserController().getAllUserTable());
-        new RObjectIOHandler<UserKillStatus>().exportData(DataFile.KILL_STATUS, getClass().getName(),
-                new KillStatusController().getAllUserTable());
+        new RObjectIOHandler().exportData(
+                DataFile.USER_DATA, new UserController().getAllUserTable(), getClass().getName()
+        );
+
+        new RObjectIOHandler().exportData(
+                DataFile.KILL_STATUS, new KillStatusController().getAllUserTable(), getClass().getName()
+        );
 
         ThreadPool.getThreadPool().allServiceOff();
         Bukkit.getScheduler().cancelTasks(this);
     }
 
     public void RObjectLoader() {
-        new UserController().updateAllUserData(new RObjectIOHandler<User>()
-                .importData(DataFile.USER_DATA, getClass().getName()));
+        new UserController().updateAllUserData(
+            new RObjectIOHandler().importData(DataFile.USER_DATA, User.class, getClass().getName())
+        );
 
-        new KillStatusController().updateAllUserData(new RObjectIOHandler<UserKillStatus>()
-                .importData(DataFile.KILL_STATUS, getClass().getName()));
+        new KillStatusController().updateAllUserData(
+            new RObjectIOHandler().importData(DataFile.KILL_STATUS, UserKillStatus.class, getClass().getName())
+        );
     }
 
     public void speedLimiter() {
@@ -155,10 +160,13 @@ public final class R01 extends JavaPlugin {
 
         ThreadPool.getThreadPool().addSchedulingTaskMin(
                 () -> {
-                    new RObjectIOHandler<User>().exportData(DataFile.USER_DATA, getClass().getName(),
-                            new UserController().getAllUserTable());
-                    new RObjectIOHandler<UserKillStatus>().exportData(DataFile.KILL_STATUS, getClass().getName(),
-                            new KillStatusController().getAllUserTable());
+                    new RObjectIOHandler().exportData(
+                            DataFile.USER_DATA, new UserController().getAllUserTable(), getClass().getName()
+                    );
+
+                    new RObjectIOHandler().exportData(
+                            DataFile.KILL_STATUS, new KillStatusController().getAllUserTable(), getClass().getName()
+                    );
                 },
                 delay,
                 interval

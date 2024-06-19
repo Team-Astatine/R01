@@ -39,11 +39,13 @@ public class SaveR01ObjectData extends CommandRegisterSection {
             return false;
         }
 
-        new RObjectIOHandler<User>().exportData(DataFile.USER_DATA, getClass().getName(),
-                new UserController().getAllUserTable());
+        new RObjectIOHandler().exportData(
+                DataFile.USER_DATA, new UserController().getAllUserTable(), getClass().getName()
+        );
 
-        new RObjectIOHandler<UserKillStatus>().exportData(DataFile.KILL_STATUS, getClass().getName(),
-                new KillStatusController().getAllUserTable());
+        new RObjectIOHandler().exportData(
+                DataFile.KILL_STATUS, new KillStatusController().getAllUserTable(), getClass().getName()
+        );
 /*
         if (args == null || args[0].isEmpty()) {
             this.rObjectIOHandler.exportData(DataFile.USER_DATA, getClass().getName(),
