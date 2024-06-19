@@ -10,4 +10,4 @@ public record User (
         int level,
         boolean isGodMode,
         boolean isAnnouncing
-        ) implements RObject {}
+) implements RObject {}
