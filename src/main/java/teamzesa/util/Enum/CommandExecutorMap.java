@@ -12,6 +12,7 @@ public enum CommandExecutorMap {
     HEALTH_RESET("setHealth", new SetHealth()),
     TOTEM_STACKING("totem", new Totem()),
     USER_OBJECT_CHECKER("vo", new ValueObjectChecker()),
+    HAND_ITEM_CHECKER("vi", new ValueItemStackChecker()),
     SAVE_R01_OBJECT_DATA("ExportR01Object", new SaveR01ObjectData()),
     CONFIG_RELOAD("dataFileReload", new DataFileReload()),
     ANNOUNCING("공지", new AnnouncingOnOff()),
