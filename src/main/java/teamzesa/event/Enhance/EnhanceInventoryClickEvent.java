@@ -81,11 +81,18 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
     }
 
     private boolean isInteractingInfoItemValidation(int modelData) {
-        boolean valid1 = this.event.getInventory().getType() == InventoryType.DROPPER;
-        boolean valid2 = this.currentItem != null;
-        boolean valid3 = valid2 && this.currentItem.getItemMeta() != null;
-        boolean valid4 = valid2 && this.currentItem.getItemMeta().hasCustomModelData();
-        boolean valid5 = valid4 && this.currentItem.getItemMeta().getCustomModelData() == modelData;
+        boolean valid1 = false, valid2 = false, valid3 = false, valid4 = false, valid5 = false;
+
+        valid1 = this.event.getInventory().getType() == InventoryType.DROPPER;
+        valid2 = this.currentItem != null;
+        valid3 = valid2 && this.currentItem.hasItemMeta();
+
+        if (valid3 && this.currentItem.hasItemMeta())
+            valid4 = this.currentItem.getItemMeta().hasCustomModelData();
+
+        if (valid4 && this.currentItem.getItemMeta().hasCustomModelData())
+            valid5 = this.currentItem.getItemMeta().getCustomModelData() == modelData;
+
         return valid1 && valid2 && valid3 && valid4 && valid5;
     }
 

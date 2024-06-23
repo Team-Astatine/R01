@@ -33,6 +33,10 @@ public class EnhanceLongRangeWeaponHurtEvent extends EnhanceUtil implements Even
             return;
 
         ItemStack weapon = player.getInventory().getItemInMainHand();
+
+        if (weapon.getItemMeta() == null)
+            return;
+
         if (!weapon.getItemMeta().hasCustomModelData())
             return;
 

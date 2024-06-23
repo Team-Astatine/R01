@@ -5,6 +5,7 @@ import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.Enhance.*;
 import teamzesa.util.Interface.StringComponentExchanger;
@@ -16,8 +17,23 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
     private static final double ENHANCE_BASE_PERCENTAGE = 10;
 
     public static boolean isMeetsJudgementCriteria(int standardValue) {
-        int ranNum = Integer.parseInt(String.valueOf(String.format("%1.0f", Math.random() * 10)));
-        return ranNum <= standardValue;
+        /*
+         * 0 -> 1강  100%
+         * 1 -> 2강  90%
+         * 2 -> 3강  80%
+         * 3 -> 4강  70%
+         * 4 -> 5강  60%
+         * 5 -> 6강  50%
+         * 6 -> 7강  40%
+         * 7 -> 8강  30%
+         * 7 -> 8강  20%
+         * 9 -> 10강 10%
+         */
+
+        int ranNum = Integer.parseInt(String.format("%1.0f", Math.random() * 10));
+//        System.out.println("ranNum > " + ranNum);
+//        System.out.println("standard > " + standardValue);
+        return ranNum < standardValue; //0.0 ~ 1.0
     }
 
     public static double getArrowPowerDamage(ItemStack weapon, double baseDmg) {
@@ -36,7 +52,9 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
 
     public static void modifyEnhanceItemModelData(ItemStack enhanceItem, int updateCustomModelData) {
         if (enhanceItem.getItemMeta().hasCustomModelData()) {
-            enhanceItem.getItemMeta().setCustomModelData(enhanceItem.getItemMeta().getCustomModelData() + updateCustomModelData);
+            ItemMeta itemMeta = enhanceItem.getItemMeta();
+            itemMeta.setCustomModelData(enhanceItem.getItemMeta().getCustomModelData() + updateCustomModelData);
+            enhanceItem.setItemMeta(itemMeta);
 
             List<Component> lore = new ArrayList<>();
             lore.add(getEnhanceStatusComponent(enhanceItem));
@@ -52,7 +70,9 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
                 if (enhanceItem.getItemMeta().getCustomModelData() == enhanceComment.getEnhanceStack())
                     return enhanceComment.getLoreComment();
             }
-        return null;
+        return Component.text("Unknown Enhancement Status")
+                .color(ColorMap.RED.getTextColor())
+                .decorate(TextDecoration.ITALIC);
     }
 
     public static Component getEnhanceDisplayComponent(ItemStack enhanceItem) {
@@ -70,8 +90,11 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
     }
 
     public static ItemStack checkModelData(ItemStack item) {
-        if (!item.getItemMeta().hasCustomModelData())
-            item.getItemMeta().setCustomModelData(0);
+        if (!item.getItemMeta().hasCustomModelData()) {
+            ItemMeta itemMeta = item.getItemMeta();
+            itemMeta.setCustomModelData(1);
+            item.setItemMeta(itemMeta);
+        }
         return item;
     }
 

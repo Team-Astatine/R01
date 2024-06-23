@@ -14,12 +14,12 @@ import java.util.ArrayList;
 
 public class RObjectIOHandler {
 
-    public <E extends RObject> ArrayList <E> importData(DataFile dataFile, Class<E> clazz, String affiliatedFunction) {
+    public <E extends RObject> ArrayList <E> importData(DataFile dataFile, Class<E> toCastClass, String affiliatedFunction) {
         loggingConsole(dataFile.getFileTypeName(), affiliatedFunction, false, true);
         ArrayList<E> resultData = new ArrayList<>();
 
         try (FileReader reader = new FileReader(dataFile.getFileInstance())) {
-            resultData = new Gson().fromJson(reader, TypeToken.getParameterized(ArrayList.class, clazz).getType());
+            resultData = new Gson().fromJson(reader, TypeToken.getParameterized(ArrayList.class, toCastClass).getType());
         } catch (IOException e) {
             loggingConsole(dataFile.getFileTypeName(), affiliatedFunction, true, true);
             e.printStackTrace();
