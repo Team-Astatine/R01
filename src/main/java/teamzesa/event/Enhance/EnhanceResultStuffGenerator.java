@@ -6,8 +6,8 @@ import org.bukkit.inventory.ItemStack;
 import teamzesa.util.Enum.*;
 
 public class EnhanceResultStuffGenerator extends EnhanceUtil {
-    private final int LOW_LEVEL = 1;
-    private final int MAX_LEVEL = 11;
+    private final int LOW_LEVEL = 0;
+    private final int MAX_LEVEL = 10;
     private int curItemModelData;
 
     private Player weaponsOwner;
@@ -105,10 +105,8 @@ public class EnhanceResultStuffGenerator extends EnhanceUtil {
             case 2 -> "이미 최고 레벨입니다.";
             case 3 -> "강화에 실패하여 무기가 파괴 되었습니다.";
             case 4 -> "파괴방어 스크롤을 사용하여 파괴방지 성공!";
-            case 5 -> this.enhanceItem.getItemMeta().displayName() == null ? "무기 -> " : this.enhanceItem.getItemMeta().displayName()
-                    + " " + this.curItemModelData + "강 -> " + --this.curItemModelData + "강 강화실패";
-            case 6 -> this.enhanceItem.getItemMeta().displayName() == null ? "무기 -> " : this.enhanceItem.getItemMeta().displayName()
-                    + " " + this.curItemModelData + "강 -> " + ++this.curItemModelData + "강 강화성공";
+            case 5 -> " " + this.curItemModelData + "강 -> " + --this.curItemModelData + "강 강화실패";
+            case 6 -> " " + this.curItemModelData + "강 -> " + ++this.curItemModelData + "강 강화성공";
             case 7 -> "파괴방지 주문서가 부족하여 강화가 실행되지 않았습니다.";
             case 8 -> "강화 주문서가 부족하여 실행되지 않았습니다.";
 
