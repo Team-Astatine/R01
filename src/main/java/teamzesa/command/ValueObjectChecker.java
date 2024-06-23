@@ -2,21 +2,25 @@ package teamzesa.command;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
 import teamzesa.DataBase.entity.UserKillStatus;
-import teamzesa.util.Interface.StringComponentExchanger;
+import teamzesa.command.register.CommandRegisterSection;
+import teamzesa.util.Enum.CommandExecutorMap;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.DataBase.entity.User;
 import teamzesa.DataBase.userHandler.UserController;
 
 import java.util.Optional;
-import java.util.UUID;
 
-public class ValueObjectChecker extends StringComponentExchanger implements CommandExecutor {
+public class ValueObjectChecker extends CommandRegisterSection {
+
+    public ValueObjectChecker() {
+        super(CommandExecutorMap.USER_OBJECT_CHECKER);
+    }
+
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
         User user = new UserController().readUser(args[0]);
