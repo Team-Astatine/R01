@@ -5,6 +5,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
+import teamzesa.DataBase.enhance.EnhanceItemBuilder;
+import teamzesa.DataBase.entity.EnhanceItem;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.Enhance.LongRangeWeaponMap;
@@ -68,14 +70,16 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
         }
 
         if (isInteractingInfoItemValidation(EXECUTE_STUFF_DATA)) {
-            if (isEnhanceInvStuffValid())
-                new EnhanceResultStuffGenerator()
-                        .addWeaponOwner((Player)this.event.getWhoClicked())
-                        .addWeaponStuff(this.enhanceItem)
-                        .addScrollStuff(this.scrollStuff)
-                        .addProtectScrollStuff(this.protectScroll)
-                        .executeEnhance();
+            if (isEnhanceInvStuffValid()) {
+                EnhanceItem enhanceItemObj = new EnhanceItemBuilder()
+                        .enhancePlayer((Player)this.event.getWhoClicked())
+                        .enhanceItem(this.enhanceItem)
+                        .enhanceScroll(this.scrollStuff)
+                        .protectScroll(this.protectScroll)
+                        .build();
 
+                new GeneratingEnhanceItem(enhanceItemObj);
+            }
             this.event.setCancelled(true);
         }
     }
