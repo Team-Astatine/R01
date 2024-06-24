@@ -7,7 +7,7 @@ import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.ColorMap;
-import teamzesa.DataBase.entity.User;
+import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.userHandler.UserBuilder;
 import teamzesa.DataBase.userHandler.UserController;
 

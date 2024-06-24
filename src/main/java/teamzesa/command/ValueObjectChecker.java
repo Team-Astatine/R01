@@ -6,11 +6,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
-import teamzesa.DataBase.entity.UserKillStatus;
+import teamzesa.DataBase.entity.RObject.UserKillStatus;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.CommandExecutorMap;
 import teamzesa.util.Enum.ColorMap;
-import teamzesa.DataBase.entity.User;
+import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.userHandler.UserController;
 
 import java.util.Optional;

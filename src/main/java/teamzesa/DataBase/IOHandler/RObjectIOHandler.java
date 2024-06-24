@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import org.bukkit.Bukkit;
-import teamzesa.DataBase.entity.RObject;
+import teamzesa.DataBase.entity.RObject.RObject;
 import teamzesa.util.Enum.DataFile;
 
 import java.io.FileReader;

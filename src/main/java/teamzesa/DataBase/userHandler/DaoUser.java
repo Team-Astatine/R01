@@ -2,7 +2,7 @@ package teamzesa.DataBase.userHandler;
 
 import teamzesa.DataBase.DAO;
 import teamzesa.DataBase.DataBase;
-import teamzesa.DataBase.entity.User;
+import teamzesa.DataBase.entity.RObject.User;
 
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;

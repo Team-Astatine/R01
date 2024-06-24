@@ -2,7 +2,7 @@ package teamzesa.DataBase.userHandler;
 
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.DataBase.entity.User;
+import teamzesa.DataBase.entity.RObject.User;
 
 import java.util.*;
 

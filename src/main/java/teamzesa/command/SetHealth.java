@@ -4,17 +4,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.checkerframework.checker.units.qual.K;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.DataBase.UserKillStatusHandler.DaoUserKillStatus;
 import teamzesa.DataBase.UserKillStatusHandler.KillStatusBuilder;
 import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
-import teamzesa.DataBase.entity.UserKillStatus;
 import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.DataBase.entity.User;
+import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.util.Enum.CommandExecutorMap;
 import teamzesa.util.Enum.ColorMap;
-import teamzesa.DataBase.userHandler.UserBuilder;
 import teamzesa.DataBase.userHandler.UserController;
 
 import java.util.Optional;

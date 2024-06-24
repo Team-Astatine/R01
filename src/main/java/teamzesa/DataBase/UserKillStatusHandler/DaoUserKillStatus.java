@@ -2,8 +2,7 @@ package teamzesa.DataBase.UserKillStatusHandler;
 
 import teamzesa.DataBase.DAO;
 import teamzesa.DataBase.DataBase;
-import teamzesa.DataBase.entity.User;
-import teamzesa.DataBase.entity.UserKillStatus;
+import teamzesa.DataBase.entity.RObject.UserKillStatus;
 
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;

@@ -6,8 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.DataBase.entity.RObject;
-import teamzesa.DataBase.entity.UserKillStatus;
+import teamzesa.DataBase.entity.RObject.UserKillStatus;
 
 import java.util.ArrayList;
 import java.util.UUID;

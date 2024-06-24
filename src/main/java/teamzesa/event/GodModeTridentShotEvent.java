@@ -3,7 +3,7 @@ package teamzesa.event;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.util.Vector;
-import teamzesa.DataBase.entity.User;
+import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.DataBase.userHandler.UserController;
 
