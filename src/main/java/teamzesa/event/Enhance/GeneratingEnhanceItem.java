@@ -1,5 +1,6 @@
 package teamzesa.event.Enhance;
 
+import org.bukkit.Material;
 import teamzesa.DataBase.entity.EnhanceItem;
 import teamzesa.util.Enum.*;
 
@@ -8,8 +9,6 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
     private final int MAX_LEVEL = 10;
 
     private final EnhanceItem item;
-
-    private int curItemModelData;
 
     private boolean hasProtectScroll;
 
@@ -43,7 +42,9 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
 
     private void executeEnhance() {
 //        MaxLvlCheck
-        if (this.curItemModelData == this.MAX_LEVEL) {
+        int currentCustomModelData = this.item.enhanceItem().getItemMeta().getCustomModelData();
+
+        if (currentCustomModelData >= this.MAX_LEVEL) {
             playerSendMessage(2, ColorMap.RED);
             return;
         }
@@ -53,14 +54,13 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
             playerSendMessage(8, ColorMap.RED);
             return;
         }
-
         if (this.hasProtectScroll && !this.isProtectScrollEnough) {
             playerSendMessage(7, ColorMap.RED);
             return;
         }
 
-        boolean isSuccess = isMeetsJudgementCriteria(MAX_LEVEL - this.curItemModelData);
-        boolean isDestroy = isMeetsJudgementCriteria(this.curItemModelData - LOW_LEVEL);
+        boolean isSuccess = isMeetsJudgementCriteria(MAX_LEVEL - currentCustomModelData);
+        boolean isDestroy = isMeetsJudgementCriteria(currentCustomModelData - LOW_LEVEL);
 
 //        execute
         if (isSuccess) {
@@ -78,9 +78,11 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
         if (!this.hasProtectScroll) {
             this.item.enhanceItem().setAmount(0);
             playerSendMessage(3, ColorMap.RED);
+            scrollDiscount(this.item.enhanceScroll(), this.item.protectScroll());
+            return;
         }
-        else playerSendMessage(4, ColorMap.VOTE_COLOR);
 
+        playerSendMessage(4, ColorMap.VOTE_COLOR);
         failEnhanceScenario();
         scrollDiscount(this.item.enhanceScroll(), this.item.protectScroll());
     }
@@ -96,24 +98,23 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
     }
 
     private void playerSendMessage(int commentCode, ColorMap commentColor) {
+        int currentCustomModelData = 0;
+        if (this.item.enhanceItem().getType() != Material.AIR)
+            currentCustomModelData = this.item.enhanceItem().getItemMeta().getCustomModelData();
+        
         String comment = switch (commentCode) {
             case 0 -> "무기를 올려주세요.";
             case 1 -> "강화 주문서가 부족합니다.";
             case 2 -> "이미 최고 레벨입니다.";
             case 3 -> "강화에 실패하여 무기가 파괴 되었습니다.";
             case 4 -> "파괴방어 스크롤을 사용하여 파괴방지 성공!";
-            case 5 -> " " + this.curItemModelData + "강 -> " + --this.curItemModelData + "강 강화실패";
-            case 6 -> " " + this.curItemModelData + "강 -> " + ++this.curItemModelData + "강 강화성공";
+            case 5 -> " " + currentCustomModelData + "강 -> " + --currentCustomModelData + "강 강화실패";
+            case 6 -> " " + currentCustomModelData + "강 -> " + ++currentCustomModelData + "강 강화성공";
             case 7 -> "파괴방지 주문서가 부족하여 강화가 실행되지 않았습니다.";
             case 8 -> "강화 주문서가 부족하여 실행되지 않았습니다.";
 
             default -> throw new IllegalStateException("UnKnown CommentCode: " + commentCode);
         };
-
-        if (commentCode == 5)
-            ++ this.curItemModelData;
-        if (commentCode == 6)
-            -- this.curItemModelData;
 
         playerSendMsgComponentExchanger(this.item.enhancePlayer(), comment, commentColor);
     }
