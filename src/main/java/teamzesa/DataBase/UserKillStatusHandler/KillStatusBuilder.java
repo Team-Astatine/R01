@@ -1,7 +1,7 @@
 package teamzesa.DataBase.UserKillStatusHandler;
 
 import org.bukkit.entity.Player;
-import teamzesa.DataBase.entity.UserKillStatus;
+import teamzesa.DataBase.entity.RObject.UserKillStatus;
 
 import java.util.UUID;
 

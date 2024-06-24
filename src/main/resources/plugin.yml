@@ -1,8 +1,8 @@
 name: R01
 version: '${version}'
 main: teamzesa.R01
-api-version: '1.20'
-authors: [ JAXPLE ]
+api-version: '1.21'
+authors: []
 
 permissions:
   SpeedLimit.bypass:
@@ -18,6 +18,8 @@ commands:
     description: 체력을 초기화 합니다.
   vo:
     description: DebugValue
+  vi:
+    description: DebugItemValue
   god:
     description: 무적을 활성화 합니다.
   dataFileReload:

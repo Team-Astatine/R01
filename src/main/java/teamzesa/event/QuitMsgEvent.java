@@ -2,8 +2,8 @@ package teamzesa.event;
 
 import org.bukkit.event.player.PlayerQuitEvent;
 import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
-import teamzesa.DataBase.entity.User;
-import teamzesa.DataBase.entity.UserKillStatus;
+import teamzesa.DataBase.entity.RObject.User;
+import teamzesa.DataBase.entity.RObject.UserKillStatus;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.ColorMap;

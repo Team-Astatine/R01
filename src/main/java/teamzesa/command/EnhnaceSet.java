@@ -38,7 +38,7 @@ public class EnhnaceSet extends CommandRegisterSection {
         ItemStack targetItem = player.getInventory().getItemInMainHand();
 
         ItemMeta targetItemMeta = targetItem.getItemMeta();
-        targetItemMeta.setCustomModelData(1);
+        targetItemMeta.setCustomModelData(0);
         targetItem.setItemMeta(targetItemMeta);
 
         EnhanceUtil.modifyEnhanceItemModelData(targetItem, enhanceLevel - targetItem.getItemMeta().getCustomModelData());

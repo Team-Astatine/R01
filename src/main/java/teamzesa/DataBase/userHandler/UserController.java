@@ -3,14 +3,10 @@ package teamzesa.DataBase.userHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.DataBase.entity.RObject;
-import teamzesa.DataBase.entity.User;
-import teamzesa.DataBase.entity.UserKillStatus;
+import teamzesa.DataBase.entity.RObject.User;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class UserController {
     private final DaoUser userDataBase = DaoUser.getInstance();

@@ -1,8 +1,7 @@
 package teamzesa.DataBase;
 
-import teamzesa.DataBase.entity.User;
-import teamzesa.DataBase.entity.UserKillStatus;
-import teamzesa.util.Interface.StringComponentExchanger;
+import teamzesa.DataBase.entity.RObject.User;
+import teamzesa.DataBase.entity.RObject.UserKillStatus;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;

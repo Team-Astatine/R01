@@ -92,7 +92,7 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
     public static ItemStack checkModelData(ItemStack item) {
         if (!item.getItemMeta().hasCustomModelData()) {
             ItemMeta itemMeta = item.getItemMeta();
-            itemMeta.setCustomModelData(1);
+            itemMeta.setCustomModelData(0);
             item.setItemMeta(itemMeta);
         }
         return item;

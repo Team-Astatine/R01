@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import org.bukkit.Bukkit;
-import teamzesa.DataBase.entity.RObject;
+import teamzesa.DataBase.entity.RObject.RObject;
 import teamzesa.util.Enum.DataFile;
 
 import java.io.FileReader;
@@ -45,8 +45,8 @@ public class RObjectIOHandler {
     private void loggingConsole(String fileName, String affiliatedFunction, boolean isError, boolean isImporting) {
         String importComment = isImporting ? "Importing" : "Exporting";
         if (!isError)
-            Bukkit.getLogger().info("[R01]" + importComment + " " + fileName + ".. " + affiliatedFunction);
+            Bukkit.getLogger().info("[R01] " + importComment + " " + fileName + ".. " + affiliatedFunction);
         else if (isError)
-            Bukkit.getLogger().info("[R01]" + importComment + " " + fileName + ".. " + affiliatedFunction + "Error");
+            Bukkit.getLogger().info("[R01] " + importComment + " " + fileName + ".. " + affiliatedFunction + "Error");
     }
 }

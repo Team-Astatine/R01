@@ -17,7 +17,10 @@ public enum ShortRangeWeaponMap implements Weapon {
     STONE_SWORD(Material.STONE_SWORD, 5.0,0.0),
     IRON_SWORD(Material.IRON_SWORD, 6.0,0.0),
     DIAMOND_SWORD(Material.DIAMOND_SWORD, 7.0,0.0),
-    NETHER_SWORD(Material.NETHERITE_SWORD, 8.0,0.0);
+    NETHER_SWORD(Material.NETHERITE_SWORD, 8.0,0.0),
+
+//    mace
+    MACE(Material.MACE, 6.0, 0.0);
 
     private final Material material;
     private final double shortRangeDamage;

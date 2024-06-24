@@ -1,4 +1,4 @@
-package teamzesa.DataBase.entity;
+package teamzesa.DataBase.entity.RObject;
 
 import java.util.*;
 
