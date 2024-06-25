@@ -35,7 +35,7 @@ public class EnhanceTridentHitEvent extends EnhanceUtil implements EventRegister
             return;
 
         this.tridentHitLocation = trident.getLocation();
-        ItemStack mainHandTrident = shooter.getInventory().getItemInMainHand();
+        ItemStack mainHandTrident = checkModelData(shooter.getInventory().getItemInMainHand());
 
         switch (getItemCustomModelData(mainHandTrident)) {
             case 1,2,3 -> executeEnhanceState(Sound.ENTITY_GHAST_DEATH, 0, false);

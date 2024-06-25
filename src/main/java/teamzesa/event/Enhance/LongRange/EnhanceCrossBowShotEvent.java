@@ -34,7 +34,7 @@ public class EnhanceCrossBowShotEvent extends EnhanceUtil implements EventRegist
             return;
 
         this.arrow = arrow;
-        ItemStack mainHandBow = player.getInventory().getItemInMainHand();
+        ItemStack mainHandBow = checkModelData(player.getInventory().getItemInMainHand());
 
         Vector vector = this.event.getEntity().getVelocity();
         switch (getItemCustomModelData(mainHandBow)) {

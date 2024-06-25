@@ -70,9 +70,10 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public static void ProjectileHitEvent(ProjectileHitEvent event) {
-        new EnhanceBowHitEvent(event);
-        new EnhanceCrossBowHitEvent(event);
-        new EnhanceTridentHitEvent(event);
+//        fixme
+//        new EnhanceBowHitEvent(event);
+//        new EnhanceCrossBowHitEvent(event);
+//        new EnhanceTridentHitEvent(event);
         new GodModeTridentHitEvent(event);
     }
 

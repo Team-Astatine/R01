@@ -31,13 +31,7 @@ public class EnhanceLongRangeWeaponHurtEvent extends EnhanceUtil implements Even
         if (!(this.damageSource.getDirectEntity() instanceof Projectile))
             return;
 
-        ItemStack weapon = player.getInventory().getItemInMainHand();
-
-        if (weapon.getItemMeta() == null)
-            return;
-
-        if (!weapon.getItemMeta().hasCustomModelData())
-            return;
+        ItemStack weapon = checkModelData(player.getInventory().getItemInMainHand());
 
         double projectileDamage = getLongRangeDamage(weapon);
         double projectilePowerIncreaseDmg = getArrowPowerDamage(weapon, projectileDamage);
