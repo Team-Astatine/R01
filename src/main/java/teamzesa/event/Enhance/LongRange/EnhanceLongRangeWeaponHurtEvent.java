@@ -1,7 +1,6 @@
 package teamzesa.event.Enhance.LongRange;
 
 import org.bukkit.damage.DamageSource;
-  import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -43,7 +42,7 @@ public class EnhanceLongRangeWeaponHurtEvent extends EnhanceUtil implements Even
         double projectileDamage = getLongRangeDamage(weapon);
         double projectilePowerIncreaseDmg = getArrowPowerDamage(weapon, projectileDamage);
 //        10,11,12%
-        double totalDamage = getEnhanceState(weapon, projectileDamage + projectilePowerIncreaseDmg);
+        double totalDamage = calculatingTotalEnhanceStageDamage(weapon, projectileDamage + projectilePowerIncreaseDmg);
 
         System.out.println("projectileDamage > " + projectileDamage);
         System.out.println("projectilePowerDmg > " + projectilePowerIncreaseDmg);
