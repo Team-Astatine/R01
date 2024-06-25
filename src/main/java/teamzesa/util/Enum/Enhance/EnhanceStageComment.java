@@ -3,7 +3,7 @@ package teamzesa.util.Enum.Enhance;
 import net.kyori.adventure.text.Component;
 import teamzesa.util.Enum.ColorMap;
 
-public enum EnhanceComment {
+public enum EnhanceStageComment {
     ONE_STEP(1, Component.text("★ +1")
             .color(ColorMap.WHITE.getTextColor())
     ),
@@ -38,7 +38,7 @@ public enum EnhanceComment {
     private final int enhanceStack;
     private final Component component;
 
-    EnhanceComment(int enhanceStack, Component component) {
+    EnhanceStageComment(int enhanceStack, Component component) {
         this.enhanceStack = enhanceStack;
         this.component = component;
     }

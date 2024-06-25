@@ -32,12 +32,13 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
             this.hasProtectScroll = true;
 
 //        enhance
-        this.isScrollEnough = this.item.enhanceScroll().getAmount() >= getScrollDiscount(this.item.enhanceScroll());
+        this.isScrollEnough =
+                this.item.enhanceScroll().getAmount() >= getScrollType(this.item.enhanceScroll()).getDiscountValue();
 
 //        protect
         if (hasProtectScroll)
             this.isProtectScrollEnough =
-                    this.item.protectScroll().getAmount() >= getProtectScrollDiscount(this.item.protectScroll());
+                    this.item.protectScroll().getAmount() >= getScrollType(this.item.protectScroll()).getDiscountProtectValue();
     }
 
     private void executeEnhance() {
@@ -89,12 +90,12 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
 
     private void successEnhanceScenario() {
         playerSendMessage(6, ColorMap.DISCORD_COLOR);
-        modifyEnhanceItemModelData(this.item.enhanceItem(), +1);
+        addItemDescription(this.item.enhanceItem(), +1);
     }
 
     private void failEnhanceScenario() {
         playerSendMessage(5, ColorMap.PINK);
-        modifyEnhanceItemModelData(this.item.enhanceItem(), -1);
+        addItemDescription(this.item.enhanceItem(), -1);
     }
 
     private void playerSendMessage(int commentCode, ColorMap commentColor) {

@@ -18,22 +18,20 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
 
     public static boolean isMeetsJudgementCriteria(int standardValue) {
         /*
-         * 0 -> 1강  100%
-         * 1 -> 2강  90%
-         * 2 -> 3강  80%
-         * 3 -> 4강  70%
-         * 4 -> 5강  60%
-         * 5 -> 6강  50%
-         * 6 -> 7강  40%
-         * 7 -> 8강  30%
-         * 7 -> 8강  20%
-         * 9 -> 10강 10%
+         * 0 -> 1강  100% 0%
+         * 1 -> 2강  90%  10%
+         * 2 -> 3강  80%  20%
+         * 3 -> 4강  70%  30%
+         * 4 -> 5강  60%  40%
+         * 5 -> 6강  50%  50%
+         * 6 -> 7강  40%  60%
+         * 7 -> 8강  30%  70%
+         * 7 -> 8강  20%  80%
+         * 9 -> 10강 10%  90%
          */
 
-        int ranNum = Integer.parseInt(String.format("%1.0f", Math.random() * 10));
-//        System.out.println("ranNum > " + ranNum);
-//        System.out.println("standard > " + standardValue);
-        return ranNum < standardValue; //0.0 ~ 1.0
+        int ranNum = Integer.parseInt(String.format("%1.0f", Math.random() * 10)); //0.0 ~ 1.0
+        return ranNum < standardValue;
     }
 
     public static double getArrowPowerDamage(ItemStack weapon, double baseDmg) {
@@ -50,26 +48,39 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         return increaseDmg == 0.5 ? 0 : increaseDmg;
     }
 
-    public static void modifyEnhanceItemModelData(ItemStack enhanceItem, int updateCustomModelData) {
-        if (enhanceItem.getItemMeta().hasCustomModelData()) {
-            ItemMeta itemMeta = enhanceItem.getItemMeta();
-            itemMeta.setCustomModelData(enhanceItem.getItemMeta().getCustomModelData() + updateCustomModelData);
-            enhanceItem.setItemMeta(itemMeta);
+    public static void isItemHasCustomModelData(ItemStack item,String funtion) {
+        if (item == null)
+            throw new IllegalArgumentException("item == null");
 
-            List<Component> lore = new ArrayList<>();
-            lore.add(getEnhanceStatusComponent(enhanceItem));
-            lore.add(getEnhanceDisplayComponent(enhanceItem));
+        if (!item.hasItemMeta())
+            throw new IllegalArgumentException(funtion + " hasItemMeta == null");
 
-            enhanceItem.lore(lore);
-        }
+        if (!item.getItemMeta().hasCustomModelData())
+            throw new IllegalArgumentException(funtion + " hasCustomModelData == null");
     }
 
-    public static Component getEnhanceStatusComponent(ItemStack enhanceItem) {
-        if (enhanceItem.getItemMeta().hasCustomModelData())
-            for (EnhanceComment enhanceComment : EnhanceComment.values()) {
-                if (enhanceItem.getItemMeta().getCustomModelData() == enhanceComment.getEnhanceStack())
-                    return enhanceComment.getLoreComment();
-            }
+    public static void addItemDescription(ItemStack item, int customModelData) {
+        isItemHasCustomModelData(item, "addItemDescription");
+
+        ItemMeta itemMeta = item.getItemMeta();
+        itemMeta.setCustomModelData(itemMeta.getCustomModelData() + customModelData);
+        item.setItemMeta(itemMeta);
+
+        List<Component> lore = new ArrayList<>();
+        lore.add(getEnhanceStatusComponent(item));
+        lore.add(getEnhanceDisplayComponent(item));
+
+        item.lore(lore);
+    }
+
+    public static Component getEnhanceStatusComponent(ItemStack item) {
+        isItemHasCustomModelData(item, "getEnhanceStatusComponent");
+
+        for (EnhanceStageComment enhanceStageComment : EnhanceStageComment.values()) {
+            if (item.getItemMeta().getCustomModelData() == enhanceStageComment.getEnhanceStack())
+                return enhanceStageComment.getLoreComment();
+        }
+
         return Component.text("Unknown Enhancement Status")
                 .color(ColorMap.RED.getTextColor())
                 .decorate(TextDecoration.ITALIC);
@@ -77,7 +88,7 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
 
     public static Component getEnhanceDisplayComponent(ItemStack enhanceItem) {
         double weaponDmg = getShortRangeDamage(enhanceItem) + getSharpnessDamage(enhanceItem);
-        double totalDmg = getEnhanceState(enhanceItem, weaponDmg);
+        double totalDmg = calculatingTotalEnhanceStageDamage(enhanceItem, weaponDmg);
         String comment = String.format("현재 데미지 : %.3f...", totalDmg);
 
         return Component.text(comment)
@@ -86,12 +97,13 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
     }
 
     public int getItemCustomModelData(ItemStack item) {
+        isItemHasCustomModelData(item, "getItemCustomModelData");
         return checkModelData(item).getItemMeta().getCustomModelData();
     }
 
     public static ItemStack checkModelData(ItemStack item) {
-        if (!item.getItemMeta().hasCustomModelData()) {
-            ItemMeta itemMeta = item.getItemMeta();
+        ItemMeta itemMeta = item.getItemMeta();
+        if (!itemMeta.hasCustomModelData()) {
             itemMeta.setCustomModelData(0);
             item.setItemMeta(itemMeta);
         }
@@ -100,28 +112,26 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
 
     public static void scrollDiscount(ItemStack scroll, ItemStack protectScroll) {
         if (protectScroll != null)
-            protectScroll.setAmount(protectScroll.getAmount() - getProtectScrollDiscount(protectScroll));
+            protectScroll.setAmount(protectScroll.getAmount() - getScrollType(protectScroll).getDiscountProtectValue());
 
-        scroll.setAmount(scroll.getAmount() - getScrollDiscount(scroll));
-    }
-
-    public static int getScrollDiscount(ItemStack scroll) {
-        return getScrollType(scroll).getDiscountValue();
-    }
-
-    public static int getProtectScrollDiscount(ItemStack scroll) {
-        return getScrollType(scroll).getDiscountProtectValue();
+        scroll.setAmount(scroll.getAmount() - getScrollType(scroll).getDiscountValue());
     }
 
     public static ScrollMap getScrollType(ItemStack scroll) {
-        if (scroll != null) {
-            for (ScrollMap scrollMap : ScrollMap.values()) {
-                Material scrollMapMaterial = scrollMap.getMaterial();
-                if (scrollMapMaterial.equals(scroll.getType()))
-                    return scrollMap;
-            }
+        if (scroll == null)
+            throw new IllegalArgumentException("getScrollType Parameter Scroll == Null");
+
+        ScrollMap resultScroll = null;
+        for (ScrollMap scrollMap : ScrollMap.values()) {
+            Material scrollMapMaterial = scrollMap.getMaterial();
+            if (scrollMapMaterial.equals(scroll.getType()))
+                resultScroll = scrollMap;
         }
-        return null;
+
+        if (resultScroll == null)
+            throw new IllegalArgumentException("getScrollType Non Register Scroll > " + scroll);
+
+        return resultScroll;
     }
 
     public static double getShortRangeDamage(ItemStack weapon) {
@@ -148,13 +158,15 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         return damage;
     }
 
-    public static double getEnhanceState(ItemStack enhanceItem, double itemFinalDamage) {
-        if (enhanceItem.getItemMeta().hasCustomModelData()) {
-            for (int i = 0; i < enhanceItem.getItemMeta().getCustomModelData(); i++) {
-                double increasePercentage = ENHANCE_BASE_PERCENTAGE + (i * 2);
-                itemFinalDamage += itemFinalDamage * (increasePercentage / 100);
-            }
+    public static double calculatingTotalEnhanceStageDamage(ItemStack item, double totalDamage) {
+        isItemHasCustomModelData(item, "getEnhanceState");
+
+        ItemMeta itemMeta = item.getItemMeta();
+        for (int i = 0; i < itemMeta.getCustomModelData(); i++) {
+            double increasePercentage = ENHANCE_BASE_PERCENTAGE + (i * 2);
+            totalDamage += totalDamage * (increasePercentage / 100);
         }
-        return itemFinalDamage;
+
+        return totalDamage;
     }
 }
