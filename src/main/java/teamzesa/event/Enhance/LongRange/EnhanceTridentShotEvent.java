@@ -30,7 +30,7 @@ public class EnhanceTridentShotEvent extends EnhanceUtil implements EventRegiste
             return;
 
         this.trident = trident;
-        ItemStack mainHandTrident = player.getInventory().getItemInMainHand();
+        ItemStack mainHandTrident = checkModelData(player.getInventory().getItemInMainHand());
 
         Vector vector = this.event.getEntity().getVelocity();
         switch (getItemCustomModelData(mainHandTrident)) {
