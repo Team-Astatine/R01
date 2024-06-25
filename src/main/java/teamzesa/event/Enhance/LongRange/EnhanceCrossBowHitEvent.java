@@ -34,7 +34,7 @@ public class EnhanceCrossBowHitEvent extends EnhanceUtil implements EventRegiste
             return;
 
         this.bowHitLocation = arrow.getLocation();
-        ItemStack mainHandBow = player.getInventory().getItemInMainHand();
+        ItemStack mainHandBow = checkModelData(player.getInventory().getItemInMainHand());
 
         switch (getItemCustomModelData(mainHandBow)) {
             case 1,2,3 -> executeEnhanceState(Sound.ENTITY_GHAST_DEATH, false);
