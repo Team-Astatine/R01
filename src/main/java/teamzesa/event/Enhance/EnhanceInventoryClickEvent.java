@@ -52,7 +52,7 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
 
     @Override
     public void execute() {
-        if (isInteractingInfoItemValidation(PANEL_STUFF_CUSTOM_DATA)) {
+        if (isAllowedInteractItem(PANEL_STUFF_CUSTOM_DATA)) {
             this.event.setCancelled(true);
             return;
         }
@@ -69,8 +69,8 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
                 this.allowedScroll.add(scrollMap.getMaterial());
         }
 
-        if (isInteractingInfoItemValidation(EXECUTE_STUFF_DATA)) {
-            if (isEnhanceInvStuffValid()) {
+        if (isAllowedInteractItem(EXECUTE_STUFF_DATA)) {
+            if (isAllowedEnhanceItem()) {
                 EnhanceItem enhanceItemObj = new EnhanceItemBuilder()
                         .enhancePlayer((Player)this.event.getWhoClicked())
                         .enhanceItem(this.enhanceItem)
@@ -84,7 +84,7 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
         }
     }
 
-    private boolean isInteractingInfoItemValidation(int modelData) {
+    private boolean isAllowedInteractItem(int allowedCustomModelData) {
         boolean valid1 = false, valid2 = false, valid3 = false, valid4 = false, valid5 = false;
 
         valid1 = this.event.getInventory().getType() == InventoryType.DROPPER;
@@ -95,12 +95,12 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
             valid4 = this.currentItem.getItemMeta().hasCustomModelData();
 
         if (valid4 && this.currentItem.getItemMeta().hasCustomModelData())
-            valid5 = this.currentItem.getItemMeta().getCustomModelData() == modelData;
+            valid5 = this.currentItem.getItemMeta().getCustomModelData() == allowedCustomModelData;
 
         return valid1 && valid2 && valid3 && valid4 && valid5;
     }
 
-    private boolean isEnhanceInvStuffValid() {
+    private boolean isAllowedEnhanceItem() {
         String comment = "";
         if (this.enhanceItem == null || this.enhanceItem.isEmpty())
             comment = "무기를 올려주세요.";
