@@ -1,4 +1,4 @@
-package teamzesa.event.Enhance.LongRange;
+package teamzesa.event.Enhance.LongRange.Hit;
 
 import org.bukkit.Location;
 import org.bukkit.Sound;
@@ -35,7 +35,10 @@ public class EnhanceTridentHitEvent extends EnhanceUtil implements EventRegister
             return;
 
         this.tridentHitLocation = trident.getLocation();
-        ItemStack mainHandTrident = checkModelData(shooter.getInventory().getItemInMainHand());
+        ItemStack mainHandTrident = shooter.getInventory().getItemInMainHand();
+
+        if (!mainHandTrident.hasItemMeta())
+            return;
 
         switch (getItemCustomModelData(mainHandTrident)) {
             case 1,2,3 -> executeEnhanceState(Sound.ENTITY_GHAST_DEATH, 0, false);

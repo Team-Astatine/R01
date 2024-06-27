@@ -15,7 +15,12 @@ import org.bukkit.event.world.ChunkLoadEvent;
 import teamzesa.event.*;
 import teamzesa.event.AntiExploit.*;
 import teamzesa.event.Enhance.*;
-import teamzesa.event.Enhance.LongRange.*;
+import teamzesa.event.Enhance.LongRange.Hit.EnhanceBowHitEvent;
+import teamzesa.event.Enhance.LongRange.Hit.EnhanceCrossBowHitEvent;
+import teamzesa.event.Enhance.LongRange.Hit.EnhanceTridentHitEvent;
+import teamzesa.event.Enhance.LongRange.Shot.EnhanceBowShotEvent;
+import teamzesa.event.Enhance.LongRange.Shot.EnhanceCrossBowShotEvent;
+import teamzesa.event.Enhance.LongRange.Shot.EnhanceTridentShotEvent;
 import teamzesa.event.Enhance.ShortRange.EnhanceShortRangeWeaponHurtEvent;
 //todo
 //fixme
@@ -71,9 +76,9 @@ public class EventRegisterSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public static void ProjectileHitEvent(ProjectileHitEvent event) {
 //        fixme
-//        new EnhanceBowHitEvent(event);
-//        new EnhanceCrossBowHitEvent(event);
-//        new EnhanceTridentHitEvent(event);
+        new EnhanceBowHitEvent(event);
+        new EnhanceCrossBowHitEvent(event);
+        new EnhanceTridentHitEvent(event);
         new GodModeTridentHitEvent(event);
     }
 

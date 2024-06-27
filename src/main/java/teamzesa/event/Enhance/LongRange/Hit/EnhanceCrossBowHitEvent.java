@@ -1,4 +1,4 @@
-package teamzesa.event.Enhance.LongRange;
+package teamzesa.event.Enhance.LongRange.Hit;
 
 import org.bukkit.Location;
 import org.bukkit.Sound;
@@ -9,11 +9,11 @@ import org.bukkit.inventory.ItemStack;
 import teamzesa.event.Enhance.EnhanceUtil;
 import teamzesa.event.EventRegister.EventRegister;
 
-public class EnhanceBowHitEvent extends EnhanceUtil implements EventRegister {
+public class EnhanceCrossBowHitEvent extends EnhanceUtil implements EventRegister {
     private Location bowHitLocation;
     private final ProjectileHitEvent event;
 
-    public EnhanceBowHitEvent(ProjectileHitEvent event) {
+    public EnhanceCrossBowHitEvent(ProjectileHitEvent event) {
         this.event = event;
         init();
         execute();
@@ -27,14 +27,17 @@ public class EnhanceBowHitEvent extends EnhanceUtil implements EventRegister {
         if (!(this.event.getEntity() instanceof Arrow arrow))
             return;
 
-        if (arrow.isShotFromCrossbow())
+        if (!arrow.isShotFromCrossbow())
             return;
 
-        if (!(this.event.getEntity().getShooter() instanceof Player player))
+        if (!(this.event.getEntity().getShooter() instanceof Player shooter))
             return;
 
         this.bowHitLocation = arrow.getLocation();
-        ItemStack mainHandBow = checkModelData(player.getInventory().getItemInMainHand());
+        ItemStack mainHandBow = shooter.getInventory().getItemInMainHand();
+
+        if (!mainHandBow.hasItemMeta())
+            return;
 
         switch (getItemCustomModelData(mainHandBow)) {
             case 1,2,3 -> executeEnhanceState(Sound.ENTITY_GHAST_DEATH, false);
