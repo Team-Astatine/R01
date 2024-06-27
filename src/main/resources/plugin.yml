@@ -1,8 +1,7 @@
 name: R01
-version: '${version}'
+version: '${6.0}'
 main: teamzesa.R01
 api-version: '1.21'
-authors: []
 
 permissions:
   SpeedLimit.bypass:
