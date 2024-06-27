@@ -13,7 +13,7 @@ import org.bukkit.event.player.*;
 import org.bukkit.event.raid.RaidTriggerEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
 import teamzesa.event.*;
-import teamzesa.event.AntiExploit.*;
+import teamzesa.event.Restricted.AntiExploit.*;
 import teamzesa.event.Enhance.*;
 import teamzesa.event.Enhance.LongRange.Hit.EnhanceBowHitEvent;
 import teamzesa.event.Enhance.LongRange.Hit.EnhanceCrossBowHitEvent;
@@ -22,6 +22,8 @@ import teamzesa.event.Enhance.LongRange.Shot.EnhanceBowShotEvent;
 import teamzesa.event.Enhance.LongRange.Shot.EnhanceCrossBowShotEvent;
 import teamzesa.event.Enhance.LongRange.Shot.EnhanceTridentShotEvent;
 import teamzesa.event.Enhance.ShortRange.EnhanceShortRangeWeaponHurtEvent;
+import teamzesa.event.Restricted.BanCommandHandler;
+import teamzesa.event.Restricted.RestrictedShulkerChest;
 //todo
 //fixme
 //refactoring
@@ -75,7 +77,6 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public static void ProjectileHitEvent(ProjectileHitEvent event) {
-//        fixme
         new EnhanceBowHitEvent(event);
         new EnhanceCrossBowHitEvent(event);
         new EnhanceTridentHitEvent(event);
@@ -97,6 +98,7 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public static void InventoryClickEvent(InventoryClickEvent event) {
+//        new RestrictedCrafter(event);
         new RestrictedShulkerChest(event);
         new EnhanceInventoryClickEvent(event);
     }
@@ -161,6 +163,6 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public static void CraftItemEvent(CraftItemEvent event) {
-        new BanItemHandler(event);
+//        new BanItemHandler(event);
     }
 }
