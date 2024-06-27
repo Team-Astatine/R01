@@ -32,8 +32,6 @@ public class EnhanceTridentShotEvent extends EnhanceUtil implements EventRegiste
         this.trident = trident;
         ItemStack mainHandTrident = player.getInventory().getItemInMainHand();
 
-        System.out.println(mainHandTrident);
-
         if (!mainHandTrident.hasItemMeta())
             return;
 
