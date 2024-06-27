@@ -1,4 +1,4 @@
-package teamzesa.event.AntiExploit;
+package teamzesa.event.Restricted;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
