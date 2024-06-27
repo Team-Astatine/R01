@@ -1,4 +1,4 @@
-package teamzesa.event.Enhance.LongRange;
+package teamzesa.event.Enhance.LongRange.Shot;
 
 import org.bukkit.Sound;
 import org.bukkit.entity.*;
@@ -30,7 +30,10 @@ public class EnhanceTridentShotEvent extends EnhanceUtil implements EventRegiste
             return;
 
         this.trident = trident;
-        ItemStack mainHandTrident = checkModelData(player.getInventory().getItemInMainHand());
+        ItemStack mainHandTrident = player.getInventory().getItemInMainHand();
+
+        if (!mainHandTrident.hasItemMeta())
+            return;
 
         Vector vector = this.event.getEntity().getVelocity();
         switch (getItemCustomModelData(mainHandTrident)) {

@@ -7,7 +7,7 @@ public enum ScrollMap {
     END_CRYSTAL(Material.END_CRYSTAL, 1,1),
     ENCHANTED_GOLDEN_APPLE(Material.ENCHANTED_GOLDEN_APPLE, 1,1),
     NETHER_STAR(Material.NETHER_STAR, 1,1),
-    TNT(Material.TNT, 1,1),
+    TNT(Material.TNT, 6,8),
     SCULK_SHRIEKER(Material.SCULK_SHRIEKER, 2,4),
     SCULK_SENSOR(Material.SCULK_SENSOR, 1,3),
     CONDUIT(Material.CONDUIT, 1,2),

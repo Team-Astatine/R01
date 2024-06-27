@@ -58,23 +58,17 @@ public class ExplosiveEvent implements EventRegister {
     }
 
     private void boomBer() {
-        this.location.createExplosion(25, true);
+        this.location.createExplosion(15, true);
     }
 
     private void cartBoom() {
-        Runnable tntCartTask = () -> {
-//            this.event.blockList().stream()
-//                    .filter(block -> block.getType().equals(Material.OBSIDIAN))
-//                    .forEach(block -> block.setType(Material.AIR));
-            this.location.createExplosion(200, true);
-        };
+        Runnable tntCartTask = () -> this.location.createExplosion(25, true);
         tntCartTask.run();
-//        ThreadPool.getThreadPool().addTask(tntCartTask);
     }
 
     private void endCrystal() {
         Runnable crystalTask = () -> {
-            this.location.createExplosion(7, true);
+            this.location.createExplosion(15, true);
         };
         crystalTask.run();
     }
