@@ -13,6 +13,7 @@ import org.bukkit.event.player.*;
 import org.bukkit.event.raid.RaidTriggerEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
 import teamzesa.event.*;
+import teamzesa.event.Restricted.*;
 import teamzesa.event.Restricted.AntiExploit.*;
 import teamzesa.event.Enhance.*;
 import teamzesa.event.Enhance.LongRange.Hit.EnhanceBowHitEvent;
@@ -22,8 +23,7 @@ import teamzesa.event.Enhance.LongRange.Shot.EnhanceBowShotEvent;
 import teamzesa.event.Enhance.LongRange.Shot.EnhanceCrossBowShotEvent;
 import teamzesa.event.Enhance.LongRange.Shot.EnhanceTridentShotEvent;
 import teamzesa.event.Enhance.ShortRange.EnhanceShortRangeWeaponHurtEvent;
-import teamzesa.event.Restricted.BanCommandHandler;
-import teamzesa.event.Restricted.RestrictedShulkerChest;
+import teamzesa.event.Restricted.AntiExploit.LeverInteraction.AntiLeverAutoClicker;
 //todo
 //fixme
 //refactoring
@@ -99,6 +99,7 @@ public class EventRegisterSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public static void InventoryClickEvent(InventoryClickEvent event) {
 //        new RestrictedCrafter(event);
+        new RestrictedItemInputDispenserHandler(event);
         new RestrictedShulkerChest(event);
         new EnhanceInventoryClickEvent(event);
     }
@@ -106,6 +107,11 @@ public class EventRegisterSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public static void InventoryCloseEvent(InventoryCloseEvent event) {
         new EnhanceInventoryCloseEvent(event);
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    public static void InventoryMoveItemEvent(InventoryMoveItemEvent event) {
+        new RestrictedInvToInvMoveItemHandler(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -128,6 +134,7 @@ public class EventRegisterSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public static void PlayerInteractEvent(PlayerInteractEvent event) {
         new AntiLeverAutoClicker(event);
+        new RestrictedEntityPInteractHandler(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -142,7 +149,7 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public static void PlayerCommandPreprocessEvent(PlayerCommandPreprocessEvent event) {
-        new BanCommandHandler(event);
+        new RestrictedCommandHandler(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -163,6 +170,6 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public static void CraftItemEvent(CraftItemEvent event) {
-//        new BanItemHandler(event);
+//        new RestrictedItemCraftHandler(event);
     }
 }
