@@ -27,10 +27,14 @@ public class RestrictedEntityPInteractHandler extends StringComponentExchanger i
         if (this.event.getPlayer().isOp())
             return;
 
-        if (!this.event.getPlayer().getInventory().getItemInMainHand().getType().equals(Material.ARMOR_STAND))
+        Material playerMainHandItemMaterial = this.event.getPlayer().getInventory().getItemInMainHand().getType();
+        boolean isRestrictedItem = new RestrictedElement().restrictedItem.stream()
+                .anyMatch(playerMainHandItemMaterial::equals);
+
+        if (!isRestrictedItem)
             return;
 
         this.event.setCancelled(true);
-        playerSendMsgComponentExchanger(this.event.getPlayer(), "아머스탠드는 설치할 수 없습니다.", ColorMap.RED);
+        playerSendMsgComponentExchanger(this.event.getPlayer(), "해당 아이템은 설치할 수 없습니다.", ColorMap.RED);
     }
 }

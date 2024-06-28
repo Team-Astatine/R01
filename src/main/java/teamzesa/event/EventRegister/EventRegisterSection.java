@@ -170,6 +170,6 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public static void CraftItemEvent(CraftItemEvent event) {
-//        new BanItemHandler(event);
+//        new RestrictedItemCraftHandler(event);
     }
 }

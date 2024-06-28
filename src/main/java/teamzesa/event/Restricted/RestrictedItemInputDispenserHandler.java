@@ -46,10 +46,14 @@ public class RestrictedItemInputDispenserHandler extends StringComponentExchange
         if (this.player.isOp())
             return;
 
-        if (this.itemStack.getType() != Material.ARMOR_STAND)
+        Material playerInputItemMaterial = this.itemStack.getType();
+        boolean isRestrictedItem = new RestrictedElement().restrictedItem.stream()
+                .anyMatch(playerInputItemMaterial::equals);
+
+        if (!isRestrictedItem)
             return;
 
         this.event.setCancelled(true);
-        playerSendMsgComponentExchanger(player, "아머스탠드는 디스펜서에 넣을 수 없습니다.", ColorMap.RED);
+        playerSendMsgComponentExchanger(player, "해당 아이템은 디스펜서에 넣을 수 없습니다.", ColorMap.RED);
     }
 }

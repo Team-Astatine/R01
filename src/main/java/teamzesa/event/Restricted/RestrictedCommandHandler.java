@@ -12,7 +12,7 @@ import java.util.Set;
 public class RestrictedCommandHandler extends StringComponentExchanger implements EventRegister {
     private Player commandSender;
     private String currentCommand;
-    private Set<String> lockingCommand;
+
     private final PlayerCommandPreprocessEvent event;
     public RestrictedCommandHandler(PlayerCommandPreprocessEvent event) {
         this.event = event;
@@ -24,21 +24,20 @@ public class RestrictedCommandHandler extends StringComponentExchanger implement
     public void init() {
         this.commandSender = this.event.getPlayer();
         this.currentCommand = this.event.getMessage();
-
-        this.lockingCommand = new HashSet<>();
-        this.lockingCommand.add("/pl");
-        this.lockingCommand.add("/plugins");
     }
 
     @Override
     public void execute() {
-        boolean messageTypeCheck = this.lockingCommand.stream()
-                .anyMatch(banningCommand -> banningCommand.equalsIgnoreCase(this.currentCommand));
+        if (this.commandSender.isOp())
+            return;
 
-        if (messageTypeCheck && !this.commandSender.isOp()) {
-            playerSendMsgComponentExchanger(
-                    this.commandSender, "해당 명령어는 사용불가합니다.", ColorMap.RED);
-            this.event.setCancelled(true);
-        }
+        boolean isCommandAllowed = new RestrictedElement().restrictedCommand.stream()
+                .anyMatch(this.currentCommand::equals);
+
+        if (!isCommandAllowed)
+            return;
+
+        this.event.setCancelled(true);
+        playerSendMsgComponentExchanger(this.commandSender, "해당 명령어는 사용불가합니다.", ColorMap.RED);
     }
 }

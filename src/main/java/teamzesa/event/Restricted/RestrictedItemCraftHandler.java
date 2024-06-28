@@ -7,14 +7,10 @@ import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.ColorMap;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class RestrictedItemCraftHandler extends StringComponentExchanger implements EventRegister {
-    private Material currentStuff;
-    private Set<Material> lockingStuff;
-    private final CraftItemEvent event;
+    private Material currentItemMaterial;
 
+    private final CraftItemEvent event;
     public RestrictedItemCraftHandler(CraftItemEvent event) {
         this.event = event;
         init();
@@ -23,22 +19,19 @@ public class RestrictedItemCraftHandler extends StringComponentExchanger impleme
 
     @Override
     public void init() {
-        this.currentStuff = this.event.getCurrentItem().getType();
-        this.lockingStuff = new HashSet<>();
-        this.lockingStuff.add(Material.TNT);
-        this.lockingStuff.add(Material.TNT_MINECART);
-        this.lockingStuff.add(Material.ARMOR_STAND);
+        this.currentItemMaterial = this.event.getCurrentItem().getType();
     }
 
     @Override
     public void execute() {
-        boolean typeChecker = this.lockingStuff.stream()
-                .anyMatch(banningStuffMaterial -> banningStuffMaterial.equals(this.currentStuff));
+        boolean isRestrictedItem = new RestrictedElement().restrictedItem.stream()
+                .anyMatch(this.currentItemMaterial::equals);
 
-        if (typeChecker) {
-            Player player = (Player) this.event.getWhoClicked();
-            playerSendMsgComponentExchanger(player, "해당 아이템은 조합할 수 없습니다.", ColorMap.RED);
-            this.event.setCancelled(true);
-        }
+        if (!isRestrictedItem)
+            return;
+
+        Player player = (Player) this.event.getWhoClicked();
+        this.event.setCancelled(true);
+        playerSendMsgComponentExchanger(player, "해당 아이템은 조합할 수 없습니다.", ColorMap.RED);
     }
 }

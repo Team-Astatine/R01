@@ -5,22 +5,17 @@ import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.inventory.InventoryType;
 import teamzesa.event.EventRegister.EventRegister;
 
-import java.util.HashSet;
-
 public class RestrictedInvToInvMoveItemHandler implements EventRegister {
-    private final InventoryMoveItemEvent event;
-    private HashSet<Material> banItem;
 
+    private final InventoryMoveItemEvent event;
     public RestrictedInvToInvMoveItemHandler(InventoryMoveItemEvent event) {
         this.event = event;
-        this.banItem = new HashSet<>();
         init();
         execute();
     }
 
     @Override
     public void init() {
-        this.banItem.add(Material.ARMOR_STAND);
     }
 
     @Override
@@ -28,10 +23,11 @@ public class RestrictedInvToInvMoveItemHandler implements EventRegister {
         if (this.event.getDestination().getType() != InventoryType.DISPENSER)
             return;
 
-        boolean isBannedItem = this.banItem.stream()
-                .anyMatch(item -> item.equals(this.event.getItem().getType()));
+        Material moveItemMaterial = this.event.getItem().getType();
+        boolean isRestrictedItem = new RestrictedElement().restrictedItem.stream()
+                .anyMatch(moveItemMaterial::equals);
 
-        if (!isBannedItem)
+        if (!isRestrictedItem)
             return;
 
         this.event.setCancelled(true);
