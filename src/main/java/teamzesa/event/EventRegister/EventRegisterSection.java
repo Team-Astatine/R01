@@ -23,6 +23,7 @@ import teamzesa.event.Enhance.LongRange.Shot.EnhanceBowShotEvent;
 import teamzesa.event.Enhance.LongRange.Shot.EnhanceCrossBowShotEvent;
 import teamzesa.event.Enhance.LongRange.Shot.EnhanceTridentShotEvent;
 import teamzesa.event.Enhance.ShortRange.EnhanceShortRangeWeaponHurtEvent;
+import teamzesa.event.Restricted.AntiExploit.LeverInteraction.AntiLeverAutoClicker;
 //todo
 //fixme
 //refactoring
