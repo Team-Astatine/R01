@@ -7,11 +7,11 @@ import teamzesa.event.EventRegister.EventRegister;
 
 import java.util.HashSet;
 
-public class RestrictedMoveItem implements EventRegister {
+public class RestrictedInvToInvMoveItemHandler implements EventRegister {
     private final InventoryMoveItemEvent event;
     private HashSet<Material> banItem;
 
-    public RestrictedMoveItem(InventoryMoveItemEvent event) {
+    public RestrictedInvToInvMoveItemHandler(InventoryMoveItemEvent event) {
         this.event = event;
         this.banItem = new HashSet<>();
         init();

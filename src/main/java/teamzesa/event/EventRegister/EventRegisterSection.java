@@ -98,7 +98,7 @@ public class EventRegisterSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public static void InventoryClickEvent(InventoryClickEvent event) {
 //        new RestrictedCrafter(event);
-        new RestrictedDispenser(event);
+        new RestrictedItemInputDispenserHandler(event);
         new RestrictedShulkerChest(event);
         new EnhanceInventoryClickEvent(event);
     }
@@ -110,7 +110,7 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public static void InventoryMoveItemEvent(InventoryMoveItemEvent event) {
-        new RestrictedMoveItem(event);
+        new RestrictedInvToInvMoveItemHandler(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -133,7 +133,7 @@ public class EventRegisterSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public static void PlayerInteractEvent(PlayerInteractEvent event) {
         new AntiLeverAutoClicker(event);
-        new RestrictedPlaceEvent(event);
+        new RestrictedEntityPlaceHandler(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -148,7 +148,7 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public static void PlayerCommandPreprocessEvent(PlayerCommandPreprocessEvent event) {
-        new BanCommandHandler(event);
+        new RestrictedCommandHandler(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)

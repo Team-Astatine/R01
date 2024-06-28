@@ -9,12 +9,12 @@ import teamzesa.util.Enum.ColorMap;
 import java.util.HashSet;
 import java.util.Set;
 
-public class BanCommandHandler extends StringComponentExchanger implements EventRegister {
+public class RestrictedCommandHandler extends StringComponentExchanger implements EventRegister {
     private Player commandSender;
     private String currentCommand;
     private Set<String> lockingCommand;
     private final PlayerCommandPreprocessEvent event;
-    public BanCommandHandler(PlayerCommandPreprocessEvent event) {
+    public RestrictedCommandHandler(PlayerCommandPreprocessEvent event) {
         this.event = event;
         init();
         execute();

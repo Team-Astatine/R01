@@ -1,7 +1,6 @@
 package teamzesa.event.Restricted;
 
 import org.bukkit.Material;
-import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
@@ -11,10 +10,7 @@ import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Interface.StringComponentExchanger;
 
-import java.util.Arrays;
-import java.util.Objects;
-
-public class RestrictedDispenser extends StringComponentExchanger implements EventRegister {
+public class RestrictedItemInputDispenserHandler extends StringComponentExchanger implements EventRegister {
 
     private Player player;
     private ItemStack itemStack;
@@ -22,7 +18,7 @@ public class RestrictedDispenser extends StringComponentExchanger implements Eve
     private Inventory currentOpeningContainerInventory;
     private final InventoryClickEvent event;
 
-    public RestrictedDispenser(InventoryClickEvent event) {
+    public RestrictedItemInputDispenserHandler(InventoryClickEvent event) {
         this.event = event;
         init();
         execute();

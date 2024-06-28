@@ -5,24 +5,21 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Interface.StringComponentExchanger;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
-public class RestrictedCrafter extends StringComponentExchanger implements EventRegister {
+public class RestrictedPreparedItemCrafterEvent extends StringComponentExchanger implements EventRegister {
 
     private Player player;
     private Inventory clickerInventory;
     private Inventory currentOpeningContainerInventory;
     private final InventoryClickEvent event;
 
-    public RestrictedCrafter(InventoryClickEvent event) {
+    public RestrictedPreparedItemCrafterEvent(InventoryClickEvent event) {
         this.event = event;
         init();
         execute();

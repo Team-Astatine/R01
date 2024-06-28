@@ -10,12 +10,12 @@ import teamzesa.util.Enum.ColorMap;
 import java.util.HashSet;
 import java.util.Set;
 
-public class BanItemHandler extends StringComponentExchanger implements EventRegister {
+public class RestrictedItemCraftHandler extends StringComponentExchanger implements EventRegister {
     private Material currentStuff;
     private Set<Material> lockingStuff;
     private final CraftItemEvent event;
 
-    public BanItemHandler(CraftItemEvent event) {
+    public RestrictedItemCraftHandler(CraftItemEvent event) {
         this.event = event;
         init();
         execute();
