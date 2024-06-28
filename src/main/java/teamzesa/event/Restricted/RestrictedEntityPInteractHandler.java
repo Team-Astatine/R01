@@ -7,10 +7,10 @@ import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Interface.StringComponentExchanger;
 
-public class RestrictedEntityPlaceHandler extends StringComponentExchanger implements EventRegister {
+public class RestrictedEntityPInteractHandler extends StringComponentExchanger implements EventRegister {
     private final PlayerInteractEvent event;
 
-    public RestrictedEntityPlaceHandler(PlayerInteractEvent event) {
+    public RestrictedEntityPInteractHandler(PlayerInteractEvent event) {
         this.event = event;
         init();
         execute();

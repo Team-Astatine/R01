@@ -133,7 +133,7 @@ public class EventRegisterSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public static void PlayerInteractEvent(PlayerInteractEvent event) {
         new AntiLeverAutoClicker(event);
-        new RestrictedEntityPlaceHandler(event);
+        new RestrictedEntityPInteractHandler(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
