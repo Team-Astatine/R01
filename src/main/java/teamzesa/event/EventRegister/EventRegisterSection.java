@@ -72,7 +72,6 @@ public class EventRegisterSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public static void PlayerDeathEvent(PlayerDeathEvent event) {
         new LifeSteelEvent(event);
-        new PlayerFlyEnableEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -94,6 +93,7 @@ public class EventRegisterSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public static void PlayerRespawnEvent(PlayerRespawnEvent event) {
         new RespawnEvent(event);
+        new PlayerFlyEnableEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
