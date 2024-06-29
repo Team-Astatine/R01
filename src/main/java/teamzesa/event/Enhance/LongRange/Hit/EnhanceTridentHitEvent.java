@@ -40,6 +40,9 @@ public class EnhanceTridentHitEvent extends EnhanceUtil implements EventRegister
         if (!mainHandTrident.hasItemMeta())
             return;
 
+        if (!mainHandTrident.getItemMeta().hasCustomModelData())
+            return;
+
         switch (getItemCustomModelData(mainHandTrident)) {
             case 1,2,3 -> executeEnhanceState(Sound.ENTITY_GHAST_DEATH, 0, false);
             case 4,5,6 -> executeEnhanceState(Sound.ENTITY_ENDER_DRAGON_HURT, 1F, false);

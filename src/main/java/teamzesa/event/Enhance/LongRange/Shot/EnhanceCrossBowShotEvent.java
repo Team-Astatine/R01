@@ -39,6 +39,9 @@ public class EnhanceCrossBowShotEvent extends EnhanceUtil implements EventRegist
         if (!mainHandBow.hasItemMeta())
             return;
 
+        if (!mainHandBow.getItemMeta().hasCustomModelData())
+            return;
+
         Vector vector = this.event.getEntity().getVelocity();
         switch (getItemCustomModelData(mainHandBow)) {
             case 1,2,3 -> executeEnhanceState(1, 1, Sound.ENTITY_GHAST_DEATH, vector);
