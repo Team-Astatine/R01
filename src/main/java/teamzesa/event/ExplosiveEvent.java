@@ -43,12 +43,12 @@ public class ExplosiveEvent implements EventRegister {
 
     private void creeperBoom() {
         Creeper creeper = (Creeper) this.event.getEntity();
-        int explosiveRadius = creeper.isPowered() ? 100 : 10;
+        int explosiveRadius = creeper.isPowered() ? 100 : 5;
         this.location.createExplosion(explosiveRadius, true);
     }
 
     private void ghastBoom() {
-        this.location.createExplosion(20, true);
+        this.location.createExplosion(3, true);
     }
 
     private void witherBoom() {
