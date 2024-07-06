@@ -59,6 +59,8 @@ public class EnhanceBowShotEvent extends EnhanceUtil implements EventRegister {
             this.arrow.setPierceLevel(pierceLevel);
             this.event.getEntity().setVelocity(vector.multiply(shootingSpeed));
             this.arrow.getWorld().playSound(arrow.getLocation(), sound, 5F, 5F);
+
+            this.arrow.setCritical(false);
         };
 
         tridentThrowingTask.run();
