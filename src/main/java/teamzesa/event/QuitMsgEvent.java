@@ -31,12 +31,12 @@ public class QuitMsgEvent extends StringComponentExchanger implements EventRegis
 
         if (userKillStatus.killCount() == 0)
             this.quitEvent.quitMessage(
-                    componentExchanger(" - " + this.quitUser.nameList().getFirst(), ColorMap.RED)
+                    componentExchanger(" - " + this.quitUser.nameList().getLast(), ColorMap.RED)
             );
 
         else
             this.quitEvent.quitMessage(
-                    componentExchanger(" - [ " + userKillStatus.killCount() + "KILL ] " + this.quitUser.nameList().getFirst(), ColorMap.RED)
+                    componentExchanger(" - [ " + userKillStatus.killCount() + "KILL ] " + this.quitUser.nameList().getLast(), ColorMap.RED)
             );
     }
 }

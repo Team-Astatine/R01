@@ -58,7 +58,7 @@ public class PlayerInfoHandler extends StringComponentExchanger implements Event
     }
 
     private void updateUserInfo(String name, String ip, boolean hasPlayedBefore) {
-        boolean equalsLastName = this.joinUser.nameList().getFirst().equals(name);
+        boolean equalsLastName = this.joinUser.nameList().getLast().equals(name);
         boolean nonExistsIP = !this.joinUser.connectionIPList().contains(ip);
 
         if (!hasPlayedBefore || !equalsLastName) {

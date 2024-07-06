@@ -73,7 +73,7 @@ public class LifeSteelEvent extends StringComponentExchanger implements EventReg
 
         //스스로가 스스로를 죽이면 무시함
         if (this.deather.equals(this.killer)) {
-            this.event.deathMessage(componentExchanger(this.deatherUser.nameList().getFirst() + " 님이 자살했습니다.", ColorMap.RED));
+            this.event.deathMessage(componentExchanger(this.deatherUser.nameList().getLast() + " 님이 자살했습니다.", ColorMap.RED));
             return true;
         }
 
@@ -111,9 +111,9 @@ public class LifeSteelEvent extends StringComponentExchanger implements EventReg
         playerSendMsgComponentExchanger(this.deather, this.killer.getName() + "님이 체력을 약탈했습니다.", ColorMap.RED);
         playerSendMsgComponentExchanger(this.killer, this.deather.getName() + "님이 체력을 약탈했습니다.", ColorMap.RED);
 
-        String deathUserName = this.userController.readUser(this.killer.getUniqueId()).nameList().getFirst();
+        String deathUserName = this.userController.readUser(this.killer.getUniqueId()).nameList().getLast();
         this.event.deathMessage(
-                componentExchanger("[KILL]" + deathUserName + " -> " + this.deatherUser.nameList().getFirst(), ColorMap.PINK)
+                componentExchanger("[KILL]" + deathUserName + " -> " + this.deatherUser.nameList().getLast(), ColorMap.PINK)
         );
     }
 }
