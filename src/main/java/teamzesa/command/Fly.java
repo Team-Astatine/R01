@@ -20,6 +20,7 @@ public class Fly extends CommandRegisterSection {
         Player targetPlayer = (Player) sender;
 
         targetPlayer.setAllowFlight(!targetPlayer.getAllowFlight());
+
         String comment = targetPlayer.getAllowFlight() ? "활성화" : "비활성화";
         playerSendMsgComponentExchanger(targetPlayer,"플라이 " + comment, ColorMap.YELLOW);
         return true;
