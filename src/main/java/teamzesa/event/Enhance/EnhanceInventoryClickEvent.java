@@ -16,8 +16,8 @@ import teamzesa.util.Interface.StringComponentExchanger;
 
 import java.util.HashSet;
 
-import static teamzesa.command.EnhanceStuff.EXECUTE_STUFF_DATA;
-import static teamzesa.command.EnhanceStuff.PANEL_STUFF_CUSTOM_DATA;
+import static teamzesa.command.EnhanceDialog.EXECUTE_STUFF_DATA;
+import static teamzesa.command.EnhanceDialog.PANEL_STUFF_CUSTOM_DATA;
 
 public class EnhanceInventoryClickEvent extends StringComponentExchanger implements EventRegister {
     private Player ownerPlayer;

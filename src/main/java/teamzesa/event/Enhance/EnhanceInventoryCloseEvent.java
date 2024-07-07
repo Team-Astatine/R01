@@ -8,7 +8,7 @@ import teamzesa.event.EventRegister.EventRegister;
 
 import java.util.*;
 
-import static teamzesa.command.EnhanceStuff.EXECUTE_STUFF_DATA;
+import static teamzesa.command.EnhanceDialog.EXECUTE_STUFF_DATA;
 
 public class EnhanceInventoryCloseEvent implements EventRegister {
     private final int MINIMUM_INVENTORY_SLOT = 5;
