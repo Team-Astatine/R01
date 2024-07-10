@@ -27,10 +27,11 @@ public class UserController {
     }
 
     public User readUser(String userName) {
-        return this.userDataBase.getAllUserTable().values().stream()
-                .filter(data -> data.nameList().contains(userName))
-                .findFirst()
-                .orElse(null);
+        Player player = Bukkit.getPlayer(userName);
+        if (player == null)
+            throw new IllegalArgumentException("UserController->readUser() Can't Exchanging Player");
+
+        return readUser(player.getUniqueId());
     }
 
     public void updateUser(@NotNull User user) {
