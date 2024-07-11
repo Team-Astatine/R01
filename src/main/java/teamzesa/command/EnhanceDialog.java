@@ -82,9 +82,11 @@ public class EnhanceDialog extends CommandRegisterSection {
         inventory.setItem(2, this.protectScrollStuff);
 
 //        🟦🟥◻️
-        inventory.setItem(6, this.discordButton);
+//        inventory.setItem(6, this.discordButton);
+        inventory.setItem(6, this.executeButton);
         inventory.setItem(7, this.executeButton);
-        inventory.setItem(8, this.notionButton);
+        inventory.setItem(8, this.executeButton);
+//        inventory.setItem(8, this.notionButton);
 
         sendPlayer.openInventory(inventory);
         return true;
