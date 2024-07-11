@@ -32,13 +32,10 @@ public class EntityAttackSpeedHandler implements EventRegister {
         if (!(this.targetEntity instanceof Player target))
             return;
 
-        int hurtTick = 20; //default 20
+        int hurtTick = 10; //default 20
         boolean stuffCheck = isDualWeaponChecker(
                 damager.getInventory().getItemInMainHand().getType(),
                 damager.getInventory().getItemInOffHand().getType());
-
-        if (!stuffCheck) //One Hand Sword
-            hurtTick = 10;
 
         if (stuffCheck) //Two Hand Sword
             hurtTick = 1;
