@@ -1,5 +1,6 @@
 package teamzesa.event.Enhance.LongRange.Shot;
 
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.*;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
@@ -10,6 +11,7 @@ import teamzesa.event.EventRegister.EventRegister;
 
 public class EnhanceTridentShotEvent extends EnhanceUtil implements EventRegister {
     private Trident trident;
+    private ItemStack shooterTrident;
     private final ProjectileLaunchEvent event;
 
     public EnhanceTridentShotEvent(ProjectileLaunchEvent event) {
@@ -26,20 +28,23 @@ public class EnhanceTridentShotEvent extends EnhanceUtil implements EventRegiste
         if (!(this.event.getEntity() instanceof Trident trident))
             return;
 
-        if (!(this.event.getEntity().getShooter() instanceof Player player))
+        if (!(this.event.getEntity().getShooter() instanceof Player shooter))
             return;
 
         this.trident = trident;
-        ItemStack mainHandTrident = player.getInventory().getItemInMainHand();
+        this.shooterTrident = shooter.getInventory().getItemInMainHand();
 
-        if (!mainHandTrident.hasItemMeta())
+        if (this.shooterTrident.getType() != Material.TRIDENT)
+            this.shooterTrident = shooter.getInventory().getItemInOffHand();
+
+        if (!this.shooterTrident.hasItemMeta())
             return;
 
-        if (!mainHandTrident.getItemMeta().hasCustomModelData())
+        if (!this.shooterTrident.getItemMeta().hasCustomModelData())
             return;
 
         Vector vector = this.event.getEntity().getVelocity();
-        switch (getItemCustomModelData(mainHandTrident)) {
+        switch (getItemCustomModelData(this.shooterTrident)) {
             case 1,2,3 -> executeEnhanceState(1,1, 1, Sound.ENTITY_GHAST_DEATH, vector);
             case 4,5,6 -> executeEnhanceState(1,2, 3, Sound.ENTITY_ENDER_DRAGON_HURT, vector);
             case 7,8,9 -> executeEnhanceState(2,3, 6, Sound.ENTITY_WITHER_SPAWN, vector);
@@ -56,7 +61,7 @@ public class EnhanceTridentShotEvent extends EnhanceUtil implements EventRegiste
             this.trident.setPierceLevel(pierceLevel);
             this.trident.setLoyaltyLevel(loyaltyLevel);
             this.event.getEntity().setVelocity(vector.multiply(shootingSpeed));
-            this.trident.getWorld().playSound(trident.getLocation(), sound, 5F, 5F);
+            this.trident.getWorld().playSound(this.trident.getLocation(), sound, 5F, 5F);
         };
 
         tridentThrowingTask.run();

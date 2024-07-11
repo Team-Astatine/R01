@@ -1,5 +1,6 @@
 package teamzesa.event.Enhance.LongRange.Shot;
 
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
@@ -35,6 +36,9 @@ public class EnhanceBowShotEvent extends EnhanceUtil implements EventRegister {
 
         this.arrow = arrow;
         ItemStack mainHandBow = shooter.getInventory().getItemInMainHand();
+
+        if (mainHandBow.getType() != Material.BOW)
+            mainHandBow = shooter.getInventory().getItemInOffHand();
 
         if (!mainHandBow.hasItemMeta())
             return;
