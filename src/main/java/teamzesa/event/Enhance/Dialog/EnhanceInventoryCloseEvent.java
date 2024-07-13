@@ -1,4 +1,4 @@
-package teamzesa.event.Enhance;
+package teamzesa.event.Enhance.Dialog;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryCloseEvent;

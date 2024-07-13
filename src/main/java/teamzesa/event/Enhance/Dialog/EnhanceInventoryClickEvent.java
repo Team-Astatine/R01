@@ -1,4 +1,4 @@
-package teamzesa.event.Enhance;
+package teamzesa.event.Enhance.Dialog;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -7,6 +7,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.DataBase.enhance.EnhanceItemBuilder;
 import teamzesa.DataBase.entity.EnhanceItem;
+import teamzesa.event.Enhance.GeneratingEnhanceItem;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.Enhance.LongRangeWeaponMap;
