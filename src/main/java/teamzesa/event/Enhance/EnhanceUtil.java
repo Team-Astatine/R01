@@ -6,6 +6,8 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import teamzesa.exception.Enhance.EnhanceItemMetaException;
+import teamzesa.exception.Enhance.EnhanceScrollTypeException;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.Enhance.*;
 import teamzesa.util.Interface.StringComponentExchanger;
@@ -48,19 +50,24 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         return increaseDmg == 0.5 ? 0 : increaseDmg;
     }
 
-    public static void isItemHasCustomModelData(ItemStack item,String funtion) {
+    public static void isItemHasCustomModelData(ItemStack item,String funtion) throws EnhanceItemMetaException {
         if (item == null)
-            throw new IllegalArgumentException("item == null");
+            throw new EnhanceItemMetaException("item == null");
 
         if (!item.hasItemMeta())
-            throw new IllegalArgumentException(funtion + " hasItemMeta == null");
+            throw new EnhanceItemMetaException(funtion + " hasItemMeta == null");
 
         if (!item.getItemMeta().hasCustomModelData())
-            throw new IllegalArgumentException(funtion + " hasCustomModelData == null");
+            throw new EnhanceItemMetaException(funtion + " hasCustomModelData == null");
     }
 
-    public static void addItemDescription(ItemStack item, int customModelData) {
-        isItemHasCustomModelData(item, "addItemDescription");
+    public static void addItemDescription(ItemStack item, int customModelData) throws EnhanceItemMetaException {
+
+        try {
+            isItemHasCustomModelData(item, "addItemDescription");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.setCustomModelData(itemMeta.getCustomModelData() + customModelData);
@@ -74,7 +81,11 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
     }
 
     public static Component getEnhanceStatusComponent(ItemStack item) {
-        isItemHasCustomModelData(item, "getEnhanceStatusComponent");
+        try {
+            isItemHasCustomModelData(item, "getEnhanceStatusComponent");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         for (EnhanceStageComment enhanceStageComment : EnhanceStageComment.values()) {
             if (item.getItemMeta().getCustomModelData() == enhanceStageComment.getEnhanceStack())
@@ -97,7 +108,11 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
     }
 
     public int getItemCustomModelData(ItemStack item) {
-        isItemHasCustomModelData(item, "getItemCustomModelData");
+        try {
+            isItemHasCustomModelData(item, "getItemCustomModelData");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return checkModelData(item).getItemMeta().getCustomModelData();
     }
 
@@ -111,15 +126,21 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
     }
 
     public static void scrollDiscount(ItemStack scroll, ItemStack protectScroll) {
-        if (protectScroll != null)
-            protectScroll.setAmount(protectScroll.getAmount() - getScrollType(protectScroll).getDiscountProtectValue());
+        try {
 
-        scroll.setAmount(scroll.getAmount() - getScrollType(scroll).getDiscountValue());
+            if (protectScroll != null) {
+                protectScroll.setAmount(protectScroll.getAmount() - getScrollType(protectScroll).getDiscountProtectValue());
+            }
+
+            scroll.setAmount(scroll.getAmount() - getScrollType(scroll).getDiscountValue());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public static ScrollMap getScrollType(ItemStack scroll) {
+    public static ScrollMap getScrollType(ItemStack scroll) throws EnhanceScrollTypeException {
         if (scroll == null)
-            throw new IllegalArgumentException("getScrollType Parameter Scroll == Null");
+            throw new EnhanceScrollTypeException("getScrollType Parameter Scroll == Null");
 
         ScrollMap resultScroll = null;
         for (ScrollMap scrollMap : ScrollMap.values()) {
@@ -129,7 +150,7 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         }
 
         if (resultScroll == null)
-            throw new IllegalArgumentException("getScrollType Non Register Scroll > " + scroll);
+            throw new EnhanceScrollTypeException("getScrollType Non Register Scroll > " + scroll);
 
         return resultScroll;
     }
@@ -159,7 +180,11 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
     }
 
     public static double calculatingTotalEnhanceStageDamage(ItemStack item, double totalDamage) {
-        isItemHasCustomModelData(item, "getEnhanceState");
+        try {
+            isItemHasCustomModelData(item, "getEnhanceState");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         ItemMeta itemMeta = item.getItemMeta();
         for (int i = 0; i < itemMeta.getCustomModelData(); i++) {

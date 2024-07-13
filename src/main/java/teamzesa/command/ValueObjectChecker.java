@@ -23,7 +23,13 @@ public class ValueObjectChecker extends CommandRegisterSection {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
-        User user = new UserController().readUser(args[0]);
+        User user = null;
+        try {
+            user = new UserController().readUser(args[0]);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         Optional.ofNullable(user)
                 .ifPresentOrElse(
                     existUser -> {

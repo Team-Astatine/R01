@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.DataBase.entity.RObject.User;
+import teamzesa.exception.NullReadUserException;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -26,10 +27,10 @@ public class UserController {
         return this.userDataBase.select(uuid);
     }
 
-    public User readUser(String userName) {
+    public User readUser(String userName) throws NullReadUserException {
         Player player = Bukkit.getPlayer(userName);
         if (player == null)
-            throw new IllegalArgumentException("UserController->readUser() Can't Exchanging Player");
+            throw new NullReadUserException("UserController->readUser() Can't Exchanging Player");
 
         return readUser(player.getUniqueId());
     }

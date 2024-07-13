@@ -27,7 +27,12 @@ public class God extends CommandRegisterSection {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
-        this.senderUser = new UserController().readUser(sender.getName());
+        try {
+            this.senderUser = new UserController().readUser(sender.getName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         Optional.ofNullable(this.senderUser).ifPresentOrElse(
                 existUser -> this.senderPlayer = Bukkit.getPlayer(existUser.uuid()),
                 ()        -> this.isConsoleSend = true

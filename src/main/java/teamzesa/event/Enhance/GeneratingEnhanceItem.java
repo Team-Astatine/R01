@@ -31,14 +31,21 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
         if (this.item.protectScroll() != null)
             this.hasProtectScroll = true;
 
-//        enhance
-        this.isScrollEnough =
-                this.item.enhanceScroll().getAmount() >= getScrollType(this.item.enhanceScroll()).getDiscountValue();
+        try {// enhance
+            this.isScrollEnough =
+                    this.item.enhanceScroll().getAmount() >= getScrollType(this.item.enhanceScroll()).getDiscountValue();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-//        protect
-        if (hasProtectScroll)
-            this.isProtectScrollEnough =
+        try { // protect
+            if (hasProtectScroll) {
+                this.isProtectScrollEnough =
                     this.item.protectScroll().getAmount() >= getScrollType(this.item.protectScroll()).getDiscountProtectValue();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void executeEnhance() {
@@ -90,12 +97,20 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
 
     private void successEnhanceScenario() {
         playerSendMessage(6, ColorMap.DISCORD_COLOR);
-        addItemDescription(this.item.enhanceItem(), +1);
+        try {
+            addItemDescription(this.item.enhanceItem(), +1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void failEnhanceScenario() {
         playerSendMessage(5, ColorMap.PINK);
-        addItemDescription(this.item.enhanceItem(), -1);
+        try {
+            addItemDescription(this.item.enhanceItem(), -1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void playerSendMessage(int commentCode, ColorMap commentColor) {

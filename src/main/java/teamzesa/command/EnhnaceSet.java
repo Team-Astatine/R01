@@ -41,7 +41,11 @@ public class EnhnaceSet extends CommandRegisterSection {
         targetItemMeta.setCustomModelData(0);
         targetItem.setItemMeta(targetItemMeta);
 
-        EnhanceUtil.addItemDescription(targetItem, enhanceLevel - targetItem.getItemMeta().getCustomModelData());
+        try {
+            EnhanceUtil.addItemDescription(targetItem, enhanceLevel - targetItem.getItemMeta().getCustomModelData());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         playerSendMsgComponentExchanger(player, getComment(enhanceLevel) , ColorMap.GREEN);
         return true;
