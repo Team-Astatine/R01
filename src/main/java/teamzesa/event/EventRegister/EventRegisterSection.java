@@ -13,6 +13,17 @@ import org.bukkit.event.player.*;
 import org.bukkit.event.raid.RaidTriggerEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
 import teamzesa.event.*;
+import teamzesa.event.Enhance.LongRange.GodMode.GodModeTridentHitEvent;
+import teamzesa.event.Enhance.LongRange.GodMode.GodModeTridentShotEvent;
+import teamzesa.event.EntityDamageByEntityEvent.EntityAttackSpeedHandler;
+import teamzesa.event.EntityExplodeEvent.ExplosiveEvent;
+import teamzesa.event.PlayerArmSwingEvent.HandSwingEvent;
+import teamzesa.event.PlayerDeathEvent.LifeSteelEvent;
+import teamzesa.event.PlayerJoinEvent.ImportPlayerStatusEvent;
+import teamzesa.event.PlayerJoinEvent.PlayerFlyEnableEvent;
+import teamzesa.event.PlayerJoinEvent.PlayerInfoHandler;
+import teamzesa.event.PlayerQuitEvent.QuitMsgEvent;
+import teamzesa.event.RaidTriggerEvent.RaidAnnouncerEvent;
 import teamzesa.event.Restricted.*;
 import teamzesa.event.Restricted.AntiExploit.*;
 import teamzesa.event.Enhance.*;
@@ -126,7 +137,7 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public static void EntityDamageEvent(EntityDamageEvent event) {
-//        Event Cancelled 하면안됌
+//        Event Cancelled 하면 해당 Event 자체가 캔슬됌.
 //        new EnhanceResistanceEvent(event);
         new EnhanceShortRangeWeaponHurtEvent(event);
     }

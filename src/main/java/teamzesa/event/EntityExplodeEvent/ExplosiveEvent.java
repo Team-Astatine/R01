@@ -1,4 +1,4 @@
-package teamzesa.event;
+package teamzesa.event.EntityExplodeEvent;
 
 import org.bukkit.Location;
 import org.bukkit.entity.*;

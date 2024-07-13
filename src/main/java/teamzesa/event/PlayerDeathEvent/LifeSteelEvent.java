@@ -1,4 +1,4 @@
-package teamzesa.event;
+package teamzesa.event.PlayerDeathEvent;
 
 import org.bukkit.*;
 import org.bukkit.entity.Player;

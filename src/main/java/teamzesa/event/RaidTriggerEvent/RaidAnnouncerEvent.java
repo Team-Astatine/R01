@@ -1,4 +1,4 @@
-package teamzesa.event;
+package teamzesa.event.RaidTriggerEvent;
 
 import org.bukkit.Location;
 import org.bukkit.event.raid.RaidTriggerEvent;

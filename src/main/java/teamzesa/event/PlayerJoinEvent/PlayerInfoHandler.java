@@ -1,4 +1,4 @@
-package teamzesa.event;
+package teamzesa.event.PlayerJoinEvent;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

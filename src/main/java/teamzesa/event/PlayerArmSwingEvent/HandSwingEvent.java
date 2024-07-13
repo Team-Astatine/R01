@@ -1,4 +1,4 @@
-package teamzesa.event;
+package teamzesa.event.PlayerArmSwingEvent;
 
 import io.papermc.paper.event.player.PlayerArmSwingEvent;
 import org.bukkit.Bukkit;
