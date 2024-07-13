@@ -1,4 +1,4 @@
-package teamzesa.event;
+package teamzesa.event.Enhance.LongRange.GodMode;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.ProjectileLaunchEvent;

@@ -1,4 +1,4 @@
-package teamzesa.event.Enhance;
+package teamzesa.event.Enhance.Dialog;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -7,6 +7,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.DataBase.enhance.EnhanceItemBuilder;
 import teamzesa.DataBase.entity.EnhanceItem;
+import teamzesa.event.Enhance.GeneratingEnhanceItem;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.Enhance.LongRangeWeaponMap;
@@ -16,8 +17,8 @@ import teamzesa.util.Interface.StringComponentExchanger;
 
 import java.util.HashSet;
 
-import static teamzesa.command.EnhanceStuff.EXECUTE_STUFF_DATA;
-import static teamzesa.command.EnhanceStuff.PANEL_STUFF_CUSTOM_DATA;
+import static teamzesa.command.EnhanceDialog.EXECUTE_STUFF_DATA;
+import static teamzesa.command.EnhanceDialog.PANEL_STUFF_CUSTOM_DATA;
 
 public class EnhanceInventoryClickEvent extends StringComponentExchanger implements EventRegister {
     private Player ownerPlayer;

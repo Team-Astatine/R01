@@ -16,17 +16,19 @@ import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.CommandExecutorMap;
 
-public class EnhanceStuff extends CommandRegisterSection {
+public class EnhanceDialog extends CommandRegisterSection {
     private Player sendPlayer;
     private ItemStack targetStuff;
     private ItemStack scrollStuff;
     private ItemStack protectScrollStuff;
     private ItemStack executeButton;
+    private ItemStack notionButton;
+    private ItemStack discordButton;
 
     public final static int PANEL_STUFF_CUSTOM_DATA = 20000;
     public final static int EXECUTE_STUFF_DATA = 30000;
 
-    public EnhanceStuff() {
+    public EnhanceDialog() {
         super(CommandExecutorMap.ENHANCE);
         init();
     }
@@ -36,7 +38,9 @@ public class EnhanceStuff extends CommandRegisterSection {
         this.targetStuff = createItem(Material.NETHERITE_SWORD, "강화할 아래슬롯에 무기를 올려주세요", ColorMap.ORANGE);
         this.scrollStuff = createItem(Material.ANVIL, "아이템에 들어갈 재료를 아래슬롯에 넣어주세요", ColorMap.ORANGE);
         this.protectScrollStuff = createItem(Material.HEART_OF_THE_SEA, "파괴방어 스크롤을 아래슬롯에 넣어주세요", ColorMap.ORANGE);
-        this.executeButton = createExecuteItem(Material.RED_STAINED_GLASS_PANE, "강화 실행", ColorMap.DISCORD_COLOR);
+        this.executeButton = createExecuteItem(Material.RED_STAINED_GLASS_PANE, "강화 실행", ColorMap.RED);
+        this.discordButton = createExecuteItem(Material.LIGHT_BLUE_STAINED_GLASS_PANE,"디스코드", ColorMap.DISCORD_COLOR);
+        this.notionButton = createExecuteItem(Material.LIGHT_GRAY_STAINED_GLASS_PANE,"강화법 확인하기", ColorMap.NOTIOIN_COLOR);
     }
 
     private ItemStack createExecuteItem(Material material, String comment, ColorMap color) {
@@ -77,10 +81,12 @@ public class EnhanceStuff extends CommandRegisterSection {
         inventory.setItem(1, this.scrollStuff);
         inventory.setItem(2, this.protectScrollStuff);
 
-//        🔘🔘🔘
+//        🟦🟥◻️
+//        inventory.setItem(6, this.discordButton);
         inventory.setItem(6, this.executeButton);
         inventory.setItem(7, this.executeButton);
         inventory.setItem(8, this.executeButton);
+//        inventory.setItem(8, this.notionButton);
 
         sendPlayer.openInventory(inventory);
         return true;

@@ -27,7 +27,12 @@ public class God extends CommandRegisterSection {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
-        this.senderUser = new UserController().readUser(sender.getName());
+        try {
+            this.senderUser = new UserController().readUser(sender.getName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         Optional.ofNullable(this.senderUser).ifPresentOrElse(
                 existUser -> this.senderPlayer = Bukkit.getPlayer(existUser.uuid()),
                 ()        -> this.isConsoleSend = true
@@ -65,10 +70,10 @@ public class God extends CommandRegisterSection {
         String comment = "은(는) 이제 " + targetStatus + " 입니다.";
 
         if (isConsoleSend)
-            Bukkit.getLogger().info("[R01] " + targetUser.nameList().getFirst() + comment);
+            Bukkit.getLogger().info("[R01] " + targetUser.nameList().getLast() + comment);
 
         else if (!this.senderPlayer.equals(targetPlayer))
-            playerSendMsgComponentExchanger(this.senderPlayer, targetUser.nameList().getFirst() + comment, ColorMap.ORANGE);
+            playerSendMsgComponentExchanger(this.senderPlayer, targetUser.nameList().getLast() + comment, ColorMap.ORANGE);
 
         playerSendMsgComponentExchanger(targetPlayer, "당신" + comment, ColorMap.ORANGE);
 

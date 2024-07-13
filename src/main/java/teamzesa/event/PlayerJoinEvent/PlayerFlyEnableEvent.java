@@ -1,8 +1,7 @@
-package teamzesa.event;
+package teamzesa.event.PlayerJoinEvent;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
@@ -42,6 +41,7 @@ public class PlayerFlyEnableEvent extends StringComponentExchanger implements Ev
     @Override
     public void execute() {
         this.player.setAllowFlight(true);
+        this.player.setFlying(true);
 
         User user = new UserController().readUser(this.player.getUniqueId());
         if (user.isGodMode())

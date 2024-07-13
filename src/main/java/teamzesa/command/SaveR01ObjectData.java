@@ -27,7 +27,13 @@ public class SaveR01ObjectData extends CommandRegisterSection {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, Command command, String label, String[] args) {
-        User senderUser = new UserController().readUser(sender.getName());
+        User senderUser = null;
+        try {
+            senderUser = new UserController().readUser(sender.getName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         Optional.ofNullable(senderUser).ifPresentOrElse(
                 existUser -> this.senderPlayer = Bukkit.getPlayer(existUser.uuid()),
                 ()        -> this.isConsoleSend = true

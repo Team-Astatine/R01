@@ -1,4 +1,4 @@
-package teamzesa.event;
+package teamzesa.event.PlayerJoinEvent;
 
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -99,11 +99,11 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
 
         if (this.userKillStatus.killCount() == 0)
             this.event.joinMessage(
-                componentExchanger(" + " + this.user.nameList().getFirst(), ColorMap.RED)
+                componentExchanger(" + " + this.user.nameList().getLast(), ColorMap.RED)
             );
 
         else this.event.joinMessage(
-            componentExchanger(" + [ " + this.userKillStatus.killCount() + "KILL ] " + user.nameList().getFirst(), ColorMap.RED)
+            componentExchanger(" + [ " + this.userKillStatus.killCount() + "KILL ] " + user.nameList().getLast(), ColorMap.RED)
         );
     }
 

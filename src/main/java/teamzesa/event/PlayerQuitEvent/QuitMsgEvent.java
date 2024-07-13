@@ -1,4 +1,4 @@
-package teamzesa.event;
+package teamzesa.event.PlayerQuitEvent;
 
 import org.bukkit.event.player.PlayerQuitEvent;
 import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
@@ -31,12 +31,12 @@ public class QuitMsgEvent extends StringComponentExchanger implements EventRegis
 
         if (userKillStatus.killCount() == 0)
             this.quitEvent.quitMessage(
-                    componentExchanger(" - " + this.quitUser.nameList().getFirst(), ColorMap.RED)
+                    componentExchanger(" - " + this.quitUser.nameList().getLast(), ColorMap.RED)
             );
 
         else
             this.quitEvent.quitMessage(
-                    componentExchanger(" - [ " + userKillStatus.killCount() + "KILL ] " + this.quitUser.nameList().getFirst(), ColorMap.RED)
+                    componentExchanger(" - [ " + userKillStatus.killCount() + "KILL ] " + this.quitUser.nameList().getLast(), ColorMap.RED)
             );
     }
 }
@@ -44,8 +44,8 @@ public class QuitMsgEvent extends StringComponentExchanger implements EventRegis
 /*
 [06:41:13 ERROR]: Could not pass event PlayerQuitEvent to R01 v4.3
 java.lang.NullPointerException: Cannot invoke "teamzesa.entity.User.killCount()" because "this.quitUser" is null
-        at teamzesa.event.QuitMsgEvent.execute(QuitMsgEvent.java:29) ~[R01-4.3.jar:?]
-        at teamzesa.event.QuitMsgEvent.<init>(QuitMsgEvent.java:18) ~[R01-4.3.jar:?]
+        at teamzesa.event.PlayerQuitEvent.QuitMsgEvent.execute(QuitMsgEvent.java:29) ~[R01-4.3.jar:?]
+        at teamzesa.event.PlayerQuitEvent.QuitMsgEvent.<init>(QuitMsgEvent.java:18) ~[R01-4.3.jar:?]
         at teamzesa.event.register.EventRegisterSection.quitEvent(EventRegisterSection.java:58) ~[R01-4.3.jar:?]
         at com.destroystokyo.paper.event.executor.asm.generated.GeneratedEventExecutor467.execute(Unknown Source) ~[?:?]
         at org.bukkit.plugin.EventExecutor$2.execute(EventExecutor.java:77) ~[purpur-api-1.20.4-R0.1-SNAPSHOT.jar:?]

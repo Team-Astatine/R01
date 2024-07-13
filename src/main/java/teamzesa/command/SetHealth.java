@@ -27,7 +27,13 @@ public class SetHealth extends CommandRegisterSection {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String @NotNull [] args) {
-        User senderUser = new UserController().readUser(sender.getName());
+        User senderUser = null;
+        try {
+            senderUser =  new UserController().readUser(sender.getName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         Optional.ofNullable(senderUser).ifPresentOrElse(
                 existUser -> this.senderPlayer = Bukkit.getPlayer(existUser.uuid()),
                 ()        -> this.isConsoleSend = true
@@ -38,7 +44,13 @@ public class SetHealth extends CommandRegisterSection {
             return false;
         }
 
-        User targetUser = new UserController().readUser(args[0]);
+        User targetUser = null;
+        try {
+            targetUser = new UserController().readUser(args[0]);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         Optional.ofNullable(Bukkit.getPlayer(targetUser.uuid())).ifPresent(
                 player -> {
                     this.targetPlayer = player;

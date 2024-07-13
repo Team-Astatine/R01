@@ -26,7 +26,13 @@ public class DataFileReload extends CommandRegisterSection {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        User user = new UserController().readUser(sender.getName());
+        User user = null;
+        try {
+            user = new UserController().readUser(sender.getName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         Optional.ofNullable(user).ifPresentOrElse(
                 existUser -> this.player = Bukkit.getPlayer(existUser.uuid()),
                 ()        -> this.isConsoleSend = true

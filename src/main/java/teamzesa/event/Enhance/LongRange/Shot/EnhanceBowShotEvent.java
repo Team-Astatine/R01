@@ -1,5 +1,6 @@
 package teamzesa.event.Enhance.LongRange.Shot;
 
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
@@ -36,6 +37,9 @@ public class EnhanceBowShotEvent extends EnhanceUtil implements EventRegister {
         this.arrow = arrow;
         ItemStack mainHandBow = shooter.getInventory().getItemInMainHand();
 
+        if (mainHandBow.getType() != Material.BOW)
+            mainHandBow = shooter.getInventory().getItemInOffHand();
+
         if (!mainHandBow.hasItemMeta())
             return;
 
@@ -59,6 +63,8 @@ public class EnhanceBowShotEvent extends EnhanceUtil implements EventRegister {
             this.arrow.setPierceLevel(pierceLevel);
             this.event.getEntity().setVelocity(vector.multiply(shootingSpeed));
             this.arrow.getWorld().playSound(arrow.getLocation(), sound, 5F, 5F);
+
+            this.arrow.setCritical(false);
         };
 
         tridentThrowingTask.run();

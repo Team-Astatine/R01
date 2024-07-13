@@ -12,8 +12,6 @@ public class UserBuilder {
     private HashSet<String> connectionIPList = new HashSet<>();
     private int joinCount;
     private int level;
-    private double healthScale;
-    private int killCount;
     private boolean isGodMode;
     private boolean isAnnouncing;
 
@@ -46,7 +44,9 @@ public class UserBuilder {
     }
 
     public UserBuilder nameList(List<String> name) {
-        this.nameList = name;
+        if (this.nameList.isEmpty())
+            this.nameList = name;
+        else this.nameList.retainAll(name);
         return this;
     }
 
