@@ -20,6 +20,7 @@ import teamzesa.DataBase.IOHandler.ConfigIOHandler;
 import teamzesa.util.Enum.DataFile;
 import teamzesa.util.ThreadPool;
 
+import java.lang.reflect.Field;
 import java.util.*;
 
 
@@ -35,6 +36,8 @@ public final class R01 extends JavaPlugin {
     @Override
     public void onEnable() {
         eventAndFunctionRegister();   //command set
+
+//        setMaxPlayers(50);
 
 //        saveDefaultSource
         if (!getDataFolder().exists())
@@ -63,6 +66,25 @@ public final class R01 extends JavaPlugin {
 
         ThreadPool.getThreadPool().allServiceOff();
         Bukkit.getScheduler().cancelTasks(this);
+    }
+
+    public void setMaxPlayers(int maxPlayers) {
+        try {
+            Object server = Bukkit.getServer();
+            Field consoleField = server.getClass().getDeclaredField("console");
+            consoleField.setAccessible(true);
+            Object console = consoleField.get(server);
+
+            Field playerListField = console.getClass().getSuperclass().getDeclaredField("playerList");
+            playerListField.setAccessible(true);
+            Object playerList = playerListField.get(console);
+
+            Field maxPlayersField = playerList.getClass().getDeclaredField("maxPlayers");
+            maxPlayersField.setAccessible(true);
+            maxPlayersField.set(playerList, maxPlayers);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void RObjectLoader() {
