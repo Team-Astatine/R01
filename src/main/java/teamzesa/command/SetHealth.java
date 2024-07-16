@@ -5,6 +5,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import teamzesa.DataBase.UserKillStatusHandler.KillStatusBuilder;
 import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
 import teamzesa.command.register.CommandRegisterSection;
@@ -13,6 +14,9 @@ import teamzesa.util.Enum.CommandExecutorMap;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.DataBase.userHandler.UserController;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -26,10 +30,10 @@ public class SetHealth extends CommandRegisterSection {
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String @NotNull [] args) {
+    public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         User senderUser = null;
         try {
-            senderUser =  new UserController().readUser(sender.getName());
+            senderUser =  new UserController().readUser(commandSender.getName());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -41,12 +45,12 @@ public class SetHealth extends CommandRegisterSection {
 
         if (senderUser != null && !this.senderPlayer.isOp()) {
             playerSendMsgComponentExchanger(this.senderPlayer,"해당 명령어는 플레이어가 사용할 수 없습니다.", ColorMap.RED);
-            return false;
+            return Collections.emptyList();
         }
 
         User targetUser = null;
         try {
-            targetUser = new UserController().readUser(args[0]);
+            targetUser = new UserController().readUser(strings[0]);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -54,10 +58,10 @@ public class SetHealth extends CommandRegisterSection {
         Optional.ofNullable(Bukkit.getPlayer(targetUser.uuid())).ifPresent(
                 player -> {
                     this.targetPlayer = player;
-                    setPlayerHealth(Double.parseDouble(args[1]));
+                    setPlayerHealth(Double.parseDouble(strings[1]));
                 }
-            );
-        return true;
+        );
+        return new ArrayList<>(List.of("setHealth"));
     }
 
     private void setPlayerHealth(double setHealthValue) {

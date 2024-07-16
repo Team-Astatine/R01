@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.CommandExecutorMap;
 import teamzesa.util.Enum.ColorMap;
@@ -13,6 +14,9 @@ import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.userHandler.UserBuilder;
 import teamzesa.DataBase.userHandler.UserController;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -26,9 +30,9 @@ public class God extends CommandRegisterSection {
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
+    public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         try {
-            this.senderUser = new UserController().readUser(sender.getName());
+            this.senderUser = new UserController().readUser(commandSender.getName());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -40,22 +44,23 @@ public class God extends CommandRegisterSection {
 
         if (this.senderUser != null && !this.senderPlayer.isOp()) {
             playerSendMsgComponentExchanger(this.senderPlayer,"해당 명령어는 플레이어가 사용할 수 없습니다.", ColorMap.RED);
-            return false;
+            return Collections.emptyList();
         }
 
-        Player targetPlayer = Bukkit.getPlayer(args[0]);
+        Player targetPlayer = Bukkit.getPlayer(strings[0]);
         if (targetPlayer == null) {
             String comment = "해당 유저는 존재하지 않습니다.";
 
             if (this.isConsoleSend)
                 Bukkit.getLogger().info("[R01] " + comment);
             else playerSendMsgComponentExchanger(senderPlayer, comment, ColorMap.RED);
-            return false;
+            return Collections.emptyList();
         }
 
         changeUserStatus(targetPlayer);
         isConsoleSend = false;
-        return true;
+
+        return new ArrayList<>(List.of("god"));
     }
 
     private void changeUserStatus(Player targetPlayer) {

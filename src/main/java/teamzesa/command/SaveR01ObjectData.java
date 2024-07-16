@@ -5,6 +5,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import teamzesa.DataBase.IOHandler.RObjectIOHandler;
 import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
 import teamzesa.command.register.CommandRegisterSection;
@@ -14,6 +15,9 @@ import teamzesa.DataBase.userHandler.UserController;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.DataFile;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -26,10 +30,10 @@ public class SaveR01ObjectData extends CommandRegisterSection {
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, Command command, String label, String[] args) {
+    public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         User senderUser = null;
         try {
-            senderUser = new UserController().readUser(sender.getName());
+            senderUser = new UserController().readUser(commandSender.getName());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -41,7 +45,7 @@ public class SaveR01ObjectData extends CommandRegisterSection {
 
         if (senderUser != null && !this.senderPlayer.isOp()) {
             playerSendMsgComponentExchanger(this.senderPlayer,"해당 명령어는 플레이어가 사용할 수 없습니다.", ColorMap.RED);
-            return false;
+            return Collections.emptyList();
         }
 
         new RObjectIOHandler().exportData(
@@ -69,7 +73,7 @@ public class SaveR01ObjectData extends CommandRegisterSection {
                     new KillStatusController().getAllUserTable());
 */
         sendComment("Success to exporting UserData");
-        return true;
+        return new ArrayList<>(List.of("ExportR01Object"));
     }
 
     private void sendComment(String comment) {

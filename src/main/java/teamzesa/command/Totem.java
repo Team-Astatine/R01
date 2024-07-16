@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.CommandExecutorMap;
 import teamzesa.util.Enum.ColorMap;
@@ -29,9 +30,9 @@ public class Totem extends CommandRegisterSection {
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender,@NotNull Command command,@NotNull String label, String[] args) {
+    public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         Runnable executeTotemSupply = () -> {
-            Totem.this.player = (Player) sender;
+            Totem.this.player = (Player) commandSender;
             Totem.this.playerInventory = Totem.this.player.getInventory();
             getAllOfPlayerTotems();
 
@@ -43,7 +44,7 @@ public class Totem extends CommandRegisterSection {
         };
 
         executeTotemSupply.run();
-        return true;
+        return new ArrayList<>(List.of("totem"));
     }
 
     private void getAllOfPlayerTotems() {

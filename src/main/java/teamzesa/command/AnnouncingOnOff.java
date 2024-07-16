@@ -4,12 +4,16 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.CommandExecutorMap;
 import teamzesa.DataBase.userHandler.UserBuilder;
 import teamzesa.DataBase.userHandler.UserController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AnnouncingOnOff extends CommandRegisterSection {
 
@@ -18,7 +22,7 @@ public class AnnouncingOnOff extends CommandRegisterSection {
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+    public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         User targetUser = new UserController().readUser(((Player) commandSender).getUniqueId());
 
         String comment = targetUser.isAnnouncing() ? "비활성화" : "활성화";
@@ -27,6 +31,7 @@ public class AnnouncingOnOff extends CommandRegisterSection {
         new UserBuilder(targetUser)
                 .isAnnouncing(!targetUser.isAnnouncing())
                 .buildAndUpdate();
-        return true;
+
+        return new ArrayList<>(List.of("공지"));
     }
 }

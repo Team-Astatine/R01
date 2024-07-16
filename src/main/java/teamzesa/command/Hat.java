@@ -6,9 +6,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.CommandExecutorMap;
 import teamzesa.util.Enum.ColorMap;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Hat extends CommandRegisterSection {
     private Player player;
@@ -38,6 +43,25 @@ public class Hat extends CommandRegisterSection {
             case hat -> headSet(tmpItemInHand);
         }
         return true;
+    }
+
+    @Override
+    public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+        this.player = (Player) commandSender;
+        this.playerInventory = this.player.getInventory();
+
+        ItemStack tmpItemInHand = this.playerInventory.getItemInMainHand();
+        if (tmpItemInHand.isEmpty()) {
+            playerSendMsgComponentExchanger(this.player,"손에 아이템이 없습니다.", ColorMap.RED);
+            return Collections.emptyList();
+        }
+
+        ArmourType armourType = ArmourType.valueOf(s);
+        switch (armourType) {
+            case hat -> headSet(tmpItemInHand);
+        }
+
+        return new ArrayList<>(List.of("hat"));
     }
 
     private void headSet(ItemStack temp){

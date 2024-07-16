@@ -5,6 +5,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.util.Enum.CommandExecutorMap;
@@ -12,6 +13,9 @@ import teamzesa.R01;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.DataBase.userHandler.UserController;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -25,10 +29,10 @@ public class DataFileReload extends CommandRegisterSection {
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+    public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         User user = null;
         try {
-            user = new UserController().readUser(sender.getName());
+            user = new UserController().readUser(commandSender.getName());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -41,12 +45,13 @@ public class DataFileReload extends CommandRegisterSection {
 //        operation Check
         if (!player.isOp() && !this.isConsoleSend) {
             playerSendMsgComponentExchanger(player,"해당 명령어는 플레이어가 사용할 수 없습니다.", ColorMap.RED);
-            return false;
+            return Collections.emptyList();
         }
 
         sendComment();
         R01.getPlugin(R01.class).configFileLoader();
-        return true;
+
+        return new ArrayList<>(List.of("dataFileReload"));
     }
 
     private void sendComment() {

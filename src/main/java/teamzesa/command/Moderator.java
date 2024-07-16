@@ -5,14 +5,12 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.CommandExecutorMap;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 public class Moderator extends CommandRegisterSection {
     private final Set<UUID> moderatorName;
@@ -34,10 +32,10 @@ public class Moderator extends CommandRegisterSection {
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
+    public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         String successComment = "지금부터 관리자 입니다.";
 
-        Optional.ofNullable(Bukkit.getPlayer(args[0])).ifPresent(
+        Optional.ofNullable(Bukkit.getPlayer(strings[0])).ifPresent(
                 player -> {
                     if (checkUPModerator(player)) {
                         playerSendMsgComponentExchanger(player, successComment, ColorMap.ORANGE);
@@ -45,7 +43,7 @@ public class Moderator extends CommandRegisterSection {
                     }
                 }
         );
-        return true;
+        return new ArrayList<>(List.of("moderator"));
     }
 
     private boolean checkUPModerator(@NotNull Player sendPlayer) {

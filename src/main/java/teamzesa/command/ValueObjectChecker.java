@@ -5,6 +5,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
 import teamzesa.DataBase.entity.RObject.UserKillStatus;
 import teamzesa.command.register.CommandRegisterSection;
@@ -13,6 +14,8 @@ import teamzesa.util.Enum.ColorMap;
 import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.userHandler.UserController;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class ValueObjectChecker extends CommandRegisterSection {
@@ -22,27 +25,27 @@ public class ValueObjectChecker extends CommandRegisterSection {
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
+    public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         User user = null;
         try {
-            user = new UserController().readUser(args[0]);
+            user = new UserController().readUser(strings[0]);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         Optional.ofNullable(user)
                 .ifPresentOrElse(
-                    existUser -> {
-                        UserKillStatus userKillStatus = new KillStatusController().readUser(existUser.uuid());
-                        sendComment(sender, existUser + "\n\n" + userKillStatus);
-                    },
+                        existUser -> {
+                            UserKillStatus userKillStatus = new KillStatusController().readUser(existUser.uuid());
+                            sendComment(commandSender, existUser + "\n\n" + userKillStatus);
+                        },
 
-                    () -> {
-                        sendComment(sender, "존재하지 않는 유저");
-                    }
+                        () -> {
+                            sendComment(commandSender, "존재하지 않는 유저");
+                        }
                 );
 
-        return true;
+        return new ArrayList<>(List.of("vo"));
     }
 
     private void sendComment(CommandSender sender, String comment) {
