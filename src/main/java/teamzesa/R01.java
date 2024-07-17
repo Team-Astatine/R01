@@ -14,7 +14,7 @@ import teamzesa.DataBase.entity.RObject.UserKillStatus;
 import teamzesa.DataBase.userHandler.UserController;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Announcer;
-import teamzesa.event.EventRegister.EventRegisterSection;
+import teamzesa.event.EventRegisterSection;
 import teamzesa.util.Enum.CommandExecutorMap;
 import teamzesa.DataBase.IOHandler.ConfigIOHandler;
 import teamzesa.util.Enum.DataFile;

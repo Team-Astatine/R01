@@ -1,4 +1,4 @@
-package teamzesa.event.EventRegister;
+package teamzesa.event;
 
 import io.papermc.paper.event.player.PlayerArmSwingEvent;
 import org.bukkit.event.EventHandler;
@@ -12,7 +12,6 @@ import org.bukkit.event.inventory.*;
 import org.bukkit.event.player.*;
 import org.bukkit.event.raid.RaidTriggerEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
-import teamzesa.event.*;
 import teamzesa.event.Enhance.Dialog.EnhanceInventoryClickEvent;
 import teamzesa.event.Enhance.Dialog.EnhanceInventoryCloseEvent;
 import teamzesa.event.Enhance.LongRange.GodMode.GodModeTridentHitEvent;
