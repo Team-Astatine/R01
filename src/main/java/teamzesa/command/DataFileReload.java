@@ -29,10 +29,10 @@ public class DataFileReload extends CommandRegisterSection {
     }
 
     @Override
-    public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         User user = null;
         try {
-            user = new UserController().readUser(commandSender.getName());
+            user = new UserController().readUser(sender.getName());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -45,13 +45,12 @@ public class DataFileReload extends CommandRegisterSection {
 //        operation Check
         if (!player.isOp() && !this.isConsoleSend) {
             playerSendMsgComponentExchanger(player,"해당 명령어는 플레이어가 사용할 수 없습니다.", ColorMap.RED);
-            return Collections.emptyList();
+            return false;
         }
 
         sendComment();
         R01.getPlugin(R01.class).configFileLoader();
-
-        return new ArrayList<>(List.of("dataFileReload"));
+        return true;
     }
 
     private void sendComment() {

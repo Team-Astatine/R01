@@ -30,10 +30,10 @@ public class SaveR01ObjectData extends CommandRegisterSection {
     }
 
     @Override
-    public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+    public boolean onCommand(@NotNull CommandSender sender, Command command, String label, String[] args) {
         User senderUser = null;
         try {
-            senderUser = new UserController().readUser(commandSender.getName());
+            senderUser = new UserController().readUser(sender.getName());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -45,7 +45,7 @@ public class SaveR01ObjectData extends CommandRegisterSection {
 
         if (senderUser != null && !this.senderPlayer.isOp()) {
             playerSendMsgComponentExchanger(this.senderPlayer,"해당 명령어는 플레이어가 사용할 수 없습니다.", ColorMap.RED);
-            return Collections.emptyList();
+            return false;
         }
 
         new RObjectIOHandler().exportData(
@@ -73,7 +73,7 @@ public class SaveR01ObjectData extends CommandRegisterSection {
                     new KillStatusController().getAllUserTable());
 */
         sendComment("Success to exporting UserData");
-        return new ArrayList<>(List.of("ExportR01Object"));
+        return true;
     }
 
     private void sendComment(String comment) {

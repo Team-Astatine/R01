@@ -26,18 +26,18 @@ public class EnhnaceSet extends CommandRegisterSection {
     }
 
     @Override
-    public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+    public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         Player player = (Player) commandSender;
 
         if (!commandSender.isOp()) {
             playerSendMsgComponentExchanger(player,"해당 명령어는 플레이어가 사용할 수 없습니다.", ColorMap.RED);
-            return Collections.emptyList();
+            return false;
         }
 
         int enhanceLevel = Integer.parseInt(strings[0]);
         if (enhanceLevel < 0 || enhanceLevel > 10) {
             playerSendMsgComponentExchanger(player,"0 ~ 10 사이 값만 대입 가능합니다.", ColorMap.RED);
-            return Collections.emptyList();
+            return false;
         }
 
         ItemStack targetItem = player.getInventory().getItemInMainHand();
@@ -53,7 +53,7 @@ public class EnhnaceSet extends CommandRegisterSection {
         }
 
         playerSendMsgComponentExchanger(player, getComment(enhanceLevel) , ColorMap.GREEN);
-        return new ArrayList<>(List.of("enhance"));
+        return true;
     }
 
     private String getComment(int enhanceLevel) {

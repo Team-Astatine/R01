@@ -11,6 +11,7 @@ import org.bukkit.event.entity.*;
 import org.bukkit.event.inventory.*;
 import org.bukkit.event.player.*;
 import org.bukkit.event.raid.RaidTriggerEvent;
+import org.bukkit.event.server.TabCompleteEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
 import teamzesa.event.Enhance.Dialog.EnhanceInventoryClickEvent;
 import teamzesa.event.Enhance.Dialog.EnhanceInventoryCloseEvent;
@@ -156,6 +157,11 @@ public class EventRegisterSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public static void BlockPistonExtendEvent(BlockPistonExtendEvent event) {
         new AntiPistonPushGravityBlockEvent(event);
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    public static void TabCompleteEvent(TabCompleteEvent event) {
+        new RestrictedCommandTabCompleteEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)

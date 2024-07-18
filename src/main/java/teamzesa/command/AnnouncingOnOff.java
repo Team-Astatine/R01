@@ -22,7 +22,7 @@ public class AnnouncingOnOff extends CommandRegisterSection {
     }
 
     @Override
-    public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+    public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         User targetUser = new UserController().readUser(((Player) commandSender).getUniqueId());
 
         String comment = targetUser.isAnnouncing() ? "비활성화" : "활성화";
@@ -31,7 +31,6 @@ public class AnnouncingOnOff extends CommandRegisterSection {
         new UserBuilder(targetUser)
                 .isAnnouncing(!targetUser.isAnnouncing())
                 .buildAndUpdate();
-
-        return new ArrayList<>(List.of("공지"));
+        return true;
     }
 }

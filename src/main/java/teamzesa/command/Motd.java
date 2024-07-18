@@ -26,11 +26,11 @@ public class Motd extends CommandRegisterSection {
     }
 
     @Override
-    public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
-        getteringNewMotd(strings);
-        sendComment(commandSender);
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
+        getteringNewMotd(args);
+        sendComment(sender);
         configDataUpdate();
-        return new ArrayList<>(List.of("motd"));
+        return false;
     }
 
     private void getteringNewMotd(String @NotNull [] newMotd) {

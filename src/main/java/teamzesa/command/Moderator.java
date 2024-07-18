@@ -32,10 +32,10 @@ public class Moderator extends CommandRegisterSection {
     }
 
     @Override
-    public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
         String successComment = "지금부터 관리자 입니다.";
 
-        Optional.ofNullable(Bukkit.getPlayer(strings[0])).ifPresent(
+        Optional.ofNullable(Bukkit.getPlayer(args[0])).ifPresent(
                 player -> {
                     if (checkUPModerator(player)) {
                         playerSendMsgComponentExchanger(player, successComment, ColorMap.ORANGE);
@@ -43,7 +43,7 @@ public class Moderator extends CommandRegisterSection {
                     }
                 }
         );
-        return new ArrayList<>(List.of("moderator"));
+        return true;
     }
 
     private boolean checkUPModerator(@NotNull Player sendPlayer) {

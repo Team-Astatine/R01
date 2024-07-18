@@ -70,7 +70,7 @@ public class EnhanceDialog extends CommandRegisterSection {
     }
 
     @Override
-    public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+    public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         this.sendPlayer = (Player) commandSender;
         Inventory inventory = Bukkit.createInventory(sendPlayer, InventoryType.DROPPER, componentExchanger("강화", ColorMap.RED));
 
@@ -93,6 +93,6 @@ public class EnhanceDialog extends CommandRegisterSection {
 //        inventory.setItem(8, this.notionButton);
 
         sendPlayer.openInventory(inventory);
-        return new ArrayList<>(List.of("강화"));
+        return true;
     }
 }

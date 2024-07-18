@@ -30,9 +30,9 @@ public class God extends CommandRegisterSection {
     }
 
     @Override
-    public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
         try {
-            this.senderUser = new UserController().readUser(commandSender.getName());
+            this.senderUser = new UserController().readUser(sender.getName());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -44,24 +44,24 @@ public class God extends CommandRegisterSection {
 
         if (this.senderUser != null && !this.senderPlayer.isOp()) {
             playerSendMsgComponentExchanger(this.senderPlayer,"해당 명령어는 플레이어가 사용할 수 없습니다.", ColorMap.RED);
-            return Collections.emptyList();
+            return false;
         }
 
-        Player targetPlayer = Bukkit.getPlayer(strings[0]);
+        Player targetPlayer = Bukkit.getPlayer(args[0]);
         if (targetPlayer == null) {
             String comment = "해당 유저는 존재하지 않습니다.";
 
             if (this.isConsoleSend)
                 Bukkit.getLogger().info("[R01] " + comment);
             else playerSendMsgComponentExchanger(senderPlayer, comment, ColorMap.RED);
-            return Collections.emptyList();
+            return false;
         }
 
         changeUserStatus(targetPlayer);
         isConsoleSend = false;
-
-        return new ArrayList<>(List.of("god"));
+        return true;
     }
+
 
     private void changeUserStatus(Player targetPlayer) {
         User targetUser = new UserController().readUser(targetPlayer.getUniqueId());

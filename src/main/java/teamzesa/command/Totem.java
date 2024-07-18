@@ -30,9 +30,9 @@ public class Totem extends CommandRegisterSection {
     }
 
     @Override
-    public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+    public boolean onCommand(@NotNull CommandSender sender,@NotNull Command command,@NotNull String label, String[] args) {
         Runnable executeTotemSupply = () -> {
-            Totem.this.player = (Player) commandSender;
+            Totem.this.player = (Player) sender;
             Totem.this.playerInventory = Totem.this.player.getInventory();
             getAllOfPlayerTotems();
 
@@ -44,7 +44,7 @@ public class Totem extends CommandRegisterSection {
         };
 
         executeTotemSupply.run();
-        return new ArrayList<>(List.of("totem"));
+        return true;
     }
 
     private void getAllOfPlayerTotems() {

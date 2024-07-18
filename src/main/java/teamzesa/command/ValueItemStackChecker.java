@@ -20,9 +20,9 @@ public class ValueItemStackChecker extends CommandRegisterSection {
     }
 
     @Override
-    public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+    public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         ItemStack mainHandItem = ((Player) commandSender).getInventory().getItemInMainHand();
         playerSendMsgComponentExchanger(commandSender, mainHandItem.toString(), ColorMap.YELLOW);
-        return new ArrayList<>(List.of("vi"));
+        return true;
     }
 }

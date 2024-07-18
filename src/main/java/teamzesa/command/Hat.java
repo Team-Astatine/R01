@@ -45,25 +45,6 @@ public class Hat extends CommandRegisterSection {
         return true;
     }
 
-    @Override
-    public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
-        this.player = (Player) commandSender;
-        this.playerInventory = this.player.getInventory();
-
-        ItemStack tmpItemInHand = this.playerInventory.getItemInMainHand();
-        if (tmpItemInHand.isEmpty()) {
-            playerSendMsgComponentExchanger(this.player,"손에 아이템이 없습니다.", ColorMap.RED);
-            return Collections.emptyList();
-        }
-
-        ArmourType armourType = ArmourType.valueOf(s);
-        switch (armourType) {
-            case hat -> headSet(tmpItemInHand);
-        }
-
-        return new ArrayList<>(List.of("hat"));
-    }
-
     private void headSet(ItemStack temp){
         ItemStack armourHead = this.playerInventory.getHelmet();
         this.playerInventory.setHelmet(temp);

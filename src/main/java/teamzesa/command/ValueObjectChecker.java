@@ -25,10 +25,10 @@ public class ValueObjectChecker extends CommandRegisterSection {
     }
 
     @Override
-    public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
         User user = null;
         try {
-            user = new UserController().readUser(strings[0]);
+            user = new UserController().readUser(args[0]);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -37,15 +37,15 @@ public class ValueObjectChecker extends CommandRegisterSection {
                 .ifPresentOrElse(
                         existUser -> {
                             UserKillStatus userKillStatus = new KillStatusController().readUser(existUser.uuid());
-                            sendComment(commandSender, existUser + "\n\n" + userKillStatus);
+                            sendComment(sender, existUser + "\n\n" + userKillStatus);
                         },
 
                         () -> {
-                            sendComment(commandSender, "존재하지 않는 유저");
+                            sendComment(sender, "존재하지 않는 유저");
                         }
                 );
 
-        return new ArrayList<>(List.of("vo"));
+        return true;
     }
 
     private void sendComment(CommandSender sender, String comment) {
