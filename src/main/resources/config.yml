@@ -1,9 +1,9 @@
 #Astatine Online
 world_setting:
   motd: 'ASTATINE ONLINE'
-  minelist: 'https://minelist.kr/servers/astn.iptime.org'
-  discord: 'https://discord.com/invite/May9BkW7yR'
-  notion: 'https://jaxple.notion.site/Project-Astatine-e000a5d52aaa4611a63fd62629ea0f36?pvs=4'
+  minelist: 'https://minelist.kr/servers/astn.kr'
+  discord: 'https://discord.com/invite/k6dyKDsuZq'
+  notion: 'https://jaxple.notion.site/Astn-kr-e000a5d52aaa4611a63fd62629ea0f36?pvs=4'
 message:
   mineListVote: '[클릭] > 마인리스트 추천'
   discordInvite: '[클릭] > 디스코드 참가'
