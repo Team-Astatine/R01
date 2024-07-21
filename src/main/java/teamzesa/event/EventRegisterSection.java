@@ -161,7 +161,7 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public static void TabCompleteEvent(TabCompleteEvent event) {
-        new RestrictedCommandTabCompleteEvent(event);
+//        new RestrictedCommandTabCompleteEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)

@@ -172,8 +172,10 @@ public final class R01 extends JavaPlugin {
     private void eventAndFunctionRegister() {
         getServer().getPluginManager().registerEvents(new EventRegisterSection(), this); //function set
 
-        for (CommandExecutorMap commandEnum : CommandExecutorMap.values()) //command set
-            getCommand(commandEnum.getCommand()).setExecutor(commandEnum.newInstance());
+        for (CommandExecutorMap commandEnum : CommandExecutorMap.values()) {//command set
+            getCommand(commandEnum.getCommand()).setExecutor(commandEnum.newCommandExecutorInstance());
+//            getCommand(commandEnum.getCommand()).setTabCompleter(commandEnum.newTabCompleterInstance());
+        }
     }
 
     private void autoSaveSchedule() {
