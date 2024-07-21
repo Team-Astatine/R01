@@ -5,6 +5,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
 import teamzesa.DataBase.entity.RObject.UserKillStatus;
 import teamzesa.command.register.CommandRegisterSection;
@@ -13,6 +14,8 @@ import teamzesa.util.Enum.ColorMap;
 import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.userHandler.UserController;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class ValueObjectChecker extends CommandRegisterSection {
@@ -32,14 +35,14 @@ public class ValueObjectChecker extends CommandRegisterSection {
 
         Optional.ofNullable(user)
                 .ifPresentOrElse(
-                    existUser -> {
-                        UserKillStatus userKillStatus = new KillStatusController().readUser(existUser.uuid());
-                        sendComment(sender, existUser + "\n\n" + userKillStatus);
-                    },
+                        existUser -> {
+                            UserKillStatus userKillStatus = new KillStatusController().readUser(existUser.uuid());
+                            sendComment(sender, existUser + "\n\n" + userKillStatus);
+                        },
 
-                    () -> {
-                        sendComment(sender, "존재하지 않는 유저");
-                    }
+                        () -> {
+                            sendComment(sender, "존재하지 않는 유저");
+                        }
                 );
 
         return true;

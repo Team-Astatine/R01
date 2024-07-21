@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.CommandExecutorMap;
 import teamzesa.util.Enum.ColorMap;
@@ -13,6 +14,9 @@ import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.userHandler.UserBuilder;
 import teamzesa.DataBase.userHandler.UserController;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -57,6 +61,7 @@ public class God extends CommandRegisterSection {
         isConsoleSend = false;
         return true;
     }
+
 
     private void changeUserStatus(Player targetPlayer) {
         User targetUser = new UserController().readUser(targetPlayer.getUniqueId());

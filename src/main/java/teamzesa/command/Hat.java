@@ -6,9 +6,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.CommandExecutorMap;
 import teamzesa.util.Enum.ColorMap;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Hat extends CommandRegisterSection {
     private Player player;

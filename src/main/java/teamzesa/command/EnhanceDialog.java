@@ -12,9 +12,13 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.CommandExecutorMap;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class EnhanceDialog extends CommandRegisterSection {
     private Player sendPlayer;

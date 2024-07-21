@@ -1,7 +1,9 @@
 package teamzesa.util.Enum;
 
 import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.TabCompleter;
 import teamzesa.command.*;
+import teamzesa.command.register.CommandRegisterSection;
 
 public enum CommandExecutorMap {
     FLY("fly", new Fly()),
@@ -20,9 +22,9 @@ public enum CommandExecutorMap {
     ENHANCE_SET("enhance", new EnhnaceSet());
 
     private final String command;
-    private final CommandExecutor executor;
+    private final CommandRegisterSection executor;
 
-    CommandExecutorMap(String command, CommandExecutor executor) {
+    CommandExecutorMap(String command, CommandRegisterSection executor) {
         this.command = command;
         this.executor = executor;
     }
@@ -31,7 +33,11 @@ public enum CommandExecutorMap {
         return command;
     }
 
-    public CommandExecutor newInstance() {
+    public CommandExecutor newCommandExecutorInstance() {
+        return executor;
+    }
+
+    public TabCompleter newTabCompleterInstance() {
         return executor;
     }
 }

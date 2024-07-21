@@ -14,12 +14,13 @@ import teamzesa.DataBase.entity.RObject.UserKillStatus;
 import teamzesa.DataBase.userHandler.UserController;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Announcer;
-import teamzesa.event.EventRegister.EventRegisterSection;
+import teamzesa.event.EventRegisterSection;
 import teamzesa.util.Enum.CommandExecutorMap;
 import teamzesa.DataBase.IOHandler.ConfigIOHandler;
 import teamzesa.util.Enum.DataFile;
 import teamzesa.util.ThreadPool;
 
+import java.lang.reflect.Field;
 import java.util.*;
 
 
@@ -35,6 +36,8 @@ public final class R01 extends JavaPlugin {
     @Override
     public void onEnable() {
         eventAndFunctionRegister();   //command set
+
+//        setMaxPlayers(50);
 
 //        saveDefaultSource
         if (!getDataFolder().exists())
@@ -63,6 +66,25 @@ public final class R01 extends JavaPlugin {
 
         ThreadPool.getThreadPool().allServiceOff();
         Bukkit.getScheduler().cancelTasks(this);
+    }
+
+    public void setMaxPlayers(int maxPlayers) {
+        try {
+            Object server = Bukkit.getServer();
+            Field consoleField = server.getClass().getDeclaredField("console");
+            consoleField.setAccessible(true);
+            Object console = consoleField.get(server);
+
+            Field playerListField = console.getClass().getSuperclass().getDeclaredField("playerList");
+            playerListField.setAccessible(true);
+            Object playerList = playerListField.get(console);
+
+            Field maxPlayersField = playerList.getClass().getDeclaredField("maxPlayers");
+            maxPlayersField.setAccessible(true);
+            maxPlayersField.set(playerList, maxPlayers);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void RObjectLoader() {
@@ -150,8 +172,10 @@ public final class R01 extends JavaPlugin {
     private void eventAndFunctionRegister() {
         getServer().getPluginManager().registerEvents(new EventRegisterSection(), this); //function set
 
-        for (CommandExecutorMap commandEnum : CommandExecutorMap.values()) //command set
-            getCommand(commandEnum.getCommand()).setExecutor(commandEnum.newInstance());
+        for (CommandExecutorMap commandEnum : CommandExecutorMap.values()) {//command set
+            getCommand(commandEnum.getCommand()).setExecutor(commandEnum.newCommandExecutorInstance());
+//            getCommand(commandEnum.getCommand()).setTabCompleter(commandEnum.newTabCompleterInstance());
+        }
     }
 
     private void autoSaveSchedule() {
