@@ -35,7 +35,7 @@ public class UserBuilder {
         joinCount(0);
         level(player.getLevel());
         isGodMode(false);
-        isAnnouncing(false);
+        isAnnouncing(true);
     }
 
     public UserBuilder uuid(UUID uuid) {
