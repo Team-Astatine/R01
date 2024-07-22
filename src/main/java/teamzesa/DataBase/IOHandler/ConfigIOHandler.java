@@ -49,6 +49,7 @@ public class ConfigIOHandler extends StringComponentExchanger {
         getCommandTotem();
         getCommandEnhance();
         getCommandAnnouncing();
+        getCommandTpa();
     }
 
     public void setWorldSettingMotd() {
@@ -118,6 +119,10 @@ public class ConfigIOHandler extends StringComponentExchanger {
 
     public String getCommandAnnouncing() {
         return getString(ConfigMenu.MESSAGE_COMMAND_ANNOUNCING);
+    }
+
+    public String getCommandTpa() {
+        return getString(ConfigMenu.MESSAGE_COMMAND_TPA);
     }
 
     public void worldConfigSave(String motd) {

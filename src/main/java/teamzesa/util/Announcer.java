@@ -101,7 +101,8 @@ public class Announcer extends StringComponentExchanger {
                 componentExchanger(this.configIOHandler.getCommandHat(), commandColor),
                 componentExchanger(this.configIOHandler.getCommandTotem(), commandColor),
                 componentExchanger(this.configIOHandler.getCommandEnhance(), enhanceColor),
-                componentExchanger(this.configIOHandler.getCommandAnnouncing(), commandColor)
+                componentExchanger(this.configIOHandler.getCommandAnnouncing(), commandColor),
+                componentExchanger(this.configIOHandler.getCommandTpa(), commandColor)
         };
     }
 
