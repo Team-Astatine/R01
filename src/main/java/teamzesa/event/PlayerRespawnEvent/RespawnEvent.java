@@ -29,7 +29,8 @@ public class RespawnEvent extends StringComponentExchanger implements EventRegis
 
     public void deathRandomTeleport() {
         if (this.player.getPotentialBedLocation() == null)
-            playerSendMsgComponentExchanger(this.player, "침대가 없어 랜덤 텔레포트 되었습니다", ColorMap.ORANGE);
-        else playerSendMsgComponentExchanger(this.player, "침대로 텔레포트 됩니다", ColorMap.YELLOW);
+            return;
+
+        playerSendMsgComponentExchanger(this.player, "침대로 텔레포트 됩니다", ColorMap.YELLOW);
     }
 }
