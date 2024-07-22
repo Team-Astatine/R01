@@ -52,6 +52,16 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
         checkingUserStatusHealth();
         increaseUserJoinCnt();
         announcingJoinMsg();
+        randomTeleportFirstJoinPlayer();
+    }
+
+    private void randomTeleportFirstJoinPlayer() {
+        if (this.player.hasPlayedBefore())
+            return;
+
+        double x = Math.random() * 2000;
+        double z = Math.random() * 2000;
+
     }
 
     private void checkingUserStatusGod() {
