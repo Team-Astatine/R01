@@ -1,6 +1,8 @@
 package teamzesa.event.PlayerJoinEvent;
 
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -19,7 +21,10 @@ import teamzesa.util.Enum.Kit.ToolKit;
 import teamzesa.util.Announcer;
 import teamzesa.DataBase.userHandler.UserBuilder;
 import teamzesa.DataBase.userHandler.UserController;
+import teamzesa.util.RanNumGenerator;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Optional;
 
 public class ImportPlayerStatusEvent extends StringComponentExchanger implements EventRegister {
@@ -59,9 +64,14 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
         if (this.player.hasPlayedBefore())
             return;
 
-        double x = Math.random() * 2000;
-        double z = Math.random() * 2000;
+        int[] position = RanNumGenerator.groundChecker(this.player.getWorld());
+        World world = this.player.getWorld();
+        int x = position[0];
+        int y = position[1];
+        int z = position[2];
 
+//        System.out.println(Arrays.toString(position));
+        this.player.teleportAsync(new Location(world,x,y,z));
     }
 
     private void checkingUserStatusGod() {
