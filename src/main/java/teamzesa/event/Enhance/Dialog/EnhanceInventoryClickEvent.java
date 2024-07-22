@@ -64,7 +64,7 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
                 this.allowedItem.add(shortRangeWeaponMap.getMaterial());
 
             for (LongRangeWeaponMap longRangeWeaponMap : LongRangeWeaponMap.values())
-                this.allowedScroll.add(longRangeWeaponMap.getMaterial());
+                this.allowedItem.add(longRangeWeaponMap.getMaterial());
 
             for (ScrollMap scrollMap : ScrollMap.values())
                 this.allowedScroll.add(scrollMap.getMaterial());
