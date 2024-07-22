@@ -1,4 +1,4 @@
-package teamzesa.event;
+package teamzesa.event.PlayerRespawnEvent;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerRespawnEvent;
