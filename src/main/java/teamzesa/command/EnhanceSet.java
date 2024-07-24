@@ -6,22 +6,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
  import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.event.Enhance.EnhanceUtil;
+import teamzesa.event.Enhance.Interface.EnhanceUtil;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.CommandExecutorMap;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-
-public class EnhnaceSet extends CommandRegisterSection {
+public class EnhanceSet extends CommandRegisterSection {
 
     private String comment;
 
-    public EnhnaceSet() {
+    public EnhanceSet() {
         super(CommandExecutorMap.ENHANCE_SET);
     }
 

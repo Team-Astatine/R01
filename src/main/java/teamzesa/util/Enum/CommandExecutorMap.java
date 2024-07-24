@@ -19,7 +19,7 @@ public enum CommandExecutorMap {
     CONFIG_RELOAD("dataFileReload", new DataFileReload()),
     ANNOUNCING("공지", new AnnouncingOnOff()),
     ENHANCE("강화", new EnhanceDialog()),
-    ENHANCE_SET("enhance", new EnhnaceSet());
+    ENHANCE_SET("enhance", new EnhanceSet());
 
     private final String command;
     private final CommandRegisterSection executor;
