@@ -2,6 +2,7 @@ package teamzesa.util.Enum.Enhance;
 
 import com.google.common.base.Functions;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 import teamzesa.event.Enhance.Interface.ScrollMap;
 import teamzesa.exception.Enhance.EnhanceItemSearchException;
 
@@ -26,7 +27,7 @@ public enum ProtectScroll implements ScrollMap {
 
     private final Material material;
     private final int discountValue;
-    private static Map<Material, ProtectScroll> CACHED_ITEM = Arrays.stream(values())
+    private static final Map<Material, ProtectScroll> CACHED_ITEM = Arrays.stream(values())
             .collect(Collectors.toMap(scroll -> scroll.material, Functions.identity()));
 
     ProtectScroll(Material material, int discountValue) {
@@ -34,10 +35,10 @@ public enum ProtectScroll implements ScrollMap {
         this.material = material;
     }
 
-    public static ProtectScroll findByMaterial(Material material) throws Exception {
-        if (!CACHED_ITEM.containsKey(material))
+    public static ProtectScroll findByItemStack(ItemStack itemStack) throws Exception {
+        if (!CACHED_ITEM.containsKey(itemStack.getType()))
             throw new EnhanceItemSearchException("Non Register This Material");
-        return CACHED_ITEM.get(material);
+        return CACHED_ITEM.get(itemStack.getType());
     }
 
     public Material getMaterial() {
