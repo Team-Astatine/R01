@@ -1,13 +1,11 @@
-package teamzesa.event.Enhance;
+package teamzesa.event.Enhance.Interface;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
-import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import teamzesa.exception.Enhance.EnhanceItemMetaException;
-import teamzesa.exception.Enhance.EnhanceScrollTypeException;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.Enhance.*;
 import teamzesa.util.Interface.StringComponentExchanger;
@@ -98,7 +96,12 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
     }
 
     public static Component getEnhanceDisplayComponent(ItemStack enhanceItem) {
-        double weaponDmg = getShortRangeDamage(enhanceItem) + getSharpnessDamage(enhanceItem);
+        double weaponDmg = 0.0;
+        try {
+            weaponDmg = getShortRangeWeaponCloseDamage(enhanceItem) + getSharpnessDamage(enhanceItem);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         double totalDmg = calculatingTotalEnhanceStageDamage(enhanceItem, weaponDmg);
         String comment = String.format("현재 데미지 : %.3f...", totalDmg);
 
@@ -127,35 +130,18 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
 
     public static void scrollDiscount(ItemStack scroll, ItemStack protectScroll) {
         try {
-
             if (protectScroll != null) {
-                protectScroll.setAmount(protectScroll.getAmount() - getScrollType(protectScroll).getDiscountProtectValue());
+                protectScroll.setAmount(protectScroll.getAmount()
+                        - ProtectScroll.findByItemStack(protectScroll).getDiscountValue());
             }
 
-            scroll.setAmount(scroll.getAmount() - getScrollType(scroll).getDiscountValue());
+            scroll.setAmount(scroll.getAmount() - Scroll.findByItemStack(scroll).getDiscountValue());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public static ScrollMap getScrollType(ItemStack scroll) throws EnhanceScrollTypeException {
-        if (scroll == null)
-            throw new EnhanceScrollTypeException("getScrollType Parameter Scroll == Null");
-
-        ScrollMap resultScroll = null;
-        for (ScrollMap scrollMap : ScrollMap.values()) {
-            Material scrollMapMaterial = scrollMap.getMaterial();
-            if (scrollMapMaterial.equals(scroll.getType()))
-                resultScroll = scrollMap;
-        }
-
-        if (resultScroll == null)
-            throw new EnhanceScrollTypeException("getScrollType Non Register Scroll > " + scroll);
-
-        return resultScroll;
-    }
-
-    public static double getShortRangeDamage(ItemStack weapon) {
+    public static double getShortRangeWeaponCloseDamage(ItemStack weapon) {
         double damage = 0.0;
         for (Weapon weaponInfo : ShortRangeWeaponMap.values()) {
             if (weaponInfo.getMaterial().equals(weapon.getType()))
@@ -170,23 +156,14 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         return damage;
     }
 
-    public static double getLongRangeDamage(ItemStack weapon) {
-        double damage = 0.0;
-        for (Weapon weaponInfo : LongRangeWeaponMap.values()) {
-            if (weaponInfo.getMaterial().equals(weapon.getType()))
-                damage = weaponInfo.getLongRangeDamage();
-        }
-        return damage;
-    }
-
-    public static double calculatingTotalEnhanceStageDamage(ItemStack item, double totalDamage) {
+    public static double calculatingTotalEnhanceStageDamage(ItemStack itemStack, double totalDamage) {
         try {
-            isItemHasCustomModelData(item, "getEnhanceState");
+            isItemHasCustomModelData(itemStack, "getEnhanceState");
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        ItemMeta itemMeta = item.getItemMeta();
+        ItemMeta itemMeta = itemStack.getItemMeta();
         for (int i = 0; i < itemMeta.getCustomModelData(); i++) {
             double increasePercentage = ENHANCE_BASE_PERCENTAGE + (i * 2);
             totalDamage += totalDamage * (increasePercentage / 100);

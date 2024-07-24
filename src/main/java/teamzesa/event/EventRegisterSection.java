@@ -25,6 +25,8 @@ import teamzesa.event.PlayerJoinEvent.ImportPlayerStatusEvent;
 import teamzesa.event.PlayerJoinEvent.PlayerFlyEnableEvent;
 import teamzesa.event.PlayerJoinEvent.PlayerInfoHandler;
 import teamzesa.event.PlayerQuitEvent.QuitMsgEvent;
+import teamzesa.event.PlayerRespawnEvent.RespawnEvent;
+import teamzesa.event.PlayerRespawnEvent.RespawnRandomTeleportEvent;
 import teamzesa.event.RaidTriggerEvent.RaidAnnouncerEvent;
 import teamzesa.event.Restricted.*;
 import teamzesa.event.Restricted.AntiExploit.*;
@@ -106,6 +108,7 @@ public class EventRegisterSection implements Listener {
     public static void PlayerRespawnEvent(PlayerRespawnEvent event) {
         new RespawnEvent(event);
         new PlayerFlyEnableEvent(event);
+        new RespawnRandomTeleportEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)

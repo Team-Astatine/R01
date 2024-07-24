@@ -11,7 +11,8 @@ import teamzesa.event.Enhance.GeneratingEnhanceItem;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.Enhance.LongRangeWeaponMap;
-import teamzesa.util.Enum.Enhance.ScrollMap;
+import teamzesa.util.Enum.Enhance.ProtectScroll;
+import teamzesa.util.Enum.Enhance.Scroll;
 import teamzesa.util.Enum.Enhance.ShortRangeWeaponMap;
 import teamzesa.util.Interface.StringComponentExchanger;
 
@@ -60,14 +61,17 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
 
 //        Add Allowed Item
         if (this.enhanceItem != null && this.scrollStuff != null) {
-            for (ShortRangeWeaponMap shortRangeWeaponMap : ShortRangeWeaponMap.values())
-                this.allowedItem.add(shortRangeWeaponMap.getMaterial());
+            for (ShortRangeWeaponMap weapon : ShortRangeWeaponMap.values())
+                this.allowedItem.add(weapon.getMaterial());
 
-            for (LongRangeWeaponMap longRangeWeaponMap : LongRangeWeaponMap.values())
-                this.allowedScroll.add(longRangeWeaponMap.getMaterial());
+            for (LongRangeWeaponMap weapon : LongRangeWeaponMap.values())
+                this.allowedItem.add(weapon.getMaterial());
 
-            for (ScrollMap scrollMap : ScrollMap.values())
-                this.allowedScroll.add(scrollMap.getMaterial());
+            for (Scroll scroll : Scroll.values())
+                this.allowedScroll.add(scroll.getMaterial());
+
+            for (ProtectScroll scroll : ProtectScroll.values())
+                this.allowedItem.add(scroll.getMaterial());
         }
 
         if (isAllowedInteractItem(EXECUTE_STUFF_DATA)) {

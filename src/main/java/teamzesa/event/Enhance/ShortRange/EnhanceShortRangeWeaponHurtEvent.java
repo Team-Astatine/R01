@@ -4,7 +4,7 @@ import org.bukkit.damage.DamageSource;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
-import teamzesa.event.Enhance.EnhanceUtil;
+import teamzesa.event.Enhance.Interface.EnhanceUtil;
 import teamzesa.event.EventRegister.EventRegister;
 
 public class EnhanceShortRangeWeaponHurtEvent extends EnhanceUtil implements EventRegister {
@@ -39,7 +39,7 @@ public class EnhanceShortRangeWeaponHurtEvent extends EnhanceUtil implements Eve
         if (!weapon.getItemMeta().hasCustomModelData())
             return;
 
-        double weaponDmg = getShortRangeDamage(weapon) + getSharpnessDamage(weapon);
+        double weaponDmg = getShortRangeWeaponCloseDamage(weapon) + getSharpnessDamage(weapon);
         double totalDmg = calculatingTotalEnhanceStageDamage(weapon, weaponDmg); // 10,12,14%
         this.event.setDamage(totalDmg);
     }

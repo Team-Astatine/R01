@@ -3,7 +3,7 @@ package teamzesa.DataBase.enhance;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.DataBase.entity.EnhanceItem;
-import teamzesa.event.Enhance.EnhanceUtil;
+import teamzesa.event.Enhance.Interface.EnhanceUtil;
 
 public class EnhanceItemBuilder extends EnhanceUtil {
 

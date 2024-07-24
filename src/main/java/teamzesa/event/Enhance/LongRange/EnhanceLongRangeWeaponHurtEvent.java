@@ -5,8 +5,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
-import teamzesa.event.Enhance.EnhanceUtil;
+import teamzesa.event.Enhance.Interface.EnhanceUtil;
 import teamzesa.event.EventRegister.EventRegister;
+import teamzesa.util.Enum.Enhance.LongRangeWeaponMap;
 
 public class EnhanceLongRangeWeaponHurtEvent extends EnhanceUtil implements EventRegister {
     private DamageSource damageSource;
@@ -33,7 +34,13 @@ public class EnhanceLongRangeWeaponHurtEvent extends EnhanceUtil implements Even
 
         ItemStack weapon = checkModelData(player.getInventory().getItemInMainHand());
 
-        double projectileDamage = getLongRangeDamage(weapon);
+        double projectileDamage = 0.0;
+        try {
+            projectileDamage = LongRangeWeaponMap.findByItemStack(weapon).getLongRangeDamage();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         double projectilePowerIncreaseDmg = getArrowPowerDamage(weapon, projectileDamage);
 //        10,11,12%
         double totalDamage = calculatingTotalEnhanceStageDamage(weapon, projectileDamage + projectilePowerIncreaseDmg);

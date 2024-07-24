@@ -2,7 +2,10 @@ package teamzesa.event.Enhance;
 
 import org.bukkit.Material;
 import teamzesa.DataBase.entity.EnhanceItem;
+import teamzesa.event.Enhance.Interface.EnhanceUtil;
 import teamzesa.util.Enum.*;
+import teamzesa.util.Enum.Enhance.ProtectScroll;
+import teamzesa.util.Enum.Enhance.Scroll;
 
 public class GeneratingEnhanceItem extends EnhanceUtil {
     private final int LOW_LEVEL = 0;
@@ -33,7 +36,7 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
 
         try {// enhance
             this.isScrollEnough =
-                    this.item.enhanceScroll().getAmount() >= getScrollType(this.item.enhanceScroll()).getDiscountValue();
+                    this.item.enhanceScroll().getAmount() >= Scroll.findByItemStack(this.item.enhanceScroll()).getDiscountValue();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -41,7 +44,7 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
         try { // protect
             if (hasProtectScroll) {
                 this.isProtectScrollEnough =
-                    this.item.protectScroll().getAmount() >= getScrollType(this.item.protectScroll()).getDiscountProtectValue();
+                    this.item.protectScroll().getAmount() >= ProtectScroll.findByItemStack(this.item.protectScroll()).getDiscountValue();
             }
         } catch (Exception e) {
             e.printStackTrace();
