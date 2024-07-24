@@ -11,7 +11,7 @@ import teamzesa.event.Enhance.GeneratingEnhanceItem;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.Enhance.LongRangeWeaponMap;
-import teamzesa.util.Enum.Enhance.ScrollMap;
+import teamzesa.util.Enum.Enhance.Scroll;
 import teamzesa.util.Enum.Enhance.ShortRangeWeaponMap;
 import teamzesa.util.Interface.StringComponentExchanger;
 
@@ -66,7 +66,7 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
             for (LongRangeWeaponMap longRangeWeaponMap : LongRangeWeaponMap.values())
                 this.allowedItem.add(longRangeWeaponMap.getMaterial());
 
-            for (ScrollMap scrollMap : ScrollMap.values())
+            for (Scroll scrollMap : Scroll.values())
                 this.allowedScroll.add(scrollMap.getMaterial());
         }
 

@@ -8,7 +8,7 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CrossbowMeta;
 import org.bukkit.util.Vector;
-import teamzesa.event.Enhance.EnhanceUtil;
+import teamzesa.event.Enhance.Interface.EnhanceUtil;
 import teamzesa.event.EventRegister.EventRegister;
 
 public class EnhanceCrossBowShotEvent extends EnhanceUtil implements EventRegister {

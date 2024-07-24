@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
-import teamzesa.event.Enhance.EnhanceUtil;
+import teamzesa.event.Enhance.Interface.EnhanceUtil;
 import teamzesa.event.EventRegister.EventRegister;
 
 public class EnhanceBowShotEvent extends EnhanceUtil implements EventRegister {
