@@ -1,8 +1,16 @@
 package teamzesa.util.Enum.Enhance;
 
 import org.bukkit.Material;
+import teamzesa.event.Enhance.Interface.EnhanceItemCache;
+import teamzesa.event.Enhance.Interface.Weapon;
+import teamzesa.exception.Enhance.EnhanceItemSearchException;
 
-public enum ShortRangeWeaponMap implements Weapon {
+import java.util.Arrays;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+public enum ShortRangeWeaponMap implements Weapon, EnhanceItemCache {
 //    axe
     WOOD_AXE(Material.WOODEN_AXE, 7.0,0.0),
     GOLD_AXE(Material.GOLDEN_AXE, 7.0,0.0),
@@ -25,11 +33,19 @@ public enum ShortRangeWeaponMap implements Weapon {
     private final Material material;
     private final double shortRangeDamage;
     private final double longRangeDamage;
+    private static Map<Material, ShortRangeWeaponMap> CACHED_ITEM = Arrays.stream(values())
+            .collect(Collectors.toMap(item -> item.material, Function.identity()));
 
     ShortRangeWeaponMap(Material material, double shortRangeDamage, double longRangeDamage) {
         this.material = material;
         this.shortRangeDamage = shortRangeDamage;
         this.longRangeDamage = longRangeDamage;
+    }
+
+    public static ShortRangeWeaponMap findByMaterial(Material material) throws Exception {
+        if (!CACHED_ITEM.containsKey(material))
+            throw new EnhanceItemSearchException("Non Register This Material");
+        return CACHED_ITEM.get(material);
     }
 
     @Override
