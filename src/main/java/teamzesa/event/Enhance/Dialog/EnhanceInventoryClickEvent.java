@@ -71,7 +71,7 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
                 this.allowedScroll.add(scroll.getMaterial());
 
             for (ProtectScroll scroll : ProtectScroll.values())
-                this.allowedItem.add(scroll.getMaterial());
+                this.allowedScroll.add(scroll.getMaterial());
         }
 
         if (isAllowedInteractItem(EXECUTE_STUFF_DATA)) {

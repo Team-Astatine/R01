@@ -12,13 +12,10 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.CommandExecutorMap;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class EnhanceDialog extends CommandRegisterSection {
     private Player sendPlayer;
@@ -31,6 +28,8 @@ public class EnhanceDialog extends CommandRegisterSection {
 
     public final static int PANEL_STUFF_CUSTOM_DATA = 20000;
     public final static int EXECUTE_STUFF_DATA = 30000;
+    public final static int EXECUTE_DISCORD_DATA = 40000;
+    public final static int EXECUTE_NOTION_DATA = 50000;
 
     public EnhanceDialog() {
         super(CommandExecutorMap.ENHANCE);
@@ -63,7 +62,15 @@ public class EnhanceDialog extends CommandRegisterSection {
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         // 강화창 디스플레이 아이템코드 또는 강화 실행 아이템코드 설정
-        meta.setCustomModelData(material == Material.RED_STAINED_GLASS_PANE ? EXECUTE_STUFF_DATA : PANEL_STUFF_CUSTOM_DATA);
+        int panelModelData = 0;
+        switch (material) {
+            case Material.RED_STAINED_GLASS_PANE        -> panelModelData = EXECUTE_STUFF_DATA;
+            case Material.LIGHT_BLUE_STAINED_GLASS_PANE -> panelModelData = EXECUTE_DISCORD_DATA;
+            case Material.LIGHT_GRAY_STAINED_GLASS_PANE -> panelModelData = EXECUTE_NOTION_DATA;
+            default                                     -> panelModelData = PANEL_STUFF_CUSTOM_DATA;
+        }
+
+        meta.setCustomModelData(panelModelData);
 
         item.setItemMeta(meta);
         return item;
