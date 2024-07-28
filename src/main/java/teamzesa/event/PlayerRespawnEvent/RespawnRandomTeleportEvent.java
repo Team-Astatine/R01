@@ -10,7 +10,6 @@ import teamzesa.util.Enum.WorldName;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.RanNumGenerator;
 
-import java.util.Arrays;
 
 public class RespawnRandomTeleportEvent extends StringComponentExchanger implements EventRegister {
     private Player player;
@@ -34,6 +33,9 @@ public class RespawnRandomTeleportEvent extends StringComponentExchanger impleme
 
         World world = Bukkit.getWorld(WorldName.world.getExchangeEnglish());
         int[] position = RanNumGenerator.groundChecker(world);
+
+        if (position == null)
+            position = RanNumGenerator.groundChecker(world);
 
         int x = position[0];
         int y = position[1];

@@ -69,6 +69,9 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
         World world = Bukkit.getWorld(WorldName.world.getExchangeEnglish());
         int[] position = RanNumGenerator.groundChecker(world);
 
+        if (position == null)
+            position = RanNumGenerator.groundChecker(world);
+
         int x = position[0];
         int y = position[1];
         int z = position[2];
