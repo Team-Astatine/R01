@@ -16,8 +16,8 @@ public class RanNumGenerator {
 
     public static int[] groundChecker(World world) {
         Block block = null;
-        boolean isLegRoom = false;
-        boolean isBodyRoom = false;
+        boolean hasLegRoom = false;
+        boolean hasBodyRoom = false;
         boolean isGround = false;
 
         int maxHigh = world.getMaxHeight() - 1; //320 > Material_VOID_AIR
@@ -31,15 +31,15 @@ public class RanNumGenerator {
             if (block.getType() != Material.AIR)
                 isGround = true;
 
-            block = world.getBlockAt(x,y+1,z);
+            block = world.getBlockAt(x,y + 1,z);
             if (block.getType() == Material.AIR || block.getType() == Material.WATER)
-                isLegRoom = true;
+                hasLegRoom = true;
 
-            block = world.getBlockAt(x,y+2,z);
+            block = world.getBlockAt(x,y + 2,z);
             if (block.getType() == Material.AIR || block.getType() == Material.WATER)
-                isBodyRoom = true;
+                hasBodyRoom = true;
 
-            if (isGround && isBodyRoom && isLegRoom)
+            if (isGround && hasBodyRoom && hasLegRoom)
                 return new int[]{x, y, z};
 
         }
