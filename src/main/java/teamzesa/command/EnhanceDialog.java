@@ -43,7 +43,7 @@ public class EnhanceDialog extends CommandRegisterSection {
         this.protectScrollStuff = createItem(Material.HEART_OF_THE_SEA, "파괴방어 스크롤을 아래슬롯에 넣어주세요", ColorMap.ORANGE);
         this.executeButton = createExecuteItem(Material.RED_STAINED_GLASS_PANE, "강화 실행", ColorMap.RED);
         this.discordButton = createExecuteItem(Material.LIGHT_BLUE_STAINED_GLASS_PANE,"디스코드", ColorMap.DISCORD_COLOR);
-        this.notionButton = createExecuteItem(Material.LIGHT_GRAY_STAINED_GLASS_PANE,"강화법 확인하기", ColorMap.NOTIOIN_COLOR);
+        this.notionButton = createExecuteItem(Material.LIGHT_GRAY_STAINED_GLASS_PANE,"강화법 확인하기", ColorMap.NOTION_COLOR);
     }
 
     private ItemStack createExecuteItem(Material material, String comment, ColorMap color) {

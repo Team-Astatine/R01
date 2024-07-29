@@ -21,7 +21,7 @@ public enum ColorMap {
     SKY_BLUE(TextColor.color(173, 216, 230)),
     VOTE_COLOR(TextColor.color(167, 123, 202)),
     COMMAND_COLOR(TextColor.color(139, 195, 74)),
-    NOTIOIN_COLOR(TextColor.color(112, 71, 157)),
+    NOTION_COLOR(TextColor.color(129, 90, 157)),
     DISCORD_COLOR(TextColor.color(114, 137, 218));
 
     private final TextColor textColor;
