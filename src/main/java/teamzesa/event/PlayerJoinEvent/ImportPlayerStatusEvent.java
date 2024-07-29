@@ -67,16 +67,12 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
             return;
 
         World world = Bukkit.getWorld(WorldName.world.getExchangeEnglish());
-        int[] position = RanNumGenerator.groundChecker(world);
-
-        if (position == null)
-            position = RanNumGenerator.groundChecker(world);
+        int[] position = new RanNumGenerator().groundChecker(world);
 
         int x = position[0];
         int y = position[1];
         int z = position[2];
 
-//        System.out.println(Arrays.toString(position));
         this.player.teleportAsync(new Location(world,x,y,z));
     }
 
