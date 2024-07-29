@@ -82,7 +82,7 @@ public class Announcer extends StringComponentExchanger {
         String mineListLink = this.configIOHandler.getMineListConfig();
 
         ColorMap commonColor = ColorMap.RED;
-        ColorMap voteColor = ColorMap.VOTE_COLOR;
+        ColorMap voteColor = ColorMap.GREEN;
         ColorMap notionColor = ColorMap.NOTION_COLOR;
         ColorMap commandColor = ColorMap.COMMAND_COLOR;
         ColorMap discordColor = ColorMap.DISCORD_COLOR;
