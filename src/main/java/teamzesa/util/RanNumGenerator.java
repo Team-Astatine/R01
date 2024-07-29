@@ -20,7 +20,7 @@ public class RanNumGenerator {
         }
 
     public int[] groundChecker(World world) {
-        System.out.println(this.isAllowedPosition);
+//        System.out.println(this.isAllowedPosition);
 
         boolean isGround = false, hasLegRoom = false, hasBodyRoom = false;
 
