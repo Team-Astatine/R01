@@ -8,7 +8,7 @@ import teamzesa.event.EventRegister.EventRegister;
 
 import java.util.*;
 
-import static teamzesa.command.EnhanceDialog.EXECUTE_STUFF_DATA;
+import static teamzesa.command.EnhanceDialog.*;
 
 public class EnhanceInventoryCloseEvent implements EventRegister {
     private final int MINIMUM_INVENTORY_SLOT = 5;
@@ -72,6 +72,12 @@ public class EnhanceInventoryCloseEvent implements EventRegister {
 
         if (slotSevenItem.getItemMeta().getCustomModelData() != EXECUTE_STUFF_DATA)
             return true;
+
+//        if (slotSevenItem.getItemMeta().getCustomModelData() != EXECUTE_DISCORD_DATA)
+//            return true;
+//
+//        if (slotSevenItem.getItemMeta().getCustomModelData() != EXECUTE_NOTION_DATA)
+//            return true;
         return false;
     }
 }

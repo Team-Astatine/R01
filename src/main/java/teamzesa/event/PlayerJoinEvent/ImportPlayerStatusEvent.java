@@ -1,5 +1,6 @@
 package teamzesa.event.PlayerJoinEvent;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -13,6 +14,7 @@ import teamzesa.DataBase.entity.RObject.UserKillStatus;
 import teamzesa.command.God;
 import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.event.EventRegister.EventRegister;
+import teamzesa.util.Enum.WorldName;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.Kit.ArmourKit;
 import teamzesa.util.Enum.ColorMap;
@@ -64,13 +66,13 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
         if (this.player.hasPlayedBefore())
             return;
 
-        int[] position = RanNumGenerator.groundChecker(this.player.getWorld());
-        World world = this.player.getWorld();
+        World world = Bukkit.getWorld(WorldName.world.getExchangeEnglish());
+        int[] position = new RanNumGenerator().groundChecker(world);
+
         int x = position[0];
         int y = position[1];
         int z = position[2];
 
-//        System.out.println(Arrays.toString(position));
         this.player.teleportAsync(new Location(world,x,y,z));
     }
 

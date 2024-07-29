@@ -82,27 +82,29 @@ public class Announcer extends StringComponentExchanger {
         String mineListLink = this.configIOHandler.getMineListConfig();
 
         ColorMap commonColor = ColorMap.RED;
-        ColorMap voteColor = ColorMap.VOTE_COLOR;
-        ColorMap notionColor = ColorMap.NOTIOIN_COLOR;
+        ColorMap voteColor = ColorMap.GREEN;
+        ColorMap notionColor = ColorMap.NOTION_COLOR;
         ColorMap commandColor = ColorMap.COMMAND_COLOR;
         ColorMap discordColor = ColorMap.DISCORD_COLOR;
         ColorMap enhanceColor = ColorMap.PINK;
 
         return new Component[]{
-                createLinkComponentExchanger(this.configIOHandler.getMineListVote(), mineListLink, voteColor),
-                createLinkComponentExchanger(this.configIOHandler.getDiscordInvite(), discordLink, discordColor),
-                createLinkComponentExchanger(this.configIOHandler.getServerGuideNotion(), notionLink, notionColor),
-
-                componentExchanger(this.configIOHandler.getSteelLifeTip(), commonColor),
-                componentExchanger(this.configIOHandler.getRaidTip(), commonColor),
-                componentExchanger(this.configIOHandler.getWeaponTip(), commonColor),
-                componentExchanger(this.configIOHandler.getExplosiveTip(), commonColor),
+                //command
                 componentExchanger(this.configIOHandler.getCommandFly(), commandColor),
                 componentExchanger(this.configIOHandler.getCommandHat(), commandColor),
                 componentExchanger(this.configIOHandler.getCommandTotem(), commandColor),
                 componentExchanger(this.configIOHandler.getCommandEnhance(), enhanceColor),
                 componentExchanger(this.configIOHandler.getCommandAnnouncing(), commandColor),
-                componentExchanger(this.configIOHandler.getCommandTpa(), commandColor)
+                componentExchanger(this.configIOHandler.getCommandTpa(), commandColor),
+                //tip
+                componentExchanger(this.configIOHandler.getSteelLifeTip(), commonColor),
+                componentExchanger(this.configIOHandler.getRaidTip(), commonColor),
+                componentExchanger(this.configIOHandler.getWeaponTip(), commonColor),
+                componentExchanger(this.configIOHandler.getExplosiveTip(), commonColor),
+                //link
+                createLinkComponentExchanger(this.configIOHandler.getMineListVote(), mineListLink, voteColor),
+                createLinkComponentExchanger(this.configIOHandler.getDiscordInvite(), discordLink, discordColor),
+                createLinkComponentExchanger(this.configIOHandler.getServerGuideNotion(), notionLink, notionColor)
         };
     }
 
