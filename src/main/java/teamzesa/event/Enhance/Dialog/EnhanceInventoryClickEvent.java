@@ -104,6 +104,10 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
                         ConfigIOHandler.getConfigIOHandler().getNotionConfig(),
                         ColorMap.NOTION_COLOR));
                 break;
+
+            default:
+                this.event.setCancelled(true);
+                break;
         }
     }
 
