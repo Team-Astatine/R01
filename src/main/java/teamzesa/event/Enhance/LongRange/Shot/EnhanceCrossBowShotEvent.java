@@ -65,15 +65,9 @@ public class EnhanceCrossBowShotEvent extends EnhanceUtil implements EventRegist
     }
 
     private void executeEnhanceState(int shootingSpeed, int pierceLevel, Sound sound, Vector vector) {
-        Runnable tridentThrowingTask = () -> {
-            this.arrow.setPierceLevel(pierceLevel);
-            this.event.getEntity().setVelocity(vector.multiply(shootingSpeed));
-            this.arrow.getWorld().playSound(arrow.getLocation(), sound, 5F, 5F);
-
-
-            this.arrow.setCritical(false);
-        };
-
-        tridentThrowingTask.run();
+        this.arrow.setPierceLevel(pierceLevel);
+        this.event.getEntity().setVelocity(vector.multiply(shootingSpeed));
+        this.arrow.getWorld().playSound(arrow.getLocation(), sound, 5F, 5F);
+        this.arrow.setCritical(false);
     }
 }
