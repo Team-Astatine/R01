@@ -1,4 +1,4 @@
-package teamzesa.event.Enhance.Dialog;
+ package teamzesa.event.Enhance.Dialog;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -80,6 +80,7 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
                 break;
 
             case 6:
+                this.event.setCancelled(true);
                 event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
                 event.getWhoClicked().sendMessage(createLinkComponentExchanger(
                         ConfigIOHandler.getConfigIOHandler().getDiscordInvite(),
@@ -102,15 +103,12 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
                 break;
 
             case 8:
+                this.event.setCancelled(true);
                 event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
                 event.getWhoClicked().sendMessage(createLinkComponentExchanger(
                         ConfigIOHandler.getConfigIOHandler().getServerGuideNotion(),
                         ConfigIOHandler.getConfigIOHandler().getNotionConfig(),
                         ColorMap.NOTION_COLOR));
-                break;
-
-            default:
-                this.event.setCancelled(true);
                 break;
         }
     }
