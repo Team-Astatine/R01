@@ -75,6 +75,10 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
         }
 
         switch (event.getSlot()) {
+            case 0,1,2:
+                this.event.setCancelled(true);
+                break;
+
             case 6:
                 event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
                 event.getWhoClicked().sendMessage(createLinkComponentExchanger(
