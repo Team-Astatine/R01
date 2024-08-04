@@ -3,8 +3,10 @@ package teamzesa.event.Enhance.Dialog;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
+import teamzesa.DataBase.IOHandler.ConfigIOHandler;
 import teamzesa.DataBase.enhance.EnhanceItemBuilder;
 import teamzesa.DataBase.entity.EnhanceItem;
 import teamzesa.event.Enhance.GeneratingEnhanceItem;
@@ -18,8 +20,7 @@ import teamzesa.util.Interface.StringComponentExchanger;
 
 import java.util.HashSet;
 
-import static teamzesa.command.EnhanceDialog.EXECUTE_STUFF_DATA;
-import static teamzesa.command.EnhanceDialog.PANEL_STUFF_CUSTOM_DATA;
+import static teamzesa.command.EnhanceDialog.*;
 
 public class EnhanceInventoryClickEvent extends StringComponentExchanger implements EventRegister {
     private Player ownerPlayer;
@@ -54,8 +55,7 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
 
     @Override
     public void execute() {
-        if (isAllowedInteractItem(PANEL_STUFF_CUSTOM_DATA)) {
-            this.event.setCancelled(true);
+        if (!event.getInventory().equals(ENHANCE_DIALOG)) {
             return;
         }
 
@@ -74,39 +74,42 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
                 this.allowedScroll.add(scroll.getMaterial());
         }
 
-        if (isAllowedInteractItem(EXECUTE_STUFF_DATA)) {
-            if (isAllowedEnhanceItem()) {
-                EnhanceItem enhanceItemObj = new EnhanceItemBuilder()
-                        .enhancePlayer((Player)this.event.getWhoClicked())
-                        .enhanceItem(this.enhanceItem)
-                        .enhanceScroll(this.scrollStuff)
-                        .protectScroll(this.protectScroll)
-                        .build();
+        switch (event.getSlot()) {
+            case 6:
+                event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                event.getWhoClicked().sendMessage(createLinkComponentExchanger(
+                        ConfigIOHandler.getConfigIOHandler().getDiscordInvite(),
+                        ConfigIOHandler.getConfigIOHandler().getDiscordConfig(),
+                        ColorMap.DISCORD_COLOR));
+                break;
 
-                new GeneratingEnhanceItem(enhanceItemObj);
-            }
-            this.event.setCancelled(true);
+            case 7:
+                if (isAllowedEnhanceItem()) {
+                    EnhanceItem enhanceItemObj = new EnhanceItemBuilder()
+                            .enhancePlayer((Player)this.event.getWhoClicked())
+                            .enhanceItem(this.enhanceItem)
+                            .enhanceScroll(this.scrollStuff)
+                            .protectScroll(this.protectScroll)
+                            .build();
+
+                    new GeneratingEnhanceItem(enhanceItemObj);
+                }
+                this.event.setCancelled(true);
+                break;
+
+            case 8:
+                event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                event.getWhoClicked().sendMessage(createLinkComponentExchanger(
+                        ConfigIOHandler.getConfigIOHandler().getServerGuideNotion(),
+                        ConfigIOHandler.getConfigIOHandler().getNotionConfig(),
+                        ColorMap.NOTION_COLOR));
+                break;
         }
-    }
-
-    private boolean isAllowedInteractItem(int allowedCustomModelData) {
-        boolean valid1 = false, valid2 = false, valid3 = false, valid4 = false, valid5 = false;
-
-        valid1 = this.event.getInventory().getType() == InventoryType.DROPPER;
-        valid2 = this.currentItem != null;
-        valid3 = valid2 && this.currentItem.hasItemMeta();
-
-        if (valid3 && this.currentItem.hasItemMeta())
-            valid4 = this.currentItem.getItemMeta().hasCustomModelData();
-
-        if (valid4 && this.currentItem.getItemMeta().hasCustomModelData())
-            valid5 = this.currentItem.getItemMeta().getCustomModelData() == allowedCustomModelData;
-
-        return valid1 && valid2 && valid3 && valid4 && valid5;
     }
 
     private boolean isAllowedEnhanceItem() {
         String comment = "";
+
         if (this.enhanceItem == null || this.enhanceItem.isEmpty())
             comment = "무기를 올려주세요.";
 
@@ -124,6 +127,7 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
 
         if (!comment.isBlank())
             playerSendMsgComponentExchanger(this.ownerPlayer, comment, ColorMap.RED);
+
         return comment.isBlank();
     }
 }
