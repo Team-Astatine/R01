@@ -8,6 +8,7 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CrossbowMeta;
 import org.bukkit.util.Vector;
+import teamzesa.DataBase.userHandler.UserController;
 import teamzesa.event.Enhance.Interface.EnhanceUtil;
 import teamzesa.event.EventRegister.EventRegister;
 
@@ -54,9 +55,11 @@ public class EnhanceCrossBowShotEvent extends EnhanceUtil implements EventRegist
             case 7,8,9 -> executeEnhanceState(2, 6, Sound.ENTITY_ENDER_DRAGON_SHOOT, vector);
             case 10 ->    {
                 executeEnhanceState(3, 10, Sound.BLOCK_CONDUIT_ACTIVATE, vector);
-                CrossbowMeta mainHand = (CrossbowMeta) mainHandCrossBow.getItemMeta();
-                mainHand.addChargedProjectile(new ItemStack(Material.ARROW));
-                mainHandCrossBow.setItemMeta(mainHand);
+                if (new UserController().readUser(shooter.getUniqueId()).isGodMode()) {
+                    CrossbowMeta mainHand = (CrossbowMeta) mainHandCrossBow.getItemMeta();
+                    mainHand.addChargedProjectile(new ItemStack(Material.ARROW));
+                    mainHandCrossBow.setItemMeta(mainHand);
+                }
             }
             default -> {
                 return;
