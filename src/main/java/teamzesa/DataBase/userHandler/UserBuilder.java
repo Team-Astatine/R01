@@ -43,11 +43,10 @@ public class UserBuilder {
         return this;
     }
 
-    public UserBuilder nameList(List<String> name) {
+    public void nameList(List<String> name) {
         if (this.nameList.isEmpty())
             this.nameList = name;
         else this.nameList.retainAll(name);
-        return this;
     }
 
     public UserBuilder nameList(String name) {
@@ -55,9 +54,8 @@ public class UserBuilder {
         return this;
     }
 
-    public UserBuilder ipList(HashSet<String> ipList) {
+    public void ipList(HashSet<String> ipList) {
         this.connectionIPList = ipList;
-        return this;
     }
 
     public UserBuilder ipList(String ip) {

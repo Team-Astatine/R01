@@ -3,6 +3,7 @@ package teamzesa.util.Enum;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.TabCompleter;
 import teamzesa.command.*;
+import teamzesa.command.AdminCommand.*;
 import teamzesa.command.register.CommandRegisterSection;
 
 public enum CommandExecutorMap {
@@ -19,7 +20,8 @@ public enum CommandExecutorMap {
     CONFIG_RELOAD("dataFileReload", new DataFileReload()),
     ANNOUNCING("공지", new AnnouncingOnOff()),
     ENHANCE("강화", new EnhanceDialog()),
-    ENHANCE_SET("enhance", new EnhanceSet());
+    ENHANCE_SET("enhance", new EnhanceSet()),
+    REMOVE_DUPLICATE_USER_DATA("RemoveDuplicateData", new RemoveDuplicateData());
 
     private final String command;
     private final CommandRegisterSection executor;
@@ -37,7 +39,7 @@ public enum CommandExecutorMap {
         return executor;
     }
 
-    public TabCompleter newTabCompleterInstance() {
-        return executor;
-    }
+//    public TabCompleter newTabCompleterInstance() {
+//        return executor;
+//    }
 }

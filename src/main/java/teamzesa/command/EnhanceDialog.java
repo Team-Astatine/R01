@@ -18,6 +18,8 @@ import teamzesa.util.Enum.CommandExecutorMap;
 
 
 public class EnhanceDialog extends CommandRegisterSection {
+    public static Inventory ENHANCE_DIALOG;
+
     private Player sendPlayer;
     private ItemStack targetStuff;
     private ItemStack scrollStuff;
@@ -79,7 +81,7 @@ public class EnhanceDialog extends CommandRegisterSection {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         this.sendPlayer = (Player) commandSender;
-        Inventory inventory = Bukkit.createInventory(sendPlayer, InventoryType.DROPPER, componentExchanger("강화", ColorMap.RED));
+        ENHANCE_DIALOG = Bukkit.createInventory(sendPlayer, InventoryType.DROPPER, componentExchanger("강화", ColorMap.RED));
 
         /*
         0 1 2
@@ -88,18 +90,18 @@ public class EnhanceDialog extends CommandRegisterSection {
         */
 
 //        🔪📜📜
-        inventory.setItem(0, this.targetStuff);
-        inventory.setItem(1, this.scrollStuff);
-        inventory.setItem(2, this.protectScrollStuff);
+        ENHANCE_DIALOG.setItem(0, this.targetStuff);
+        ENHANCE_DIALOG.setItem(1, this.scrollStuff);
+        ENHANCE_DIALOG.setItem(2, this.protectScrollStuff);
 
 //        🟦🟥◻️
-//        inventory.setItem(6, this.discordButton);
-        inventory.setItem(6, this.executeButton);
-        inventory.setItem(7, this.executeButton);
-        inventory.setItem(8, this.executeButton);
-//        inventory.setItem(8, this.notionButton);
+        ENHANCE_DIALOG.setItem(6, this.discordButton);
+//        ENHANCE_DIALOG.setItem(6, this.executeButton);
+        ENHANCE_DIALOG.setItem(7, this.executeButton);
+//        ENHANCE_DIALOG.setItem(8, this.executeButton);
+        ENHANCE_DIALOG.setItem(8, this.notionButton);
 
-        sendPlayer.openInventory(inventory);
+        sendPlayer.openInventory(ENHANCE_DIALOG);
         return true;
     }
 }

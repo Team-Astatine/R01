@@ -12,7 +12,7 @@ import teamzesa.util.Enum.CommandExecutorMap;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class CommandRegisterSection extends StringComponentExchanger implements TabCompleter, CommandExecutor {
+public abstract class CommandRegisterSection extends StringComponentExchanger implements /*TabCompleter,*/ CommandExecutor {
     private final CommandExecutorMap typeOfCommand;
 
     public CommandRegisterSection(CommandExecutorMap typeOfCommand) {
@@ -24,8 +24,8 @@ public abstract class CommandRegisterSection extends StringComponentExchanger im
         return false;
     }
 
-    @Override
-    public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
-        return Collections.emptyList();
-    }
+//    @Override
+//    public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+//        return Collections.emptyList();
+//    }
 }

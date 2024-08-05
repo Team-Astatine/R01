@@ -59,14 +59,14 @@ public class PlayerInfoHandler extends StringComponentExchanger implements Event
 
     private void updateUserInfo(String name, String ip, boolean hasPlayedBefore) {
         boolean equalsLastName = this.joinUser.nameList().getLast().equals(name);
-        boolean nonExistsIP = !this.joinUser.connectionIPList().contains(ip);
+        boolean existsIP = this.joinUser.connectionIPList().contains(ip);
 
-        if (!hasPlayedBefore || !equalsLastName) {
+        if (!equalsLastName) {
             updateNameList(name);
-            sendMessageToPlayer(this.joinPlayer, "이름이 변경되었습니다.", "신규 이름을 등록합니다.", hasPlayedBefore);
+            sendMessageToPlayer(this.joinPlayer, "새로운 이름으로 접속하셨습니다.", "신규 이름을 등록합니다.", hasPlayedBefore);
         }
 
-        if (hasPlayedBefore || nonExistsIP) {
+        if (!existsIP) {
             updateIPList(ip);
             sendMessageToPlayer(this.joinPlayer, "새로운 IP로 접속하셨습니다.", "신규 IP를 등록합니다.", hasPlayedBefore);
         }

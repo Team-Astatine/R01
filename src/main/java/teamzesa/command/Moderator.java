@@ -33,13 +33,15 @@ public class Moderator extends CommandRegisterSection {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
-        String successComment = "지금부터 관리자 입니다.";
-
-        Optional.ofNullable(Bukkit.getPlayer(args[0])).ifPresent(
+        Optional.of((Player) sender).ifPresent(
                 player -> {
                     if (checkUPModerator(player)) {
+                        String successComment = "지금부터 관리자 입니다.";
                         playerSendMsgComponentExchanger(player, successComment, ColorMap.ORANGE);
                         player.setOp(true);
+                    } else {
+                        String FailComment = "사용권한이 없습니다.";
+                        playerSendMsgComponentExchanger(player, FailComment, ColorMap.RED);
                     }
                 }
         );
