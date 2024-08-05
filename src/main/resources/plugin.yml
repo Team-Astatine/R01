@@ -16,20 +16,6 @@ permissions:
     default: op
 
 commands:
-  ExportR01Object:
-    description: R01프로젝트에 모든 Object가 Export 됩니다.
-  Motd:
-    description: Motd를 설정합니다.
-  setHealth:
-    description: 체력을 초기화 합니다.
-  vo:
-    description: DebugValue
-  vi:
-    description: DebugItemValue
-  god:
-    description: 무적을 활성화 합니다.
-  dataFileReload:
-    description: config 을 Reload 합니다.
   moderator:
     description: 관리자 권한부여
   hat:
@@ -42,5 +28,23 @@ commands:
     description: 공지를 키거나 끕니다.
   강화:
     description: 강화창을 엽니다.
+
+  Motd:
+    description: Motd를 설정합니다.
+    permission: R01.DataControl
+  ExportR01Object:
+    description: R01프로젝트에 모든 Object가 Export 됩니다.
+  setHealth:
+    description: 체력을 초기화 합니다.
+  vo:
+    description: DebugValue
+  vi:
+    description: DebugItemValue
+  god:
+    description: 무적을 활성화 합니다.
+  dataFileReload:
+    description: config 을 Reload 합니다.
   enhance:
     description: 강화를 설정합니다.
+  RemoveDuplicateData:
+    description: UserData에 중복 이름을 삭제합니다.

@@ -19,7 +19,8 @@ public enum CommandExecutorMap {
     CONFIG_RELOAD("dataFileReload", new DataFileReload()),
     ANNOUNCING("공지", new AnnouncingOnOff()),
     ENHANCE("강화", new EnhanceDialog()),
-    ENHANCE_SET("enhance", new EnhanceSet());
+    ENHANCE_SET("enhance", new EnhanceSet()),
+    REMOVE_DUPLICATE_USER_DATA("RemoveDuplicateData", new RemoveDuplicateData());
 
     private final String command;
     private final CommandRegisterSection executor;
