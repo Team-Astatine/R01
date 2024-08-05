@@ -11,7 +11,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
 import teamzesa.DataBase.entity.RObject.UserKillStatus;
-import teamzesa.command.God;
+import teamzesa.command.AdminCommand.God;
 import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Enum.WorldName;
@@ -25,8 +25,6 @@ import teamzesa.DataBase.userHandler.UserBuilder;
 import teamzesa.DataBase.userHandler.UserController;
 import teamzesa.util.RanNumGenerator;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Optional;
 
 public class ImportPlayerStatusEvent extends StringComponentExchanger implements EventRegister {

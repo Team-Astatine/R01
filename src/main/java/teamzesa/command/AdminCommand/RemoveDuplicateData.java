@@ -1,4 +1,4 @@
-package teamzesa.command;
+package teamzesa.command.AdminCommand;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -8,7 +8,6 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.userHandler.UserController;
 import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.event.EventRegisterSection;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.CommandExecutorMap;
 

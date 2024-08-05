@@ -1,11 +1,10 @@
-package teamzesa.command;
+package teamzesa.command.AdminCommand;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import teamzesa.DataBase.UserKillStatusHandler.KillStatusBuilder;
 import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
 import teamzesa.command.register.CommandRegisterSection;
@@ -14,9 +13,6 @@ import teamzesa.util.Enum.CommandExecutorMap;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.DataBase.userHandler.UserController;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
 
