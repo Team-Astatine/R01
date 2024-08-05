@@ -23,6 +23,11 @@ public class EnhanceSet extends CommandRegisterSection {
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         Player player = (Player) commandSender;
 
+        if (!player.hasPermission("R01.ItemControl")) {
+            playerSendMsgComponentExchanger(player,"해당 명령어는 플레이어가 사용할 수 없습니다.", ColorMap.RED);
+            return false;
+        }
+
         if (!commandSender.isOp()) {
             playerSendMsgComponentExchanger(player,"해당 명령어는 플레이어가 사용할 수 없습니다.", ColorMap.RED);
             return false;

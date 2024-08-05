@@ -8,6 +8,12 @@ permissions:
   SpeedLimit.bypass:
     description: Bypass the speed limit
     default: op
+  R01.DataControl:
+    description: R01 Project에 모든 Data를 Export, Import 할 수 있습니다.
+    default: op
+  R01.ItemControl:
+    description: R01 Project에 모든 Item 관련 명령어를 수행할 수 있습니다.
+    default: op
 
 commands:
   ExportR01Object:
