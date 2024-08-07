@@ -72,6 +72,7 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
         int z = position[2];
 
         this.player.teleportAsync(new Location(world,x,y,z));
+        Bukkit.getLogger().info(String.format("%s Player Teleport Position is > %d %d %d", player.getName(), x,y,z));
     }
 
     private void checkingUserStatusGod() {
@@ -97,6 +98,7 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
             this.player.getInventory().addItem(kit.getFood());
         }
 
+        /* Non Using Netherite Kit
         for (ArmourKit kit : ArmourKit.values()) {
             ItemStack armour = kit.getArmour();
             armour.addEnchantment(Enchantment.PROTECTION, 2);
@@ -112,7 +114,9 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
             tool.addEnchantment(Enchantment.UNBREAKING, 2);
             this.player.getInventory().addItem(tool);
         }
+        */
     }
+
     private void announcingJoinMsg() {
         this.announcer.joinAnnouncer(this.player);
         this.announcer.countAnnouncer(this.player);
