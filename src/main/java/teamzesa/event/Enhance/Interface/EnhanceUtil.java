@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class EnhanceUtil extends StringComponentExchanger {
-    private static final double ENHANCE_BASE_PERCENTAGE = 10;
+    private static final double ENHANCE_BASE_PERCENTAGE = 1;
 
     public static boolean isMeetsJudgementCriteria(int standardValue) {
         /*
@@ -165,7 +165,7 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
 
         ItemMeta itemMeta = itemStack.getItemMeta();
         for (int i = 0; i < itemMeta.getCustomModelData(); i++) {
-            double increasePercentage = ENHANCE_BASE_PERCENTAGE + (i * 2);
+            double increasePercentage = ENHANCE_BASE_PERCENTAGE + i;
             totalDamage += totalDamage * (increasePercentage / 100);
         }
 
