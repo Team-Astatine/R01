@@ -3,7 +3,6 @@ package teamzesa.event.Enhance.ShortRange;
 import org.bukkit.damage.DamageSource;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.event.Enhance.Interface.EnhanceUtil;
 import teamzesa.event.EventRegister.EventRegister;
