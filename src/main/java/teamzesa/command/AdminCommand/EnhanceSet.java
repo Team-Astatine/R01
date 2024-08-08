@@ -41,7 +41,7 @@ public class EnhanceSet extends CommandRegisterSection {
         targetItem.setItemMeta(targetItemMeta);
 
         try {
-            EnhanceUtil.addItemDescription(targetItem, enhanceLevel - targetItem.getItemMeta().getCustomModelData());
+            EnhanceUtil.increaseDmgAndAddLore(targetItem, enhanceLevel - targetItem.getItemMeta().getCustomModelData());
         } catch (Exception e) {
             e.printStackTrace();
         }
