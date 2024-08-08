@@ -2,6 +2,7 @@ package teamzesa.event.Enhance.ShortRange;
 
 import org.bukkit.damage.DamageSource;
 import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.event.Enhance.Interface.EnhanceUtil;
@@ -9,9 +10,9 @@ import teamzesa.event.EventRegister.EventRegister;
 
 public class EnhanceShortRangeWeaponHurtEvent extends EnhanceUtil implements EventRegister {
     private DamageSource damageSource;
-    private final EntityDamageEvent event;
+    private final EntityDamageByEntityEvent event;
 
-    public EnhanceShortRangeWeaponHurtEvent(EntityDamageEvent event) {
+    public EnhanceShortRangeWeaponHurtEvent(EntityDamageByEntityEvent event) {
         this.event = event;
 
         init();
@@ -40,7 +41,8 @@ public class EnhanceShortRangeWeaponHurtEvent extends EnhanceUtil implements Eve
             return;
 
         double weaponDmg = getShortRangeWeaponCloseDamage(weapon) + getSharpnessDamage(weapon);
-        double totalDmg = calculatingTotalEnhanceStageDamage(weapon, weaponDmg); // 10,12,14%
+        double totalDmg = calculatingTotalEnhanceStageDamage(weapon, weaponDmg); // 11, 12, 13% Increase Dmg
+        totalDmg = this.event.isCritical() ? totalDmg * 1.5 : totalDmg; // calculation critical 50 % Dmg
         this.event.setDamage(totalDmg);
     }
 }
