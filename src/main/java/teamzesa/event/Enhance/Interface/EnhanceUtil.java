@@ -59,17 +59,19 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
             throw new EnhanceItemMetaException(funtion + " hasCustomModelData == null");
     }
 
-    public static void addItemDescription(ItemStack item, int updateCount) throws EnhanceItemMetaException {
-
+    public static void increaseDmgAndAddLore(ItemStack item, int updateCount) throws EnhanceItemMetaException {
         try {
             isItemHasCustomModelData(item, "addItemDescription");
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println(item);
 
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.setCustomModelData(itemMeta.getCustomModelData() + updateCount);
         item.setItemMeta(itemMeta);
+
+        System.out.println(item);
 
         List<Component> lore = new ArrayList<>();
         lore.add(getEnhanceStatusComponent(item));

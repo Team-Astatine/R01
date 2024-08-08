@@ -7,12 +7,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPhysicsEvent;
 import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.block.BlockRedstoneEvent;
+import org.bukkit.event.enchantment.EnchantItemEvent;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.inventory.*;
 import org.bukkit.event.player.*;
 import org.bukkit.event.raid.RaidTriggerEvent;
 import org.bukkit.event.server.TabCompleteEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
+import teamzesa.event.EnchantItemEvent.UpdateEnhanceItemLoreFromEnchantment;
 import teamzesa.event.Enhance.Dialog.EnhanceInventoryClickEvent;
 import teamzesa.event.Enhance.Dialog.EnhanceInventoryCloseEvent;
 import teamzesa.event.Enhance.LongRange.GodMode.GodModeTridentHitEvent;
@@ -89,6 +91,11 @@ public class EventRegisterSection implements Listener {
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
+    public static void EnchantItemEvent(EnchantItemEvent event) {
+        new UpdateEnhanceItemLoreFromEnchantment(event);
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
     public static void ProjectileHitEvent(ProjectileHitEvent event) {
         new EnhanceBowHitEvent(event);
         new EnhanceCrossBowHitEvent(event);
@@ -143,7 +150,6 @@ public class EventRegisterSection implements Listener {
     public static void EntityDamageEvent(EntityDamageEvent event) {
 //        Event Cancelled 하면 해당 Event 자체가 캔슬됌.
 //        new EnhanceResistanceEvent(event);
-        new EnhanceShortRangeWeaponHurtEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -186,6 +192,7 @@ public class EventRegisterSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public static void EntityDamageByEntityEvent(EntityDamageByEntityEvent event) {
         new EntityAttackSpeedHandler(event);
+        new EnhanceShortRangeWeaponHurtEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
