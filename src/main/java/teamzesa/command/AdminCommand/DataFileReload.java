@@ -39,11 +39,6 @@ public class DataFileReload extends CommandRegisterSection {
         );
 
 //        operation Check
-        if (!player.hasPermission("R01.DataControl") && !this.isConsoleSend) {
-            playerSendMsgComponentExchanger(player,"해당 명령어는 플레이어가 사용할 수 없습니다.", ColorMap.RED);
-            return false;
-        }
-
         if (!player.isOp() && !this.isConsoleSend) {
             playerSendMsgComponentExchanger(player,"해당 명령어는 플레이어가 사용할 수 없습니다.", ColorMap.RED);
             return false;

@@ -39,7 +39,7 @@ public enum CommandExecutorMap {
         return executor;
     }
 
-    public TabCompleter newTabCompleterInstance() {
-        return executor;
-    }
+//    public TabCompleter newTabCompleterInstance() {
+//        return executor;
+//    }
 }
