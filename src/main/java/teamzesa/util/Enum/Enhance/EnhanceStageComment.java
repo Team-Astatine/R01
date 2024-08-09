@@ -1,7 +1,13 @@
 package teamzesa.util.Enum.Enhance;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextDecoration;
 import teamzesa.util.Enum.ColorMap;
+
+import java.util.Arrays;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public enum EnhanceStageComment {
     ONE_STEP(1, Component.text("★ +1")
@@ -37,10 +43,21 @@ public enum EnhanceStageComment {
 
     private final int enhanceStack;
     private final Component component;
+    private final static Map<Integer, EnhanceStageComment> CACHED_ITEM = Arrays.stream(values())
+                    .collect(Collectors.toMap(EnhanceStageComment::getEnhanceStack, Function.identity()));
 
     EnhanceStageComment(int enhanceStack, Component component) {
         this.enhanceStack = enhanceStack;
         this.component = component;
+    }
+
+    public static Component findByEnhanceLevelComment(int enhanceLevel) {
+        if (!CACHED_ITEM.containsKey(enhanceLevel))
+            return Component.text("Unknown Enhancement Status")
+                    .color(ColorMap.RED.getTextColor())
+                    .decorate(TextDecoration.ITALIC);
+
+        return CACHED_ITEM.get(enhanceLevel).getLoreComment();
     }
 
     public int getEnhanceStack() {

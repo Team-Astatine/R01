@@ -87,14 +87,7 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
             e.printStackTrace();
         }
 
-        for (EnhanceStageComment enhanceStageComment : EnhanceStageComment.values()) {
-            if (item.getItemMeta().getCustomModelData() == enhanceStageComment.getEnhanceStack())
-                return enhanceStageComment.getLoreComment();
-        }
-
-        return Component.text("Unknown Enhancement Status")
-                .color(ColorMap.RED.getTextColor())
-                .decorate(TextDecoration.ITALIC);
+        return EnhanceStageComment.findByEnhanceLevelComment(item.getItemMeta().getCustomModelData());
     }
 
     public static Component getEnhanceDisplayComponent(ItemStack enhanceItem) {
