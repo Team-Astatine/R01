@@ -17,7 +17,7 @@ import org.bukkit.event.player.*;
 import org.bukkit.event.raid.RaidTriggerEvent;
 import org.bukkit.event.server.TabCompleteEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
-import teamzesa.event.EnchantItemEvent.UpdateEnhanceItemLoreFromEnchantment;
+import teamzesa.event.Enhance.PlayerInteraction.UpdateEnhanceItemLoreFromEnchantment;
 import teamzesa.event.Enhance.PlayerInteraction.EnhanceInventoryClickEvent;
 import teamzesa.event.Enhance.PlayerInteraction.EnhanceInventoryCloseEvent;
 import teamzesa.event.Enhance.PlayerInteraction.LongRange.GodMode.GodModeTridentHitEvent;
