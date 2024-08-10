@@ -1,4 +1,4 @@
-package teamzesa.event.Enhance.ShortRange;
+package teamzesa.event.Enhance.PlayerInteraction.ShortRange;
 
 import org.bukkit.damage.DamageSource;
 import org.bukkit.entity.Player;

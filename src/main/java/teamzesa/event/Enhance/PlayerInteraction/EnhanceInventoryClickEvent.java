@@ -1,10 +1,9 @@
- package teamzesa.event.Enhance.Dialog;
+ package teamzesa.event.Enhance.PlayerInteraction;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.DataBase.IOHandler.ConfigIOHandler;
 import teamzesa.DataBase.enhance.EnhanceItemBuilder;

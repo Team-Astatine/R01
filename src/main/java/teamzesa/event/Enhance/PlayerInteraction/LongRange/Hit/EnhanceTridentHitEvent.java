@@ -1,4 +1,4 @@
-package teamzesa.event.Enhance.LongRange.Hit;
+package teamzesa.event.Enhance.PlayerInteraction.LongRange.Hit;
 
 import org.bukkit.Location;
 import org.bukkit.Material;

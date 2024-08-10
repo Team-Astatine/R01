@@ -1,4 +1,4 @@
-package teamzesa.event.Enhance.LongRange;
+package teamzesa.event.Enhance.PlayerInteraction.LongRange;
 
 import org.bukkit.damage.DamageSource;
 import org.bukkit.entity.Player;

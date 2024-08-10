@@ -1,4 +1,4 @@
-package teamzesa.event.Enhance.LongRange.Shot;
+package teamzesa.event.Enhance.PlayerInteraction.LongRange.Shot;
 
 import org.bukkit.Material;
 import org.bukkit.Sound;

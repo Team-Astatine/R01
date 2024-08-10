@@ -1,4 +1,4 @@
-package teamzesa.event.Enhance.LongRange.GodMode;
+package teamzesa.event.Enhance.PlayerInteraction.LongRange.GodMode;
 
 import org.bukkit.Location;
 import org.bukkit.Sound;
