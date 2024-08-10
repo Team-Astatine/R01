@@ -1,4 +1,5 @@
 package teamzesa.command.AdminCommand;
+import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -73,7 +74,7 @@ public class God extends CommandRegisterSection {
         if (isConsoleSend)
             Bukkit.getLogger().info("[R01] " + targetUser.nameList().getLast() + comment);
 
-        else if (!this.senderPlayer.equals(targetPlayer))
+        else if (ObjectUtils.notEqual(this.senderPlayer, targetPlayer))
             playerSendMsgComponentExchanger(this.senderPlayer, targetUser.nameList().getLast() + comment, ColorMap.ORANGE);
 
         playerSendMsgComponentExchanger(targetPlayer, "당신" + comment, ColorMap.ORANGE);

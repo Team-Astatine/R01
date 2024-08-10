@@ -1,6 +1,7 @@
 package teamzesa.event.PlayerArmSwingEvent;
 
 import io.papermc.paper.event.player.PlayerArmSwingEvent;
+import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -27,16 +28,16 @@ public class HandSwingEvent implements EventRegister {
 
     @Override
     public void execute() {
-        if (this.player.getInventory().getItemInMainHand().getType() != Material.AIR)
+        if (ObjectUtils.notEqual(this.player.getInventory().getItemInMainHand(), Material.AIR))
             return;
 
-        if (this.player.getInventory().getItemInOffHand().getType() != Material.AIR)
+        if (ObjectUtils.notEqual(this.player.getInventory().getItemInOffHand().getType() ,Material.AIR))
             return;
 
-        if (this.event.getAnimationType() == PlayerAnimationType.OFF_ARM_SWING)
+        if (ObjectUtils.notEqual(this.event.getAnimationType(), PlayerAnimationType.OFF_ARM_SWING))
             return;
 
-        BukkitTask offHandSwing = Bukkit.getScheduler().runTaskLater(
+        Bukkit.getScheduler().runTaskLater(
                 R01.getPlugin(R01.class),
                 () -> this.event.getPlayer().swingOffHand(),
                 7L
