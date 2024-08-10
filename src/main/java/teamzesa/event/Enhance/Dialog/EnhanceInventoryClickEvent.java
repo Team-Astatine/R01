@@ -75,23 +75,23 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
         }
 
         switch (event.getSlot()) {
-            case 0,1,2:
+            case 0, 1, 2 -> {
                 this.event.setCancelled(true);
-                break;
+            }
 
-            case 6:
+            case 6 -> {
                 this.event.setCancelled(true);
                 event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
                 event.getWhoClicked().sendMessage(createLinkComponentExchanger(
                         ConfigIOHandler.getConfigIOHandler().getDiscordInvite(),
                         ConfigIOHandler.getConfigIOHandler().getDiscordConfig(),
                         ColorMap.DISCORD_COLOR));
-                break;
+            }
 
-            case 7:
+            case 7 -> {
                 if (isAllowedEnhanceItem()) {
                     EnhanceItem enhanceItemObj = new EnhanceItemBuilder()
-                            .enhancePlayer((Player)this.event.getWhoClicked())
+                            .enhancePlayer((Player) this.event.getWhoClicked())
                             .enhanceItem(this.enhanceItem)
                             .enhanceScroll(this.scrollStuff)
                             .protectScroll(this.protectScroll)
@@ -100,16 +100,17 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
                     new GeneratingEnhanceItem(enhanceItemObj);
                 }
                 this.event.setCancelled(true);
-                break;
+            }
 
-            case 8:
+            case 8 -> {
                 this.event.setCancelled(true);
                 event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
                 event.getWhoClicked().sendMessage(createLinkComponentExchanger(
                         ConfigIOHandler.getConfigIOHandler().getServerGuideNotion(),
                         ConfigIOHandler.getConfigIOHandler().getNotionConfig(),
                         ColorMap.NOTION_COLOR));
-                break;
+            }
+
         }
     }
 
