@@ -96,9 +96,7 @@ public class EnhanceDialog extends CommandRegisterSection {
 
 //        🟦🟥◻️
         ENHANCE_DIALOG.setItem(6, this.discordButton);
-//        ENHANCE_DIALOG.setItem(6, this.executeButton);
         ENHANCE_DIALOG.setItem(7, this.executeButton);
-//        ENHANCE_DIALOG.setItem(8, this.executeButton);
         ENHANCE_DIALOG.setItem(8, this.notionButton);
 
         sendPlayer.openInventory(ENHANCE_DIALOG);
