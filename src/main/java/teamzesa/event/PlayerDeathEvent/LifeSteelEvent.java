@@ -51,7 +51,7 @@ public class LifeSteelEvent extends StringComponentExchanger implements EventReg
     }
 
     private boolean checkingGodMod() {
-        if (ObjectUtils.notEqual(this.deatherUser.isGodMode(), true))
+        if (!this.deatherUser.isGodMode())
             return false;
 
         Location playerLocation = this.deather.getLocation();
