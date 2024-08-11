@@ -1,4 +1,5 @@
 package teamzesa.command.AdminCommand;
+
 import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -7,12 +8,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.util.Enum.CommandExecutorMap;
-import teamzesa.util.Enum.ColorMap;
 import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.userHandler.UserBuilder;
 import teamzesa.DataBase.userHandler.UserController;
+import teamzesa.command.register.CommandRegisterSection;
+import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.CommandExecutorMap;
 
 import java.util.Optional;
 
@@ -36,11 +37,11 @@ public class God extends CommandRegisterSection {
 
         Optional.ofNullable(this.senderUser).ifPresentOrElse(
                 existUser -> this.senderPlayer = Bukkit.getPlayer(existUser.uuid()),
-                ()        -> this.isConsoleSend = true
+                () -> this.isConsoleSend = true
         );
 
         if (this.senderUser != null && !this.senderPlayer.isOp()) {
-            playerSendMsgComponentExchanger(this.senderPlayer,"해당 명령어는 플레이어가 사용할 수 없습니다.", ColorMap.RED);
+            playerSendMsgComponentExchanger(this.senderPlayer, "해당 명령어는 플레이어가 사용할 수 없습니다.", ColorMap.RED);
             return false;
         }
 
@@ -65,7 +66,7 @@ public class God extends CommandRegisterSection {
         targetUser = new UserBuilder(targetUser)
                 .isGodMode(!targetUser.isGodMode())
                 .buildAndUpdate();
-        setPotionEffect(targetPlayer,targetUser);
+        setPotionEffect(targetPlayer, targetUser);
 
 
         String targetStatus = targetUser.isGodMode() ? "신" : "인간";
@@ -83,8 +84,8 @@ public class God extends CommandRegisterSection {
 
     public void setPotionEffect(Player targetPlayer, User targetUser) {
         if (targetUser.isGodMode()) {
-            targetPlayer.addPotionEffect(new PotionEffect(PotionEffectType.SATURATION,100000000,0));
-            targetPlayer.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE,100000000,0));
+            targetPlayer.addPotionEffect(new PotionEffect(PotionEffectType.SATURATION, 100000000, 0));
+            targetPlayer.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 100000000, 0));
         } else {
             targetPlayer.removePotionEffect(PotionEffectType.SATURATION);
             targetPlayer.removePotionEffect(PotionEffectType.FIRE_RESISTANCE);

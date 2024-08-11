@@ -5,7 +5,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
- import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.event.Enhance.Interface.EnhanceUtil;
@@ -25,13 +25,13 @@ public class EnhanceSet extends CommandRegisterSection {
         Player player = (Player) commandSender;
 
         if (BooleanUtils.isFalse(commandSender.isOp())) {
-            playerSendMsgComponentExchanger(player,"해당 명령어는 플레이어가 사용할 수 없습니다.", ColorMap.RED);
+            playerSendMsgComponentExchanger(player, "해당 명령어는 플레이어가 사용할 수 없습니다.", ColorMap.RED);
             return false;
         }
 
         int enhanceLevel = Integer.parseInt(strings[0]);
         if (enhanceLevel < 0 || enhanceLevel > 10) {
-            playerSendMsgComponentExchanger(player,"0 ~ 10 사이 값만 대입 가능합니다.", ColorMap.RED);
+            playerSendMsgComponentExchanger(player, "0 ~ 10 사이 값만 대입 가능합니다.", ColorMap.RED);
             return false;
         }
 
@@ -46,7 +46,7 @@ public class EnhanceSet extends CommandRegisterSection {
             e.printStackTrace();
         }
 
-        playerSendMsgComponentExchanger(player, getComment(enhanceLevel) , ColorMap.GREEN);
+        playerSendMsgComponentExchanger(player, getComment(enhanceLevel), ColorMap.GREEN);
         return true;
     }
 

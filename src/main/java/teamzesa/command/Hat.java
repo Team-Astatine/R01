@@ -6,14 +6,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.util.Enum.CommandExecutorMap;
 import teamzesa.util.Enum.ColorMap;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import teamzesa.util.Enum.CommandExecutorMap;
 
 public class Hat extends CommandRegisterSection {
     private Player player;
@@ -34,7 +29,7 @@ public class Hat extends CommandRegisterSection {
 
         ItemStack tmpItemInHand = this.playerInventory.getItemInMainHand();
         if (tmpItemInHand.isEmpty()) {
-            playerSendMsgComponentExchanger(this.player,"손에 아이템이 없습니다.", ColorMap.RED);
+            playerSendMsgComponentExchanger(this.player, "손에 아이템이 없습니다.", ColorMap.RED);
             return false;
         }
 
@@ -45,10 +40,10 @@ public class Hat extends CommandRegisterSection {
         return true;
     }
 
-    private void headSet(ItemStack temp){
+    private void headSet(ItemStack temp) {
         ItemStack armourHead = this.playerInventory.getHelmet();
         this.playerInventory.setHelmet(temp);
         this.playerInventory.setItemInMainHand(armourHead);
-        playerSendMsgComponentExchanger(this.player,"머리에 썼어요!", ColorMap.YELLOW);
+        playerSendMsgComponentExchanger(this.player, "머리에 썼어요!", ColorMap.YELLOW);
     }
 }

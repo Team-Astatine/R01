@@ -8,11 +8,11 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.DataBase.UserKillStatusHandler.KillStatusBuilder;
 import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
-import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.DataBase.entity.RObject.User;
-import teamzesa.util.Enum.CommandExecutorMap;
-import teamzesa.util.Enum.ColorMap;
 import teamzesa.DataBase.userHandler.UserController;
+import teamzesa.command.register.CommandRegisterSection;
+import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.CommandExecutorMap;
 
 import java.util.Optional;
 
@@ -30,18 +30,18 @@ public class SetHealth extends CommandRegisterSection {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String @NotNull [] args) {
         User senderUser = null;
         try {
-            senderUser =  new UserController().readUser(sender.getName());
+            senderUser = new UserController().readUser(sender.getName());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         Optional.ofNullable(senderUser).ifPresentOrElse(
                 existUser -> this.senderPlayer = Bukkit.getPlayer(existUser.uuid()),
-                ()        -> this.isConsoleSend = true
+                () -> this.isConsoleSend = true
         );
 
         if (senderUser != null && !this.senderPlayer.isOp()) {
-            playerSendMsgComponentExchanger(this.senderPlayer,"해당 명령어는 플레이어가 사용할 수 없습니다.", ColorMap.RED);
+            playerSendMsgComponentExchanger(this.senderPlayer, "해당 명령어는 플레이어가 사용할 수 없습니다.", ColorMap.RED);
             return false;
         }
 
