@@ -35,7 +35,7 @@ public class EnhanceShortRangeWeaponHurtEvent extends EnhanceUtil implements Eve
 
         ItemStack weapon = player.getInventory().getItemInMainHand();
 
-        if (ObjectUtils.notEqual(weapon.getItemMeta(), null))
+        if (weapon.getItemMeta() == null)
             return;
 
         if (BooleanUtils.isFalse(weapon.getItemMeta().hasCustomModelData()))
