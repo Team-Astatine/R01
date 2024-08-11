@@ -45,7 +45,7 @@ public enum EnhanceStageComment {
     private final int enhanceStack;
     private final Component component;
     private final static Map<Integer, EnhanceStageComment> CACHED_ITEM = Arrays.stream(values())
-                    .collect(Collectors.toMap(EnhanceStageComment::getEnhanceStack, Function.identity()));
+            .collect(Collectors.toMap(EnhanceStageComment::getEnhanceStack, Function.identity()));
 
     EnhanceStageComment(int enhanceStack, Component component) {
         this.enhanceStack = enhanceStack;

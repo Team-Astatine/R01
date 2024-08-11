@@ -29,7 +29,7 @@ public enum Scroll implements ScrollMap {
     private final Material material;
     private final int discountValue;
     private static final Map<Material, Scroll> CACHED_ITEM = Arrays.stream(values())
-                    .collect(Collectors.toMap(scroll -> scroll.material, Functions.identity()));
+            .collect(Collectors.toMap(scroll -> scroll.material, Functions.identity()));
 
     Scroll(Material material, int discountValue) {
         this.discountValue = discountValue;
