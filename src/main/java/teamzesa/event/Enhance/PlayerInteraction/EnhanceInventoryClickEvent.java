@@ -2,9 +2,11 @@ package teamzesa.event.Enhance.PlayerInteraction;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Material;
+import org.bukkit.block.Dispenser;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.DataBase.IOHandler.ConfigIOHandler;
 import teamzesa.DataBase.enhance.EnhanceItemBuilder;
@@ -74,43 +76,44 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
                 this.allowedScroll.add(scroll.getMaterial());
         }
 
-        switch (event.getSlot()) {
-            case 0, 1, 2 -> {
-                this.event.setCancelled(true);
-            }
-
-            case 6 -> {
-                this.event.setCancelled(true);
-                event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
-                event.getWhoClicked().sendMessage(createLinkComponentExchanger(
-                        ConfigIOHandler.getConfigIOHandler().getDiscordInvite(),
-                        ConfigIOHandler.getConfigIOHandler().getDiscordConfig(),
-                        ColorMap.DISCORD_COLOR));
-            }
-
-            case 7 -> {
-                if (isAllowedEnhanceItem()) {
-                    EnhanceItem enhanceItemObj = new EnhanceItemBuilder()
-                            .enhancePlayer((Player) this.event.getWhoClicked())
-                            .enhanceItem(this.enhanceItem)
-                            .enhanceScroll(this.scrollStuff)
-                            .protectScroll(this.protectScroll)
-                            .build();
-
-                    new GeneratingEnhanceItem(enhanceItemObj);
+        if (this.event.getClickedInventory().getType().equals(InventoryType.DROPPER)) {
+            switch (this.event.getSlot()) {
+                case 0, 1, 2 -> {
+                    this.event.setCancelled(true);
                 }
-                this.event.setCancelled(true);
-            }
 
-            case 8 -> {
-                this.event.setCancelled(true);
-                event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
-                event.getWhoClicked().sendMessage(createLinkComponentExchanger(
-                        ConfigIOHandler.getConfigIOHandler().getServerGuideNotion(),
-                        ConfigIOHandler.getConfigIOHandler().getNotionConfig(),
-                        ColorMap.NOTION_COLOR));
-            }
+                case 6 -> {
+                    this.event.setCancelled(true);
+                    event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                    event.getWhoClicked().sendMessage(createLinkComponentExchanger(
+                            ConfigIOHandler.getConfigIOHandler().getDiscordInvite(),
+                            ConfigIOHandler.getConfigIOHandler().getDiscordConfig(),
+                            ColorMap.DISCORD_COLOR));
+                }
 
+                case 7 -> {
+                    if (isAllowedEnhanceItem()) {
+                        EnhanceItem enhanceItemObj = new EnhanceItemBuilder()
+                                .enhancePlayer((Player) this.event.getWhoClicked())
+                                .enhanceItem(this.enhanceItem)
+                                .enhanceScroll(this.scrollStuff)
+                                .protectScroll(this.protectScroll)
+                                .build();
+
+                        new GeneratingEnhanceItem(enhanceItemObj);
+                    }
+                    this.event.setCancelled(true);
+                }
+
+                case 8 -> {
+                    this.event.setCancelled(true);
+                    event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                    event.getWhoClicked().sendMessage(createLinkComponentExchanger(
+                            ConfigIOHandler.getConfigIOHandler().getServerGuideNotion(),
+                            ConfigIOHandler.getConfigIOHandler().getNotionConfig(),
+                            ColorMap.NOTION_COLOR));
+                }
+            }
         }
     }
 
