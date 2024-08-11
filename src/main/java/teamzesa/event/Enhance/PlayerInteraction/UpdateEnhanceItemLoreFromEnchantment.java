@@ -1,5 +1,7 @@
-package teamzesa.event.EnchantItemEvent;
+package teamzesa.event.Enhance.PlayerInteraction;
 
+import net.kyori.adventure.text.Component;
+import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.enchantment.EnchantItemEvent;
 import org.bukkit.inventory.ItemStack;
@@ -39,20 +41,21 @@ public class UpdateEnhanceItemLoreFromEnchantment extends StringComponentExchang
         if (this.sharpnessLevel < 1)
             return;
 
-        if (!this.enchantItem.hasItemMeta())
+        if (BooleanUtils.isFalse(this.enchantItem.hasItemMeta()))
             return;
 
-        if (!this.enchantItem.getItemMeta().hasCustomModelData())
+        if (BooleanUtils.isFalse(this.enchantItem.getItemMeta().hasCustomModelData()))
             return;
 
-        ItemMeta itemMeta = this.enchantItem.getItemMeta();
-        this.enhanceLevel = itemMeta.getCustomModelData();
+        this.enchantItem.addEnchantments(this.enchantment);
+        this.enhanceLevel = this.enchantItem.getItemMeta().getCustomModelData();
 
-        itemMeta.setCustomModelData(0);
-        this.enchantItem.setItemMeta(itemMeta);
+        ItemMeta targetItemMeta = this.enchantItem.getItemMeta();
+        targetItemMeta.setCustomModelData(0);
+        this.enchantItem.setItemMeta(targetItemMeta);
 
         try {
-            EnhanceUtil.increaseDmgAndAddLore(this.enchantItem, +enhanceLevel);
+            EnhanceUtil.increaseDmgAndAddLore(this.enchantItem, enhanceLevel);
         } catch (Exception e) {
             e.printStackTrace();
         }

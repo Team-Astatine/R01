@@ -65,13 +65,10 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(item);
 
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.setCustomModelData(itemMeta.getCustomModelData() + updateCount);
         item.setItemMeta(itemMeta);
-
-        System.out.println(item);
 
         List<Component> lore = new ArrayList<>();
         lore.add(getEnhanceStatusComponent(item));
@@ -92,11 +89,12 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
 
     public static Component getEnhanceDisplayComponent(ItemStack enhanceItem) {
         double weaponDmg = 0.0;
-        try {
+        try { //Calculation Origin Dmg + Sharpness Dmg
             weaponDmg = getShortRangeWeaponCloseDamage(enhanceItem) + getSharpnessDamage(enhanceItem);
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         double totalDmg = calculatingTotalEnhanceStageDamage(enhanceItem, weaponDmg);
         String comment = String.format("현재 데미지 : %.3f...", totalDmg);
 
