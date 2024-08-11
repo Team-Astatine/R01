@@ -10,6 +10,7 @@ import teamzesa.event.EventRegister.EventRegister;
 public class RestrictedInvToInvMoveItemHandler implements EventRegister {
 
     private final InventoryMoveItemEvent event;
+
     public RestrictedInvToInvMoveItemHandler(InventoryMoveItemEvent event) {
         this.event = event;
         init();

@@ -1,8 +1,9 @@
 package teamzesa.event.PlayerDeathEvent;
 
 import org.apache.commons.lang3.BooleanUtils;
-import org.apache.commons.lang3.ObjectUtils;
-import org.bukkit.*;
+import org.bukkit.Location;
+import org.bukkit.Particle;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import teamzesa.DataBase.UserKillStatusHandler.KillStatusBuilder;
@@ -11,8 +12,8 @@ import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.entity.RObject.UserKillStatus;
 import teamzesa.DataBase.userHandler.UserController;
 import teamzesa.event.EventRegister.EventRegister;
-import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Interface.StringComponentExchanger;
 
 
 public class LifeSteelEvent extends StringComponentExchanger implements EventRegister {

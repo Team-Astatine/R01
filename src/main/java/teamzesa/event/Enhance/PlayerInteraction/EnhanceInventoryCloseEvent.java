@@ -8,7 +8,9 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.event.EventRegister.EventRegister;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
 
 import static teamzesa.command.EnhanceDialog.*;
 
@@ -19,6 +21,7 @@ public class EnhanceInventoryCloseEvent implements EventRegister {
     private ArrayList<ItemStack> slot;
 
     private final InventoryCloseEvent event;
+
     public EnhanceInventoryCloseEvent(InventoryCloseEvent event) {
         this.event = event;
         init();

@@ -16,6 +16,7 @@ public class RespawnRandomTeleportEvent extends StringComponentExchanger impleme
     private Player player;
 
     private final PlayerRespawnEvent event;
+
     public RespawnRandomTeleportEvent(PlayerRespawnEvent event) {
         this.event = event;
         init();
@@ -39,6 +40,6 @@ public class RespawnRandomTeleportEvent extends StringComponentExchanger impleme
         int y = position[1];
         int z = position[2];
 
-        this.player.teleportAsync(new Location(world,x,y,z));
+        this.player.teleportAsync(new Location(world, x, y, z));
     }
 }

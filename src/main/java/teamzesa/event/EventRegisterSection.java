@@ -17,7 +17,6 @@ import org.bukkit.event.player.*;
 import org.bukkit.event.raid.RaidTriggerEvent;
 import org.bukkit.event.server.TabCompleteEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
-import teamzesa.event.Enhance.PlayerInteraction.UpdateEnhanceItemLoreFromEnchantment;
 import teamzesa.event.Enhance.PlayerInteraction.EnhanceInventoryClickEvent;
 import teamzesa.event.Enhance.PlayerInteraction.EnhanceInventoryCloseEvent;
 import teamzesa.event.Enhance.PlayerInteraction.LongRange.GodMode.GodModeTridentHitEvent;
@@ -29,6 +28,7 @@ import teamzesa.event.Enhance.PlayerInteraction.LongRange.Shot.EnhanceBowShotEve
 import teamzesa.event.Enhance.PlayerInteraction.LongRange.Shot.EnhanceCrossBowShotEvent;
 import teamzesa.event.Enhance.PlayerInteraction.LongRange.Shot.EnhanceTridentShotEvent;
 import teamzesa.event.Enhance.PlayerInteraction.ShortRange.EnhanceShortRangeWeaponHurtEvent;
+import teamzesa.event.Enhance.PlayerInteraction.UpdateEnhanceItemLoreFromEnchantment;
 import teamzesa.event.EntityDamageByEntityEvent.EntityAttackSpeedHandler;
 import teamzesa.event.EntityExplodeEvent.ExplosiveEvent;
 import teamzesa.event.PlayerArmSwingEvent.HandSwingEvent;

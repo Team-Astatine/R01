@@ -17,6 +17,7 @@ import teamzesa.event.EventRegister.EventRegister;
 public class EnhanceCrossBowShotEvent extends EnhanceUtil implements EventRegister {
     private Arrow arrow;
     private final ProjectileLaunchEvent event;
+
     public EnhanceCrossBowShotEvent(ProjectileLaunchEvent event) {
         this.event = event;
 
@@ -25,7 +26,8 @@ public class EnhanceCrossBowShotEvent extends EnhanceUtil implements EventRegist
     }
 
     @Override
-    public void init() {}
+    public void init() {
+    }
 
     @Override
     public void execute() {
@@ -52,10 +54,10 @@ public class EnhanceCrossBowShotEvent extends EnhanceUtil implements EventRegist
 
         Vector vector = this.event.getEntity().getVelocity();
         switch (getItemCustomModelData(mainHandCrossBow)) {
-            case 1,2,3 -> executeEnhanceState(1, 1, Sound.ENTITY_GHAST_DEATH, vector);
-            case 4,5,6 -> executeEnhanceState(1, 3, Sound.ENTITY_ENDER_DRAGON_HURT, vector);
-            case 7,8,9 -> executeEnhanceState(2, 6, Sound.ENTITY_ENDER_DRAGON_SHOOT, vector);
-            case 10 ->    {
+            case 1, 2, 3 -> executeEnhanceState(1, 1, Sound.ENTITY_GHAST_DEATH, vector);
+            case 4, 5, 6 -> executeEnhanceState(1, 3, Sound.ENTITY_ENDER_DRAGON_HURT, vector);
+            case 7, 8, 9 -> executeEnhanceState(2, 6, Sound.ENTITY_ENDER_DRAGON_SHOOT, vector);
+            case 10 -> {
                 executeEnhanceState(3, 10, Sound.BLOCK_CONDUIT_ACTIVATE, vector);
                 if (new UserController().readUser(shooter.getUniqueId()).isGodMode()) {
                     CrossbowMeta mainHand = (CrossbowMeta) mainHandCrossBow.getItemMeta();
@@ -64,7 +66,6 @@ public class EnhanceCrossBowShotEvent extends EnhanceUtil implements EventRegist
                 }
             }
             default -> {
-                return;
             }
         }
     }

@@ -50,7 +50,7 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         return increaseDmg == 0.5 ? 0 : increaseDmg;
     }
 
-    public static void isItemHasCustomModelData(ItemStack item,String funtion) throws EnhanceItemMetaException {
+    public static void isItemHasCustomModelData(ItemStack item, String funtion) throws EnhanceItemMetaException {
         if (item == null)
             throw new EnhanceItemMetaException("item == null");
 

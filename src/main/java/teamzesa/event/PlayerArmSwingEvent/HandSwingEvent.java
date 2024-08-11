@@ -6,7 +6,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerAnimationType;
-import org.bukkit.scheduler.BukkitTask;
 import teamzesa.R01;
 import teamzesa.event.EventRegister.EventRegister;
 
@@ -31,7 +30,7 @@ public class HandSwingEvent implements EventRegister {
         if (ObjectUtils.notEqual(this.player.getInventory().getItemInMainHand(), Material.AIR))
             return;
 
-        if (ObjectUtils.notEqual(this.player.getInventory().getItemInOffHand().getType() ,Material.AIR))
+        if (ObjectUtils.notEqual(this.player.getInventory().getItemInOffHand().getType(), Material.AIR))
             return;
 
         if (ObjectUtils.notEqual(this.event.getAnimationType(), PlayerAnimationType.OFF_ARM_SWING))

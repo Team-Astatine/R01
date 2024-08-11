@@ -1,4 +1,4 @@
- package teamzesa.event.Enhance.PlayerInteraction;
+package teamzesa.event.Enhance.PlayerInteraction;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Material;
@@ -20,7 +20,7 @@ import teamzesa.util.Interface.StringComponentExchanger;
 
 import java.util.HashSet;
 
-import static teamzesa.command.EnhanceDialog.*;
+import static teamzesa.command.EnhanceDialog.ENHANCE_DIALOG;
 
 public class EnhanceInventoryClickEvent extends StringComponentExchanger implements EventRegister {
     private Player ownerPlayer;

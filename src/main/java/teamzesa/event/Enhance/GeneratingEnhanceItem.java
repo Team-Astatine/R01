@@ -5,7 +5,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.Material;
 import teamzesa.DataBase.entity.EnhanceItem;
 import teamzesa.event.Enhance.Interface.EnhanceUtil;
-import teamzesa.util.Enum.*;
+import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.Enhance.ProtectScroll;
 import teamzesa.util.Enum.Enhance.Scroll;
 
@@ -46,7 +46,7 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
         try { // protect
             if (hasProtectScroll) {
                 this.isProtectScrollEnough =
-                    this.item.protectScroll().getAmount() >= ProtectScroll.findByItemStack(this.item.protectScroll()).getDiscountValue();
+                        this.item.protectScroll().getAmount() >= ProtectScroll.findByItemStack(this.item.protectScroll()).getDiscountValue();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -122,7 +122,7 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
         int currentCustomModelData = 0;
         if (ObjectUtils.notEqual(this.item.enhanceItem().getType(), Material.AIR))
             currentCustomModelData = this.item.enhanceItem().getItemMeta().getCustomModelData();
-        
+
         String comment = switch (commentCode) {
             case 0 -> "무기를 올려주세요.";
             case 1 -> "강화 주문서가 부족합니다.";

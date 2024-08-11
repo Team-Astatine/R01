@@ -21,7 +21,8 @@ public class EnhanceCrossBowHitEvent extends EnhanceUtil implements EventRegiste
     }
 
     @Override
-    public void init() {}
+    public void init() {
+    }
 
     @Override
     public void execute() {
@@ -44,19 +45,18 @@ public class EnhanceCrossBowHitEvent extends EnhanceUtil implements EventRegiste
             return;
 
         switch (getItemCustomModelData(mainHandBow)) {
-            case 1,2,3 -> executeEnhanceState(Sound.ENTITY_GHAST_DEATH, false);
-            case 4,5,6 -> executeEnhanceState(Sound.ENTITY_ENDER_DRAGON_HURT, false);
-            case 7,8,9 -> executeEnhanceState(Sound.ENTITY_ENDER_DRAGON_SHOOT, false);
-            case 10 ->    executeEnhanceState(Sound.BLOCK_CONDUIT_ACTIVATE, true);
+            case 1, 2, 3 -> executeEnhanceState(Sound.ENTITY_GHAST_DEATH, false);
+            case 4, 5, 6 -> executeEnhanceState(Sound.ENTITY_ENDER_DRAGON_HURT, false);
+            case 7, 8, 9 -> executeEnhanceState(Sound.ENTITY_ENDER_DRAGON_SHOOT, false);
+            case 10 -> executeEnhanceState(Sound.BLOCK_CONDUIT_ACTIVATE, true);
             default -> {
-                return;
             }
         }
     }
 
     private void executeEnhanceState(Sound sound, boolean isFire) {
         Runnable tridentHitTask = () ->
-            this.bowHitLocation.getWorld().playSound(this.bowHitLocation, sound, 5F, 5F);
+                this.bowHitLocation.getWorld().playSound(this.bowHitLocation, sound, 5F, 5F);
 
         tridentHitTask.run();
     }

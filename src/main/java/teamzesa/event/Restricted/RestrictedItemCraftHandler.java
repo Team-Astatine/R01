@@ -5,13 +5,14 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.CraftItemEvent;
 import teamzesa.event.EventRegister.EventRegister;
-import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Interface.StringComponentExchanger;
 
 public class RestrictedItemCraftHandler extends StringComponentExchanger implements EventRegister {
     private Material currentItemMaterial;
 
     private final CraftItemEvent event;
+
     public RestrictedItemCraftHandler(CraftItemEvent event) {
         this.event = event;
         init();

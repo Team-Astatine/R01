@@ -1,7 +1,8 @@
 package teamzesa.event.EntityExplodeEvent;
 
 import org.bukkit.Location;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Creeper;
+import org.bukkit.entity.WitherSkull;
 import org.bukkit.event.entity.EntityExplodeEvent;
 import teamzesa.event.EventRegister.EventRegister;
 

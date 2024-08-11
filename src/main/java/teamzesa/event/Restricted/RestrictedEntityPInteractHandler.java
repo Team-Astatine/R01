@@ -19,7 +19,8 @@ public class RestrictedEntityPInteractHandler extends StringComponentExchanger i
     }
 
     @Override
-    public void init() {}
+    public void init() {
+    }
 
     @Override
     public void execute() {

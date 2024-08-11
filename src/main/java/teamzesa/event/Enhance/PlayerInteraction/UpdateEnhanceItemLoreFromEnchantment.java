@@ -1,6 +1,5 @@
 package teamzesa.event.Enhance.PlayerInteraction;
 
-import net.kyori.adventure.text.Component;
 import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.enchantment.EnchantItemEvent;
@@ -20,6 +19,7 @@ public class UpdateEnhanceItemLoreFromEnchantment extends StringComponentExchang
     private int enhanceLevel = 0;
 
     private final EnchantItemEvent event;
+
     public UpdateEnhanceItemLoreFromEnchantment(EnchantItemEvent event) {
         this.event = event;
         init();

@@ -10,6 +10,7 @@ import java.util.List;
 public class RestrictedCommandTabCompleteEvent extends StringComponentExchanger implements EventRegister {
 
     private final TabCompleteEvent event;
+
     public RestrictedCommandTabCompleteEvent(TabCompleteEvent event) {
         this.event = event;
         init();
