@@ -62,25 +62,32 @@ public class EnhanceInventoryCloseEvent implements EventRegister {
     }
 
     private boolean validation() {
-        if (ObjectUtils.notEqual(this.event.getInventory().getType(), InventoryType.DROPPER))
+        if (BooleanUtils.isFalse(this.event.getInventory().equals(ENHANCE_DIALOG)))
             return true;
 
+        ItemStack slotZeroItem = this.event.getView().getItem(0);
+        ItemStack slotFirstItem = this.event.getView().getItem(1);
+        ItemStack slotSecondItem = this.event.getView().getItem(2);
+
+        ItemStack slotSixItem = this.event.getView().getItem(6);
         ItemStack slotSevenItem = this.event.getView().getItem(7);
-        if (slotSevenItem == null)
+        ItemStack slotEightItem = this.event.getView().getItem(8);
+
+        if (ObjectUtils.notEqual(slotZeroItem.getItemMeta().getCustomModelData(), PANEL_STUFF_CUSTOM_DATA))
             return true;
 
-        if (BooleanUtils.isFalse(slotSevenItem.hasItemMeta()))
+        if (ObjectUtils.notEqual(slotFirstItem.getItemMeta().getCustomModelData(), PANEL_STUFF_CUSTOM_DATA))
             return true;
 
-        if (BooleanUtils.isFalse(slotSevenItem.getItemMeta().hasCustomModelData()))
+        if (ObjectUtils.notEqual(slotSecondItem.getItemMeta().getCustomModelData(), PANEL_STUFF_CUSTOM_DATA))
             return true;
 
-        if (ObjectUtils.notEqual(slotSevenItem.getItemMeta().getCustomModelData(), EXECUTE_DISCORD_DATA))
+        if (ObjectUtils.notEqual(slotSixItem.getItemMeta().getCustomModelData(), EXECUTE_DISCORD_DATA))
             return true;
 
         if (ObjectUtils.notEqual(slotSevenItem.getItemMeta().getCustomModelData(), EXECUTE_STUFF_DATA))
             return true;
 
-        return ObjectUtils.notEqual(slotSevenItem.getItemMeta().getCustomModelData(), EXECUTE_NOTION_DATA);
+        return ObjectUtils.notEqual(slotEightItem.getItemMeta().getCustomModelData(), EXECUTE_NOTION_DATA);
     }
 }
