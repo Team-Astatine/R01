@@ -1,6 +1,7 @@
 package teamzesa.util.Enum.Enhance;
 
 import com.google.common.base.Functions;
+import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.event.Enhance.Interface.ScrollMap;
@@ -36,7 +37,7 @@ public enum ProtectScroll implements ScrollMap {
     }
 
     public static ProtectScroll findByItemStack(ItemStack itemStack) throws Exception {
-        if (!CACHED_ITEM.containsKey(itemStack.getType()))
+        if (BooleanUtils.isFalse(CACHED_ITEM.containsKey(itemStack.getType())))
             throw new EnhanceItemSearchException("Non Register This Material");
         return CACHED_ITEM.get(itemStack.getType());
     }

@@ -2,6 +2,7 @@ package teamzesa.util.Enum.Enhance;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
+import org.apache.commons.lang3.BooleanUtils;
 import teamzesa.util.Enum.ColorMap;
 
 import java.util.Arrays;
@@ -52,7 +53,7 @@ public enum EnhanceStageComment {
     }
 
     public static Component findByEnhanceLevelComment(int enhanceLevel) {
-        if (!CACHED_ITEM.containsKey(enhanceLevel))
+        if (BooleanUtils.isFalse(CACHED_ITEM.containsKey(enhanceLevel)))
             return Component.text("Unknown Enhancement Status")
                     .color(ColorMap.RED.getTextColor())
                     .decorate(TextDecoration.ITALIC);

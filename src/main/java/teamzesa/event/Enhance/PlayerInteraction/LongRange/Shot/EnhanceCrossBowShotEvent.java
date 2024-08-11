@@ -1,5 +1,7 @@
 package teamzesa.event.Enhance.PlayerInteraction.LongRange.Shot;
 
+import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Arrow;
@@ -30,7 +32,7 @@ public class EnhanceCrossBowShotEvent extends EnhanceUtil implements EventRegist
         if (!(this.event.getEntity() instanceof Arrow arrow))
             return;
 
-        if (!arrow.isShotFromCrossbow())
+        if (BooleanUtils.isFalse(arrow.isShotFromCrossbow()))
             return;
 
         if (!(this.event.getEntity().getShooter() instanceof Player shooter))
@@ -39,13 +41,13 @@ public class EnhanceCrossBowShotEvent extends EnhanceUtil implements EventRegist
         this.arrow = arrow;
         ItemStack mainHandCrossBow = shooter.getInventory().getItemInMainHand();
 
-        if (mainHandCrossBow.getType() != Material.CROSSBOW)
+        if (ObjectUtils.notEqual(mainHandCrossBow.getType(), Material.CROSSBOW))
             mainHandCrossBow = shooter.getInventory().getItemInOffHand();
 
-        if (!mainHandCrossBow.hasItemMeta())
+        if (BooleanUtils.isFalse(mainHandCrossBow.hasItemMeta()))
             return;
 
-        if (!mainHandCrossBow.getItemMeta().hasCustomModelData())
+        if (BooleanUtils.isFalse(mainHandCrossBow.getItemMeta().hasCustomModelData()))
             return;
 
         Vector vector = this.event.getEntity().getVelocity();

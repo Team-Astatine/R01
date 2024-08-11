@@ -2,6 +2,8 @@ package teamzesa.event.Enhance.Interface;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
+import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -52,10 +54,10 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         if (item == null)
             throw new EnhanceItemMetaException("item == null");
 
-        if (!item.hasItemMeta())
+        if (BooleanUtils.isFalse(item.hasItemMeta()))
             throw new EnhanceItemMetaException(funtion + " hasItemMeta == null");
 
-        if (!item.getItemMeta().hasCustomModelData())
+        if (BooleanUtils.isFalse(item.getItemMeta().hasCustomModelData()))
             throw new EnhanceItemMetaException(funtion + " hasCustomModelData == null");
     }
 
@@ -114,7 +116,7 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
 
     public static ItemStack checkModelData(ItemStack item) {
         ItemMeta itemMeta = item.getItemMeta();
-        if (!itemMeta.hasCustomModelData()) {
+        if (BooleanUtils.isFalse(itemMeta.hasCustomModelData())) {
             itemMeta.setCustomModelData(0);
             item.setItemMeta(itemMeta);
         }
@@ -123,7 +125,7 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
 
     public static void scrollDiscount(ItemStack scroll, ItemStack protectScroll) {
         try {
-            if (protectScroll != null) {
+            if (ObjectUtils.notEqual(protectScroll, null)) {
                 protectScroll.setAmount(protectScroll.getAmount()
                         - ProtectScroll.findByItemStack(protectScroll).getDiscountValue());
             }

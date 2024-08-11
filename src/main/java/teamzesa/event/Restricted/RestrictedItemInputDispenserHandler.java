@@ -1,5 +1,7 @@
 package teamzesa.event.Restricted;
 
+import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -37,10 +39,10 @@ public class RestrictedItemInputDispenserHandler extends StringComponentExchange
         if (this.clickerInventory == null)
             return;
 
-        if (this.currentOpeningContainerInventory.getType() != InventoryType.DISPENSER)
+        if (ObjectUtils.notEqual(this.currentOpeningContainerInventory.getType(), InventoryType.DISPENSER))
             return;
 
-        if (this.clickerInventory.getType() != InventoryType.PLAYER)
+        if (ObjectUtils.notEqual(this.clickerInventory.getType(), InventoryType.PLAYER))
             return;
 
         if (this.player.isOp())
@@ -50,7 +52,7 @@ public class RestrictedItemInputDispenserHandler extends StringComponentExchange
         boolean isRestrictedItem = new RestrictedElement().restrictedItem.stream()
                 .anyMatch(playerInputItemMaterial::equals);
 
-        if (!isRestrictedItem)
+        if (BooleanUtils.isFalse(isRestrictedItem))
             return;
 
         this.event.setCancelled(true);

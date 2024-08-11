@@ -1,5 +1,6 @@
 package teamzesa.event.Restricted;
 
+import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.CraftItemEvent;
@@ -27,7 +28,7 @@ public class RestrictedItemCraftHandler extends StringComponentExchanger impleme
         boolean isRestrictedItem = new RestrictedElement().restrictedItem.stream()
                 .anyMatch(this.currentItemMaterial::equals);
 
-        if (!isRestrictedItem)
+        if (BooleanUtils.isFalse(isRestrictedItem))
             return;
 
         Player player = (Player) this.event.getWhoClicked();

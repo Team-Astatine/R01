@@ -1,5 +1,6 @@
 package teamzesa.command;
 
+import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -36,7 +37,7 @@ public class Totem extends CommandRegisterSection {
             Totem.this.playerInventory = Totem.this.player.getInventory();
             getAllOfPlayerTotems();
 
-            if (!validationInventory())
+            if (BooleanUtils.isFalse(validationInventory()))
                 return;
 
             removeTotemInInv();

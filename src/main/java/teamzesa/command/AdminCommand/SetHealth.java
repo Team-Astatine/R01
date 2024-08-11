@@ -1,5 +1,6 @@
 package teamzesa.command.AdminCommand;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -78,7 +79,7 @@ public class SetHealth extends CommandRegisterSection {
             return;
         }
 
-        if (!this.senderPlayer.equals(this.targetPlayer))
+        if (ObjectUtils.notEqual(this.senderPlayer, this.targetPlayer))
             playerSendMsgComponentExchanger(this.senderPlayer, comment, ColorMap.YELLOW);
         playerSendMsgComponentExchanger(this.targetPlayer, comment, ColorMap.YELLOW);
     }

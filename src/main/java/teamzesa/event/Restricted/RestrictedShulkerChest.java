@@ -1,5 +1,6 @@
 package teamzesa.event.Restricted;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -42,15 +43,15 @@ public class RestrictedShulkerChest extends StringComponentExchanger implements 
 //        System.out.println("getInv > " + this.currentOpeningContainerInventory.getType());
 
 //        System.out.println("current click container Typing Check");
-        if (this.currentOpeningContainerInventory.getType() != InventoryType.SHULKER_BOX)
+        if (ObjectUtils.notEqual(this.currentOpeningContainerInventory.getType(), InventoryType.SHULKER_BOX))
             return;
 
 //        System.out.println("clicker container Typing Check");
-        if (this.clickerInventory.getType() != InventoryType.PLAYER)
+        if (ObjectUtils.notEqual(this.clickerInventory.getType(), InventoryType.PLAYER))
             return;
 
 //        System.out.println("itemStack Type Check");
-        if (this.itemStack.getType() != Material.TOTEM_OF_UNDYING)
+        if (ObjectUtils.notEqual(this.itemStack.getType(), Material.TOTEM_OF_UNDYING))
             return;
 
 //        System.out.println("itemStack amount Check");

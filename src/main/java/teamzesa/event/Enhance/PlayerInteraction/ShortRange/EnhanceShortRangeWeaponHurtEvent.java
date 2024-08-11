@@ -1,5 +1,7 @@
 package teamzesa.event.Enhance.PlayerInteraction.ShortRange;
 
+import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.damage.DamageSource;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -33,10 +35,10 @@ public class EnhanceShortRangeWeaponHurtEvent extends EnhanceUtil implements Eve
 
         ItemStack weapon = player.getInventory().getItemInMainHand();
 
-        if (weapon.getItemMeta() == null)
+        if (ObjectUtils.notEqual(weapon.getItemMeta(), null))
             return;
 
-        if (!weapon.getItemMeta().hasCustomModelData())
+        if (BooleanUtils.isFalse(weapon.getItemMeta().hasCustomModelData()))
             return;
 
         double weaponDmg = getShortRangeWeaponCloseDamage(weapon) + getSharpnessDamage(weapon);

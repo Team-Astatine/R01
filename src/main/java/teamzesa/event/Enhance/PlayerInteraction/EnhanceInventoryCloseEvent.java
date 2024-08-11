@@ -1,5 +1,7 @@
 package teamzesa.event.Enhance.PlayerInteraction;
 
+import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
@@ -57,27 +59,25 @@ public class EnhanceInventoryCloseEvent implements EventRegister {
     }
 
     private boolean validation() {
-        if (this.event.getInventory().getType() != InventoryType.DROPPER)
+        if (ObjectUtils.notEqual(this.event.getInventory().getType(), InventoryType.DROPPER))
             return true;
 
         ItemStack slotSevenItem = this.event.getView().getItem(7);
         if (slotSevenItem == null)
             return true;
 
-        if (!slotSevenItem.hasItemMeta())
+        if (BooleanUtils.isFalse(slotSevenItem.hasItemMeta()))
             return true;
 
-        if (!slotSevenItem.getItemMeta().hasCustomModelData())
+        if (BooleanUtils.isFalse(slotSevenItem.getItemMeta().hasCustomModelData()))
             return true;
 
-        if (slotSevenItem.getItemMeta().getCustomModelData() != EXECUTE_STUFF_DATA)
+        if (ObjectUtils.notEqual(slotSevenItem.getItemMeta().getCustomModelData(), EXECUTE_DISCORD_DATA))
             return true;
 
-//        if (slotSevenItem.getItemMeta().getCustomModelData() != EXECUTE_DISCORD_DATA)
-//            return true;
-//
-//        if (slotSevenItem.getItemMeta().getCustomModelData() != EXECUTE_NOTION_DATA)
-//            return true;
-        return false;
+        if (ObjectUtils.notEqual(slotSevenItem.getItemMeta().getCustomModelData(), EXECUTE_STUFF_DATA))
+            return true;
+
+        return ObjectUtils.notEqual(slotSevenItem.getItemMeta().getCustomModelData(), EXECUTE_NOTION_DATA);
     }
 }

@@ -1,5 +1,6 @@
 package teamzesa.event.PlayerDeathEvent;
 
+import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
@@ -51,7 +52,7 @@ public class LifeSteelEvent extends StringComponentExchanger implements EventReg
     }
 
     private boolean checkingGodMod() {
-        if (!this.deatherUser.isGodMode())
+        if (BooleanUtils.isFalse(this.deatherUser.isGodMode()))
             return false;
 
         Location playerLocation = this.deather.getLocation();

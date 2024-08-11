@@ -1,5 +1,7 @@
 package teamzesa.event.Enhance;
 
+import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.Material;
 import teamzesa.DataBase.entity.EnhanceItem;
 import teamzesa.event.Enhance.Interface.EnhanceUtil;
@@ -31,7 +33,7 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
         this.isProtectScrollEnough = false;
 
 //        existProtectScroll
-        if (this.item.protectScroll() != null)
+        if (ObjectUtils.notEqual(this.item.protectScroll(), null))
             this.hasProtectScroll = true;
 
         try {// enhance
@@ -61,11 +63,11 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
         }
 
 //        Scroll Valid
-        if (!this.isScrollEnough) {
+        if (BooleanUtils.isFalse(this.isScrollEnough)) {
             playerSendMessage(8, ColorMap.RED);
             return;
         }
-        if (this.hasProtectScroll && !this.isProtectScrollEnough) {
+        if (this.hasProtectScroll && BooleanUtils.isFalse(this.isProtectScrollEnough)) {
             playerSendMessage(7, ColorMap.RED);
             return;
         }
@@ -80,13 +82,13 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
             return;
         }
 
-        if (!isDestroy) {
+        if (BooleanUtils.isFalse(isDestroy)) {
             failEnhanceScenario();
             scrollDiscount(this.item.enhanceScroll(), this.item.protectScroll());
             return;
         }
 
-        if (!this.hasProtectScroll) {
+        if (BooleanUtils.isFalse(this.hasProtectScroll)) {
             this.item.enhanceItem().setAmount(0);
             playerSendMessage(3, ColorMap.RED);
             scrollDiscount(this.item.enhanceScroll(), this.item.protectScroll());
@@ -118,7 +120,7 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
 
     private void playerSendMessage(int commentCode, ColorMap commentColor) {
         int currentCustomModelData = 0;
-        if (this.item.enhanceItem().getType() != Material.AIR)
+        if (ObjectUtils.notEqual(this.item.enhanceItem().getType(), Material.AIR))
             currentCustomModelData = this.item.enhanceItem().getItemMeta().getCustomModelData();
         
         String comment = switch (commentCode) {

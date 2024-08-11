@@ -1,5 +1,6 @@
 package teamzesa.event.Enhance.PlayerInteraction.LongRange.Hit;
 
+import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Arrow;
@@ -27,7 +28,7 @@ public class EnhanceCrossBowHitEvent extends EnhanceUtil implements EventRegiste
         if (!(this.event.getEntity() instanceof Arrow arrow))
             return;
 
-        if (!arrow.isShotFromCrossbow())
+        if (BooleanUtils.isFalse(arrow.isShotFromCrossbow()))
             return;
 
         if (!(this.event.getEntity().getShooter() instanceof Player shooter))
@@ -36,10 +37,10 @@ public class EnhanceCrossBowHitEvent extends EnhanceUtil implements EventRegiste
         this.bowHitLocation = arrow.getLocation();
         ItemStack mainHandBow = shooter.getInventory().getItemInMainHand();
 
-        if (!mainHandBow.hasItemMeta())
+        if (BooleanUtils.isFalse(mainHandBow.hasItemMeta()))
             return;
 
-        if (!mainHandBow.getItemMeta().hasCustomModelData())
+        if (BooleanUtils.isFalse(mainHandBow.getItemMeta().hasCustomModelData()))
             return;
 
         switch (getItemCustomModelData(mainHandBow)) {

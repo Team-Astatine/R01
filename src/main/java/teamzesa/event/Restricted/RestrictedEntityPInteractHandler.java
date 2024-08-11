@@ -1,5 +1,7 @@
 package teamzesa.event.Restricted;
 
+import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.Material;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
@@ -21,7 +23,7 @@ public class RestrictedEntityPInteractHandler extends StringComponentExchanger i
 
     @Override
     public void execute() {
-        if (this.event.getHand() != EquipmentSlot.HAND)
+        if (ObjectUtils.notEqual(this.event.getHand(), EquipmentSlot.HAND))
             return;
 
         if (this.event.getPlayer().isOp())
@@ -31,7 +33,7 @@ public class RestrictedEntityPInteractHandler extends StringComponentExchanger i
         boolean isRestrictedItem = new RestrictedElement().restrictedItem.stream()
                 .anyMatch(playerMainHandItemMaterial::equals);
 
-        if (!isRestrictedItem)
+        if (BooleanUtils.isFalse(isRestrictedItem))
             return;
 
         this.event.setCancelled(true);

@@ -1,5 +1,7 @@
 package teamzesa.event.Enhance.PlayerInteraction.LongRange.Shot;
 
+import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Arrow;
@@ -37,13 +39,13 @@ public class EnhanceBowShotEvent extends EnhanceUtil implements EventRegister {
         this.arrow = arrow;
         ItemStack mainHandBow = shooter.getInventory().getItemInMainHand();
 
-        if (mainHandBow.getType() != Material.BOW)
+        if (ObjectUtils.notEqual(mainHandBow.getType(), Material.BOW))
             mainHandBow = shooter.getInventory().getItemInOffHand();
 
-        if (!mainHandBow.hasItemMeta())
+        if (BooleanUtils.isFalse(mainHandBow.hasItemMeta()))
             return;
 
-        if (!mainHandBow.getItemMeta().hasCustomModelData())
+        if (BooleanUtils.isFalse(mainHandBow.getItemMeta().hasCustomModelData()))
             return;
 
         Vector vector = this.event.getEntity().getVelocity();

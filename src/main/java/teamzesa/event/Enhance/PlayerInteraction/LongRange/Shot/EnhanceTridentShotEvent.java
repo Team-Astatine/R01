@@ -1,5 +1,7 @@
 package teamzesa.event.Enhance.PlayerInteraction.LongRange.Shot;
 
+import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.*;
@@ -34,13 +36,13 @@ public class EnhanceTridentShotEvent extends EnhanceUtil implements EventRegiste
         this.trident = trident;
         this.shooterTrident = shooter.getInventory().getItemInMainHand();
 
-        if (this.shooterTrident.getType() != Material.TRIDENT)
+        if (ObjectUtils.notEqual(this.shooterTrident.getType(), Material.TRIDENT))
             this.shooterTrident = shooter.getInventory().getItemInOffHand();
 
-        if (!this.shooterTrident.hasItemMeta())
+        if (BooleanUtils.isFalse(this.shooterTrident.hasItemMeta()))
             return;
 
-        if (!this.shooterTrident.getItemMeta().hasCustomModelData())
+        if (BooleanUtils.isFalse(this.shooterTrident.getItemMeta().hasCustomModelData()))
             return;
 
         Vector vector = this.event.getEntity().getVelocity();

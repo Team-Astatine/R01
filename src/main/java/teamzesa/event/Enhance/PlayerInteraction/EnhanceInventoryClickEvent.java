@@ -1,5 +1,6 @@
  package teamzesa.event.Enhance.PlayerInteraction;
 
+import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -54,7 +55,7 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
 
     @Override
     public void execute() {
-        if (!event.getInventory().equals(ENHANCE_DIALOG)) {
+        if (BooleanUtils.isFalse(event.getInventory().equals(ENHANCE_DIALOG))) {
             return;
         }
 
@@ -122,16 +123,16 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
         else if (this.scrollStuff == null || this.scrollStuff.isEmpty())
             comment = "강화 주문서가 부족합니다.";
 
-        else if (!this.allowedItem.contains(this.enhanceItem.getType()))
+        else if (BooleanUtils.isFalse(this.allowedItem.contains(this.enhanceItem.getType())))
             comment = "허용된 아이템을 넣어주세요.";
 
-        else if (!this.allowedScroll.contains(this.scrollStuff.getType()))
+        else if (BooleanUtils.isFalse(this.allowedScroll.contains(this.scrollStuff.getType())))
             comment = "허용된 주문서를 넣어주세요";
 
-        else if (this.protectScroll != null && !this.allowedScroll.contains(this.protectScroll.getType()))
+        else if (this.protectScroll != null && BooleanUtils.isFalse(this.allowedScroll.contains(this.protectScroll.getType())))
             comment = "허용된 주문서를 넣어주세요";
 
-        if (!comment.isBlank())
+        if (BooleanUtils.isFalse(comment.isBlank()))
             playerSendMsgComponentExchanger(this.ownerPlayer, comment, ColorMap.RED);
 
         return comment.isBlank();

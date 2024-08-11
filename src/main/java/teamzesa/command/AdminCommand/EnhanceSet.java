@@ -1,5 +1,6 @@
 package teamzesa.command.AdminCommand;
 
+import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -23,7 +24,7 @@ public class EnhanceSet extends CommandRegisterSection {
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         Player player = (Player) commandSender;
 
-        if (!commandSender.isOp()) {
+        if (BooleanUtils.isFalse(commandSender.isOp())) {
             playerSendMsgComponentExchanger(player,"해당 명령어는 플레이어가 사용할 수 없습니다.", ColorMap.RED);
             return false;
         }
@@ -35,13 +36,12 @@ public class EnhanceSet extends CommandRegisterSection {
         }
 
         ItemStack targetItem = player.getInventory().getItemInMainHand();
-
         ItemMeta targetItemMeta = targetItem.getItemMeta();
         targetItemMeta.setCustomModelData(0);
         targetItem.setItemMeta(targetItemMeta);
 
         try {
-            EnhanceUtil.increaseDmgAndAddLore(targetItem, enhanceLevel - targetItem.getItemMeta().getCustomModelData());
+            EnhanceUtil.increaseDmgAndAddLore(targetItem, enhanceLevel);
         } catch (Exception e) {
             e.printStackTrace();
         }

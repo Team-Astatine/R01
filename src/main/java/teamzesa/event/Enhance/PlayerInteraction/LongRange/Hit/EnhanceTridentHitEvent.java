@@ -1,5 +1,7 @@
 package teamzesa.event.Enhance.PlayerInteraction.LongRange.Hit;
 
+import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -38,13 +40,13 @@ public class EnhanceTridentHitEvent extends EnhanceUtil implements EventRegister
         this.tridentHitLocation = trident.getLocation();
         ItemStack mainHandTrident = shooter.getInventory().getItemInMainHand();
 
-        if (mainHandTrident.getType() != Material.TRIDENT)
+        if (ObjectUtils.notEqual(mainHandTrident.getType(), Material.TRIDENT))
             mainHandTrident = shooter.getInventory().getItemInOffHand();
 
-        if (!mainHandTrident.hasItemMeta())
+        if (BooleanUtils.isFalse(mainHandTrident.hasItemMeta()))
             return;
 
-        if (!mainHandTrident.getItemMeta().hasCustomModelData())
+        if (BooleanUtils.isFalse(mainHandTrident.getItemMeta().hasCustomModelData()))
             return;
 
         switch (getItemCustomModelData(mainHandTrident)) {

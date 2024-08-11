@@ -1,5 +1,6 @@
 package teamzesa.util;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -33,15 +34,15 @@ public class RanNumGenerator {
         Block block = null;
         for (int y = maxHigh; y >= minHigh; y--) {
             block = world.getBlockAt(x, y, z);
-            if (block.getType() != Material.AIR)
+            if (ObjectUtils.notEqual(block.getType(), Material.AIR))
                 isGround = true;
 
             block = world.getBlockAt(x,y + 2,z);
-            if (block.getType() == Material.AIR)
+            if (block.getType().equals(Material.AIR))
                 hasBodyRoom = true;
 
             block = world.getBlockAt(x,y + 1,z);
-            if (block.getType() == Material.AIR)
+            if (block.getType().equals(Material.AIR))
                 hasLegRoom = true;
 
             if (isGround && hasBodyRoom && hasLegRoom) {

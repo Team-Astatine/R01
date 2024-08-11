@@ -1,5 +1,6 @@
 package teamzesa.event.Restricted;
 
+import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import teamzesa.event.EventRegister.EventRegister;
@@ -34,7 +35,7 @@ public class RestrictedCommandHandler extends StringComponentExchanger implement
         boolean isCommandAllowed = new RestrictedElement().restrictedCommand.stream()
                 .anyMatch(this.currentCommand::equals);
 
-        if (!isCommandAllowed)
+        if (BooleanUtils.isFalse(isCommandAllowed))
             return;
 
         this.event.setCancelled(true);

@@ -1,6 +1,7 @@
 package teamzesa;
 
 import net.kyori.adventure.text.Component;
+import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
@@ -43,7 +44,7 @@ public final class R01 extends JavaPlugin {
 //        setMaxPlayers(50);
 
 //        saveDefaultSource
-        if (!getDataFolder().exists())
+        if (BooleanUtils.isFalse(getDataFolder().exists()))
             generationDataFile();
 
 //        configSet

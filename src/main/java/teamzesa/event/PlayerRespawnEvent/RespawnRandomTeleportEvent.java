@@ -1,5 +1,6 @@
 package teamzesa.event.PlayerRespawnEvent;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -28,7 +29,7 @@ public class RespawnRandomTeleportEvent extends StringComponentExchanger impleme
 
     @Override
     public void execute() {
-        if (this.player.getPotentialBedLocation() != null)
+        if (ObjectUtils.notEqual(this.player.getPotentialBedLocation(), null))
             return;
 
         World world = Bukkit.getWorld(WorldName.world.getExchangeEnglish());
