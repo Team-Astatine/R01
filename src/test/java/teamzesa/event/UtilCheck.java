@@ -1,11 +1,17 @@
 package teamzesa.event;
 
 import org.apache.commons.lang3.BooleanUtils;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 
 public class UtilCheck {
-    boolean isGodMode = false;
+    boolean isGodMode;
+
+    @Before
+    public void set() {
+        isGodMode = false;
+    }
 
     @Test
     @DisplayName("Entry")
