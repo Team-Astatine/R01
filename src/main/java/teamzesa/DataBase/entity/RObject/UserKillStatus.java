@@ -6,4 +6,5 @@ public record UserKillStatus(
         UUID uuid,
         double healthScale,
         int killCount
-) implements RObject {}
+) implements RObject {
+}

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class RObjectIOHandler {
 
-    public <E extends RObject> ArrayList <E> importData(DataFile dataFile, Class<E> toCastClass, String affiliatedFunction) {
+    public <E extends RObject> ArrayList<E> importData(DataFile dataFile, Class<E> toCastClass, String affiliatedFunction) {
         loggingConsole(dataFile.getFileTypeName(), affiliatedFunction, false, true);
         ArrayList<E> resultData = new ArrayList<>();
 
@@ -35,7 +35,7 @@ public class RObjectIOHandler {
             new GsonBuilder()
                     .setPrettyPrinting()
                     .create()
-                    .toJson(totalDataValue,writer);
+                    .toJson(totalDataValue, writer);
 
         } catch (IOException e) {
             loggingConsole(dataFile.getFileTypeName(), affiliatedFunction, true, false);

@@ -10,7 +10,8 @@ public class KillStatusBuilder {
     private double healthScale;
     private int killCount;
 
-    public KillStatusBuilder() {}
+    public KillStatusBuilder() {
+    }
 
     public KillStatusBuilder(UserKillStatus userKillStatus) {
         this.uuid = userKillStatus.uuid();
