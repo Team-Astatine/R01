@@ -9,10 +9,7 @@ import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.block.BlockRedstoneEvent;
 import org.bukkit.event.enchantment.EnchantItemEvent;
 import org.bukkit.event.entity.*;
-import org.bukkit.event.inventory.CraftItemEvent;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.event.inventory.InventoryMoveItemEvent;
+import org.bukkit.event.inventory.*;
 import org.bukkit.event.player.*;
 import org.bukkit.event.raid.RaidTriggerEvent;
 import org.bukkit.event.server.TabCompleteEvent;
@@ -28,9 +25,10 @@ import teamzesa.event.Enhance.PlayerInteraction.LongRange.Shot.EnhanceBowShotEve
 import teamzesa.event.Enhance.PlayerInteraction.LongRange.Shot.EnhanceCrossBowShotEvent;
 import teamzesa.event.Enhance.PlayerInteraction.LongRange.Shot.EnhanceTridentShotEvent;
 import teamzesa.event.Enhance.PlayerInteraction.ShortRange.EnhanceShortRangeWeaponHurtEvent;
-import teamzesa.event.Enhance.PlayerInteraction.UpdateItemLore.UpdateEnhanceItemLoreFromAnvil;
 import teamzesa.event.Enhance.PlayerInteraction.UpdateItemLore.UpdateEnhanceItemLoreFromEnchantment;
-import teamzesa.event.Enhance.PlayerInteraction.UpdateItemLore.UpdateEnhanceItemLoreFromGrindStone;
+import teamzesa.event.Enhance.PlayerInteraction.UpdateItemLore.UpdateEnhanceItemPrepareAnvil;
+import teamzesa.event.Enhance.PlayerInteraction.UpdateItemLore.UpdateEnhanceResultItemLoreFromAnvil;
+import teamzesa.event.Enhance.PlayerInteraction.UpdateItemLore.UpdateEnhanceResultItemLoreFromGrindStone;
 import teamzesa.event.EntityDamageByEntityEvent.EntityAttackSpeedHandler;
 import teamzesa.event.EntityExplodeEvent.ExplosiveEvent;
 import teamzesa.event.PlayerArmSwingEvent.HandSwingEvent;
@@ -102,6 +100,15 @@ public class EventRegisterSection implements Listener {
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
+    public static void EnchantItemEvent(PrepareAnvilEvent event) {
+        new UpdateEnhanceItemPrepareAnvil();
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    public static void EnchantItemEvent(PrepareGrindstoneEvent event) {
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
     public static void ProjectileHitEvent(ProjectileHitEvent event) {
         new EnhanceBowHitEvent(event);
         new EnhanceCrossBowHitEvent(event);
@@ -131,8 +138,8 @@ public class EventRegisterSection implements Listener {
         new RestrictedShulkerChest(event);
 
         new EnhanceInventoryClickEvent(event);
-        new UpdateEnhanceItemLoreFromAnvil(event);
-        new UpdateEnhanceItemLoreFromGrindStone(event);
+        new UpdateEnhanceResultItemLoreFromAnvil(event);
+        new UpdateEnhanceResultItemLoreFromGrindStone(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
