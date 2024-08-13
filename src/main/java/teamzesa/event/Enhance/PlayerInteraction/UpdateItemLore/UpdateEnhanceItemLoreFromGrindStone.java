@@ -11,56 +11,58 @@ import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 import java.util.Map;
+import java.util.Optional;
 
 public class UpdateEnhanceItemLoreFromGrindStone extends StringComponentExchanger implements EventRegister {
+    private ItemStack enchantItem;
 
     private final InventoryClickEvent event;
 
     public UpdateEnhanceItemLoreFromGrindStone(InventoryClickEvent event) {
         this.event = event;
+
+        if (valid())
+            return;
+
         init();
         execute();
     }
 
+    public boolean valid() {
+        if (BooleanUtils.isFalse(this.event.getClickedInventory().getType().equals(InventoryType.GRINDSTONE)))
+            return true;
+
+        return BooleanUtils.isFalse(this.event.getSlotType().equals(InventoryType.SlotType.RESULT));
+    }
 
     @Override
     public void init() {
+        this.enchantItem = this.event.getClickedInventory().getItem(2);
     }
 
     @Override
     public void execute() {
-        if (BooleanUtils.isFalse(this.event.getClickedInventory().getType().equals(InventoryType.GRINDSTONE)))
+        if (this.enchantItem == null) //아이템에 아무것도 옵션이 없을때 null 뜸
             return;
 
-        if (BooleanUtils.isFalse(this.event.getSlotType().equals(InventoryType.SlotType.RESULT)))
+        if (BooleanUtils.isFalse(this.enchantItem.hasItemMeta()))
             return;
 
-        ItemStack enchantItem = this.event.getClickedInventory().getItem(2);
-
-
-        if (enchantItem == null) //아이템에 아무것도 옵션이 없을때 null 뜸
+        if (BooleanUtils.isFalse(this.enchantItem.getItemMeta().hasCustomModelData()))
             return;
 
-        if (BooleanUtils.isFalse(enchantItem.hasItemMeta()))
-            return;
+        Map<Enchantment, Integer> enchantment = this.enchantItem.getEnchantments();
+        Optional.of(enchantment).ifPresent(
+                enchant -> this.enchantItem.addEnchantments(enchant)
+        );
 
-        if (BooleanUtils.isFalse(enchantItem.getItemMeta().hasCustomModelData()))
-            return;
-
-        Map<Enchantment, Integer> enchantment = enchantItem.getEnchantments();
-
-        if (enchantment == null)
-            return;
-
-        enchantItem.addEnchantments(enchantment);
-
-        int enhanceLevel = enchantItem.getItemMeta().getCustomModelData();
-        ItemMeta targetItemMeta = enchantItem.getItemMeta();
+        int enhanceLevel = this.enchantItem.getItemMeta().getCustomModelData();
+        ItemMeta targetItemMeta = this.enchantItem.getItemMeta();
         targetItemMeta.setCustomModelData(0);
-        enchantItem.setItemMeta(targetItemMeta);
+        this.enchantItem.setItemMeta(targetItemMeta);
 
         try {
-            EnhanceUtil.increaseDmgAndAddLore(enchantItem, enhanceLevel);
+            EnhanceUtil.increaseDmgAndAddLore(this.enchantItem, enhanceLevel);
         } catch (Exception e) {
             e.printStackTrace();
         }
