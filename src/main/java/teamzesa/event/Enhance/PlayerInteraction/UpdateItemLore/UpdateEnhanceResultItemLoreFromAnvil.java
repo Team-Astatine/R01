@@ -14,8 +14,6 @@ import java.util.Map;
 
 public class UpdateEnhanceResultItemLoreFromAnvil extends StringComponentExchanger implements EventRegister {
     private ItemStack enchantItem;
-    private Map<Enchantment, Integer> enchantment;
-    private int sharpnessLevel;
 
     private final InventoryClickEvent event;
 
@@ -42,27 +40,29 @@ public class UpdateEnhanceResultItemLoreFromAnvil extends StringComponentExchang
     @Override
     public void init() {
         this.enchantItem = this.event.getClickedInventory().getItem(2);
-        this.enchantment = this.enchantItem.getEnchantments();
-        this.sharpnessLevel = enchantItem.getEnchantmentLevel(Enchantment.SHARPNESS);
     }
 
     @Override
     public void execute() {
+        if (enchantItem == null)
+            return;
+
         if (BooleanUtils.isFalse(enchantItem.hasItemMeta()))
             return;
 
         if (BooleanUtils.isFalse(enchantItem.getItemMeta().hasCustomModelData()))
             return;
 
-        if (sharpnessLevel < 1)
+        if (enchantItem.getEnchantmentLevel(Enchantment.SHARPNESS) < 1)
             return;
 
-        enchantItem.addEnchantments(enchantment);
-
         int enhanceLevel = enchantItem.getItemMeta().getCustomModelData();
+
         ItemMeta targetItemMeta = enchantItem.getItemMeta();
         targetItemMeta.setCustomModelData(0);
         enchantItem.setItemMeta(targetItemMeta);
+
+        enchantItem.addEnchantments(this.enchantItem.getEnchantments());
 
         try {
             EnhanceUtil.increaseDmgAndAddLore(enchantItem, enhanceLevel);
