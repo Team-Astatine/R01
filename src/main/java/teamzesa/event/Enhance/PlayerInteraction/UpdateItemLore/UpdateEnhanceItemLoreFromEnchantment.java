@@ -1,4 +1,4 @@
-package teamzesa.event.Enhance.PlayerInteraction;
+package teamzesa.event.Enhance.PlayerInteraction.UpdateItemLore;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.enchantments.Enchantment;
