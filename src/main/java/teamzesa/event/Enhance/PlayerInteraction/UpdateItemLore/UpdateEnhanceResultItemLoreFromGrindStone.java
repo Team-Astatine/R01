@@ -13,12 +13,12 @@ import teamzesa.util.Interface.StringComponentExchanger;
 import java.util.Map;
 import java.util.Optional;
 
-public class UpdateEnhanceItemLoreFromGrindStone extends StringComponentExchanger implements EventRegister {
+public class UpdateEnhanceResultItemLoreFromGrindStone extends StringComponentExchanger implements EventRegister {
     private ItemStack enchantItem;
 
     private final InventoryClickEvent event;
 
-    public UpdateEnhanceItemLoreFromGrindStone(InventoryClickEvent event) {
+    public UpdateEnhanceResultItemLoreFromGrindStone(InventoryClickEvent event) {
         this.event = event;
 
         if (valid())
@@ -29,6 +29,9 @@ public class UpdateEnhanceItemLoreFromGrindStone extends StringComponentExchange
     }
 
     public boolean valid() {
+        if (this.event.getClickedInventory() == null)
+            return true;
+
         if (BooleanUtils.isFalse(this.event.getClickedInventory().getType().equals(InventoryType.GRINDSTONE)))
             return true;
 

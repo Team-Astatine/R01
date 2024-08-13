@@ -12,14 +12,14 @@ import teamzesa.util.Interface.StringComponentExchanger;
 
 import java.util.Map;
 
-public class UpdateEnhanceItemLoreFromAnvil extends StringComponentExchanger implements EventRegister {
+public class UpdateEnhanceResultItemLoreFromAnvil extends StringComponentExchanger implements EventRegister {
     private ItemStack enchantItem;
     private Map<Enchantment, Integer> enchantment;
     private int sharpnessLevel;
 
     private final InventoryClickEvent event;
 
-    public UpdateEnhanceItemLoreFromAnvil(InventoryClickEvent event) {
+    public UpdateEnhanceResultItemLoreFromAnvil(InventoryClickEvent event) {
         this.event = event;
 
         if (valid())
@@ -30,6 +30,9 @@ public class UpdateEnhanceItemLoreFromAnvil extends StringComponentExchanger imp
     }
 
     public boolean valid() {
+        if (this.event.getClickedInventory() == null)
+            return true;
+
         if (BooleanUtils.isFalse(this.event.getClickedInventory().getType().equals(InventoryType.ANVIL)))
             return true;
 
