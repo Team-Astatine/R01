@@ -153,7 +153,7 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
 
     public static double calculatingTotalEnhanceStageDamage(ItemStack itemStack, double totalDamage) {
         try {
-            isItemHasCustomModelData(itemStack, "getEnhanceState");
+            isItemHasCustomModelData(itemStack, "calculatingTotalEnhanceStageDamage");
         } catch (Exception e) {
             e.printStackTrace();
         }
