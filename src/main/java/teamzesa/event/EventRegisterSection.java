@@ -101,7 +101,7 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public static void EnchantItemEvent(PrepareAnvilEvent event) {
-        new UpdateEnhanceItemPrepareAnvil();
+        new UpdateEnhanceItemPrepareAnvil(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
