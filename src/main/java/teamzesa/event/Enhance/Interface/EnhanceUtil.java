@@ -100,7 +100,7 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         }
 
         double totalDmg = calculatingTotalEnhanceStageDamage(enhanceItem, weaponDmg);
-        String comment = String.format("현재 데미지 : %.3f...", totalDmg);
+        String comment = String.format("예상 데미지 : %.3f...", totalDmg);
 
         return Component.text(comment)
                 .color(ColorMap.GREEN.getTextColor())
