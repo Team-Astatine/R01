@@ -50,7 +50,5 @@ public class UpdateEnhanceItemPrepareAnvil implements EventRegister {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        event.setResult(this.resultItem);
     }
 }

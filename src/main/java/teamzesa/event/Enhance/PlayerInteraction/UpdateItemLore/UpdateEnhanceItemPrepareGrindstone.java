@@ -48,7 +48,5 @@ public class UpdateEnhanceItemPrepareGrindstone implements EventRegister {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        this.event.setResult(this.resultItem);
     }
 }
