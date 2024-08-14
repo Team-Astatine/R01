@@ -16,15 +16,13 @@ public enum Scroll implements ScrollMap {
     END_CRYSTAL(Material.END_CRYSTAL, 1),
     ENCHANTED_GOLDEN_APPLE(Material.ENCHANTED_GOLDEN_APPLE, 1),
     NETHER_STAR(Material.NETHER_STAR, 1),
-    TNT(Material.TNT, 6),
     SCULK_SHRIEKER(Material.SCULK_SHRIEKER, 2),
     SCULK_SENSOR(Material.SCULK_SENSOR, 1),
     CONDUIT(Material.CONDUIT, 1),
     DRAGON_HEAD(Material.DRAGON_HEAD, 1),
     RABBIT_FOOT(Material.RABBIT_FOOT, 2),
     HEART_OF_THE_SEA(Material.HEART_OF_THE_SEA, 3),
-    TOTEM_OF_UNDYING(Material.TOTEM_OF_UNDYING, 8),
-    ENDER_PEARL(Material.ENDER_PEARL, 16);
+    TOTEM_OF_UNDYING(Material.TOTEM_OF_UNDYING, 8);
 
     private final Material material;
     private final int discountValue;
