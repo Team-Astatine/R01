@@ -22,12 +22,12 @@ public class UpdateEnhanceItemPrepareAnvil implements EventRegister {
     }
 
     @Override
-    public void execute() {
-        this.resultItem = this.event.getInventory().getItem(2);
+     public void init() {
+        this.resultItem = this.event.getResult();
     }
 
     @Override
-    public void init() {
+    public void execute() {
         if (this.resultItem == null)
             return;
 
@@ -40,21 +40,17 @@ public class UpdateEnhanceItemPrepareAnvil implements EventRegister {
         if (this.resultItem.getEnchantmentLevel(Enchantment.SHARPNESS) < 1)
             return;
 
-        System.out.println("1 > " + this.resultItem);
-
         int enhanceLevel = this.resultItem.getItemMeta().getCustomModelData();
         ItemMeta targetItemMeta = this.resultItem.getItemMeta();
         targetItemMeta.setCustomModelData(0);
         this.resultItem.setItemMeta(targetItemMeta);
 
-        System.out.println("2 > " + this.resultItem);
         try {
             EnhanceUtil.increaseDmgAndAddLore(this.resultItem, enhanceLevel);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        System.out.println("3 > " + this.resultItem);
         event.setResult(this.resultItem);
     }
 }
