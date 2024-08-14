@@ -1,6 +1,7 @@
 package teamzesa.event;
 
 import io.papermc.paper.event.player.PlayerArmSwingEvent;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -25,10 +26,7 @@ import teamzesa.event.Enhance.PlayerInteraction.LongRange.Shot.EnhanceBowShotEve
 import teamzesa.event.Enhance.PlayerInteraction.LongRange.Shot.EnhanceCrossBowShotEvent;
 import teamzesa.event.Enhance.PlayerInteraction.LongRange.Shot.EnhanceTridentShotEvent;
 import teamzesa.event.Enhance.PlayerInteraction.ShortRange.EnhanceShortRangeWeaponHurtEvent;
-import teamzesa.event.Enhance.PlayerInteraction.UpdateItemLore.UpdateEnhanceItemLoreFromEnchantment;
-import teamzesa.event.Enhance.PlayerInteraction.UpdateItemLore.UpdateEnhanceItemPrepareAnvil;
-import teamzesa.event.Enhance.PlayerInteraction.UpdateItemLore.UpdateEnhanceResultItemLoreFromAnvil;
-import teamzesa.event.Enhance.PlayerInteraction.UpdateItemLore.UpdateEnhanceResultItemLoreFromGrindStone;
+import teamzesa.event.Enhance.PlayerInteraction.UpdateItemLore.*;
 import teamzesa.event.EntityDamageByEntityEvent.EntityAttackSpeedHandler;
 import teamzesa.event.EntityExplodeEvent.ExplosiveEvent;
 import teamzesa.event.PlayerArmSwingEvent.HandSwingEvent;
@@ -106,6 +104,7 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public static void EnchantItemEvent(PrepareGrindstoneEvent event) {
+        new UpdateEnhanceItemPrepareGrindstone(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
