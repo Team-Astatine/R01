@@ -10,10 +10,8 @@ import teamzesa.event.Enhance.Interface.EnhanceUtil;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Interface.StringComponentExchanger;
 
-import java.util.Map;
-
 public class UpdateEnhanceResultItemLoreFromAnvil extends StringComponentExchanger implements EventRegister {
-    private ItemStack enchantItem;
+    private ItemStack resultItem;
 
     private final InventoryClickEvent event;
 
@@ -39,33 +37,33 @@ public class UpdateEnhanceResultItemLoreFromAnvil extends StringComponentExchang
 
     @Override
     public void init() {
-        this.enchantItem = this.event.getClickedInventory().getItem(2);
+        this.resultItem = this.event.getClickedInventory().getItem(2);
     }
 
     @Override
     public void execute() {
-        if (enchantItem == null)
+        if (this.resultItem == null)
             return;
 
-        if (BooleanUtils.isFalse(enchantItem.hasItemMeta()))
+        if (BooleanUtils.isFalse(this.resultItem.hasItemMeta()))
             return;
 
-        if (BooleanUtils.isFalse(enchantItem.getItemMeta().hasCustomModelData()))
+        if (BooleanUtils.isFalse(this.resultItem.getItemMeta().hasCustomModelData()))
             return;
 
-        if (enchantItem.getEnchantmentLevel(Enchantment.SHARPNESS) < 1)
+        if (this.resultItem.getEnchantmentLevel(Enchantment.SHARPNESS) < 1)
             return;
 
-        int enhanceLevel = enchantItem.getItemMeta().getCustomModelData();
+        int enhanceLevel = this.resultItem.getItemMeta().getCustomModelData();
 
-        ItemMeta targetItemMeta = enchantItem.getItemMeta();
+        ItemMeta targetItemMeta = this.resultItem.getItemMeta();
         targetItemMeta.setCustomModelData(0);
-        enchantItem.setItemMeta(targetItemMeta);
+        this.resultItem.setItemMeta(targetItemMeta);
 
-        enchantItem.addEnchantments(this.enchantItem.getEnchantments());
+        this.resultItem.addEnchantments(this.resultItem.getEnchantments());
 
         try {
-            EnhanceUtil.increaseDmgAndAddLore(enchantItem, enhanceLevel);
+            EnhanceUtil.increaseDmgAndAddLore(this.resultItem, enhanceLevel);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public class UpdateEnhanceResultItemLoreFromGrindStone extends StringComponentExchanger implements EventRegister {
-    private ItemStack enchantItem;
+    private ItemStack resultItem;
 
     private final InventoryClickEvent event;
 
@@ -40,32 +40,27 @@ public class UpdateEnhanceResultItemLoreFromGrindStone extends StringComponentEx
 
     @Override
     public void init() {
-        this.enchantItem = this.event.getClickedInventory().getItem(2);
+        this.resultItem = this.event.getClickedInventory().getItem(2);
     }
 
     @Override
     public void execute() {
-        if (this.enchantItem == null) //아이템에 아무것도 옵션이 없을때 null 뜸
+        if (this.resultItem == null) //아이템에 아무것도 옵션이 없을때 null 뜸
             return;
 
-        if (BooleanUtils.isFalse(this.enchantItem.hasItemMeta()))
+        if (BooleanUtils.isFalse(this.resultItem.hasItemMeta()))
             return;
 
-        if (BooleanUtils.isFalse(this.enchantItem.getItemMeta().hasCustomModelData()))
+        if (BooleanUtils.isFalse(this.resultItem.getItemMeta().hasCustomModelData()))
             return;
 
-        Map<Enchantment, Integer> enchantment = this.enchantItem.getEnchantments();
-        Optional.of(enchantment).ifPresent(
-                enchant -> this.enchantItem.addEnchantments(enchant)
-        );
-
-        int enhanceLevel = this.enchantItem.getItemMeta().getCustomModelData();
-        ItemMeta targetItemMeta = this.enchantItem.getItemMeta();
+        int enhanceLevel = this.resultItem.getItemMeta().getCustomModelData();
+        ItemMeta targetItemMeta = this.resultItem.getItemMeta();
         targetItemMeta.setCustomModelData(0);
-        this.enchantItem.setItemMeta(targetItemMeta);
+        this.resultItem.setItemMeta(targetItemMeta);
 
         try {
-            EnhanceUtil.increaseDmgAndAddLore(this.enchantItem, enhanceLevel);
+            EnhanceUtil.increaseDmgAndAddLore(this.resultItem, enhanceLevel);
         } catch (Exception e) {
             e.printStackTrace();
         }
