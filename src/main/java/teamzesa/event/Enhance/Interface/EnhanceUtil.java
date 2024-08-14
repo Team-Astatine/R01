@@ -62,6 +62,7 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
     }
 
     public static void increaseDmgAndAddLore(ItemStack item, int updateCount) throws EnhanceItemMetaException {
+        List<Component> lore = new ArrayList<>();
         try {
             isItemHasCustomModelData(item, "addItemDescription");
         } catch (Exception e) {
@@ -72,9 +73,10 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         itemMeta.setCustomModelData(itemMeta.getCustomModelData() + updateCount);
         item.setItemMeta(itemMeta);
 
-        List<Component> lore = new ArrayList<>();
-        lore.add(getEnhanceStatusComponent(item));
-        lore.add(getEnhanceDisplayComponent(item));
+        if (updateCount > 0) { // 0 == Remove All Item Lore
+            lore.add(getEnhanceStatusComponent(item));
+            lore.add(getEnhanceDisplayComponent(item));
+        }
 
         item.lore(lore);
     }
