@@ -1,5 +1,6 @@
 package teamzesa.event.PlayerRespawnEvent;
 
+import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -30,6 +31,10 @@ public class RespawnRandomTeleportEvent extends StringComponentExchanger impleme
 
     @Override
     public void execute() {
+        System.out.println(this.event.isAnchorSpawn());
+        if (this.event.isAnchorSpawn())
+            return;
+
         if (ObjectUtils.notEqual(this.player.getPotentialBedLocation(), null))
             return;
 
