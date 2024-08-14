@@ -1,7 +1,6 @@
-package teamzesa.event;
+package teamzesa.event.EventRegister;
 
 import io.papermc.paper.event.player.PlayerArmSwingEvent;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
