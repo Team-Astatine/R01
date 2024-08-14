@@ -31,7 +31,6 @@ public class RespawnRandomTeleportEvent extends StringComponentExchanger impleme
 
     @Override
     public void execute() {
-        System.out.println(this.event.isAnchorSpawn());
         if (this.event.isAnchorSpawn())
             return;
 
