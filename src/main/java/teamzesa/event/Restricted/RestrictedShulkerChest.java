@@ -35,6 +35,25 @@ public class RestrictedShulkerChest extends StringComponentExchanger implements 
 
     @Override
     public void execute() {
+        if (this.clickerInventory == null)
+            return;
+
+        if (ObjectUtils.notEqual(this.currentOpeningContainerInventory.getType(), InventoryType.SHULKER_BOX))
+            return;
+
+        if (ObjectUtils.notEqual(this.clickerInventory.getType(), InventoryType.PLAYER))
+            return;
+
+        if (ObjectUtils.notEqual(this.itemStack.getType(), Material.TOTEM_OF_UNDYING))
+            return;
+
+        if (this.itemStack.getAmount() <= 1)
+            return;
+
+        this.event.setCancelled(true);
+        playerSendMsgComponentExchanger(player, "겹쳐진 토템은 셜커에 보관할 수 없습니다.", ColorMap.RED);
+
+        /*Debugging Code
 //        System.out.println("null check");
         if (this.clickerInventory == null)
             return;
@@ -59,7 +78,6 @@ public class RestrictedShulkerChest extends StringComponentExchanger implements 
             return;
 
 //        System.out.println("cancel");
-        this.event.setCancelled(true);
-        playerSendMsgComponentExchanger(player, "겹쳐진 토템은 셜커에 보관할 수 없습니다.", ColorMap.RED);
+         */
     }
 }

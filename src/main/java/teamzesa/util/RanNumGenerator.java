@@ -19,8 +19,6 @@ public class RanNumGenerator {
     }
 
     public int[] groundChecker(World world) {
-//        System.out.println(this.isAllowedPosition);
-
         boolean isGround = false, hasLegRoom = false, hasBodyRoom = false;
 
         int maxHigh = world.getMaxHeight() - 1; //320 > Material_VOID_AIR
@@ -51,11 +49,6 @@ public class RanNumGenerator {
                 break;
             }
         }
-
-//        System.out.println(Arrays.toString(this.position));
-//        System.out.println(world.getBlockAt(x,position[1] + 2,z).getType());
-//        System.out.println(world.getBlockAt(x,position[1] + 1,z).getType());
-//        System.out.println(world.getBlockAt(x,position[1],z).getType()+"\n\n");
 
         if (this.isAllowedPosition)
             return this.position;
