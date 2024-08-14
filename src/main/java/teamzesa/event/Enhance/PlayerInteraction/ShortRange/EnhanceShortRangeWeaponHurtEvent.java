@@ -41,9 +41,27 @@ public class EnhanceShortRangeWeaponHurtEvent extends EnhanceUtil implements Eve
         if (BooleanUtils.isFalse(weapon.getItemMeta().hasCustomModelData()))
             return;
 
-        double weaponDmg = getShortRangeWeaponCloseDamage(weapon) + getSharpnessDamage(weapon);
-        double totalDmg = calculatingTotalEnhanceStageDamage(weapon, weaponDmg); // 11, 12, 13% Increase Dmg
-        totalDmg = this.event.isCritical() ? totalDmg * 1.5 : totalDmg; // calculation critical 50 % Dmg
-        this.event.setDamage(totalDmg);
+        double eventFinalDamage = this.event.getFinalDamage(); //getOriginalDamage
+        eventFinalDamage = this.event.isCritical() ? eventFinalDamage / 1.5 : eventFinalDamage; //Remove Critical Damage
+
+        double resultDmg = calculatingTotalEnhanceStageDamage(weapon, eventFinalDamage);// 11, 12, 13% Increase Dmg
+        resultDmg = this.event.isCritical() ? resultDmg * 1.5 : resultDmg; //Add Critical Damage
+
+        this.event.setDamage(resultDmg);
+
+        /* Debugging Code
+        double eventFinalDamage = this.event.getFinalDamage();
+        System.out.println("finalDmg > " + eventFinalDamage);
+        eventFinalDamage = this.event.isCritical() ? eventFinalDamage / 1.5 : eventFinalDamage;
+        System.out.println("finalDmg remove Critical > " + eventFinalDamage);
+
+        double resultDmg = calculatingTotalEnhanceStageDamage(weapon, eventFinalDamage);// 11, 12, 13% Increase Dmg
+        System.out.println("finalDmg calculation enhance DMG > " + resultDmg);
+        resultDmg = this.event.isCritical() ? resultDmg * 1.5 : resultDmg;
+
+        System.out.println("finalDmg calculation critical DMG > " + resultDmg);
+        System.out.println();
+        this.event.setDamage(resultDmg);
+         */
     }
 }
