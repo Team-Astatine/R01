@@ -1,12 +1,14 @@
 package teamzesa.event.Enhance.PlayerInteraction;
 
 import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.Material;
 import org.bukkit.block.Dispenser;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.DataBase.IOHandler.ConfigIOHandler;
 import teamzesa.DataBase.enhance.EnhanceItemBuilder;
@@ -76,7 +78,8 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
                 this.allowedScroll.add(scroll.getMaterial());
         }
 
-        if (this.event.getClickedInventory().getType().equals(InventoryType.DROPPER)) {
+        Inventory playerOpenInv = this.event.getClickedInventory();
+        if (ObjectUtils.notEqual(playerOpenInv, null) && playerOpenInv.getType().equals(InventoryType.DROPPER)) {
             switch (this.event.getSlot()) {
                 case 0, 1, 2 -> {
                     this.event.setCancelled(true);
