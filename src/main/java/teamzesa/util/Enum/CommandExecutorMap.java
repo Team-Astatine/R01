@@ -1,9 +1,8 @@
 package teamzesa.util.Enum;
 
 import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.TabCompleter;
-import teamzesa.command.*;
 import teamzesa.command.AdminCommand.*;
+import teamzesa.command.*;
 import teamzesa.command.register.CommandRegisterSection;
 
 public enum CommandExecutorMap {

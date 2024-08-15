@@ -24,7 +24,8 @@ public class AutoUpdate {
     private File folder;
     private List<File> fileList;
 
-    private AutoUpdate() {}
+    private AutoUpdate() {
+    }
 
     public void fileLoader() {
         this.folder = DataFile.ABSOLUTE_PATH.getFileInstance();
@@ -79,7 +80,7 @@ public class AutoUpdate {
         this.fileList.stream()
                 .filter(file ->
                         file.getName().contains("R01-") &&
-                        file.getName().contains(".jar"))
+                                file.getName().contains(".jar"))
                 .forEach(file -> {
                     boolean deleteExecutor = file.delete();
                     if (deleteExecutor) Bukkit.getLogger().info("[R01] Success Remove LegacyPlugin");
@@ -107,7 +108,7 @@ public class AutoUpdate {
                 if (line.contains("<title>Release")) {
                     gitVersion = Double.parseDouble(
                             line.split("<title>Release Astatine ")[1]
-                                .split(" ·")[0]
+                                    .split(" ·")[0]
                     );
                     br.close();
                     return;

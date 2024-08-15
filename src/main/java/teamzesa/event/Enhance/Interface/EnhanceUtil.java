@@ -2,6 +2,8 @@ package teamzesa.event.Enhance.Interface;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
+import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -14,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class EnhanceUtil extends StringComponentExchanger {
-    private static final double ENHANCE_BASE_PERCENTAGE = 10;
+    private static final double ENHANCE_BASE_PERCENTAGE = 1;
 
     public static boolean isMeetsJudgementCriteria(int standardValue) {
         /*
@@ -48,19 +50,19 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         return increaseDmg == 0.5 ? 0 : increaseDmg;
     }
 
-    public static void isItemHasCustomModelData(ItemStack item,String funtion) throws EnhanceItemMetaException {
+    public static void isItemHasCustomModelData(ItemStack item, String funtion) throws EnhanceItemMetaException {
         if (item == null)
             throw new EnhanceItemMetaException("item == null");
 
-        if (!item.hasItemMeta())
+        if (BooleanUtils.isFalse(item.hasItemMeta()))
             throw new EnhanceItemMetaException(funtion + " hasItemMeta == null");
 
-        if (!item.getItemMeta().hasCustomModelData())
+        if (BooleanUtils.isFalse(item.getItemMeta().hasCustomModelData()))
             throw new EnhanceItemMetaException(funtion + " hasCustomModelData == null");
     }
 
-    public static void addItemDescription(ItemStack item, int customModelData) throws EnhanceItemMetaException {
-
+    public static void increaseDmgAndAddLore(ItemStack item, int updateCount) throws EnhanceItemMetaException {
+        List<Component> lore = new ArrayList<>();
         try {
             isItemHasCustomModelData(item, "addItemDescription");
         } catch (Exception e) {
@@ -68,12 +70,13 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         }
 
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.setCustomModelData(itemMeta.getCustomModelData() + customModelData);
+        itemMeta.setCustomModelData(itemMeta.getCustomModelData() + updateCount);
         item.setItemMeta(itemMeta);
 
-        List<Component> lore = new ArrayList<>();
-        lore.add(getEnhanceStatusComponent(item));
-        lore.add(getEnhanceDisplayComponent(item));
+        if (updateCount > 0) { // 0 == Remove All Item Lore
+            lore.add(getEnhanceStatusComponent(item));
+            lore.add(getEnhanceDisplayComponent(item));
+        }
 
         item.lore(lore);
     }
@@ -85,25 +88,19 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
             e.printStackTrace();
         }
 
-        for (EnhanceStageComment enhanceStageComment : EnhanceStageComment.values()) {
-            if (item.getItemMeta().getCustomModelData() == enhanceStageComment.getEnhanceStack())
-                return enhanceStageComment.getLoreComment();
-        }
-
-        return Component.text("Unknown Enhancement Status")
-                .color(ColorMap.RED.getTextColor())
-                .decorate(TextDecoration.ITALIC);
+        return EnhanceStageComment.findByEnhanceLevelComment(item.getItemMeta().getCustomModelData());
     }
 
     public static Component getEnhanceDisplayComponent(ItemStack enhanceItem) {
         double weaponDmg = 0.0;
-        try {
+        try { //Calculation Origin Dmg + Sharpness Dmg
             weaponDmg = getShortRangeWeaponCloseDamage(enhanceItem) + getSharpnessDamage(enhanceItem);
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         double totalDmg = calculatingTotalEnhanceStageDamage(enhanceItem, weaponDmg);
-        String comment = String.format("현재 데미지 : %.3f...", totalDmg);
+        String comment = String.format("예상 데미지 : %.3f...", totalDmg);
 
         return Component.text(comment)
                 .color(ColorMap.GREEN.getTextColor())
@@ -121,7 +118,7 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
 
     public static ItemStack checkModelData(ItemStack item) {
         ItemMeta itemMeta = item.getItemMeta();
-        if (!itemMeta.hasCustomModelData()) {
+        if (BooleanUtils.isFalse(itemMeta.hasCustomModelData())) {
             itemMeta.setCustomModelData(0);
             item.setItemMeta(itemMeta);
         }
@@ -130,7 +127,7 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
 
     public static void scrollDiscount(ItemStack scroll, ItemStack protectScroll) {
         try {
-            if (protectScroll != null) {
+            if (ObjectUtils.notEqual(protectScroll, null)) {
                 protectScroll.setAmount(protectScroll.getAmount()
                         - ProtectScroll.findByItemStack(protectScroll).getDiscountValue());
             }
@@ -158,14 +155,14 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
 
     public static double calculatingTotalEnhanceStageDamage(ItemStack itemStack, double totalDamage) {
         try {
-            isItemHasCustomModelData(itemStack, "getEnhanceState");
+            isItemHasCustomModelData(itemStack, "calculatingTotalEnhanceStageDamage");
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         ItemMeta itemMeta = itemStack.getItemMeta();
         for (int i = 0; i < itemMeta.getCustomModelData(); i++) {
-            double increasePercentage = ENHANCE_BASE_PERCENTAGE + (i * 2);
+            double increasePercentage = ENHANCE_BASE_PERCENTAGE + i;
             totalDamage += totalDamage * (increasePercentage / 100);
         }
 

@@ -1,5 +1,6 @@
 package teamzesa.util.Enum.Enhance;
 
+import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.event.Enhance.Interface.EnhanceItemCache;
@@ -29,7 +30,7 @@ public enum LongRangeWeaponMap implements Weapon, EnhanceItemCache {
     }
 
     public static LongRangeWeaponMap findByItemStack(ItemStack itemStack) throws Exception {
-        if (!CACHED_ITEM.containsKey(itemStack.getType()))
+        if (BooleanUtils.isFalse(CACHED_ITEM.containsKey(itemStack.getType())))
             throw new EnhanceItemSearchException("Non Register This Material");
         return CACHED_ITEM.get(itemStack.getType());
     }

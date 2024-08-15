@@ -5,10 +5,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.util.Enum.CommandExecutorMap;
 import teamzesa.DataBase.IOHandler.ConfigIOHandler;
+import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.CommandExecutorMap;
 
 
 public class Motd extends CommandRegisterSection {

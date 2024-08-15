@@ -37,11 +37,11 @@ public class RemoveDuplicateData extends CommandRegisterSection {
 
         Optional.ofNullable(this.senderUser).ifPresentOrElse(
                 existUser -> this.senderPlayer = Bukkit.getPlayer(existUser.uuid()),
-                ()        -> this.isConsoleSend = true
+                () -> this.isConsoleSend = true
         );
 
         if (this.senderUser != null && !this.senderPlayer.isOp() && !this.isConsoleSend) {
-            playerSendMsgComponentExchanger(this.senderPlayer,"해당 명령어는 플레이어가 사용할 수 없습니다.", ColorMap.RED);
+            playerSendMsgComponentExchanger(this.senderPlayer, "해당 명령어는 플레이어가 사용할 수 없습니다.", ColorMap.RED);
             return false;
         }
 

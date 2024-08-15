@@ -4,10 +4,10 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
 import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.entity.RObject.UserKillStatus;
-import teamzesa.event.EventRegister.EventRegister;
-import teamzesa.util.Interface.StringComponentExchanger;
-import teamzesa.util.Enum.ColorMap;
 import teamzesa.DataBase.userHandler.UserController;
+import teamzesa.event.EventRegister.EventRegister;
+import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Interface.StringComponentExchanger;
 
 public class QuitMsgEvent extends StringComponentExchanger implements EventRegister {
     private User quitUser;

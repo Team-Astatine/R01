@@ -1,27 +1,31 @@
 package teamzesa;
 
 import net.kyori.adventure.text.Component;
+import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
+import teamzesa.DataBase.IOHandler.ConfigIOHandler;
 import teamzesa.DataBase.IOHandler.RObjectIOHandler;
 import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
 import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.entity.RObject.UserKillStatus;
 import teamzesa.DataBase.userHandler.UserController;
-import teamzesa.util.Enum.ColorMap;
+import teamzesa.event.EventRegister.EventRegisterSection;
 import teamzesa.util.Announcer;
-import teamzesa.event.EventRegisterSection;
+import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.CommandExecutorMap;
-import teamzesa.DataBase.IOHandler.ConfigIOHandler;
 import teamzesa.util.Enum.DataFile;
 import teamzesa.util.ThreadPool;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 
 public final class R01 extends JavaPlugin {
@@ -40,7 +44,7 @@ public final class R01 extends JavaPlugin {
 //        setMaxPlayers(50);
 
 //        saveDefaultSource
-        if (!getDataFolder().exists())
+        if (BooleanUtils.isFalse(getDataFolder().exists()))
             generationDataFile();
 
 //        configSet
@@ -89,11 +93,11 @@ public final class R01 extends JavaPlugin {
 
     public void RObjectLoader() {
         new UserController().updateAllUserData(
-            new RObjectIOHandler().importData(DataFile.USER_DATA, User.class, getClass().getName())
+                new RObjectIOHandler().importData(DataFile.USER_DATA, User.class, getClass().getName())
         );
 
         new KillStatusController().updateAllUserData(
-            new RObjectIOHandler().importData(DataFile.KILL_STATUS, UserKillStatus.class, getClass().getName())
+                new RObjectIOHandler().importData(DataFile.KILL_STATUS, UserKillStatus.class, getClass().getName())
         );
     }
 
@@ -200,15 +204,15 @@ public final class R01 extends JavaPlugin {
 
     private void pluginLoadTime() {
         String blockingTime = String.format("(%.3fs)",
-                (System.currentTimeMillis() - this.RUNNING_TIME)/1000.0
+                (System.currentTimeMillis() - this.RUNNING_TIME) / 1000.0
         );
         Bukkit.getLogger().info(PLUGIN_NAME + " Done " + blockingTime);
     }
 
     private void generationDataFile() {
         saveDefaultConfig(); // config Data
-        saveResource(DataFile.USER_DATA.getFileName(),false); // userData
-        saveResource(DataFile.KILL_STATUS.getFileName(),false); // killStatusData
+        saveResource(DataFile.USER_DATA.getFileName(), false); // userData
+        saveResource(DataFile.KILL_STATUS.getFileName(), false); // killStatusData
         Bukkit.getLogger().info(PLUGIN_NAME + " Plugin Data File 생성 완료.");
     }
 }

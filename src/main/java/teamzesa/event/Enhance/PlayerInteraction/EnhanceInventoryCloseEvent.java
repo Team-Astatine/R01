@@ -1,12 +1,16 @@
-package teamzesa.event.Enhance.Dialog;
+package teamzesa.event.Enhance.PlayerInteraction;
 
+import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.event.EventRegister.EventRegister;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
 
 import static teamzesa.command.EnhanceDialog.*;
 
@@ -17,6 +21,7 @@ public class EnhanceInventoryCloseEvent implements EventRegister {
     private ArrayList<ItemStack> slot;
 
     private final InventoryCloseEvent event;
+
     public EnhanceInventoryCloseEvent(InventoryCloseEvent event) {
         this.event = event;
         init();
@@ -57,27 +62,32 @@ public class EnhanceInventoryCloseEvent implements EventRegister {
     }
 
     private boolean validation() {
-        if (this.event.getInventory().getType() != InventoryType.DROPPER)
+        if (BooleanUtils.isFalse(this.event.getInventory().equals(ENHANCE_DIALOG)))
             return true;
 
+        ItemStack slotZeroItem = this.event.getView().getItem(0);
+        ItemStack slotFirstItem = this.event.getView().getItem(1);
+        ItemStack slotSecondItem = this.event.getView().getItem(2);
+
+        ItemStack slotSixItem = this.event.getView().getItem(6);
         ItemStack slotSevenItem = this.event.getView().getItem(7);
-        if (slotSevenItem == null)
+        ItemStack slotEightItem = this.event.getView().getItem(8);
+
+        if (ObjectUtils.notEqual(slotZeroItem.getItemMeta().getCustomModelData(), PANEL_STUFF_CUSTOM_DATA))
             return true;
 
-        if (!slotSevenItem.hasItemMeta())
+        if (ObjectUtils.notEqual(slotFirstItem.getItemMeta().getCustomModelData(), PANEL_STUFF_CUSTOM_DATA))
             return true;
 
-        if (!slotSevenItem.getItemMeta().hasCustomModelData())
+        if (ObjectUtils.notEqual(slotSecondItem.getItemMeta().getCustomModelData(), PANEL_STUFF_CUSTOM_DATA))
             return true;
 
-        if (slotSevenItem.getItemMeta().getCustomModelData() != EXECUTE_STUFF_DATA)
+        if (ObjectUtils.notEqual(slotSixItem.getItemMeta().getCustomModelData(), EXECUTE_DISCORD_DATA))
             return true;
 
-//        if (slotSevenItem.getItemMeta().getCustomModelData() != EXECUTE_DISCORD_DATA)
-//            return true;
-//
-//        if (slotSevenItem.getItemMeta().getCustomModelData() != EXECUTE_NOTION_DATA)
-//            return true;
-        return false;
+        if (ObjectUtils.notEqual(slotSevenItem.getItemMeta().getCustomModelData(), EXECUTE_STUFF_DATA))
+            return true;
+
+        return ObjectUtils.notEqual(slotEightItem.getItemMeta().getCustomModelData(), EXECUTE_NOTION_DATA);
     }
 }

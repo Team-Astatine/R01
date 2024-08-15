@@ -3,6 +3,7 @@ package teamzesa.DataBase.IOHandler;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Bukkit;
 import teamzesa.DataBase.entity.RObject.RObject;
 import teamzesa.util.Enum.DataFile;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 
 public class RObjectIOHandler {
 
-    public <E extends RObject> ArrayList <E> importData(DataFile dataFile, Class<E> toCastClass, String affiliatedFunction) {
+    public <E extends RObject> ArrayList<E> importData(DataFile dataFile, Class<E> toCastClass, String affiliatedFunction) {
         loggingConsole(dataFile.getFileTypeName(), affiliatedFunction, false, true);
         ArrayList<E> resultData = new ArrayList<>();
 
@@ -34,7 +35,7 @@ public class RObjectIOHandler {
             new GsonBuilder()
                     .setPrettyPrinting()
                     .create()
-                    .toJson(totalDataValue,writer);
+                    .toJson(totalDataValue, writer);
 
         } catch (IOException e) {
             loggingConsole(dataFile.getFileTypeName(), affiliatedFunction, true, false);
@@ -44,7 +45,7 @@ public class RObjectIOHandler {
 
     private void loggingConsole(String fileName, String affiliatedFunction, boolean isError, boolean isImporting) {
         String importComment = isImporting ? "Importing" : "Exporting";
-        if (!isError)
+        if (BooleanUtils.isFalse(isError))
             Bukkit.getLogger().info("[R01] " + importComment + " " + fileName + ".. " + affiliatedFunction);
         else if (isError)
             Bukkit.getLogger().info("[R01] " + importComment + " " + fileName + ".. " + affiliatedFunction + "Error");

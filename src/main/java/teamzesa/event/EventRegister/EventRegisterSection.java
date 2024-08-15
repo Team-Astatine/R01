@@ -1,4 +1,4 @@
-package teamzesa.event;
+package teamzesa.event.EventRegister;
 
 import io.papermc.paper.event.player.PlayerArmSwingEvent;
 import org.bukkit.event.EventHandler;
@@ -7,16 +7,25 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPhysicsEvent;
 import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.block.BlockRedstoneEvent;
+import org.bukkit.event.enchantment.EnchantItemEvent;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.inventory.*;
 import org.bukkit.event.player.*;
 import org.bukkit.event.raid.RaidTriggerEvent;
 import org.bukkit.event.server.TabCompleteEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
-import teamzesa.event.Enhance.Dialog.EnhanceInventoryClickEvent;
-import teamzesa.event.Enhance.Dialog.EnhanceInventoryCloseEvent;
-import teamzesa.event.Enhance.LongRange.GodMode.GodModeTridentHitEvent;
-import teamzesa.event.Enhance.LongRange.GodMode.GodModeTridentShotEvent;
+import teamzesa.event.Enhance.PlayerInteraction.EnhanceInventoryClickEvent;
+import teamzesa.event.Enhance.PlayerInteraction.EnhanceInventoryCloseEvent;
+import teamzesa.event.Enhance.PlayerInteraction.LongRange.GodMode.GodModeTridentHitEvent;
+import teamzesa.event.Enhance.PlayerInteraction.LongRange.GodMode.GodModeTridentShotEvent;
+import teamzesa.event.Enhance.PlayerInteraction.LongRange.Hit.EnhanceBowHitEvent;
+import teamzesa.event.Enhance.PlayerInteraction.LongRange.Hit.EnhanceCrossBowHitEvent;
+import teamzesa.event.Enhance.PlayerInteraction.LongRange.Hit.EnhanceTridentHitEvent;
+import teamzesa.event.Enhance.PlayerInteraction.LongRange.Shot.EnhanceBowShotEvent;
+import teamzesa.event.Enhance.PlayerInteraction.LongRange.Shot.EnhanceCrossBowShotEvent;
+import teamzesa.event.Enhance.PlayerInteraction.LongRange.Shot.EnhanceTridentShotEvent;
+import teamzesa.event.Enhance.PlayerInteraction.ShortRange.EnhanceShortRangeWeaponHurtEvent;
+import teamzesa.event.Enhance.PlayerInteraction.UpdateItemLore.*;
 import teamzesa.event.EntityDamageByEntityEvent.EntityAttackSpeedHandler;
 import teamzesa.event.EntityExplodeEvent.ExplosiveEvent;
 import teamzesa.event.PlayerArmSwingEvent.HandSwingEvent;
@@ -28,16 +37,10 @@ import teamzesa.event.PlayerQuitEvent.QuitMsgEvent;
 import teamzesa.event.PlayerRespawnEvent.RespawnEvent;
 import teamzesa.event.PlayerRespawnEvent.RespawnRandomTeleportEvent;
 import teamzesa.event.RaidTriggerEvent.RaidAnnouncerEvent;
-import teamzesa.event.Restricted.*;
-import teamzesa.event.Restricted.AntiExploit.*;
-import teamzesa.event.Enhance.LongRange.Hit.EnhanceBowHitEvent;
-import teamzesa.event.Enhance.LongRange.Hit.EnhanceCrossBowHitEvent;
-import teamzesa.event.Enhance.LongRange.Hit.EnhanceTridentHitEvent;
-import teamzesa.event.Enhance.LongRange.Shot.EnhanceBowShotEvent;
-import teamzesa.event.Enhance.LongRange.Shot.EnhanceCrossBowShotEvent;
-import teamzesa.event.Enhance.LongRange.Shot.EnhanceTridentShotEvent;
-import teamzesa.event.Enhance.ShortRange.EnhanceShortRangeWeaponHurtEvent;
+import teamzesa.event.Restricted.AntiExploit.AntiPistonPushGravityBlockEvent;
+import teamzesa.event.Restricted.AntiExploit.AntiPortalChunkRenderingEvent;
 import teamzesa.event.Restricted.AntiExploit.LeverInteraction.AntiLeverAutoClicker;
+import teamzesa.event.Restricted.*;
 //todo
 //fixme
 //refactoring
@@ -89,6 +92,21 @@ public class EventRegisterSection implements Listener {
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
+    public static void EnchantItemEvent(EnchantItemEvent event) {
+        new UpdateEnhanceItemLoreFromEnchantment(event);
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    public static void EnchantItemEvent(PrepareAnvilEvent event) {
+        new UpdateEnhanceItemPrepareAnvil(event);
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    public static void EnchantItemEvent(PrepareGrindstoneEvent event) {
+        new UpdateEnhanceItemPrepareGrindstone(event);
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
     public static void ProjectileHitEvent(ProjectileHitEvent event) {
         new EnhanceBowHitEvent(event);
         new EnhanceCrossBowHitEvent(event);
@@ -116,7 +134,10 @@ public class EventRegisterSection implements Listener {
 //        new RestrictedCrafter(event);
         new RestrictedItemInputDispenserHandler(event);
         new RestrictedShulkerChest(event);
+
         new EnhanceInventoryClickEvent(event);
+        new UpdateEnhanceResultItemLoreFromAnvil(event);
+        new UpdateEnhanceResultItemLoreFromGrindStone(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -143,7 +164,6 @@ public class EventRegisterSection implements Listener {
     public static void EntityDamageEvent(EntityDamageEvent event) {
 //        Event Cancelled 하면 해당 Event 자체가 캔슬됌.
 //        new EnhanceResistanceEvent(event);
-        new EnhanceShortRangeWeaponHurtEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -186,6 +206,7 @@ public class EventRegisterSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public static void EntityDamageByEntityEvent(EntityDamageByEntityEvent event) {
         new EntityAttackSpeedHandler(event);
+        new EnhanceShortRangeWeaponHurtEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)

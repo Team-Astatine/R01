@@ -1,16 +1,17 @@
 package teamzesa.command;
 
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.CommandExecutorMap;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
 
 public class Moderator extends CommandRegisterSection {
     private final Set<UUID> moderatorName;
@@ -22,8 +23,8 @@ public class Moderator extends CommandRegisterSection {
     }
 
     private void moderList() {
-        UUID jaxple =     UUID.fromString("27d84b4f-5991-4001-89d5-0fdfd3374a3d");
-        UUID kelriex =    UUID.fromString("7e57dd28-bdba-4312-84ea-2da58cd6e598");
+        UUID jaxple = UUID.fromString("27d84b4f-5991-4001-89d5-0fdfd3374a3d");
+        UUID kelriex = UUID.fromString("7e57dd28-bdba-4312-84ea-2da58cd6e598");
         UUID gunbunjule = UUID.fromString("581a57af-91c9-4cf1-a173-85a2b48b68a7");
 
         this.moderatorName.add(jaxple);

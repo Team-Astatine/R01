@@ -1,5 +1,7 @@
 package teamzesa.event.PlayerRespawnEvent;
 
+import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -15,6 +17,7 @@ public class RespawnRandomTeleportEvent extends StringComponentExchanger impleme
     private Player player;
 
     private final PlayerRespawnEvent event;
+
     public RespawnRandomTeleportEvent(PlayerRespawnEvent event) {
         this.event = event;
         init();
@@ -28,7 +31,10 @@ public class RespawnRandomTeleportEvent extends StringComponentExchanger impleme
 
     @Override
     public void execute() {
-        if (this.player.getPotentialBedLocation() != null)
+        if (this.event.isAnchorSpawn())
+            return;
+
+        if (ObjectUtils.notEqual(this.player.getPotentialBedLocation(), null))
             return;
 
         World world = Bukkit.getWorld(WorldName.world.getExchangeEnglish());
@@ -38,6 +44,6 @@ public class RespawnRandomTeleportEvent extends StringComponentExchanger impleme
         int y = position[1];
         int z = position[2];
 
-        this.player.teleportAsync(new Location(world,x,y,z));
+        this.player.teleportAsync(new Location(world, x, y, z));
     }
 }

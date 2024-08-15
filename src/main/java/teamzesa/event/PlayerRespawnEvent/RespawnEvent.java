@@ -3,8 +3,8 @@ package teamzesa.event.PlayerRespawnEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import teamzesa.event.EventRegister.EventRegister;
-import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Interface.StringComponentExchanger;
 
 
 public class RespawnEvent extends StringComponentExchanger implements EventRegister {
@@ -31,6 +31,8 @@ public class RespawnEvent extends StringComponentExchanger implements EventRegis
         if (this.player.getPotentialBedLocation() == null)
             return;
 
-        playerSendMsgComponentExchanger(this.player, "침대로 텔레포트 됩니다", ColorMap.YELLOW);
+        String comment = this.event.isAnchorSpawn() ? "정박기로 텔레포트 합니다" : "침대로 텔레포트 합니다";
+
+        playerSendMsgComponentExchanger(this.player, comment, ColorMap.YELLOW);
     }
 }

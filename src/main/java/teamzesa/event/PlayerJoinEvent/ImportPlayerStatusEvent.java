@@ -2,27 +2,22 @@ package teamzesa.event.PlayerJoinEvent;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.inventory.ItemStack;
 import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
-import teamzesa.DataBase.entity.RObject.UserKillStatus;
-import teamzesa.command.AdminCommand.God;
 import teamzesa.DataBase.entity.RObject.User;
-import teamzesa.event.EventRegister.EventRegister;
-import teamzesa.util.Enum.WorldName;
-import teamzesa.util.Interface.StringComponentExchanger;
-import teamzesa.util.Enum.Kit.ArmourKit;
-import teamzesa.util.Enum.ColorMap;
-import teamzesa.util.Enum.Kit.FoodKit;
-import teamzesa.util.Enum.Kit.ToolKit;
-import teamzesa.util.Announcer;
+import teamzesa.DataBase.entity.RObject.UserKillStatus;
 import teamzesa.DataBase.userHandler.UserBuilder;
 import teamzesa.DataBase.userHandler.UserController;
+import teamzesa.command.AdminCommand.God;
+import teamzesa.event.EventRegister.EventRegister;
+import teamzesa.util.Announcer;
+import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.Kit.FoodKit;
+import teamzesa.util.Enum.WorldName;
+import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.RanNumGenerator;
 
 import java.util.Optional;
@@ -71,7 +66,8 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
         int y = position[1];
         int z = position[2];
 
-        this.player.teleportAsync(new Location(world,x,y,z));
+        this.player.teleportAsync(new Location(world, x, y, z));
+        Bukkit.getLogger().info(String.format("%s Player Teleport Position is > %d %d %d", player.getName(), x, y, z));
     }
 
     private void checkingUserStatusGod() {
@@ -97,6 +93,7 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
             this.player.getInventory().addItem(kit.getFood());
         }
 
+        /* Non Using Netherite Kit
         for (ArmourKit kit : ArmourKit.values()) {
             ItemStack armour = kit.getArmour();
             armour.addEnchantment(Enchantment.PROTECTION, 2);
@@ -112,18 +109,20 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
             tool.addEnchantment(Enchantment.UNBREAKING, 2);
             this.player.getInventory().addItem(tool);
         }
+        */
     }
+
     private void announcingJoinMsg() {
         this.announcer.joinAnnouncer(this.player);
         this.announcer.countAnnouncer(this.player);
 
         if (this.userKillStatus.killCount() == 0)
             this.event.joinMessage(
-                componentExchanger(" + " + this.user.nameList().getLast(), ColorMap.RED)
+                    componentExchanger(" + " + this.user.nameList().getLast(), ColorMap.RED)
             );
 
         else this.event.joinMessage(
-            componentExchanger(" + [ " + this.userKillStatus.killCount() + "KILL ] " + user.nameList().getLast(), ColorMap.RED)
+                componentExchanger(" + [ " + this.userKillStatus.killCount() + "KILL ] " + user.nameList().getLast(), ColorMap.RED)
         );
     }
 

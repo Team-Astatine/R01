@@ -1,15 +1,16 @@
 package teamzesa.event.PlayerJoinEvent;
 
+import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
 import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
-import teamzesa.event.EventRegister.EventRegister;
-import teamzesa.util.Interface.StringComponentExchanger;
-import teamzesa.util.Enum.ColorMap;
 import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.userHandler.UserBuilder;
 import teamzesa.DataBase.userHandler.UserController;
+import teamzesa.event.EventRegister.EventRegister;
+import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Interface.StringComponentExchanger;
 
 import java.util.Optional;
 
@@ -61,12 +62,12 @@ public class PlayerInfoHandler extends StringComponentExchanger implements Event
         boolean equalsLastName = this.joinUser.nameList().getLast().equals(name);
         boolean existsIP = this.joinUser.connectionIPList().contains(ip);
 
-        if (!equalsLastName) {
+        if (BooleanUtils.isFalse(equalsLastName)) {
             updateNameList(name);
             sendMessageToPlayer(this.joinPlayer, "새로운 이름으로 접속하셨습니다.", "신규 이름을 등록합니다.", hasPlayedBefore);
         }
 
-        if (!existsIP) {
+        if (BooleanUtils.isFalse(existsIP)) {
             updateIPList(ip);
             sendMessageToPlayer(this.joinPlayer, "새로운 IP로 접속하셨습니다.", "신규 IP를 등록합니다.", hasPlayedBefore);
         }

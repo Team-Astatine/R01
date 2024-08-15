@@ -7,9 +7,9 @@ import teamzesa.DataBase.entity.RObject.User;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class DaoUser implements DAO<UUID,User> {
+public class DaoUser implements DAO<UUID, User> {
 
-    private static final ConcurrentHashMap<UUID,User> USER_DATA = DataBase.getUserDataInstance();
+    private static final ConcurrentHashMap<UUID, User> USER_DATA = DataBase.getUserDataInstance();
 
     private static class DaoUserHolder {
         private final static DaoUser INSTANCE = new DaoUser();
@@ -20,7 +20,7 @@ public class DaoUser implements DAO<UUID,User> {
     }
 
 
-    public synchronized ConcurrentHashMap<UUID,User> getAllUserTable() {
+    public synchronized ConcurrentHashMap<UUID, User> getAllUserTable() {
         return new ConcurrentHashMap<>(USER_DATA);
     }
 

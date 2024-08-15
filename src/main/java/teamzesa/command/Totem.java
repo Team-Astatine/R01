@@ -1,5 +1,6 @@
 package teamzesa.command;
 
+import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -7,13 +8,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.util.Enum.CommandExecutorMap;
 import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.CommandExecutorMap;
 
-import java.util.*;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 public class Totem extends CommandRegisterSection {
     private final Material TOTEM = Material.TOTEM_OF_UNDYING;
@@ -30,13 +32,13 @@ public class Totem extends CommandRegisterSection {
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender,@NotNull Command command,@NotNull String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         Runnable executeTotemSupply = () -> {
             Totem.this.player = (Player) sender;
             Totem.this.playerInventory = Totem.this.player.getInventory();
             getAllOfPlayerTotems();
 
-            if (!validationInventory())
+            if (BooleanUtils.isFalse(validationInventory()))
                 return;
 
             removeTotemInInv();
@@ -62,14 +64,14 @@ public class Totem extends CommandRegisterSection {
 
 //        n <= STACK
         if (totalAmount <= STACK) {
-            this.playerInventory.setItemInOffHand(new ItemStack(TOTEM,totalAmount));
+            this.playerInventory.setItemInOffHand(new ItemStack(TOTEM, totalAmount));
         } else {
 //        n >= STACK
             this.playerInventory.setItemInOffHand(new ItemStack(TOTEM, STACK));
             this.playerInventory.addItem(new ItemStack(TOTEM, totalAmount - STACK));
         }
 
-       playerSendMsgComponentExchanger(this.player,"토템을 합쳤습니다.", ColorMap.YELLOW);
+        playerSendMsgComponentExchanger(this.player, "토템을 합쳤습니다.", ColorMap.YELLOW);
     }
 
     private void removeTotemInInv() {
@@ -77,18 +79,18 @@ public class Totem extends CommandRegisterSection {
 
 //        전체 아이템 창 정보 다 가져옴 armour , offHand Whatever
         Optional.ofNullable(this.playerInventory.getHelmet()).ifPresent(
-            helmet -> {
-                if (helmet.getType() == TOTEM)
-                    this.playerInventory.setHelmet(new ItemStack(Material.AIR));
-            });
+                helmet -> {
+                    if (helmet.getType() == TOTEM)
+                        this.playerInventory.setHelmet(new ItemStack(Material.AIR));
+                });
 
         Optional.of(this.playerInventory.getItemInOffHand()).ifPresent(
-            offhand -> {
-                if (offhand.getType() == TOTEM)
-                    this.playerInventory.setItemInOffHand(new ItemStack(Material.AIR));
-                else
-                    this.playerInventory.addItem(this.playerInventory.getItemInOffHand());
-        });
+                offhand -> {
+                    if (offhand.getType() == TOTEM)
+                        this.playerInventory.setItemInOffHand(new ItemStack(Material.AIR));
+                    else
+                        this.playerInventory.addItem(this.playerInventory.getItemInOffHand());
+                });
     }
 
     private boolean validationInventory() {

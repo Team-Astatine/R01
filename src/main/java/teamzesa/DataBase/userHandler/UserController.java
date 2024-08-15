@@ -15,7 +15,7 @@ public class UserController {
     public boolean createUser(@NotNull Player player) {
         return createUser(
                 new UserBuilder(player)
-                .buildAndUpdate()
+                        .buildAndUpdate()
         );
     }
 

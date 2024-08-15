@@ -3,7 +3,7 @@ package teamzesa.DataBase;
 import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.entity.RObject.UserKillStatus;
 
-import java.util.*;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class DataBase {
@@ -11,7 +11,7 @@ public class DataBase {
         private final static ConcurrentHashMap<UUID, User> INSTANCE = new ConcurrentHashMap<>();
     }
 
-    public static ConcurrentHashMap<UUID,User> getUserDataInstance() {
+    public static ConcurrentHashMap<UUID, User> getUserDataInstance() {
         return UserDataHolder.INSTANCE;
     }
 

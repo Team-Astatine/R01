@@ -4,7 +4,10 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.DataBase.entity.RObject.User;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.UUID;
 
 public class UserBuilder {
     private UUID uuid;
@@ -15,7 +18,8 @@ public class UserBuilder {
     private boolean isGodMode;
     private boolean isAnnouncing;
 
-    public UserBuilder(){}
+    public UserBuilder() {
+    }
 
     public UserBuilder(@NotNull User user) {
         uuid(user.uuid());
@@ -27,7 +31,7 @@ public class UserBuilder {
         isAnnouncing(user.isAnnouncing());
     }
 
-//    First Time add User
+    //    First Time add User
     public UserBuilder(Player player) {
         uuid(player.getUniqueId());
         nameList(player.getName());

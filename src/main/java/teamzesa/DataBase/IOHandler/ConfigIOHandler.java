@@ -2,10 +2,10 @@ package teamzesa.DataBase.IOHandler;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
-import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.ConfigMenu;
 import teamzesa.util.Enum.DataFile;
+import teamzesa.util.Interface.StringComponentExchanger;
 
 import java.io.File;
 import java.io.IOException;

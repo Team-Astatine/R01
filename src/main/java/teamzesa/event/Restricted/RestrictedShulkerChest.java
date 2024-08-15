@@ -1,5 +1,6 @@
 package teamzesa.event.Restricted;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -7,8 +8,8 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.event.EventRegister.EventRegister;
-import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Interface.StringComponentExchanger;
 
 public class RestrictedShulkerChest extends StringComponentExchanger implements EventRegister {
 
@@ -34,6 +35,25 @@ public class RestrictedShulkerChest extends StringComponentExchanger implements 
 
     @Override
     public void execute() {
+        if (this.clickerInventory == null)
+            return;
+
+        if (ObjectUtils.notEqual(this.currentOpeningContainerInventory.getType(), InventoryType.SHULKER_BOX))
+            return;
+
+        if (ObjectUtils.notEqual(this.clickerInventory.getType(), InventoryType.PLAYER))
+            return;
+
+        if (ObjectUtils.notEqual(this.itemStack.getType(), Material.TOTEM_OF_UNDYING))
+            return;
+
+        if (this.itemStack.getAmount() <= 1)
+            return;
+
+        this.event.setCancelled(true);
+        playerSendMsgComponentExchanger(player, "겹쳐진 토템은 셜커에 보관할 수 없습니다.", ColorMap.RED);
+
+        /*Debugging Code
 //        System.out.println("null check");
         if (this.clickerInventory == null)
             return;
@@ -42,15 +62,15 @@ public class RestrictedShulkerChest extends StringComponentExchanger implements 
 //        System.out.println("getInv > " + this.currentOpeningContainerInventory.getType());
 
 //        System.out.println("current click container Typing Check");
-        if (this.currentOpeningContainerInventory.getType() != InventoryType.SHULKER_BOX)
+        if (ObjectUtils.notEqual(this.currentOpeningContainerInventory.getType(), InventoryType.SHULKER_BOX))
             return;
 
 //        System.out.println("clicker container Typing Check");
-        if (this.clickerInventory.getType() != InventoryType.PLAYER)
+        if (ObjectUtils.notEqual(this.clickerInventory.getType(), InventoryType.PLAYER))
             return;
 
 //        System.out.println("itemStack Type Check");
-        if (this.itemStack.getType() != Material.TOTEM_OF_UNDYING)
+        if (ObjectUtils.notEqual(this.itemStack.getType(), Material.TOTEM_OF_UNDYING))
             return;
 
 //        System.out.println("itemStack amount Check");
@@ -58,7 +78,6 @@ public class RestrictedShulkerChest extends StringComponentExchanger implements 
             return;
 
 //        System.out.println("cancel");
-        this.event.setCancelled(true);
-        playerSendMsgComponentExchanger(player, "겹쳐진 토템은 셜커에 보관할 수 없습니다.", ColorMap.RED);
+         */
     }
 }

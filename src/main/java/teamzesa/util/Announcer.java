@@ -5,11 +5,11 @@ import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.IOHandler.ConfigIOHandler;
-import teamzesa.util.Interface.StringComponentExchanger;
-import teamzesa.util.Enum.ColorMap;
+import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.userHandler.UserController;
+import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Interface.StringComponentExchanger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,18 +56,18 @@ public class Announcer extends StringComponentExchanger {
         long delay = 0;
         long interval = 5;
         ThreadPool.getThreadPool().addSchedulingTaskMin(() -> {
-            List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
-            if (players.isEmpty())
-                return;
+                    List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
+                    if (players.isEmpty())
+                        return;
 
-            players.forEach(player -> {
-                User user = new UserController().readUser(player.getUniqueId());
-                if (user.isAnnouncing())
-                    sendComment(player, createComponents());
-            });
-        },
-        delay,
-        interval
+                    players.forEach(player -> {
+                        User user = new UserController().readUser(player.getUniqueId());
+                        if (user.isAnnouncing())
+                            sendComment(player, createComponents());
+                    });
+                },
+                delay,
+                interval
         );
     }
 

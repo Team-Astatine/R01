@@ -1,12 +1,12 @@
-package teamzesa.event.Enhance.LongRange.GodMode;
+package teamzesa.event.Enhance.PlayerInteraction.LongRange.GodMode;
 
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Trident;
 import org.bukkit.event.entity.ProjectileHitEvent;
-import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.DataBase.userHandler.UserController;
+import teamzesa.event.EventRegister.EventRegister;
 
 
 public class GodModeTridentHitEvent implements EventRegister {
@@ -18,7 +18,8 @@ public class GodModeTridentHitEvent implements EventRegister {
     }
 
     @Override
-    public void init() {}
+    public void init() {
+    }
 
     @Override
     public void execute() {

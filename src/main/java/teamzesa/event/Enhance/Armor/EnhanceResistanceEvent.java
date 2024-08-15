@@ -6,6 +6,7 @@ import teamzesa.event.EventRegister.EventRegister;
 public class EnhanceResistanceEvent implements EventRegister {
 
     private final EntityDamageEvent event;
+
     public EnhanceResistanceEvent(EntityDamageEvent event) {
         this.event = event;
         init();
@@ -19,6 +20,6 @@ public class EnhanceResistanceEvent implements EventRegister {
 
     @Override
     public void execute() {
-        
+
     }
 }
