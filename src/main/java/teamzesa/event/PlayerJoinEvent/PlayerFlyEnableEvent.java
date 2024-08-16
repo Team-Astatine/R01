@@ -42,7 +42,7 @@ public class PlayerFlyEnableEvent extends StringComponentExchanger implements Ev
                 this.comment = "월드를 이동하여 플라이가 재활성화 됩니다";
             }
 
-            default -> throw new IllegalStateException("Unexpected Event value: " + event);
+            default -> throw new IllegalStateException("Unknown Event value: " + event);
         }
     }
 
