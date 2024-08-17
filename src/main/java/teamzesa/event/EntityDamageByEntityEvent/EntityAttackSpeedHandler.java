@@ -4,6 +4,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.inventory.ItemStack;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Enum.Enhance.ShortRangeWeaponMap;
 
@@ -34,8 +35,9 @@ public class EntityAttackSpeedHandler implements EventRegister {
 
         int hurtTick = 10; //default 20
         boolean stuffCheck = isDualWeaponChecker(
-                damager.getInventory().getItemInMainHand().getType(),
-                damager.getInventory().getItemInOffHand().getType());
+                damager.getInventory().getItemInMainHand(),
+                damager.getInventory().getItemInOffHand()
+        );
 
         if (stuffCheck) //Two Hand Sword
             hurtTick = 1;
@@ -44,12 +46,16 @@ public class EntityAttackSpeedHandler implements EventRegister {
         target.setMaximumNoDamageTicks(hurtTick);
     }
 
-    private Boolean isDualWeaponChecker(Material mainStuff, Material offStuff) {
-        for (ShortRangeWeaponMap shortRangeWeaponMapInfo : ShortRangeWeaponMap.values()) {
-            Material material = shortRangeWeaponMapInfo.getMaterial();
-            if (material.equals(mainStuff) && material.equals(offStuff))
-                return true;
-        }
-        return false;
+    private Boolean isDualWeaponChecker(ItemStack mainStuff, ItemStack offStuff) {
+        ShortRangeWeaponMap mainHand = ShortRangeWeaponMap.findByItemStack(mainStuff);
+        ShortRangeWeaponMap offHand = ShortRangeWeaponMap.findByItemStack(offStuff);
+
+        if (mainHand.getMaterial().equals(Material.AIR))
+            return false;
+
+        if (offHand.getMaterial().equals(Material.AIR))
+            return false;
+
+        return true;
     }
 }

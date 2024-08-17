@@ -92,12 +92,8 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
     }
 
     public static Component getEnhanceDisplayComponent(ItemStack enhanceItem) {
-        double weaponDmg = 0.0;
-        try { //Calculation Origin Dmg + Sharpness Dmg
-            weaponDmg = getShortRangeWeaponCloseDamage(enhanceItem) + getSharpnessDamage(enhanceItem);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        //Calculation Origin Dmg + Sharpness Dmg
+        double weaponDmg = getShortRangeWeaponCloseDamage(enhanceItem) + getSharpnessDamage(enhanceItem);
 
         double totalDmg = calculatingTotalEnhanceStageDamage(enhanceItem, weaponDmg);
         String comment = String.format("예상 데미지 : %.3f...", totalDmg);
@@ -140,15 +136,15 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
 
     public static double getShortRangeWeaponCloseDamage(ItemStack weapon) {
         double damage = 0.0;
-        for (Weapon weaponInfo : ShortRangeWeaponMap.values()) {
-            if (weaponInfo.getMaterial().equals(weapon.getType()))
-                damage = weaponInfo.getShortRangeDamage();
-        }
+        ShortRangeWeaponMap shortRangeWeaponMap = ShortRangeWeaponMap.findByItemStack(weapon);
+        LongRangeWeaponMap longRangeWeaponMap = LongRangeWeaponMap.findByItemStack(weapon);
 
-        for (Weapon weaponInfo : LongRangeWeaponMap.values()) {
-            if (weaponInfo.getMaterial().equals(weapon.getType()))
-                damage = weaponInfo.getShortRangeDamage();
-        }
+        if (ObjectUtils.notEqual(shortRangeWeaponMap, ShortRangeWeaponMap.AIR))
+            return shortRangeWeaponMap.getShortRangeDamage();
+
+
+        if (ObjectUtils.notEqual(longRangeWeaponMap, LongRangeWeaponMap.AIR))
+            return longRangeWeaponMap.getShortRangeDamage();
 
         return damage;
     }
