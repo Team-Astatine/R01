@@ -1,5 +1,6 @@
 package teamzesa.event.EventRegister;
 
+import io.papermc.paper.event.player.AsyncChatEvent;
 import io.papermc.paper.event.player.PlayerArmSwingEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -39,6 +40,7 @@ import teamzesa.event.PlayerRespawnEvent.RespawnRandomTeleportEvent;
 import teamzesa.event.RaidTriggerEvent.RaidAnnouncerEvent;
 import teamzesa.event.Restricted.AntiExploit.AntiPistonPushGravityBlockEvent;
 import teamzesa.event.Restricted.AntiExploit.AntiPortalChunkRenderingEvent;
+import teamzesa.event.Restricted.AntiExploit.FloodChat.RestrictedChatFlood;
 import teamzesa.event.Restricted.AntiExploit.LeverInteraction.AntiLeverAutoClicker;
 import teamzesa.event.Restricted.*;
 //todo
@@ -190,6 +192,11 @@ public class EventRegisterSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public static void PlayerCommandPreprocessEvent(PlayerCommandPreprocessEvent event) {
         new RestrictedCommandHandler(event);
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    public static void AsyncChatEvent(AsyncChatEvent event) {
+        new RestrictedChatFlood(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
