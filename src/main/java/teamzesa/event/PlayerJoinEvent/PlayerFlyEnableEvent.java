@@ -48,6 +48,9 @@ public class PlayerFlyEnableEvent extends StringComponentExchanger implements Ev
 
     @Override
     public void execute() {
+        if (this.player == null)
+            return;
+
         this.player.setAllowFlight(true);
         this.player.setFlying(true);
 
