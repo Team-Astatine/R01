@@ -27,7 +27,7 @@ public enum ProtectScroll implements ScrollMap {
     private final Material material;
     private final int discountValue;
     private static final Map<Material, ProtectScroll> CACHED_ITEM = Arrays.stream(values())
-            .collect(Collectors.toMap(scroll -> scroll.material, Functions.identity()));
+            .collect(Collectors.toMap(ProtectScroll::getMaterial, Functions.identity()));
 
     ProtectScroll(Material material, int discountValue) {
         this.discountValue = discountValue;

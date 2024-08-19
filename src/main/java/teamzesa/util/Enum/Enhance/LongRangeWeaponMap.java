@@ -22,7 +22,7 @@ public enum LongRangeWeaponMap implements Weapon, EnhanceItemCache {
     private final double shortRangeDamage;
     private final double longRangeDamage;
     private static final Map<Material, LongRangeWeaponMap> CACHED_ITEM = Arrays.stream(values())
-            .collect(Collectors.toMap(item -> item.material, Function.identity()));
+            .collect(Collectors.toMap(LongRangeWeaponMap::getMaterial, Function.identity()));
 
     LongRangeWeaponMap(Material material, double shortRangeDamage, double longRangeDamage) {
         this.material = material;

@@ -37,7 +37,7 @@ public enum ShortRangeWeaponMap implements Weapon, EnhanceItemCache {
     private final double shortRangeDamage;
     private final double longRangeDamage;
     private static final Map<Material, ShortRangeWeaponMap> CACHED_ITEM = Arrays.stream(values())
-            .collect(Collectors.toMap(item -> item.material, Function.identity()));
+            .collect(Collectors.toMap(ShortRangeWeaponMap::getMaterial, Function.identity()));
 
     ShortRangeWeaponMap(Material material, double shortRangeDamage, double longRangeDamage) {
         this.material = material;
