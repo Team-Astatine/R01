@@ -1,8 +1,19 @@
 package teamzesa.util.Enum.Enhance;
 
+import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+import teamzesa.event.Enhance.Interface.Armour;
+import teamzesa.event.Enhance.Interface.EnhanceItemCache;
 
-public enum ArmorMap {
+import java.util.Arrays;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+public enum ArmourMap implements Armour, EnhanceItemCache {
+    AIR(Material.AIR, 0),
+
     LEATHER_HELMET(Material.LEATHER_HELMET, 1),
     CHAINMAIL_HELMET(Material.CHAINMAIL_HELMET, 1),
     GOLDEN_HELMET(Material.GOLDEN_HELMET, 1),
@@ -35,10 +46,18 @@ public enum ArmorMap {
 
     private final Material material;
     private final int resistance;
+    private final static Map<Material, ArmourMap> CACHED_ITEM = Arrays.stream(values())
+            .collect(Collectors.toMap(ArmourMap::getMaterial, Function.identity()));
 
-    ArmorMap(Material material, int resistance) {
+    ArmourMap(Material material, int resistance) {
         this.material = material;
         this.resistance = resistance;
+    }
+
+    public static ArmourMap findByItemStack(ItemStack itemStack) {
+        if (BooleanUtils.isFalse(CACHED_ITEM.containsKey(itemStack.getType())))
+            return AIR;
+        return CACHED_ITEM.get(itemStack.getType());
     }
 
     public Material getMaterial() {
