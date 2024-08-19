@@ -1,7 +1,6 @@
 package teamzesa.event.Enhance.PlayerInteraction.UpdateItemLore;
 
 import org.apache.commons.lang3.BooleanUtils;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.inventory.PrepareGrindstoneEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -44,7 +43,7 @@ public class UpdateEnhanceItemPrepareGrindstone implements EventRegister {
         this.resultItem.setItemMeta(itemMeta);
 
         try {
-            EnhanceUtil.increaseDmgAndAddLore(this.resultItem, enhanceLevel);
+            EnhanceUtil.updateEnhanceItemLore(this.resultItem, enhanceLevel);
         } catch (Exception e) {
             e.printStackTrace();
         }

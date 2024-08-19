@@ -1,7 +1,6 @@
 package teamzesa.event.Enhance.PlayerInteraction.UpdateItemLore;
 
 import org.apache.commons.lang3.BooleanUtils;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
@@ -9,9 +8,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import teamzesa.event.Enhance.Interface.EnhanceUtil;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Interface.StringComponentExchanger;
-
-import java.util.Map;
-import java.util.Optional;
 
 public class UpdateEnhanceResultItemLoreFromGrindStone extends StringComponentExchanger implements EventRegister {
     private ItemStack resultItem;
@@ -60,7 +56,7 @@ public class UpdateEnhanceResultItemLoreFromGrindStone extends StringComponentEx
         this.resultItem.setItemMeta(targetItemMeta);
 
         try {
-            EnhanceUtil.increaseDmgAndAddLore(this.resultItem, enhanceLevel);
+            EnhanceUtil.updateEnhanceItemLore(this.resultItem, enhanceLevel);
         } catch (Exception e) {
             e.printStackTrace();
         }
