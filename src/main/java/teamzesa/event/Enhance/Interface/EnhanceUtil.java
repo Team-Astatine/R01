@@ -4,6 +4,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ObjectUtils;
+import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -61,7 +62,7 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
             throw new EnhanceItemMetaException(funtion + " hasCustomModelData == null");
     }
 
-    public static void increaseDmgAndAddLore(ItemStack item, int updateCount) throws EnhanceItemMetaException {
+    public static void updateEnhanceItemLore(ItemStack item, int updateCount) throws EnhanceItemMetaException {
         List<Component> lore = new ArrayList<>();
         try {
             isItemHasCustomModelData(item, "addItemDescription");
@@ -73,9 +74,14 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         itemMeta.setCustomModelData(itemMeta.getCustomModelData() + updateCount);
         item.setItemMeta(itemMeta);
 
-        if (itemMeta.getCustomModelData() > 0) { // 0 == Remove All Item Lore
+        if (itemMeta.getCustomModelData() > 0) { // 0 == Remove All Item Lore /enhance 0
             lore.add(getEnhanceStatusComponent(item));
-            lore.add(getEnhanceDisplayComponent(item));
+
+            ArmourMap armourMap = ArmourMap.findByItemStack(item);
+            if (armourMap.getMaterial().equals(Material.AIR))
+                lore.add(getEnhanceWeaoonDisplayComponent(item));
+            else
+                lore.add(getEnhanceAmourDisplayComponent(item));
         }
 
         item.lore(lore);
@@ -91,7 +97,22 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         return EnhanceStageComment.findByEnhanceLevelComment(item.getItemMeta().getCustomModelData());
     }
 
-    public static Component getEnhanceDisplayComponent(ItemStack enhanceItem) {
+    //debug
+    public static Component getEnhanceAmourDisplayComponent(ItemStack enhanceItem) {
+        try {
+            isItemHasCustomModelData(enhanceItem, "getEnhanceStatusComponent");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String comment = String.format("추가 방어율 : %d%%", enhanceItem.getItemMeta().getCustomModelData());
+
+        return Component.text(comment)
+                .color(ColorMap.GREEN.getTextColor())
+                .decorate(TextDecoration.BOLD);
+    }
+
+    public static Component getEnhanceWeaoonDisplayComponent(ItemStack enhanceItem) {
         //Calculation Origin Dmg + Sharpness Dmg
         double weaponDmg = getShortRangeWeaponCloseDamage(enhanceItem) + getSharpnessDamage(enhanceItem);
 
@@ -141,7 +162,6 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
 
         if (ObjectUtils.notEqual(shortRangeWeaponMap, ShortRangeWeaponMap.AIR))
             return shortRangeWeaponMap.getShortRangeDamage();
-
 
         if (ObjectUtils.notEqual(longRangeWeaponMap, LongRangeWeaponMap.AIR))
             return longRangeWeaponMap.getShortRangeDamage();
