@@ -15,6 +15,7 @@ import org.bukkit.event.player.*;
 import org.bukkit.event.raid.RaidTriggerEvent;
 import org.bukkit.event.server.TabCompleteEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
+import teamzesa.event.Enhance.Armor.EnhanceArmourResistanceHelmet;
 import teamzesa.event.Enhance.PlayerInteraction.EnhanceInventoryClickEvent;
 import teamzesa.event.Enhance.PlayerInteraction.EnhanceInventoryCloseEvent;
 import teamzesa.event.Enhance.PlayerInteraction.LongRange.GodMode.GodModeTridentHitEvent;
@@ -214,6 +215,7 @@ public class EventRegisterSection implements Listener {
     public static void EntityDamageByEntityEvent(EntityDamageByEntityEvent event) {
         new EntityAttackSpeedHandler(event);
         new EnhanceShortRangeWeaponHurtEvent(event);
+        new EnhanceArmourResistanceHelmet(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)

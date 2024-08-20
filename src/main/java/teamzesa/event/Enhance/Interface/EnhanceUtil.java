@@ -169,6 +169,16 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         return damage;
     }
 
+    public static double calculatingTotalResistanceDamage(ItemStack itemStack, double totalDamage) {
+        try {
+            isItemHasCustomModelData(itemStack, "calculatingTotalResistanceDamage");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return totalDamage - (totalDamage * itemStack.getItemMeta().getCustomModelData() * 0.01);
+    }
+
     public static double calculatingTotalEnhanceStageDamage(ItemStack itemStack, double totalDamage) {
         try {
             isItemHasCustomModelData(itemStack, "calculatingTotalEnhanceStageDamage");
