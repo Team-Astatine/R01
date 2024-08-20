@@ -173,8 +173,6 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         for (ItemStack item : itemStack)
             totalPercentage += getCustomModelData(item);
 
-        System.out.println(totalPercentage);
-
         return totalDamage - (totalDamage * totalPercentage * 0.01);
     }
 
