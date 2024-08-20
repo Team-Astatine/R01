@@ -1,6 +1,5 @@
 package teamzesa.event.Enhance.Armor;
 
-import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -38,9 +37,7 @@ public class EnhanceArmourResistanceArmour implements EventRegister {
         armour[2] = target.getInventory().getLeggings();
         armour[3] = target.getInventory().getBoots();
 
-
         double totalDmg = EnhanceUtil.calculatingTotalResistancePercentage(armour, this.event.getFinalDamage());
         this.event.setDamage(totalDmg);
     }
-
 }
