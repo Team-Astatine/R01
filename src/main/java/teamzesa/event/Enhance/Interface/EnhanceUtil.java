@@ -71,7 +71,11 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         }
 
         ItemMeta itemMeta = item.getItemMeta();
+
         itemMeta.setCustomModelData(itemMeta.getCustomModelData() + updateCount);
+        if (itemMeta.getCustomModelData() == 10)
+            itemMeta.setUnbreakable(true);
+
         item.setItemMeta(itemMeta);
 
         if (itemMeta.getCustomModelData() > 0) { // 0 == Remove All Item Lore /enhance 0
