@@ -97,7 +97,6 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         return EnhanceStageComment.findByEnhanceLevelComment(item.getItemMeta().getCustomModelData());
     }
 
-    //debug
     public static Component getEnhanceAmourDisplayComponent(ItemStack enhanceItem) {
         try {
             isItemHasCustomModelData(enhanceItem, "getEnhanceStatusComponent");
@@ -169,14 +168,27 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         return damage;
     }
 
-    public static double calculatingTotalResistanceDamage(ItemStack itemStack, double totalDamage) {
-        try {
-            isItemHasCustomModelData(itemStack, "calculatingTotalResistanceDamage");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public static double calculatingTotalResistancePercentage(ItemStack[] itemStack, double totalDamage) {
+        int totalPercentage = 0;
+        for (ItemStack item : itemStack)
+            totalPercentage += getCustomModelData(item);
 
-        return totalDamage - (totalDamage * itemStack.getItemMeta().getCustomModelData() * 0.01);
+        System.out.println(totalPercentage);
+
+        return totalDamage - (totalDamage * totalPercentage * 0.01);
+    }
+
+    public static int getCustomModelData(ItemStack item) {
+        if (item == null)
+            return 0;
+
+        if (item.getItemMeta() == null)
+            return 0;
+
+        if (BooleanUtils.isFalse(item.getItemMeta().hasCustomModelData()))
+            return 0;
+
+        return item.getItemMeta().getCustomModelData();
     }
 
     public static double calculatingTotalEnhanceStageDamage(ItemStack itemStack, double totalDamage) {
