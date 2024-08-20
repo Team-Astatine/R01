@@ -10,12 +10,12 @@ import org.bukkit.inventory.ItemStack;
 import teamzesa.event.Enhance.Interface.EnhanceUtil;
 import teamzesa.event.EventRegister.EventRegister;
 
-public class EnhanceArmourResistanceHelmet implements EventRegister {
+public class EnhanceArmourResistanceArmour implements EventRegister {
 
     private Entity targetEntity;
     private final EntityDamageByEntityEvent event;
 
-    public EnhanceArmourResistanceHelmet(EntityDamageByEntityEvent event) {
+    public EnhanceArmourResistanceArmour(EntityDamageByEntityEvent event) {
         this.event = event;
         init();
         execute();
@@ -32,19 +32,15 @@ public class EnhanceArmourResistanceHelmet implements EventRegister {
             return;
 
         Player target = (Player) this.targetEntity;
-        ItemStack armour = target.getInventory().getHelmet();
+        ItemStack[] armour = new ItemStack[4];
+        armour[0] = target.getInventory().getHelmet();
+        armour[1] = target.getInventory().getChestplate();
+        armour[2] = target.getInventory().getLeggings();
+        armour[3] = target.getInventory().getBoots();
 
-        if (armour == null)
-            return;
 
-        if (armour.getItemMeta() == null)
-            return;
-
-        if (BooleanUtils.isFalse(armour.getItemMeta().hasCustomModelData()))
-            return;
-
-        double totalDmg = EnhanceUtil.calculatingTotalResistanceDamage(armour, this.event.getFinalDamage());
-
+        double totalDmg = EnhanceUtil.calculatingTotalResistancePercentage(armour, this.event.getFinalDamage());
         this.event.setDamage(totalDmg);
     }
+
 }
