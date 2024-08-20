@@ -96,10 +96,7 @@ public class LifeSteelEvent extends StringComponentExchanger implements EventReg
                 this.deather == killer)
             return;
 
-        updateUserHealthScaleData(STEP_SIZE);
-    }
-
-    private void updateUserHealthScaleData(double STEP_SIZE) {
+        //execute Logic
         this.userKillStatus.healthUpdate(
                 new KillStatusBuilder(this.deatherUserKillStatus)
                         .healthScale(this.deather.getHealthScale() - STEP_SIZE)
