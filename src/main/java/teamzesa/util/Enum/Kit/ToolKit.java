@@ -4,18 +4,23 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 public enum ToolKit {
-    NETHERITE_SWORD(new ItemStack(Material.NETHERITE_SWORD)),
-    NETHERITE_PICKAXE(new ItemStack(Material.NETHERITE_PICKAXE)),
-    NETHERITE_AXE(new ItemStack(Material.NETHERITE_AXE)),
-    NETHERITE_SHOVEL(new ItemStack(Material.NETHERITE_SHOVEL));
+    IRON_AXE(new ItemStack(Material.IRON_AXE), 1),
+    SHIELD(new ItemStack(Material.SHIELD), 1),
+    IRON_INGOT(new ItemStack(Material.IRON_INGOT), 1);
 
     private final ItemStack toolKit;
+    private final int itemCount;
 
-    ToolKit(ItemStack itemStack) {
+    ToolKit(ItemStack itemStack, int itemCount) {
         this.toolKit = itemStack;
+        this.itemCount = itemCount;
     }
 
     public ItemStack getToolKit() {
         return this.toolKit;
+    }
+
+    public int getItemCount() {
+        return itemCount;
     }
 }

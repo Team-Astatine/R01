@@ -6,6 +6,7 @@ import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.inventory.ItemStack;
 import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
 import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.entity.RObject.UserKillStatus;
@@ -16,6 +17,7 @@ import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Announcer;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.Kit.FoodKit;
+import teamzesa.util.Enum.Kit.ToolKit;
 import teamzesa.util.Enum.WorldName;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.RanNumGenerator;
@@ -100,16 +102,13 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
             armour.addEnchantment(Enchantment.UNBREAKING, 2);
             this.player.getInventory().addItem(kit.getArmour());
         }
+        */
 
         for (ToolKit kit : ToolKit.values()) {
             ItemStack tool = kit.getToolKit();
-            if (tool.getType().equals(Material.NETHERITE_SWORD))
-                tool.addEnchantment(Enchantment.SHARPNESS, 2);
-            else tool.addEnchantment(Enchantment.EFFICIENCY, 2);
-            tool.addEnchantment(Enchantment.UNBREAKING, 2);
+            tool.setAmount(kit.getItemCount());
             this.player.getInventory().addItem(tool);
         }
-        */
     }
 
     private void announcingJoinMsg() {
