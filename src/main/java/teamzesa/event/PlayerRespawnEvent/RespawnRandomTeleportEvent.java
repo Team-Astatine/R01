@@ -34,7 +34,7 @@ public class RespawnRandomTeleportEvent extends StringComponentExchanger impleme
         if (this.event.isAnchorSpawn())
             return;
 
-        if (ObjectUtils.notEqual(this.player.getPotentialBedLocation(), null))
+        if (ObjectUtils.allNotNull(this.player.getPotentialBedLocation()))
             return;
 
         World world = Bukkit.getWorld(WorldName.world.getExchangeEnglish());

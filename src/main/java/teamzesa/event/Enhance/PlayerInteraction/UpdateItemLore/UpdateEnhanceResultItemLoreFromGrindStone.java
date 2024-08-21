@@ -1,6 +1,7 @@
 package teamzesa.event.Enhance.PlayerInteraction.UpdateItemLore;
 
 import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
@@ -25,7 +26,7 @@ public class UpdateEnhanceResultItemLoreFromGrindStone extends StringComponentEx
     }
 
     public boolean valid() {
-        if (this.event.getClickedInventory() == null)
+        if (ObjectUtils.allNull(this.event.getClickedInventory()))
             return true;
 
         if (BooleanUtils.isFalse(this.event.getClickedInventory().getType().equals(InventoryType.GRINDSTONE)))
@@ -41,7 +42,7 @@ public class UpdateEnhanceResultItemLoreFromGrindStone extends StringComponentEx
 
     @Override
     public void execute() {
-        if (this.resultItem == null) //아이템에 아무것도 옵션이 없을때 null 뜸
+        if (ObjectUtils.allNull(this.resultItem)) //아이템에 아무것도 옵션이 없을때 null 뜸
             return;
 
         if (BooleanUtils.isFalse(this.resultItem.hasItemMeta()))

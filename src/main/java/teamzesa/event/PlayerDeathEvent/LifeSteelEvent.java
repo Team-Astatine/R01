@@ -1,6 +1,7 @@
 package teamzesa.event.PlayerDeathEvent;
 
 import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -71,7 +72,7 @@ public class LifeSteelEvent extends StringComponentExchanger implements EventReg
 
     private boolean validKiller() {
         //무조건 플레이어가 죽여야함
-        if (this.killer == null)
+        if (ObjectUtils.allNull(this.killer))
             return true;
 
         //스스로가 스스로를 죽이면 무시함

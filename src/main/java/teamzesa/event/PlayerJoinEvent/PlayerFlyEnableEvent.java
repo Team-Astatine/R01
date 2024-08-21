@@ -1,5 +1,6 @@
 package teamzesa.event.PlayerJoinEvent;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
@@ -48,7 +49,7 @@ public class PlayerFlyEnableEvent extends StringComponentExchanger implements Ev
 
     @Override
     public void execute() {
-        if (this.player == null)
+        if (ObjectUtils.allNull(this.player))
             return;
 
         this.player.setAllowFlight(true);

@@ -1,6 +1,7 @@
 package teamzesa.event.Enhance.PlayerInteraction.UpdateItemLore;
 
 import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.event.inventory.PrepareGrindstoneEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -27,7 +28,7 @@ public class UpdateEnhanceItemPrepareGrindstone implements EventRegister {
 
     @Override
     public void execute() {
-        if (this.resultItem == null)
+        if (ObjectUtils.allNull(this.resultItem))
             return;
 
         if (BooleanUtils.isFalse(this.resultItem.hasItemMeta()))

@@ -1,6 +1,7 @@
 package teamzesa.event.Enhance.PlayerInteraction.UpdateItemLore;
 
 import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.inventory.PrepareAnvilEvent;
 import org.bukkit.inventory.ItemStack;
@@ -28,7 +29,7 @@ public class UpdateEnhanceItemPrepareAnvil implements EventRegister {
 
     @Override
     public void execute() {
-        if (this.resultItem == null)
+        if (ObjectUtils.allNull(this.resultItem))
             return;
 
         if (BooleanUtils.isFalse(this.resultItem.hasItemMeta()))

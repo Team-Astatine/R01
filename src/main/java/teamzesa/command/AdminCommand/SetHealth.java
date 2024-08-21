@@ -1,5 +1,6 @@
 package teamzesa.command.AdminCommand;
 
+import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -40,7 +41,7 @@ public class SetHealth extends CommandRegisterSection {
                 () -> this.isConsoleSend = true
         );
 
-        if (senderUser != null && !this.senderPlayer.isOp()) {
+        if (ObjectUtils.allNotNull(senderUser) && BooleanUtils.isFalse(this.senderPlayer.isOp())) {
             playerSendMsgComponentExchanger(this.senderPlayer, "해당 명령어는 플레이어가 사용할 수 없습니다.", ColorMap.RED);
             return false;
         }

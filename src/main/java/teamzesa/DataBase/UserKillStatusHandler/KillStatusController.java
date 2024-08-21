@@ -1,5 +1,6 @@
 package teamzesa.DataBase.UserKillStatusHandler;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
@@ -44,7 +45,7 @@ public class KillStatusController {
     public void updateAllUserData(ArrayList<UserKillStatus> newUserData) {
         this.userKillStatus.clear();
 
-        if (newUserData == null)
+        if (ObjectUtils.allNull(newUserData))
             return;
 
         newUserData.forEach(this::createUserKillStatus);

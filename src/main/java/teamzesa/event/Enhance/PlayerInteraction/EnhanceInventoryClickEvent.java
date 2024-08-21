@@ -64,7 +64,7 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
         }
 
 //        Add Allowed Item
-        if (this.enhanceItem != null && this.scrollStuff != null) {
+        if (ObjectUtils.allNotNull(this.enhanceItem, this.scrollStuff)) {
             for (ShortRangeWeaponMap weapon : ShortRangeWeaponMap.values())
                 this.allowedItem.add(weapon.getMaterial());
 
@@ -123,10 +123,10 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
     private boolean isAllowedEnhanceItem() {
         String comment = "";
 
-        if (this.enhanceItem == null || this.enhanceItem.isEmpty())
+        if (ObjectUtils.allNull(this.enhanceItem) || this.enhanceItem.isEmpty())
             comment = "무기를 올려주세요.";
 
-        else if (this.scrollStuff == null || this.scrollStuff.isEmpty())
+        else if (ObjectUtils.allNull(this.scrollStuff) || this.scrollStuff.isEmpty())
             comment = "강화 주문서가 부족합니다.";
 
         else if (BooleanUtils.isFalse(this.allowedItem.contains(this.enhanceItem.getType())))
@@ -135,7 +135,7 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
         else if (BooleanUtils.isFalse(this.allowedScroll.contains(this.scrollStuff.getType())))
             comment = "허용된 주문서를 넣어주세요";
 
-        else if (this.protectScroll != null && BooleanUtils.isFalse(this.allowedScroll.contains(this.protectScroll.getType())))
+        else if (ObjectUtils.allNotNull(this.protectScroll) && BooleanUtils.isFalse(this.allowedScroll.contains(this.protectScroll.getType())))
             comment = "허용된 주문서를 넣어주세요";
 
         if (BooleanUtils.isFalse(comment.isBlank()))

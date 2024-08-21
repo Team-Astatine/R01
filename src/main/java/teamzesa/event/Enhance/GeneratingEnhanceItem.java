@@ -33,7 +33,7 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
         this.isProtectScrollEnough = false;
 
 //        existProtectScroll
-        if (ObjectUtils.notEqual(this.item.protectScroll(), null))
+        if (ObjectUtils.allNotNull(this.item.protectScroll()))
             this.hasProtectScroll = true;
 
         try {// enhance

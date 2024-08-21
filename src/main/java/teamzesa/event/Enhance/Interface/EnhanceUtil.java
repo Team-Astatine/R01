@@ -52,7 +52,7 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
     }
 
     public static void isItemHasCustomModelData(ItemStack item, String funtion) throws EnhanceItemMetaException {
-        if (item == null)
+         if (ObjectUtils.allNull(item))
             throw new EnhanceItemMetaException("item == null");
 
         if (BooleanUtils.isFalse(item.hasItemMeta()))
@@ -181,10 +181,10 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
     }
 
     public static int getCustomModelData(ItemStack item) {
-        if (item == null)
+        if (ObjectUtils.allNull(item))
             return 0;
 
-        if (item.getItemMeta() == null)
+        if (ObjectUtils.allNull(item.getItemMeta()))
             return 0;
 
         if (BooleanUtils.isFalse(item.getItemMeta().hasCustomModelData()))
