@@ -5,7 +5,6 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.event.Enhance.Interface.EnhanceItemCache;
 import teamzesa.event.Enhance.Interface.Weapon;
-import teamzesa.exception.Enhance.EnhanceItemSearchException;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -13,6 +12,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public enum LongRangeWeaponMap implements Weapon, EnhanceItemCache {
+    AIR(Material.AIR, 0, 0),
+
     TRIDENT(Material.TRIDENT, 9.0, 8.0),
     CROSSBOW(Material.CROSSBOW, 0.0, 7.0),
     BOW(Material.BOW, 0.0, 6.0);
@@ -21,7 +22,7 @@ public enum LongRangeWeaponMap implements Weapon, EnhanceItemCache {
     private final double shortRangeDamage;
     private final double longRangeDamage;
     private static final Map<Material, LongRangeWeaponMap> CACHED_ITEM = Arrays.stream(values())
-            .collect(Collectors.toMap(item -> item.material, Function.identity()));
+            .collect(Collectors.toMap(LongRangeWeaponMap::getMaterial, Function.identity()));
 
     LongRangeWeaponMap(Material material, double shortRangeDamage, double longRangeDamage) {
         this.material = material;
@@ -29,9 +30,9 @@ public enum LongRangeWeaponMap implements Weapon, EnhanceItemCache {
         this.longRangeDamage = longRangeDamage;
     }
 
-    public static LongRangeWeaponMap findByItemStack(ItemStack itemStack) throws Exception {
+    public static LongRangeWeaponMap findByItemStack(ItemStack itemStack) {
         if (BooleanUtils.isFalse(CACHED_ITEM.containsKey(itemStack.getType())))
-            throw new EnhanceItemSearchException("Non Register This Material");
+            return AIR;
         return CACHED_ITEM.get(itemStack.getType());
     }
 

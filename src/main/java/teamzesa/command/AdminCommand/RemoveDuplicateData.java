@@ -1,5 +1,6 @@
 package teamzesa.command.AdminCommand;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -40,7 +41,7 @@ public class RemoveDuplicateData extends CommandRegisterSection {
                 () -> this.isConsoleSend = true
         );
 
-        if (this.senderUser != null && !this.senderPlayer.isOp() && !this.isConsoleSend) {
+        if (ObjectUtils.allNotNull(this.senderUser) && !this.senderPlayer.isOp() || !this.isConsoleSend) {
             playerSendMsgComponentExchanger(this.senderPlayer, "해당 명령어는 플레이어가 사용할 수 없습니다.", ColorMap.RED);
             return false;
         }

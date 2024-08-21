@@ -5,7 +5,6 @@ import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.event.Enhance.Interface.EnhanceItemCache;
 import teamzesa.event.Enhance.Interface.Weapon;
-import teamzesa.exception.Enhance.EnhanceItemSearchException;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -13,6 +12,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public enum ShortRangeWeaponMap implements Weapon, EnhanceItemCache {
+    AIR(Material.AIR, 0, 0),
+
     //    axe
     WOOD_AXE(Material.WOODEN_AXE, 7.0, 0.0),
     GOLD_AXE(Material.GOLDEN_AXE, 7.0, 0.0),
@@ -36,7 +37,7 @@ public enum ShortRangeWeaponMap implements Weapon, EnhanceItemCache {
     private final double shortRangeDamage;
     private final double longRangeDamage;
     private static final Map<Material, ShortRangeWeaponMap> CACHED_ITEM = Arrays.stream(values())
-            .collect(Collectors.toMap(item -> item.material, Function.identity()));
+            .collect(Collectors.toMap(ShortRangeWeaponMap::getMaterial, Function.identity()));
 
     ShortRangeWeaponMap(Material material, double shortRangeDamage, double longRangeDamage) {
         this.material = material;
@@ -44,9 +45,9 @@ public enum ShortRangeWeaponMap implements Weapon, EnhanceItemCache {
         this.longRangeDamage = longRangeDamage;
     }
 
-    public static ShortRangeWeaponMap findByItemStack(ItemStack itemStack) throws Exception {
+    public static ShortRangeWeaponMap findByItemStack(ItemStack itemStack) {
         if (BooleanUtils.isFalse(CACHED_ITEM.containsKey(itemStack.getType())))
-            throw new EnhanceItemSearchException("Non Register This Material");
+            return AIR;
         return CACHED_ITEM.get(itemStack.getType());
     }
 

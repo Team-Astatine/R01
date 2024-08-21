@@ -34,14 +34,9 @@ public class EnhanceLongRangeWeaponHurtEvent extends EnhanceUtil implements Even
 
         ItemStack weapon = checkModelData(player.getInventory().getItemInMainHand());
 
-        double projectileDamage = 0.0;
-        try {
-            projectileDamage = LongRangeWeaponMap.findByItemStack(weapon).getLongRangeDamage();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        double projectileDamage = LongRangeWeaponMap.findByItemStack(weapon).getLongRangeDamage();
         double projectilePowerIncreaseDmg = getArrowPowerDamage(weapon, projectileDamage);
+
 //        10,11,12%
         double totalDamage = calculatingTotalEnhanceStageDamage(weapon, projectileDamage + projectilePowerIncreaseDmg);
 

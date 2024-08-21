@@ -35,16 +35,17 @@ public class EnhanceShortRangeWeaponHurtEvent extends EnhanceUtil implements Eve
 
         ItemStack weapon = player.getInventory().getItemInMainHand();
 
-        if (weapon.getItemMeta() == null)
+        if (ObjectUtils.allNull(weapon.getItemMeta()))
             return;
 
         if (BooleanUtils.isFalse(weapon.getItemMeta().hasCustomModelData()))
             return;
 
-        double eventFinalDamage = this.event.getFinalDamage(); //getOriginalDamage
-        eventFinalDamage = this.event.isCritical() ? eventFinalDamage / 1.5 : eventFinalDamage; //Remove Critical Damage
+        double eventDamage = this.event.getDamage(); //getOriginalDamage
 
-        double resultDmg = calculatingTotalEnhanceStageDamage(weapon, eventFinalDamage);// 11, 12, 13% Increase Dmg
+        eventDamage = this.event.isCritical() ? eventDamage / 1.5 : eventDamage; //Remove Critical Damage
+
+        double resultDmg = calculatingTotalEnhanceStageDamage(weapon, eventDamage);// 11, 12, 13% Increase Dmg
         resultDmg = this.event.isCritical() ? resultDmg * 1.5 : resultDmg; //Add Critical Damage
 
         this.event.setDamage(resultDmg);

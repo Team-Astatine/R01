@@ -4,6 +4,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ObjectUtils;
+import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -51,7 +52,7 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
     }
 
     public static void isItemHasCustomModelData(ItemStack item, String funtion) throws EnhanceItemMetaException {
-        if (item == null)
+         if (ObjectUtils.allNull(item))
             throw new EnhanceItemMetaException("item == null");
 
         if (BooleanUtils.isFalse(item.hasItemMeta()))
@@ -61,7 +62,7 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
             throw new EnhanceItemMetaException(funtion + " hasCustomModelData == null");
     }
 
-    public static void increaseDmgAndAddLore(ItemStack item, int updateCount) throws EnhanceItemMetaException {
+    public static void updateEnhanceItemLore(ItemStack item, int updateCount) throws EnhanceItemMetaException {
         List<Component> lore = new ArrayList<>();
         try {
             isItemHasCustomModelData(item, "addItemDescription");
@@ -70,12 +71,21 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         }
 
         ItemMeta itemMeta = item.getItemMeta();
+
         itemMeta.setCustomModelData(itemMeta.getCustomModelData() + updateCount);
+        if (itemMeta.getCustomModelData() == 10)
+            itemMeta.setUnbreakable(true);
+
         item.setItemMeta(itemMeta);
 
-        if (updateCount > 0) { // 0 == Remove All Item Lore
+        if (itemMeta.getCustomModelData() > 0) { // 0 == Remove All Item Lore /enhance 0
             lore.add(getEnhanceStatusComponent(item));
-            lore.add(getEnhanceDisplayComponent(item));
+
+            ArmourMap armourMap = ArmourMap.findByItemStack(item);
+            if (armourMap.getMaterial().equals(Material.AIR))
+                lore.add(getEnhanceWeaoonDisplayComponent(item));
+            else
+                lore.add(getEnhanceAmourDisplayComponent(item));
         }
 
         item.lore(lore);
@@ -91,13 +101,23 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         return EnhanceStageComment.findByEnhanceLevelComment(item.getItemMeta().getCustomModelData());
     }
 
-    public static Component getEnhanceDisplayComponent(ItemStack enhanceItem) {
-        double weaponDmg = 0.0;
-        try { //Calculation Origin Dmg + Sharpness Dmg
-            weaponDmg = getShortRangeWeaponCloseDamage(enhanceItem) + getSharpnessDamage(enhanceItem);
+    public static Component getEnhanceAmourDisplayComponent(ItemStack enhanceItem) {
+        try {
+            isItemHasCustomModelData(enhanceItem, "getEnhanceStatusComponent");
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        String comment = String.format("추가 방어율 : %d%%", enhanceItem.getItemMeta().getCustomModelData());
+
+        return Component.text(comment)
+                .color(ColorMap.GREEN.getTextColor())
+                .decorate(TextDecoration.BOLD);
+    }
+
+    public static Component getEnhanceWeaoonDisplayComponent(ItemStack enhanceItem) {
+        //Calculation Origin Dmg + Sharpness Dmg
+        double weaponDmg = getShortRangeWeaponCloseDamage(enhanceItem) + getSharpnessDamage(enhanceItem);
 
         double totalDmg = calculatingTotalEnhanceStageDamage(enhanceItem, weaponDmg);
         String comment = String.format("예상 데미지 : %.3f...", totalDmg);
@@ -140,17 +160,37 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
 
     public static double getShortRangeWeaponCloseDamage(ItemStack weapon) {
         double damage = 0.0;
-        for (Weapon weaponInfo : ShortRangeWeaponMap.values()) {
-            if (weaponInfo.getMaterial().equals(weapon.getType()))
-                damage = weaponInfo.getShortRangeDamage();
-        }
+        ShortRangeWeaponMap shortRangeWeaponMap = ShortRangeWeaponMap.findByItemStack(weapon);
+        LongRangeWeaponMap longRangeWeaponMap = LongRangeWeaponMap.findByItemStack(weapon);
 
-        for (Weapon weaponInfo : LongRangeWeaponMap.values()) {
-            if (weaponInfo.getMaterial().equals(weapon.getType()))
-                damage = weaponInfo.getShortRangeDamage();
-        }
+        if (ObjectUtils.notEqual(shortRangeWeaponMap, ShortRangeWeaponMap.AIR))
+            return shortRangeWeaponMap.getShortRangeDamage();
+
+        if (ObjectUtils.notEqual(longRangeWeaponMap, LongRangeWeaponMap.AIR))
+            return longRangeWeaponMap.getShortRangeDamage();
 
         return damage;
+    }
+
+    public static double calculatingTotalResistancePercentage(ItemStack[] itemStack, double totalDamage) {
+        int totalPercentage = 0;
+        for (ItemStack item : itemStack)
+            totalPercentage += getCustomModelData(item);
+
+        return totalDamage - (totalDamage * totalPercentage * 0.01);
+    }
+
+    public static int getCustomModelData(ItemStack item) {
+        if (ObjectUtils.allNull(item))
+            return 0;
+
+        if (ObjectUtils.allNull(item.getItemMeta()))
+            return 0;
+
+        if (BooleanUtils.isFalse(item.getItemMeta().hasCustomModelData()))
+            return 0;
+
+        return item.getItemMeta().getCustomModelData();
     }
 
     public static double calculatingTotalEnhanceStageDamage(ItemStack itemStack, double totalDamage) {

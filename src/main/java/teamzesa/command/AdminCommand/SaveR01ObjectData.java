@@ -1,5 +1,6 @@
 package teamzesa.command.AdminCommand;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -73,7 +74,7 @@ public class SaveR01ObjectData extends CommandRegisterSection {
     }
 
     private void sendComment(String comment) {
-        if (isConsoleSend && this.senderPlayer == null)
+        if (isConsoleSend && ObjectUtils.allNull(this.senderPlayer))
             Bukkit.getLogger().info("[R01] " + comment);
         else playerSendMsgComponentExchanger(this.senderPlayer, comment, ColorMap.YELLOW);
     }

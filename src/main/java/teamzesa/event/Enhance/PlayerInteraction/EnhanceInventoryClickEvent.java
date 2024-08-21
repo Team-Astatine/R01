@@ -1,12 +1,14 @@
 package teamzesa.event.Enhance.PlayerInteraction;
 
 import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.Material;
 import org.bukkit.block.Dispenser;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.DataBase.IOHandler.ConfigIOHandler;
 import teamzesa.DataBase.enhance.EnhanceItemBuilder;
@@ -62,7 +64,7 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
         }
 
 //        Add Allowed Item
-        if (this.enhanceItem != null && this.scrollStuff != null) {
+        if (ObjectUtils.allNotNull(this.enhanceItem, this.scrollStuff)) {
             for (ShortRangeWeaponMap weapon : ShortRangeWeaponMap.values())
                 this.allowedItem.add(weapon.getMaterial());
 
@@ -76,7 +78,8 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
                 this.allowedScroll.add(scroll.getMaterial());
         }
 
-        if (this.event.getClickedInventory().getType().equals(InventoryType.DROPPER)) {
+        Inventory playerOpenInv = this.event.getClickedInventory();
+        if (ObjectUtils.notEqual(playerOpenInv, null) && playerOpenInv.getType().equals(InventoryType.DROPPER)) {
             switch (this.event.getSlot()) {
                 case 0, 1, 2 -> {
                     this.event.setCancelled(true);
@@ -120,10 +123,10 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
     private boolean isAllowedEnhanceItem() {
         String comment = "";
 
-        if (this.enhanceItem == null || this.enhanceItem.isEmpty())
+        if (ObjectUtils.allNull(this.enhanceItem) || this.enhanceItem.isEmpty())
             comment = "무기를 올려주세요.";
 
-        else if (this.scrollStuff == null || this.scrollStuff.isEmpty())
+        else if (ObjectUtils.allNull(this.scrollStuff) || this.scrollStuff.isEmpty())
             comment = "강화 주문서가 부족합니다.";
 
         else if (BooleanUtils.isFalse(this.allowedItem.contains(this.enhanceItem.getType())))
@@ -132,7 +135,7 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
         else if (BooleanUtils.isFalse(this.allowedScroll.contains(this.scrollStuff.getType())))
             comment = "허용된 주문서를 넣어주세요";
 
-        else if (this.protectScroll != null && BooleanUtils.isFalse(this.allowedScroll.contains(this.protectScroll.getType())))
+        else if (ObjectUtils.allNotNull(this.protectScroll) && BooleanUtils.isFalse(this.allowedScroll.contains(this.protectScroll.getType())))
             comment = "허용된 주문서를 넣어주세요";
 
         if (BooleanUtils.isFalse(comment.isBlank()))

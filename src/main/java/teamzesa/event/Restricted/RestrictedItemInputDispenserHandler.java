@@ -36,7 +36,7 @@ public class RestrictedItemInputDispenserHandler extends StringComponentExchange
 
     @Override
     public void execute() {
-        if (this.clickerInventory == null)
+        if (ObjectUtils.allNull(this.clickerInventory))
             return;
 
         if (ObjectUtils.notEqual(this.currentOpeningContainerInventory.getType(), InventoryType.DISPENSER))

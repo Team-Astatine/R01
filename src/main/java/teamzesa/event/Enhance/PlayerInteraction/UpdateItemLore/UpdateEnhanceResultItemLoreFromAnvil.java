@@ -1,6 +1,7 @@
 package teamzesa.event.Enhance.PlayerInteraction.UpdateItemLore;
 
 import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryType;
@@ -26,7 +27,7 @@ public class UpdateEnhanceResultItemLoreFromAnvil extends StringComponentExchang
     }
 
     public boolean valid() {
-        if (this.event.getClickedInventory() == null)
+        if (ObjectUtils.allNull(this.event.getClickedInventory()))
             return true;
 
         if (BooleanUtils.isFalse(this.event.getClickedInventory().getType().equals(InventoryType.ANVIL)))
@@ -42,7 +43,7 @@ public class UpdateEnhanceResultItemLoreFromAnvil extends StringComponentExchang
 
     @Override
     public void execute() {
-        if (this.resultItem == null)
+        if (ObjectUtils.allNull(this.resultItem))
             return;
 
         if (BooleanUtils.isFalse(this.resultItem.hasItemMeta()))
@@ -63,7 +64,7 @@ public class UpdateEnhanceResultItemLoreFromAnvil extends StringComponentExchang
         this.resultItem.addEnchantments(this.resultItem.getEnchantments());
 
         try {
-            EnhanceUtil.increaseDmgAndAddLore(this.resultItem, enhanceLevel);
+            EnhanceUtil.updateEnhanceItemLore(this.resultItem, enhanceLevel);
         } catch (Exception e) {
             e.printStackTrace();
         }

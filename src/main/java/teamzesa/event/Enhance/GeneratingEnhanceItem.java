@@ -33,7 +33,7 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
         this.isProtectScrollEnough = false;
 
 //        existProtectScroll
-        if (ObjectUtils.notEqual(this.item.protectScroll(), null))
+        if (ObjectUtils.allNotNull(this.item.protectScroll()))
             this.hasProtectScroll = true;
 
         try {// enhance
@@ -103,7 +103,7 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
     private void successEnhanceScenario() {
         playerSendMessage(6, ColorMap.DISCORD_COLOR);
         try {
-            increaseDmgAndAddLore(this.item.enhanceItem(), +1);
+            updateEnhanceItemLore(this.item.enhanceItem(), +1);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -112,7 +112,7 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
     private void failEnhanceScenario() {
         playerSendMessage(5, ColorMap.PINK);
         try {
-            increaseDmgAndAddLore(this.item.enhanceItem(), -1);
+            updateEnhanceItemLore(this.item.enhanceItem(), -1);
         } catch (Exception e) {
             e.printStackTrace();
         }
