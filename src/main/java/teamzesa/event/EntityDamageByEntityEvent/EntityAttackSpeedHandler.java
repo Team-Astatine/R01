@@ -1,7 +1,9 @@
 package teamzesa.event.EntityDamageByEntityEvent;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
@@ -27,11 +29,14 @@ public class EntityAttackSpeedHandler implements EventRegister {
 
     @Override
     public void execute() {
-        if (!(this.damagerEntity instanceof Player damager))
+        if (ObjectUtils.notEqual(this.damagerEntity.getType(), EntityType.PLAYER))
             return;
 
-        if (!(this.targetEntity instanceof Player target))
+        if (ObjectUtils.notEqual(this.targetEntity.getType(), EntityType.PLAYER))
             return;
+
+        Player damager = (Player) this.damagerEntity;
+        Player target = (Player) this.targetEntity;
 
         int hurtTick = 10; //default 20
         boolean stuffCheck = isDualWeaponChecker(
