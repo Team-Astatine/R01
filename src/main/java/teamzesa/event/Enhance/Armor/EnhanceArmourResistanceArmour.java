@@ -37,7 +37,9 @@ public class EnhanceArmourResistanceArmour implements EventRegister {
         armour[2] = target.getInventory().getLeggings();
         armour[3] = target.getInventory().getBoots();
 
-        double totalDmg = EnhanceUtil.calculatingTotalResistancePercentage(armour, this.event.getFinalDamage());
+        double originalDMG = this.event.getDamage()
+                + this.event.getOriginalDamage(EntityDamageEvent.DamageModifier.ARMOR);
+        double totalDmg = EnhanceUtil.calculatingTotalResistancePercentage(armour, originalDMG);
         this.event.setDamage(totalDmg);
     }
 }
