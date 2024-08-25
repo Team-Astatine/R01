@@ -166,7 +166,7 @@ public class EventRegisterSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public static void EntityDamageEvent(EntityDamageEvent event) {
 //        Event Cancelled 하면 해당 Event 자체가 캔슬됌.
-//        new EnhanceResistanceEvent(event);
+        new EnhanceArmourResistanceArmour(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -215,7 +215,6 @@ public class EventRegisterSection implements Listener {
     public static void EntityDamageByEntityEvent(EntityDamageByEntityEvent event) {
         new EntityAttackSpeedHandler(event);
         new EnhanceShortRangeWeaponHurtEvent(event);
-        new EnhanceArmourResistanceArmour(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)

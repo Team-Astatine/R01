@@ -4,7 +4,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.event.Enhance.Interface.EnhanceUtil;
 import teamzesa.event.EventRegister.EventRegister;
@@ -12,9 +12,9 @@ import teamzesa.event.EventRegister.EventRegister;
 public class EnhanceArmourResistanceArmour implements EventRegister {
 
     private Entity targetEntity;
-    private final EntityDamageByEntityEvent event;
+    private final EntityDamageEvent event;
 
-    public EnhanceArmourResistanceArmour(EntityDamageByEntityEvent event) {
+    public EnhanceArmourResistanceArmour(EntityDamageEvent event) {
         this.event = event;
         init();
         execute();
