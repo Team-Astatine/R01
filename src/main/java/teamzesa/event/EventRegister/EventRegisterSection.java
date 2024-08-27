@@ -136,6 +136,7 @@ public class EventRegisterSection implements Listener {
     public static void InventoryClickEvent(InventoryClickEvent event) {
 //        new RestrictedCrafter(event);
         new RestrictedItemInputDispenserHandler(event);
+        new RestrictedStackingTotemInteraction(event);
         new RestrictedShulkerChest(event);
 
         new EnhanceInventoryClickEvent(event);
