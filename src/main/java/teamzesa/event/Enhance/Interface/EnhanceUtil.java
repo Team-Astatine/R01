@@ -147,7 +147,7 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
 
     public static void scrollDiscount(ItemStack scroll, ItemStack protectScroll) {
         try {
-            if (ObjectUtils.notEqual(protectScroll, null)) {
+            if (ObjectUtils.isNotEmpty(protectScroll)) {
                 protectScroll.setAmount(protectScroll.getAmount()
                         - ProtectScroll.findByItemStack(protectScroll).getDiscountValue());
             }

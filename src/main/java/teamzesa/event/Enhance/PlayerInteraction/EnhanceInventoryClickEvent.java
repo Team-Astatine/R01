@@ -3,7 +3,6 @@ package teamzesa.event.Enhance.PlayerInteraction;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.Material;
-import org.bukkit.block.Dispenser;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -24,16 +23,14 @@ import java.util.HashSet;
 import static teamzesa.command.EnhanceDialog.ENHANCE_DIALOG;
 
 public class EnhanceInventoryClickEvent extends StringComponentExchanger implements EventRegister {
+    private final InventoryClickEvent event;
     private Player ownerPlayer;
     private ItemStack currentItem;
     private ItemStack enhanceItem;
     private ItemStack scrollStuff;
     private ItemStack protectScroll;
-
     private HashSet<Material> allowedItem;
     private HashSet<Material> allowedScroll;
-
-    private final InventoryClickEvent event;
 
     public EnhanceInventoryClickEvent(InventoryClickEvent event) {
         this.event = event;
@@ -79,7 +76,7 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
         }
 
         Inventory playerOpenInv = this.event.getClickedInventory();
-        if (ObjectUtils.notEqual(playerOpenInv, null) && playerOpenInv.getType().equals(InventoryType.DROPPER)) {
+        if (ObjectUtils.isNotEmpty(playerOpenInv) && playerOpenInv.getType().equals(InventoryType.DROPPER)) {
             switch (this.event.getSlot()) {
                 case 0, 1, 2 -> {
                     this.event.setCancelled(true);
@@ -88,20 +85,12 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
                 case 6 -> {
                     this.event.setCancelled(true);
                     event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
-                    event.getWhoClicked().sendMessage(createLinkComponentExchanger(
-                            ConfigIOHandler.getConfigIOHandler().getDiscordInvite(),
-                            ConfigIOHandler.getConfigIOHandler().getDiscordConfig(),
-                            ColorMap.DISCORD_COLOR));
+                    event.getWhoClicked().sendMessage(createLinkComponentExchanger(ConfigIOHandler.getConfigIOHandler().getDiscordInvite(), ConfigIOHandler.getConfigIOHandler().getDiscordConfig(), ColorMap.DISCORD_COLOR));
                 }
 
                 case 7 -> {
                     if (isAllowedEnhanceItem()) {
-                        EnhanceItem enhanceItemObj = new EnhanceItemBuilder()
-                                .enhancePlayer((Player) this.event.getWhoClicked())
-                                .enhanceItem(this.enhanceItem)
-                                .enhanceScroll(this.scrollStuff)
-                                .protectScroll(this.protectScroll)
-                                .build();
+                        EnhanceItem enhanceItemObj = new EnhanceItemBuilder().enhancePlayer((Player) this.event.getWhoClicked()).enhanceItem(this.enhanceItem).enhanceScroll(this.scrollStuff).protectScroll(this.protectScroll).build();
 
                         new GeneratingEnhanceItem(enhanceItemObj);
                     }
@@ -111,10 +100,7 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
                 case 8 -> {
                     this.event.setCancelled(true);
                     event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
-                    event.getWhoClicked().sendMessage(createLinkComponentExchanger(
-                            ConfigIOHandler.getConfigIOHandler().getServerGuideNotion(),
-                            ConfigIOHandler.getConfigIOHandler().getNotionConfig(),
-                            ColorMap.NOTION_COLOR));
+                    event.getWhoClicked().sendMessage(createLinkComponentExchanger(ConfigIOHandler.getConfigIOHandler().getServerGuideNotion(), ConfigIOHandler.getConfigIOHandler().getNotionConfig(), ColorMap.NOTION_COLOR));
                 }
             }
         }
@@ -123,11 +109,9 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
     private boolean isAllowedEnhanceItem() {
         String comment = "";
 
-        if (ObjectUtils.isEmpty(this.enhanceItem) || this.enhanceItem.isEmpty())
-            comment = "무기를 올려주세요.";
+        if (ObjectUtils.isEmpty(this.enhanceItem) || this.enhanceItem.isEmpty()) comment = "무기를 올려주세요.";
 
-        else if (ObjectUtils.isEmpty(this.scrollStuff) || this.scrollStuff.isEmpty())
-            comment = "강화 주문서가 부족합니다.";
+        else if (ObjectUtils.isEmpty(this.scrollStuff) || this.scrollStuff.isEmpty()) comment = "강화 주문서가 부족합니다.";
 
         else if (BooleanUtils.isFalse(this.allowedItem.contains(this.enhanceItem.getType())))
             comment = "허용된 아이템을 넣어주세요.";
