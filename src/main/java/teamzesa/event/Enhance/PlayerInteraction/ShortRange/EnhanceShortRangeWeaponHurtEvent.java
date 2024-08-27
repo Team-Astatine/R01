@@ -30,7 +30,7 @@ public class EnhanceShortRangeWeaponHurtEvent extends EnhanceUtil implements Eve
 
     @Override
     public void execute() {
-         if (ObjectUtils.allNull(this.causingEntity, this.directEntity))
+         if (ObjectUtils.anyNull(this.causingEntity, this.directEntity))
             return;
 
         if (ObjectUtils.notEqual(this.causingEntity.getType(), EntityType.PLAYER))
