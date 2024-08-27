@@ -30,7 +30,7 @@ public class UserController {
 
     public User readUser(String userName) throws NullReadUserException {
         Player player = Bukkit.getPlayer(userName);
-        if (ObjectUtils.allNull(player))
+        if (ObjectUtils.isEmpty(player))
             throw new NullReadUserException("UserController->readUser() Can't Exchanging Player");
 
         return readUser(player.getUniqueId());
@@ -43,7 +43,7 @@ public class UserController {
     public void updateAllUserData(ArrayList<User> newUserData) {
         this.userDataBase.clear();
 
-        if (ObjectUtils.allNull(newUserData))
+        if (ObjectUtils.isEmpty(newUserData))
             return;
 
         newUserData.forEach(this::createUser);

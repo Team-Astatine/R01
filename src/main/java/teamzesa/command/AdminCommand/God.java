@@ -47,7 +47,7 @@ public class God extends CommandRegisterSection {
         }
 
         Player targetPlayer = Bukkit.getPlayer(args[0]);
-        if (ObjectUtils.allNull(targetPlayer)) {
+        if (ObjectUtils.isEmpty(targetPlayer)) {
             String comment = "해당 유저는 존재하지 않습니다.";
 
             if (this.isConsoleSend)

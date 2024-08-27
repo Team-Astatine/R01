@@ -45,7 +45,7 @@ public class KillStatusController {
     public void updateAllUserData(ArrayList<UserKillStatus> newUserData) {
         this.userKillStatus.clear();
 
-        if (ObjectUtils.allNull(newUserData))
+        if (ObjectUtils.isEmpty(newUserData))
             return;
 
         newUserData.forEach(this::createUserKillStatus);

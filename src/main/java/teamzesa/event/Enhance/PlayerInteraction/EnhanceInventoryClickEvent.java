@@ -123,10 +123,10 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
     private boolean isAllowedEnhanceItem() {
         String comment = "";
 
-        if (ObjectUtils.allNull(this.enhanceItem) || this.enhanceItem.isEmpty())
+        if (ObjectUtils.isEmpty(this.enhanceItem) || this.enhanceItem.isEmpty())
             comment = "무기를 올려주세요.";
 
-        else if (ObjectUtils.allNull(this.scrollStuff) || this.scrollStuff.isEmpty())
+        else if (ObjectUtils.isEmpty(this.scrollStuff) || this.scrollStuff.isEmpty())
             comment = "강화 주문서가 부족합니다.";
 
         else if (BooleanUtils.isFalse(this.allowedItem.contains(this.enhanceItem.getType())))

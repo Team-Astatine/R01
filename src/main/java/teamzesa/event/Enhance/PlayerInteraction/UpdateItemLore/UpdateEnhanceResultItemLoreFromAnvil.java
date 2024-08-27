@@ -27,7 +27,7 @@ public class UpdateEnhanceResultItemLoreFromAnvil extends StringComponentExchang
     }
 
     public boolean valid() {
-        if (ObjectUtils.allNull(this.event.getClickedInventory()))
+        if (ObjectUtils.isEmpty(this.event.getClickedInventory()))
             return true;
 
         if (BooleanUtils.isFalse(this.event.getClickedInventory().getType().equals(InventoryType.ANVIL)))
@@ -43,7 +43,7 @@ public class UpdateEnhanceResultItemLoreFromAnvil extends StringComponentExchang
 
     @Override
     public void execute() {
-        if (ObjectUtils.allNull(this.resultItem))
+        if (ObjectUtils.isEmpty(this.resultItem))
             return;
 
         if (BooleanUtils.isFalse(this.resultItem.hasItemMeta()))

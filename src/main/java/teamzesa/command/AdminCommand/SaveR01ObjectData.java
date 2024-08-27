@@ -74,7 +74,7 @@ public class SaveR01ObjectData extends CommandRegisterSection {
     }
 
     private void sendComment(String comment) {
-        if (isConsoleSend && ObjectUtils.allNull(this.senderPlayer))
+        if (isConsoleSend && ObjectUtils.isEmpty(this.senderPlayer))
             Bukkit.getLogger().info("[R01] " + comment);
         else playerSendMsgComponentExchanger(this.senderPlayer, comment, ColorMap.YELLOW);
     }
