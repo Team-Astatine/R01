@@ -14,5 +14,7 @@ public class RestrictedElement {
 
         restrictedCommand.add("/pl");
         restrictedCommand.add("/plugins");
+        restrictedCommand.add("/bukkit:pl");
+        restrictedCommand.add("/bukkit:plugins");
     }
 }

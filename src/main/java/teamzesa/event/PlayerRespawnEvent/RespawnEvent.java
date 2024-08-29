@@ -29,7 +29,7 @@ public class RespawnEvent extends StringComponentExchanger implements EventRegis
     }
 
     public void deathRandomTeleport() {
-        if (ObjectUtils.allNull(this.player.getPotentialBedLocation()))
+        if (ObjectUtils.isEmpty(this.player.getPotentialBedLocation()))
             return;
 
         String comment = this.event.isAnchorSpawn() ? "정박기로 텔레포트 합니다" : "침대로 텔레포트 합니다";

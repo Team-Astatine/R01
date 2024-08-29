@@ -2,7 +2,8 @@ package teamzesa.event.Enhance.PlayerInteraction.ShortRange;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ObjectUtils;
-import org.bukkit.damage.DamageSource;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
@@ -10,7 +11,8 @@ import teamzesa.event.Enhance.Interface.EnhanceUtil;
 import teamzesa.event.EventRegister.EventRegister;
 
 public class EnhanceShortRangeWeaponHurtEvent extends EnhanceUtil implements EventRegister {
-    private DamageSource damageSource;
+    private Entity causingEntity;
+    private Entity directEntity;
     private final EntityDamageByEntityEvent event;
 
     public EnhanceShortRangeWeaponHurtEvent(EntityDamageByEntityEvent event) {
@@ -22,20 +24,25 @@ public class EnhanceShortRangeWeaponHurtEvent extends EnhanceUtil implements Eve
 
     @Override
     public void init() {
-        this.damageSource = this.event.getDamageSource();
+        this.causingEntity = this.event.getDamageSource().getCausingEntity();
+        this.directEntity = this.event.getDamageSource().getDirectEntity();
     }
 
     @Override
     public void execute() {
-        if (!(this.damageSource.getCausingEntity() instanceof Player))
+         if (ObjectUtils.anyNull(this.causingEntity, this.directEntity))
             return;
 
-        if (!(this.damageSource.getDirectEntity() instanceof Player player))
+        if (ObjectUtils.notEqual(this.causingEntity.getType(), EntityType.PLAYER))
             return;
 
+        if (ObjectUtils.notEqual(this.directEntity.getType(), EntityType.PLAYER))
+            return;
+
+        Player player = (Player) this.directEntity;
         ItemStack weapon = player.getInventory().getItemInMainHand();
 
-        if (ObjectUtils.allNull(weapon.getItemMeta()))
+        if (ObjectUtils.isEmpty(weapon.getItemMeta()))
             return;
 
         if (BooleanUtils.isFalse(weapon.getItemMeta().hasCustomModelData()))

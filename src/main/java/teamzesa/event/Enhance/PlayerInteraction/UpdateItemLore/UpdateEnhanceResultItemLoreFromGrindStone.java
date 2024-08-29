@@ -26,7 +26,7 @@ public class UpdateEnhanceResultItemLoreFromGrindStone extends StringComponentEx
     }
 
     public boolean valid() {
-        if (ObjectUtils.allNull(this.event.getClickedInventory()))
+        if (ObjectUtils.isEmpty(this.event.getClickedInventory()))
             return true;
 
         if (BooleanUtils.isFalse(this.event.getClickedInventory().getType().equals(InventoryType.GRINDSTONE)))
@@ -42,7 +42,7 @@ public class UpdateEnhanceResultItemLoreFromGrindStone extends StringComponentEx
 
     @Override
     public void execute() {
-        if (ObjectUtils.allNull(this.resultItem)) //아이템에 아무것도 옵션이 없을때 null 뜸
+        if (ObjectUtils.isEmpty(this.resultItem)) //아이템에 아무것도 옵션이 없을때 null 뜸
             return;
 
         if (BooleanUtils.isFalse(this.resultItem.hasItemMeta()))

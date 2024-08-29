@@ -29,7 +29,7 @@ public class UpdateEnhanceItemPrepareAnvil implements EventRegister {
 
     @Override
     public void execute() {
-        if (ObjectUtils.allNull(this.resultItem))
+        if (ObjectUtils.isEmpty(this.resultItem))
             return;
 
         if (BooleanUtils.isFalse(this.resultItem.hasItemMeta()))

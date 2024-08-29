@@ -72,7 +72,7 @@ public class LifeSteelEvent extends StringComponentExchanger implements EventReg
 
     private boolean validKiller() {
         //무조건 플레이어가 죽여야함
-        if (ObjectUtils.allNull(this.killer))
+        if (ObjectUtils.isEmpty(this.killer))
             return true;
 
         //스스로가 스스로를 죽이면 무시함

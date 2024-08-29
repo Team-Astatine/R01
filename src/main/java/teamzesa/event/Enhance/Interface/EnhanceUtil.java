@@ -52,7 +52,7 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
     }
 
     public static void isItemHasCustomModelData(ItemStack item, String funtion) throws EnhanceItemMetaException {
-         if (ObjectUtils.allNull(item))
+         if (ObjectUtils.isEmpty(item))
             throw new EnhanceItemMetaException("item == null");
 
         if (BooleanUtils.isFalse(item.hasItemMeta()))
@@ -147,7 +147,7 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
 
     public static void scrollDiscount(ItemStack scroll, ItemStack protectScroll) {
         try {
-            if (ObjectUtils.notEqual(protectScroll, null)) {
+            if (ObjectUtils.isNotEmpty(protectScroll)) {
                 protectScroll.setAmount(protectScroll.getAmount()
                         - ProtectScroll.findByItemStack(protectScroll).getDiscountValue());
             }
@@ -181,10 +181,10 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
     }
 
     public static int getCustomModelData(ItemStack item) {
-        if (ObjectUtils.allNull(item))
+        if (ObjectUtils.isEmpty(item))
             return 0;
 
-        if (ObjectUtils.allNull(item.getItemMeta()))
+        if (ObjectUtils.isEmpty(item.getItemMeta()))
             return 0;
 
         if (BooleanUtils.isFalse(item.getItemMeta().hasCustomModelData()))
