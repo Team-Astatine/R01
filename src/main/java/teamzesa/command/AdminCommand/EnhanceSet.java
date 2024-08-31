@@ -14,8 +14,6 @@ import teamzesa.util.Enum.CommandExecutorMap;
 
 public class EnhanceSet extends CommandRegisterSection {
 
-    private String comment;
-
     public EnhanceSet() {
         super(CommandExecutorMap.ENHANCE_SET);
     }

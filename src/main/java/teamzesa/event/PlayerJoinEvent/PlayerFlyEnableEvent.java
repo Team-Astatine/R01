@@ -56,7 +56,7 @@ public class PlayerFlyEnableEvent extends StringComponentExchanger implements Ev
         this.player.setFlying(true);
 
         User user = new UserController().readUser(this.player.getUniqueId());
-        if (user.isGodMode())
+        if (user.godMode())
             return;
 
         playerSendMsgComponentExchanger(this.player, this.comment, ColorMap.YELLOW);

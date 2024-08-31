@@ -9,7 +9,7 @@ import teamzesa.event.Enhance.Interface.EnhanceUtil;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Enum.Enhance.LongRangeWeaponMap;
 
-public class EnhanceLongRangeWeaponHurtEvent extends EnhanceUtil implements EventRegister {
+public class EnhanceLongRangeWeaponHurtEvent implements EventRegister {
     private DamageSource damageSource;
     private final EntityDamageEvent event;
 
@@ -32,13 +32,14 @@ public class EnhanceLongRangeWeaponHurtEvent extends EnhanceUtil implements Even
         if (!(this.damageSource.getDirectEntity() instanceof Projectile))
             return;
 
-        ItemStack weapon = checkModelData(player.getInventory().getItemInMainHand());
+        ItemStack weapon = EnhanceUtil.checkModelData(player.getInventory().getItemInMainHand());
 
         double projectileDamage = LongRangeWeaponMap.findByItemStack(weapon).getLongRangeDamage();
-        double projectilePowerIncreaseDmg = getArrowPowerDamage(weapon, projectileDamage);
+        double projectilePowerIncreaseDmg = EnhanceUtil.getArrowPowerDamage(weapon, projectileDamage);
 
 //        10,11,12%
-        double totalDamage = calculatingTotalEnhanceStageDamage(weapon, projectileDamage + projectilePowerIncreaseDmg);
+        double totalDamage = EnhanceUtil.calculatingTotalEnhanceStageDamage(
+                weapon, projectileDamage + projectilePowerIncreaseDmg);
 
         System.out.println("projectileDamage > " + projectileDamage);
         System.out.println("projectilePowerDmg > " + projectilePowerIncreaseDmg);

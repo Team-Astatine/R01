@@ -22,7 +22,7 @@ import java.util.Optional;
 public class God extends CommandRegisterSection {
     private User senderUser;
     private Player senderPlayer;
-    private boolean isConsoleSend = false;
+    private boolean consoleSend = false;
 
     public God() {
         super(CommandExecutorMap.GOD_MODE);
@@ -38,7 +38,7 @@ public class God extends CommandRegisterSection {
 
         Optional.ofNullable(this.senderUser).ifPresentOrElse(
                 existUser -> this.senderPlayer = Bukkit.getPlayer(existUser.uuid()),
-                () -> this.isConsoleSend = true
+                () -> this.consoleSend = true
         );
 
         if (ObjectUtils.allNotNull(this.senderUser) && BooleanUtils.isFalse(this.senderPlayer.isOp())) {
@@ -50,14 +50,14 @@ public class God extends CommandRegisterSection {
         if (ObjectUtils.isEmpty(targetPlayer)) {
             String comment = "해당 유저는 존재하지 않습니다.";
 
-            if (this.isConsoleSend)
+            if (this.consoleSend)
                 Bukkit.getLogger().info("[R01] " + comment);
             else playerSendMsgComponentExchanger(senderPlayer, comment, ColorMap.RED);
             return false;
         }
 
         changeUserStatus(targetPlayer);
-        isConsoleSend = false;
+        consoleSend = false;
         return true;
     }
 
@@ -65,15 +65,15 @@ public class God extends CommandRegisterSection {
     private void changeUserStatus(Player targetPlayer) {
         User targetUser = new UserController().readUser(targetPlayer.getUniqueId());
         targetUser = new UserBuilder(targetUser)
-                .isGodMode(!targetUser.isGodMode())
+                .isGodMode(!targetUser.godMode())
                 .buildAndUpdate();
         setPotionEffect(targetPlayer, targetUser);
 
 
-        String targetStatus = targetUser.isGodMode() ? "신" : "인간";
+        String targetStatus = targetUser.godMode() ? "신" : "인간";
         String comment = "은(는) 이제 " + targetStatus + " 입니다.";
 
-        if (isConsoleSend)
+        if (consoleSend)
             Bukkit.getLogger().info("[R01] " + targetUser.nameList().getLast() + comment);
 
         else if (ObjectUtils.notEqual(this.senderPlayer, targetPlayer))
@@ -84,7 +84,7 @@ public class God extends CommandRegisterSection {
     }
 
     public void setPotionEffect(Player targetPlayer, User targetUser) {
-        if (targetUser.isGodMode()) {
+        if (targetUser.godMode()) {
             targetPlayer.addPotionEffect(new PotionEffect(PotionEffectType.SATURATION, 100000000, 0));
             targetPlayer.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 100000000, 0));
         } else {

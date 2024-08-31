@@ -4,7 +4,6 @@ import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.event.EventRegister.EventRegister;
 
@@ -36,7 +35,7 @@ public class EnhanceInventoryCloseEvent implements EventRegister {
 
     @Override
     public void execute() {
-        if (validation())
+        if (isNotAllowedThisEvent())
             return;
 
         this.slot.add(this.event.getInventory().getItem(3));
@@ -61,7 +60,7 @@ public class EnhanceInventoryCloseEvent implements EventRegister {
                     .forEach(item -> this.itemOwner.getWorld().dropItem(this.itemOwner.getLocation(), item));
     }
 
-    private boolean validation() {
+    private boolean isNotAllowedThisEvent() {
         if (BooleanUtils.isFalse(this.event.getInventory().equals(ENHANCE_DIALOG)))
             return true;
 

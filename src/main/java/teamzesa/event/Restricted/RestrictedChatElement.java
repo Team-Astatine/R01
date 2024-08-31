@@ -5,11 +5,11 @@ import org.bukkit.Material;
 import java.util.HashSet;
 import java.util.Set;
 
-public class RestrictedElement {
+public class RestrictedChatElement {
     public final Set<Material> restrictedItem = new HashSet<>();
     public final Set<String> restrictedCommand = new HashSet<>();
 
-    public RestrictedElement() {
+    public RestrictedChatElement() {
         restrictedItem.add(Material.ARMOR_STAND);
 
         restrictedCommand.add("/pl");
