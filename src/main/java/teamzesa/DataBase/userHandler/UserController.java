@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class UserController {
-    private final DaoUser userDataBase = DaoUser.getInstance();
+    private final UserAccessManager userDataBase = UserAccessManager.getInstance();
 
     public boolean createUser(@NotNull Player player) {
         return createUser(

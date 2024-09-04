@@ -1,6 +1,6 @@
 package teamzesa.DataBase;
 
-public interface DAO<K, E> {
+public interface AccessObject<K, E> {
 
     Boolean insert(E e);
 
