@@ -10,7 +10,7 @@ public record User(
         HashSet<String> connectionIPList,
         int joinCount,
         int level,
-        boolean isGodMode,
-        boolean isAnnouncing
+        boolean godMode,
+        boolean announcingSkip
 ) implements RObject {
 }

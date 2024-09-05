@@ -21,7 +21,7 @@ import java.util.Optional;
 public class SetHealth extends CommandRegisterSection {
     private Player senderPlayer;
     private Player targetPlayer;
-    private boolean isConsoleSend = false;
+    private boolean consoleSend = false;
 
     public SetHealth() {
         super(CommandExecutorMap.HEALTH_RESET);
@@ -38,7 +38,7 @@ public class SetHealth extends CommandRegisterSection {
 
         Optional.ofNullable(senderUser).ifPresentOrElse(
                 existUser -> this.senderPlayer = Bukkit.getPlayer(existUser.uuid()),
-                () -> this.isConsoleSend = true
+                () -> this.consoleSend = true
         );
 
         if (ObjectUtils.allNotNull(senderUser) && BooleanUtils.isFalse(this.senderPlayer.isOp())) {
@@ -75,7 +75,7 @@ public class SetHealth extends CommandRegisterSection {
 
     private void sendComment(double setHealthValue) {
         String comment = this.targetPlayer.getName() + "님의 체력이" + setHealthValue + "으로 설정됐습니다.";
-        if (isConsoleSend) {
+        if (consoleSend) {
             Bukkit.getLogger().info("[R01] " + comment);
             return;
         }

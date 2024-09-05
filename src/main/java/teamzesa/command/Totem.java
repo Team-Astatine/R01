@@ -38,7 +38,7 @@ public class Totem extends CommandRegisterSection {
             Totem.this.playerInventory = Totem.this.player.getInventory();
             getAllOfPlayerTotems();
 
-            if (BooleanUtils.isFalse(validationInventory()))
+            if (BooleanUtils.isFalse(isNotAllowedThisEvent()))
                 return;
 
             removeTotemInInv();
@@ -93,7 +93,7 @@ public class Totem extends CommandRegisterSection {
                 });
     }
 
-    private boolean validationInventory() {
+    private boolean isNotAllowedThisEvent() {
         long maxCnt = this.totemCountData.stream()
                 .filter(cnt -> cnt >= MINIMUM && cnt < STACK)
                 .count();
