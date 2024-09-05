@@ -58,18 +58,18 @@ public class PlayerInfoHandler extends StringComponentExchanger implements Event
         updateUserInfo(name, ip, this.joinPlayer.hasPlayedBefore());
     }
 
-    private void updateUserInfo(String name, String ip, boolean hasPlayedBefore) {
+    private void updateUserInfo(String name, String ip, boolean playedBefore) {
         boolean equalsLastName = this.joinUser.nameList().getLast().equals(name);
         boolean existsIP = this.joinUser.connectionIPList().contains(ip);
 
         if (BooleanUtils.isFalse(equalsLastName)) {
             updateNameList(name);
-            sendMessageToPlayer(this.joinPlayer, "새로운 이름으로 접속하셨습니다.", "신규 이름을 등록합니다.", hasPlayedBefore);
+            sendMessageToPlayer(this.joinPlayer, "새로운 이름으로 접속하셨습니다.", "신규 이름을 등록합니다.", playedBefore);
         }
 
         if (BooleanUtils.isFalse(existsIP)) {
             updateIPList(ip);
-            sendMessageToPlayer(this.joinPlayer, "새로운 IP로 접속하셨습니다.", "신규 IP를 등록합니다.", hasPlayedBefore);
+            sendMessageToPlayer(this.joinPlayer, "새로운 IP로 접속하셨습니다.", "신규 IP를 등록합니다.", playedBefore);
         }
     }
 
@@ -85,8 +85,8 @@ public class PlayerInfoHandler extends StringComponentExchanger implements Event
                 .buildAndUpdate();
     }
 
-    private void sendMessageToPlayer(Player player, String existingMessage, String newMessage, boolean hasPlayedBefore) {
-        String message = hasPlayedBefore ? existingMessage : newMessage;
+    private void sendMessageToPlayer(Player player, String existingMessage, String newMessage, boolean playedBefore) {
+        String message = playedBefore ? existingMessage : newMessage;
         playerSendMsgComponentExchanger(player, message, ColorMap.YELLOW);
     }
 

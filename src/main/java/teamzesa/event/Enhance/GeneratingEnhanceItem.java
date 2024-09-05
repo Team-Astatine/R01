@@ -17,8 +17,8 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
 
     private boolean hasProtectScroll;
 
-    private boolean isScrollEnough;
-    private boolean isProtectScrollEnough;
+    private boolean scrollEnough;
+    private boolean protectScrollEnough;
 
     public GeneratingEnhanceItem(EnhanceItem item) {
         this.item = item;
@@ -29,15 +29,15 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
 
     private void init() {
         this.hasProtectScroll = false;
-        this.isScrollEnough = false;
-        this.isProtectScrollEnough = false;
+        this.scrollEnough = false;
+        this.protectScrollEnough = false;
 
 //        existProtectScroll
         if (ObjectUtils.allNotNull(this.item.protectScroll()))
             this.hasProtectScroll = true;
 
         try {// enhance
-            this.isScrollEnough =
+            this.scrollEnough =
                     this.item.enhanceScroll().getAmount() >= Scroll.findByItemStack(this.item.enhanceScroll()).getDiscountValue();
         } catch (Exception e) {
             e.printStackTrace();
@@ -45,7 +45,7 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
 
         try { // protect
             if (hasProtectScroll) {
-                this.isProtectScrollEnough =
+                this.protectScrollEnough =
                         this.item.protectScroll().getAmount() >= ProtectScroll.findByItemStack(this.item.protectScroll()).getDiscountValue();
             }
         } catch (Exception e) {
@@ -63,26 +63,26 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
         }
 
 //        Scroll Valid
-        if (BooleanUtils.isFalse(this.isScrollEnough)) {
+        if (BooleanUtils.isFalse(this.scrollEnough)) {
             playerSendMessage(8, ColorMap.RED);
             return;
         }
-        if (this.hasProtectScroll && BooleanUtils.isFalse(this.isProtectScrollEnough)) {
+        if (this.hasProtectScroll && BooleanUtils.isFalse(this.protectScrollEnough)) {
             playerSendMessage(7, ColorMap.RED);
             return;
         }
 
-        boolean isSuccess = isMeetsJudgementCriteria(MAX_LEVEL - currentCustomModelData);
-        boolean isDestroy = isMeetsJudgementCriteria(currentCustomModelData - LOW_LEVEL);
+        boolean success = isMeetsJudgementCriteria(MAX_LEVEL - currentCustomModelData);
+        boolean destroy = isMeetsJudgementCriteria(currentCustomModelData - LOW_LEVEL);
 
 //        execute
-        if (isSuccess) {
+        if (success) {
             successEnhanceScenario();
             scrollDiscount(this.item.enhanceScroll(), this.item.protectScroll());
             return;
         }
 
-        if (BooleanUtils.isFalse(isDestroy)) {
+        if (BooleanUtils.isFalse(destroy)) {
             failEnhanceScenario();
             scrollDiscount(this.item.enhanceScroll(), this.item.protectScroll());
             return;

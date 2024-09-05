@@ -25,7 +25,7 @@ public class GodModeTridentShotEvent implements EventRegister {
         if (!(this.event.getEntity().getShooter() instanceof Player shooter))
             return;
 
-        if (BooleanUtils.isFalse(getUser(shooter).isGodMode()))
+        if (BooleanUtils.isFalse(getUser(shooter).godMode()))
             return;
 
         Vector projectile = this.event.getEntity().getVelocity(); //현재속도 get

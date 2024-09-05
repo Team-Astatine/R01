@@ -6,7 +6,7 @@ import teamzesa.DataBase.entity.RObject.UserKillStatus;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class DataBase {
+public class UserCachingData {
     private static class UserDataHolder {
         private final static ConcurrentHashMap<UUID, User> INSTANCE = new ConcurrentHashMap<>();
     }
