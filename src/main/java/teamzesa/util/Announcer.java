@@ -62,7 +62,7 @@ public class Announcer extends StringComponentExchanger {
 
                     players.forEach(player -> {
                         User user = new UserController().readUser(player.getUniqueId());
-                        if (user.isAnnouncing())
+                        if (user.announcingSkip())
                             sendComment(player, createComponents());
                     });
                 },

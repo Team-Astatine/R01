@@ -46,15 +46,15 @@ public class LifeSteelEvent extends StringComponentExchanger implements EventReg
 
     @Override
     public void execute() {
-        if (checkingGodMod())
+        if (isDeathUserGodMode())
             return;
-        if (validKiller())
+        if (isNotAllowedThisEvent())
             return;
         lifeSteel();
     }
 
-    private boolean checkingGodMod() {
-        if (BooleanUtils.isFalse(this.deatherUser.isGodMode()))
+    private boolean isDeathUserGodMode() {
+        if (BooleanUtils.isFalse(this.deatherUser.godMode()))
             return false;
 
         Location playerLocation = this.deather.getLocation();
@@ -70,7 +70,7 @@ public class LifeSteelEvent extends StringComponentExchanger implements EventReg
         return true;
     }
 
-    private boolean validKiller() {
+    private boolean isNotAllowedThisEvent() {
         //무조건 플레이어가 죽여야함
         if (ObjectUtils.isEmpty(this.killer))
             return true;

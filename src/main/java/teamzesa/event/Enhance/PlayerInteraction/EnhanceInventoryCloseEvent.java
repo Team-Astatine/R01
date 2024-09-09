@@ -4,8 +4,9 @@ import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import teamzesa.DataBase.enhance.EnhanceInventoryHandler;
 import teamzesa.event.EventRegister.EventRegister;
 
 import java.util.ArrayList;
@@ -16,8 +17,10 @@ import static teamzesa.command.EnhanceDialog.*;
 
 public class EnhanceInventoryCloseEvent implements EventRegister {
     private final int MINIMUM_INVENTORY_SLOT = 5;
+    private EnhanceInventoryHandler enhanceInventoryHandler;
 
     private Player itemOwner;
+    private Inventory enhanceDialog;
     private ArrayList<ItemStack> slot;
 
     private final InventoryCloseEvent event;
@@ -30,13 +33,16 @@ public class EnhanceInventoryCloseEvent implements EventRegister {
 
     @Override
     public void init() {
+        this.enhanceInventoryHandler = EnhanceInventoryHandler.getEnhanceInventoryHandler();
+
         this.itemOwner = (Player) this.event.getPlayer();
+        this.enhanceDialog = this.enhanceInventoryHandler.get(this.itemOwner.getUniqueId());
         this.slot = new ArrayList<>();
     }
 
     @Override
     public void execute() {
-        if (validation())
+        if (isNotAllowedThisEvent())
             return;
 
         this.slot.add(this.event.getInventory().getItem(3));
@@ -59,10 +65,12 @@ public class EnhanceInventoryCloseEvent implements EventRegister {
             this.slot.stream()
                     .filter(Objects::nonNull)
                     .forEach(item -> this.itemOwner.getWorld().dropItem(this.itemOwner.getLocation(), item));
+
+        this.enhanceInventoryHandler.remove(this.itemOwner.getUniqueId());
     }
 
-    private boolean validation() {
-        if (BooleanUtils.isFalse(this.event.getInventory().equals(ENHANCE_DIALOG)))
+    private boolean isNotAllowedThisEvent() {
+        if (BooleanUtils.isFalse(this.event.getInventory().equals(this.enhanceDialog)))
             return true;
 
         ItemStack slotZeroItem = this.event.getView().getItem(0);

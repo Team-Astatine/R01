@@ -1,20 +1,20 @@
 package teamzesa.DataBase.UserKillStatusHandler;
 
-import teamzesa.DataBase.DAO;
-import teamzesa.DataBase.DataBase;
+import teamzesa.DataBase.AccessObject;
+import teamzesa.DataBase.UserCachingData;
 import teamzesa.DataBase.entity.RObject.UserKillStatus;
 
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class DaoUserKillStatus implements DAO<UUID, UserKillStatus> {
-    private static final ConcurrentHashMap<UUID, UserKillStatus> KILL_STATUS = DataBase.getUserKillStatusInstance();
+public class UserKillStatusAccessManager implements AccessObject<UUID, UserKillStatus> {
+    private static final ConcurrentHashMap<UUID, UserKillStatus> KILL_STATUS = UserCachingData.getUserKillStatusInstance();
 
     private static class DaoUserKillStatusHolder {
-        private final static DaoUserKillStatus INSTANCE = new DaoUserKillStatus();
+        private final static UserKillStatusAccessManager INSTANCE = new UserKillStatusAccessManager();
     }
 
-    public static DaoUserKillStatus getInstance() {
+    public static UserKillStatusAccessManager getInstance() {
         return DaoUserKillStatusHolder.INSTANCE;
     }
 

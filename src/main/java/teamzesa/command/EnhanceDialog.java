@@ -12,13 +12,15 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
+import teamzesa.DataBase.enhance.EnhanceInventoryHandler;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.CommandExecutorMap;
 
 
 public class EnhanceDialog extends CommandRegisterSection {
-    public static Inventory ENHANCE_DIALOG;
+    public EnhanceInventoryHandler enhanceInventoryHandler;
+    public Inventory enhanceDialog;
 
     private Player sendPlayer;
     private ItemStack targetStuff;
@@ -39,6 +41,8 @@ public class EnhanceDialog extends CommandRegisterSection {
     }
 
     private void init() {
+        this.enhanceInventoryHandler = EnhanceInventoryHandler.getEnhanceInventoryHandler();
+
 //        panel
         this.targetStuff = createItem(Material.NETHERITE_SWORD, "강화할 아래슬롯에 무기를 올려주세요", ColorMap.ORANGE);
         this.scrollStuff = createItem(Material.ANVIL, "아이템에 들어갈 재료를 아래슬롯에 넣어주세요", ColorMap.ORANGE);
@@ -81,7 +85,7 @@ public class EnhanceDialog extends CommandRegisterSection {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         this.sendPlayer = (Player) commandSender;
-        ENHANCE_DIALOG = Bukkit.createInventory(sendPlayer, InventoryType.DROPPER, componentExchanger("강화", ColorMap.RED));
+        enhanceDialog = Bukkit.createInventory(sendPlayer, InventoryType.DROPPER, componentExchanger("강화", ColorMap.RED));
 
         /*
         0 1 2
@@ -90,16 +94,18 @@ public class EnhanceDialog extends CommandRegisterSection {
         */
 
 //        🔪📜📜
-        ENHANCE_DIALOG.setItem(0, this.targetStuff);
-        ENHANCE_DIALOG.setItem(1, this.scrollStuff);
-        ENHANCE_DIALOG.setItem(2, this.protectScrollStuff);
+        enhanceDialog.setItem(0, this.targetStuff);
+        enhanceDialog.setItem(1, this.scrollStuff);
+        enhanceDialog.setItem(2, this.protectScrollStuff);
 
 //        🟦🟥◻️
-        ENHANCE_DIALOG.setItem(6, this.discordButton);
-        ENHANCE_DIALOG.setItem(7, this.executeButton);
-        ENHANCE_DIALOG.setItem(8, this.notionButton);
+        enhanceDialog.setItem(6, this.discordButton);
+        enhanceDialog.setItem(7, this.executeButton);
+        enhanceDialog.setItem(8, this.notionButton);
 
-        sendPlayer.openInventory(ENHANCE_DIALOG);
+        sendPlayer.openInventory(enhanceDialog);
+
+        this.enhanceInventoryHandler.insert(this.sendPlayer.getUniqueId(), enhanceDialog);
         return true;
     }
 }

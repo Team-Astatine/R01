@@ -35,7 +35,7 @@ public class EnhanceTridentHitEvent extends EnhanceUtil implements EventRegister
         if (!(this.event.getEntity().getShooter() instanceof Player shooter))
             return;
 
-        if (new UserController().readUser(shooter.getUniqueId()).isGodMode())
+        if (new UserController().readUser(shooter.getUniqueId()).godMode())
             return;
 
         this.tridentHitLocation = trident.getLocation();

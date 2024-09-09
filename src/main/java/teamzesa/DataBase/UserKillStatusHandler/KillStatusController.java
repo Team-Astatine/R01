@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class KillStatusController {
-    private final DaoUserKillStatus userKillStatus = DaoUserKillStatus.getInstance();
+    private final UserKillStatusAccessManager userKillStatus = UserKillStatusAccessManager.getInstance();
 
     public boolean createUserKillStatus(Player player) {
         return createUserKillStatus(

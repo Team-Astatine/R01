@@ -59,7 +59,7 @@ public class EnhanceCrossBowShotEvent extends EnhanceUtil implements EventRegist
             case 7, 8, 9 -> executeEnhanceState(2, 6, Sound.ENTITY_ENDER_DRAGON_SHOOT, vector);
             case 10 -> {
                 executeEnhanceState(3, 10, Sound.BLOCK_CONDUIT_ACTIVATE, vector);
-                if (new UserController().readUser(shooter.getUniqueId()).isGodMode()) {
+                if (new UserController().readUser(shooter.getUniqueId()).godMode()) {
                     CrossbowMeta mainHand = (CrossbowMeta) mainHandCrossBow.getItemMeta();
                     mainHand.addChargedProjectile(new ItemStack(Material.ARROW));
                     mainHandCrossBow.setItemMeta(mainHand);

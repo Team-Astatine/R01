@@ -1,4 +1,4 @@
-package teamzesa.event.Enhance.Armor;
+package teamzesa.event.Enhance.PlayerInteraction.Armour;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.entity.Entity;

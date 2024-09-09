@@ -15,8 +15,8 @@ public class UserBuilder {
     private HashSet<String> connectionIPList = new HashSet<>();
     private int joinCount;
     private int level;
-    private boolean isGodMode;
-    private boolean isAnnouncing;
+    private boolean godMode;
+    private boolean announcingSkip;
 
     public UserBuilder() {
     }
@@ -27,8 +27,8 @@ public class UserBuilder {
         ipList(user.connectionIPList());
         joinCount(user.joinCount());
         level(user.level());
-        isGodMode(user.isGodMode());
-        isAnnouncing(user.isAnnouncing());
+        isGodMode(user.godMode());
+        isAnnouncingSkip(user.announcingSkip());
     }
 
     //    First Time add User
@@ -39,7 +39,7 @@ public class UserBuilder {
         joinCount(0);
         level(player.getLevel());
         isGodMode(false);
-        isAnnouncing(true);
+        isAnnouncingSkip(true);
     }
 
     public UserBuilder uuid(UUID uuid) {
@@ -78,12 +78,12 @@ public class UserBuilder {
     }
 
     public UserBuilder isGodMode(boolean currentGodMode) {
-        this.isGodMode = currentGodMode;
+        this.godMode = currentGodMode;
         return this;
     }
 
-    public UserBuilder isAnnouncing(boolean currentAnnouncingStatus) {
-        this.isAnnouncing = currentAnnouncingStatus;
+    public UserBuilder isAnnouncingSkip(boolean currentAnnouncingStatus) {
+        this.announcingSkip = currentAnnouncingStatus;
         return this;
     }
 
@@ -94,8 +94,8 @@ public class UserBuilder {
                 connectionIPList,
                 joinCount,
                 level,
-                isGodMode,
-                isAnnouncing
+                godMode,
+                announcingSkip
         );
     }
 

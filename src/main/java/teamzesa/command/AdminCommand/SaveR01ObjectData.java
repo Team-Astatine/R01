@@ -20,7 +20,7 @@ import java.util.Optional;
 
 public class SaveR01ObjectData extends CommandRegisterSection {
     private Player senderPlayer;
-    private boolean isConsoleSend = false;
+    private boolean consoleSend = false;
 
     public SaveR01ObjectData() {
         super(CommandExecutorMap.SAVE_R01_OBJECT_DATA);
@@ -37,7 +37,7 @@ public class SaveR01ObjectData extends CommandRegisterSection {
 
         Optional.ofNullable(senderUser).ifPresentOrElse(
                 existUser -> this.senderPlayer = Bukkit.getPlayer(existUser.uuid()),
-                () -> this.isConsoleSend = true
+                () -> this.consoleSend = true
         );
 
         if (senderUser != null && !this.senderPlayer.isOp()) {
@@ -74,7 +74,7 @@ public class SaveR01ObjectData extends CommandRegisterSection {
     }
 
     private void sendComment(String comment) {
-        if (isConsoleSend && ObjectUtils.isEmpty(this.senderPlayer))
+        if (consoleSend && ObjectUtils.isEmpty(this.senderPlayer))
             Bukkit.getLogger().info("[R01] " + comment);
         else playerSendMsgComponentExchanger(this.senderPlayer, comment, ColorMap.YELLOW);
     }

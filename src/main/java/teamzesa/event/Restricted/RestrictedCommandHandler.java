@@ -30,10 +30,10 @@ public class RestrictedCommandHandler extends StringComponentExchanger implement
         if (this.commandSender.isOp())
             return;
 
-        boolean isCommandAllowed = new RestrictedElement().restrictedCommand.stream()
+        boolean commandAllowed = new RestrictedChatElement().restrictedCommand.stream()
                 .anyMatch(this.currentCommand::equals);
 
-        if (BooleanUtils.isFalse(isCommandAllowed))
+        if (BooleanUtils.isFalse(commandAllowed))
             return;
 
         this.event.setCancelled(true);

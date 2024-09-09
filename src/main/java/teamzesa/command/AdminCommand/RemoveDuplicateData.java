@@ -22,7 +22,7 @@ import java.util.Set;
 public class RemoveDuplicateData extends CommandRegisterSection {
     private User senderUser;
     private Player senderPlayer;
-    private boolean isConsoleSend = false;
+    private boolean consoleSend = false;
 
     public RemoveDuplicateData() {
         super(CommandExecutorMap.REMOVE_DUPLICATE_USER_DATA);
@@ -38,10 +38,10 @@ public class RemoveDuplicateData extends CommandRegisterSection {
 
         Optional.ofNullable(this.senderUser).ifPresentOrElse(
                 existUser -> this.senderPlayer = Bukkit.getPlayer(existUser.uuid()),
-                () -> this.isConsoleSend = true
+                () -> this.consoleSend = true
         );
 
-        if (ObjectUtils.allNotNull(this.senderUser) && !this.senderPlayer.isOp() || !this.isConsoleSend) {
+        if (ObjectUtils.allNotNull(this.senderUser) && !this.senderPlayer.isOp() || !this.consoleSend) {
             playerSendMsgComponentExchanger(this.senderPlayer, "해당 명령어는 플레이어가 사용할 수 없습니다.", ColorMap.RED);
             return false;
         }
@@ -60,8 +60,8 @@ public class RemoveDuplicateData extends CommandRegisterSection {
                     user.connectionIPList(),
                     user.joinCount(),
                     user.level(),
-                    user.isGodMode(),
-                    user.isAnnouncing()
+                    user.godMode(),
+                    user.announcingSkip()
             ));
         }
 
