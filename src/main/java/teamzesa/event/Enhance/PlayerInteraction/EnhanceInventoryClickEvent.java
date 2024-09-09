@@ -10,6 +10,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.DataBase.IOHandler.ConfigIOHandler;
+import teamzesa.DataBase.enhance.EnhanceInventoryHandler;
 import teamzesa.DataBase.enhance.EnhanceItemBuilder;
 import teamzesa.DataBase.entity.EnhanceItem;
 import teamzesa.event.Enhance.GeneratingEnhanceItem;
@@ -20,11 +21,11 @@ import teamzesa.util.Interface.StringComponentExchanger;
 
 import java.util.HashSet;
 
-import static teamzesa.command.EnhanceDialog.ENHANCE_DIALOG;
 
 public class EnhanceInventoryClickEvent extends StringComponentExchanger implements EventRegister {
     private final InventoryClickEvent event;
     private Player ownerPlayer;
+    private Inventory enhanceInventory;
     private ItemStack currentItem;
     private ItemStack enhanceItem;
     private ItemStack scrollStuff;
@@ -42,6 +43,7 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
     public void init() {
         this.currentItem = this.event.getCurrentItem();
         this.ownerPlayer = this.event.getWhoClicked() instanceof Player player ? player : null;
+        this.enhanceInventory = EnhanceInventoryHandler.getEnhanceInventoryHandler().get(this.ownerPlayer.getUniqueId());
 
         this.enhanceItem = this.event.getView().getItem(3);
         this.scrollStuff = this.event.getView().getItem(4);
@@ -53,7 +55,7 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
 
     @Override
     public void execute() {
-        if (BooleanUtils.isFalse(event.getInventory().equals(ENHANCE_DIALOG))) {
+        if (BooleanUtils.isFalse(this.event.getInventory().equals(this.enhanceInventory))) {
             return;
         }
 
