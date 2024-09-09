@@ -3,8 +3,8 @@ package teamzesa.util.Enum.Enhance;
 import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import teamzesa.event.Enhance.Interface.Armour;
-import teamzesa.event.Enhance.Interface.EnhanceItemCache;
+import teamzesa.DataBase.enhance.Armour;
+import teamzesa.DataBase.enhance.EnhanceItemCache;
 
 import java.util.Arrays;
 import java.util.Map;

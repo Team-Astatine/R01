@@ -2,7 +2,6 @@ package teamzesa.event;
 
 import org.junit.Before;
 import org.junit.Test;
-import teamzesa.event.Enhance.Interface.EnhanceUtil;
 
 public class ItemValid {
 

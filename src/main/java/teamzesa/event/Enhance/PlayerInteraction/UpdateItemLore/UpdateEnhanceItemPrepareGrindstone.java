@@ -5,7 +5,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.event.inventory.PrepareGrindstoneEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import teamzesa.event.Enhance.Interface.EnhanceUtil;
+import teamzesa.event.Enhance.EnhanceUtil;
 import teamzesa.event.EventRegister.EventRegister;
 
 public class UpdateEnhanceItemPrepareGrindstone implements EventRegister {

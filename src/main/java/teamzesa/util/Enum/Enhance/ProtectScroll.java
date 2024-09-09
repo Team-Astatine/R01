@@ -4,7 +4,7 @@ import com.google.common.base.Functions;
 import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import teamzesa.event.Enhance.Interface.ScrollMap;
+import teamzesa.DataBase.enhance.ScrollMap;
 import teamzesa.exception.Enhance.EnhanceItemSearchException;
 
 import java.util.Arrays;

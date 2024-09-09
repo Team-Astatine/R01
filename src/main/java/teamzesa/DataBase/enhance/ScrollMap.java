@@ -1,4 +1,4 @@
-package teamzesa.event.Enhance.Interface;
+package teamzesa.DataBase.enhance;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;

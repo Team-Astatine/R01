@@ -1,4 +1,4 @@
-package teamzesa.event.Restricted.AntiExploit.FloodChat;
+package teamzesa.DataBase.entity.Restricted.Chat;
 
 import org.bukkit.entity.Player;
 

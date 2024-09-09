@@ -1,4 +1,4 @@
-package teamzesa.DataBase.entity;
+package teamzesa.DataBase.entity.Enhance;
 
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
