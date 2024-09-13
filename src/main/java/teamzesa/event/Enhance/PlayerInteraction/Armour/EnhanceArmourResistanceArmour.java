@@ -1,6 +1,7 @@
 package teamzesa.event.Enhance.PlayerInteraction.Armour;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -8,8 +9,9 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.event.Enhance.EnhanceUtil;
 import teamzesa.event.EventRegister.EventRegister;
+import teamzesa.util.Interface.StringComponentExchanger;
 
-public class EnhanceArmourResistanceArmour implements EventRegister {
+public class EnhanceArmourResistanceArmour extends StringComponentExchanger implements EventRegister {
 
     private Entity targetEntity;
     private final EntityDamageEvent event;
@@ -37,9 +39,11 @@ public class EnhanceArmourResistanceArmour implements EventRegister {
         armour[2] = target.getInventory().getLeggings();
         armour[3] = target.getInventory().getBoots();
 
-        double originalDMG = this.event.getDamage()
-                + this.event.getOriginalDamage(EntityDamageEvent.DamageModifier.ARMOR);
-        double totalDmg = EnhanceUtil.calculatingTotalResistancePercentage(armour, originalDMG);
-        this.event.setDamage(totalDmg);
+        double getDmg = this.event.getDamage();
+        double percentage = EnhanceUtil.calculatingDefencePercentage(armour);
+        if (percentage == 0.0)
+            return;
+
+        this.event.setDamage(getDmg - getDmg * percentage);
     }
 }

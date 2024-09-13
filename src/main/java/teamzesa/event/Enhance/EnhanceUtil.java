@@ -172,12 +172,12 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         return damage;
     }
 
-    public static double calculatingTotalResistancePercentage(ItemStack[] itemStack, double totalDamage) {
+    public static double calculatingDefencePercentage(ItemStack[] itemStack) {
         int totalPercentage = 0;
         for (ItemStack item : itemStack)
             totalPercentage += getCustomModelData(item);
 
-        return totalDamage - (totalDamage * totalPercentage * 0.01);
+        return totalPercentage * 0.01;
     }
 
     public static int getCustomModelData(ItemStack item) {
