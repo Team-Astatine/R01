@@ -1,7 +1,6 @@
 package teamzesa.event.Enhance.PlayerInteraction.Armour;
 
 import org.apache.commons.lang3.ObjectUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -40,7 +39,7 @@ public class EnhanceArmourResistanceArmour extends StringComponentExchanger impl
         armour[3] = target.getInventory().getBoots();
 
         double getDmg = this.event.getDamage();
-        double percentage = EnhanceUtil.calculatingDefencePercentage(armour);
+        double percentage = EnhanceUtil.getCalculatingDefencePercentage(armour);
         if (percentage == 0.0)
             return;
 

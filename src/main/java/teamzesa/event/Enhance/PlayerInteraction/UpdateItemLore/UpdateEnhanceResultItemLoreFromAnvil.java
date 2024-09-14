@@ -64,7 +64,7 @@ public class UpdateEnhanceResultItemLoreFromAnvil extends StringComponentExchang
         this.resultItem.addEnchantments(this.resultItem.getEnchantments());
 
         try {
-            EnhanceUtil.updateEnhanceItemLore(this.resultItem, enhanceLevel);
+            EnhanceUtil.increaseEnhanceItemLevel(this.resultItem, enhanceLevel);
         } catch (Exception e) {
             e.printStackTrace();
         }

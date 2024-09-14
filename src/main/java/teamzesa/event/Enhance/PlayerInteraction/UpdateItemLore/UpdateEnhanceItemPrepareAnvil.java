@@ -47,7 +47,7 @@ public class UpdateEnhanceItemPrepareAnvil implements EventRegister {
         this.resultItem.setItemMeta(targetItemMeta);
 
         try {
-            EnhanceUtil.updateEnhanceItemLore(this.resultItem, enhanceLevel);
+            EnhanceUtil.increaseEnhanceItemLevel(this.resultItem, enhanceLevel);
         } catch (Exception e) {
             e.printStackTrace();
         }

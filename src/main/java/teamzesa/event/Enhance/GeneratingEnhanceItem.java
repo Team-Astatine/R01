@@ -102,7 +102,7 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
     private void successEnhanceScenario() {
         playerSendMessage(6, ColorMap.DISCORD_COLOR);
         try {
-            updateEnhanceItemLore(this.item.enhanceItem(), +1);
+            increaseEnhanceItemLevel(this.item.enhanceItem(), +1);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -111,7 +111,7 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
     private void failEnhanceScenario() {
         playerSendMessage(5, ColorMap.PINK);
         try {
-            updateEnhanceItemLore(this.item.enhanceItem(), -1);
+            increaseEnhanceItemLevel(this.item.enhanceItem(), -1);
         } catch (Exception e) {
             e.printStackTrace();
         }

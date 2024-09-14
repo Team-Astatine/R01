@@ -44,7 +44,7 @@ public class UpdateEnhanceItemPrepareGrindstone implements EventRegister {
         this.resultItem.setItemMeta(itemMeta);
 
         try {
-            EnhanceUtil.updateEnhanceItemLore(this.resultItem, enhanceLevel);
+            EnhanceUtil.increaseEnhanceItemLevel(this.resultItem, enhanceLevel);
         } catch (Exception e) {
             e.printStackTrace();
         }

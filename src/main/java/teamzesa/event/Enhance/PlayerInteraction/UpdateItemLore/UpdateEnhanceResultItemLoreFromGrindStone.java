@@ -57,7 +57,7 @@ public class UpdateEnhanceResultItemLoreFromGrindStone extends StringComponentEx
         this.resultItem.setItemMeta(targetItemMeta);
 
         try {
-            EnhanceUtil.updateEnhanceItemLore(this.resultItem, enhanceLevel);
+            EnhanceUtil.increaseEnhanceItemLevel(this.resultItem, enhanceLevel);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -21,7 +21,7 @@ public class EnhanceItemBuilder extends EnhanceUtil {
     }
 
     public EnhanceItemBuilder enhanceItem(ItemStack enhanceItem) {
-        this.enhanceItem = checkModelData(enhanceItem); //CheckUp hasCustomModelData
+        this.enhanceItem = initItemCustomModelData(enhanceItem); //CheckUp hasCustomModelData
         return this;
     }
 

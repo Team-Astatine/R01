@@ -52,7 +52,7 @@ public enum EnhanceStageComment {
         this.component = component;
     }
 
-    public static Component findByEnhanceLevelComment(int enhanceLevel) {
+    public static Component getEnhancementLoreByLevel(int enhanceLevel) {
         if (BooleanUtils.isFalse(CACHED_ITEM.containsKey(enhanceLevel)))
             return Component.text("Unknown Enhancement Status")
                     .color(ColorMap.RED.getTextColor())

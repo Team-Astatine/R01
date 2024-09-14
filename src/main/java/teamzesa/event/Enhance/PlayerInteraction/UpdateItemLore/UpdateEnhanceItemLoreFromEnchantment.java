@@ -55,7 +55,7 @@ public class UpdateEnhanceItemLoreFromEnchantment extends StringComponentExchang
         this.enchantItem.setItemMeta(targetItemMeta);
 
         try {
-            EnhanceUtil.updateEnhanceItemLore(this.enchantItem, enhanceLevel);
+            EnhanceUtil.increaseEnhanceItemLevel(this.enchantItem, enhanceLevel);
         } catch (Exception e) {
             e.printStackTrace();
         }
