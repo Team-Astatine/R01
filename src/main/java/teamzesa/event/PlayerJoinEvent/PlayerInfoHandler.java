@@ -1,9 +1,15 @@
 package teamzesa.event.PlayerJoinEvent;
 
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.title.Title;
+import net.kyori.adventure.title.TitlePart;
 import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.UnknownNullability;
 import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
 import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.userHandler.UserBuilder;
@@ -12,6 +18,7 @@ import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Interface.StringComponentExchanger;
 
+import java.time.Duration;
 import java.util.Optional;
 
 
@@ -56,6 +63,15 @@ public class PlayerInfoHandler extends StringComponentExchanger implements Event
         String ip = this.joinPlayer.getAddress().getHostName();
 
         updateUserInfo(name, ip, this.joinPlayer.hasPlayedBefore());
+        titleMessage();
+    }
+
+    private void titleMessage() {
+        Title title = Title.title(
+                componentExchanger("무정부 플라이 생야생",ColorMap.PURPLE),
+                componentExchanger("Astatine Online",ColorMap.ORANGE)
+        );
+        this.joinPlayer.showTitle(title);
     }
 
     private void updateUserInfo(String name, String ip, boolean playedBefore) {
