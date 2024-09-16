@@ -33,6 +33,10 @@ public abstract class StringComponentExchanger {
         Bukkit.broadcast(exchangerStringToComponentAndColor(comment, color));
     }
 
+    public void playerSendMsgComponentExchanger(@NotNull Player player, Component comment) {
+        player.sendMessage(comment);
+    }
+
     public void playerSendMsgComponentExchanger(@NotNull Player player, String comment) {
         player.sendMessage(exchangerStringToComponent(comment));
     }

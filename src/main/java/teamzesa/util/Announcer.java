@@ -8,6 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.DataBase.IOHandler.ConfigIOHandler;
 import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.userHandler.UserController;
+import teamzesa.R01;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Interface.StringComponentExchanger;
 
@@ -46,12 +47,6 @@ public class Announcer extends StringComponentExchanger {
         );
     }
 
-    public void joinAnnouncer(Player player) {
-        Component[] components = createComponents();
-        for (Component component : components)
-            player.sendMessage(component);
-    }
-
     public void defaultAnnouncer() {
         long delay = 0;
         long interval = 5;
@@ -63,49 +58,11 @@ public class Announcer extends StringComponentExchanger {
                     players.forEach(player -> {
                         User user = new UserController().readUser(player.getUniqueId());
                         if (user.announcingSkip())
-                            sendComment(player, createComponents());
+                            Bukkit.getScheduler().runTask(R01.getPlugin(R01.class), ()-> player.performCommand("help"));
                     });
                 },
                 delay,
                 interval
         );
     }
-
-    private void sendComment(Player player, Component[] component) {
-        for (Component commentList : component)
-            player.sendMessage(commentList);
-    }
-
-    private Component @NotNull [] createComponents() {
-        String notionLink = this.configIOHandler.getNotionConfig();
-        String discordLink = this.configIOHandler.getDiscordConfig();
-        String mineListLink = this.configIOHandler.getMineListConfig();
-
-        ColorMap commonColor = ColorMap.RED;
-        ColorMap voteColor = ColorMap.GREEN;
-        ColorMap notionColor = ColorMap.NOTION_COLOR;
-        ColorMap commandColor = ColorMap.COMMAND_COLOR;
-        ColorMap discordColor = ColorMap.DISCORD_COLOR;
-        ColorMap enhanceColor = ColorMap.PINK;
-
-        return new Component[]{
-                //command
-                componentExchanger(this.configIOHandler.getCommandFly(), commandColor),
-                componentExchanger(this.configIOHandler.getCommandHat(), commandColor),
-                componentExchanger(this.configIOHandler.getCommandTotem(), commandColor),
-                componentExchanger(this.configIOHandler.getCommandEnhance(), enhanceColor),
-                componentExchanger(this.configIOHandler.getCommandAnnouncing(), commandColor),
-                componentExchanger(this.configIOHandler.getCommandTpa(), commandColor),
-                //tip
-                componentExchanger(this.configIOHandler.getSteelLifeTip(), commonColor),
-                componentExchanger(this.configIOHandler.getRaidTip(), commonColor),
-                componentExchanger(this.configIOHandler.getWeaponTip(), commonColor),
-                componentExchanger(this.configIOHandler.getExplosiveTip(), commonColor),
-                //link
-                createLinkComponentExchanger(this.configIOHandler.getMineListVote(), mineListLink, voteColor),
-                createLinkComponentExchanger(this.configIOHandler.getDiscordInvite(), discordLink, discordColor),
-                createLinkComponentExchanger(this.configIOHandler.getServerGuideNotion(), notionLink, notionColor)
-        };
-    }
-
 }

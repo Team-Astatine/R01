@@ -112,8 +112,7 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
     }
 
     private void announcingJoinMsg() {
-//        this.player.performCommand("help");
-        this.announcer.joinAnnouncer(this.player);
+        this.player.performCommand("help");
         this.announcer.countAnnouncer(this.player);
 
         if (this.userKillStatus.killCount() == 0)

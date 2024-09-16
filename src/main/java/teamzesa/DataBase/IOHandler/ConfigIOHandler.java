@@ -34,16 +34,20 @@ public class ConfigIOHandler extends StringComponentExchanger {
 
     public void allConfigLoad() {
         setWorldSettingMotd();
+        getHelp();
+        getCommunityLink();
         getMineListConfig();
         getDiscordConfig();
         getNotionConfig();
         getMineListVote();
         getDiscordInvite();
         getServerGuideNotion();
+        getTip();
         getSteelLifeTip();
         getRaidTip();
         getWeaponTip();
         getExplosiveTip();
+        getCommandHelp();
         getCommandFly();
         getCommandHat();
         getCommandTotem();
@@ -57,8 +61,16 @@ public class ConfigIOHandler extends StringComponentExchanger {
         Bukkit.motd(componentExchanger(motd, ColorMap.VOTE_COLOR));
     }
 
+    public String getHelp() {
+        return getString(ConfigMenu.MESSAGE_COMMAND_HELP);
+    }
+
     public String getWorldMotdConfig() {
         return getString(ConfigMenu.WORLD_SETTING_MOTD);
+    }
+
+    public String getCommunityLink() {
+        return getString(ConfigMenu.MESSAGE_COMMAND_COMMUNITY);
     }
 
     public String getMineListConfig() {
@@ -85,6 +97,10 @@ public class ConfigIOHandler extends StringComponentExchanger {
         return getString(ConfigMenu.MESSAGE_SERVER_GUID_NOTION);
     }
 
+    public String getTip() {
+        return getString(ConfigMenu.MESSAGE_COMMAND_SERVER_TIP);
+    }
+
     public String getSteelLifeTip() {
         return getString(ConfigMenu.MESSAGE_STEEL_LIFE_TIP);
     }
@@ -99,6 +115,10 @@ public class ConfigIOHandler extends StringComponentExchanger {
 
     public String getExplosiveTip() {
         return getString(ConfigMenu.MESSAGE_EXPLOSIVE_TIP);
+    }
+
+    public String getCommandHelp() {
+        return getString(ConfigMenu.MESSAGE_COMMAND_TIP);
     }
 
     public String getCommandFly() {
