@@ -62,7 +62,7 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
             return;
 
         World world = Bukkit.getWorld(WorldName.world.getExchangeEnglish());
-        int[] position = new RanNumGenerator().groundChecker(world);
+        int[] position = new RanNumGenerator().getRandomPosition(world);
 
         int x = position[0];
         int y = position[1];
@@ -112,6 +112,7 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
     }
 
     private void announcingJoinMsg() {
+//        this.player.performCommand("help");
         this.announcer.joinAnnouncer(this.player);
         this.announcer.countAnnouncer(this.player);
 

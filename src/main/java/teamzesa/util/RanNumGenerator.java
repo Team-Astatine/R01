@@ -18,7 +18,7 @@ public class RanNumGenerator {
         return (int) (Math.random() * range) + MIN_RANDOM_TP;
     }
 
-    public int[] groundChecker(World world) {
+    public int[] getRandomPosition(World world) {
         boolean ground = false, legRoom = false, bodyRoom = false;
 
         int maxHigh = world.getMaxHeight() - 1; //320 > Material_VOID_AIR
@@ -53,6 +53,6 @@ public class RanNumGenerator {
         if (this.allowedPosition)
             return this.position;
 
-        return groundChecker(world);
+        return getRandomPosition(world);
     }
 }
