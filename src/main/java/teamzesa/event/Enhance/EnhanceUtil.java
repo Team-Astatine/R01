@@ -6,7 +6,9 @@ import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import teamzesa.exception.Enhance.EnhanceItemMetaException;
 import teamzesa.util.Enum.ColorMap;
@@ -87,8 +89,14 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
 
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.setCustomModelData(itemMeta.getCustomModelData() + updateCount);
-        if (itemMeta.getCustomModelData() == 10)
+        if (itemMeta.getCustomModelData() == 10) {
             itemMeta.setUnbreakable(true);
+            itemMeta.setFireResistant(true);
+            itemMeta.setRarity(ItemRarity.EPIC);
+
+            Damageable itemDamageable = (Damageable) itemMeta;
+            itemDamageable.setDamage(0);
+        }
         item.setItemMeta(itemMeta);
 
         if (itemMeta.getCustomModelData() > 0) { // 0 == Remove All Item Lore /enhance 0
