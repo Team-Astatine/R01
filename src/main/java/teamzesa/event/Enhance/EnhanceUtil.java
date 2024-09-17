@@ -89,16 +89,18 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
 
         ItemMeta itemMeta = item.getItemMeta();
         itemMeta.setCustomModelData(itemMeta.getCustomModelData() + updateCount);
+
+//        최종강화 아이템 설정
         if (itemMeta.getCustomModelData() == 10) {
             itemMeta.setUnbreakable(true);
             itemMeta.setFireResistant(true);
             itemMeta.setRarity(ItemRarity.EPIC);
 
-            Damageable itemDamageable = (Damageable) itemMeta;
-            itemDamageable.setDamage(0);
+            ((Damageable) itemMeta).resetDamage();
         }
         item.setItemMeta(itemMeta);
 
+//        정상적인 형태의 강화작업
         if (itemMeta.getCustomModelData() > 0) { // 0 == Remove All Item Lore /enhance 0
             lore.add(getEnhanceStatusLore(item));
 
@@ -107,8 +109,10 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
                 lore.add(getWeaponDamageLore(item));
             else
                 lore.add(getEnhanceDecreaseDamagePercentageLore(item));
+            item.lore(lore);
         }
-        item.lore(lore);
+
+//        todo CustomModelData 가 0 일 시 아이템 초기화 작업 로직
     }
 
     public static Component getEnhanceStatusLore(ItemStack item) {
