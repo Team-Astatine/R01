@@ -5,6 +5,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.event.Enhance.EnhanceUtil;
@@ -32,7 +33,10 @@ public class EnhanceSet extends CommandRegisterSection {
             return false;
         }
 
-        ItemStack targetItem = EnhanceUtil.initItemCustomModelData(player.getInventory().getItemInMainHand());
+        ItemStack targetItem = player.getInventory().getItemInMainHand();
+        ItemMeta targetItemMeta = targetItem.getItemMeta();
+        targetItemMeta.setCustomModelData(0);
+        targetItem.setItemMeta(targetItemMeta);
 
         try {
             EnhanceUtil.increaseEnhanceItemLevel(targetItem, enhanceLevel);
