@@ -2,11 +2,11 @@ package teamzesa.util.Enum;
 
 import org.bukkit.command.CommandExecutor;
 import teamzesa.command.AdminCommand.*;
-import teamzesa.command.*;
 import teamzesa.command.Announcing.CommandTip;
+import teamzesa.command.Announcing.Community;
 import teamzesa.command.Announcing.Help;
 import teamzesa.command.Announcing.ServerTip;
-import teamzesa.command.Announcing.Community;
+import teamzesa.command.*;
 import teamzesa.command.register.CommandRegisterSection;
 
 public enum CommandExecutorMap {
