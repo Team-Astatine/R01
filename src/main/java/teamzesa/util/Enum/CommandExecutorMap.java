@@ -11,6 +11,7 @@ import teamzesa.command.register.CommandRegisterSection;
 
 public enum CommandExecutorMap {
 //    User
+    ASTN("Astn", new Astn()),
     HELP("Help", new Help()),
     MODERATOR("moderator", new Moderator()),
     ARMOUR_HEAD("hat", new Hat()),

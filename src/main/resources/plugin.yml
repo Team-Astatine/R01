@@ -17,6 +17,8 @@ permissions:
     default: op
 
 commands:
+  astn:
+    description: Astn.kr 최신버전 무정부 야생약탈 서버
   help:
     description: 서버 도움말을 출력합니다.
   moderator:
