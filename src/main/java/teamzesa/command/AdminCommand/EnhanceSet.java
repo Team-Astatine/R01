@@ -28,7 +28,7 @@ public class EnhanceSet extends CommandRegisterSection {
         }
 
         int enhanceLevel = Integer.parseInt(strings[0]);
-        if (enhanceLevel < 0 || enhanceLevel > 10) {
+        if (enhanceLevel < 1 || enhanceLevel > 10) {
             playerSendMsgComponentExchanger(player, "0 ~ 10 사이 값만 대입 가능합니다.", ColorMap.RED);
             return false;
         }
