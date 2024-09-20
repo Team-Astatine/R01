@@ -2,8 +2,8 @@ package teamzesa.DataBase.enhance;
 
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import teamzesa.DataBase.entity.EnhanceItem;
-import teamzesa.event.Enhance.Interface.EnhanceUtil;
+import teamzesa.DataBase.entity.Enhance.EnhanceItem;
+import teamzesa.event.Enhance.EnhanceUtil;
 
 public class EnhanceItemBuilder extends EnhanceUtil {
 
@@ -21,7 +21,7 @@ public class EnhanceItemBuilder extends EnhanceUtil {
     }
 
     public EnhanceItemBuilder enhanceItem(ItemStack enhanceItem) {
-        this.enhanceItem = checkModelData(enhanceItem); //CheckUp hasCustomModelData
+        this.enhanceItem = initItemCustomModelData(enhanceItem); //CheckUp hasCustomModelData
         return this;
     }
 

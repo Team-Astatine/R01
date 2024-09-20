@@ -1,4 +1,4 @@
-package teamzesa.DataBase.IOHandler;
+package teamzesa.DataBase;
 
 import org.bukkit.Bukkit;
 import teamzesa.util.Enum.DataFile;

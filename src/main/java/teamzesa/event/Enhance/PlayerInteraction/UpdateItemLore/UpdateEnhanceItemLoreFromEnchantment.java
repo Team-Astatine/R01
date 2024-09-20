@@ -5,7 +5,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.enchantment.EnchantItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import teamzesa.event.Enhance.Interface.EnhanceUtil;
+import teamzesa.event.Enhance.EnhanceUtil;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Interface.StringComponentExchanger;
 
@@ -55,7 +55,7 @@ public class UpdateEnhanceItemLoreFromEnchantment extends StringComponentExchang
         this.enchantItem.setItemMeta(targetItemMeta);
 
         try {
-            EnhanceUtil.updateEnhanceItemLore(this.enchantItem, enhanceLevel);
+            EnhanceUtil.increaseEnhanceItemLevel(this.enchantItem, enhanceLevel);
         } catch (Exception e) {
             e.printStackTrace();
         }

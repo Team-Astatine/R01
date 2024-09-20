@@ -6,7 +6,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.inventory.PrepareAnvilEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import teamzesa.event.Enhance.Interface.EnhanceUtil;
+import teamzesa.event.Enhance.EnhanceUtil;
 import teamzesa.event.EventRegister.EventRegister;
 
 public class UpdateEnhanceItemPrepareAnvil implements EventRegister {
@@ -47,7 +47,7 @@ public class UpdateEnhanceItemPrepareAnvil implements EventRegister {
         this.resultItem.setItemMeta(targetItemMeta);
 
         try {
-            EnhanceUtil.updateEnhanceItemLore(this.resultItem, enhanceLevel);
+            EnhanceUtil.increaseEnhanceItemLevel(this.resultItem, enhanceLevel);
         } catch (Exception e) {
             e.printStackTrace();
         }

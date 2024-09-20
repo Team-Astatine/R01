@@ -12,7 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import teamzesa.DataBase.IOHandler.ConfigIOHandler;
 import teamzesa.DataBase.enhance.EnhanceInventoryHandler;
 import teamzesa.DataBase.enhance.EnhanceItemBuilder;
-import teamzesa.DataBase.entity.EnhanceItem;
+import teamzesa.DataBase.entity.Enhance.EnhanceItem;
 import teamzesa.event.Enhance.GeneratingEnhanceItem;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Enum.ColorMap;

@@ -8,7 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.event.Enhance.Interface.EnhanceUtil;
+import teamzesa.event.Enhance.EnhanceUtil;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.CommandExecutorMap;
 
@@ -28,7 +28,7 @@ public class EnhanceSet extends CommandRegisterSection {
         }
 
         int enhanceLevel = Integer.parseInt(strings[0]);
-        if (enhanceLevel < 0 || enhanceLevel > 10) {
+        if (enhanceLevel < 1 || enhanceLevel > 10) {
             playerSendMsgComponentExchanger(player, "0 ~ 10 사이 값만 대입 가능합니다.", ColorMap.RED);
             return false;
         }
@@ -39,7 +39,7 @@ public class EnhanceSet extends CommandRegisterSection {
         targetItem.setItemMeta(targetItemMeta);
 
         try {
-            EnhanceUtil.updateEnhanceItemLore(targetItem, enhanceLevel);
+            EnhanceUtil.increaseEnhanceItemLevel(targetItem, enhanceLevel);
         } catch (Exception e) {
             e.printStackTrace();
         }

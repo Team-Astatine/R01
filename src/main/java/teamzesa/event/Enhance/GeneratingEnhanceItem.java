@@ -3,8 +3,7 @@ package teamzesa.event.Enhance;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.Material;
-import teamzesa.DataBase.entity.EnhanceItem;
-import teamzesa.event.Enhance.Interface.EnhanceUtil;
+import teamzesa.DataBase.entity.Enhance.EnhanceItem;
 import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.Enhance.ProtectScroll;
 import teamzesa.util.Enum.Enhance.Scroll;
@@ -103,7 +102,7 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
     private void successEnhanceScenario() {
         playerSendMessage(6, ColorMap.DISCORD_COLOR);
         try {
-            updateEnhanceItemLore(this.item.enhanceItem(), +1);
+            increaseEnhanceItemLevel(this.item.enhanceItem(), +1);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -112,7 +111,7 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
     private void failEnhanceScenario() {
         playerSendMessage(5, ColorMap.PINK);
         try {
-            updateEnhanceItemLore(this.item.enhanceItem(), -1);
+            increaseEnhanceItemLevel(this.item.enhanceItem(), -1);
         } catch (Exception e) {
             e.printStackTrace();
         }

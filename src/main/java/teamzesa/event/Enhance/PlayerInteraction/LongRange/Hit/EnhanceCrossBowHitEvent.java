@@ -7,7 +7,7 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.ItemStack;
-import teamzesa.event.Enhance.Interface.EnhanceUtil;
+import teamzesa.event.Enhance.EnhanceUtil;
 import teamzesa.event.EventRegister.EventRegister;
 
 public class EnhanceCrossBowHitEvent extends EnhanceUtil implements EventRegister {

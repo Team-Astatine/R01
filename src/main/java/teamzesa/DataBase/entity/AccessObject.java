@@ -1,4 +1,4 @@
-package teamzesa.DataBase;
+package teamzesa.DataBase.entity;
 
 public interface AccessObject<K, E> {
 

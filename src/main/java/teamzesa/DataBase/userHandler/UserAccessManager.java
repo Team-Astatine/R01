@@ -1,6 +1,6 @@
 package teamzesa.DataBase.userHandler;
 
-import teamzesa.DataBase.AccessObject;
+import teamzesa.DataBase.entity.AccessObject;
 import teamzesa.DataBase.UserCachingData;
 import teamzesa.DataBase.entity.RObject.User;
 

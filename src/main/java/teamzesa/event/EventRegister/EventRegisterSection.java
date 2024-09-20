@@ -28,6 +28,7 @@ import teamzesa.event.Enhance.PlayerInteraction.LongRange.Shot.EnhanceCrossBowSh
 import teamzesa.event.Enhance.PlayerInteraction.LongRange.Shot.EnhanceTridentShotEvent;
 import teamzesa.event.Enhance.PlayerInteraction.ShortRange.EnhanceShortRangeWeaponHurtEvent;
 import teamzesa.event.Enhance.PlayerInteraction.UpdateItemLore.*;
+import teamzesa.event.EntityDamageByEntityEvent.EntityAttackSpeedClear;
 import teamzesa.event.EntityDamageByEntityEvent.EntityAttackSpeedHandler;
 import teamzesa.event.EntityExplodeEvent.ExplosiveEvent;
 import teamzesa.event.PlayerArmSwingEvent.HandSwingEvent;
@@ -172,6 +173,7 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public static void PlayerInteractEvent(PlayerInteractEvent event) {
+        new EntityAttackSpeedClear(event);
         new AntiLeverAutoClicker(event);
         new RestrictedEntityPInteractHandler(event);
     }
