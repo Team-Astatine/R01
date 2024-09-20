@@ -110,10 +110,5 @@ public class LifeSteelEvent extends StringComponentExchanger implements EventReg
 
         playerSendMsgComponentExchanger(this.deathPlayer, this.killer.getName() + "님이 체력을 약탈했습니다.", ColorMap.RED);
         playerSendMsgComponentExchanger(this.killer, this.deathPlayer.getName() + "님이 체력을 약탈했습니다.", ColorMap.RED);
-
-        String killerName = this.userController.readUser(this.killer.getUniqueId()).nameList().getLast();
-        this.event.deathMessage(
-                componentExchanger("[KILL]" + killerName + " -> " + this.killerUserObj.nameList().getLast(), ColorMap.PINK)
-        );
     }
 }
