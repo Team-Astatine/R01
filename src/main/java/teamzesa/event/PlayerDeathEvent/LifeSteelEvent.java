@@ -19,14 +19,14 @@ import teamzesa.util.Interface.StringComponentExchanger;
 
 public class LifeSteelEvent extends StringComponentExchanger implements EventRegister {
     private final UserController userController = new UserController();
-    private final KillStatusController userKillStatus = new KillStatusController();
+    private final KillStatusController killStatusController = new KillStatusController();
 
-    private Player deather;
+    private Player deathPlayer;
+    private UserKillStatus deathUserKillStatusObj;
+
     private Player killer;
-
-    private User deatherUser;
-    private UserKillStatus deatherUserKillStatus;
-    private UserKillStatus killerUserKillStatus;
+    private User killerUserObj;
+    private UserKillStatus killerKillStatusObj;
 
     private final PlayerDeathEvent event;
 
@@ -38,10 +38,10 @@ public class LifeSteelEvent extends StringComponentExchanger implements EventReg
 
     @Override
     public void init() {
-        this.deather = this.event.getPlayer();
-        this.killer = deather.getKiller();
-        this.deatherUser = this.userController.readUser(this.deather.getUniqueId());
-        this.deatherUserKillStatus = this.userKillStatus.readUser(this.deather.getUniqueId());
+        this.deathPlayer = this.event.getPlayer();
+        this.killer = deathPlayer.getKiller();
+        this.killerUserObj = this.userController.readUser(this.deathPlayer.getUniqueId());
+        this.deathUserKillStatusObj = this.killStatusController.readUser(this.deathPlayer.getUniqueId());
     }
 
     @Override
@@ -54,10 +54,10 @@ public class LifeSteelEvent extends StringComponentExchanger implements EventReg
     }
 
     private boolean isDeathUserGodMode() {
-        if (BooleanUtils.isFalse(this.deatherUser.godMode()))
+        if (BooleanUtils.isFalse(this.killerUserObj.godMode()))
             return false;
 
-        Location playerLocation = this.deather.getLocation();
+        Location playerLocation = this.deathPlayer.getLocation();
         playerLocation.setY(playerLocation.getY() + 2.0);
         Runnable undyingEventTask = () -> {
             playerLocation.getWorld().playSound(playerLocation, Sound.ENTITY_WITHER_SPAWN, 1.0f, 1.0f);
@@ -76,8 +76,8 @@ public class LifeSteelEvent extends StringComponentExchanger implements EventReg
             return true;
 
         //스스로가 스스로를 죽이면 무시함
-        if (this.deather.equals(this.killer)) {
-            this.event.deathMessage(componentExchanger(this.deatherUser.nameList().getLast() + " 님이 자살했습니다.", ColorMap.RED));
+        if (this.deathPlayer.equals(this.killer)) {
+            this.event.deathMessage(componentExchanger(this.killerUserObj.nameList().getLast() + " 님이 자살했습니다.", ColorMap.RED));
             return true;
         }
 
@@ -85,36 +85,35 @@ public class LifeSteelEvent extends StringComponentExchanger implements EventReg
     }
 
     private void lifeSteel() {
-        this.killerUserKillStatus = this.userKillStatus.readUser(this.killer.getUniqueId());
+        this.killerKillStatusObj = this.killStatusController.readUser(this.killer.getUniqueId());
 
         double MAX_HEALTH_SCALE = 60.0;
         double MIN_HEALTH_SCALE = 4.0;
         double STEP_SIZE = 2.0;
 
         //valid Logic
-        if (this.deather.getHealthScale() <= MIN_HEALTH_SCALE ||
+        if (this.deathPlayer.getHealthScale() <= MIN_HEALTH_SCALE ||
                 this.killer.getHealthScale() >= MAX_HEALTH_SCALE ||
-                this.deather == killer)
+                this.deathPlayer == killer)
             return;
 
         //execute Logic
-        this.userKillStatus.healthUpdate(
-                new KillStatusBuilder(this.deatherUserKillStatus)
-                        .healthScale(this.deather.getHealthScale() - STEP_SIZE)
+        this.killStatusController.healthUpdate(
+                new KillStatusBuilder(this.deathUserKillStatusObj)
+                        .healthScale(this.deathPlayer.getHealthScale() - STEP_SIZE)
                         .build());
 
-        this.userKillStatus.healthUpdate(
-                new KillStatusBuilder(this.killerUserKillStatus)
+        this.killStatusController.healthUpdate(
+                new KillStatusBuilder(this.killerKillStatusObj)
                         .healthScale(this.killer.getHealthScale() + STEP_SIZE)
-                        .killCount(this.killerUserKillStatus.killCount() + 1)
                         .build());
 
-        playerSendMsgComponentExchanger(this.deather, this.killer.getName() + "님이 체력을 약탈했습니다.", ColorMap.RED);
-        playerSendMsgComponentExchanger(this.killer, this.deather.getName() + "님이 체력을 약탈했습니다.", ColorMap.RED);
+        playerSendMsgComponentExchanger(this.deathPlayer, this.killer.getName() + "님이 체력을 약탈했습니다.", ColorMap.RED);
+        playerSendMsgComponentExchanger(this.killer, this.deathPlayer.getName() + "님이 체력을 약탈했습니다.", ColorMap.RED);
 
-        String deathUserName = this.userController.readUser(this.killer.getUniqueId()).nameList().getLast();
+        String killerName = this.userController.readUser(this.killer.getUniqueId()).nameList().getLast();
         this.event.deathMessage(
-                componentExchanger("[KILL]" + deathUserName + " -> " + this.deatherUser.nameList().getLast(), ColorMap.PINK)
+                componentExchanger("[KILL]" + killerName + " -> " + this.killerUserObj.nameList().getLast(), ColorMap.PINK)
         );
     }
 }
