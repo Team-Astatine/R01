@@ -34,6 +34,8 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
      */
     public static boolean isMeetsJudgementCriteria(int standardValue) {
         int ranNum = Integer.parseInt(String.format("%1.0f", Math.random() * 10)); //0.0 ~ 1.0
+//        System.out.println("ranNum > " + ranNum);
+//        System.out.println("standardValue > " + standardValue);
         return ranNum <= standardValue;
     }
 
