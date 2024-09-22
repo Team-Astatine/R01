@@ -93,7 +93,6 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public static void PlayerDeathEvent(PlayerDeathEvent event) {
-        event.deathMessage(null);
         new LifeSteelEvent(event);
         new UpdateKillStatusForKiller(event);
     }
