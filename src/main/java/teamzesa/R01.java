@@ -105,7 +105,7 @@ public final class R01 extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new EventRegisterSection(), this); //function set
 
         for (CommandExecutorMap commandEnum : CommandExecutorMap.values()) {//command set
-            getCommand(commandEnum.getCommand()).setExecutor(commandEnum.newCommandExecutorInstance());
+            getCommand(commandEnum.getCommand()).setExecutor(commandEnum.newCommandExecutor());
 //            getCommand(commandEnum.getCommand()).setTabCompleter(commandEnum.newTabCompleterInstance());
         }
     }
