@@ -87,15 +87,15 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
             return;
         }
 
-        if (BooleanUtils.isFalse(this.hasProtectScroll)) {
+        if (destroy && BooleanUtils.isFalse(this.hasProtectScroll)) {
             this.item.enhanceItem().setAmount(0);
             playerSendMessage(3, ColorMap.RED);
             scrollDiscount(this.item.enhanceScroll(), this.item.protectScroll());
             return;
         }
 
-        playerSendMessage(4, ColorMap.VOTE_COLOR);
         failEnhanceScenario();
+        playerSendMessage(4, ColorMap.VOTE_COLOR);
         scrollDiscount(this.item.enhanceScroll(), this.item.protectScroll());
     }
 
