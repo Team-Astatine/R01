@@ -5,7 +5,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.CommandExecutorMap;
 
 import java.util.HashSet;
@@ -38,11 +38,11 @@ public class Moderator extends CommandRegisterSection {
                 player -> {
                     if (checkUPModerator(player)) {
                         String successComment = "지금부터 관리자 입니다.";
-                        playerSendMsgComponentExchanger(player, successComment, ColorMap.ORANGE);
+                        playerSendMsgComponentExchanger(player, successComment, ColorList.ORANGE);
                         player.setOp(true);
                     } else {
                         String FailComment = "사용권한이 없습니다.";
-                        playerSendMsgComponentExchanger(player, FailComment, ColorMap.RED);
+                        playerSendMsgComponentExchanger(player, FailComment, ColorList.RED);
                     }
                 }
         );

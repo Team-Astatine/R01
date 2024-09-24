@@ -1,24 +1,18 @@
 package teamzesa.event.PlayerJoinEvent;
 
-import net.kyori.adventure.text.Component;
 import net.kyori.adventure.title.Title;
-import net.kyori.adventure.title.TitlePart;
 import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.annotations.UnknownNullability;
 import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
 import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.userHandler.UserBuilder;
 import teamzesa.DataBase.userHandler.UserController;
 import teamzesa.event.EventRegister.EventRegister;
-import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Interface.StringComponentExchanger;
 
-import java.time.Duration;
 import java.util.Optional;
 
 
@@ -68,8 +62,8 @@ public class PlayerInfoHandler extends StringComponentExchanger implements Event
 
     private void titleMessage() {
         Title title = Title.title(
-                componentExchanger("최신버전 무정부 플라이 생야생",ColorMap.PURPLE),
-                componentExchanger("Astatine Online",ColorMap.ORANGE)
+                componentExchanger("최신버전 무정부 플라이 생야생", ColorList.PURPLE),
+                componentExchanger("Astatine Online", ColorList.ORANGE)
         );
         this.joinPlayer.showTitle(title);
     }
@@ -103,7 +97,7 @@ public class PlayerInfoHandler extends StringComponentExchanger implements Event
 
     private void sendMessageToPlayer(Player player, String existingMessage, String newMessage, boolean playedBefore) {
         String message = playedBefore ? existingMessage : newMessage;
-        playerSendMsgComponentExchanger(player, message, ColorMap.YELLOW);
+        playerSendMsgComponentExchanger(player, message, ColorList.YELLOW);
     }
 
 }

@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import teamzesa.exception.Enhance.EnhanceItemMetaException;
-import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.Enhance.*;
 import teamzesa.util.Interface.StringComponentExchanger;
 
@@ -137,7 +137,7 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         String comment = String.format("추가 방어율 : %d%%", enhanceItem.getItemMeta().getCustomModelData());
 
         return Component.text(comment)
-                .color(ColorMap.GREEN.getTextColor())
+                .color(ColorList.GREEN.getTextColor())
                 .decorate(TextDecoration.BOLD);
     }
 
@@ -149,7 +149,7 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         String comment = String.format("예상 데미지 : %.3f...", totalDmg);
 
         return Component.text(comment)
-                .color(ColorMap.GREEN.getTextColor())
+                .color(ColorList.GREEN.getTextColor())
                 .decorate(TextDecoration.BOLD);
     }
 

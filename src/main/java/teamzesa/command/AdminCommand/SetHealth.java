@@ -12,7 +12,7 @@ import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
 import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.userHandler.UserController;
 import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.CommandExecutorMap;
 
 import java.util.Optional;
@@ -42,7 +42,7 @@ public class SetHealth extends CommandRegisterSection {
         );
 
         if (ObjectUtils.allNotNull(senderUser) && BooleanUtils.isFalse(this.senderPlayer.isOp())) {
-            playerSendMsgComponentExchanger(this.senderPlayer, "해당 명령어는 플레이어가 사용할 수 없습니다.", ColorMap.RED);
+            playerSendMsgComponentExchanger(this.senderPlayer, "해당 명령어는 플레이어가 사용할 수 없습니다.", ColorList.RED);
             return false;
         }
 
@@ -81,7 +81,7 @@ public class SetHealth extends CommandRegisterSection {
         }
 
         if (ObjectUtils.notEqual(this.senderPlayer, this.targetPlayer))
-            playerSendMsgComponentExchanger(this.senderPlayer, comment, ColorMap.YELLOW);
-        playerSendMsgComponentExchanger(this.targetPlayer, comment, ColorMap.YELLOW);
+            playerSendMsgComponentExchanger(this.senderPlayer, comment, ColorList.YELLOW);
+        playerSendMsgComponentExchanger(this.targetPlayer, comment, ColorList.YELLOW);
     }
 }

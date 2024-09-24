@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.event.EventRegister.EventRegister;
-import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 public class RestrictedStackingTotemInteraction extends StringComponentExchanger implements EventRegister {
@@ -48,7 +48,7 @@ public class RestrictedStackingTotemInteraction extends StringComponentExchanger
         playerSendMsgComponentExchanger(
                 clicker,
                 "겹쳐진 토템은 [스왑키, Shift + 클릭] 으로만 옮길 수 있습니다.",
-                ColorMap.RED
+                ColorList.RED
         );
         this.event.setCancelled(true);
     }

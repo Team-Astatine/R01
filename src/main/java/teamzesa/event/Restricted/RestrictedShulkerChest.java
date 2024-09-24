@@ -8,7 +8,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.event.EventRegister.EventRegister;
-import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 public class RestrictedShulkerChest extends StringComponentExchanger implements EventRegister {
@@ -51,7 +51,7 @@ public class RestrictedShulkerChest extends StringComponentExchanger implements 
             return;
 
         this.event.setCancelled(true);
-        playerSendMsgComponentExchanger(player, "겹쳐진 토템은 셜커에 보관할 수 없습니다.", ColorMap.RED);
+        playerSendMsgComponentExchanger(player, "겹쳐진 토템은 셜커에 보관할 수 없습니다.", ColorList.RED);
 
         /*Debugging Code
 //        System.out.println("null check");

@@ -9,7 +9,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.event.EventRegister.EventRegister;
-import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 public class RestrictedItemInputDispenserHandler extends StringComponentExchanger implements EventRegister {
@@ -56,6 +56,6 @@ public class RestrictedItemInputDispenserHandler extends StringComponentExchange
             return;
 
         this.event.setCancelled(true);
-        playerSendMsgComponentExchanger(player, "해당 아이템은 디스펜서에 넣을 수 없습니다.", ColorMap.RED);
+        playerSendMsgComponentExchanger(player, "해당 아이템은 디스펜서에 넣을 수 없습니다.", ColorList.RED);
     }
 }

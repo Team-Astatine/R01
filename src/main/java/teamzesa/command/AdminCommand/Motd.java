@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.DataBase.IOHandler.ConfigIOHandler;
 import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.CommandExecutorMap;
 
 
@@ -45,12 +45,12 @@ public class Motd extends CommandRegisterSection {
     private void sendComment(CommandSender sender) {
         String comment = "New Motd Set -> " + this.newMotd;
         if (sender instanceof Player player) {
-            playerSendMsgComponentExchanger(player, comment, ColorMap.YELLOW);
+            playerSendMsgComponentExchanger(player, comment, ColorList.YELLOW);
         } else Bukkit.getLogger().info(comment);
     }
 
     private void configDataUpdate() {
-        Bukkit.motd(componentExchanger(this.newMotd, ColorMap.VOTE_COLOR));
+        Bukkit.motd(componentExchanger(this.newMotd, ColorList.VOTE_COLOR));
         ConfigIOHandler.getConfigIOHandler().worldConfigSave(this.newMotd);
     }
 }

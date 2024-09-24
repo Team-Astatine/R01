@@ -1,7 +1,6 @@
 package teamzesa.util;
 
 import net.kyori.adventure.audience.Audience;
-import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
@@ -9,7 +8,7 @@ import teamzesa.DataBase.IOHandler.ConfigIOHandler;
 import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.userHandler.UserController;
 import teamzesa.R01;
-import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 import java.util.ArrayList;
@@ -35,15 +34,15 @@ public class Announcer extends StringComponentExchanger {
     public void countAnnouncer(Player player) {
         int joinCnt = new UserController().readUser(player.getUniqueId()).joinCount();
         player.sendMessage(
-                componentExchanger(this.configIOHandler.getWorldMotdConfig(), ColorMap.SKY_BLUE)
-                        .append(componentExchanger(" " + joinCnt, ColorMap.PINK))
-                        .append(componentExchanger("번째 접속!", ColorMap.SKY_BLUE))
+                componentExchanger(this.configIOHandler.getWorldMotdConfig(), ColorList.SKY_BLUE)
+                        .append(componentExchanger(" " + joinCnt, ColorList.PINK))
+                        .append(componentExchanger("번째 접속!", ColorList.SKY_BLUE))
         );
     }
 
     public void setPlayerTabHeader(@NotNull Audience audience) {
         audience.sendPlayerListHeader(
-                componentExchanger(this.configIOHandler.getWorldMotdConfig(), ColorMap.PURPLE)
+                componentExchanger(this.configIOHandler.getWorldMotdConfig(), ColorList.PURPLE)
         );
     }
 

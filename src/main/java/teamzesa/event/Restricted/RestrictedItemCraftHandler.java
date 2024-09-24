@@ -5,7 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.CraftItemEvent;
 import teamzesa.event.EventRegister.EventRegister;
-import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 public class RestrictedItemCraftHandler extends StringComponentExchanger implements EventRegister {
@@ -34,6 +34,6 @@ public class RestrictedItemCraftHandler extends StringComponentExchanger impleme
 
         Player player = (Player) this.event.getWhoClicked();
         this.event.setCancelled(true);
-        playerSendMsgComponentExchanger(player, "해당 아이템은 조합할 수 없습니다.", ColorMap.RED);
+        playerSendMsgComponentExchanger(player, "해당 아이템은 조합할 수 없습니다.", ColorList.RED);
     }
 }

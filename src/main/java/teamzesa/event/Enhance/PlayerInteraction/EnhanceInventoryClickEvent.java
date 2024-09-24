@@ -15,7 +15,7 @@ import teamzesa.DataBase.enhance.EnhanceItemBuilder;
 import teamzesa.DataBase.entity.Enhance.EnhanceItem;
 import teamzesa.event.Enhance.GeneratingEnhanceItem;
 import teamzesa.event.EventRegister.EventRegister;
-import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.Enhance.*;
 import teamzesa.util.Interface.StringComponentExchanger;
 
@@ -87,7 +87,7 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
                 case 6 -> {
                     this.event.setCancelled(true);
                     event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
-                    event.getWhoClicked().sendMessage(createLinkComponentExchanger(ConfigIOHandler.getConfigIOHandler().getDiscordInvite(), ConfigIOHandler.getConfigIOHandler().getDiscordConfig(), ColorMap.DISCORD_COLOR));
+                    event.getWhoClicked().sendMessage(createLinkComponentExchanger(ConfigIOHandler.getConfigIOHandler().getDiscordInvite(), ConfigIOHandler.getConfigIOHandler().getDiscordConfig(), ColorList.DISCORD_COLOR));
                 }
 
                 case 7 -> {
@@ -102,7 +102,7 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
                 case 8 -> {
                     this.event.setCancelled(true);
                     event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
-                    event.getWhoClicked().sendMessage(createLinkComponentExchanger(ConfigIOHandler.getConfigIOHandler().getServerGuideNotion(), ConfigIOHandler.getConfigIOHandler().getNotionConfig(), ColorMap.NOTION_COLOR));
+                    event.getWhoClicked().sendMessage(createLinkComponentExchanger(ConfigIOHandler.getConfigIOHandler().getServerGuideNotion(), ConfigIOHandler.getConfigIOHandler().getNotionConfig(), ColorList.NOTION_COLOR));
                 }
             }
         }
@@ -125,7 +125,7 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
             comment = "허용된 주문서를 넣어주세요";
 
         if (BooleanUtils.isFalse(comment.isBlank()))
-            playerSendMsgComponentExchanger(this.ownerPlayer, comment, ColorMap.RED);
+            playerSendMsgComponentExchanger(this.ownerPlayer, comment, ColorList.RED);
 
         return comment.isBlank();
     }

@@ -10,7 +10,7 @@ import teamzesa.DataBase.IOHandler.RObjectIOHandler;
 import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.userHandler.UserController;
 import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.CommandExecutorMap;
 import teamzesa.util.Enum.DataFile;
 
@@ -42,7 +42,7 @@ public class RemoveDuplicateData extends CommandRegisterSection {
         );
 
         if (ObjectUtils.allNotNull(this.senderUser) && !this.senderPlayer.isOp() || !this.consoleSend) {
-            playerSendMsgComponentExchanger(this.senderPlayer, "해당 명령어는 플레이어가 사용할 수 없습니다.", ColorMap.RED);
+            playerSendMsgComponentExchanger(this.senderPlayer, "해당 명령어는 플레이어가 사용할 수 없습니다.", ColorList.RED);
             return false;
         }
 
@@ -66,11 +66,11 @@ public class RemoveDuplicateData extends CommandRegisterSection {
         }
 
         userController.updateAllUserData(newUsers);
-        playerSendMsgComponentExchanger(this.senderPlayer, "성공적으로 중복이 제거되었습니다.", ColorMap.YELLOW);
+        playerSendMsgComponentExchanger(this.senderPlayer, "성공적으로 중복이 제거되었습니다.", ColorList.YELLOW);
 
         new RObjectIOHandler().exportData(
                 DataFile.USER_DATA, new UserController().getAllUserTable(), getClass().getName());
-        playerSendMsgComponentExchanger(this.senderPlayer, "성공적으로 데이터가 저장되었습니다.", ColorMap.YELLOW);
+        playerSendMsgComponentExchanger(this.senderPlayer, "성공적으로 데이터가 저장되었습니다.", ColorList.YELLOW);
         return true;
     }
 }

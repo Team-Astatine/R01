@@ -9,7 +9,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.event.Enhance.EnhanceUtil;
-import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.CommandExecutorMap;
 
 public class EnhanceSet extends CommandRegisterSection {
@@ -23,13 +23,13 @@ public class EnhanceSet extends CommandRegisterSection {
         Player player = (Player) commandSender;
 
         if (BooleanUtils.isFalse(commandSender.isOp())) {
-            playerSendMsgComponentExchanger(player, "해당 명령어는 플레이어가 사용할 수 없습니다.", ColorMap.RED);
+            playerSendMsgComponentExchanger(player, "해당 명령어는 플레이어가 사용할 수 없습니다.", ColorList.RED);
             return false;
         }
 
         int enhanceLevel = Integer.parseInt(strings[0]);
         if (enhanceLevel < 1 || enhanceLevel > 10) {
-            playerSendMsgComponentExchanger(player, "0 ~ 10 사이 값만 대입 가능합니다.", ColorMap.RED);
+            playerSendMsgComponentExchanger(player, "0 ~ 10 사이 값만 대입 가능합니다.", ColorList.RED);
             return false;
         }
 
@@ -44,7 +44,7 @@ public class EnhanceSet extends CommandRegisterSection {
             e.printStackTrace();
         }
 
-        playerSendMsgComponentExchanger(player, getComment(enhanceLevel), ColorMap.GREEN);
+        playerSendMsgComponentExchanger(player, getComment(enhanceLevel), ColorList.GREEN);
         return true;
     }
 

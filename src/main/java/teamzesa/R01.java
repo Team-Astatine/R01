@@ -1,13 +1,8 @@
 package teamzesa;
 
-import net.kyori.adventure.text.Component;
 import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.util.Vector;
 import teamzesa.DataBase.IOHandler.ConfigIOHandler;
 import teamzesa.DataBase.IOHandler.RObjectIOHandler;
 import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
@@ -16,16 +11,11 @@ import teamzesa.DataBase.entity.RObject.UserKillStatus;
 import teamzesa.DataBase.userHandler.UserController;
 import teamzesa.event.EventRegister.EventRegisterSection;
 import teamzesa.util.Announcer;
-import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.CommandExecutorMap;
 import teamzesa.util.Enum.DataFile;
 import teamzesa.util.ThreadPool;
 
 import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
 
 
 public final class R01 extends JavaPlugin {

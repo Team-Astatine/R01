@@ -3,7 +3,7 @@ package teamzesa.event.RaidTriggerEvent;
 import org.bukkit.Location;
 import org.bukkit.event.raid.RaidTriggerEvent;
 import teamzesa.event.EventRegister.EventRegister;
-import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.WorldName;
 import teamzesa.util.Interface.StringComponentExchanger;
 
@@ -33,6 +33,6 @@ public class RaidAnnouncerEvent extends StringComponentExchanger implements Even
 
         sendAnnouncerComponentExchanger(
                 String.format("%s 월드의 X : %1.0f | Z : %1.0f 에서 레이드가 시작됩니다.", activeWorldKorean, x, z),
-                ColorMap.ORANGE);
+                ColorList.ORANGE);
     }
 }

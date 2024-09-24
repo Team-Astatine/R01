@@ -6,7 +6,7 @@ import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.entity.RObject.UserKillStatus;
 import teamzesa.DataBase.userHandler.UserController;
 import teamzesa.event.EventRegister.EventRegister;
-import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 public class QuitMsgEvent extends StringComponentExchanger implements EventRegister {
@@ -31,12 +31,12 @@ public class QuitMsgEvent extends StringComponentExchanger implements EventRegis
 
         if (userKillStatus.killCount() == 0)
             this.quitEvent.quitMessage(
-                    componentExchanger(" - " + this.quitUser.nameList().getLast(), ColorMap.RED)
+                    componentExchanger(" - " + this.quitUser.nameList().getLast(), ColorList.RED)
             );
 
         else
             this.quitEvent.quitMessage(
-                    componentExchanger(" - [ " + userKillStatus.killCount() + "KILL ] " + this.quitUser.nameList().getLast(), ColorMap.RED)
+                    componentExchanger(" - [ " + userKillStatus.killCount() + "KILL ] " + this.quitUser.nameList().getLast(), ColorList.RED)
             );
     }
 }

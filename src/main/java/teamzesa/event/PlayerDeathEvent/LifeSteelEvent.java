@@ -13,7 +13,7 @@ import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.entity.RObject.UserKillStatus;
 import teamzesa.DataBase.userHandler.UserController;
 import teamzesa.event.EventRegister.EventRegister;
-import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 
@@ -77,7 +77,7 @@ public class LifeSteelEvent extends StringComponentExchanger implements EventReg
 
         //스스로가 스스로를 죽이면 무시함
         if (this.deathPlayer.equals(this.killer)) {
-            this.event.deathMessage(componentExchanger(this.killerUserObj.nameList().getLast() + " 님이 자살했습니다.", ColorMap.RED));
+            this.event.deathMessage(componentExchanger(this.killerUserObj.nameList().getLast() + " 님이 자살했습니다.", ColorList.RED));
             return true;
         }
 
@@ -108,7 +108,7 @@ public class LifeSteelEvent extends StringComponentExchanger implements EventReg
                         .healthScale(this.killer.getHealthScale() + STEP_SIZE)
                         .build());
 
-        playerSendMsgComponentExchanger(this.deathPlayer, this.killer.getName() + "님이 체력을 약탈했습니다.", ColorMap.RED);
-        playerSendMsgComponentExchanger(this.killer, this.deathPlayer.getName() + "님이 체력을 약탈했습니다.", ColorMap.RED);
+        playerSendMsgComponentExchanger(this.deathPlayer, this.killer.getName() + "님이 체력을 약탈했습니다.", ColorList.RED);
+        playerSendMsgComponentExchanger(this.killer, this.deathPlayer.getName() + "님이 체력을 약탈했습니다.", ColorList.RED);
     }
 }

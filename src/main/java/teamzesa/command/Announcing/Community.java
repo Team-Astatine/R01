@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.DataBase.IOHandler.ConfigIOHandler;
 import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.CommandExecutorMap;
 
 import java.util.ArrayList;
@@ -26,9 +26,9 @@ public class Community extends CommandRegisterSection {
         String discordLink = configIOHandler.getDiscordConfig();
         String mineListLink = configIOHandler.getMineListConfig();
 
-        ColorMap voteColor = ColorMap.GREEN;
-        ColorMap notionColor = ColorMap.NOTION_COLOR;
-        ColorMap discordColor = ColorMap.DISCORD_COLOR;
+        ColorList voteColor = ColorList.GREEN;
+        ColorList notionColor = ColorList.NOTION_COLOR;
+        ColorList discordColor = ColorList.DISCORD_COLOR;
 
         ArrayList<Component> communityLink = new ArrayList<>();
         communityLink.add(createLinkComponentExchanger(configIOHandler.getMineListVote(), mineListLink, voteColor));

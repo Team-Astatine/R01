@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.DataBase.IOHandler.ConfigIOHandler;
 import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.CommandExecutorMap;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class ServerTip extends CommandRegisterSection {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         ConfigIOHandler configIOHandler = ConfigIOHandler.getConfigIOHandler();
-        ColorMap commonColor = ColorMap.RED;
+        ColorList commonColor = ColorList.RED;
 
         ArrayList<Component> serverTip = new ArrayList<>();
         serverTip.add(componentExchanger(configIOHandler.getSteelLifeTip(), commonColor));
