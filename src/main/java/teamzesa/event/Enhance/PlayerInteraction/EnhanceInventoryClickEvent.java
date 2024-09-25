@@ -19,6 +19,7 @@ import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.Enhance.*;
 import teamzesa.util.Interface.StringComponentExchanger;
 
+import java.util.Arrays;
 import java.util.HashSet;
 
 
@@ -61,20 +62,12 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
 
 //        Add Allowed Item
         if (ObjectUtils.allNotNull(this.enhanceItem, this.scrollStuff)) {
-            for (ShortRangeWeaponMap weapon : ShortRangeWeaponMap.values())
-                this.allowedItem.add(weapon.getMaterial());
+            Arrays.stream(ShortRangeWeaponMap.values()).forEach(i -> this.allowedItem.add(i.getMaterial()));
+            Arrays.stream(LongRangeWeaponMap.values()).forEach(i -> this.allowedItem.add(i.getMaterial()));
+            Arrays.stream(ArmourMap.values()).forEach(i -> this.allowedItem.add(i.getMaterial()));
 
-            for (LongRangeWeaponMap weapon : LongRangeWeaponMap.values())
-                this.allowedItem.add(weapon.getMaterial());
-
-            for (ArmourMap armour : ArmourMap.values())
-                this.allowedItem.add(armour.getMaterial());
-
-            for (Scroll scroll : Scroll.values())
-                this.allowedScroll.add(scroll.getMaterial());
-
-            for (ProtectScroll scroll : ProtectScroll.values())
-                this.allowedScroll.add(scroll.getMaterial());
+            Arrays.stream(Scroll.values()).forEach(i -> this.allowedScroll.add(i.getMaterial()));
+            Arrays.stream(ProtectScroll.values()).forEach(i -> this.allowedScroll.add(i.getMaterial()));
         }
 
         Inventory playerOpenInv = this.event.getClickedInventory();

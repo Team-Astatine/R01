@@ -22,6 +22,7 @@ import teamzesa.util.Enum.WorldName;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.RanNumGenerator;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 public class ImportPlayerStatusEvent extends StringComponentExchanger implements EventRegister {
@@ -91,9 +92,9 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
         if (this.player.hasPlayedBefore())
             return;
 
-        for (FoodKit kit : FoodKit.values()) {
-            this.player.getInventory().addItem(kit.getFood());
-        }
+        Arrays.stream(FoodKit.values()).forEach(i ->
+                this.player.getInventory().addItem(i.getFood())
+        );
 
         /* Non Using Netherite Kit
         for (ArmourKit kit : ArmourKit.values()) {
@@ -104,11 +105,11 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
         }
         */
 
-        for (ToolKit kit : ToolKit.values()) {
-            ItemStack tool = kit.getToolKit();
-            tool.setAmount(kit.getItemCount());
+        Arrays.stream(ToolKit.values()).forEach(i -> {
+            ItemStack tool = i.getToolKit();
+            tool.setAmount(i.getItemCount());
             this.player.getInventory().addItem(tool);
-        }
+        });
     }
 
     private void announcingJoinMsg() {
