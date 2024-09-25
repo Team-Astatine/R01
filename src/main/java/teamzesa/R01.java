@@ -16,6 +16,7 @@ import teamzesa.util.Enum.DataFile;
 import teamzesa.util.ThreadPool;
 
 import java.lang.reflect.Field;
+import java.util.EnumSet;
 
 
 public final class R01 extends JavaPlugin {
@@ -104,10 +105,8 @@ public final class R01 extends JavaPlugin {
     private void eventAndFunctionRegister() {
         getServer().getPluginManager().registerEvents(new EventRegisterSection(), this); //function set
 
-        for (CommandExecutorMap commandEnum : CommandExecutorMap.values()) {//command set
-            getCommand(commandEnum.getCommand()).setExecutor(commandEnum.newCommandExecutor());
-//            getCommand(commandEnum.getCommand()).setTabCompleter(commandEnum.newTabCompleterInstance());
-        }
+        EnumSet<CommandExecutorMap> commandList = EnumSet.allOf(CommandExecutorMap.class);
+        commandList.forEach(c -> getCommand(c.getCommand()).setExecutor(c.newCommandExecutor()));
     }
 
     private void autoSaveSchedule() {
