@@ -2,7 +2,7 @@ package teamzesa.util.Enum;
 
 import net.kyori.adventure.text.format.TextColor;
 
-public enum ColorMap {
+public enum ColorList {
     WHITE(TextColor.color(255, 255, 255)),
     WHITE_TO_RED1(TextColor.color(255, 227, 242)),
     WHITE_TO_RED2(TextColor.color(255, 204, 226)),
@@ -26,7 +26,7 @@ public enum ColorMap {
 
     private final TextColor textColor;
 
-    ColorMap(TextColor colorName) {
+    ColorList(TextColor colorName) {
         this.textColor = colorName;
     }
 

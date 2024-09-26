@@ -7,7 +7,6 @@ import teamzesa.command.Announcing.Community;
 import teamzesa.command.Announcing.Help;
 import teamzesa.command.Announcing.ServerTip;
 import teamzesa.command.*;
-import teamzesa.command.register.CommandRegisterSection;
 
 public enum CommandExecutorMap {
 //    User
@@ -35,9 +34,9 @@ public enum CommandExecutorMap {
     ENHANCE_SET("enhance", new EnhanceSet());
 
     private final String command;
-    private final CommandRegisterSection executor;
+    private final CommandExecutor executor;
 
-    CommandExecutorMap(String command, CommandRegisterSection executor) {
+    CommandExecutorMap(String command, CommandExecutor executor) {
         this.command = command;
         this.executor = executor;
     }
@@ -46,7 +45,7 @@ public enum CommandExecutorMap {
         return command;
     }
 
-    public CommandExecutor newCommandExecutorInstance() {
+    public CommandExecutor newCommandExecutor() {
         return executor;
     }
 

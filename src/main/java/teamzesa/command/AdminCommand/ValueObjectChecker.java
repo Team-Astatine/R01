@@ -10,7 +10,7 @@ import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.entity.RObject.UserKillStatus;
 import teamzesa.DataBase.userHandler.UserController;
 import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.CommandExecutorMap;
 
 import java.util.Optional;
@@ -47,7 +47,7 @@ public class ValueObjectChecker extends CommandRegisterSection {
 
     private void sendComment(CommandSender sender, String comment) {
         if (sender instanceof Player)
-            playerSendMsgComponentExchanger(sender, comment, ColorMap.YELLOW);
+            playerSendMsgComponentExchanger(sender, comment, ColorList.YELLOW);
         else Bukkit.getLogger().info(comment);
     }
 }

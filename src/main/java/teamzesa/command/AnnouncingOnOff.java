@@ -8,7 +8,7 @@ import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.userHandler.UserBuilder;
 import teamzesa.DataBase.userHandler.UserController;
 import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.CommandExecutorMap;
 
 public class AnnouncingOnOff extends CommandRegisterSection {
@@ -22,7 +22,7 @@ public class AnnouncingOnOff extends CommandRegisterSection {
         User targetUser = new UserController().readUser(((Player) commandSender).getUniqueId());
 
         String comment = targetUser.announcingSkip() ? "비활성화" : "활성화";
-        playerSendMsgComponentExchanger(commandSender, "공지 " + comment + " 완료", ColorMap.YELLOW);
+        playerSendMsgComponentExchanger(commandSender, "공지 " + comment + " 완료", ColorList.YELLOW);
 
         new UserBuilder(targetUser)
                 .isAnnouncingSkip(!targetUser.announcingSkip())

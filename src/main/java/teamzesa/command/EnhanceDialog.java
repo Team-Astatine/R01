@@ -14,7 +14,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.DataBase.enhance.EnhanceInventoryHandler;
 import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.CommandExecutorMap;
 
 
@@ -44,19 +44,19 @@ public class EnhanceDialog extends CommandRegisterSection {
         this.enhanceInventoryHandler = EnhanceInventoryHandler.getEnhanceInventoryHandler();
 
 //        panel
-        this.targetStuff = createItem(Material.NETHERITE_SWORD, "강화할 아래슬롯에 무기를 올려주세요", ColorMap.ORANGE);
-        this.scrollStuff = createItem(Material.ANVIL, "아이템에 들어갈 재료를 아래슬롯에 넣어주세요", ColorMap.ORANGE);
-        this.protectScrollStuff = createItem(Material.HEART_OF_THE_SEA, "파괴방어 스크롤을 아래슬롯에 넣어주세요", ColorMap.ORANGE);
-        this.executeButton = createExecuteItem(Material.RED_STAINED_GLASS_PANE, "강화 실행", ColorMap.RED);
-        this.discordButton = createExecuteItem(Material.LIGHT_BLUE_STAINED_GLASS_PANE, "디스코드", ColorMap.DISCORD_COLOR);
-        this.notionButton = createExecuteItem(Material.LIGHT_GRAY_STAINED_GLASS_PANE, "강화법 확인하기", ColorMap.NOTION_COLOR);
+        this.targetStuff = createItem(Material.NETHERITE_SWORD, "강화할 아래슬롯에 무기를 올려주세요", ColorList.ORANGE);
+        this.scrollStuff = createItem(Material.ANVIL, "아이템에 들어갈 재료를 아래슬롯에 넣어주세요", ColorList.ORANGE);
+        this.protectScrollStuff = createItem(Material.HEART_OF_THE_SEA, "파괴방어 스크롤을 아래슬롯에 넣어주세요", ColorList.ORANGE);
+        this.executeButton = createExecuteItem(Material.RED_STAINED_GLASS_PANE, "강화 실행", ColorList.RED);
+        this.discordButton = createExecuteItem(Material.LIGHT_BLUE_STAINED_GLASS_PANE, "디스코드", ColorList.DISCORD_COLOR);
+        this.notionButton = createExecuteItem(Material.LIGHT_GRAY_STAINED_GLASS_PANE, "강화법 확인하기", ColorList.NOTION_COLOR);
     }
 
-    private ItemStack createExecuteItem(Material material, String comment, ColorMap color) {
+    private ItemStack createExecuteItem(Material material, String comment, ColorList color) {
         return createItem(material, comment, color);
     }
 
-    private ItemStack createItem(Material material, String comment, ColorMap color) {
+    private ItemStack createItem(Material material, String comment, ColorList color) {
         ItemStack item = new ItemStack(material);
         ItemMeta meta = item.getItemMeta();
 
@@ -85,7 +85,7 @@ public class EnhanceDialog extends CommandRegisterSection {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         this.sendPlayer = (Player) commandSender;
-        enhanceDialog = Bukkit.createInventory(sendPlayer, InventoryType.DROPPER, componentExchanger("강화", ColorMap.RED));
+        enhanceDialog = Bukkit.createInventory(sendPlayer, InventoryType.DROPPER, componentExchanger("강화", ColorList.RED));
 
         /*
         0 1 2

@@ -6,7 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import teamzesa.event.EventRegister.EventRegister;
-import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 public class RestrictedEntityPInteractHandler extends StringComponentExchanger implements EventRegister {
@@ -38,6 +38,6 @@ public class RestrictedEntityPInteractHandler extends StringComponentExchanger i
             return;
 
         this.event.setCancelled(true);
-        playerSendMsgComponentExchanger(this.event.getPlayer(), "해당 아이템은 설치할 수 없습니다.", ColorMap.RED);
+        playerSendMsgComponentExchanger(this.event.getPlayer(), "해당 아이템은 설치할 수 없습니다.", ColorList.RED);
     }
 }

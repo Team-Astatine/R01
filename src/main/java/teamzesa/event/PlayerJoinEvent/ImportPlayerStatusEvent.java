@@ -15,13 +15,14 @@ import teamzesa.DataBase.userHandler.UserController;
 import teamzesa.command.AdminCommand.God;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Announcer;
-import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.Kit.FoodKit;
 import teamzesa.util.Enum.Kit.ToolKit;
 import teamzesa.util.Enum.WorldName;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.RanNumGenerator;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 public class ImportPlayerStatusEvent extends StringComponentExchanger implements EventRegister {
@@ -91,9 +92,9 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
         if (this.player.hasPlayedBefore())
             return;
 
-        for (FoodKit kit : FoodKit.values()) {
-            this.player.getInventory().addItem(kit.getFood());
-        }
+        Arrays.stream(FoodKit.values()).forEach(i ->
+                this.player.getInventory().addItem(i.getFood())
+        );
 
         /* Non Using Netherite Kit
         for (ArmourKit kit : ArmourKit.values()) {
@@ -104,11 +105,11 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
         }
         */
 
-        for (ToolKit kit : ToolKit.values()) {
-            ItemStack tool = kit.getToolKit();
-            tool.setAmount(kit.getItemCount());
+        Arrays.stream(ToolKit.values()).forEach(i -> {
+            ItemStack tool = i.getToolKit();
+            tool.setAmount(i.getItemCount());
             this.player.getInventory().addItem(tool);
-        }
+        });
     }
 
     private void announcingJoinMsg() {
@@ -117,11 +118,11 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
 
         if (this.userKillStatus.killCount() == 0)
             this.event.joinMessage(
-                    componentExchanger(" + " + this.user.nameList().getLast(), ColorMap.RED)
+                    componentExchanger(" + " + this.user.nameList().getLast(), ColorList.RED)
             );
 
         else this.event.joinMessage(
-                componentExchanger(" + [ " + this.userKillStatus.killCount() + "KILL ] " + user.nameList().getLast(), ColorMap.RED)
+                componentExchanger(" + [ " + this.userKillStatus.killCount() + "KILL ] " + user.nameList().getLast(), ColorList.RED)
         );
     }
 

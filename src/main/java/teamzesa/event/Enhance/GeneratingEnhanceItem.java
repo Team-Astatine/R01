@@ -4,7 +4,7 @@ import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.Material;
 import teamzesa.DataBase.entity.Enhance.EnhanceItem;
-import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.Enhance.ProtectScroll;
 import teamzesa.util.Enum.Enhance.Scroll;
 
@@ -57,17 +57,17 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
         int currentCustomModelData = this.item.enhanceItem().getItemMeta().getCustomModelData();
 
         if (currentCustomModelData >= this.MAX_LEVEL) {
-            playerSendMessage(2, ColorMap.RED);
+            playerSendMessage(2, ColorList.RED);
             return;
         }
 
 //        Scroll Valid
         if (BooleanUtils.isFalse(this.scrollEnough)) {
-            playerSendMessage(8, ColorMap.RED);
+            playerSendMessage(8, ColorList.RED);
             return;
         }
         if (this.hasProtectScroll && BooleanUtils.isFalse(this.protectScrollEnough)) {
-            playerSendMessage(7, ColorMap.RED);
+            playerSendMessage(7, ColorList.RED);
             return;
         }
 
@@ -89,18 +89,18 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
 
         if (destroy && BooleanUtils.isFalse(this.hasProtectScroll)) {
             this.item.enhanceItem().setAmount(0);
-            playerSendMessage(3, ColorMap.RED);
+            playerSendMessage(3, ColorList.RED);
             scrollDiscount(this.item.enhanceScroll(), this.item.protectScroll());
             return;
         }
 
         failEnhanceScenario();
-        playerSendMessage(4, ColorMap.VOTE_COLOR);
+        playerSendMessage(4, ColorList.VOTE_COLOR);
         scrollDiscount(this.item.enhanceScroll(), this.item.protectScroll());
     }
 
     private void successEnhanceScenario() {
-        playerSendMessage(6, ColorMap.DISCORD_COLOR);
+        playerSendMessage(6, ColorList.DISCORD_COLOR);
         try {
             increaseEnhanceItemLevel(this.item.enhanceItem(), +1);
         } catch (Exception e) {
@@ -109,7 +109,7 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
     }
 
     private void failEnhanceScenario() {
-        playerSendMessage(5, ColorMap.PINK);
+        playerSendMessage(5, ColorList.PINK);
         try {
             increaseEnhanceItemLevel(this.item.enhanceItem(), -1);
         } catch (Exception e) {
@@ -117,7 +117,7 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
         }
     }
 
-    private void playerSendMessage(int commentCode, ColorMap commentColor) {
+    private void playerSendMessage(int commentCode, ColorList commentColor) {
         int currentCustomModelData = 0;
         if (ObjectUtils.notEqual(this.item.enhanceItem().getType(), Material.AIR))
             currentCustomModelData = this.item.enhanceItem().getItemMeta().getCustomModelData();

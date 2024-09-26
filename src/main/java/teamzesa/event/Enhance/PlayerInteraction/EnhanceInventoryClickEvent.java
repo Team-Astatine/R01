@@ -15,10 +15,11 @@ import teamzesa.DataBase.enhance.EnhanceItemBuilder;
 import teamzesa.DataBase.entity.Enhance.EnhanceItem;
 import teamzesa.event.Enhance.GeneratingEnhanceItem;
 import teamzesa.event.EventRegister.EventRegister;
-import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.Enhance.*;
 import teamzesa.util.Interface.StringComponentExchanger;
 
+import java.util.Arrays;
 import java.util.HashSet;
 
 
@@ -61,20 +62,12 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
 
 //        Add Allowed Item
         if (ObjectUtils.allNotNull(this.enhanceItem, this.scrollStuff)) {
-            for (ShortRangeWeaponMap weapon : ShortRangeWeaponMap.values())
-                this.allowedItem.add(weapon.getMaterial());
+            Arrays.stream(ShortRangeWeaponMap.values()).forEach(i -> this.allowedItem.add(i.getMaterial()));
+            Arrays.stream(LongRangeWeaponMap.values()).forEach(i -> this.allowedItem.add(i.getMaterial()));
+            Arrays.stream(ArmourMap.values()).forEach(i -> this.allowedItem.add(i.getMaterial()));
 
-            for (LongRangeWeaponMap weapon : LongRangeWeaponMap.values())
-                this.allowedItem.add(weapon.getMaterial());
-
-            for (ArmourMap armour : ArmourMap.values())
-                this.allowedItem.add(armour.getMaterial());
-
-            for (Scroll scroll : Scroll.values())
-                this.allowedScroll.add(scroll.getMaterial());
-
-            for (ProtectScroll scroll : ProtectScroll.values())
-                this.allowedScroll.add(scroll.getMaterial());
+            Arrays.stream(Scroll.values()).forEach(i -> this.allowedScroll.add(i.getMaterial()));
+            Arrays.stream(ProtectScroll.values()).forEach(i -> this.allowedScroll.add(i.getMaterial()));
         }
 
         Inventory playerOpenInv = this.event.getClickedInventory();
@@ -87,7 +80,7 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
                 case 6 -> {
                     this.event.setCancelled(true);
                     event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
-                    event.getWhoClicked().sendMessage(createLinkComponentExchanger(ConfigIOHandler.getConfigIOHandler().getDiscordInvite(), ConfigIOHandler.getConfigIOHandler().getDiscordConfig(), ColorMap.DISCORD_COLOR));
+                    event.getWhoClicked().sendMessage(createLinkComponentExchanger(ConfigIOHandler.getConfigIOHandler().getDiscordInvite(), ConfigIOHandler.getConfigIOHandler().getDiscordConfig(), ColorList.DISCORD_COLOR));
                 }
 
                 case 7 -> {
@@ -102,7 +95,7 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
                 case 8 -> {
                     this.event.setCancelled(true);
                     event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
-                    event.getWhoClicked().sendMessage(createLinkComponentExchanger(ConfigIOHandler.getConfigIOHandler().getServerGuideNotion(), ConfigIOHandler.getConfigIOHandler().getNotionConfig(), ColorMap.NOTION_COLOR));
+                    event.getWhoClicked().sendMessage(createLinkComponentExchanger(ConfigIOHandler.getConfigIOHandler().getServerGuideNotion(), ConfigIOHandler.getConfigIOHandler().getNotionConfig(), ColorList.NOTION_COLOR));
                 }
             }
         }
@@ -125,7 +118,7 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
             comment = "허용된 주문서를 넣어주세요";
 
         if (BooleanUtils.isFalse(comment.isBlank()))
-            playerSendMsgComponentExchanger(this.ownerPlayer, comment, ColorMap.RED);
+            playerSendMsgComponentExchanger(this.ownerPlayer, comment, ColorList.RED);
 
         return comment.isBlank();
     }

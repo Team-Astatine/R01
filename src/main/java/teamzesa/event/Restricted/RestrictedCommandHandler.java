@@ -4,7 +4,7 @@ import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import teamzesa.event.EventRegister.EventRegister;
-import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 public class RestrictedCommandHandler extends StringComponentExchanger implements EventRegister {
@@ -37,6 +37,6 @@ public class RestrictedCommandHandler extends StringComponentExchanger implement
             return;
 
         this.event.setCancelled(true);
-        playerSendMsgComponentExchanger(this.commandSender, "해당 명령어는 사용불가합니다.", ColorMap.RED);
+        playerSendMsgComponentExchanger(this.commandSender, "해당 명령어는 사용불가합니다.", ColorList.RED);
     }
 }

@@ -13,7 +13,7 @@ import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.userHandler.UserBuilder;
 import teamzesa.DataBase.userHandler.UserController;
 import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.CommandExecutorMap;
 
 import java.util.Optional;
@@ -42,7 +42,7 @@ public class God extends CommandRegisterSection {
         );
 
         if (ObjectUtils.allNotNull(this.senderUser) && BooleanUtils.isFalse(this.senderPlayer.isOp())) {
-            playerSendMsgComponentExchanger(this.senderPlayer, "해당 명령어는 플레이어가 사용할 수 없습니다.", ColorMap.RED);
+            playerSendMsgComponentExchanger(this.senderPlayer, "해당 명령어는 플레이어가 사용할 수 없습니다.", ColorList.RED);
             return false;
         }
 
@@ -52,7 +52,7 @@ public class God extends CommandRegisterSection {
 
             if (this.consoleSend)
                 Bukkit.getLogger().info("[R01] " + comment);
-            else playerSendMsgComponentExchanger(senderPlayer, comment, ColorMap.RED);
+            else playerSendMsgComponentExchanger(senderPlayer, comment, ColorList.RED);
             return false;
         }
 
@@ -77,9 +77,9 @@ public class God extends CommandRegisterSection {
             Bukkit.getLogger().info("[R01] " + targetUser.nameList().getLast() + comment);
 
         else if (ObjectUtils.notEqual(this.senderPlayer, targetPlayer))
-            playerSendMsgComponentExchanger(this.senderPlayer, targetUser.nameList().getLast() + comment, ColorMap.ORANGE);
+            playerSendMsgComponentExchanger(this.senderPlayer, targetUser.nameList().getLast() + comment, ColorList.ORANGE);
 
-        playerSendMsgComponentExchanger(targetPlayer, "당신" + comment, ColorMap.ORANGE);
+        playerSendMsgComponentExchanger(targetPlayer, "당신" + comment, ColorList.ORANGE);
 
     }
 

@@ -1,13 +1,8 @@
 package teamzesa;
 
-import net.kyori.adventure.text.Component;
 import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.util.Vector;
 import teamzesa.DataBase.IOHandler.ConfigIOHandler;
 import teamzesa.DataBase.IOHandler.RObjectIOHandler;
 import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
@@ -16,16 +11,12 @@ import teamzesa.DataBase.entity.RObject.UserKillStatus;
 import teamzesa.DataBase.userHandler.UserController;
 import teamzesa.event.EventRegister.EventRegisterSection;
 import teamzesa.util.Announcer;
-import teamzesa.util.Enum.ColorMap;
 import teamzesa.util.Enum.CommandExecutorMap;
 import teamzesa.util.Enum.DataFile;
 import teamzesa.util.ThreadPool;
 
 import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.EnumSet;
 
 
 public final class R01 extends JavaPlugin {
@@ -101,68 +92,6 @@ public final class R01 extends JavaPlugin {
         );
     }
 
-    public void speedLimiter() {
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(this,
-                () -> {
-                    double allowedMaxMetersPerSec = 110.0;
-                    Iterator playersIterator = Bukkit.getOnlinePlayers().iterator();
-
-                    Set<String> tped = new HashSet();
-                    HashMap<String, Location> locs = new HashMap();
-
-                    while (true) {
-                        while (true) {
-                            Player player;
-                            do {
-                                if (!playersIterator.hasNext()) {
-                                    return;
-                                }
-
-                                player = (Player) playersIterator.next();
-                            } while (player.isOp());
-
-                            if (locs.get(player.getName()) != null && !tped.contains(player.getName())) {
-                                Location prevloc = (locs.get(player.getName())).clone();
-                                Location newloc = player.getLocation().clone();
-                                System.out.println(prevloc);
-                                System.out.println(newloc);
-
-                                Vector v = newloc.subtract(prevloc).toVector();
-                                if (v.clone().normalize().getY() < -0.95) {
-                                    locs.remove(player.getName());
-                                    continue;
-                                }
-
-                                double distance = v.length();
-                                if (distance > allowedMaxMetersPerSec) {
-                                    if (player.isInsideVehicle()) {
-                                        Entity vehicle = player.getVehicle();
-                                        player.leaveVehicle();
-                                        Location entityLoc = prevloc.clone().add(0.0, 0.5, 0.0);
-                                        vehicle.teleport(entityLoc);
-                                        player.teleport(prevloc);
-                                    } else {
-                                        player.teleport(prevloc);
-                                    }
-
-                                    player.sendMessage(
-                                            Component.text("너무 빠릅니다.")
-                                                    .color(ColorMap.RED.getTextColor())
-                                    );
-                                    continue;
-                                }
-                            }
-
-                            locs.put(player.getName(), player.getLocation().clone());
-                            tped.remove(player.getName());
-                        }
-                    }
-                },
-                0L,
-                20L
-        );
-    }
-
     public void configFileLoader() {
 //        config Set
         ConfigIOHandler configIOHandler = ConfigIOHandler.getConfigIOHandler();
@@ -176,10 +105,8 @@ public final class R01 extends JavaPlugin {
     private void eventAndFunctionRegister() {
         getServer().getPluginManager().registerEvents(new EventRegisterSection(), this); //function set
 
-        for (CommandExecutorMap commandEnum : CommandExecutorMap.values()) {//command set
-            getCommand(commandEnum.getCommand()).setExecutor(commandEnum.newCommandExecutorInstance());
-//            getCommand(commandEnum.getCommand()).setTabCompleter(commandEnum.newTabCompleterInstance());
-        }
+        EnumSet<CommandExecutorMap> commandList = EnumSet.allOf(CommandExecutorMap.class);
+        commandList.forEach(c -> getCommand(c.getCommand()).setExecutor(c.newCommandExecutor()));
     }
 
     private void autoSaveSchedule() {

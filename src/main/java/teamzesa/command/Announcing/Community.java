@@ -1,42 +1,50 @@
 package teamzesa.command.Announcing;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.ClickEvent;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.DataBase.IOHandler.ConfigIOHandler;
-import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.util.Enum.ColorMap;
-import teamzesa.util.Enum.CommandExecutorMap;
+import teamzesa.util.Enum.ColorList;
 
-import java.util.ArrayList;
-
-public class Community extends CommandRegisterSection {
-
-    public Community() {
-        super(CommandExecutorMap.COMMUNITY);
-    }
+public record Community() implements CommandExecutor {
 
     @Override
-    public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+    public boolean onCommand(final @NotNull CommandSender commandSender,
+                             final @NotNull Command command,
+                             final @NotNull String s,
+                             final @NotNull String[] strings) {
+
         ConfigIOHandler configIOHandler = ConfigIOHandler.getConfigIOHandler();
 
         String notionLink = configIOHandler.getNotionConfig();
         String discordLink = configIOHandler.getDiscordConfig();
         String mineListLink = configIOHandler.getMineListConfig();
 
-        ColorMap voteColor = ColorMap.GREEN;
-        ColorMap notionColor = ColorMap.NOTION_COLOR;
-        ColorMap discordColor = ColorMap.DISCORD_COLOR;
+        TextColor notionColor = ColorList.NOTION_COLOR.getTextColor();
+        TextColor discordColor = ColorList.DISCORD_COLOR.getTextColor();
+        TextColor mineListColor = ColorList.GREEN.getTextColor();
 
-        ArrayList<Component> communityLink = new ArrayList<>();
-        communityLink.add(createLinkComponentExchanger(configIOHandler.getMineListVote(), mineListLink, voteColor));
-        communityLink.add(createLinkComponentExchanger(configIOHandler.getDiscordInvite(), discordLink, discordColor));
-        communityLink.add(createLinkComponentExchanger(configIOHandler.getServerGuideNotion(), notionLink, notionColor));
+        commandSender.sendMessage(
+                Component.text(configIOHandler.getMineListVote())
+                        .color(mineListColor)
+                        .clickEvent(ClickEvent.openUrl(mineListLink))
+        );
 
-        for (Component comment : communityLink)
-            playerSendMsgComponentExchanger((Player) commandSender, comment);
+        commandSender.sendMessage(
+                Component.text(configIOHandler.getDiscordInvite())
+                        .color(discordColor)
+                        .clickEvent(ClickEvent.openUrl(discordLink))
+        );
+
+        commandSender.sendMessage(
+                Component.text(configIOHandler.getServerGuideNotion())
+                        .color(notionColor)
+                        .clickEvent(ClickEvent.openUrl(notionLink))
+        );
 
         return true;
     }

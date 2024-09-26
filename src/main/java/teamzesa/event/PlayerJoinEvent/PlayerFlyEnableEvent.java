@@ -9,7 +9,7 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.userHandler.UserController;
 import teamzesa.event.EventRegister.EventRegister;
-import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 public class PlayerFlyEnableEvent extends StringComponentExchanger implements EventRegister {
@@ -59,6 +59,6 @@ public class PlayerFlyEnableEvent extends StringComponentExchanger implements Ev
         if (user.godMode())
             return;
 
-        playerSendMsgComponentExchanger(this.player, this.comment, ColorMap.YELLOW);
+        playerSendMsgComponentExchanger(this.player, this.comment, ColorList.YELLOW);
     }
 }

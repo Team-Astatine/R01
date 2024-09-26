@@ -1,24 +1,25 @@
 package teamzesa.command.Announcing;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.DataBase.IOHandler.ConfigIOHandler;
-import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.util.Enum.ColorMap;
-import teamzesa.util.Enum.CommandExecutorMap;
+import teamzesa.util.Enum.ColorList;
 
-public class Help extends CommandRegisterSection {
-    public Help() {
-        super(CommandExecutorMap.HELP);
-    }
+public record Help() implements CommandExecutor {
 
     @Override
-    public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
-        ConfigIOHandler configIOHandler = ConfigIOHandler.getConfigIOHandler();
+    public boolean onCommand(final @NotNull CommandSender commandSender,
+                             final @NotNull Command command,
+                             final @NotNull String s,
+                             final @NotNull String[] strings) {
 
-        playerSendMsgComponentExchanger((Player) commandSender, configIOHandler.getHelp(), ColorMap.WHITE_TO_RED6);
+        ConfigIOHandler configIOHandler = ConfigIOHandler.getConfigIOHandler();
+        commandSender.sendMessage(Component.text(
+                configIOHandler.getHelp(), ColorList.WHITE_TO_RED6.getTextColor())
+        );
         return true;
     }
 }

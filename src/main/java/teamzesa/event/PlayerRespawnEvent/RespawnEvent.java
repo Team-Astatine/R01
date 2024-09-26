@@ -4,7 +4,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import teamzesa.event.EventRegister.EventRegister;
-import teamzesa.util.Enum.ColorMap;
+import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 
@@ -34,6 +34,6 @@ public class RespawnEvent extends StringComponentExchanger implements EventRegis
 
         String comment = this.event.isAnchorSpawn() ? "정박기로 텔레포트 합니다" : "침대로 텔레포트 합니다";
 
-        playerSendMsgComponentExchanger(this.player, comment, ColorMap.YELLOW);
+        playerSendMsgComponentExchanger(this.player, comment, ColorList.YELLOW);
     }
 }
