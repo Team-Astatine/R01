@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.DataBase.enhance.EnhanceInventoryHandler;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.ColorList;
-import teamzesa.util.Enum.CommandExecutorMap;
+import teamzesa.util.Enum.CommandType;
 
 
 public class EnhanceDialog extends CommandRegisterSection {
@@ -36,7 +36,7 @@ public class EnhanceDialog extends CommandRegisterSection {
     public final static int EXECUTE_NOTION_DATA = 50000;
 
     public EnhanceDialog() {
-        super(CommandExecutorMap.ENHANCE);
+        super(CommandType.ENHANCE);
         init();
     }
 

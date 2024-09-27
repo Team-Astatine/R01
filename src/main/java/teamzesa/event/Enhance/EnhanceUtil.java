@@ -106,8 +106,8 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         if (itemMeta.getCustomModelData() > 0) { // 0 == Remove All Item Lore /enhance 0
             lore.add(getEnhanceStatusLore(item));
 
-            ArmourMap armourMap = ArmourMap.findByItemStack(item);
-            if (armourMap.getMaterial().equals(Material.AIR))
+            ArmourList armourList = ArmourList.findByItemStack(item);
+            if (armourList.getMaterial().equals(Material.AIR))
                 lore.add(getWeaponDamageLore(item));
             else
                 lore.add(getEnhanceDecreaseDamagePercentageLore(item));
@@ -175,10 +175,10 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         try {
             if (ObjectUtils.isNotEmpty(protectScroll)) {
                 protectScroll.setAmount(protectScroll.getAmount()
-                        - ProtectScroll.findByItemStack(protectScroll).getDiscountValue());
+                        - ProtectScrollList.findByItemStack(protectScroll).getDiscountValue());
             }
 
-            scroll.setAmount(scroll.getAmount() - Scroll.findByItemStack(scroll).getDiscountValue());
+            scroll.setAmount(scroll.getAmount() - ScrollList.findByItemStack(scroll).getDiscountValue());
         } catch (Exception e) {
             e.printStackTrace();
         }

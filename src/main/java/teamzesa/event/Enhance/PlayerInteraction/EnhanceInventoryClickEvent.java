@@ -64,10 +64,10 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
         if (ObjectUtils.allNotNull(this.enhanceItem, this.scrollStuff)) {
             Arrays.stream(ShortRangeWeaponMap.values()).forEach(i -> this.allowedItem.add(i.getMaterial()));
             Arrays.stream(LongRangeWeaponMap.values()).forEach(i -> this.allowedItem.add(i.getMaterial()));
-            Arrays.stream(ArmourMap.values()).forEach(i -> this.allowedItem.add(i.getMaterial()));
+            Arrays.stream(ArmourList.values()).forEach(i -> this.allowedItem.add(i.getMaterial()));
 
-            Arrays.stream(Scroll.values()).forEach(i -> this.allowedScroll.add(i.getMaterial()));
-            Arrays.stream(ProtectScroll.values()).forEach(i -> this.allowedScroll.add(i.getMaterial()));
+            Arrays.stream(ScrollList.values()).forEach(i -> this.allowedScroll.add(i.getMaterial()));
+            Arrays.stream(ProtectScrollList.values()).forEach(i -> this.allowedScroll.add(i.getMaterial()));
         }
 
         Inventory playerOpenInv = this.event.getClickedInventory();

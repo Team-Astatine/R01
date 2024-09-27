@@ -6,13 +6,13 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.ColorList;
-import teamzesa.util.Enum.CommandExecutorMap;
+import teamzesa.util.Enum.CommandType;
 
 
 public class Fly extends CommandRegisterSection {
 
     public Fly() {
-        super(CommandExecutorMap.FLY);
+        super(CommandType.FLY);
     }
 
     @Override

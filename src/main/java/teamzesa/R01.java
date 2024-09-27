@@ -11,11 +11,10 @@ import teamzesa.DataBase.entity.RObject.UserKillStatus;
 import teamzesa.DataBase.userHandler.UserController;
 import teamzesa.event.EventRegister.EventRegisterSection;
 import teamzesa.util.Announcer;
-import teamzesa.util.Enum.CommandExecutorMap;
+import teamzesa.util.Enum.CommandType;
 import teamzesa.util.Enum.DataFile;
 import teamzesa.util.ThreadPool;
 
-import java.lang.reflect.Field;
 import java.util.EnumSet;
 
 
@@ -86,8 +85,8 @@ public final class R01 extends JavaPlugin {
     private void registerCommandAndEvent() {
         getServer().getPluginManager().registerEvents(new EventRegisterSection(), this); //function set
 
-        EnumSet<CommandExecutorMap> commandList = EnumSet.allOf(CommandExecutorMap.class);
-        commandList.forEach(c -> getCommand(c.getCommand()).setExecutor(c.newCommandExecutor()));
+        EnumSet<CommandType> commandType = EnumSet.allOf(CommandType.class);
+        commandType.forEach(c -> getCommand(c.getCommand()).setExecutor(c.newCommandExecutor()));
     }
 
     private void SchedulingExportData() {

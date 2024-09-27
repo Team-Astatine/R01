@@ -8,7 +8,7 @@ import teamzesa.command.Announcing.Help;
 import teamzesa.command.Announcing.ServerTip;
 import teamzesa.command.*;
 
-public enum CommandExecutorMap {
+public enum CommandType {
 //    User
     ASTN("Astn", new Astn()),
     HELP("Help", new Help()),
@@ -36,7 +36,7 @@ public enum CommandExecutorMap {
     private final String command;
     private final CommandExecutor executor;
 
-    CommandExecutorMap(String command, CommandExecutor executor) {
+    CommandType(String command, CommandExecutor executor) {
         this.command = command;
         this.executor = executor;
     }

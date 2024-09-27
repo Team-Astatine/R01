@@ -13,7 +13,7 @@ import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.userHandler.UserController;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.ColorList;
-import teamzesa.util.Enum.CommandExecutorMap;
+import teamzesa.util.Enum.CommandType;
 
 import java.util.Optional;
 
@@ -24,7 +24,7 @@ public class SetHealth extends CommandRegisterSection {
     private boolean consoleSend = false;
 
     public SetHealth() {
-        super(CommandExecutorMap.HEALTH_RESET);
+        super(CommandType.HEALTH_RESET);
     }
 
     @Override

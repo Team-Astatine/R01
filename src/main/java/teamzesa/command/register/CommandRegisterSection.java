@@ -4,13 +4,13 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.util.Enum.CommandExecutorMap;
+import teamzesa.util.Enum.CommandType;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 public abstract class CommandRegisterSection extends StringComponentExchanger implements /*TabCompleter,*/ CommandExecutor {
-    private final CommandExecutorMap typeOfCommand;
+    private final CommandType typeOfCommand;
 
-    public CommandRegisterSection(CommandExecutorMap typeOfCommand) {
+    public CommandRegisterSection(CommandType typeOfCommand) {
         this.typeOfCommand = typeOfCommand;
     }
 

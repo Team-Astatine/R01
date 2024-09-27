@@ -10,7 +10,7 @@ import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.ColorList;
-import teamzesa.util.Enum.CommandExecutorMap;
+import teamzesa.util.Enum.CommandType;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,7 +28,7 @@ public class Totem extends CommandRegisterSection {
     private List<Integer> totemCountData;
 
     public Totem() {
-        super(CommandExecutorMap.TOTEM_STACKING);
+        super(CommandType.TOTEM_STACKING);
     }
 
     @Override
