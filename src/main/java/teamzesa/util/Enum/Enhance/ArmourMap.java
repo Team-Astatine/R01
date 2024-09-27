@@ -4,14 +4,14 @@ import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.DataBase.enhance.Armour;
-import teamzesa.DataBase.enhance.EnhanceItemCache;
+import teamzesa.DataBase.enhance.EnhanceItem;
 
 import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public enum ArmourMap implements Armour, EnhanceItemCache {
+public enum ArmourMap implements Armour, EnhanceItem {
     AIR(Material.AIR, 0),
 
     LEATHER_HELMET(Material.LEATHER_HELMET, 1),

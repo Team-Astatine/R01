@@ -1,4 +1,4 @@
 package teamzesa.DataBase.enhance;
 
-public interface EnhanceItemCache {
+public interface EnhanceItem {
 }

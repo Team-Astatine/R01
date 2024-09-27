@@ -3,7 +3,7 @@ package teamzesa.util.Enum.Enhance;
 import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import teamzesa.DataBase.enhance.EnhanceItemCache;
+import teamzesa.DataBase.enhance.EnhanceItem;
 import teamzesa.DataBase.enhance.Weapon;
 
 import java.util.Arrays;
@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public enum LongRangeWeaponMap implements Weapon, EnhanceItemCache {
+public enum LongRangeWeaponMap implements Weapon, EnhanceItem {
     AIR(Material.AIR, 0, 0),
 
     TRIDENT(Material.TRIDENT, 9.0, 8.0),
