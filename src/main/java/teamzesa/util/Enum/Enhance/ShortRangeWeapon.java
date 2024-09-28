@@ -3,7 +3,6 @@ package teamzesa.util.Enum.Enhance;
 import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import teamzesa.DataBase.enhance.EnhanceItem;
 import teamzesa.DataBase.enhance.Weapon;
 
 import java.util.Arrays;
@@ -11,7 +10,7 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public enum ShortRangeWeaponMap implements Weapon, EnhanceItem {
+public enum ShortRangeWeapon implements Weapon {
     AIR(Material.AIR, 0, 0),
 
     //    axe
@@ -36,16 +35,16 @@ public enum ShortRangeWeaponMap implements Weapon, EnhanceItem {
     private final Material material;
     private final double shortRangeDamage;
     private final double longRangeDamage;
-    private static final Map<Material, ShortRangeWeaponMap> CACHED_ITEM = Arrays.stream(values())
-            .collect(Collectors.toMap(ShortRangeWeaponMap::getMaterial, Function.identity()));
+    private static final Map<Material, ShortRangeWeapon> CACHED_ITEM = Arrays.stream(values())
+            .collect(Collectors.toMap(ShortRangeWeapon::getMaterial, Function.identity()));
 
-    ShortRangeWeaponMap(Material material, double shortRangeDamage, double longRangeDamage) {
+    ShortRangeWeapon(Material material, double shortRangeDamage, double longRangeDamage) {
         this.material = material;
         this.shortRangeDamage = shortRangeDamage;
         this.longRangeDamage = longRangeDamage;
     }
 
-    public static ShortRangeWeaponMap findByItemStack(ItemStack itemStack) {
+    public static ShortRangeWeapon findByItemStack(ItemStack itemStack) {
         if (BooleanUtils.isFalse(CACHED_ITEM.containsKey(itemStack.getType())))
             return AIR;
         return CACHED_ITEM.get(itemStack.getType());

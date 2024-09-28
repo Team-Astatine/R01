@@ -186,14 +186,14 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
 
     public static double getShortRangeWeaponCloseDamage(ItemStack weapon) {
         double damage = 0.0;
-        ShortRangeWeaponMap shortRangeWeaponMap = ShortRangeWeaponMap.findByItemStack(weapon);
-        LongRangeWeaponMap longRangeWeaponMap = LongRangeWeaponMap.findByItemStack(weapon);
+        ShortRangeWeapon shortRangeWeapon = ShortRangeWeapon.findByItemStack(weapon);
+        LongRangeWeapon longRangeWeapon = LongRangeWeapon.findByItemStack(weapon);
 
-        if (ObjectUtils.notEqual(shortRangeWeaponMap, ShortRangeWeaponMap.AIR))
-            return shortRangeWeaponMap.getShortRangeDamage();
+        if (ObjectUtils.notEqual(shortRangeWeapon, ShortRangeWeapon.AIR))
+            return shortRangeWeapon.getShortRangeDamage();
 
-        if (ObjectUtils.notEqual(longRangeWeaponMap, LongRangeWeaponMap.AIR))
-            return longRangeWeaponMap.getShortRangeDamage();
+        if (ObjectUtils.notEqual(longRangeWeapon, LongRangeWeapon.AIR))
+            return longRangeWeapon.getShortRangeDamage();
 
         return damage;
     }

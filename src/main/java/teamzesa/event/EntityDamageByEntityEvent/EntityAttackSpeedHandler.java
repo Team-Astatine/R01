@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.event.EventRegister.EventRegister;
-import teamzesa.util.Enum.Enhance.ShortRangeWeaponMap;
+import teamzesa.util.Enum.Enhance.ShortRangeWeapon;
 
 public class EntityAttackSpeedHandler implements EventRegister {
     private Entity damagerEntity;
@@ -52,8 +52,8 @@ public class EntityAttackSpeedHandler implements EventRegister {
     }
 
     private Boolean isDualWeaponChecker(ItemStack mainStuff, ItemStack offStuff) {
-        ShortRangeWeaponMap mainHand = ShortRangeWeaponMap.findByItemStack(mainStuff);
-        ShortRangeWeaponMap offHand = ShortRangeWeaponMap.findByItemStack(offStuff);
+        ShortRangeWeapon mainHand = ShortRangeWeapon.findByItemStack(mainStuff);
+        ShortRangeWeapon offHand = ShortRangeWeapon.findByItemStack(offStuff);
 
         if (mainHand.getMaterial().equals(Material.AIR))
             return false;
