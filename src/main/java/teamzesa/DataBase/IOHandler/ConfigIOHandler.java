@@ -94,7 +94,7 @@ public class ConfigIOHandler extends StringComponentExchanger {
     }
 
     public String getServerGuideNotion() {
-        return getString(ConfigMenu.MESSAGE_SERVER_GUID_NOTION);
+        return getString(ConfigMenu.MESSAGE_SERVER_GUIDE_NOTION);
     }
 
     public String getTip() {

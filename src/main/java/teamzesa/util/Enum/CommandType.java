@@ -24,13 +24,13 @@ public enum CommandType {
 
 //    Moderator
     MOTD("motd", new Motd()),
-    SAVE_R01_OBJECT_DATA("ExportR01Object", new SaveR01ObjectData()),
+    EXPORT_DATA_FILE("ExportDataFile", new ExportDataFile()),
     REMOVE_DUPLICATE_USER_DATA("RemoveDuplicateData", new RemoveDuplicateData()),
     HEALTH_RESET("setHealth", new SetHealth()),
     GOD_MODE("god", new God()),
     CONFIG_RELOAD("dataFileReload", new DataFileReload()),
-    USER_OBJECT_CHECKER("vo", new ValueObjectChecker()),
-    HAND_ITEM_CHECKER("vi", new ValueItemStackChecker()),
+    LOOK_USER_VALUE("vo", new LookUserValue()),
+    LOOK_USER_MAIN_HAND_ITEM("vi", new LookUserMainHandItem()),
     ENHANCE_SET("enhance", new EnhanceSet());
 
     private final String command;
@@ -45,7 +45,7 @@ public enum CommandType {
         return command;
     }
 
-    public CommandExecutor newCommandExecutor() {
+    public CommandExecutor getCommandInstance() {
         return executor;
     }
 

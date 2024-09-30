@@ -18,12 +18,12 @@ import teamzesa.util.Enum.DataFile;
 import java.util.Optional;
 
 
-public class SaveR01ObjectData extends CommandRegisterSection {
+public class ExportDataFile extends CommandRegisterSection {
     private Player senderPlayer;
     private boolean consoleSend = false;
 
-    public SaveR01ObjectData() {
-        super(CommandType.SAVE_R01_OBJECT_DATA);
+    public ExportDataFile() {
+        super(CommandType.EXPORT_DATA_FILE);
     }
 
     @Override

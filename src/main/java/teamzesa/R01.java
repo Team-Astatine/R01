@@ -86,7 +86,7 @@ public final class R01 extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new EventRegisterSection(), this); //function set
 
         EnumSet<CommandType> commandType = EnumSet.allOf(CommandType.class);
-        commandType.forEach(c -> getCommand(c.getCommand()).setExecutor(c.newCommandExecutor()));
+        commandType.forEach(c -> getCommand(c.getCommand()).setExecutor(c.getCommandInstance()));
     }
 
     private void SchedulingExportData() {
