@@ -107,7 +107,7 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
 
         Arrays.stream(ToolKit.values()).forEach(i -> {
             ItemStack tool = i.getToolKit();
-            tool.setAmount(i.getItemCount());
+            tool.setAmount(i.getSupplyAmount());
             this.player.getInventory().addItem(tool);
         });
     }
