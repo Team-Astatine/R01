@@ -46,7 +46,6 @@ public enum LongRangeWeapon implements Weapon, EnhanceItem {
         return shortRangeDamage;
     }
 
-    @Override
     public double getLongRangeDamage() {
         return longRangeDamage;
     }
