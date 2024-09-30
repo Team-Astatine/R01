@@ -62,7 +62,7 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
         if (this.player.hasPlayedBefore())
             return;
 
-        World world = Bukkit.getWorld(WorldName.world.getExchangeEnglish());
+        World world = Bukkit.getWorld(WorldName.WORLD.getExchangeEnglish());
         int[] position = new RanNumGenerator().getRandomPosition(world);
 
         int x = position[0];
