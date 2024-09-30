@@ -11,6 +11,4 @@ public interface Weapon extends EnhanceItem {
     Material getMaterial();
 
     double getShortRangeDamage();
-
-    double getLongRangeDamage();
 }
