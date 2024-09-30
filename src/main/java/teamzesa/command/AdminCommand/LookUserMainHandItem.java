@@ -10,9 +10,9 @@ import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.CommandType;
 
 
-public class ValueItemStackChecker extends CommandRegisterSection {
-    public ValueItemStackChecker() {
-        super(CommandType.HAND_ITEM_CHECKER);
+public class LookUserMainHandItem extends CommandRegisterSection {
+    public LookUserMainHandItem() {
+        super(CommandType.LOOK_USER_MAIN_HAND_ITEM);
     }
 
     @Override

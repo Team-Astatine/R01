@@ -15,10 +15,10 @@ import teamzesa.util.Enum.CommandType;
 
 import java.util.Optional;
 
-public class ValueObjectChecker extends CommandRegisterSection {
+public class LookUserValue extends CommandRegisterSection {
 
-    public ValueObjectChecker() {
-        super(CommandType.USER_OBJECT_CHECKER);
+    public LookUserValue() {
+        super(CommandType.LOOK_USER_VALUE);
     }
 
     @Override

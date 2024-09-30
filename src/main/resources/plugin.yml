@@ -43,7 +43,7 @@ commands:
   Motd:
     description: Motd를 설정합니다.
     permission: R01.DataControl
-  ExportR01Object:
+  ExportDataFile:
     description: R01프로젝트에 모든 Object가 Export 됩니다.
     permission: R01.DataControl
   RemoveDuplicateData:
