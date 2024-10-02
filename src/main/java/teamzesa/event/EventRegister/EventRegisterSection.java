@@ -103,12 +103,12 @@ public class EventRegisterSection implements Listener {
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public static void EnchantItemEvent(PrepareAnvilEvent event) {
+    public static void PrepareAnvilEvent(PrepareAnvilEvent event) {
         new UpdateEnhanceItemPrepareAnvil(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public static void EnchantItemEvent(PrepareGrindstoneEvent event) {
+    public static void PrepareGrindstoneEvent(PrepareGrindstoneEvent event) {
         new UpdateEnhanceItemPrepareGrindstone(event);
     }
 
