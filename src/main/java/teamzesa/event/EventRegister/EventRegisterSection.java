@@ -73,7 +73,6 @@ public class EventRegisterSection implements Listener {
 //        new AntiExploitFromChunkEvent(event);
     }
 
-
     @EventHandler(priority = EventPriority.LOWEST)
     public static void PlayerJoinEvent(PlayerJoinEvent event) {
         new PlayerInfoHandler(event);
