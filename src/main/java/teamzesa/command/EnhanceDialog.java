@@ -17,6 +17,8 @@ import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Enum.CommandType;
 
+import static teamzesa.DataBase.enhance.EnhanceInventoryHandler.*;
+
 
 public class EnhanceDialog extends CommandRegisterSection {
     public EnhanceInventoryHandler enhanceInventoryHandler;
@@ -29,11 +31,6 @@ public class EnhanceDialog extends CommandRegisterSection {
     private ItemStack executeButton;
     private ItemStack notionButton;
     private ItemStack discordButton;
-
-    public final static int PANEL_STUFF_CUSTOM_DATA = 20000;
-    public final static int EXECUTE_STUFF_DATA = 30000;
-    public final static int EXECUTE_DISCORD_DATA = 40000;
-    public final static int EXECUTE_NOTION_DATA = 50000;
 
     public EnhanceDialog() {
         super(CommandType.ENHANCE);

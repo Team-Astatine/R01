@@ -18,6 +18,11 @@ public class EnhanceInventoryHandler {
 
     private final Map<UUID, Inventory> enhanceInventoryCachedData;
 
+    public final static int PANEL_STUFF_CUSTOM_DATA = 20000;
+    public final static int EXECUTE_STUFF_DATA = 30000;
+    public final static int EXECUTE_DISCORD_DATA = 40000;
+    public final static int EXECUTE_NOTION_DATA = 50000;
+
     public EnhanceInventoryHandler() {
         this.enhanceInventoryCachedData = new HashMap<>();
     }
