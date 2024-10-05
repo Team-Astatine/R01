@@ -11,14 +11,14 @@ import teamzesa.DataBase.entity.RObject.UserKillStatus;
 import teamzesa.DataBase.userHandler.UserController;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.ColorList;
-import teamzesa.util.Enum.CommandExecutorMap;
+import teamzesa.util.Enum.CommandType;
 
 import java.util.Optional;
 
-public class ValueObjectChecker extends CommandRegisterSection {
+public class LookUserValue extends CommandRegisterSection {
 
-    public ValueObjectChecker() {
-        super(CommandExecutorMap.USER_OBJECT_CHECKER);
+    public LookUserValue() {
+        super(CommandType.LOOK_USER_VALUE);
     }
 
     @Override

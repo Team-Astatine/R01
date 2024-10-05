@@ -4,14 +4,13 @@ import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.DataBase.enhance.Armour;
-import teamzesa.DataBase.enhance.EnhanceItemCache;
 
 import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public enum ArmourMap implements Armour, EnhanceItemCache {
+public enum ArmourList implements Armour {
     AIR(Material.AIR, 0),
 
     LEATHER_HELMET(Material.LEATHER_HELMET, 1),
@@ -46,15 +45,15 @@ public enum ArmourMap implements Armour, EnhanceItemCache {
 
     private final Material material;
     private final int resistance;
-    private final static Map<Material, ArmourMap> CACHED_ITEM = Arrays.stream(values())
-            .collect(Collectors.toMap(ArmourMap::getMaterial, Function.identity()));
+    private final static Map<Material, ArmourList> CACHED_ITEM = Arrays.stream(values())
+            .collect(Collectors.toMap(ArmourList::getMaterial, Function.identity()));
 
-    ArmourMap(Material material, int resistance) {
+    ArmourList(Material material, int resistance) {
         this.material = material;
         this.resistance = resistance;
     }
 
-    public static ArmourMap findByItemStack(ItemStack itemStack) {
+    public static ArmourList findByItemStack(ItemStack itemStack) {
         if (BooleanUtils.isFalse(CACHED_ITEM.containsKey(itemStack.getType())))
             return AIR;
         return CACHED_ITEM.get(itemStack.getType());

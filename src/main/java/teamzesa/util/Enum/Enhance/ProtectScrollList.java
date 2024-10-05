@@ -4,14 +4,14 @@ import com.google.common.base.Functions;
 import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import teamzesa.DataBase.enhance.ScrollMap;
+import teamzesa.DataBase.enhance.Scroll;
 import teamzesa.exception.Enhance.EnhanceItemSearchException;
 
 import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public enum ProtectScroll implements ScrollMap {
+public enum ProtectScrollList implements Scroll {
     DRAGON_EGG(Material.DRAGON_EGG, 0),
     END_CRYSTAL(Material.END_CRYSTAL, 1),
     ENCHANTED_GOLDEN_APPLE(Material.ENCHANTED_GOLDEN_APPLE, 1),
@@ -26,15 +26,15 @@ public enum ProtectScroll implements ScrollMap {
 
     private final Material material;
     private final int discountValue;
-    private static final Map<Material, ProtectScroll> CACHED_ITEM = Arrays.stream(values())
-            .collect(Collectors.toMap(ProtectScroll::getMaterial, Functions.identity()));
+    private static final Map<Material, ProtectScrollList> CACHED_ITEM = Arrays.stream(values())
+            .collect(Collectors.toMap(ProtectScrollList::getMaterial, Functions.identity()));
 
-    ProtectScroll(Material material, int discountValue) {
+    ProtectScrollList(Material material, int discountValue) {
         this.discountValue = discountValue;
         this.material = material;
     }
 
-    public static ProtectScroll findByItemStack(ItemStack itemStack) throws Exception {
+    public static ProtectScrollList findByItemStack(ItemStack itemStack) throws Exception {
         if (BooleanUtils.isFalse(CACHED_ITEM.containsKey(itemStack.getType())))
             throw new EnhanceItemSearchException("Non Register This Material");
         return CACHED_ITEM.get(itemStack.getType());

@@ -11,7 +11,7 @@ public enum ConfigMenu {
 
     MESSAGE_MINELIST_VOTE("message.mineListVote"),
     MESSAGE_DISCORD_INVITE("message.discordInvite"),
-    MESSAGE_SERVER_GUID_NOTION("message.serverGuideNotion"),
+    MESSAGE_SERVER_GUIDE_NOTION("message.serverGuideNotion"),
 
     MESSAGE_COMMAND_SERVER_TIP("message.commandServerTip"),
     MESSAGE_STEEL_LIFE_TIP("message.steelLifeTip"),

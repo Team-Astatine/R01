@@ -12,18 +12,18 @@ import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.userHandler.UserController;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.ColorList;
-import teamzesa.util.Enum.CommandExecutorMap;
+import teamzesa.util.Enum.CommandType;
 import teamzesa.util.Enum.DataFile;
 
 import java.util.Optional;
 
 
-public class SaveR01ObjectData extends CommandRegisterSection {
+public class ExportDataFile extends CommandRegisterSection {
     private Player senderPlayer;
     private boolean consoleSend = false;
 
-    public SaveR01ObjectData() {
-        super(CommandExecutorMap.SAVE_R01_OBJECT_DATA);
+    public ExportDataFile() {
+        super(CommandType.EXPORT_DATA_FILE);
     }
 
     @Override

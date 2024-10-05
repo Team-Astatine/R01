@@ -9,12 +9,12 @@ import teamzesa.DataBase.userHandler.UserBuilder;
 import teamzesa.DataBase.userHandler.UserController;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.ColorList;
-import teamzesa.util.Enum.CommandExecutorMap;
+import teamzesa.util.Enum.CommandType;
 
 public class AnnouncingOnOff extends CommandRegisterSection {
 
     public AnnouncingOnOff() {
-        super(CommandExecutorMap.ANNOUNCING);
+        super(CommandType.ANNOUNCING);
     }
 
     @Override

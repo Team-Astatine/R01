@@ -11,11 +11,10 @@ import teamzesa.DataBase.entity.RObject.UserKillStatus;
 import teamzesa.DataBase.userHandler.UserController;
 import teamzesa.event.EventRegister.EventRegisterSection;
 import teamzesa.util.Announcer;
-import teamzesa.util.Enum.CommandExecutorMap;
+import teamzesa.util.Enum.CommandType;
 import teamzesa.util.Enum.DataFile;
 import teamzesa.util.ThreadPool;
 
-import java.lang.reflect.Field;
 import java.util.EnumSet;
 
 
@@ -30,7 +29,7 @@ public final class R01 extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        eventAndFunctionRegister();   //command set
+        registerCommandAndEvent();   //command set
 
 //        setMaxPlayers(50);
 
@@ -39,11 +38,11 @@ public final class R01 extends JavaPlugin {
             generationDataFile();
 
 //        configSet
-        RObjectLoader();
+        dataFileLoader();
 
 //        speedLimiter();
         configFileLoader(); // config set File
-        autoSaveSchedule(); // User Data Auto Save Scheduling
+        SchedulingExportData(); // User Data Auto Save Scheduling
 
 //        loading Time
         pluginLoadTime();
@@ -63,26 +62,7 @@ public final class R01 extends JavaPlugin {
         Bukkit.getScheduler().cancelTasks(this);
     }
 
-    public void setMaxPlayers(int maxPlayers) {
-        try {
-            Object server = Bukkit.getServer();
-            Field consoleField = server.getClass().getDeclaredField("console");
-            consoleField.setAccessible(true);
-            Object console = consoleField.get(server);
-
-            Field playerListField = console.getClass().getSuperclass().getDeclaredField("playerList");
-            playerListField.setAccessible(true);
-            Object playerList = playerListField.get(console);
-
-            Field maxPlayersField = playerList.getClass().getDeclaredField("maxPlayers");
-            maxPlayersField.setAccessible(true);
-            maxPlayersField.set(playerList, maxPlayers);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void RObjectLoader() {
+    private void dataFileLoader() {
         new UserController().updateAllUserData(
                 new RObjectIOHandler().importData(DataFile.USER_DATA, User.class, getClass().getName())
         );
@@ -102,14 +82,14 @@ public final class R01 extends JavaPlugin {
         Announcer.getAnnouncer().defaultAnnouncer();
     }
 
-    private void eventAndFunctionRegister() {
+    private void registerCommandAndEvent() {
         getServer().getPluginManager().registerEvents(new EventRegisterSection(), this); //function set
 
-        EnumSet<CommandExecutorMap> commandList = EnumSet.allOf(CommandExecutorMap.class);
-        commandList.forEach(c -> getCommand(c.getCommand()).setExecutor(c.newCommandExecutor()));
+        EnumSet<CommandType> commandType = EnumSet.allOf(CommandType.class);
+        commandType.forEach(c -> getCommand(c.getCommand()).setExecutor(c.getCommandInstance()));
     }
 
-    private void autoSaveSchedule() {
+    private void SchedulingExportData() {
         long delay = 0;
         long interval = 720; // 12hour term auto save
 

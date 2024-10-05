@@ -62,7 +62,7 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
         if (this.player.hasPlayedBefore())
             return;
 
-        World world = Bukkit.getWorld(WorldName.world.getExchangeEnglish());
+        World world = Bukkit.getWorld(WorldName.WORLD.getExchangeEnglish());
         int[] position = new RanNumGenerator().getRandomPosition(world);
 
         int x = position[0];
@@ -107,7 +107,7 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
 
         Arrays.stream(ToolKit.values()).forEach(i -> {
             ItemStack tool = i.getToolKit();
-            tool.setAmount(i.getItemCount());
+            tool.setAmount(i.getSupplyAmount());
             this.player.getInventory().addItem(tool);
         });
     }

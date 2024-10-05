@@ -36,7 +36,7 @@ public class RespawnRandomTeleportEvent extends StringComponentExchanger impleme
         if (ObjectUtils.allNotNull(this.player.getPotentialBedLocation()))
             return;
 
-        World world = Bukkit.getWorld(WorldName.world.getExchangeEnglish());
+        World world = Bukkit.getWorld(WorldName.WORLD.getExchangeEnglish());
         int[] position = new RanNumGenerator().getRandomPosition(world);
 
         int x = position[0];

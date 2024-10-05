@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
-import static teamzesa.command.EnhanceDialog.*;
+import static teamzesa.DataBase.enhance.EnhanceInventoryHandler.*;
 
 public class EnhanceInventoryCloseEvent implements EventRegister {
     private final int MINIMUM_INVENTORY_SLOT = 5;

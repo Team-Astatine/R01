@@ -7,12 +7,12 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.ColorList;
-import teamzesa.util.Enum.CommandExecutorMap;
+import teamzesa.util.Enum.CommandType;
 
 public class Astn extends CommandRegisterSection {
 
     public Astn() {
-        super(CommandExecutorMap.ASTN);
+        super(CommandType.ASTN);
     }
 
     @Override

@@ -9,18 +9,18 @@ public enum ToolKit {
     IRON_INGOT(new ItemStack(Material.IRON_INGOT), 16);
 
     private final ItemStack toolKit;
-    private final int itemCount;
+    private final int supplyAmount;
 
-    ToolKit(ItemStack itemStack, int itemCount) {
+    ToolKit(ItemStack itemStack, int supplyAmount) {
         this.toolKit = itemStack;
-        this.itemCount = itemCount;
+        this.supplyAmount = supplyAmount;
     }
 
     public ItemStack getToolKit() {
         return this.toolKit;
     }
 
-    public int getItemCount() {
-        return itemCount;
+    public int getSupplyAmount() {
+        return supplyAmount;
     }
 }

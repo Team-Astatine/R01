@@ -5,8 +5,8 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.Material;
 import teamzesa.DataBase.entity.Enhance.EnhanceItem;
 import teamzesa.util.Enum.ColorList;
-import teamzesa.util.Enum.Enhance.ProtectScroll;
-import teamzesa.util.Enum.Enhance.Scroll;
+import teamzesa.util.Enum.Enhance.ProtectScrollList;
+import teamzesa.util.Enum.Enhance.ScrollList;
 
 public class GeneratingEnhanceItem extends EnhanceUtil {
     private final int LOW_LEVEL = 0;
@@ -37,7 +37,7 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
 
         try {// enhance
             this.scrollEnough =
-                    this.item.enhanceScroll().getAmount() >= Scroll.findByItemStack(this.item.enhanceScroll()).getDiscountValue();
+                    this.item.enhanceScroll().getAmount() >= ScrollList.findByItemStack(this.item.enhanceScroll()).getDiscountValue();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -45,7 +45,7 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
         try { // protect
             if (hasProtectScroll) {
                 this.protectScrollEnough =
-                        this.item.protectScroll().getAmount() >= ProtectScroll.findByItemStack(this.item.protectScroll()).getDiscountValue();
+                        this.item.protectScroll().getAmount() >= ProtectScrollList.findByItemStack(this.item.protectScroll()).getDiscountValue();
             }
         } catch (Exception e) {
             e.printStackTrace();

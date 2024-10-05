@@ -4,14 +4,14 @@ import com.google.common.base.Functions;
 import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import teamzesa.DataBase.enhance.ScrollMap;
+import teamzesa.DataBase.enhance.Scroll;
 import teamzesa.exception.Enhance.EnhanceItemSearchException;
 
 import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public enum Scroll implements ScrollMap {
+public enum ScrollList implements Scroll {
     DRAGON_EGG(Material.DRAGON_EGG, 0),
     END_CRYSTAL(Material.END_CRYSTAL, 1),
     ENCHANTED_GOLDEN_APPLE(Material.ENCHANTED_GOLDEN_APPLE, 1),
@@ -26,15 +26,15 @@ public enum Scroll implements ScrollMap {
 
     private final Material material;
     private final int discountValue;
-    private static final Map<Material, Scroll> CACHED_ITEM = Arrays.stream(values())
-            .collect(Collectors.toMap(Scroll::getMaterial, Functions.identity()));
+    private static final Map<Material, ScrollList> CACHED_ITEM = Arrays.stream(values())
+            .collect(Collectors.toMap(ScrollList::getMaterial, Functions.identity()));
 
-    Scroll(Material material, int discountValue) {
+    ScrollList(Material material, int discountValue) {
         this.discountValue = discountValue;
         this.material = material;
     }
 
-    public static Scroll findByItemStack(ItemStack itemStack) throws Exception {
+    public static ScrollList findByItemStack(ItemStack itemStack) throws Exception {
         if (BooleanUtils.isFalse(CACHED_ITEM.containsKey(itemStack.getType())))
             throw new EnhanceItemSearchException("Non Register This Material");
         return CACHED_ITEM.get(itemStack.getType());

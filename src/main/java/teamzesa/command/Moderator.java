@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.ColorList;
-import teamzesa.util.Enum.CommandExecutorMap;
+import teamzesa.util.Enum.CommandType;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -17,7 +17,7 @@ public class Moderator extends CommandRegisterSection {
     private final Set<UUID> moderatorName;
 
     public Moderator() {
-        super(CommandExecutorMap.MODERATOR);
+        super(CommandType.MODERATOR);
         this.moderatorName = new HashSet<>();
         moderList();
     }

@@ -8,14 +8,14 @@ import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.ColorList;
-import teamzesa.util.Enum.CommandExecutorMap;
+import teamzesa.util.Enum.CommandType;
 
 public class Hat extends CommandRegisterSection {
     private Player player;
     private PlayerInventory playerInventory;
 
     public Hat() {
-        super(CommandExecutorMap.ARMOUR_HEAD);
+        super(CommandType.ARMOUR_HEAD);
     }
 
     private enum ArmourType {

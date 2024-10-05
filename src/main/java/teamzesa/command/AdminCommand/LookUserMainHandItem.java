@@ -7,12 +7,12 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.ColorList;
-import teamzesa.util.Enum.CommandExecutorMap;
+import teamzesa.util.Enum.CommandType;
 
 
-public class ValueItemStackChecker extends CommandRegisterSection {
-    public ValueItemStackChecker() {
-        super(CommandExecutorMap.HAND_ITEM_CHECKER);
+public class LookUserMainHandItem extends CommandRegisterSection {
+    public LookUserMainHandItem() {
+        super(CommandType.LOOK_USER_MAIN_HAND_ITEM);
     }
 
     @Override

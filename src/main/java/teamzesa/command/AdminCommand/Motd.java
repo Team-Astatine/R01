@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.DataBase.IOHandler.ConfigIOHandler;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.util.Enum.ColorList;
-import teamzesa.util.Enum.CommandExecutorMap;
+import teamzesa.util.Enum.CommandType;
 
 
 public class Motd extends CommandRegisterSection {
@@ -17,7 +17,7 @@ public class Motd extends CommandRegisterSection {
     private String newMotd;
 
     public Motd() {
-        super(CommandExecutorMap.MOTD);
+        super(CommandType.MOTD);
         this.newMotd = DEFAULT_SERVER_MOTD;
     }
 
