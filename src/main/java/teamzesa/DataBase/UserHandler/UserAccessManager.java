@@ -19,7 +19,6 @@ public class UserAccessManager implements AccessObject<UUID, User> {
         return DaoUserHolder.INSTANCE;
     }
 
-
     public synchronized ConcurrentHashMap<UUID, User> getAllUserTable() {
         return new ConcurrentHashMap<>(USER_DATA);
     }
