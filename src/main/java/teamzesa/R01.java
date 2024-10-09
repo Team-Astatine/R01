@@ -102,6 +102,10 @@ public final class R01 extends JavaPlugin {
                     new RObjectIOHandler().exportData(
                             DataFile.KILL_STATUS, new KillStatusController().getAllUserTable(), getClass().getName()
                     );
+
+//                    new RObjectIOHandler().exportData(
+//                            DataFile.USER_INVENTORY, new UserIn().getAllUserTable(), getClass().getName()
+//                    );
                 },
                 delay,
                 interval
