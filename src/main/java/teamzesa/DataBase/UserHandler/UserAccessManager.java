@@ -1,4 +1,4 @@
-package teamzesa.DataBase.userHandler;
+package teamzesa.DataBase.UserHandler;
 
 import teamzesa.DataBase.entity.AccessObject;
 import teamzesa.DataBase.UserCachingData;

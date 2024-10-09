@@ -8,7 +8,7 @@ import teamzesa.DataBase.IOHandler.RObjectIOHandler;
 import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
 import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.entity.RObject.UserKillStatus;
-import teamzesa.DataBase.userHandler.UserController;
+import teamzesa.DataBase.UserHandler.UserController;
 import teamzesa.event.EventRegister.EventRegisterSection;
 import teamzesa.util.Announcer;
 import teamzesa.util.Enum.CommandType;
