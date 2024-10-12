@@ -1,4 +1,4 @@
-package teamzesa.DataBase.userHandler;
+package teamzesa.DataBase.UserHandler;
 
 import teamzesa.DataBase.entity.AccessObject;
 import teamzesa.DataBase.UserCachingData;
@@ -18,7 +18,6 @@ public class UserAccessManager implements AccessObject<UUID, User> {
     public static UserAccessManager getInstance() {
         return DaoUserHolder.INSTANCE;
     }
-
 
     public synchronized ConcurrentHashMap<UUID, User> getAllUserTable() {
         return new ConcurrentHashMap<>(USER_DATA);

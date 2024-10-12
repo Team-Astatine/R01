@@ -10,7 +10,7 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CrossbowMeta;
 import org.bukkit.util.Vector;
-import teamzesa.DataBase.userHandler.UserController;
+import teamzesa.DataBase.UserHandler.UserController;
 import teamzesa.event.Enhance.EnhanceUtil;
 import teamzesa.event.EventRegister.EventRegister;
 

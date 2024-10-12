@@ -1,4 +1,4 @@
-package teamzesa.DataBase.userHandler;
+package teamzesa.DataBase.UserHandler;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.Bukkit;

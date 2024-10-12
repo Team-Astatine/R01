@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.util.Vector;
 import teamzesa.DataBase.entity.RObject.User;
-import teamzesa.DataBase.userHandler.UserController;
+import teamzesa.DataBase.UserHandler.UserController;
 import teamzesa.event.EventRegister.EventRegister;
 
 public class GodModeTridentShotEvent implements EventRegister {

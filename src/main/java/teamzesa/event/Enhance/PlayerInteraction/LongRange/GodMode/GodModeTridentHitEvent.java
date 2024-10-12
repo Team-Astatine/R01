@@ -5,7 +5,7 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Trident;
 import org.bukkit.event.entity.ProjectileHitEvent;
-import teamzesa.DataBase.userHandler.UserController;
+import teamzesa.DataBase.UserHandler.UserController;
 import teamzesa.event.EventRegister.EventRegister;
 
 

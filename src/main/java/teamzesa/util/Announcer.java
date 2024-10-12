@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.DataBase.IOHandler.ConfigIOHandler;
 import teamzesa.DataBase.entity.RObject.User;
-import teamzesa.DataBase.userHandler.UserController;
+import teamzesa.DataBase.UserHandler.UserController;
 import teamzesa.R01;
 import teamzesa.util.Enum.ColorList;
 import teamzesa.util.Interface.StringComponentExchanger;
