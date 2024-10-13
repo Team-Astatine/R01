@@ -1,4 +1,4 @@
-package teamzesa.event.Enhance.PlayerInteraction;
+package teamzesa.event.Enhance.PlayerInteraction.UserInterface;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ObjectUtils;
@@ -23,7 +23,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 
-public class EnhanceInventoryClickEvent extends StringComponentExchanger implements EventRegister {
+public class EnhanceUIClickEvent extends StringComponentExchanger implements EventRegister {
     private final InventoryClickEvent event;
     private Player ownerPlayer;
     private Inventory enhanceInventory;
@@ -34,7 +34,7 @@ public class EnhanceInventoryClickEvent extends StringComponentExchanger impleme
     private HashSet<Material> allowedItem;
     private HashSet<Material> allowedScroll;
 
-    public EnhanceInventoryClickEvent(InventoryClickEvent event) {
+    public EnhanceUIClickEvent(InventoryClickEvent event) {
         this.event = event;
         init();
         execute();
