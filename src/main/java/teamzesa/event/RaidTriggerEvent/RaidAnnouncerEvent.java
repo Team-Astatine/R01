@@ -26,13 +26,13 @@ public class RaidAnnouncerEvent extends StringComponentExchanger implements Even
 
     @Override
     public void execute() {
-        String activeWorldKorean = WorldName.valueOf(activeWorld).getKoreanWorldName();
+        WorldName activeWorld = WorldName.findByWorldName(this.activeWorld);
 
         double x = this.location.getX();
         double z = this.location.getZ();
 
         sendAnnouncerComponentExchanger(
-                String.format("%s 월드의 X : %1.0f | Z : %1.0f 에서 레이드가 시작됩니다.", activeWorldKorean, x, z),
-                ColorList.ORANGE);
+                String.format("%s 월드의 X : %1.0f | Z : %1.0f 에서 레이드가 시작됩니다.",
+                        activeWorld.getKoreanWorldName(), x, z), ColorList.ORANGE);
     }
 }
