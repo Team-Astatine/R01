@@ -18,7 +18,11 @@ public class AnnouncingOnOff extends CommandRegisterSection {
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+    public boolean onCommand(final @NotNull CommandSender commandSender,
+                             final @NotNull Command command,
+                             final @NotNull String s,
+                             final @NotNull String[] strings) {
+
         User targetUser = new UserController().readUser(((Player) commandSender).getUniqueId());
 
         String comment = targetUser.announcingSkip() ? "비활성화" : "활성화";

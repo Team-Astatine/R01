@@ -19,7 +19,11 @@ public class EnhanceDialog extends CommandRegisterSection {
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+    public boolean onCommand(final @NotNull CommandSender commandSender,
+                             final @NotNull Command command,
+                             final @NotNull String s,
+                             final @NotNull String[] strings) {
+
         Player player = (Player) commandSender;
 
         Inventory enhanceUI = new EnhanceUIGenerator()

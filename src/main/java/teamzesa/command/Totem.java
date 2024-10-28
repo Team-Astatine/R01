@@ -32,7 +32,11 @@ public class Totem extends CommandRegisterSection {
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
+    public boolean onCommand(final @NotNull CommandSender sender,
+                             final @NotNull Command command,
+                             final @NotNull String label,
+                             final @NotNull String[] args) {
+
         Runnable executeTotemSupply = () -> {
             Totem.this.player = (Player) sender;
             Totem.this.playerInventory = Totem.this.player.getInventory();

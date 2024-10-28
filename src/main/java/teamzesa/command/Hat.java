@@ -23,7 +23,11 @@ public class Hat extends CommandRegisterSection {
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
+    public boolean onCommand(final @NotNull CommandSender sender,
+                             final @NotNull Command command,
+                             final @NotNull String label,
+                             final @NotNull String[] args) {
+
         this.player = (Player) sender;
         this.playerInventory = this.player.getInventory();
 
