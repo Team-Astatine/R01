@@ -37,7 +37,7 @@ public class KillStatusController {
     public void healthUpdate(@NotNull UserKillStatus userKillStatus) {
         Player player = Bukkit.getPlayer(userKillStatus.uuid());
         player.setHealthScale(userKillStatus.healthScale());
-        player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(userKillStatus.healthScale());
+        player.getAttribute(Attribute.MAX_HEALTH).setBaseValue(userKillStatus.healthScale());
         player.addPotionEffect(new PotionEffect(PotionEffectType.INSTANT_HEALTH, 40, 1));
         updateKillStatus(userKillStatus);
     }

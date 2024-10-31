@@ -80,7 +80,7 @@ public class EnhanceUIGenerator extends StringComponentExchanger {
 
         meta.addEnchant(Enchantment.CHANNELING, 1, true);
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-        meta.addItemFlags(ItemFlag.HIDE_ITEM_SPECIFICS);
+        meta.addItemFlags(ItemFlag.HIDE_ADDITIONAL_TOOLTIP);
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         // 강화창 디스플레이 아이템코드 또는 강화 실행 아이템코드 설정
