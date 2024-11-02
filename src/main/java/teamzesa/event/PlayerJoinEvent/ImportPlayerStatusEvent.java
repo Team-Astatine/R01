@@ -12,7 +12,7 @@ import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.entity.RObject.UserKillStatus;
 import teamzesa.DataBase.UserHandler.UserBuilder;
 import teamzesa.DataBase.UserHandler.UserController;
-import teamzesa.command.AdminCommand.God;
+import teamzesa.command.ModeratorCommand.God;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Announcer;
 import teamzesa.util.Enum.ColorList;

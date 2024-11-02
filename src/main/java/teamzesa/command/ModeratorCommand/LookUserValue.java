@@ -1,4 +1,4 @@
-package teamzesa.command.AdminCommand;
+package teamzesa.command.ModeratorCommand;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;

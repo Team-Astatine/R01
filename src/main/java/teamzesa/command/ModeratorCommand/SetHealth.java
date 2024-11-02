@@ -1,4 +1,4 @@
-package teamzesa.command.AdminCommand;
+package teamzesa.command.ModeratorCommand;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ObjectUtils;
