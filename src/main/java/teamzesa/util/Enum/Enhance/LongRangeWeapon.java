@@ -3,15 +3,15 @@ package teamzesa.util.Enum.Enhance;
 import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import teamzesa.DataBase.enhance.EnhanceItem;
-import teamzesa.DataBase.enhance.Weapon;
+import teamzesa.DataBase.entity.Enhance.EnhanceItemInterface;
+import teamzesa.DataBase.entity.Enhance.Weapon;
 
 import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public enum LongRangeWeapon implements Weapon, EnhanceItem {
+public enum LongRangeWeapon implements Weapon, EnhanceItemInterface {
     AIR(Material.AIR, 0, 0),
 
     TRIDENT(Material.TRIDENT, 9.0, 8.0),

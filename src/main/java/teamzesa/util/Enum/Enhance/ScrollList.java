@@ -4,7 +4,7 @@ import com.google.common.base.Functions;
 import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import teamzesa.DataBase.enhance.Scroll;
+import teamzesa.DataBase.entity.Enhance.Scroll;
 import teamzesa.exception.Enhance.EnhanceItemSearchException;
 
 import java.util.Arrays;
