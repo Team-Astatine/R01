@@ -26,7 +26,6 @@ public class ThreadPool {
                 MAX_CORE_POOL_SIZE,  // 최대 쓰레딩 wait 갯수 4
                 KEEP_ALIVE_TIME, TimeUnit.SECONDS,
                 new LinkedBlockingQueue<>(QUEUE_CAPACITY)
-//                new SynchronousQueue<>()
         );
         */
         scheduledExecutorService = Executors.newScheduledThreadPool(4);
