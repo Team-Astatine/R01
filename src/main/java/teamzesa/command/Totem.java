@@ -66,13 +66,41 @@ public class Totem extends CommandRegisterSection {
                 .mapToInt(Integer::intValue)
                 .sum();
 
+        System.out.println("totalAmount > " + totalAmount);
 //        n <= STACK
-        if (totalAmount <= STACK) {
+        if (totalAmount <= STACK)
             this.playerInventory.setItemInOffHand(new ItemStack(TOTEM, totalAmount));
-        } else {
+
+        else {
 //        n >= STACK
-            this.playerInventory.setItemInOffHand(new ItemStack(TOTEM, STACK));
-            this.playerInventory.addItem(new ItemStack(TOTEM, totalAmount - STACK));
+            /*
+            total Amount / STACK  -> 몇으로 나눠지는지 확인
+            인벤토리 공간을 확인 후 count
+            첫 스택은 offHand에, 나머지 나눠지는 개수만큼 스택으로 지급 나머지는 개수로 지급
+             */
+            int supplyStackAmount = totalAmount / STACK;
+            long invNullingSpaceCount = Arrays.stream(this.playerInventory.getContents())
+                    .filter(Objects::isNull)
+                    .count();
+
+//            공간확보
+            if (invNullingSpaceCount < supplyStackAmount + 1) {
+                playerSendMsgComponentExchanger(this.player, "인벤토리 공간이 부족합니다.", ColorList.YELLOW);
+                return;
+            }
+
+//            Stack 지급
+            for (long i = 0; i < supplyStackAmount; i++) {
+                if (i == 0) {
+                    this.playerInventory.setItemInOffHand(new ItemStack(TOTEM, STACK));
+                    continue;
+                }
+
+                this.playerInventory.addItem(new ItemStack(TOTEM, STACK));
+            }
+
+//            나머지 지급
+            this.playerInventory.addItem(new ItemStack(TOTEM, totalAmount - (supplyStackAmount * STACK)));
         }
 
         playerSendMsgComponentExchanger(this.player, "토템을 합쳤습니다.", ColorList.YELLOW);
