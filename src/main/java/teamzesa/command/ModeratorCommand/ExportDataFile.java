@@ -1,4 +1,4 @@
-package teamzesa.command.AdminCommand;
+package teamzesa.command.ModeratorCommand;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.Bukkit;
@@ -27,7 +27,11 @@ public class ExportDataFile extends CommandRegisterSection {
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(final @NotNull CommandSender sender,
+                             final @NotNull Command command,
+                             final @NotNull String label,
+                             final @NotNull String[] args) {
+
         User senderUser = null;
         try {
             senderUser = new UserController().readUser(sender.getName());

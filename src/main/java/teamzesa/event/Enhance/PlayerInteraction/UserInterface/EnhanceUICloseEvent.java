@@ -1,4 +1,4 @@
-package teamzesa.event.Enhance.PlayerInteraction;
+package teamzesa.event.Enhance.PlayerInteraction.UserInterface;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ObjectUtils;
@@ -15,7 +15,7 @@ import java.util.Objects;
 
 import static teamzesa.DataBase.enhance.EnhanceInventoryHandler.*;
 
-public class EnhanceInventoryCloseEvent implements EventRegister {
+public class EnhanceUICloseEvent implements EventRegister {
     private final int MINIMUM_INVENTORY_SLOT = 5;
     private EnhanceInventoryHandler enhanceInventoryHandler;
 
@@ -25,7 +25,7 @@ public class EnhanceInventoryCloseEvent implements EventRegister {
 
     private final InventoryCloseEvent event;
 
-    public EnhanceInventoryCloseEvent(InventoryCloseEvent event) {
+    public EnhanceUICloseEvent(InventoryCloseEvent event) {
         this.event = event;
         init();
         execute();

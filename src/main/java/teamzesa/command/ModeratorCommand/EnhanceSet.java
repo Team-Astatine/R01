@@ -1,4 +1,4 @@
-package teamzesa.command.AdminCommand;
+package teamzesa.command.ModeratorCommand;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.command.Command;
@@ -19,7 +19,11 @@ public class EnhanceSet extends CommandRegisterSection {
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+    public boolean onCommand(final @NotNull CommandSender commandSender,
+                             final @NotNull Command command,
+                             final @NotNull String s,
+                             final @NotNull String[] strings) {
+
         Player player = (Player) commandSender;
 
         if (BooleanUtils.isFalse(commandSender.isOp())) {

@@ -16,8 +16,8 @@ import org.bukkit.event.raid.RaidTriggerEvent;
 import org.bukkit.event.server.TabCompleteEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
 import teamzesa.event.Enhance.PlayerInteraction.Armour.EnhanceArmourResistanceArmour;
-import teamzesa.event.Enhance.PlayerInteraction.EnhanceInventoryClickEvent;
-import teamzesa.event.Enhance.PlayerInteraction.EnhanceInventoryCloseEvent;
+import teamzesa.event.Enhance.PlayerInteraction.UserInterface.EnhanceUIClickEvent;
+import teamzesa.event.Enhance.PlayerInteraction.UserInterface.EnhanceUICloseEvent;
 import teamzesa.event.Enhance.PlayerInteraction.LongRange.GodMode.GodModeTridentHitEvent;
 import teamzesa.event.Enhance.PlayerInteraction.LongRange.GodMode.GodModeTridentShotEvent;
 import teamzesa.event.Enhance.PlayerInteraction.LongRange.Hit.EnhanceBowHitEvent;
@@ -31,6 +31,7 @@ import teamzesa.event.Enhance.PlayerInteraction.UpdateItemLore.*;
 import teamzesa.event.EntityDamageByEntityEvent.EntityAttackSpeedClear;
 import teamzesa.event.EntityDamageByEntityEvent.EntityAttackSpeedHandler;
 import teamzesa.event.EntityExplodeEvent.ExplosiveEvent;
+import teamzesa.event.EntityExplodeEvent.RestrictedExplosiveDamageManager;
 import teamzesa.event.PlayerArmSwingEvent.HandSwingEvent;
 import teamzesa.event.PlayerDeathEvent.LifeSteelEvent;
 import teamzesa.event.PlayerDeathEvent.UpdateKillStatusForKiller;
@@ -141,14 +142,14 @@ public class EventRegisterSection implements Listener {
         new RestrictedStackingTotemInteraction(event);
         new RestrictedShulkerChest(event);
 
-        new EnhanceInventoryClickEvent(event);
+        new EnhanceUIClickEvent(event);
         new UpdateEnhanceResultItemLoreFromAnvil(event);
         new UpdateEnhanceResultItemLoreFromGrindStone(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
     public static void InventoryCloseEvent(InventoryCloseEvent event) {
-        new EnhanceInventoryCloseEvent(event);
+        new EnhanceUICloseEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -170,6 +171,7 @@ public class EventRegisterSection implements Listener {
     public static void EntityDamageEvent(EntityDamageEvent event) {
 //        Event Cancelled 하면 해당 Event 자체가 캔슬됌.
         new EnhanceArmourResistanceArmour(event);
+        new RestrictedExplosiveDamageManager(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)

@@ -1,7 +1,7 @@
 package teamzesa.util.Enum;
 
 import org.bukkit.command.CommandExecutor;
-import teamzesa.command.AdminCommand.*;
+import teamzesa.command.ModeratorCommand.*;
 import teamzesa.command.Announcing.CommandTip;
 import teamzesa.command.Announcing.Community;
 import teamzesa.command.Announcing.Help;

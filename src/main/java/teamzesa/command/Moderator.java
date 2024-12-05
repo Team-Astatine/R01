@@ -33,7 +33,11 @@ public class Moderator extends CommandRegisterSection {
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String @NotNull [] args) {
+    public boolean onCommand(final @NotNull CommandSender sender,
+                             final @NotNull Command command,
+                             final @NotNull String label,
+                             final @NotNull String [] args) {
+
         Optional.of((Player) sender).ifPresent(
                 player -> {
                     if (checkUPModerator(player)) {

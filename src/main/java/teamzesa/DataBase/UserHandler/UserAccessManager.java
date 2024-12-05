@@ -15,6 +15,9 @@ public class UserAccessManager implements AccessObject<UUID, User> {
         private final static UserAccessManager INSTANCE = new UserAccessManager();
     }
 
+    private UserAccessManager() {
+    }
+
     public static UserAccessManager getInstance() {
         return DaoUserHolder.INSTANCE;
     }

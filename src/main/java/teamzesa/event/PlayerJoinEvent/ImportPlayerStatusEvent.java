@@ -12,7 +12,7 @@ import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.entity.RObject.UserKillStatus;
 import teamzesa.DataBase.UserHandler.UserBuilder;
 import teamzesa.DataBase.UserHandler.UserController;
-import teamzesa.command.AdminCommand.God;
+import teamzesa.command.ModeratorCommand.God;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Announcer;
 import teamzesa.util.Enum.ColorList;
@@ -78,14 +78,14 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
     }
 
     private void checkingUserStatusAttackSpeed() {
-        Optional.ofNullable(this.player.getAttribute(Attribute.GENERIC_ATTACK_SPEED)).ifPresent(
+        Optional.ofNullable(this.player.getAttribute(Attribute.ATTACK_SPEED)).ifPresent(
                 attackSpeed -> attackSpeed.setBaseValue(40.0)
         );
     }
 
     private void checkingUserStatusHealth() {
         this.player.setHealthScale(this.userKillStatus.healthScale());
-        this.player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(this.userKillStatus.healthScale());
+        this.player.getAttribute(Attribute.MAX_HEALTH).setBaseValue(this.userKillStatus.healthScale());
     }
 
     private void supplyUserKit() {

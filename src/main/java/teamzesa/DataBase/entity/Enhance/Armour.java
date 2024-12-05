@@ -1,8 +1,8 @@
-package teamzesa.DataBase.enhance;
+package teamzesa.DataBase.entity.Enhance;
 
 import org.bukkit.Material;
 
-public interface Armour extends EnhanceItem {
+public interface Armour extends EnhanceItemInterface {
     static <E extends Armour> E findByMaterial(Material material) throws Exception {
         return null;
     }

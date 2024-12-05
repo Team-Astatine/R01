@@ -1,4 +1,4 @@
-package teamzesa.command.AdminCommand;
+package teamzesa.command.ModeratorCommand;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -16,7 +16,11 @@ public class LookUserMainHandItem extends CommandRegisterSection {
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+    public boolean onCommand(final @NotNull CommandSender commandSender,
+                             final @NotNull Command command,
+                             final @NotNull String s,
+                             final @NotNull String[] strings) {
+
         ItemStack mainHandItem = ((Player) commandSender).getInventory().getItemInMainHand();
         playerSendMsgComponentExchanger(commandSender, mainHandItem.toString(), ColorList.YELLOW);
         return true;
