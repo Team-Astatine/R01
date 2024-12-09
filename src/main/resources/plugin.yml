@@ -33,6 +33,8 @@ commands:
     description: 강화창을 엽니다.
   hat:
     description: 손에 든 아이템을 머리에 착용합니다.
+  swap:
+    description: 손에 든 아이템을 다른 손으로 옮깁니다.
   totem:
     description: 토템을 합칩니다.
   fly:
