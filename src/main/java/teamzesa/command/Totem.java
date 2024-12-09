@@ -66,7 +66,6 @@ public class Totem extends CommandRegisterSection {
                 .mapToInt(Integer::intValue)
                 .sum();
 
-        System.out.println("totalAmount > " + totalAmount);
 //        n <= STACK
         if (totalAmount <= STACK)
             this.playerInventory.setItemInOffHand(new ItemStack(TOTEM, totalAmount));
