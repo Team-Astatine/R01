@@ -22,6 +22,7 @@ public enum ConfigMenu {
     MESSAGE_COMMAND_TIP("message.CommandTip"),
     MESSAGE_COMMAND_FLY("message.commandFly"),
     MESSAGE_COMMAND_HAT("message.commandHat"),
+    MESSAGE_COMMAND_SWAP("message.commandSwap"),
     MESSAGE_COMMAND_TOTEM("message.commandTotem"),
     MESSAGE_COMMAND_ENHANCE("message.commandEnhance"),
     MESSAGE_COMMAND_ANNOUNCING("message.commandAnnouncing"),
