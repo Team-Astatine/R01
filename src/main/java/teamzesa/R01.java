@@ -16,6 +16,7 @@ import teamzesa.util.Enum.DataFile;
 import teamzesa.util.ThreadPool;
 
 import java.util.EnumSet;
+import java.util.Objects;
 
 
 public final class R01 extends JavaPlugin {
@@ -34,6 +35,7 @@ public final class R01 extends JavaPlugin {
 //        setMaxPlayers(50);
 
 //        saveDefaultSource
+
         if (BooleanUtils.isFalse(getDataFolder().exists()))
             generationDataFile();
 
@@ -85,8 +87,9 @@ public final class R01 extends JavaPlugin {
     private void registerCommandAndEvent() {
         getServer().getPluginManager().registerEvents(new EventRegisterSection(), this); //function set
 
-        EnumSet<CommandType> commandType = EnumSet.allOf(CommandType.class);
-        commandType.forEach(c -> getCommand(c.getCommand()).setExecutor(c.getCommandInstance()));
+        EnumSet.allOf(CommandType.class).forEach(
+                c -> getCommand(c.getCommand()).setExecutor(c.getCommandInstance())
+        );
     }
 
     private void SchedulingExportData() {
