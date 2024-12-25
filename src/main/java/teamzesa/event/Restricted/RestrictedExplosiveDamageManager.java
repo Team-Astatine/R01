@@ -1,4 +1,4 @@
-package teamzesa.event.EntityExplodeEvent;
+package teamzesa.event.Restricted;
 
 import org.bukkit.damage.DamageType;
 import org.bukkit.entity.Entity;

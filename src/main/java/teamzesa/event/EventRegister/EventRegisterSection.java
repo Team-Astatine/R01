@@ -31,7 +31,7 @@ import teamzesa.event.Enhance.PlayerInteraction.UpdateItemLore.*;
 import teamzesa.event.EntityDamageByEntityEvent.EntityAttackSpeedClear;
 import teamzesa.event.EntityDamageByEntityEvent.EntityAttackSpeedHandler;
 import teamzesa.event.EntityExplodeEvent.ExplosiveEvent;
-import teamzesa.event.EntityExplodeEvent.RestrictedExplosiveDamageManager;
+import teamzesa.event.Restricted.RestrictedExplosiveDamageManager;
 import teamzesa.event.PlayerArmSwingEvent.HandSwingEvent;
 import teamzesa.event.PlayerDeathEvent.LifeSteelEvent;
 import teamzesa.event.PlayerDeathEvent.UpdateKillStatusForKiller;

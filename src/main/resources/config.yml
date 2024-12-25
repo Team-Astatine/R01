@@ -18,6 +18,7 @@ message:
   CommandTip: '/명령어'
   commandFly: '/fly - 플라이는 항상 활성화 되어 있으며 필요시 입력해주세요.'
   commandHat: '/hat - 손에 든 아이템을 머리에 씁니다.'
+  commandSwap: '/swap - 손에 든 아이템을 다른 손으로 옮깁니다.'
   commandTotem: '/totem - 인벤토리의 토템을 모두 합칩니다.'
   commandEnhance: '/강화 - 강화창을 열거나 닫습니다.'
   commandAnnouncing: '/공지 - 공지사항 채팅을 끄거나 킵니다.'

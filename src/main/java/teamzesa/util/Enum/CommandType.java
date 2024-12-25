@@ -14,6 +14,7 @@ public enum CommandType {
     HELP("Help", new Help()),
     MODERATOR("moderator", new Moderator()),
     ARMOUR_HEAD("hat", new Hat()),
+    OFF_HAND_ITEM_SWAP_FOR_BE("swap", new OffHandItemSwap()),
     TOTEM_STACKING("totem", new Totem()),
     FLY("fly", new Fly()),
     ANNOUNCING("공지", new AnnouncingOnOff()),
