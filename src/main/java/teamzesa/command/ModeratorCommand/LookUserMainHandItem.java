@@ -22,6 +22,7 @@ public class LookUserMainHandItem extends CommandRegisterSection {
                              final @NotNull String[] strings) {
 
         ItemStack mainHandItem = ((Player) commandSender).getInventory().getItemInMainHand();
+        System.out.println("mainHandItem > " + mainHandItem.toString());
         playerSendMsgComponentExchanger(commandSender, mainHandItem.toString(), ColorList.YELLOW);
         return true;
     }
