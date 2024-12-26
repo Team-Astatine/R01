@@ -6,7 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Bukkit;
 import teamzesa.DataBase.entity.RObject.RObject;
-import teamzesa.util.Enum.DataFile;
+import teamzesa.Enum.DataFile;
 
 import java.io.FileReader;
 import java.io.FileWriter;

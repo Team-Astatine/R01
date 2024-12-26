@@ -8,7 +8,7 @@ import teamzesa.DataBase.IOHandler.ConfigIOHandler;
 import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.UserHandler.UserController;
 import teamzesa.R01;
-import teamzesa.util.Enum.ColorList;
+import teamzesa.Enum.ColorList;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 import java.util.ArrayList;

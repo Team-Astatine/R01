@@ -1,9 +1,9 @@
-package teamzesa.util.Enum.Enhance;
+package teamzesa.Enum.Enhance;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.apache.commons.lang3.BooleanUtils;
-import teamzesa.util.Enum.ColorList;
+import teamzesa.Enum.ColorList;
 
 import java.util.Arrays;
 import java.util.Map;

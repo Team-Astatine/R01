@@ -5,8 +5,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.util.Enum.ColorList;
-import teamzesa.util.Enum.CommandType;
+import teamzesa.Enum.ColorList;
+import teamzesa.Enum.CommandType;
 
 
 public class Fly extends CommandRegisterSection {

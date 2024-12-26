@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.util.Enum.CommandType;
+import teamzesa.Enum.CommandType;
 
 public class OffHandItemSwap extends CommandRegisterSection {
 

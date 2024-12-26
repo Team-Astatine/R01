@@ -1,4 +1,4 @@
-package teamzesa.util.Enum.Enhance;
+package teamzesa.Enum.Enhance;
 
 import com.google.common.base.Functions;
 import org.apache.commons.lang3.BooleanUtils;

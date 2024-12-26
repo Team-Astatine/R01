@@ -2,15 +2,15 @@ package teamzesa.DataBase.IOHandler;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
-import teamzesa.util.Enum.ColorList;
-import teamzesa.util.Enum.ConfigMenu;
-import teamzesa.util.Enum.DataFile;
+import teamzesa.Enum.ColorList;
+import teamzesa.Enum.ConfigMenu;
+import teamzesa.Enum.DataFile;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 import java.io.File;
 import java.io.IOException;
 
-import static teamzesa.util.Enum.ConfigMenu.MESSAGE_COMMAND_TOTEM;
+import static teamzesa.Enum.ConfigMenu.MESSAGE_COMMAND_TOTEM;
 
 public class ConfigIOHandler extends StringComponentExchanger {
     private static class ConfigIOHandlerHolder {

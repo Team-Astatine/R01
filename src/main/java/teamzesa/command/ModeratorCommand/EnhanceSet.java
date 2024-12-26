@@ -9,8 +9,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.event.Enhance.EnhanceUtil;
-import teamzesa.util.Enum.ColorList;
-import teamzesa.util.Enum.CommandType;
+import teamzesa.Enum.ColorList;
+import teamzesa.Enum.CommandType;
 
 public class EnhanceSet extends CommandRegisterSection {
 

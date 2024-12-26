@@ -9,7 +9,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import teamzesa.util.Enum.ColorList;
+import teamzesa.Enum.ColorList;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 import static teamzesa.DataBase.enhance.EnhanceInventoryHandler.*;

@@ -7,7 +7,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import teamzesa.event.EventRegister.EventRegister;
-import teamzesa.util.Enum.WorldName;
+import teamzesa.Enum.WorldName;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.RanNumGenerator;
 

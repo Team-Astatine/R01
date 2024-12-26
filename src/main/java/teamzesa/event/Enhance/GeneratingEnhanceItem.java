@@ -4,9 +4,9 @@ import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.Material;
 import teamzesa.DataBase.entity.Enhance.EnhanceItem;
-import teamzesa.util.Enum.ColorList;
-import teamzesa.util.Enum.Enhance.ProtectScrollList;
-import teamzesa.util.Enum.Enhance.ScrollList;
+import teamzesa.Enum.ColorList;
+import teamzesa.Enum.Enhance.ProtectScrollList;
+import teamzesa.Enum.Enhance.ScrollList;
 
 public class GeneratingEnhanceItem extends EnhanceUtil {
     private final int LOW_LEVEL = 0;

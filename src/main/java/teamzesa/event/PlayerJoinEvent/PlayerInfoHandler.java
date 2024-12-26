@@ -10,7 +10,7 @@ import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.UserHandler.UserBuilder;
 import teamzesa.DataBase.UserHandler.UserController;
 import teamzesa.event.EventRegister.EventRegister;
-import teamzesa.util.Enum.ColorList;
+import teamzesa.Enum.ColorList;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 import java.util.Optional;

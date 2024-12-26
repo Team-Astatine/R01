@@ -6,8 +6,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.util.Enum.ColorList;
-import teamzesa.util.Enum.ConfigMenu;
+import teamzesa.Enum.ColorList;
+import teamzesa.Enum.ConfigMenu;
 
 public abstract class StringComponentExchanger {
     private Component exchangerStringToComponent(String comment) {

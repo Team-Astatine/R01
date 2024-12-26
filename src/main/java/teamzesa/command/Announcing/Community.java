@@ -8,7 +8,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.DataBase.IOHandler.ConfigIOHandler;
-import teamzesa.util.Enum.ColorList;
+import teamzesa.Enum.ColorList;
 
 public record Community() implements CommandExecutor {
 

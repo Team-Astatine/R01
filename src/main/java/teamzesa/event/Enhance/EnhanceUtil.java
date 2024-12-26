@@ -11,8 +11,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import teamzesa.exception.Enhance.EnhanceItemMetaException;
-import teamzesa.util.Enum.ColorList;
-import teamzesa.util.Enum.Enhance.*;
+import teamzesa.Enum.ColorList;
+import teamzesa.Enum.Enhance.*;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 import java.util.ArrayList;

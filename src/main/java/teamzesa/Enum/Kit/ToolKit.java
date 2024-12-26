@@ -1,4 +1,4 @@
-package teamzesa.util.Enum.Kit;
+package teamzesa.Enum.Kit;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;

@@ -1,4 +1,4 @@
-package teamzesa.util.Enum;
+package teamzesa.Enum;
 
 public enum ConfigMenu {
     MESSAGE_COMMAND_HELP("message.commandHelp"),

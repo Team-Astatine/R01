@@ -1,4 +1,4 @@
-package teamzesa.util.Enum;
+package teamzesa.Enum;
 
 import java.util.Arrays;
 import java.util.Map;

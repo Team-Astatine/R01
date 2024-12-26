@@ -15,10 +15,10 @@ import teamzesa.DataBase.UserHandler.UserController;
 import teamzesa.command.ModeratorCommand.God;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Announcer;
-import teamzesa.util.Enum.ColorList;
-import teamzesa.util.Enum.Kit.FoodKit;
-import teamzesa.util.Enum.Kit.ToolKit;
-import teamzesa.util.Enum.WorldName;
+import teamzesa.Enum.ColorList;
+import teamzesa.Enum.Kit.FoodKit;
+import teamzesa.Enum.Kit.ToolKit;
+import teamzesa.Enum.WorldName;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.RanNumGenerator;
 

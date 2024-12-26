@@ -1,4 +1,4 @@
-package teamzesa.util.Enum.Enhance;
+package teamzesa.Enum.Enhance;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Material;

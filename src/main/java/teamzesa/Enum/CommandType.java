@@ -1,4 +1,4 @@
-package teamzesa.util.Enum;
+package teamzesa.Enum;
 
 import org.bukkit.command.CommandExecutor;
 import teamzesa.command.ModeratorCommand.*;
