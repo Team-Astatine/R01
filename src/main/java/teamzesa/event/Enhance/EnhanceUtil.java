@@ -81,7 +81,7 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         return item.getItemMeta().getCustomModelData();
     }
 
-    public static void increaseEnhanceItemLevel(ItemStack item, int updateCount) throws EnhanceItemMetaException {
+    public static void increaseEnhanceItemLevel(ItemStack item, int increaseLevel) throws EnhanceItemMetaException {
         List<Component> lore = new ArrayList<>();
         try {
             validCustomModelData(item, "addItemDescription");
@@ -90,7 +90,7 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         }
 
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.setCustomModelData(itemMeta.getCustomModelData() + updateCount);
+        itemMeta.setCustomModelData(itemMeta.getCustomModelData() + increaseLevel);
 
 //        최종강화 아이템 설정
         if (itemMeta.getCustomModelData() == 10) {

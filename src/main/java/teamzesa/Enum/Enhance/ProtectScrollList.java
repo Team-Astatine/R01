@@ -8,6 +8,7 @@ import teamzesa.DataBase.entity.Enhance.Scroll;
 import teamzesa.exception.Enhance.EnhanceItemSearchException;
 
 import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -26,8 +27,15 @@ public enum ProtectScrollList implements Scroll {
 
     private final Material material;
     private final int discountValue;
-    private static final Map<Material, ProtectScrollList> CACHED_ITEM = Arrays.stream(values())
-            .collect(Collectors.toMap(ProtectScrollList::getMaterial, Functions.identity()));
+    private static final EnumMap<Material, ProtectScrollList> CACHED_ITEM =
+            Arrays.stream(values()).collect(
+                    Collectors.toMap(
+                            ProtectScrollList::getMaterial,
+                            Functions.identity(),
+                            (k1, k2) -> k1,
+                            () -> new EnumMap<>(Material.class)
+                    )
+            );
 
     ProtectScrollList(Material material, int discountValue) {
         this.discountValue = discountValue;

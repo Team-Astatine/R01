@@ -12,7 +12,7 @@ public enum WorldName {
 
     private final String exchangeKorean;
     private final String exchangeEnglish;
-    private final static Map<String, WorldName> CACHED_ITEM = Arrays.stream(values())
+    private final static Map<String, WorldName> CACHED_ITEM =Arrays.stream(values())
             .collect(Collectors.toMap(WorldName::getExchangeEnglish, Function.identity()));
 
     WorldName(String korean, String english) {

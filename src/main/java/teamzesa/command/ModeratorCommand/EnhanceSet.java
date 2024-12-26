@@ -38,6 +38,11 @@ public class EnhanceSet extends CommandRegisterSection {
         }
 
         ItemStack targetItem = player.getInventory().getItemInMainHand();
+
+        switch (targetItem.getType()) {
+
+        }
+
         ItemMeta targetItemMeta = targetItem.getItemMeta();
         targetItemMeta.setCustomModelData(0);
         targetItem.setItemMeta(targetItemMeta);
