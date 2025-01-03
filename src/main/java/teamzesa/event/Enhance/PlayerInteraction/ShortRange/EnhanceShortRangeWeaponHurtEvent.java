@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import teamzesa.event.Enhance.EnhanceUtil;
 import teamzesa.event.EventRegister.EventRegister;
 
-public class EnhanceShortRangeWeaponHurtEvent extends EnhanceUtil implements EventRegister {
+public class EnhanceShortRangeWeaponHurtEvent implements EventRegister {
     private Entity causingEntity;
     private Entity directEntity;
     private final EntityDamageByEntityEvent event;
@@ -52,7 +52,7 @@ public class EnhanceShortRangeWeaponHurtEvent extends EnhanceUtil implements Eve
 
         eventDamage = this.event.isCritical() ? eventDamage / 1.5 : eventDamage; //Remove Critical Damage
 
-        double resultDmg = getCalculatingDamagePercentage(weapon, eventDamage);// 11, 12, 13% Increase Dmg
+        double resultDmg = EnhanceUtil.getCalculatingDamagePercentage(weapon, eventDamage);// 11, 12, 13% Increase Dmg
         resultDmg = this.event.isCritical() ? resultDmg * 1.5 : resultDmg; //Add Critical Damage
 
         this.event.setDamage(resultDmg);

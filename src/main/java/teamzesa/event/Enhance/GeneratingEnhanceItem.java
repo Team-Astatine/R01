@@ -7,8 +7,9 @@ import teamzesa.DataBase.entity.Enhance.EnhanceItem;
 import teamzesa.Enum.ColorList;
 import teamzesa.Enum.Enhance.ProtectScrollList;
 import teamzesa.Enum.Enhance.ScrollList;
+import teamzesa.util.Interface.StringComponentExchanger;
 
-public class GeneratingEnhanceItem extends EnhanceUtil {
+public class GeneratingEnhanceItem extends StringComponentExchanger {
     private final int LOW_LEVEL = 0;
     private final int MAX_LEVEL = 10;
 
@@ -71,38 +72,38 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
             return;
         }
 
-        boolean success = isMeetsJudgementCriteria(MAX_LEVEL - currentCustomModelData);
-        boolean destroy = isMeetsJudgementCriteria(currentCustomModelData - LOW_LEVEL);
+        boolean success = EnhanceUtil.isMeetsJudgementCriteria(MAX_LEVEL - currentCustomModelData);
+        boolean destroy = EnhanceUtil.isMeetsJudgementCriteria(currentCustomModelData - LOW_LEVEL);
 
 //        execute
         if (success) {
             successEnhanceScenario();
-            scrollDiscount(this.item.enhanceScroll(), this.item.protectScroll());
+            EnhanceUtil.scrollDiscount(this.item.enhanceScroll(), this.item.protectScroll());
             return;
         }
 
         if (BooleanUtils.isFalse(destroy)) {
             failEnhanceScenario();
-            scrollDiscount(this.item.enhanceScroll(), this.item.protectScroll());
+            EnhanceUtil.scrollDiscount(this.item.enhanceScroll(), this.item.protectScroll());
             return;
         }
 
         if (destroy && BooleanUtils.isFalse(this.hasProtectScroll)) {
             this.item.enhanceItem().setAmount(0);
             playerSendMessage(3, ColorList.RED);
-            scrollDiscount(this.item.enhanceScroll(), this.item.protectScroll());
+            EnhanceUtil.scrollDiscount(this.item.enhanceScroll(), this.item.protectScroll());
             return;
         }
 
         failEnhanceScenario();
         playerSendMessage(4, ColorList.VOTE_COLOR);
-        scrollDiscount(this.item.enhanceScroll(), this.item.protectScroll());
+        EnhanceUtil.scrollDiscount(this.item.enhanceScroll(), this.item.protectScroll());
     }
 
     private void successEnhanceScenario() {
         playerSendMessage(6, ColorList.DISCORD_COLOR);
         try {
-            increaseEnhanceItemLevel(this.item.enhanceItem(), +1);
+            EnhanceUtil.increaseEnhanceItemLevel(this.item.enhanceItem(), +1);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -111,7 +112,7 @@ public class GeneratingEnhanceItem extends EnhanceUtil {
     private void failEnhanceScenario() {
         playerSendMessage(5, ColorList.PINK);
         try {
-            increaseEnhanceItemLevel(this.item.enhanceItem(), -1);
+            EnhanceUtil.increaseEnhanceItemLevel(this.item.enhanceItem(), -1);
         } catch (Exception e) {
             e.printStackTrace();
         }

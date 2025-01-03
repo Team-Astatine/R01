@@ -1,5 +1,6 @@
 package teamzesa.event.Enhance;
 
+import io.papermc.paper.registry.tag.Tag;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.apache.commons.lang3.BooleanUtils;
@@ -18,7 +19,7 @@ import teamzesa.util.Interface.StringComponentExchanger;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class EnhanceUtil extends StringComponentExchanger {
+public final class EnhanceUtil extends StringComponentExchanger {
 
     /*
      * 0 -> 1강  100% 0%
@@ -153,7 +154,7 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
                 .decorate(TextDecoration.BOLD);
     }
 
-    public int getItemCustomModelData(ItemStack item) {
+    public static int getItemCustomModelData(ItemStack item) {
         try {
             validCustomModelData(item, "getItemCustomModelData");
         } catch (Exception e) {
