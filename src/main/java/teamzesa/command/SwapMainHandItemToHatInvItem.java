@@ -10,11 +10,11 @@ import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.Enum.ColorList;
 import teamzesa.Enum.CommandType;
 
-public class Hat extends CommandRegisterSection {
+public class SwapMainHandItemToHatInvItem extends CommandRegisterSection {
     private Player player;
     private PlayerInventory playerInventory;
 
-    public Hat() {
+    public SwapMainHandItemToHatInvItem() {
         super(CommandType.ARMOUR_HEAD);
     }
 

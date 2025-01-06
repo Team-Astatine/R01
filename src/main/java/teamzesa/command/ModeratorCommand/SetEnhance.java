@@ -1,15 +1,12 @@
 package teamzesa.command.ModeratorCommand;
 
 import org.apache.commons.lang3.BooleanUtils;
-import org.bukkit.Tag;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.damage.DamageType;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.tag.DamageTypeTags;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.Enum.Enhance.EnhanceItemUndoInformation;
 import teamzesa.command.register.CommandRegisterSection;
@@ -19,11 +16,9 @@ import teamzesa.Enum.CommandType;
 
 import java.util.Map;
 
-import static org.yaml.snakeyaml.tokens.Token.ID.Tag;
+public class SetEnhance extends CommandRegisterSection {
 
-public class EnhanceSet extends CommandRegisterSection {
-
-    public EnhanceSet() {
+    public SetEnhance() {
         super(CommandType.ENHANCE_SET);
     }
 

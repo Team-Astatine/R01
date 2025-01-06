@@ -18,11 +18,11 @@ import teamzesa.Enum.DataFile;
 import java.util.Optional;
 
 
-public class ExportDataFile extends CommandRegisterSection {
+public class ExportAllData extends CommandRegisterSection {
     private Player senderPlayer;
     private boolean consoleSend = false;
 
-    public ExportDataFile() {
+    public ExportAllData() {
         super(CommandType.EXPORT_DATA_FILE);
     }
 

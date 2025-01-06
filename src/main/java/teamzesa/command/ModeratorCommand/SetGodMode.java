@@ -19,12 +19,12 @@ import teamzesa.Enum.CommandType;
 import java.util.Optional;
 
 
-public class God extends CommandRegisterSection {
+public class SetGodMode extends CommandRegisterSection {
     private User senderUser;
     private Player senderPlayer;
     private boolean consoleSend = false;
 
-    public God() {
+    public SetGodMode() {
         super(CommandType.GOD_MODE);
     }
 

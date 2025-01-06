@@ -16,12 +16,12 @@ import teamzesa.Enum.CommandType;
 import java.util.Optional;
 
 
-public class DataFileReload extends CommandRegisterSection {
+public class ConfigDataReload extends CommandRegisterSection {
 
     private Player player;
     private boolean consoleSend = false;
 
-    public DataFileReload() {
+    public ConfigDataReload() {
         super(CommandType.CONFIG_RELOAD);
     }
 

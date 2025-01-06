@@ -11,12 +11,12 @@ import teamzesa.Enum.ColorList;
 import teamzesa.Enum.CommandType;
 
 
-public class Motd extends CommandRegisterSection {
+public class SetMotd extends CommandRegisterSection {
 
     private static final String DEFAULT_SERVER_MOTD = "Astatine Online";
     private String newMotd;
 
-    public Motd() {
+    public SetMotd() {
         super(CommandType.MOTD);
         this.newMotd = DEFAULT_SERVER_MOTD;
     }

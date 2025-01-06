@@ -9,9 +9,9 @@ import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.Enum.ColorList;
 import teamzesa.Enum.CommandType;
 
-public class Astn extends CommandRegisterSection {
+public class TitleAstatine extends CommandRegisterSection {
 
-    public Astn() {
+    public TitleAstatine() {
         super(CommandType.ASTN);
     }
 

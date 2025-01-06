@@ -12,9 +12,9 @@ import teamzesa.Enum.CommandType;
 
 
 
-public class EnhanceDialog extends CommandRegisterSection {
+public class OpenEnhanceDialog extends CommandRegisterSection {
 
-    public EnhanceDialog() {
+    public OpenEnhanceDialog() {
         super(CommandType.ENHANCE);
     }
 

@@ -19,12 +19,12 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-public class RemoveDuplicateData extends CommandRegisterSection {
+public class RemoveDuplicateUserNameData extends CommandRegisterSection {
     private User senderUser;
     private Player senderPlayer;
     private boolean consoleSend = false;
 
-    public RemoveDuplicateData() {
+    public RemoveDuplicateUserNameData() {
         super(CommandType.REMOVE_DUPLICATE_USER_DATA);
     }
 

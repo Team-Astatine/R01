@@ -8,9 +8,9 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.Enum.CommandType;
 
-public class OffHandItemSwap extends CommandRegisterSection {
+public class OffHandItemSwapFunction extends CommandRegisterSection {
 
-    public OffHandItemSwap() {
+    public OffHandItemSwapFunction() {
         super(CommandType.OFF_HAND_ITEM_SWAP_FOR_BE);
     }
 

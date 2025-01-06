@@ -11,9 +11,9 @@ import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.Enum.ColorList;
 import teamzesa.Enum.CommandType;
 
-public class AnnouncingOnOff extends CommandRegisterSection {
+public class ToggleAnnouncing extends CommandRegisterSection {
 
-    public AnnouncingOnOff() {
+    public ToggleAnnouncing() {
         super(CommandType.ANNOUNCING);
     }
 

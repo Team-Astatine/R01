@@ -10,29 +10,29 @@ import teamzesa.command.*;
 
 public enum CommandType {
 //    User
-    ASTN("Astn", new Astn()),
+    ASTN("Astn", new TitleAstatine()),
     HELP("Help", new Help()),
     MODERATOR("moderator", new Moderator()),
-    ARMOUR_HEAD("hat", new Hat()),
-    OFF_HAND_ITEM_SWAP_FOR_BE("swap", new OffHandItemSwap()),
-    TOTEM_STACKING("totem", new Totem()),
-    FLY("fly", new Fly()),
-    ANNOUNCING("공지", new AnnouncingOnOff()),
-    ENHANCE("강화", new EnhanceDialog()),
+    ARMOUR_HEAD("hat", new SwapMainHandItemToHatInvItem()),
+    OFF_HAND_ITEM_SWAP_FOR_BE("swap", new OffHandItemSwapFunction()),
+    TOTEM_STACKING("totem", new StackingTotemFunction()),
+    FLY("fly", new ToggleFly()),
+    ANNOUNCING("공지", new ToggleAnnouncing()),
+    ENHANCE("강화", new OpenEnhanceDialog()),
     COMMAND_TIP("명령어", new CommandTip()),
     SERVER_TIP("서버팁", new ServerTip()),
     COMMUNITY("커뮤니티", new Community()),
 
 //    Moderator
-    MOTD("motd", new Motd()),
-    EXPORT_DATA_FILE("ExportDataFile", new ExportDataFile()),
-    REMOVE_DUPLICATE_USER_DATA("RemoveDuplicateData", new RemoveDuplicateData()),
+    MOTD("motd", new SetMotd()),
+    EXPORT_DATA_FILE("ExportDataFile", new ExportAllData()),
+    REMOVE_DUPLICATE_USER_DATA("RemoveDuplicateData", new RemoveDuplicateUserNameData()),
     HEALTH_RESET("setHealth", new SetHealth()),
-    GOD_MODE("god", new God()),
-    CONFIG_RELOAD("dataFileReload", new DataFileReload()),
+    GOD_MODE("god", new SetGodMode()),
+    CONFIG_RELOAD("dataFileReload", new ConfigDataReload()),
     LOOK_USER_VALUE("vo", new LookUserValue()),
     LOOK_USER_MAIN_HAND_ITEM("vi", new LookUserMainHandItem()),
-    ENHANCE_SET("enhance", new EnhanceSet());
+    ENHANCE_SET("enhance", new SetEnhance());
 
     private final String command;
     private final CommandExecutor executor;

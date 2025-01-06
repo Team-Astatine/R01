@@ -9,9 +9,9 @@ import teamzesa.Enum.ColorList;
 import teamzesa.Enum.CommandType;
 
 
-public class Fly extends CommandRegisterSection {
+public class ToggleFly extends CommandRegisterSection {
 
-    public Fly() {
+    public ToggleFly() {
         super(CommandType.FLY);
     }
 
