@@ -15,8 +15,8 @@ import teamzesa.DataBase.enhance.EnhanceItemBuilder;
 import teamzesa.DataBase.entity.Enhance.EnhanceItem;
 import teamzesa.event.Enhance.GeneratingEnhanceItem;
 import teamzesa.event.EventRegister.EventRegister;
-import teamzesa.util.Enum.ColorList;
-import teamzesa.util.Enum.Enhance.*;
+import teamzesa.Enum.ColorList;
+import teamzesa.Enum.Enhance.*;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 import java.util.Arrays;

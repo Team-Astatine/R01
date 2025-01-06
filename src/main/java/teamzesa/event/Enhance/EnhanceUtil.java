@@ -1,5 +1,6 @@
 package teamzesa.event.Enhance;
 
+import io.papermc.paper.registry.tag.Tag;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.apache.commons.lang3.BooleanUtils;
@@ -11,14 +12,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import teamzesa.exception.Enhance.EnhanceItemMetaException;
-import teamzesa.util.Enum.ColorList;
-import teamzesa.util.Enum.Enhance.*;
+import teamzesa.Enum.ColorList;
+import teamzesa.Enum.Enhance.*;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class EnhanceUtil extends StringComponentExchanger {
+public final class EnhanceUtil extends StringComponentExchanger {
 
     /*
      * 0 -> 1강  100% 0%
@@ -81,7 +82,7 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         return item.getItemMeta().getCustomModelData();
     }
 
-    public static void increaseEnhanceItemLevel(ItemStack item, int updateCount) throws EnhanceItemMetaException {
+    public static void increaseEnhanceItemLevel(ItemStack item, int increaseLevel) throws EnhanceItemMetaException {
         List<Component> lore = new ArrayList<>();
         try {
             validCustomModelData(item, "addItemDescription");
@@ -90,7 +91,7 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
         }
 
         ItemMeta itemMeta = item.getItemMeta();
-        itemMeta.setCustomModelData(itemMeta.getCustomModelData() + updateCount);
+        itemMeta.setCustomModelData(itemMeta.getCustomModelData() + increaseLevel);
 
 //        최종강화 아이템 설정
         if (itemMeta.getCustomModelData() == 10) {
@@ -153,7 +154,7 @@ public abstract class EnhanceUtil extends StringComponentExchanger {
                 .decorate(TextDecoration.BOLD);
     }
 
-    public int getItemCustomModelData(ItemStack item) {
+    public static int getItemCustomModelData(ItemStack item) {
         try {
             validCustomModelData(item, "getItemCustomModelData");
         } catch (Exception e) {

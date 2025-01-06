@@ -1,4 +1,4 @@
-package teamzesa.util.Enum.Enhance;
+package teamzesa.Enum.Enhance;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Material;
@@ -6,6 +6,7 @@ import org.bukkit.inventory.ItemStack;
 import teamzesa.DataBase.entity.Enhance.Armour;
 
 import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -45,8 +46,15 @@ public enum ArmourList implements Armour {
 
     private final Material material;
     private final int resistance;
-    private final static Map<Material, ArmourList> CACHED_ITEM = Arrays.stream(values())
-            .collect(Collectors.toMap(ArmourList::getMaterial, Function.identity()));
+    private final static EnumMap<Material, ArmourList> CACHED_ITEM =
+            Arrays.stream(values()).collect(
+                    Collectors.toMap(
+                            ArmourList::getMaterial,
+                            Function.identity(),
+                            (k1, k2) -> k1,
+                            () -> new EnumMap<>(Material.class)
+                    )
+            );
 
     ArmourList(Material material, int resistance) {
         this.material = material;

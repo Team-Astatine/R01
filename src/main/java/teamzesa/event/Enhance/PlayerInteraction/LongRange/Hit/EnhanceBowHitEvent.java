@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import teamzesa.event.Enhance.EnhanceUtil;
 import teamzesa.event.EventRegister.EventRegister;
 
-public class EnhanceBowHitEvent extends EnhanceUtil implements EventRegister {
+public class EnhanceBowHitEvent implements EventRegister {
     private Location bowHitLocation;
     private final ProjectileHitEvent event;
 
@@ -44,7 +44,7 @@ public class EnhanceBowHitEvent extends EnhanceUtil implements EventRegister {
         if (BooleanUtils.isFalse(mainHandBow.getItemMeta().hasCustomModelData()))
             return;
 
-        switch (getItemCustomModelData(mainHandBow)) {
+        switch (EnhanceUtil.getItemCustomModelData(mainHandBow)) {
             case 1, 2, 3 -> executeEnhanceState(Sound.ENTITY_GHAST_DEATH, false);
             case 4, 5, 6 -> executeEnhanceState(Sound.ENTITY_ENDER_DRAGON_HURT, false);
             case 7, 8, 9 -> executeEnhanceState(Sound.ENTITY_ENDER_DRAGON_SHOOT, false);

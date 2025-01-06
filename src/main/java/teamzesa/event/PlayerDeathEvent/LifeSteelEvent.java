@@ -13,7 +13,7 @@ import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.entity.RObject.UserKillStatus;
 import teamzesa.DataBase.UserHandler.UserController;
 import teamzesa.event.EventRegister.EventRegister;
-import teamzesa.util.Enum.ColorList;
+import teamzesa.Enum.ColorList;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 

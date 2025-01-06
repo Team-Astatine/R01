@@ -10,21 +10,21 @@ import teamzesa.DataBase.IOHandler.RObjectIOHandler;
 import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.UserHandler.UserController;
 import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.util.Enum.ColorList;
-import teamzesa.util.Enum.CommandType;
-import teamzesa.util.Enum.DataFile;
+import teamzesa.Enum.ColorList;
+import teamzesa.Enum.CommandType;
+import teamzesa.Enum.DataFile;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-public class RemoveDuplicateData extends CommandRegisterSection {
+public class RemoveDuplicateUserNameData extends CommandRegisterSection {
     private User senderUser;
     private Player senderPlayer;
     private boolean consoleSend = false;
 
-    public RemoveDuplicateData() {
+    public RemoveDuplicateUserNameData() {
         super(CommandType.REMOVE_DUPLICATE_USER_DATA);
     }
 

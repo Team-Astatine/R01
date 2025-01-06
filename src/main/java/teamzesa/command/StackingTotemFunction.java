@@ -9,15 +9,15 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.util.Enum.ColorList;
-import teamzesa.util.Enum.CommandType;
+import teamzesa.Enum.ColorList;
+import teamzesa.Enum.CommandType;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-public class Totem extends CommandRegisterSection {
+public class StackingTotemFunction extends CommandRegisterSection {
     private final Material TOTEM = Material.TOTEM_OF_UNDYING;
 
     private final int STACK = 64;
@@ -27,7 +27,7 @@ public class Totem extends CommandRegisterSection {
     private PlayerInventory playerInventory;
     private List<Integer> totemCountData;
 
-    public Totem() {
+    public StackingTotemFunction() {
         super(CommandType.TOTEM_STACKING);
     }
 
@@ -38,8 +38,8 @@ public class Totem extends CommandRegisterSection {
                              final @NotNull String[] args) {
 
         Runnable executeTotemSupply = () -> {
-            Totem.this.player = (Player) sender;
-            Totem.this.playerInventory = Totem.this.player.getInventory();
+            StackingTotemFunction.this.player = (Player) sender;
+            StackingTotemFunction.this.playerInventory = StackingTotemFunction.this.player.getInventory();
             getAllOfPlayerTotems();
 
             if (BooleanUtils.isFalse(isNotAllowedThisEvent()))

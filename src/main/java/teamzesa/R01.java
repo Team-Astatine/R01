@@ -11,12 +11,11 @@ import teamzesa.DataBase.entity.RObject.UserKillStatus;
 import teamzesa.DataBase.UserHandler.UserController;
 import teamzesa.event.EventRegister.EventRegisterSection;
 import teamzesa.util.Announcer;
-import teamzesa.util.Enum.CommandType;
-import teamzesa.util.Enum.DataFile;
+import teamzesa.Enum.CommandType;
+import teamzesa.Enum.DataFile;
 import teamzesa.util.ThreadPool;
 
 import java.util.EnumSet;
-import java.util.Objects;
 
 
 public final class R01 extends JavaPlugin {

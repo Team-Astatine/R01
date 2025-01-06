@@ -14,7 +14,7 @@ import teamzesa.DataBase.UserHandler.UserController;
 import teamzesa.event.Enhance.EnhanceUtil;
 import teamzesa.event.EventRegister.EventRegister;
 
-public class EnhanceCrossBowShotEvent extends EnhanceUtil implements EventRegister {
+public class EnhanceCrossBowShotEvent implements EventRegister {
     private Arrow arrow;
     private final ProjectileLaunchEvent event;
 
@@ -53,7 +53,7 @@ public class EnhanceCrossBowShotEvent extends EnhanceUtil implements EventRegist
             return;
 
         Vector vector = this.event.getEntity().getVelocity();
-        switch (getItemCustomModelData(mainHandCrossBow)) {
+        switch (EnhanceUtil.getItemCustomModelData(mainHandCrossBow)) {
             case 1, 2, 3 -> executeEnhanceState(1, 1, Sound.ENTITY_GHAST_DEATH, vector);
             case 4, 5, 6 -> executeEnhanceState(1, 3, Sound.ENTITY_ENDER_DRAGON_HURT, vector);
             case 7, 8, 9 -> executeEnhanceState(2, 6, Sound.ENTITY_ENDER_DRAGON_SHOOT, vector);

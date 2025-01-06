@@ -10,18 +10,18 @@ import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.UserHandler.UserController;
 import teamzesa.R01;
 import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.util.Enum.ColorList;
-import teamzesa.util.Enum.CommandType;
+import teamzesa.Enum.ColorList;
+import teamzesa.Enum.CommandType;
 
 import java.util.Optional;
 
 
-public class DataFileReload extends CommandRegisterSection {
+public class ConfigDataReload extends CommandRegisterSection {
 
     private Player player;
     private boolean consoleSend = false;
 
-    public DataFileReload() {
+    public ConfigDataReload() {
         super(CommandType.CONFIG_RELOAD);
     }
 

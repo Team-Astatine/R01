@@ -12,7 +12,7 @@ import org.bukkit.util.Vector;
 import teamzesa.event.Enhance.EnhanceUtil;
 import teamzesa.event.EventRegister.EventRegister;
 
-public class EnhanceTridentShotEvent extends EnhanceUtil implements EventRegister {
+public class EnhanceTridentShotEvent implements EventRegister {
     private Trident trident;
     private ItemStack shooterTrident;
     private final ProjectileLaunchEvent event;
@@ -48,7 +48,7 @@ public class EnhanceTridentShotEvent extends EnhanceUtil implements EventRegiste
             return;
 
         Vector vector = this.event.getEntity().getVelocity();
-        switch (getItemCustomModelData(this.shooterTrident)) {
+        switch (EnhanceUtil.getItemCustomModelData(this.shooterTrident)) {
             case 1, 2, 3 -> executeEnhanceState(1, 1, 1, Sound.ENTITY_GHAST_DEATH, vector);
             case 4, 5, 6 -> executeEnhanceState(1, 2, 3, Sound.ENTITY_ENDER_DRAGON_HURT, vector);
             case 7, 8, 9 -> executeEnhanceState(2, 3, 6, Sound.ENTITY_WITHER_SPAWN, vector);

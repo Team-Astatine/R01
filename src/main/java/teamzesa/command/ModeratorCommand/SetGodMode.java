@@ -13,18 +13,18 @@ import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.UserHandler.UserBuilder;
 import teamzesa.DataBase.UserHandler.UserController;
 import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.util.Enum.ColorList;
-import teamzesa.util.Enum.CommandType;
+import teamzesa.Enum.ColorList;
+import teamzesa.Enum.CommandType;
 
 import java.util.Optional;
 
 
-public class God extends CommandRegisterSection {
+public class SetGodMode extends CommandRegisterSection {
     private User senderUser;
     private Player senderPlayer;
     private boolean consoleSend = false;
 
-    public God() {
+    public SetGodMode() {
         super(CommandType.GOD_MODE);
     }
 

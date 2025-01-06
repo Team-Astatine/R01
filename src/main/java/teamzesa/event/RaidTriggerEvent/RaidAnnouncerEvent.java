@@ -3,8 +3,8 @@ package teamzesa.event.RaidTriggerEvent;
 import org.bukkit.Location;
 import org.bukkit.event.raid.RaidTriggerEvent;
 import teamzesa.event.EventRegister.EventRegister;
-import teamzesa.util.Enum.ColorList;
-import teamzesa.util.Enum.WorldName;
+import teamzesa.Enum.ColorList;
+import teamzesa.Enum.WorldName;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 public class RaidAnnouncerEvent extends StringComponentExchanger implements EventRegister {

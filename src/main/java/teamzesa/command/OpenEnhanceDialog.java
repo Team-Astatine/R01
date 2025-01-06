@@ -8,13 +8,13 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.DataBase.enhance.EnhanceInventoryHandler;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.event.Enhance.PlayerInteraction.UserInterface.EnhanceUIGenerator;
-import teamzesa.util.Enum.CommandType;
+import teamzesa.Enum.CommandType;
 
 
 
-public class EnhanceDialog extends CommandRegisterSection {
+public class OpenEnhanceDialog extends CommandRegisterSection {
 
-    public EnhanceDialog() {
+    public OpenEnhanceDialog() {
         super(CommandType.ENHANCE);
     }
 

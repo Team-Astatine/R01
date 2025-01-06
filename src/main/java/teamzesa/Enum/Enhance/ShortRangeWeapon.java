@@ -1,4 +1,4 @@
-package teamzesa.util.Enum.Enhance;
+package teamzesa.Enum.Enhance;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Material;
@@ -6,6 +6,7 @@ import org.bukkit.inventory.ItemStack;
 import teamzesa.DataBase.entity.Enhance.Weapon;
 
 import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -34,8 +35,15 @@ public enum ShortRangeWeapon implements Weapon {
 
     private final Material material;
     private final double shortRangeDamage;
-    private static final Map<Material, ShortRangeWeapon> CACHED_ITEM = Arrays.stream(values())
-            .collect(Collectors.toMap(ShortRangeWeapon::getMaterial, Function.identity()));
+    private static final Map<Material, ShortRangeWeapon> CACHED_ITEM =
+            Arrays.stream(values()).collect(
+                    Collectors.toMap(
+                            ShortRangeWeapon::getMaterial,
+                            Function.identity(),
+                            (k1, k2) -> k1,
+                            () -> new EnumMap<>(Material.class)
+                    )
+            );
 
     ShortRangeWeapon(Material material, double shortRangeDamage, double longRangeDamage) {
         this.material = material;

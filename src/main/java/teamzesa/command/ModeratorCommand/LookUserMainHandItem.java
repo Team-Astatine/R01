@@ -6,8 +6,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.util.Enum.ColorList;
-import teamzesa.util.Enum.CommandType;
+import teamzesa.Enum.ColorList;
+import teamzesa.Enum.CommandType;
 
 
 public class LookUserMainHandItem extends CommandRegisterSection {
@@ -22,6 +22,7 @@ public class LookUserMainHandItem extends CommandRegisterSection {
                              final @NotNull String[] strings) {
 
         ItemStack mainHandItem = ((Player) commandSender).getInventory().getItemInMainHand();
+        System.out.println("mainHandItem > " + mainHandItem.toString());
         playerSendMsgComponentExchanger(commandSender, mainHandItem.toString(), ColorList.YELLOW);
         return true;
     }

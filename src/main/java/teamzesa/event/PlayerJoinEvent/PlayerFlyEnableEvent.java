@@ -9,7 +9,7 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.UserHandler.UserController;
 import teamzesa.event.EventRegister.EventRegister;
-import teamzesa.util.Enum.ColorList;
+import teamzesa.Enum.ColorList;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 public class PlayerFlyEnableEvent extends StringComponentExchanger implements EventRegister {

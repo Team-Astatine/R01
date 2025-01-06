@@ -8,12 +8,12 @@ import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.UserHandler.UserBuilder;
 import teamzesa.DataBase.UserHandler.UserController;
 import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.util.Enum.ColorList;
-import teamzesa.util.Enum.CommandType;
+import teamzesa.Enum.ColorList;
+import teamzesa.Enum.CommandType;
 
-public class AnnouncingOnOff extends CommandRegisterSection {
+public class ToggleAnnouncing extends CommandRegisterSection {
 
-    public AnnouncingOnOff() {
+    public ToggleAnnouncing() {
         super(CommandType.ANNOUNCING);
     }
 

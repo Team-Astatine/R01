@@ -1,4 +1,4 @@
-package teamzesa.util.Enum.Enhance;
+package teamzesa.Enum.Enhance;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Material;
@@ -7,6 +7,7 @@ import teamzesa.DataBase.entity.Enhance.EnhanceItemInterface;
 import teamzesa.DataBase.entity.Enhance.Weapon;
 
 import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -21,8 +22,15 @@ public enum LongRangeWeapon implements Weapon, EnhanceItemInterface {
     private final Material material;
     private final double shortRangeDamage;
     private final double longRangeDamage;
-    private static final Map<Material, LongRangeWeapon> CACHED_ITEM = Arrays.stream(values())
-            .collect(Collectors.toMap(LongRangeWeapon::getMaterial, Function.identity()));
+    private static final EnumMap<Material, LongRangeWeapon> CACHED_ITEM =
+            Arrays.stream(values()).collect(
+                    Collectors.toMap(
+                        LongRangeWeapon::getMaterial,
+                        Function.identity(),
+                        (k1, k2) -> k1,
+                        () -> new EnumMap<>(Material.class)
+                    )
+            );
 
     LongRangeWeapon(Material material, double shortRangeDamage, double longRangeDamage) {
         this.material = material;

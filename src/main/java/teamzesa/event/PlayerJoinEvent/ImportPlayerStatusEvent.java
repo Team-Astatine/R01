@@ -12,13 +12,13 @@ import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.entity.RObject.UserKillStatus;
 import teamzesa.DataBase.UserHandler.UserBuilder;
 import teamzesa.DataBase.UserHandler.UserController;
-import teamzesa.command.ModeratorCommand.God;
+import teamzesa.command.ModeratorCommand.SetGodMode;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Announcer;
-import teamzesa.util.Enum.ColorList;
-import teamzesa.util.Enum.Kit.FoodKit;
-import teamzesa.util.Enum.Kit.ToolKit;
-import teamzesa.util.Enum.WorldName;
+import teamzesa.Enum.ColorList;
+import teamzesa.Enum.Kit.FoodKit;
+import teamzesa.Enum.Kit.ToolKit;
+import teamzesa.Enum.WorldName;
 import teamzesa.util.Interface.StringComponentExchanger;
 import teamzesa.util.RanNumGenerator;
 
@@ -74,7 +74,7 @@ public class ImportPlayerStatusEvent extends StringComponentExchanger implements
     }
 
     private void checkingUserStatusGod() {
-        new God().setPotionEffect(this.player, this.user);
+        new SetGodMode().setPotionEffect(this.player, this.user);
     }
 
     private void checkingUserStatusAttackSpeed() {

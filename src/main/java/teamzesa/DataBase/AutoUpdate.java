@@ -1,7 +1,7 @@
 package teamzesa.DataBase;
 
 import org.bukkit.Bukkit;
-import teamzesa.util.Enum.DataFile;
+import teamzesa.Enum.DataFile;
 
 import java.io.*;
 import java.net.MalformedURLException;

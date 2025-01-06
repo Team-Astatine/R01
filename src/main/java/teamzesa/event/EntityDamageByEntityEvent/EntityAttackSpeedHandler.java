@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.event.EventRegister.EventRegister;
-import teamzesa.util.Enum.Enhance.ShortRangeWeapon;
+import teamzesa.Enum.Enhance.ShortRangeWeapon;
 
 public class EntityAttackSpeedHandler implements EventRegister {
     private Entity damagerEntity;
