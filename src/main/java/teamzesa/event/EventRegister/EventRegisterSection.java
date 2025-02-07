@@ -57,63 +57,63 @@ import teamzesa.event.Restricted.*;
 
 public class EventRegisterSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
-    public static void BlockRedstoneEvent(BlockRedstoneEvent event) {
+    public void BlockRedstoneEvent(BlockRedstoneEvent event) {
 //        methodImplement
 //        new AntiRedStoneCrash(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public static void BlockPhysicsEvent(BlockPhysicsEvent event) {
+    public void BlockPhysicsEvent(BlockPhysicsEvent event) {
 //        methodImplement
 //        new AntiGravityCrash(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public static void ChunkLoadEvent(ChunkLoadEvent event) {
+    public void ChunkLoadEvent(ChunkLoadEvent event) {
 //        methodImplement
 //        new AntiExploitFromChunkEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public static void PlayerJoinEvent(PlayerJoinEvent event) {
+    public void PlayerJoinEvent(PlayerJoinEvent event) {
         new PlayerInfoHandler(event);
         new PlayerFlyEnableEvent(event);
         new ImportPlayerStatusEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public static void PlayerQuitEvent(PlayerQuitEvent event) {
+    public void PlayerQuitEvent(PlayerQuitEvent event) {
         new QuitMsgEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public static void RaidTriggerEvent(RaidTriggerEvent event) {
+    public void RaidTriggerEvent(RaidTriggerEvent event) {
         new RaidAnnouncerEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public static void PlayerDeathEvent(PlayerDeathEvent event) {
+    public void PlayerDeathEvent(PlayerDeathEvent event) {
         new LifeSteelEvent(event);
         new UpdateKillStatusForKiller(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public static void EnchantItemEvent(EnchantItemEvent event) {
+    public void EnchantItemEvent(EnchantItemEvent event) {
         new UpdateEnhanceItemLoreFromEnchantment(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public static void PrepareAnvilEvent(PrepareAnvilEvent event) {
+    public void PrepareAnvilEvent(PrepareAnvilEvent event) {
         new UpdateEnhanceItemPrepareAnvil(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public static void PrepareGrindstoneEvent(PrepareGrindstoneEvent event) {
+    public void PrepareGrindstoneEvent(PrepareGrindstoneEvent event) {
         new UpdateEnhanceItemPrepareGrindstone(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public static void ProjectileHitEvent(ProjectileHitEvent event) {
+    public void ProjectileHitEvent(ProjectileHitEvent event) {
         new EnhanceBowHitEvent(event);
         new EnhanceCrossBowHitEvent(event);
         new EnhanceTridentHitEvent(event);
@@ -121,7 +121,7 @@ public class EventRegisterSection implements Listener {
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public static void ProjectileLaunchEvent(ProjectileLaunchEvent event) {
+    public void ProjectileLaunchEvent(ProjectileLaunchEvent event) {
         new EnhanceBowShotEvent(event);
         new EnhanceCrossBowShotEvent(event);
         new EnhanceTridentShotEvent(event);
@@ -129,14 +129,14 @@ public class EventRegisterSection implements Listener {
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public static void PlayerRespawnEvent(PlayerRespawnEvent event) {
+    public void PlayerRespawnEvent(PlayerRespawnEvent event) {
         new RespawnEvent(event);
         new PlayerFlyEnableEvent(event);
         new RespawnRandomTeleportEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public static void InventoryClickEvent(InventoryClickEvent event) {
+    public void InventoryClickEvent(InventoryClickEvent event) {
 //        new RestrictedCrafter(event);
         new RestrictedItemInputDispenserHandler(event);
         new RestrictedStackingTotemInteraction(event);
@@ -148,83 +148,83 @@ public class EventRegisterSection implements Listener {
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public static void InventoryCloseEvent(InventoryCloseEvent event) {
+    public void InventoryCloseEvent(InventoryCloseEvent event) {
         new EnhanceUICloseEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public static void InventoryMoveItemEvent(InventoryMoveItemEvent event) {
+    public void InventoryMoveItemEvent(InventoryMoveItemEvent event) {
         new RestrictedInvToInvMoveItemHandler(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public static void EntityExplodeEvent(EntityExplodeEvent event) {
+    public void EntityExplodeEvent(EntityExplodeEvent event) {
         new ExplosiveEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public static void PlayerArmSwingEvent(PlayerArmSwingEvent event) {
+    public void PlayerArmSwingEvent(PlayerArmSwingEvent event) {
         new HandSwingEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public static void EntityDamageEvent(EntityDamageEvent event) {
+    public void EntityDamageEvent(EntityDamageEvent event) {
 //        Event Cancelled 하면 해당 Event 자체가 캔슬됌.
         new EnhanceArmourResistanceArmour(event);
         new RestrictedExplosiveDamageManager(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public static void PlayerInteractEvent(PlayerInteractEvent event) {
+    public void PlayerInteractEvent(PlayerInteractEvent event) {
         new EntityAttackSpeedClear(event);
         new AntiLeverAutoClicker(event);
         new RestrictedEntityPInteractHandler(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public static void EntityPortalEvent(EntityPortalEvent event) {
+    public void EntityPortalEvent(EntityPortalEvent event) {
         new AntiPortalChunkRenderingEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public static void BlockPistonExtendEvent(BlockPistonExtendEvent event) {
+    public void BlockPistonExtendEvent(BlockPistonExtendEvent event) {
         new AntiPistonPushGravityBlockEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public static void TabCompleteEvent(TabCompleteEvent event) {
+    public void TabCompleteEvent(TabCompleteEvent event) {
 //        new RestrictedCommandTabCompleteEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public static void PlayerCommandPreprocessEvent(PlayerCommandPreprocessEvent event) {
+    public void PlayerCommandPreprocessEvent(PlayerCommandPreprocessEvent event) {
         new RestrictedCommandHandler(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public static void AsyncChatEvent(AsyncChatEvent event) {
+    public void AsyncChatEvent(AsyncChatEvent event) {
         new RestrictedChatFlood(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public static void PlayerSwapHandItemsEvent(PlayerSwapHandItemsEvent event) {
+    public void PlayerSwapHandItemsEvent(PlayerSwapHandItemsEvent event) {
 //        methodImplement
 
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public static void PlayerChangedWorldEvent(PlayerChangedWorldEvent event) {
+    public void PlayerChangedWorldEvent(PlayerChangedWorldEvent event) {
         new PlayerFlyEnableEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public static void EntityDamageByEntityEvent(EntityDamageByEntityEvent event) {
+    public void EntityDamageByEntityEvent(EntityDamageByEntityEvent event) {
         new EntityAttackSpeedHandler(event);
         new EnhanceShortRangeWeaponHurtEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public static void CraftItemEvent(CraftItemEvent event) {
+    public void CraftItemEvent(CraftItemEvent event) {
 //        new RestrictedItemCraftHandler(event);
     }
 }
