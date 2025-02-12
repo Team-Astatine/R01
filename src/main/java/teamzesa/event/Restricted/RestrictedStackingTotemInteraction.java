@@ -1,6 +1,7 @@
 package teamzesa.event.Restricted;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -30,6 +31,9 @@ public class RestrictedStackingTotemInteraction extends StringComponentExchanger
 
     @Override
     public void execute() {
+        if (this.clicker.getGameMode() == GameMode.CREATIVE)
+            return;
+
         if (this.event.isShiftClick())
             return;
 

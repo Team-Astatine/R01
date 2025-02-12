@@ -88,17 +88,11 @@ public class StackingTotemFunction extends CommandRegisterSection {
                 return;
             }
 
-//            Stack 지급
-            for (long i = 0; i < supplyStackAmount; i++) {
-                if (i == 0) {
-                    this.playerInventory.setItemInOffHand(new ItemStack(TOTEM, STACK));
-                    continue;
-                }
-
-                this.playerInventory.addItem(new ItemStack(TOTEM, STACK));
-            }
-
-//            나머지 지급
+            /*
+            OffHand 1스택
+            나머지 인벤토리에 지급
+             */
+            this.playerInventory.setItemInOffHand(new ItemStack(TOTEM, STACK));
             this.playerInventory.addItem(new ItemStack(TOTEM, totalAmount - (supplyStackAmount * STACK)));
         }
 
@@ -134,14 +128,20 @@ public class StackingTotemFunction extends CommandRegisterSection {
                 .count();
 
         String message = "";
+        ItemStack playerOffHandItem = this.playerInventory.getItemInOffHand();
         if (this.totemCountData.isEmpty())
             message = "인벤토리에 토템이 없습니다.";
+
+        else if (playerOffHandItem.getType() == TOTEM)
+            if (playerOffHandItem.getAmount() == 64)
+                message = "토템은 최대 한 세트만 합칠 수 있습니다.";
 
         else if (maxCnt < 2 && minCnt < 1)
             message = "합칠 토템이 없습니다.";
 
         else if (maxCnt < 2 && minCnt < 2)
             message = "2개 이상의 토템을 가지고 있으셔야 합니다.";
+
 
         if (message.isEmpty())
             return true;
