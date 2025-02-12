@@ -1,0 +1,71 @@
+name: R01
+version: '8.4'
+main: teamzesa.R01
+api-version: '1.21.1'
+authors: [JAXPLE]
+website: https://jaxple.notion.site/Astn-kr-e000a5d52aaa4611a63fd62629ea0f36?pvs=4
+
+permissions:
+  SpeedLimit.bypass:
+    description: Bypass the speed limit
+    default: op
+  R01.DataControl:
+    description: R01 Project에 모든 Data를 Export, Import 할 수 있습니다.
+    default: op
+  R01.ItemControl:
+    description: R01 Project에 모든 Item 관련 명령어를 수행할 수 있습니다.
+    default: op
+
+commands:
+  astn:
+    description: Astn.kr 최신버전 무정부 야생약탈 서버
+  help:
+    description: 서버 도움말을 출력합니다.
+  moderator:
+    description: 특정 유저에게 관리자 권한부여
+  hat:
+    description: 손에 든 아이템을 머리에 착용합니다.
+  swap:
+    description: 손에 든 아이템을 다른 손으로 옮깁니다.
+  totem:
+    description: 토템을 합칩니다.
+  fly:
+    description: 하늘을 납니다.
+  공지:
+    description: 공지를 활/비활성화 합니다.
+  강화:
+    description: 강화창을 엽니다.
+  명령어:
+    description: 사용가능한 명령어를 확인합니다.
+  서버팁:
+    description: 플레이 팁을 보여줍니다.
+  커뮤니티:
+    description: 커뮤니티 링크를 보여줍니다.
+
+  Motd:
+    description: Motd를 설정합니다.
+    permission: R01.DataControl
+  ExportDataFile:
+    description: R01프로젝트에 모든 Object가 Export 됩니다.
+    permission: R01.DataControl
+  RemoveDuplicateData:
+    description: UserData에 중복 이름을 삭제합니다.
+    permission: R01.DataControl
+  setHealth:
+    description: 체력을 초기화 합니다.
+    permission: R01.DataControl
+  god:
+    description: 무적을 활성화 합니다.
+    permission: R01.DataControl
+  dataFileReload:
+    description: config 을 Reload 합니다.
+    permission: R01.DataControl
+  vo:
+    description: DebugValue
+    permission: R01.ItemControl
+  vi:
+    description: DebugItemValue
+    permission: R01.ItemControl
+  enhance:
+    description: 강화를 설정합니다.
+    permission: R01.ItemControl
