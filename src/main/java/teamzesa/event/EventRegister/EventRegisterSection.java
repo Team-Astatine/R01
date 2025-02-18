@@ -2,6 +2,8 @@ package teamzesa.event.EventRegister;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
 import io.papermc.paper.event.player.PlayerArmSwingEvent;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -56,6 +58,13 @@ import teamzesa.event.Restricted.*;
 //debug
 
 public class EventRegisterSection implements Listener {
+
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+    public void CraftItemEvent(FoodLevelChangeEvent event) {
+//        배고픔 제한해제
+        event.setFoodLevel(20);
+    }
+
     @EventHandler(priority = EventPriority.LOWEST)
     public void BlockRedstoneEvent(BlockRedstoneEvent event) {
 //        methodImplement
