@@ -55,6 +55,9 @@ import teamzesa.event.Restricted.*;
 //funImplement
 //debug
 
+/*
+* 반야생으로 수정작업예정
+* */
 public class EventRegisterSection implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void BlockRedstoneEvent(BlockRedstoneEvent event) {
