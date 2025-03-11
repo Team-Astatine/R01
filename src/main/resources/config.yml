@@ -1,8 +1,8 @@
 #Astatine Online
 world_setting:
   motd: 'ASTATINE ONLINE'
-  minelist: 'https://minelist.kr/servers/astn.kr'
-  discord: 'https://discord.com/invite/k6dyKDsuZq'
+  minelist: 'https://minelist.kr/servers/astn.kr:1229'
+  discord: 'https://discord.com/invite/5UtVAMJUZe'
   notion: 'https://jaxple.notion.site/Astn-kr-e000a5d52aaa4611a63fd62629ea0f36?pvs=4'
 message:
   commandHelp: '[/help] : /명령어, /서버팁, /커뮤니티'
