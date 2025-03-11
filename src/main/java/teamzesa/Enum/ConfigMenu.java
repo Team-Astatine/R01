@@ -26,7 +26,11 @@ public enum ConfigMenu {
     MESSAGE_COMMAND_TOTEM("message.commandTotem"),
     MESSAGE_COMMAND_ENHANCE("message.commandEnhance"),
     MESSAGE_COMMAND_ANNOUNCING("message.commandAnnouncing"),
-    MESSAGE_COMMAND_TPA("message.commandTpa");
+    MESSAGE_COMMAND_TPA("message.commandTpa"),
+    MESSAGE_COMMAND_SHOP("message.commandShop"),
+    MESSAGE_COMMAND_BALANCE("message.commandBalance"),
+    MESSAGE_COMMAND_PARTY("message.commandParty"),
+    MESSAGE_COMMAND_SKILL("message.commandSkill");
 
     private final String configMessage;
 
