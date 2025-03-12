@@ -31,6 +31,7 @@ import teamzesa.event.Enhance.PlayerInteraction.UpdateItemLore.*;
 import teamzesa.event.EntityDamageByEntityEvent.EntityAttackSpeedClear;
 import teamzesa.event.EntityDamageByEntityEvent.EntityAttackSpeedHandler;
 import teamzesa.event.EntityExplodeEvent.ExplosiveEvent;
+import teamzesa.event.PlayerDeathEvent.DropDeadsHead;
 import teamzesa.event.Restricted.RestrictedExplosiveDamageManager;
 import teamzesa.event.PlayerArmSwingEvent.HandSwingEvent;
 import teamzesa.event.PlayerDeathEvent.LifeSteelEvent;
@@ -98,6 +99,7 @@ public class EventRegisterSection implements Listener {
     public void PlayerDeathEvent(PlayerDeathEvent event) {
         new LifeSteelEvent(event);
         new UpdateKillStatusForKiller(event);
+        new DropDeadsHead(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
