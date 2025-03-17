@@ -23,3 +23,7 @@ message:
   commandEnhance: '/강화 - 강화창을 열거나 닫습니다.'
   commandAnnouncing: '/공지 - 공지사항 채팅을 끄거나 킵니다.'
   commandTpa: '/tpa, /tpahere, /tpatoggle - tpa를 사용합니다.'
+  commandShop: '/shop 으로 상점창을 열 수 있습니다.'
+  commandBalance: '/money, /돈 으로 소지한 금액을 알 수 있습니다.'
+  commandParty: '/party 로 파티관련 명령어를 확인 할 수 있습니다.'
+  commandSkill: '/스킬명으로 스킬 레벨 및 능력을 알 수 있습니다.'
