@@ -57,7 +57,7 @@ public class EnhanceShortRangeWeaponHurtEvent implements EventRegister {
 
         this.event.setDamage(resultDmg);
 
-        /* Debugging Code
+        /* debug fixme
         double eventFinalDamage = this.event.getFinalDamage();
         System.out.println("finalDmg > " + eventFinalDamage);
         eventFinalDamage = this.event.isCritical() ? eventFinalDamage / 1.5 : eventFinalDamage;
