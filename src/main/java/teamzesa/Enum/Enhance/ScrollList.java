@@ -9,19 +9,18 @@ import teamzesa.exception.Enhance.EnhanceItemSearchException;
 
 import java.util.Arrays;
 import java.util.EnumMap;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public enum ScrollList implements Scroll {
     DRAGON_EGG(Material.DRAGON_EGG, 0),
-    END_CRYSTAL(Material.END_CRYSTAL, 1),
+//    END_CRYSTAL(Material.END_CRYSTAL, 1),
     ENCHANTED_GOLDEN_APPLE(Material.ENCHANTED_GOLDEN_APPLE, 1),
     NETHER_STAR(Material.NETHER_STAR, 1),
     SCULK_SHRIEKER(Material.SCULK_SHRIEKER, 2),
 //    SCULK_SENSOR(Material.SCULK_SENSOR, 1),
     CONDUIT(Material.CONDUIT, 1),
     DRAGON_HEAD(Material.DRAGON_HEAD, 1),
-    RABBIT_FOOT(Material.RABBIT_FOOT, 2),
+//    RABBIT_FOOT(Material.RABBIT_FOOT, 2),
     HEART_OF_THE_SEA(Material.HEART_OF_THE_SEA, 3),
     TOTEM_OF_UNDYING(Material.TOTEM_OF_UNDYING, 8);
 

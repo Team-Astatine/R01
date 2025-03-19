@@ -4,7 +4,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.DataBase.entity.Enhance.EnhanceItem;
 import teamzesa.event.Enhance.EnhanceUtil;
+import teamzesa.event.Enhance.GeneratingEnhanceItem;
 
+/**
+ * {@link EnhanceItem} 강화용 아이템을 만듭니다.
+ * 강화 성공 및 실패 확률은 {@link GeneratingEnhanceItem} 를 참고해주세요.
+ */
 public class EnhanceItemBuilder {
 
     private Player enhancePlayer;

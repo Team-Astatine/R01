@@ -2,8 +2,6 @@ package teamzesa.event.EventRegister;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
 import io.papermc.paper.event.player.PlayerArmSwingEvent;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -33,6 +31,7 @@ import teamzesa.event.Enhance.PlayerInteraction.UpdateItemLore.*;
 import teamzesa.event.EntityDamageByEntityEvent.EntityAttackSpeedClear;
 import teamzesa.event.EntityDamageByEntityEvent.EntityAttackSpeedHandler;
 import teamzesa.event.EntityExplodeEvent.ExplosiveEvent;
+import teamzesa.event.PlayerDeathEvent.DropDeadsHead;
 import teamzesa.event.Restricted.RestrictedExplosiveDamageManager;
 import teamzesa.event.PlayerArmSwingEvent.HandSwingEvent;
 import teamzesa.event.PlayerDeathEvent.LifeSteelEvent;
@@ -49,38 +48,43 @@ import teamzesa.event.Restricted.AntiExploit.AntiPortalChunkRenderingEvent;
 import teamzesa.event.Restricted.AntiExploit.FloodChat.RestrictedChatFlood;
 import teamzesa.event.Restricted.AntiExploit.LeverInteraction.AntiLeverAutoClicker;
 import teamzesa.event.Restricted.*;
-//todo
-//fixme
-//refactoring
-//Implement
-//methodImplement
-//funImplement
-//debug
 
+/**
+ * {@linkplain org.bukkit.event.Listener}의 구현체를 관리합니다.
+ * @performance RunTime시 해당 클래스는 하나의 Instance만 생성됩니다.
+ *
+ * 개발 진행 시 필요에 따라 각 태그를 사용하여 기록합니다.
+ * todo
+ * fixme
+ * refactoring
+ * Implement
+ * methodImplement
+ * funImplement
+ * debug
+ *
+ * {@link EventPriority}로 모든 이벤트의 우선순위를 정합니다.
+ * Event 처리의 우선순위는 역순이며, 자세한건 {@linkplain EventHandler}, {@link EventPriority}를 참고해주세요.
+ * {@link EventHandler#ignoreCancelled()}는 이벤트 취소 시 더 이상 Runtime에서 호출하지 않습니다. {@link EventHandler} 참고해주세요.
+ *
+ * 각 함수는 {@linkplain Listener}을 상속받고 있는 EventClass 와 1 대 1로 명칭이 매칭됩니다.
+ * 이벤트를 추가하고 싶다면, Event를 선택하여 해당 함수에 객체를 생성 후, {@link EventRegister}를 상속받아 구현합니다.
+ * 사용하지 않지만, 개발된 함수는 일단 적어둔 후 todo 태그로 관리힙니다.
+ */
 public class EventRegisterSection implements Listener {
-
-    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
-    public void CraftItemEvent(FoodLevelChangeEvent event) {
-//        배고픔 제한해제
-        event.setFoodLevel(20);
-    }
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void BlockRedstoneEvent(BlockRedstoneEvent event) {
 //        methodImplement
-//        new AntiRedStoneCrash(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void BlockPhysicsEvent(BlockPhysicsEvent event) {
 //        methodImplement
-//        new AntiGravityCrash(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void ChunkLoadEvent(ChunkLoadEvent event) {
 //        methodImplement
-//        new AntiExploitFromChunkEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -104,6 +108,7 @@ public class EventRegisterSection implements Listener {
     public void PlayerDeathEvent(PlayerDeathEvent event) {
         new LifeSteelEvent(event);
         new UpdateKillStatusForKiller(event);
+        new DropDeadsHead(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -146,7 +151,6 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void InventoryClickEvent(InventoryClickEvent event) {
-//        new RestrictedCrafter(event);
         new RestrictedItemInputDispenserHandler(event);
         new RestrictedStackingTotemInteraction(event);
         new RestrictedShulkerChest(event);
@@ -202,6 +206,7 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void TabCompleteEvent(TabCompleteEvent event) {
+//        todo permission 세팅으로 해결함.
 //        new RestrictedCommandTabCompleteEvent(event);
     }
 
@@ -234,6 +239,7 @@ public class EventRegisterSection implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void CraftItemEvent(CraftItemEvent event) {
+//        todo permission 세팅으로 해결함.
 //        new RestrictedItemCraftHandler(event);
     }
 }

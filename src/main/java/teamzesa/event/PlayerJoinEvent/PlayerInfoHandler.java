@@ -62,7 +62,7 @@ public class PlayerInfoHandler extends StringComponentExchanger implements Event
 
     private void titleMessage() {
         Title title = Title.title(
-                componentExchanger("최신버전 무정부 플라이 생야생", ColorList.PURPLE),
+                componentExchanger("최신버전 무정부 플라이 반야생", ColorList.PURPLE),
                 componentExchanger("Astatine Online", ColorList.ORANGE)
         );
         this.joinPlayer.showTitle(title);

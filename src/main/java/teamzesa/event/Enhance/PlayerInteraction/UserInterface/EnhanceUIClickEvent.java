@@ -54,6 +54,13 @@ public class EnhanceUIClickEvent extends StringComponentExchanger implements Eve
         this.allowedScroll = new HashSet<>();
     }
 
+    /**
+     * 인벤토리를 열고 닫음에 있어서 인벤토리 주인을 찾습니다.
+     * Click Inventory 생성은 {@link EnhanceUIGenerator}를 참고해주세요.
+     * Inventory UUID 를 고정하기 위해 {@link EnhanceInventoryHandler}를 사용합니다.
+     * 인벤토리 생성, 등록이 완료되면 플레이어가 강화 이벤트를 발생시키는지 확인합니다.
+     * 강화는 {@link GeneratingEnhanceItem} 를 참조하세요.
+     */
     @Override
     public void execute() {
         if (BooleanUtils.isFalse(this.event.getInventory().equals(this.enhanceInventory))) {

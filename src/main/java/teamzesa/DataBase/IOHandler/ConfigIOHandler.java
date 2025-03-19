@@ -10,8 +10,6 @@ import teamzesa.util.Interface.StringComponentExchanger;
 import java.io.File;
 import java.io.IOException;
 
-import static teamzesa.Enum.ConfigMenu.MESSAGE_COMMAND_TOTEM;
-
 public class ConfigIOHandler extends StringComponentExchanger {
     private static class ConfigIOHandlerHolder {
         private static final ConfigIOHandler INSTANCE = new ConfigIOHandler();
@@ -20,7 +18,6 @@ public class ConfigIOHandler extends StringComponentExchanger {
     public static ConfigIOHandler getConfigIOHandler() {
         return ConfigIOHandlerHolder.INSTANCE;
     }
-
 
     private File file;
     private YamlConfiguration config;
@@ -57,6 +54,10 @@ public class ConfigIOHandler extends StringComponentExchanger {
         getCommandEnhance();
         getCommandAnnouncing();
         getCommandTpa();
+        getCommandShop();
+        getCommandBalance();
+        getCommandParty();
+        getCommandSkill();
     }
 
     public void setWorldSettingMotd() {
@@ -137,7 +138,7 @@ public class ConfigIOHandler extends StringComponentExchanger {
     }
 
     public String getCommandTotem() {
-        return getString(MESSAGE_COMMAND_TOTEM);
+        return getString(ConfigMenu.MESSAGE_COMMAND_TOTEM);
     }
 
     public String getCommandEnhance() {
@@ -150,6 +151,22 @@ public class ConfigIOHandler extends StringComponentExchanger {
 
     public String getCommandTpa() {
         return getString(ConfigMenu.MESSAGE_COMMAND_TPA);
+    }
+
+    public String getCommandShop() {
+        return getString(ConfigMenu.MESSAGE_COMMAND_SHOP);
+    }
+
+    public String getCommandBalance() {
+        return getString(ConfigMenu.MESSAGE_COMMAND_BALANCE);
+    }
+
+    public String getCommandParty() {
+        return getString(ConfigMenu.MESSAGE_COMMAND_PARTY);
+    }
+
+    public String getCommandSkill() {
+        return getString(ConfigMenu.MESSAGE_COMMAND_SKILL);
     }
 
     public void worldConfigSave(String motd) {
