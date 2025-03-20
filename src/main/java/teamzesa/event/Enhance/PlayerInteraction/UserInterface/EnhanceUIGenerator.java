@@ -9,6 +9,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import teamzesa.DataBase.IOHandler.ConfigIOHandler;
 import teamzesa.Enum.ColorList;
 import teamzesa.util.Interface.StringComponentExchanger;
 
@@ -45,22 +46,31 @@ public class EnhanceUIGenerator extends StringComponentExchanger {
         return this;
     }
 
-//    refactoring
+    /**
+     * refactoring
+     * 해당 순서대로 Inventory index가 설정됩니다.
+     * 0 1 2 - 🔪📜📜
+     * 3 4 5
+     * 6 7 8 - 🟦🟥◻️
+     *
+     * 0 - 강화용 아이템을 넣는 가이드 무기를 표기합니다.
+     * 1 - 강화 주문서를 넣는 가이드를 표기 합니다.
+     * 2 - 파괴방지 주문서를 넣는 가이드를 표기 합니다.
+     *
+     * 6 - 디스코드 링크를 표기합니다.
+     * 7 - 강화를 실행합니다. {@link EnhanceUIClickEvent} 를 참고해주세요.
+     * 8 - 노션링크를 표기합니다.
+     * 웹 사이트 링크는 {@link ConfigIOHandler} 를 참고하면 됩니다.
+     *
+     * @return {@link Inventory}
+     */
     public Inventory executeUI() {
         enhanceDialog = Bukkit.createInventory(sendPlayer, InventoryType.DROPPER, componentExchanger("강화", ColorList.RED));
 
-        /*
-        0 1 2
-        3 4 5
-        6 7 8
-        */
-
-//        🔪📜📜
         enhanceDialog.setItem(0, this.targetStuff);
         enhanceDialog.setItem(1, this.scrollStuff);
         enhanceDialog.setItem(2, this.protectScrollStuff);
 
-//        🟦🟥◻️
         enhanceDialog.setItem(6, this.discordButton);
         enhanceDialog.setItem(7, this.executeButton);
         enhanceDialog.setItem(8, this.notionButton);

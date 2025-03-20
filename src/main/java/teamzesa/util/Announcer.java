@@ -46,6 +46,10 @@ public class Announcer extends StringComponentExchanger {
         );
     }
 
+    /**
+     * 서버 공지사항을 5분마다 공지합니다.
+     * @see ThreadPool#addSchedulingTaskMin(Runnable, long, long) 을 참조해주세요. 
+     */
     public void defaultAnnouncer() {
         long delay = 0;
         long interval = 5;

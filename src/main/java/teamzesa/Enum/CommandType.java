@@ -1,13 +1,23 @@
 package teamzesa.Enum;
 
 import org.bukkit.command.CommandExecutor;
+import teamzesa.R01;
 import teamzesa.command.ModeratorCommand.*;
-import teamzesa.command.Announcing.CommandTip;
-import teamzesa.command.Announcing.Community;
-import teamzesa.command.Announcing.Help;
-import teamzesa.command.Announcing.ServerTip;
+import teamzesa.command.Announcing.*;
 import teamzesa.command.*;
+import teamzesa.command.register.CommandRegisterSection;
 
+/**
+ * 명령어 추가 시 해당 Enumeration 에 추가합니다.
+ * 관리자 명령어와, 유저 명령어를 구분 후 추가해야 하며, 각 명령어에 permission 설정을 통해 Tab Complete 에 제한을 둬야합니다.
+ *
+ * 명령어 추가방법
+ * resources/plugin.yml 에 명령어 추가합니다.
+ * @see CommandType 에 명령어 등록 및 명령 시 발생할 Instance 추가합니다.
+ * @see CommandRegisterSection 을 상속받아 명령어 입력시 execute 할 Instance를 추가합니다.
+ *
+ * @implSpec {@link R01} 에 registerCommandAndEvent() 함수에서 명령어를 일괄 등록합니다.
+ */
 public enum CommandType {
 //    User
     ASTN("Astn", new TitleAstatine()),

@@ -5,10 +5,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import teamzesa.DataBase.IOHandler.ConfigIOHandler;
 import teamzesa.DataBase.IOHandler.RObjectIOHandler;
+import teamzesa.DataBase.UserCachingData;
+import teamzesa.DataBase.UserHandler.*;
 import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
 import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.entity.RObject.UserKillStatus;
 import teamzesa.DataBase.UserHandler.UserController;
+import teamzesa.command.ModeratorCommand.ConfigDataReload;
 import teamzesa.event.EventRegister.EventRegisterSection;
 import teamzesa.util.Announcer;
 import teamzesa.Enum.CommandType;
@@ -63,6 +66,19 @@ public final class R01 extends JavaPlugin {
         Bukkit.getScheduler().cancelTasks(this);
     }
 
+    /**
+     * @see UserCachingData 에 데이터를 모두 import 합니다.
+     *
+     * 데이터 파일 추가법.
+     * @see DataFile 에 경로 및 데이터 명을 추가합니다.
+     * resource 폴더에 {@link DataFile}에 추가했던 .json 파일을 생성합니다.
+     * @see UserCachingData 에 해당 데이터 타입의 Caching Map 을 만듭니다.
+     * Access Manager, Builder, Controller 를 생성합니다.
+     * @see UserAccessManager
+     * @see UserBuilder
+     * @see UserController
+     * 위 3개 클래스를 참조해 주세요.
+     */
     private void dataFileLoader() {
         new UserController().updateAllUserData(
                 new RObjectIOHandler().importData(DataFile.USER_DATA, User.class, getClass().getName())
@@ -73,6 +89,11 @@ public final class R01 extends JavaPlugin {
         );
     }
 
+    /**
+     * Config File 을 모두 load 합니다.
+     * @see ConfigDataReload 시에 사용되는 함수입니다.
+     * 플러그인 실행 시 최초 1회 실행됩니다.
+     */
     public void configFileLoader() {
 //        config Set
         ConfigIOHandler configIOHandler = ConfigIOHandler.getConfigIOHandler();
@@ -83,6 +104,10 @@ public final class R01 extends JavaPlugin {
         Announcer.getAnnouncer().defaultAnnouncer();
     }
 
+    /**
+     * @see EventRegisterSection Instance 를 생성합니다.
+     * @see CommandType 에 모든 커멘드 Instance 를 등록합니다.
+     */
     private void registerCommandAndEvent() {
         getServer().getPluginManager().registerEvents(new EventRegisterSection(), this); //function set
 
@@ -91,6 +116,11 @@ public final class R01 extends JavaPlugin {
         );
     }
 
+    /**
+     * @see UserCachingData 에 데이터를 모두 exeporting 합니다.
+     *
+     * @implSpec 12시간마다 자동으로 저장되는 scheduler 입니다.
+     */
     private void SchedulingExportData() {
         long delay = 0;
         long interval = 720; // 12hour term auto save

@@ -6,8 +6,8 @@ import teamzesa.R01;
 import java.io.File;
 
 public enum DataFile {
-    CONFIG(new File(R01.getPlugin(R01.class).getDataFolder(), "config.yml"), "Config"),
-    USER_DATA(new File(R01.getPlugin(R01.class).getDataFolder(), "userData.json"), "User Data"),
+    CONFIG(new File(R01.getPlugin(R01.class).getDataFolder(), "config.yml"), "Config "),
+    USER_DATA(new File(R01.getPlugin(R01.class).getDataFolder(), "userData.json"), "User Data "),
     KILL_STATUS(new File(R01.getPlugin(R01.class).getDataFolder(), "killStatus.json"), "Kill Status "),
     USER_INVENTORY(new File(R01.getPlugin(R01.class).getDataFolder(), "userInventory.json"), "User Inventory "),
     ABSOLUTE_PATH(new File(R01.getPlugin(R01.class).getDataFolder().getParentFile().getAbsolutePath()), "Plugin Folder");
