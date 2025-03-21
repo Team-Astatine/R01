@@ -6,7 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import teamzesa.DataBase.IOHandler.ConfigIOHandler;
 import teamzesa.DataBase.IOHandler.RObjectIOHandler;
 import teamzesa.DataBase.UserCachingData;
-import teamzesa.DataBase.UserHandler.*;
+import teamzesa.DataBase.UserHandler.*;     
 import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
 import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.entity.RObject.UserKillStatus;
@@ -78,6 +78,7 @@ public final class R01 extends JavaPlugin {
      * @see UserBuilder
      * @see UserController
      * 위 3개 클래스를 참조해 주세요.
+     *
      */
     private void dataFileLoader() {
         new UserController().updateAllUserData(
