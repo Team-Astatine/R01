@@ -13,14 +13,15 @@ import java.util.stream.Collectors;
 
 public enum ProtectScrollList implements Scroll {
     DRAGON_EGG(Material.DRAGON_EGG, 0),
-    END_CRYSTAL(Material.END_CRYSTAL, 1),
+//    END_CRYSTAL(Material.END_CRYSTAL, 1),
+    ELYTRA(Material.ELYTRA, 1),
     ENCHANTED_GOLDEN_APPLE(Material.ENCHANTED_GOLDEN_APPLE, 1),
     NETHER_STAR(Material.NETHER_STAR, 1),
     SCULK_SHRIEKER(Material.SCULK_SHRIEKER, 4),
-    SCULK_SENSOR(Material.SCULK_SENSOR, 3),
+//    SCULK_SENSOR(Material.SCULK_SENSOR, 3),
     CONDUIT(Material.CONDUIT, 2),
     DRAGON_HEAD(Material.DRAGON_HEAD, 2),
-    RABBIT_FOOT(Material.RABBIT_FOOT, 3),
+//    RABBIT_FOOT(Material.RABBIT_FOOT, 3),
     HEART_OF_THE_SEA(Material.HEART_OF_THE_SEA, 6),
     TOTEM_OF_UNDYING(Material.TOTEM_OF_UNDYING, 16);
 
