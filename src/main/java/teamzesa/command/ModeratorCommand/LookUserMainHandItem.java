@@ -7,12 +7,12 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.Enum.ColorList;
-import teamzesa.Enum.CommandType;
+import teamzesa.Enum.ListOfCommand;
 
 
 public class LookUserMainHandItem extends CommandRegisterSection {
     public LookUserMainHandItem() {
-        super(CommandType.LOOK_USER_MAIN_HAND_ITEM);
+        super(ListOfCommand.LOOK_USER_MAIN_HAND_ITEM);
     }
 
     @Override

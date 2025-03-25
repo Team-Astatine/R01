@@ -11,7 +11,7 @@ import teamzesa.DataBase.UserHandler.UserController;
 import teamzesa.R01;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.Enum.ColorList;
-import teamzesa.Enum.CommandType;
+import teamzesa.Enum.ListOfCommand;
 
 import java.util.Optional;
 
@@ -22,7 +22,7 @@ public class ConfigDataReload extends CommandRegisterSection {
     private boolean consoleSend = false;
 
     public ConfigDataReload() {
-        super(CommandType.CONFIG_RELOAD);
+        super(ListOfCommand.CONFIG_RELOAD);
     }
 
     @Override

@@ -12,7 +12,7 @@ import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.UserHandler.UserController;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.Enum.ColorList;
-import teamzesa.Enum.CommandType;
+import teamzesa.Enum.ListOfCommand;
 import teamzesa.Enum.DataFile;
 
 import java.util.Optional;
@@ -23,7 +23,7 @@ public class ExportAllData extends CommandRegisterSection {
     private boolean consoleSend = false;
 
     public ExportAllData() {
-        super(CommandType.EXPORT_DATA_FILE);
+        super(ListOfCommand.EXPORT_DATA_FILE);
     }
 
     @Override

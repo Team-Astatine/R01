@@ -8,14 +8,14 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.DataBase.enhance.EnhanceInventoryHandler;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.event.Enhance.PlayerInteraction.UserInterface.EnhanceUIGenerator;
-import teamzesa.Enum.CommandType;
+import teamzesa.Enum.ListOfCommand;
 
 
 
 public class OpenEnhanceDialog extends CommandRegisterSection {
 
     public OpenEnhanceDialog() {
-        super(CommandType.ENHANCE);
+        super(ListOfCommand.ENHANCE);
     }
 
     @Override

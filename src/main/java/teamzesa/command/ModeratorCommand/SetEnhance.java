@@ -12,14 +12,14 @@ import teamzesa.Enum.Enhance.EnhanceItemUndoInformation;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.event.Enhance.EnhanceUtil;
 import teamzesa.Enum.ColorList;
-import teamzesa.Enum.CommandType;
+import teamzesa.Enum.ListOfCommand;
 
 import java.util.Map;
 
 public class SetEnhance extends CommandRegisterSection {
 
     public SetEnhance() {
-        super(CommandType.ENHANCE_SET);
+        super(ListOfCommand.ENHANCE_SET);
     }
 
     @Override

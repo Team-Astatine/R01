@@ -13,12 +13,12 @@ import teamzesa.command.register.CommandRegisterSection;
  *
  * 명령어 추가방법
  * resources/plugin.yml 에 명령어 추가합니다.
- * @see CommandType 에 명령어 등록 및 명령 시 발생할 Instance 추가합니다.
- * @see CommandRegisterSection 을 상속받아 명령어 입력시 execute 할 Instance를 추가합니다.
+ * @see ListOfCommand 에 명령어 등록 및 명령 시 발생할 Instance 추가합니다.
+ * @see CommandRegisterSection 을 extend하여 명령어 입력 시 execute 할 Instance를 추가합니다.
  *
  * @implSpec {@link R01} 에 registerCommandAndEvent() 함수에서 명령어를 일괄 등록합니다.
  */
-public enum CommandType {
+public enum ListOfCommand {
 //    User
     ASTN("Astn", new TitleAstatine()),
     HELP("Help", new Help()),
@@ -47,7 +47,7 @@ public enum CommandType {
     private final String command;
     private final CommandExecutor executor;
 
-    CommandType(String command, CommandExecutor executor) {
+    ListOfCommand(String command, CommandExecutor executor) {
         this.command = command;
         this.executor = executor;
     }

@@ -9,12 +9,12 @@ import teamzesa.DataBase.UserHandler.UserBuilder;
 import teamzesa.DataBase.UserHandler.UserController;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.Enum.ColorList;
-import teamzesa.Enum.CommandType;
+import teamzesa.Enum.ListOfCommand;
 
 public class ToggleAnnouncing extends CommandRegisterSection {
 
     public ToggleAnnouncing() {
-        super(CommandType.ANNOUNCING);
+        super(ListOfCommand.ANNOUNCING);
     }
 
     @Override

@@ -11,14 +11,14 @@ import teamzesa.DataBase.entity.RObject.UserKillStatus;
 import teamzesa.DataBase.UserHandler.UserController;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.Enum.ColorList;
-import teamzesa.Enum.CommandType;
+import teamzesa.Enum.ListOfCommand;
 
 import java.util.Optional;
 
 public class LookUserValue extends CommandRegisterSection {
 
     public LookUserValue() {
-        super(CommandType.LOOK_USER_VALUE);
+        super(ListOfCommand.LOOK_USER_VALUE);
     }
 
     @Override

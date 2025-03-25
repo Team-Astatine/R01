@@ -7,12 +7,12 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.Enum.ColorList;
-import teamzesa.Enum.CommandType;
+import teamzesa.Enum.ListOfCommand;
 
 public class TitleAstatine extends CommandRegisterSection {
 
     public TitleAstatine() {
-        super(CommandType.ASTN);
+        super(ListOfCommand.ASTN);
     }
 
     @Override

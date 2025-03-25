@@ -6,12 +6,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.Enum.CommandType;
+import teamzesa.Enum.ListOfCommand;
 
 public class OffHandItemSwapFunction extends CommandRegisterSection {
 
     public OffHandItemSwapFunction() {
-        super(CommandType.OFF_HAND_ITEM_SWAP_FOR_BE);
+        super(ListOfCommand.OFF_HAND_ITEM_SWAP_FOR_BE);
     }
 
     @Override

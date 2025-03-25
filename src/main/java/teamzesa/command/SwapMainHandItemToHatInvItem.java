@@ -8,14 +8,14 @@ import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.Enum.ColorList;
-import teamzesa.Enum.CommandType;
+import teamzesa.Enum.ListOfCommand;
 
 public class SwapMainHandItemToHatInvItem extends CommandRegisterSection {
     private Player player;
     private PlayerInventory playerInventory;
 
     public SwapMainHandItemToHatInvItem() {
-        super(CommandType.ARMOUR_HEAD);
+        super(ListOfCommand.ARMOUR_HEAD);
     }
 
     private enum ArmourType {

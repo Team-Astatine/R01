@@ -14,7 +14,7 @@ import teamzesa.DataBase.UserHandler.UserBuilder;
 import teamzesa.DataBase.UserHandler.UserController;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.Enum.ColorList;
-import teamzesa.Enum.CommandType;
+import teamzesa.Enum.ListOfCommand;
 
 import java.util.Optional;
 
@@ -25,7 +25,7 @@ public class SetGodMode extends CommandRegisterSection {
     private boolean consoleSend = false;
 
     public SetGodMode() {
-        super(CommandType.GOD_MODE);
+        super(ListOfCommand.GOD_MODE);
     }
 
     @Override

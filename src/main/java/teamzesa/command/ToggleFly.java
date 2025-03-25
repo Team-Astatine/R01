@@ -6,13 +6,13 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.Enum.ColorList;
-import teamzesa.Enum.CommandType;
+import teamzesa.Enum.ListOfCommand;
 
 
 public class ToggleFly extends CommandRegisterSection {
 
     public ToggleFly() {
-        super(CommandType.FLY);
+        super(ListOfCommand.FLY);
     }
 
     @Override

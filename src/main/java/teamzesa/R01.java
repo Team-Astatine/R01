@@ -14,7 +14,7 @@ import teamzesa.DataBase.UserHandler.UserController;
 import teamzesa.command.ModeratorCommand.ConfigDataReload;
 import teamzesa.event.EventRegister.EventRegisterSection;
 import teamzesa.util.Announcer;
-import teamzesa.Enum.CommandType;
+import teamzesa.Enum.ListOfCommand;
 import teamzesa.Enum.DataFile;
 import teamzesa.util.ThreadPool;
 
@@ -107,12 +107,12 @@ public final class R01 extends JavaPlugin {
 
     /**
      * @see EventRegisterSection Instance 를 생성합니다.
-     * @see CommandType 에 모든 커멘드 Instance 를 등록합니다.
+     * @see ListOfCommand 에 모든 커멘드 Instance 를 등록합니다.
      */
     private void registerCommandAndEvent() {
         getServer().getPluginManager().registerEvents(new EventRegisterSection(), this); //function set
 
-        EnumSet.allOf(CommandType.class).forEach(
+        EnumSet.allOf(ListOfCommand.class).forEach(
                 c -> getCommand(c.getCommand()).setExecutor(c.getCommandInstance())
         );
     }

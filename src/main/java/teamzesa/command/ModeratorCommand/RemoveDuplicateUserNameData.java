@@ -11,7 +11,7 @@ import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.UserHandler.UserController;
 import teamzesa.command.register.CommandRegisterSection;
 import teamzesa.Enum.ColorList;
-import teamzesa.Enum.CommandType;
+import teamzesa.Enum.ListOfCommand;
 import teamzesa.Enum.DataFile;
 
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ public class RemoveDuplicateUserNameData extends CommandRegisterSection {
     private boolean consoleSend = false;
 
     public RemoveDuplicateUserNameData() {
-        super(CommandType.REMOVE_DUPLICATE_USER_DATA);
+        super(ListOfCommand.REMOVE_DUPLICATE_USER_DATA);
     }
 
     @Override
