@@ -70,7 +70,7 @@ import teamzesa.event.Restricted.*;
  * 이벤트를 추가하고 싶다면, Event를 선택하여 해당 함수에 객체를 생성 후, {@link EventRegister}를 상속받아 구현합니다.
  * 사용하지 않지만, 개발된 함수는 일단 적어둔 후 todo 태그로 관리힙니다.
  */
-public class EventRegisterSection implements Listener {
+public class ListOfEvent implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void BlockRedstoneEvent(BlockRedstoneEvent event) {

@@ -12,7 +12,7 @@ import teamzesa.DataBase.entity.RObject.User;
 import teamzesa.DataBase.entity.RObject.UserKillStatus;
 import teamzesa.DataBase.UserHandler.UserController;
 import teamzesa.command.ModeratorCommand.ConfigDataReload;
-import teamzesa.event.EventRegister.EventRegisterSection;
+import teamzesa.event.EventRegister.ListOfEvent;
 import teamzesa.util.Announcer;
 import teamzesa.Enum.ListOfCommand;
 import teamzesa.Enum.DataFile;
@@ -106,11 +106,11 @@ public final class R01 extends JavaPlugin {
     }
 
     /**
-     * @see EventRegisterSection Instance 를 생성합니다.
+     * @see ListOfEvent Instance 를 생성합니다.
      * @see ListOfCommand 에 모든 커멘드 Instance 를 등록합니다.
      */
     private void registerCommandAndEvent() {
-        getServer().getPluginManager().registerEvents(new EventRegisterSection(), this); //function set
+        getServer().getPluginManager().registerEvents(new ListOfEvent(), this); //function set
 
         EnumSet.allOf(ListOfCommand.class).forEach(
                 c -> getCommand(c.getCommand()).setExecutor(c.getCommandInstance())
