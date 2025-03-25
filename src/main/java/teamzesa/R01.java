@@ -32,23 +32,16 @@ public final class R01 extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        registerCommandAndEvent();   //command set
-
-//        setMaxPlayers(50);
-
-//        saveDefaultSource
+        registerCommandAndEvent();
 
         if (BooleanUtils.isFalse(getDataFolder().exists()))
             generationDataFile();
 
-//        configSet
         dataFileLoader();
 
-//        speedLimiter();
-        configFileLoader(); // config set File
-        SchedulingExportData(); // User Data Auto Save Scheduling
+        configFileLoader();
+        SchedulingExportData();
 
-//        loading Time
         pluginLoadTime();
     }
 
@@ -110,7 +103,7 @@ public final class R01 extends JavaPlugin {
      * @see ListOfCommand 에 모든 커멘드 Instance 를 등록합니다.
      */
     private void registerCommandAndEvent() {
-        getServer().getPluginManager().registerEvents(new ListOfEvent(), this); //function set
+        getServer().getPluginManager().registerEvents(new ListOfEvent(), this);
 
         EnumSet.allOf(ListOfCommand.class).forEach(
                 c -> getCommand(c.getCommand()).setExecutor(c.getCommandInstance())
