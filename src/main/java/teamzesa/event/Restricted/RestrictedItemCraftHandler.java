@@ -26,7 +26,7 @@ public class RestrictedItemCraftHandler extends StringComponentExchanger impleme
 
     @Override
     public void execute() {
-        boolean restrictedItem = new RestrictedChatElement().restrictedItem.stream()
+        boolean restrictedItem = new RestrictedElement().restrictedItem.stream()
                 .anyMatch(this.currentItemMaterial::equals);
 
         if (BooleanUtils.isFalse(restrictedItem))

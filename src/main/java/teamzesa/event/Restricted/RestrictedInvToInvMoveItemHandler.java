@@ -27,7 +27,7 @@ public class RestrictedInvToInvMoveItemHandler implements EventRegister {
             return;
 
         Material moveItemMaterial = this.event.getItem().getType();
-        boolean restrictedItem = new RestrictedChatElement().restrictedItem.stream()
+        boolean restrictedItem = new RestrictedElement().restrictedItem.stream()
                 .anyMatch(moveItemMaterial::equals);
 
         if (BooleanUtils.isFalse(restrictedItem))

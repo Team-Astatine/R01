@@ -49,7 +49,7 @@ public class RestrictedItemInputDispenserHandler extends StringComponentExchange
             return;
 
         Material playerInputItemMaterial = this.itemStack.getType();
-        boolean restrictedItem = new RestrictedChatElement().restrictedItem.stream()
+        boolean restrictedItem = new RestrictedElement().restrictedItem.stream()
                 .anyMatch(playerInputItemMaterial::equals);
 
         if (BooleanUtils.isFalse(restrictedItem))

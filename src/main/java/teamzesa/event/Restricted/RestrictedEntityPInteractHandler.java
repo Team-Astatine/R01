@@ -31,7 +31,7 @@ public class RestrictedEntityPInteractHandler extends StringComponentExchanger i
             return;
 
         Material playerMainHandItemMaterial = this.event.getPlayer().getInventory().getItemInMainHand().getType();
-        boolean restrictedItem = new RestrictedChatElement().restrictedItem.stream()
+        boolean restrictedItem = new RestrictedElement().restrictedItem.stream()
                 .anyMatch(playerMainHandItemMaterial::equals);
 
         if (BooleanUtils.isFalse(restrictedItem))
