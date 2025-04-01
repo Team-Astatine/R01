@@ -191,7 +191,7 @@ public class ListOfEvent implements Listener {
     public void PlayerInteractEvent(PlayerInteractEvent event) {
         new EntityAttackSpeedClear(event);
         new LeverInteractionHandler(event);
-        new RestrictedEntityPInteractHandler(event);
+        new RestrictedEntityPlayerInteractHandler(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
