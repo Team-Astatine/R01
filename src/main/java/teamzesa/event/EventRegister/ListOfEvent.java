@@ -46,7 +46,7 @@ import teamzesa.event.RaidTriggerEvent.RaidAnnouncerEvent;
 import teamzesa.event.Restricted.AntiExploit.AntiPistonPushGravityBlockEvent;
 import teamzesa.event.Restricted.AntiExploit.AntiPortalChunkRenderingEvent;
 import teamzesa.event.Restricted.AntiExploit.FloodChat.RestrictedChatFlood;
-import teamzesa.event.Restricted.AntiExploit.LeverInteraction.AntiLeverAutoClicker;
+import teamzesa.event.Restricted.AntiExploit.LeverInteraction.LeverInteractionHandler;
 import teamzesa.event.Restricted.*;
 
 /**
@@ -190,7 +190,7 @@ public class ListOfEvent implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void PlayerInteractEvent(PlayerInteractEvent event) {
         new EntityAttackSpeedClear(event);
-        new AntiLeverAutoClicker(event);
+        new LeverInteractionHandler(event);
         new RestrictedEntityPInteractHandler(event);
     }
 
