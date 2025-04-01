@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.inventory.InventoryType;
 import teamzesa.event.EventRegister.EventRegister;
+import teamzesa.event.Restricted.AntiExploit.ItemAndCommand.RestrictedElement;
 
 public class RestrictedInvToInvMoveItemHandler implements EventRegister {
 

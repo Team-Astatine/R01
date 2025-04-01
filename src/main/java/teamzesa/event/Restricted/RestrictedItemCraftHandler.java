@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.CraftItemEvent;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.Enum.ColorList;
+import teamzesa.event.Restricted.AntiExploit.ItemAndCommand.RestrictedElement;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 public class RestrictedItemCraftHandler extends StringComponentExchanger implements EventRegister {

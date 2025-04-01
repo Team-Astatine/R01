@@ -7,6 +7,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.Enum.ColorList;
+import teamzesa.event.Restricted.AntiExploit.ItemAndCommand.RestrictedElement;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 public class RestrictedEntityPlayerInteractHandler extends StringComponentExchanger implements EventRegister {
