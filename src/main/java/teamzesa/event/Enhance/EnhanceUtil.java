@@ -1,6 +1,5 @@
 package teamzesa.event.Enhance;
 
-import io.papermc.paper.registry.tag.Tag;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.apache.commons.lang3.BooleanUtils;
@@ -11,6 +10,8 @@ import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
+import teamzesa.Enum.Enhance.DefaultDamage.LongRangeWeapon;
+import teamzesa.Enum.Enhance.DefaultDamage.ShortRangeWeapon;
 import teamzesa.exception.Enhance.EnhanceItemMetaException;
 import teamzesa.Enum.ColorList;
 import teamzesa.Enum.Enhance.*;

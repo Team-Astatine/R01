@@ -1,8 +1,8 @@
 package teamzesa.DataBase.entity.Enhance;
 
 import org.bukkit.Material;
-import teamzesa.Enum.Enhance.LongRangeWeapon;
-import teamzesa.Enum.Enhance.ShortRangeWeapon;
+import teamzesa.Enum.Enhance.DefaultDamage.LongRangeWeapon;
+import teamzesa.Enum.Enhance.DefaultDamage.ShortRangeWeapon;
 
 /**
  * 강화 주문서 아이템을 정의합니다.

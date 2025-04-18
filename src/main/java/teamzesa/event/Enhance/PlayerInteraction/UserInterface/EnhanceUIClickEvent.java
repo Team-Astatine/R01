@@ -13,6 +13,8 @@ import teamzesa.DataBase.IOHandler.ConfigIOHandler;
 import teamzesa.DataBase.enhance.EnhanceInventoryHandler;
 import teamzesa.DataBase.enhance.EnhanceItemBuilder;
 import teamzesa.DataBase.entity.Enhance.EnhanceItem;
+import teamzesa.Enum.Enhance.DefaultDamage.LongRangeWeapon;
+import teamzesa.Enum.Enhance.DefaultDamage.ShortRangeWeapon;
 import teamzesa.event.Enhance.GeneratingEnhanceItem;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.Enum.ColorList;

@@ -1,4 +1,4 @@
-package teamzesa.Enum.Enhance;
+package teamzesa.Enum.Enhance.DefaultDamage;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Material;

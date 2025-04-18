@@ -7,7 +7,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.event.Enhance.EnhanceUtil;
 import teamzesa.event.EventRegister.EventRegister;
-import teamzesa.Enum.Enhance.LongRangeWeapon;
+import teamzesa.Enum.Enhance.DefaultDamage.LongRangeWeapon;
 
 public class EnhanceLongRangeWeaponHurtEvent implements EventRegister {
     private DamageSource damageSource;
