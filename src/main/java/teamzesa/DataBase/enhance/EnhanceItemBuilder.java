@@ -40,7 +40,7 @@ public class EnhanceItemBuilder {
         return this;
     }
 
-    public EnhanceItem build() {
+    public EnhanceItem generating() {
         return new EnhanceItem(
                 this.enhancePlayer,
                 this.enhanceItem,
