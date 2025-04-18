@@ -89,12 +89,21 @@ public class EnhanceUIClickEvent extends StringComponentExchanger implements Eve
                 case 6 -> {
                     this.event.setCancelled(true);
                     event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
-                    event.getWhoClicked().sendMessage(createLinkComponentExchanger(ConfigIOHandler.getConfigIOHandler().getDiscordInvite(), ConfigIOHandler.getConfigIOHandler().getDiscordConfig(), ColorList.DISCORD_COLOR));
+                    event.getWhoClicked().sendMessage(createLinkComponentExchanger(
+                            ConfigIOHandler.getConfigIOHandler().getDiscordInvite(),
+                            ConfigIOHandler.getConfigIOHandler().getDiscordConfig(),
+                            ColorList.DISCORD_COLOR
+                    ));
                 }
 
                 case 7 -> {
                     if (isAllowedEnhanceItem()) {
-                        EnhanceItem enhanceItemObj = new EnhanceItemBuilder().enhancePlayer((Player) this.event.getWhoClicked()).enhanceItem(this.enhanceItem).enhanceScroll(this.scrollStuff).protectScroll(this.protectScroll).build();
+                        EnhanceItem enhanceItemObj = new EnhanceItemBuilder()
+                                .enhancePlayer((Player) this.event.getWhoClicked())
+                                .enhanceItem(this.enhanceItem)
+                                .enhanceScroll(this.scrollStuff)
+                                .protectScroll(this.protectScroll)
+                                .build();
 
                         new GeneratingEnhanceItem(enhanceItemObj);
                     }
@@ -104,7 +113,11 @@ public class EnhanceUIClickEvent extends StringComponentExchanger implements Eve
                 case 8 -> {
                     this.event.setCancelled(true);
                     event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
-                    event.getWhoClicked().sendMessage(createLinkComponentExchanger(ConfigIOHandler.getConfigIOHandler().getServerGuideNotion(), ConfigIOHandler.getConfigIOHandler().getNotionConfig(), ColorList.NOTION_COLOR));
+                    event.getWhoClicked().sendMessage(createLinkComponentExchanger(
+                            ConfigIOHandler.getConfigIOHandler().getServerGuideNotion(),
+                            ConfigIOHandler.getConfigIOHandler().getNotionConfig(),
+                            ColorList.NOTION_COLOR
+                    ));
                 }
             }
         }
