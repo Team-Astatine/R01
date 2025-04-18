@@ -103,7 +103,7 @@ public class EnhanceUIClickEvent extends StringComponentExchanger implements Eve
                                 .enhanceItem(this.enhanceItem)
                                 .enhanceScroll(this.scrollStuff)
                                 .protectScroll(this.protectScroll)
-                                .build();
+                                .generating();
 
                         new GeneratingEnhanceItem(enhanceItemObj);
                     }
