@@ -24,8 +24,6 @@ public class BossDeathListener extends StringComponentExchanger implements Event
         this.event = event;
 
         this.bossType = BossType.findByEntityType(this.event.getEntityType());
-        System.out.println(this.bossType);
-
         if (bossType == null)
             return;
 
