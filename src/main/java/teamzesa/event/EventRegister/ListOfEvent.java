@@ -30,6 +30,7 @@ import teamzesa.event.Enhance.PlayerInteraction.ShortRange.EnhanceShortRangeWeap
 import teamzesa.event.Enhance.PlayerInteraction.UpdateItemLore.*;
 import teamzesa.event.EntityDamageByEntityEvent.EntityAttackSpeedClear;
 import teamzesa.event.EntityDamageByEntityEvent.EntityAttackSpeedHandler;
+import teamzesa.event.EntityDeathEvent.BossDeathListener;
 import teamzesa.event.EntityExplodeEvent.ExplosiveEvent;
 import teamzesa.event.PlayerDeathEvent.DropDeadsHead;
 import teamzesa.event.Restricted.RestrictedExplosiveDamageManager;
@@ -109,6 +110,11 @@ public class ListOfEvent implements Listener {
         new LifeSteelEvent(event);
         new UpdateKillStatusForKiller(event);
         new DropDeadsHead(event);
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void EntityDeathEvent(EntityDeathEvent event) {
+        new BossDeathListener(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
