@@ -102,7 +102,8 @@ public class ListOfEvent implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void RaidTriggerEvent(RaidTriggerEvent event) {
-        new RaidAnnouncerEvent(event);
+//        todo 반야생변경에 따른 콘텐츠 수정
+//        new RaidAnnouncerEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
