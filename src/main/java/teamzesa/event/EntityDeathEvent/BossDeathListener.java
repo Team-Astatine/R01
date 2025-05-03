@@ -40,21 +40,30 @@ public class BossDeathListener extends StringComponentExchanger implements Event
     @Override
     public void execute() {
         double MAX_HEALTH_SCALE = 60.0;
+        double newHealthScale = this.bossSlayerPlayer.getHealthScale() + this.bossType.getRewardHealth();
 
-        if (this.bossSlayerPlayer.getHealthScale() >= MAX_HEALTH_SCALE)
-            return;
+        if (newHealthScale >= MAX_HEALTH_SCALE)
+            newHealthScale = MAX_HEALTH_SCALE;
 
         this.killStatusController.healthUpdate(
                 new KillStatusBuilder(this.bossSlayerUser)
-                        .healthScale(this.bossSlayerPlayer.getHealthScale() + this.bossType.getRewardHealth())
+                        .healthScale(newHealthScale)
                         .build()
         );
 
-        String comment = String.format("%s님이 %s를 처치하여 체력이 %.0f 증가했습니다.",
-                this.bossSlayerPlayer.getName(),
-                this.bossType.getBossName(),
-                this.bossSlayerPlayer.getHealthScale()
-        );
+        String playerName = this.bossSlayerPlayer.getName();
+        String bossName = this.bossType.getBossName();
+
+        String comment;
+        if (newHealthScale < 30)
+            comment = String.format("%s님이 %s를 처치하여 체력이 %.0f 증가했습니다.",
+                    playerName, bossName, this.bossSlayerPlayer.getHealthScale());
+
+        else
+            comment = String.format("%s님이 %s를 처치하여 풀 체력이 되었습니다.",
+                    playerName, bossName);
+
+
         playerSendMsgComponentExchanger(this.bossSlayerPlayer, comment, ColorList.PINK);
     }
 }
