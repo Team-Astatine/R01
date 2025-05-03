@@ -1,12 +1,14 @@
 package teamzesa.event.EntityDamageByEntityEvent;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
+import teamzesa.R01;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.Enum.Enhance.DefaultDamage.ShortRangeWeapon;
 
@@ -39,15 +41,22 @@ public class EntityAttackSpeedHandler implements EventRegister {
         Player target = (Player) this.targetEntity;
 
         int hurtTick = 10; //default 20
+
         boolean stuffCheck = isDualWeaponChecker(
                 damager.getInventory().getItemInMainHand(),
                 damager.getInventory().getItemInOffHand()
         );
-
         if (stuffCheck) //Two Hand Sword
             hurtTick = 1;
 
 //        ((LivingEntity) e.getEntity()).setMaximumNoDamageTicks(1);
+
+//        Bukkit.getScheduler().runTaskLater(R01.getPlugin(R01.class),
+//                () -> targetEntity.setVelocity(targetEntity.getVelocity().multiply(hitDelay)), 1);
+//
+//        Bukkit.getScheduler().runTaskLater(R01.getPlugin(R01.class),
+//                () -> target.setNoDamageTicks((int) hitDelay), 1);
+
         target.setMaximumNoDamageTicks(hurtTick);
     }
 
