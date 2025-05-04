@@ -6,19 +6,19 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class EnhanceInventoryHandler {
+public class EnhanceInventoryManager {
 
-    private static class EnhanceInventoryHandlerHolder {
-        private final static EnhanceInventoryHandler INSTANCE = new EnhanceInventoryHandler();
+    private static class EnhanceInventoryManagerHolder {
+        private final static EnhanceInventoryManager INSTANCE = new EnhanceInventoryManager();
     }
 
-    public static EnhanceInventoryHandler getEnhanceInventoryHandler() {
-        return EnhanceInventoryHandlerHolder.INSTANCE;
+    public static EnhanceInventoryManager getEnhanceInventoryManager() {
+        return EnhanceInventoryManagerHolder.INSTANCE;
     }
 
     private final Map<UUID, Inventory> enhanceInventoryCachedData;
 
-    public EnhanceInventoryHandler() {
+    public EnhanceInventoryManager() {
         this.enhanceInventoryCachedData = new HashMap<>();
     }
 

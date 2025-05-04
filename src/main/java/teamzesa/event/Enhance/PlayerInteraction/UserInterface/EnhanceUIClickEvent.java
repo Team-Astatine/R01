@@ -10,7 +10,7 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.DataBase.IOHandler.ConfigIOHandler;
-import teamzesa.DataBase.enhance.EnhanceInventoryHandler;
+import teamzesa.DataBase.enhance.EnhanceInventoryManager;
 import teamzesa.DataBase.enhance.EnhanceItemBuilder;
 import teamzesa.DataBase.entity.Enhance.EnhanceItem;
 import teamzesa.Enum.Enhance.DefaultDamage.LongRangeWeapon;
@@ -19,6 +19,7 @@ import teamzesa.event.Enhance.GeneratingEnhanceItem;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.Enum.ColorList;
 import teamzesa.Enum.Enhance.*;
+import teamzesa.util.Interface.UserUIGenerator.InventoryUIGenerator;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 import java.util.Arrays;
@@ -46,7 +47,7 @@ public class EnhanceUIClickEvent extends StringComponentExchanger implements Eve
     public void init() {
         this.currentItem = this.event.getCurrentItem();
         this.ownerPlayer = this.event.getWhoClicked() instanceof Player player ? player : null;
-        this.enhanceInventory = EnhanceInventoryHandler.getEnhanceInventoryHandler().get(this.ownerPlayer.getUniqueId());
+        this.enhanceInventory = EnhanceInventoryManager.getEnhanceInventoryManager().get(this.ownerPlayer.getUniqueId());
 
         this.enhanceItem = this.event.getView().getItem(3);
         this.scrollStuff = this.event.getView().getItem(4);
@@ -58,8 +59,8 @@ public class EnhanceUIClickEvent extends StringComponentExchanger implements Eve
 
     /**
      * 인벤토리를 열고 닫음에 있어서 인벤토리 주인을 찾습니다.
-     * Click Inventory 생성은 {@link EnhanceUIGenerator}를 참고해주세요.
-     * Inventory UUID 를 고정하기 위해 {@link EnhanceInventoryHandler}를 사용합니다.
+     * Click Inventory 생성은 {@link InventoryUIGenerator}를 참고해주세요.
+     * Inventory UUID 를 고정하기 위해 {@link EnhanceInventoryManager}를 사용합니다.
      * 인벤토리 생성, 등록이 완료되면 플레이어가 강화 이벤트를 발생시키는지 확인합니다.
      * 강화는 {@link GeneratingEnhanceItem} 를 참조하세요.
      */

@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import teamzesa.DataBase.enhance.EnhanceInventoryHandler;
+import teamzesa.DataBase.enhance.EnhanceInventoryManager;
 import teamzesa.Enum.UI.InventoryCustomModelIds;
 import teamzesa.event.EventRegister.EventRegister;
 
@@ -14,11 +14,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
-import static teamzesa.DataBase.enhance.EnhanceInventoryHandler.*;
-
 public class EnhanceUICloseEvent implements EventRegister {
     private final int MINIMUM_INVENTORY_SLOT = 5;
-    private EnhanceInventoryHandler enhanceInventoryHandler;
+    private EnhanceInventoryManager enhanceInventoryHandler;
 
     private Player itemOwner;
     private Inventory enhanceDialog;
@@ -34,7 +32,7 @@ public class EnhanceUICloseEvent implements EventRegister {
 
     @Override
     public void init() {
-        this.enhanceInventoryHandler = EnhanceInventoryHandler.getEnhanceInventoryHandler();
+        this.enhanceInventoryHandler = EnhanceInventoryManager.getEnhanceInventoryManager();
 
         this.itemOwner = (Player) this.event.getPlayer();
         this.enhanceDialog = this.enhanceInventoryHandler.get(this.itemOwner.getUniqueId());

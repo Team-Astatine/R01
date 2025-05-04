@@ -33,7 +33,7 @@ import teamzesa.event.EntityDamageByEntityEvent.EntityAttackSpeedHandler;
 import teamzesa.event.EntityDeathEvent.BossDeathListener;
 import teamzesa.event.EntityExplodeEvent.ExplosiveEvent;
 import teamzesa.event.PlayerDeathEvent.DropDeadsHead;
-import teamzesa.event.PlayerToggleSneakEvent.MenuOpener;
+import teamzesa.event.PlayerSwapHandItemsEvent.MenuOpener;
 import teamzesa.event.Restricted.RestrictedExplosiveDamageManager;
 import teamzesa.event.PlayerArmSwingEvent.HandSwingEvent;
 import teamzesa.event.PlayerDeathEvent.LifeSteelEvent;
@@ -44,7 +44,6 @@ import teamzesa.event.PlayerJoinEvent.PlayerInfoHandler;
 import teamzesa.event.PlayerQuitEvent.QuitMsgEvent;
 import teamzesa.event.PlayerRespawnEvent.RespawnEvent;
 import teamzesa.event.PlayerRespawnEvent.RespawnRandomTeleportEvent;
-import teamzesa.event.RaidTriggerEvent.RaidAnnouncerEvent;
 import teamzesa.event.Restricted.AntiExploit.AntiPistonPushGravityBlockEvent;
 import teamzesa.event.Restricted.AntiExploit.AntiPortalChunkRenderingEvent;
 import teamzesa.event.Restricted.AntiExploit.FloodChat.RestrictedChatFlood;
@@ -99,11 +98,6 @@ public class ListOfEvent implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void PlayerQuitEvent(PlayerQuitEvent event) {
         new QuitMsgEvent(event);
-    }
-
-    @EventHandler(priority = EventPriority.LOWEST)
-    public void PlayerToggleSneakEvent(PlayerToggleSneakEvent event) {
-        new MenuOpener(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -235,8 +229,7 @@ public class ListOfEvent implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void PlayerSwapHandItemsEvent(PlayerSwapHandItemsEvent event) {
-//        methodImplement
-
+        new MenuOpener(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
