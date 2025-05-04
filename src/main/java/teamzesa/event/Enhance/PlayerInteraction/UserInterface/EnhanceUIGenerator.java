@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import teamzesa.DataBase.IOHandler.ConfigIOHandler;
 import teamzesa.Enum.ColorList;
+import teamzesa.Enum.UI.InventoryCustomModelIds;
 import teamzesa.util.Interface.StringComponentExchanger;
 
 import static teamzesa.DataBase.enhance.EnhanceInventoryHandler.*;
@@ -94,15 +95,14 @@ public class EnhanceUIGenerator extends StringComponentExchanger {
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
         // 강화창 디스플레이 아이템코드 또는 강화 실행 아이템코드 설정
-        int panelModelData = 0;
+        InventoryCustomModelIds panelModelData = InventoryCustomModelIds.PANEL_STUFF_CUSTOM_DATA;
         switch (material) {
-            case Material.RED_STAINED_GLASS_PANE -> panelModelData = EXECUTE_STUFF_DATA;
-            case Material.LIGHT_BLUE_STAINED_GLASS_PANE -> panelModelData = EXECUTE_DISCORD_DATA;
-            case Material.LIGHT_GRAY_STAINED_GLASS_PANE -> panelModelData = EXECUTE_NOTION_DATA;
-            default -> panelModelData = PANEL_STUFF_CUSTOM_DATA;
+            case Material.RED_STAINED_GLASS_PANE -> panelModelData = InventoryCustomModelIds.EXECUTE_STUFF_DATA;
+            case Material.LIGHT_BLUE_STAINED_GLASS_PANE -> panelModelData = InventoryCustomModelIds.EXECUTE_DISCORD_DATA;
+            case Material.LIGHT_GRAY_STAINED_GLASS_PANE -> panelModelData = InventoryCustomModelIds.EXECUTE_NOTION_DATA;
         }
 
-        meta.setCustomModelData(panelModelData);
+        meta.setCustomModelData(panelModelData.getValues());
         item.setItemMeta(meta);
         return item;
     }

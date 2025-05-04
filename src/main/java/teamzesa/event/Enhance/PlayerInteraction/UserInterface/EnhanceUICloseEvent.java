@@ -7,6 +7,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.DataBase.enhance.EnhanceInventoryHandler;
+import teamzesa.Enum.UI.InventoryCustomModelIds;
 import teamzesa.event.EventRegister.EventRegister;
 
 import java.util.ArrayList;
@@ -81,21 +82,33 @@ public class EnhanceUICloseEvent implements EventRegister {
         ItemStack slotSevenItem = this.event.getView().getItem(7);
         ItemStack slotEightItem = this.event.getView().getItem(8);
 
-        if (ObjectUtils.notEqual(slotZeroItem.getItemMeta().getCustomModelData(), PANEL_STUFF_CUSTOM_DATA))
+        if (ObjectUtils.notEqual
+                (slotZeroItem.getItemMeta().getCustomModelData(), InventoryCustomModelIds.PANEL_STUFF_CUSTOM_DATA.getValues())
+        )
             return true;
 
-        if (ObjectUtils.notEqual(slotFirstItem.getItemMeta().getCustomModelData(), PANEL_STUFF_CUSTOM_DATA))
+        if (ObjectUtils.notEqual
+                (slotFirstItem.getItemMeta().getCustomModelData(), InventoryCustomModelIds.PANEL_STUFF_CUSTOM_DATA.getValues())
+        )
             return true;
 
-        if (ObjectUtils.notEqual(slotSecondItem.getItemMeta().getCustomModelData(), PANEL_STUFF_CUSTOM_DATA))
+        if (ObjectUtils.notEqual
+                (slotSecondItem.getItemMeta().getCustomModelData(), InventoryCustomModelIds.PANEL_STUFF_CUSTOM_DATA.getValues())
+        )
             return true;
 
-        if (ObjectUtils.notEqual(slotSixItem.getItemMeta().getCustomModelData(), EXECUTE_DISCORD_DATA))
+        if (ObjectUtils.notEqual
+                (slotSixItem.getItemMeta().getCustomModelData(), InventoryCustomModelIds.EXECUTE_DISCORD_DATA.getValues())
+        )
             return true;
 
-        if (ObjectUtils.notEqual(slotSevenItem.getItemMeta().getCustomModelData(), EXECUTE_STUFF_DATA))
+        if (ObjectUtils.notEqual
+                (slotSevenItem.getItemMeta().getCustomModelData(), InventoryCustomModelIds.EXECUTE_STUFF_DATA.getValues())
+        )
             return true;
 
-        return ObjectUtils.notEqual(slotEightItem.getItemMeta().getCustomModelData(), EXECUTE_NOTION_DATA);
+        return ObjectUtils.notEqual(
+                slotEightItem.getItemMeta().getCustomModelData(), InventoryCustomModelIds.EXECUTE_NOTION_DATA.getValues()
+        );
     }
 }
