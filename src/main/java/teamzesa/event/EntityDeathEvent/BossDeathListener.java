@@ -42,6 +42,9 @@ public class BossDeathListener extends StringComponentExchanger implements Event
         double MAX_HEALTH_SCALE = 60.0;
         double newHealthScale = this.bossSlayerPlayer.getHealthScale() + this.bossType.getRewardHealth();
 
+        if (bossSlayerPlayer.getHealthScale() >= 60)
+            return;
+
         if (newHealthScale >= MAX_HEALTH_SCALE)
             newHealthScale = MAX_HEALTH_SCALE;
 
