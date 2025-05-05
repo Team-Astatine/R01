@@ -5,13 +5,13 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.DataBase.UserKillStatusHandler.KillStatusController;
-import teamzesa.DataBase.entity.RObject.User;
-import teamzesa.DataBase.entity.RObject.UserKillStatus;
-import teamzesa.DataBase.UserHandler.UserController;
-import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.Enum.ColorList;
-import teamzesa.Enum.ListOfCommand;
+import teamzesa.Data.User.UserKillStatus.KillStatusController;
+import teamzesa.Data.User.UserData.User;
+import teamzesa.Data.User.UserKillStatus.UserKillStatus;
+import teamzesa.Data.User.UserData.UserController;
+import teamzesa.command.CommandRegisterSection;
+import teamzesa.Enumeration.Type.ColorType;
+import teamzesa.Enumeration.Command.ListOfCommand;
 
 import java.util.Optional;
 
@@ -51,7 +51,7 @@ public class LookUserValue extends CommandRegisterSection {
 
     private void sendComment(CommandSender sender, String comment) {
         if (sender instanceof Player)
-            playerSendMsgComponentExchanger(sender, comment, ColorList.YELLOW);
+            playerSendMsgComponentExchanger(sender, comment, ColorType.YELLOW);
         else Bukkit.getLogger().info(comment);
     }
 }

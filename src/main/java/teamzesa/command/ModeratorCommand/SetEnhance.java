@@ -8,11 +8,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.Enum.Enhance.EnhanceItemUndoInformation;
-import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.event.Enhance.EnhanceUtil;
-import teamzesa.Enum.ColorList;
-import teamzesa.Enum.ListOfCommand;
+import teamzesa.Enumeration.Enhance.Items.EnhanceItemUndoInformation;
+import teamzesa.command.CommandRegisterSection;
+import teamzesa.Event.Enhance.EnhanceUtil;
+import teamzesa.Enumeration.Type.ColorType;
+import teamzesa.Enumeration.Command.ListOfCommand;
 
 import java.util.Map;
 
@@ -31,13 +31,13 @@ public class SetEnhance extends CommandRegisterSection {
         Player player = (Player) commandSender;
 
         if (BooleanUtils.isFalse(commandSender.isOp())) {
-            playerSendMsgComponentExchanger(player, "해당 명령어는 플레이어가 사용할 수 없습니다.", ColorList.RED);
+            playerSendMsgComponentExchanger(player, "해당 명령어는 플레이어가 사용할 수 없습니다.", ColorType.RED);
             return false;
         }
 
         int enhanceLevel = Integer.parseInt(strings[0]);
         if (enhanceLevel < 0 || enhanceLevel > 10) {
-            playerSendMsgComponentExchanger(player, "0 ~ 10 사이 값만 대입 가능합니다.", ColorList.RED);
+            playerSendMsgComponentExchanger(player, "0 ~ 10 사이 값만 대입 가능합니다.", ColorType.RED);
             return false;
         }
 
@@ -69,7 +69,7 @@ public class SetEnhance extends CommandRegisterSection {
             e.printStackTrace();
         }
 
-        playerSendMsgComponentExchanger(player, getComment(enhanceLevel), ColorList.GREEN);
+        playerSendMsgComponentExchanger(player, getComment(enhanceLevel), ColorType.GREEN);
         return true;
     }
 

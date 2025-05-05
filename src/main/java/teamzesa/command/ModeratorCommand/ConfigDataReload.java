@@ -6,12 +6,12 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.DataBase.entity.RObject.User;
-import teamzesa.DataBase.UserHandler.UserController;
+import teamzesa.Data.User.UserData.User;
+import teamzesa.Data.User.UserData.UserController;
 import teamzesa.R01;
-import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.Enum.ColorList;
-import teamzesa.Enum.ListOfCommand;
+import teamzesa.command.CommandRegisterSection;
+import teamzesa.Enumeration.Type.ColorType;
+import teamzesa.Enumeration.Command.ListOfCommand;
 
 import java.util.Optional;
 
@@ -45,7 +45,7 @@ public class ConfigDataReload extends CommandRegisterSection {
 
 //        operation Check
         if (BooleanUtils.isFalse(player.isOp()) && BooleanUtils.isFalse(this.consoleSend)) {
-            playerSendMsgComponentExchanger(player, "해당 명령어는 플레이어가 사용할 수 없습니다.", ColorList.RED);
+            playerSendMsgComponentExchanger(player, "해당 명령어는 플레이어가 사용할 수 없습니다.", ColorType.RED);
             return false;
         }
 
@@ -58,6 +58,6 @@ public class ConfigDataReload extends CommandRegisterSection {
         String comment = "Reload Done";
         if (this.consoleSend)
             Bukkit.getLogger().info("[R01] " + comment);
-        else playerSendMsgComponentExchanger(this.player, comment, ColorList.YELLOW);
+        else playerSendMsgComponentExchanger(this.player, comment, ColorType.YELLOW);
     }
 }

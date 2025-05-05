@@ -5,10 +5,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.DataBase.IOHandler.ConfigIOHandler;
-import teamzesa.command.register.CommandRegisterSection;
-import teamzesa.Enum.ColorList;
-import teamzesa.Enum.ListOfCommand;
+import teamzesa.Data.DataIO.Config.ConfigIOHandler;
+import teamzesa.command.CommandRegisterSection;
+import teamzesa.Enumeration.Type.ColorType;
+import teamzesa.Enumeration.Command.ListOfCommand;
 
 
 public class SetMotd extends CommandRegisterSection {
@@ -49,12 +49,12 @@ public class SetMotd extends CommandRegisterSection {
     private void sendComment(CommandSender sender) {
         String comment = "New Motd Set -> " + this.newMotd;
         if (sender instanceof Player player) {
-            playerSendMsgComponentExchanger(player, comment, ColorList.YELLOW);
+            playerSendMsgComponentExchanger(player, comment, ColorType.YELLOW);
         } else Bukkit.getLogger().info(comment);
     }
 
     private void configDataUpdate() {
-        Bukkit.motd(componentExchanger(this.newMotd, ColorList.VOTE_COLOR));
+        Bukkit.motd(componentExchanger(this.newMotd, ColorType.VOTE_COLOR));
         ConfigIOHandler.getConfigIOHandler().worldConfigSave(this.newMotd);
     }
 }
