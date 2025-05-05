@@ -24,7 +24,7 @@ public class SetHealth extends CommandRegisterSection {
     private boolean consoleSend = false;
 
     public SetHealth() {
-        super(ListOfCommand.HEALTH_RESET);
+        super(ListOfCommand.HEALTH_SCALE_SET);
     }
 
     @Override

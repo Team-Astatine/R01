@@ -17,7 +17,7 @@ public class SetMotd extends CommandRegisterSection {
     private String newMotd;
 
     public SetMotd() {
-        super(ListOfCommand.MOTD);
+        super(ListOfCommand.MOTD_SET);
         this.newMotd = DEFAULT_SERVER_MOTD;
     }
 

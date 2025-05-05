@@ -25,7 +25,7 @@ public class SetGodMode extends CommandRegisterSection {
     private boolean consoleSend = false;
 
     public SetGodMode() {
-        super(ListOfCommand.GOD_MODE);
+        super(ListOfCommand.GOD_MODE_SET);
     }
 
     @Override
