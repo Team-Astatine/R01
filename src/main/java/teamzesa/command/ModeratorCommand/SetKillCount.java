@@ -11,7 +11,6 @@ import teamzesa.Enumeration.Command.ListOfCommand;
 import teamzesa.command.CommandRegisterSection;
 
 public class SetKillCount extends CommandRegisterSection {
-    private boolean consoleSend = false;
 
     public SetKillCount() {
         super(ListOfCommand.KILL_COUNT_SET);
