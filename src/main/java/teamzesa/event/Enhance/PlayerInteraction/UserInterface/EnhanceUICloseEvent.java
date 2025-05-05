@@ -7,7 +7,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.DataBase.enhance.EnhanceInventoryManager;
-import teamzesa.Enum.UI.InventoryCustomModelIds;
+import teamzesa.Enum.Enhance.UI.InventoryCustomModelIds;
 import teamzesa.event.EventRegister.EventRegister;
 
 import java.util.ArrayList;

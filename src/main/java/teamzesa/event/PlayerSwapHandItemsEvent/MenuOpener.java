@@ -7,7 +7,7 @@ import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.DataBase.UserHandler.MenuGenerator.SlotItemMapping;
-import teamzesa.DataBase.UserHandler.MenuGenerator.UserInventoryManager;
+import teamzesa.DataBase.UserInterface.UserInventoryManager;
 import teamzesa.Enum.ColorList;
 import teamzesa.event.EventRegister.EventRegister;
 import teamzesa.util.Interface.StringComponentExchanger;
@@ -28,6 +28,7 @@ public class MenuOpener extends StringComponentExchanger implements EventRegiste
         if (BooleanUtils.isFalse(this.chestOwner.isSneaking()))
             return;
 
+        this.event.setCancelled(true);
         init();
         execute();
     }

@@ -1,4 +1,4 @@
-package teamzesa.Enum.UI;
+package teamzesa.Enum.Enhance.UI;
 
 public enum InventoryCustomModelIds {
 //    Enhance ModelData

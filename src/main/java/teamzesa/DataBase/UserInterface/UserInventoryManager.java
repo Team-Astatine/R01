@@ -1,4 +1,4 @@
-package teamzesa.DataBase.UserHandler.MenuGenerator;
+package teamzesa.DataBase.UserInterface;
 
 import org.bukkit.inventory.Inventory;
 
