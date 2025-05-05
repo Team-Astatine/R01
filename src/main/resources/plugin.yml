@@ -69,3 +69,6 @@ commands:
   enhance:
     description: 강화를 설정합니다.
     permission: R01.ItemControl
+  setKillCount:
+    description: 킬 카운트를 설정합니다.
+    permission: R01.ItemControl

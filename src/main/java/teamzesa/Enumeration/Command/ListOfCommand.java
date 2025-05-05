@@ -35,15 +35,16 @@ public enum ListOfCommand {
     COMMUNITY("커뮤니티", new Community()),
 
 //    Moderator
-    MOTD("motd", new SetMotd()),
+    MOTD_SET("motd", new SetMotd()),
     EXPORT_DATA_FILE("ExportDataFile", new ExportAllData()),
     REMOVE_DUPLICATE_USER_DATA("RemoveDuplicateData", new RemoveDuplicateUserNameData()),
-    HEALTH_RESET("setHealth", new SetHealth()),
-    GOD_MODE("god", new SetGodMode()),
+    HEALTH_SCALE_SET("setHealth", new SetHealth()),
+    GOD_MODE_SET("god", new SetGodMode()),
     CONFIG_RELOAD("dataFileReload", new ConfigDataReload()),
     LOOK_USER_VALUE("vo", new LookUserValue()),
     LOOK_USER_MAIN_HAND_ITEM("vi", new LookUserMainHandItem()),
-    ENHANCE_SET("enhance", new SetEnhance());
+    ENHANCE_SET("enhance", new SetEnhance()),
+    KILL_COUNT_SET("setKillCount", new SetKillCount());
 
     private final String command;
     private final CommandExecutor executor;
