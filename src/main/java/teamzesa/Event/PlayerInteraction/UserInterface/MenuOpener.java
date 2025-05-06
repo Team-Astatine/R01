@@ -1,4 +1,4 @@
-package teamzesa.Event.PlayerInteraction.PlayerSwapHandItemsEvent;
+package teamzesa.Event.PlayerInteraction.UserInterface;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Material;
@@ -6,7 +6,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import teamzesa.Data.Function.UserInterface.SlotItemMapping;
 import teamzesa.Data.User.UserInventory.UserInventoryManager;
 import teamzesa.Enumeration.Type.ColorType;
 import teamzesa.Event.EventRegister;

@@ -42,7 +42,7 @@ import teamzesa.Event.PlayerInteraction.PlayerStatus.PlayerJoinEvent.PlayerInfoH
 import teamzesa.Event.PlayerInteraction.Announce.JoinAndQuitMessage.QuitMessageHandler;
 import teamzesa.Event.PlayerInteraction.PlayerStatus.PlayerRespawnEvent.RespawnMessageHandler;
 import teamzesa.Event.RandomTeleport.RespawnRandomTeleportEvent;
-import teamzesa.Event.PlayerInteraction.PlayerSwapHandItemsEvent.MenuOpener;
+import teamzesa.Event.PlayerInteraction.UserInterface.MenuOpener;
 import teamzesa.Event.Restricted.AntiExploit.ChatFlood.RestrictedChatFlood;
 import teamzesa.Event.Restricted.AntiExploit.ChunkRenderer.AntiPortalChunkRenderingEvent;
 import teamzesa.Event.Restricted.AntiExploit.Gravity.AntiPistonPushGravityBlockEvent;

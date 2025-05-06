@@ -4,7 +4,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import teamzesa.Data.Function.UserInterface.PanelItem;
+import teamzesa.Event.PlayerInteraction.UserInterface.PanelItem;
 import teamzesa.Enumeration.Type.ColorType;
 import teamzesa.Util.Function.StringComponentExchanger;
 

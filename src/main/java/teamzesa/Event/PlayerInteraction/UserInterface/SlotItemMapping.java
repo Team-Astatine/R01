@@ -1,4 +1,4 @@
-package teamzesa.Data.Function.UserInterface;
+package teamzesa.Event.PlayerInteraction.UserInterface;
 
 import org.bukkit.inventory.ItemStack;
 
