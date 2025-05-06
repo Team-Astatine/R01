@@ -1,14 +1,18 @@
 package teamzesa.Event.EntityDamageByEntityEvent;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.Event.EventRegister.EventRegister;
 import teamzesa.Enumeration.Enhance.Items.Weapon.ShortRange;
+import teamzesa.R01;
+import teamzesa.Util.Function.ThreadPool;
 
 public class EntityAttackSpeedHandler implements EventRegister {
     private Entity damagerEntity;
@@ -32,11 +36,8 @@ public class EntityAttackSpeedHandler implements EventRegister {
         if (ObjectUtils.notEqual(this.damagerEntity.getType(), EntityType.PLAYER))
             return;
 
-        if (ObjectUtils.notEqual(this.targetEntity.getType(), EntityType.PLAYER))
-            return;
-
         Player damager = (Player) this.damagerEntity;
-        Player target = (Player) this.targetEntity;
+        LivingEntity target = (LivingEntity) this.targetEntity;
 
         int hurtTick = 10; //default 20
 
@@ -47,15 +48,17 @@ public class EntityAttackSpeedHandler implements EventRegister {
         if (stuffCheck) //Two Hand Sword
             hurtTick = 1;
 
-//        ((LivingEntity) e.getEntity()).setMaximumNoDamageTicks(1);
+//        target.setMaximumNoDamageTicks(hurtTick);
 
 //        Bukkit.getScheduler().runTaskLater(R01.getPlugin(R01.class),
 //                () -> targetEntity.setVelocity(targetEntity.getVelocity().multiply(hitDelay)), 1);
-//
-//        Bukkit.getScheduler().runTaskLater(R01.getPlugin(R01.class),
-//                () -> target.setNoDamageTicks((int) hitDelay), 1);
 
-        target.setMaximumNoDamageTicks(hurtTick);
+        Bukkit.getScheduler().runTaskLater(
+                R01.getPlugin(R01.class),
+                () -> target.setNoDamageTicks(1),
+                hurtTick
+        );
+
     }
 
     private Boolean isDualWeaponChecker(ItemStack mainStuff, ItemStack offStuff) {

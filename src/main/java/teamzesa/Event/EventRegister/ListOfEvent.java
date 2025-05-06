@@ -28,7 +28,6 @@ import teamzesa.Event.Enhance.PlayerInteraction.LongRange.Shot.EnhanceCrossBowSh
 import teamzesa.Event.Enhance.PlayerInteraction.LongRange.Shot.EnhanceTridentShotEvent;
 import teamzesa.Event.Enhance.PlayerInteraction.ShortRange.EnhanceShortRangeWeaponHurtEvent;
 import teamzesa.Event.Enhance.PlayerInteraction.UpdateItemLore.*;
-import teamzesa.Event.EntityDamageByEntityEvent.EntityAttackSpeedClear;
 import teamzesa.Event.EntityDamageByEntityEvent.EntityAttackSpeedHandler;
 import teamzesa.Event.EntityDeathEvent.BossDeathListener;
 import teamzesa.Event.EntityExplodeEvent.ExplosiveEvent;
@@ -174,7 +173,7 @@ public class ListOfEvent implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void InventoryMoveItemEvent(InventoryMoveItemEvent event) {
-        new RestrictedInvToInvMoveItemHandler(event);
+        new RestrictedDispenserInventoryMoveItemHandler(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -196,9 +195,8 @@ public class ListOfEvent implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void PlayerInteractEvent(PlayerInteractEvent event) {
-        new EntityAttackSpeedClear(event);
         new LeverInteractionHandler(event);
-        new RestrictedEntityPlayerInteractHandler(event);
+        new RestrictedPlayerInteract(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -219,7 +217,7 @@ public class ListOfEvent implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void PlayerCommandPreprocessEvent(PlayerCommandPreprocessEvent event) {
-        new RestrictedCommandHandler(event);
+        new RestrictedCommandInteraction(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
