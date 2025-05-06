@@ -11,8 +11,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CrossbowMeta;
 import org.bukkit.util.Vector;
 import teamzesa.Data.User.UserData.UserController;
-import teamzesa.Event.Enhance.EnhanceUtil;
-import teamzesa.Event.EventRegister.EventRegister;
+import teamzesa.Event.Enhance.Interface.EnhanceUtil;
+import teamzesa.Event.EventRegister;
 
 public class EnhanceCrossBowShotEvent implements EventRegister {
     private Arrow arrow;

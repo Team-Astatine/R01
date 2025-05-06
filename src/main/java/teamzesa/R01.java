@@ -7,16 +7,16 @@ import teamzesa.Data.DataIO.Config.ConfigIOHandler;
 import teamzesa.Data.DataIO.User.RObjectIOHandler;
 import teamzesa.Data.User.UserData.UserAccessManager;
 import teamzesa.Data.User.UserData.UserBuilder;
-import teamzesa.Data.User.UserCachingData;
+import teamzesa.Data.User.UserDataCacheHolder;
 import teamzesa.Data.User.UserKillStatus.KillStatusController;
 import teamzesa.Data.User.UserData.User;
 import teamzesa.Data.User.UserKillStatus.UserKillStatus;
 import teamzesa.Data.User.UserData.UserController;
 import teamzesa.command.ModeratorCommand.ConfigDataReload;
-import teamzesa.Event.EventRegister.ListOfEvent;
-import teamzesa.Util.Function.Announcer;
-import teamzesa.Enumeration.Command.ListOfCommand;
-import teamzesa.Enumeration.Data.DataFile;
+import teamzesa.Event.ListOfEvent;
+import teamzesa.Event.PlayerInteraction.Announce.Tip.Announcer;
+import teamzesa.command.ListOfCommand;
+import teamzesa.Data.DataIO.User.DataFile;
 import teamzesa.Util.Function.ThreadPool;
 
 import java.util.EnumSet;
@@ -61,12 +61,12 @@ public final class R01 extends JavaPlugin {
     }
 
     /**
-     * @see UserCachingData 에 데이터를 모두 import 합니다.
+     * @see UserDataCacheHolder 에 데이터를 모두 import 합니다.
      *
      * 데이터 파일 추가법.
      * @see DataFile 에 경로 및 데이터 명을 추가합니다.
      * resource 폴더에 {@link DataFile}에 추가했던 .json 파일을 생성합니다.
-     * @see UserCachingData 에 해당 데이터 타입의 Caching Map 을 만듭니다.
+     * @see UserDataCacheHolder 에 해당 데이터 타입의 Caching Map 을 만듭니다.
      * Access Manager, Builder, Controller 를 생성합니다.
      * @see UserAccessManager
      * @see UserBuilder
@@ -112,7 +112,7 @@ public final class R01 extends JavaPlugin {
     }
 
     /**
-     * @see UserCachingData 에 데이터를 모두 exeporting 합니다.
+     * @see UserDataCacheHolder 에 데이터를 모두 exeporting 합니다.
      *
      * @implSpec 12시간마다 자동으로 저장되는 scheduler 입니다.
      */

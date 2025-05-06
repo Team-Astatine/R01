@@ -7,8 +7,8 @@ import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.ItemStack;
-import teamzesa.Event.Enhance.EnhanceUtil;
-import teamzesa.Event.EventRegister.EventRegister;
+import teamzesa.Event.Enhance.Interface.EnhanceUtil;
+import teamzesa.Event.EventRegister;
 
 public class EnhanceBowHitEvent implements EventRegister {
     private Location bowHitLocation;

@@ -1,14 +1,14 @@
 package teamzesa.Data.User.UserData;
 
-import teamzesa.Data.Interface.User.AccessObject;
-import teamzesa.Data.User.UserCachingData;
+import teamzesa.Data.User.Interface.AccessObject;
+import teamzesa.Data.User.UserDataCacheHolder;
 
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class UserAccessManager implements AccessObject<UUID, User> {
 
-    private static final ConcurrentHashMap<UUID, User> USER_DATA = UserCachingData.getUserDataInstance();
+    private static final ConcurrentHashMap<UUID, User> USER_DATA = UserDataCacheHolder.getUserDataInstance();
 
     private static class DaoUserHolder {
         private final static UserAccessManager INSTANCE = new UserAccessManager();

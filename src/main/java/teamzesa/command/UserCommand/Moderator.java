@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.CommandRegisterSection;
 import teamzesa.Enumeration.Type.ColorType;
-import teamzesa.Enumeration.Command.ListOfCommand;
+import teamzesa.command.ListOfCommand;
 
 import java.util.HashSet;
 import java.util.Optional;

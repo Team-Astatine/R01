@@ -6,9 +6,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import teamzesa.Data.Function.Enhance.EnhanceInventoryManager;
-import teamzesa.Enumeration.Enhance.UI.ChestInventory.InventoryCustomModelIds;
-import teamzesa.Event.EventRegister.EventRegister;
+import teamzesa.Event.Enhance.PlayerInteraction.UserInterface.Enumeration.InventoryUICustomModeData;
+import teamzesa.Event.EventRegister;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -81,32 +80,32 @@ public class EnhanceUICloseEvent implements EventRegister {
         ItemStack slotEightItem = this.event.getView().getItem(8);
 
         if (ObjectUtils.notEqual
-                (slotZeroItem.getItemMeta().getCustomModelData(), InventoryCustomModelIds.PANEL_STUFF_CUSTOM_DATA.getValues())
+                (slotZeroItem.getItemMeta().getCustomModelData(), InventoryUICustomModeData.PANEL_STUFF_CUSTOM_DATA.getValues())
         )
             return true;
 
         if (ObjectUtils.notEqual
-                (slotFirstItem.getItemMeta().getCustomModelData(), InventoryCustomModelIds.PANEL_STUFF_CUSTOM_DATA.getValues())
+                (slotFirstItem.getItemMeta().getCustomModelData(), InventoryUICustomModeData.PANEL_STUFF_CUSTOM_DATA.getValues())
         )
             return true;
 
         if (ObjectUtils.notEqual
-                (slotSecondItem.getItemMeta().getCustomModelData(), InventoryCustomModelIds.PANEL_STUFF_CUSTOM_DATA.getValues())
+                (slotSecondItem.getItemMeta().getCustomModelData(), InventoryUICustomModeData.PANEL_STUFF_CUSTOM_DATA.getValues())
         )
             return true;
 
         if (ObjectUtils.notEqual
-                (slotSixItem.getItemMeta().getCustomModelData(), InventoryCustomModelIds.EXECUTE_DISCORD_DATA.getValues())
+                (slotSixItem.getItemMeta().getCustomModelData(), InventoryUICustomModeData.EXECUTE_DISCORD_DATA.getValues())
         )
             return true;
 
         if (ObjectUtils.notEqual
-                (slotSevenItem.getItemMeta().getCustomModelData(), InventoryCustomModelIds.EXECUTE_STUFF_DATA.getValues())
+                (slotSevenItem.getItemMeta().getCustomModelData(), InventoryUICustomModeData.EXECUTE_STUFF_DATA.getValues())
         )
             return true;
 
         return ObjectUtils.notEqual(
-                slotEightItem.getItemMeta().getCustomModelData(), InventoryCustomModelIds.EXECUTE_NOTION_DATA.getValues()
+                slotEightItem.getItemMeta().getCustomModelData(), InventoryUICustomModeData.EXECUTE_NOTION_DATA.getValues()
         );
     }
 }

@@ -1,6 +1,6 @@
 package teamzesa.Data.User.UserKillStatus;
 
-import teamzesa.Data.Interface.User.RObject;
+import teamzesa.Data.User.Interface.RObject;
 
 import java.util.UUID;
 

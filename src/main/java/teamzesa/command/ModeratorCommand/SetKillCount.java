@@ -10,9 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.Data.User.UserData.User;
 import teamzesa.Data.User.UserData.UserController;
 import teamzesa.Data.User.UserKillStatus.KillStatusBuilder;
-import teamzesa.Data.User.UserKillStatus.KillStatusController;
-import teamzesa.Data.User.UserKillStatus.UserKillStatus;
-import teamzesa.Enumeration.Command.ListOfCommand;
+import teamzesa.command.ListOfCommand;
 import teamzesa.Enumeration.Type.ColorType;
 import teamzesa.command.CommandRegisterSection;
 

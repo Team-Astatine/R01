@@ -11,14 +11,14 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.Data.DataIO.Config.ConfigIOHandler;
 import teamzesa.Data.Function.UserInterface.SlotItemMapping;
 import teamzesa.Data.Function.UserInterface.PanelItem;
-import teamzesa.Data.Function.Enhance.EnhanceInventoryManager;
+import teamzesa.Event.Enhance.PlayerInteraction.UserInterface.EnhanceInventoryManager;
 import teamzesa.Enumeration.Type.ColorType;
-import teamzesa.Enumeration.Enhance.UI.ChestInventory.InventoryCustomModelIds;
+import teamzesa.Event.Enhance.PlayerInteraction.UserInterface.Enumeration.InventoryUICustomModeData;
 import teamzesa.command.CommandRegisterSection;
 import teamzesa.Event.Enhance.PlayerInteraction.UserInterface.EnhanceUIClickEvent;
 import teamzesa.Util.UserUIGenerator.CreatePanelItem;
 import teamzesa.Util.UserUIGenerator.InventoryUIGenerator;
-import teamzesa.Enumeration.Command.ListOfCommand;
+import teamzesa.command.ListOfCommand;
 
 import java.util.Arrays;
 import java.util.List;
@@ -81,37 +81,37 @@ public class OpenEnhanceDialog extends CommandRegisterSection {
         return Arrays.asList(
                 new SlotItemMapping(SLOT_WEAPON, createItem(
                         Material.NETHERITE_SWORD,
-                        InventoryCustomModelIds.PANEL_STUFF_CUSTOM_DATA,
+                        InventoryUICustomModeData.PANEL_STUFF_CUSTOM_DATA,
                         "강화할 아래슬롯에 무기를 올려주세요",
                         ColorType.ORANGE)),
 
                 new SlotItemMapping(SLOT_SCROLL, createItem(
                         Material.ANVIL,
-                        InventoryCustomModelIds.PANEL_STUFF_CUSTOM_DATA,
+                        InventoryUICustomModeData.PANEL_STUFF_CUSTOM_DATA,
                         "아이템에 들어갈 재료를 아래슬롯에 넣어주세요",
                         ColorType.ORANGE)),
 
                 new SlotItemMapping(SLOT_PROTECT, createItem(
                         Material.HEART_OF_THE_SEA,
-                        InventoryCustomModelIds.PANEL_STUFF_CUSTOM_DATA,
+                        InventoryUICustomModeData.PANEL_STUFF_CUSTOM_DATA,
                         "파괴방어 스크롤을 아래슬롯에 넣어주세요",
                         ColorType.ORANGE)),
 
                 new SlotItemMapping(SLOT_DISCORD, createItem(
                         Material.LIGHT_BLUE_STAINED_GLASS_PANE,
-                        InventoryCustomModelIds.EXECUTE_DISCORD_DATA,
+                        InventoryUICustomModeData.EXECUTE_DISCORD_DATA,
                         "디스코드 링크받기",
                         ColorType.DISCORD_COLOR)),
 
                 new SlotItemMapping(SLOT_EXECUTE, createItem(
                         Material.RED_STAINED_GLASS_PANE,
-                        InventoryCustomModelIds.EXECUTE_STUFF_DATA,
+                        InventoryUICustomModeData.EXECUTE_STUFF_DATA,
                         "강화 실행",
                         ColorType.RED)),
 
                 new SlotItemMapping(SLOT_NOTION, createItem(
                         Material.LIGHT_GRAY_STAINED_GLASS_PANE,
-                        InventoryCustomModelIds.EXECUTE_NOTION_DATA,
+                        InventoryUICustomModeData.EXECUTE_NOTION_DATA,
                         "강화법 확인하기",
                         ColorType.NOTION_COLOR))
         );
@@ -120,7 +120,7 @@ public class OpenEnhanceDialog extends CommandRegisterSection {
     /**
      * 기본 아이템 생성 메서드
      */
-    private ItemStack createItem(Material material, InventoryCustomModelIds modelId, String comment, ColorType color) {
+    private ItemStack createItem(Material material, InventoryUICustomModeData modelId, String comment, ColorType color) {
         return new CreatePanelItem()
                 .setPanelItem(new PanelItem(material, modelId.getValues()))
                 .setComment(comment)

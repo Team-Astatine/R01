@@ -5,9 +5,9 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.enchantment.EnchantItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import teamzesa.Event.Enhance.EnhanceUtil;
-import teamzesa.Event.EventRegister.EventRegister;
-import teamzesa.Util.StringComponentExchanger;
+import teamzesa.Event.Enhance.Interface.EnhanceUtil;
+import teamzesa.Event.EventRegister;
+import teamzesa.Util.Function.StringComponentExchanger;
 
 import java.util.Map;
 import java.util.Optional;

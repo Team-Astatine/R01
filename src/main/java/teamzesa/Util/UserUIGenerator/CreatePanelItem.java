@@ -6,7 +6,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import teamzesa.Data.Function.UserInterface.PanelItem;
 import teamzesa.Enumeration.Type.ColorType;
-import teamzesa.Util.StringComponentExchanger;
+import teamzesa.Util.Function.StringComponentExchanger;
 
 public class CreatePanelItem extends StringComponentExchanger {
 

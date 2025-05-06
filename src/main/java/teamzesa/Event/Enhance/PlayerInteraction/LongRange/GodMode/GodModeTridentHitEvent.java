@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Trident;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import teamzesa.Data.User.UserData.UserController;
-import teamzesa.Event.EventRegister.EventRegister;
+import teamzesa.Event.EventRegister;
 
 
 public class GodModeTridentHitEvent implements EventRegister {

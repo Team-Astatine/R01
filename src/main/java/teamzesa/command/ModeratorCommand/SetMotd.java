@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.Data.DataIO.Config.ConfigIOHandler;
 import teamzesa.command.CommandRegisterSection;
 import teamzesa.Enumeration.Type.ColorType;
-import teamzesa.Enumeration.Command.ListOfCommand;
+import teamzesa.command.ListOfCommand;
 
 
 public class SetMotd extends CommandRegisterSection {

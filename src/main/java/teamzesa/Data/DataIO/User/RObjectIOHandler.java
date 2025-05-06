@@ -5,8 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Bukkit;
-import teamzesa.Data.Interface.User.RObject;
-import teamzesa.Enumeration.Data.DataFile;
+import teamzesa.Data.User.Interface.RObject;
 
 import java.io.FileReader;
 import java.io.FileWriter;

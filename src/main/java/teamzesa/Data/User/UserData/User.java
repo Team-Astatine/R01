@@ -1,6 +1,6 @@
 package teamzesa.Data.User.UserData;
 
-import teamzesa.Data.Interface.User.RObject;
+import teamzesa.Data.User.Interface.RObject;
 
 import java.util.HashSet;
 import java.util.List;

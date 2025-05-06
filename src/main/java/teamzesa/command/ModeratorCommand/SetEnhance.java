@@ -8,11 +8,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.Enumeration.Enhance.Items.EnhanceItemUndoInformation;
+import teamzesa.Event.Enhance.Enumeration.EnhanceItemAttributes;
 import teamzesa.command.CommandRegisterSection;
-import teamzesa.Event.Enhance.EnhanceUtil;
+import teamzesa.Event.Enhance.Interface.EnhanceUtil;
 import teamzesa.Enumeration.Type.ColorType;
-import teamzesa.Enumeration.Command.ListOfCommand;
+import teamzesa.command.ListOfCommand;
 
 import java.util.Map;
 
@@ -43,7 +43,7 @@ public class SetEnhance extends CommandRegisterSection {
 
         ItemStack targetItem = player.getInventory().getItemInMainHand();
         ItemMeta targetItemMeta = targetItem.getItemMeta();
-        EnhanceItemUndoInformation itemInformation = EnhanceItemUndoInformation.findByMaterial(targetItem);
+        EnhanceItemAttributes itemInformation = EnhanceItemAttributes.findByMaterial(targetItem);
 
         if (enhanceLevel == 0) {
             ItemStack undoItem = new ItemStack(targetItem.getType(), 1);

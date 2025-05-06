@@ -4,8 +4,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.Enumeration.Command.ListOfCommand;
-import teamzesa.Util.StringComponentExchanger;
+import teamzesa.Util.Function.StringComponentExchanger;
 
 /**
  * 명령어를 등록하기 위한 구현체 클래스 입니다.

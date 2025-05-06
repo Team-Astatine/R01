@@ -11,8 +11,8 @@ import teamzesa.Data.User.UserData.User;
 import teamzesa.Data.User.UserData.UserController;
 import teamzesa.command.CommandRegisterSection;
 import teamzesa.Enumeration.Type.ColorType;
-import teamzesa.Enumeration.Command.ListOfCommand;
-import teamzesa.Enumeration.Data.DataFile;
+import teamzesa.command.ListOfCommand;
+import teamzesa.Data.DataIO.User.DataFile;
 
 import java.util.ArrayList;
 import java.util.HashSet;

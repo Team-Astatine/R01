@@ -9,7 +9,7 @@ import teamzesa.Data.User.UserData.UserBuilder;
 import teamzesa.Data.User.UserData.UserController;
 import teamzesa.command.CommandRegisterSection;
 import teamzesa.Enumeration.Type.ColorType;
-import teamzesa.Enumeration.Command.ListOfCommand;
+import teamzesa.command.ListOfCommand;
 
 public class ToggleAnnouncing extends CommandRegisterSection {
 

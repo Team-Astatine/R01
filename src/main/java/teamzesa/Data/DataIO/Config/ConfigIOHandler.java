@@ -3,9 +3,8 @@ package teamzesa.Data.DataIO.Config;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import teamzesa.Enumeration.Type.ColorType;
-import teamzesa.Enumeration.Data.ConfigMenu;
-import teamzesa.Enumeration.Data.DataFile;
-import teamzesa.Util.StringComponentExchanger;
+import teamzesa.Data.DataIO.User.DataFile;
+import teamzesa.Util.Function.StringComponentExchanger;
 
 import java.io.File;
 import java.io.IOException;

@@ -8,7 +8,7 @@ import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.command.CommandRegisterSection;
 import teamzesa.Enumeration.Type.ColorType;
-import teamzesa.Enumeration.Command.ListOfCommand;
+import teamzesa.command.ListOfCommand;
 
 public class SwapMainHandItemToHatInvItem extends CommandRegisterSection {
     private Player player;

@@ -1,7 +1,7 @@
 package teamzesa.Data.Deprecate;
 
 import org.bukkit.Bukkit;
-import teamzesa.Enumeration.Data.DataFile;
+import teamzesa.Data.DataIO.User.DataFile;
 
 import java.io.*;
 import java.net.MalformedURLException;

@@ -10,19 +10,18 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.Data.DataIO.Config.ConfigIOHandler;
-import teamzesa.Data.Function.Enhance.EnhanceInventoryManager;
-import teamzesa.Data.Function.Enhance.EnhanceItemBuilder;
-import teamzesa.Data.Function.Enhance.EnhanceItem;
-import teamzesa.Enumeration.Enhance.Items.Armour.ArmourList;
-import teamzesa.Enumeration.Enhance.Items.Scroll.ProtectScrollList;
-import teamzesa.Enumeration.Enhance.Items.Scroll.ScrollList;
-import teamzesa.Enumeration.Enhance.Items.Weapon.LongRange;
-import teamzesa.Enumeration.Enhance.Items.Weapon.ShortRange;
-import teamzesa.Event.Enhance.GeneratingEnhanceItem;
-import teamzesa.Event.EventRegister.EventRegister;
+import teamzesa.Event.Enhance.Processor.EnhanceItemBuilder;
+import teamzesa.Event.Enhance.Processor.EnhanceItem;
+import teamzesa.Event.Enhance.Enumeration.Armour.ArmourList;
+import teamzesa.Event.Enhance.Enumeration.Scroll.ProtectScrollList;
+import teamzesa.Event.Enhance.Enumeration.Scroll.ScrollList;
+import teamzesa.Event.Enhance.Enumeration.Weapon.LongRange;
+import teamzesa.Event.Enhance.Enumeration.Weapon.ShortRange;
+import teamzesa.Event.Enhance.Processor.EnhanceItemExecutor;
+import teamzesa.Event.EventRegister;
 import teamzesa.Enumeration.Type.ColorType;
 import teamzesa.Util.UserUIGenerator.InventoryUIGenerator;
-import teamzesa.Util.StringComponentExchanger;
+import teamzesa.Util.Function.StringComponentExchanger;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -64,7 +63,7 @@ public class EnhanceUIClickEvent extends StringComponentExchanger implements Eve
      * Click Inventory 생성은 {@link InventoryUIGenerator}를 참고해주세요.
      * Inventory UUID 를 고정하기 위해 {@link EnhanceInventoryManager}를 사용합니다.
      * 인벤토리 생성, 등록이 완료되면 플레이어가 강화 이벤트를 발생시키는지 확인합니다.
-     * 강화는 {@link GeneratingEnhanceItem} 를 참조하세요.
+     * 강화는 {@link EnhanceItemExecutor} 를 참조하세요.
      */
     @Override
     public void execute() {
@@ -108,7 +107,7 @@ public class EnhanceUIClickEvent extends StringComponentExchanger implements Eve
                                 .protectScroll(this.protectScroll)
                                 .generating();
 
-                        new GeneratingEnhanceItem(enhanceItemObj);
+                        new EnhanceItemExecutor(enhanceItemObj);
                     }
                     this.event.setCancelled(true);
                 }

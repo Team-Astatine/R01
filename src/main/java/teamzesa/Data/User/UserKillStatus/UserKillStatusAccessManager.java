@@ -1,13 +1,13 @@
 package teamzesa.Data.User.UserKillStatus;
 
-import teamzesa.Data.Interface.User.AccessObject;
-import teamzesa.Data.User.UserCachingData;
+import teamzesa.Data.User.Interface.AccessObject;
+import teamzesa.Data.User.UserDataCacheHolder;
 
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class UserKillStatusAccessManager implements AccessObject<UUID, UserKillStatus> {
-    private static final ConcurrentHashMap<UUID, UserKillStatus> KILL_STATUS = UserCachingData.getUserKillStatusInstance();
+    private static final ConcurrentHashMap<UUID, UserKillStatus> KILL_STATUS = UserDataCacheHolder.getUserKillStatusInstance();
 
     private static class DaoUserKillStatusHolder {
         private final static UserKillStatusAccessManager INSTANCE = new UserKillStatusAccessManager();
