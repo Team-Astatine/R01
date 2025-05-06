@@ -5,7 +5,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.Data.User.UserKillStatus.KillStatusController;
+import teamzesa.Data.User.UserKillStatus.UserKillStatusController;
 import teamzesa.Data.User.UserData.User;
 import teamzesa.Data.User.UserKillStatus.UserKillStatus;
 import teamzesa.Data.User.UserData.UserController;
@@ -37,7 +37,7 @@ public class LookUserValue extends CommandRegisterSection {
         Optional.ofNullable(user)
                 .ifPresentOrElse(
                         existUser -> {
-                            UserKillStatus userKillStatus = new KillStatusController().readUser(existUser.uuid());
+                            UserKillStatus userKillStatus = new UserKillStatusController().readUser(existUser.uuid());
                             sendComment(sender, existUser + "\n\n" + userKillStatus);
                         },
 

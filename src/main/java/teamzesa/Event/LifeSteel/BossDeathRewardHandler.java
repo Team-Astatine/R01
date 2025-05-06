@@ -2,8 +2,8 @@ package teamzesa.Event.LifeSteel;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDeathEvent;
-import teamzesa.Data.User.UserKillStatus.KillStatusBuilder;
-import teamzesa.Data.User.UserKillStatus.KillStatusController;
+import teamzesa.Data.User.UserKillStatus.UserKillStatusBuilder;
+import teamzesa.Data.User.UserKillStatus.UserKillStatusController;
 import teamzesa.Data.User.UserKillStatus.UserKillStatus;
 import teamzesa.Enumeration.Type.ColorType;
 import teamzesa.Enumeration.Type.BossType;
@@ -11,7 +11,7 @@ import teamzesa.Event.EventRegister;
 import teamzesa.Util.Function.StringComponentExchanger;
 
 public class BossDeathRewardHandler extends StringComponentExchanger implements EventRegister {
-    private final KillStatusController killStatusController = new KillStatusController();
+    private final UserKillStatusController userKillStatusController = new UserKillStatusController();
 
     private BossType bossType;
 
@@ -34,7 +34,7 @@ public class BossDeathRewardHandler extends StringComponentExchanger implements 
     @Override
     public void init() {
         this.bossSlayerPlayer = this.event.getEntity().getKiller();
-        this.bossSlayerUser = this.killStatusController.readUser(this.bossSlayerPlayer.getUniqueId());
+        this.bossSlayerUser = this.userKillStatusController.readUser(this.bossSlayerPlayer.getUniqueId());
     }
 
     @Override
@@ -48,8 +48,8 @@ public class BossDeathRewardHandler extends StringComponentExchanger implements 
         if (newHealthScale >= MAX_HEALTH_SCALE)
             newHealthScale = MAX_HEALTH_SCALE;
 
-        this.killStatusController.healthUpdate(
-                new KillStatusBuilder(this.bossSlayerUser)
+        this.userKillStatusController.healthUpdate(
+                new UserKillStatusBuilder(this.bossSlayerUser)
                         .healthScale(newHealthScale)
                         .build()
         );

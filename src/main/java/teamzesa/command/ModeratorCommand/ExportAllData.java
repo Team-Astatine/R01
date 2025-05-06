@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.Data.DataIO.User.RObjectIOHandler;
-import teamzesa.Data.User.UserKillStatus.KillStatusController;
+import teamzesa.Data.User.UserKillStatus.UserKillStatusController;
 import teamzesa.Data.User.UserData.User;
 import teamzesa.Data.User.UserData.UserController;
 import teamzesa.command.CommandRegisterSection;
@@ -54,7 +54,7 @@ public class ExportAllData extends CommandRegisterSection {
         );
 
         new RObjectIOHandler().exportData(
-                DataFile.KILL_STATUS, new KillStatusController().getAllUserTable(), getClass().getName()
+                DataFile.KILL_STATUS, new UserKillStatusController().getAllUserTable(), getClass().getName()
         );
 /*
         if (args == null || args[0].isEmpty()) {

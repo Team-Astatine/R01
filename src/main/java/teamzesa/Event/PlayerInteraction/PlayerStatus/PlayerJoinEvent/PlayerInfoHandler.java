@@ -5,7 +5,7 @@ import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
-import teamzesa.Data.User.UserKillStatus.KillStatusController;
+import teamzesa.Data.User.UserKillStatus.UserKillStatusController;
 import teamzesa.Data.User.UserData.User;
 import teamzesa.Data.User.UserData.UserBuilder;
 import teamzesa.Data.User.UserData.UserController;
@@ -20,7 +20,7 @@ public class PlayerInfoHandler extends StringComponentExchanger implements Event
     private User joinUser;
     private Player joinPlayer;
     private UserController userController;
-    private KillStatusController userKillStatus;
+    private UserKillStatusController userKillStatus;
     private final PlayerJoinEvent joinEvent;
 
     public PlayerInfoHandler(PlayerJoinEvent event) {
@@ -32,7 +32,7 @@ public class PlayerInfoHandler extends StringComponentExchanger implements Event
     @Override
     public void init() {
         this.userController = new UserController();
-        this.userKillStatus = new KillStatusController();
+        this.userKillStatus = new UserKillStatusController();
         this.joinPlayer = this.joinEvent.getPlayer();
         User user = this.userController.readUser(this.joinPlayer.getUniqueId());
 

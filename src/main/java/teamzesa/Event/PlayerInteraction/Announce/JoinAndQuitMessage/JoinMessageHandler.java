@@ -2,7 +2,7 @@ package teamzesa.Event.PlayerInteraction.Announce.JoinAndQuitMessage;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
-import teamzesa.Data.User.UserKillStatus.KillStatusController;
+import teamzesa.Data.User.UserKillStatus.UserKillStatusController;
 import teamzesa.Data.User.UserKillStatus.UserKillStatus;
 import teamzesa.Enumeration.Type.ColorType;
 import teamzesa.Event.EventRegister;
@@ -24,7 +24,7 @@ public class JoinMessageHandler extends StringComponentExchanger implements Even
     @Override
     public void init() {
         this.joinPlayer = this.event.getPlayer();
-        this.userKillStatus = new KillStatusController().readUser(this.joinPlayer.getUniqueId());
+        this.userKillStatus = new UserKillStatusController().readUser(this.joinPlayer.getUniqueId());
     }
 
     @Override

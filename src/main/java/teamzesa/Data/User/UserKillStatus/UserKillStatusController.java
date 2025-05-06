@@ -11,12 +11,12 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class KillStatusController {
+public class UserKillStatusController {
     private final UserKillStatusAccessManager userKillStatus = UserKillStatusAccessManager.getInstance();
 
     public boolean createUserKillStatus(Player player) {
         return createUserKillStatus(
-                new KillStatusBuilder(player)
+                new UserKillStatusBuilder(player)
                         .buildAndUpdate()
         );
     }

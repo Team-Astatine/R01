@@ -4,32 +4,32 @@ import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
-public class KillStatusBuilder {
+public class UserKillStatusBuilder {
     private UUID uuid;
     private double healthScale;
     private int killCount;
 
-    public KillStatusBuilder() {
+    public UserKillStatusBuilder() {
     }
 
-    public KillStatusBuilder(UserKillStatus userKillStatus) {
+    public UserKillStatusBuilder(UserKillStatus userKillStatus) {
         this.uuid = userKillStatus.uuid();
         healthScale(userKillStatus.healthScale());
         killCount(userKillStatus.killCount());
     }
 
-    public KillStatusBuilder(Player player) {
+    public UserKillStatusBuilder(Player player) {
         this.uuid = player.getUniqueId();
         healthScale(player.getHealthScale());
         killCount(0);
     }
 
-    public KillStatusBuilder healthScale(double healthScale) {
+    public UserKillStatusBuilder healthScale(double healthScale) {
         this.healthScale = healthScale;
         return this;
     }
 
-    public KillStatusBuilder killCount(int killCount) {
+    public UserKillStatusBuilder killCount(int killCount) {
         this.killCount = killCount;
         return this;
     }
@@ -44,7 +44,7 @@ public class KillStatusBuilder {
 
     public UserKillStatus buildAndUpdate() {
         UserKillStatus userKillStatus = build();
-        new KillStatusController().updateKillStatus(userKillStatus);
+        new UserKillStatusController().updateKillStatus(userKillStatus);
         return userKillStatus;
     }
 }

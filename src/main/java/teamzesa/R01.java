@@ -8,7 +8,7 @@ import teamzesa.Data.DataIO.User.RObjectIOHandler;
 import teamzesa.Data.User.UserData.UserAccessManager;
 import teamzesa.Data.User.UserData.UserBuilder;
 import teamzesa.Data.User.UserDataCacheHolder;
-import teamzesa.Data.User.UserKillStatus.KillStatusController;
+import teamzesa.Data.User.UserKillStatus.UserKillStatusController;
 import teamzesa.Data.User.UserData.User;
 import teamzesa.Data.User.UserKillStatus.UserKillStatus;
 import teamzesa.Data.User.UserData.UserController;
@@ -53,7 +53,7 @@ public final class R01 extends JavaPlugin {
         );
 
         new RObjectIOHandler().exportData(
-                DataFile.KILL_STATUS, new KillStatusController().getAllUserTable(), getClass().getName()
+                DataFile.KILL_STATUS, new UserKillStatusController().getAllUserTable(), getClass().getName()
         );
 
         ThreadPool.getThreadPool().allServiceOff();
@@ -79,7 +79,7 @@ public final class R01 extends JavaPlugin {
                 new RObjectIOHandler().importData(DataFile.USER_DATA, User.class, getClass().getName())
         );
 
-        new KillStatusController().updateAllUserData(
+        new UserKillStatusController().updateAllUserData(
                 new RObjectIOHandler().importData(DataFile.KILL_STATUS, UserKillStatus.class, getClass().getName())
         );
     }
@@ -127,7 +127,7 @@ public final class R01 extends JavaPlugin {
                     );
 
                     new RObjectIOHandler().exportData(
-                            DataFile.KILL_STATUS, new KillStatusController().getAllUserTable(), getClass().getName()
+                            DataFile.KILL_STATUS, new UserKillStatusController().getAllUserTable(), getClass().getName()
                     );
 
 //                    new RObjectIOHandler().exportData(

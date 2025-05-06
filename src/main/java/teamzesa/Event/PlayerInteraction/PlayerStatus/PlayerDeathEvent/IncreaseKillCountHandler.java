@@ -4,13 +4,13 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import teamzesa.Data.User.UserData.UserController;
-import teamzesa.Data.User.UserKillStatus.KillStatusBuilder;
-import teamzesa.Data.User.UserKillStatus.KillStatusController;
+import teamzesa.Data.User.UserKillStatus.UserKillStatusBuilder;
+import teamzesa.Data.User.UserKillStatus.UserKillStatusController;
 import teamzesa.Data.User.UserKillStatus.UserKillStatus;
 import teamzesa.Event.EventRegister;
 
 public class IncreaseKillCountHandler implements EventRegister {
-    private KillStatusController controller = new KillStatusController();
+    private UserKillStatusController controller = new UserKillStatusController();
     private UserController userController = new UserController();
 
     private UserKillStatus userKillStatus;
@@ -38,7 +38,7 @@ public class IncreaseKillCountHandler implements EventRegister {
             return;
 
         this.userKillStatus = this.controller.readUser(player.getUniqueId());
-        new KillStatusBuilder(this.userKillStatus)
+        new UserKillStatusBuilder(this.userKillStatus)
                 .killCount(this.userKillStatus.killCount() + 1)
                 .buildAndUpdate();
     }

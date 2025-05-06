@@ -7,8 +7,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.Data.User.UserKillStatus.KillStatusBuilder;
-import teamzesa.Data.User.UserKillStatus.KillStatusController;
+import teamzesa.Data.User.UserKillStatus.UserKillStatusBuilder;
+import teamzesa.Data.User.UserKillStatus.UserKillStatusController;
 import teamzesa.Data.User.UserData.User;
 import teamzesa.Data.User.UserData.UserController;
 import teamzesa.command.CommandRegisterSection;
@@ -67,9 +67,9 @@ public class SetHealth extends CommandRegisterSection {
     }
 
     private void setPlayerHealth(double setHealthValue) {
-        KillStatusController userKillStatusController = new KillStatusController();
+        UserKillStatusController userKillStatusController = new UserKillStatusController();
         userKillStatusController.healthUpdate(
-                new KillStatusBuilder(userKillStatusController.readUser(this.targetPlayer.getUniqueId()))
+                new UserKillStatusBuilder(userKillStatusController.readUser(this.targetPlayer.getUniqueId()))
                         .healthScale(setHealthValue)
                         .buildAndUpdate()
         );

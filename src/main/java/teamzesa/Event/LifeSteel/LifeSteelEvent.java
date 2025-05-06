@@ -7,8 +7,8 @@ import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import teamzesa.Data.User.UserKillStatus.KillStatusBuilder;
-import teamzesa.Data.User.UserKillStatus.KillStatusController;
+import teamzesa.Data.User.UserKillStatus.UserKillStatusBuilder;
+import teamzesa.Data.User.UserKillStatus.UserKillStatusController;
 import teamzesa.Data.User.UserData.User;
 import teamzesa.Data.User.UserKillStatus.UserKillStatus;
 import teamzesa.Data.User.UserData.UserController;
@@ -19,7 +19,7 @@ import teamzesa.Util.Function.StringComponentExchanger;
 
 public class LifeSteelEvent extends StringComponentExchanger implements EventRegister {
     private final UserController userController = new UserController();
-    private final KillStatusController killStatusController = new KillStatusController();
+    private final UserKillStatusController userKillStatusController = new UserKillStatusController();
 
     private Player deathPlayer;
     private UserKillStatus deathUserKillStatusObj;
@@ -41,7 +41,7 @@ public class LifeSteelEvent extends StringComponentExchanger implements EventReg
         this.deathPlayer = this.event.getPlayer();
         this.killer = deathPlayer.getKiller();
         this.killerUserObj = this.userController.readUser(this.deathPlayer.getUniqueId());
-        this.deathUserKillStatusObj = this.killStatusController.readUser(this.deathPlayer.getUniqueId());
+        this.deathUserKillStatusObj = this.userKillStatusController.readUser(this.deathPlayer.getUniqueId());
     }
 
     @Override
@@ -85,7 +85,7 @@ public class LifeSteelEvent extends StringComponentExchanger implements EventReg
     }
 
     private void lifeSteel() {
-        this.killerKillStatusObj = this.killStatusController.readUser(this.killer.getUniqueId());
+        this.killerKillStatusObj = this.userKillStatusController.readUser(this.killer.getUniqueId());
 
         double MAX_HEALTH_SCALE = 60.0;
         double MIN_HEALTH_SCALE = 4.0;
@@ -98,13 +98,13 @@ public class LifeSteelEvent extends StringComponentExchanger implements EventReg
             return;
 
         //execute Logic
-        this.killStatusController.healthUpdate(
-                new KillStatusBuilder(this.deathUserKillStatusObj)
+        this.userKillStatusController.healthUpdate(
+                new UserKillStatusBuilder(this.deathUserKillStatusObj)
                         .healthScale(this.deathPlayer.getHealthScale() - STEP_SIZE)
                         .build());
 
-        this.killStatusController.healthUpdate(
-                new KillStatusBuilder(this.killerKillStatusObj)
+        this.userKillStatusController.healthUpdate(
+                new UserKillStatusBuilder(this.killerKillStatusObj)
                         .healthScale(this.killer.getHealthScale() + STEP_SIZE)
                         .build());
 

@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.Data.User.UserData.User;
 import teamzesa.Data.User.UserData.UserController;
-import teamzesa.Data.User.UserKillStatus.KillStatusBuilder;
+import teamzesa.Data.User.UserKillStatus.UserKillStatusBuilder;
 import teamzesa.command.ListOfCommand;
 import teamzesa.Enumeration.Type.ColorType;
 import teamzesa.command.CommandRegisterSection;
@@ -59,7 +59,7 @@ public class SetKillCount extends CommandRegisterSection {
         Optional.ofNullable(Bukkit.getPlayer(targetUser.uuid())).ifPresent(
                 player -> {
                     this.targetPlayer = player;
-                    new KillStatusBuilder(this.targetPlayer)
+                    new UserKillStatusBuilder(this.targetPlayer)
                             .killCount(setKillCount)
                             .buildAndUpdate();
                 }

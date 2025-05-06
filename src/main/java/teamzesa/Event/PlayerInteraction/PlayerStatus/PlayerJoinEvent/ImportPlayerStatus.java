@@ -7,7 +7,7 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
-import teamzesa.Data.User.UserKillStatus.KillStatusController;
+import teamzesa.Data.User.UserKillStatus.UserKillStatusController;
 import teamzesa.Data.User.UserData.User;
 import teamzesa.Data.User.UserKillStatus.UserKillStatus;
 import teamzesa.Data.User.UserData.UserBuilder;
@@ -40,7 +40,7 @@ public class ImportPlayerStatus extends StringComponentExchanger implements Even
     public void init() {
         this.player = this.event.getPlayer();
         this.user = new UserController().readUser(this.player.getUniqueId());
-        this.userKillStatus = new KillStatusController().readUser(this.player.getUniqueId());
+        this.userKillStatus = new UserKillStatusController().readUser(this.player.getUniqueId());
     }
 
     @Override
