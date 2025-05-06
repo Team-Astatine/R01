@@ -27,6 +27,7 @@ public enum ListOfCommand {
     OFF_HAND_ITEM_SWAP_FOR_BE("swap", new OffHandItemSwapFunction()),
     TOTEM_STACKING("totem", new StackingTotemFunction()),
     FLY("fly", new ToggleFly()),
+    TIME("playtime", new PlayTime()),
     ANNOUNCING("공지", new ToggleAnnouncing()),
     ENHANCE("강화", new OpenEnhanceDialog()),
     COMMAND_TIP("명령어", new CommandTip()),

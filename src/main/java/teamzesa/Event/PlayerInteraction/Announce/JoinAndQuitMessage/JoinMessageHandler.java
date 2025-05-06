@@ -30,7 +30,7 @@ public class JoinMessageHandler extends StringComponentExchanger implements Even
     @Override
     public void execute() {
         this.joinPlayer.performCommand("help");
-        Announcer.getAnnouncer().countAnnouncer(this.joinPlayer);
+        Announcer.getAnnouncer().joinPlayerInformationAnnouncer(this.joinPlayer);
 
         if (this.userKillStatus.killCount() == 0)
             this.event.joinMessage(

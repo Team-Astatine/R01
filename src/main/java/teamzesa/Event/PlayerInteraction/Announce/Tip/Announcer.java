@@ -2,6 +2,7 @@ package teamzesa.Event.PlayerInteraction.Announce.Tip;
 
 import net.kyori.adventure.audience.Audience;
 import org.bukkit.Bukkit;
+import org.bukkit.Statistic;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.Data.DataIO.Config.ConfigIOHandler;
@@ -32,12 +33,22 @@ public class Announcer extends StringComponentExchanger {
         this.configIOHandler = ConfigIOHandler.getConfigIOHandler();
     }
 
-    public void countAnnouncer(Player player) {
+    public void joinPlayerInformationAnnouncer(Player player) {
         int joinCnt = new UserController().readUser(player.getUniqueId()).joinCount();
+
+        int ticks = player.getStatistic(Statistic.PLAY_ONE_MINUTE);
+        long totalSeconds = ticks / 20L;
+        long hrs = totalSeconds / 3600;
+        long mins = (totalSeconds % 3600) / 60;
+        long secs = totalSeconds % 60;
+        String formatted = String.format("%02d시간 %02d분 %02d초", hrs, mins, secs);
+
         player.sendMessage(
                 componentExchanger(this.configIOHandler.getWorldMotdConfig(), ColorType.SKY_BLUE)
                         .append(componentExchanger(" " + joinCnt, ColorType.PINK))
-                        .append(componentExchanger("번째 접속!", ColorType.SKY_BLUE))
+                        .append(componentExchanger("번째 접속,", ColorType.SKY_BLUE))
+                        .append(componentExchanger(" " + formatted, ColorType.PINK))
+                        .append(componentExchanger(" 째 플레이 중!", ColorType.SKY_BLUE))
         );
     }
 

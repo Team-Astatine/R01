@@ -31,6 +31,8 @@ commands:
     description: 토템을 합칩니다.
   fly:
     description: 하늘을 납니다.
+  playtime:
+    description: 플레이시간을 확인합니다.
   공지:
     description: 공지를 활/비활성화 합니다.
   강화:
