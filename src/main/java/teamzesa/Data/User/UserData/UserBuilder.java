@@ -1,5 +1,6 @@
 package teamzesa.Data.User.UserData;
 
+import org.bukkit.Statistic;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -13,6 +14,7 @@ public class UserBuilder {
     private List<String> nameList = new ArrayList<>();
     private HashSet<String> connectionIPList = new HashSet<>();
     private int joinCount;
+    private int playTime;
     private int level;
     private boolean godMode;
     private boolean announcingSkip;
@@ -25,6 +27,7 @@ public class UserBuilder {
         nameList(user.nameList());
         ipList(user.connectionIPList());
         joinCount(user.joinCount());
+        playTime(user.playTime());
         level(user.level());
         isGodMode(user.godMode());
         isAnnouncingSkip(user.announcingSkip());
@@ -36,6 +39,7 @@ public class UserBuilder {
         nameList(player.getName());
         ipList(player.getAddress().getHostName());
         joinCount(0);
+        playTime(player.getStatistic(Statistic.PLAY_ONE_MINUTE));
         level(player.getLevel());
         isGodMode(false);
         isAnnouncingSkip(true);
@@ -71,6 +75,11 @@ public class UserBuilder {
         return this;
     }
 
+    public UserBuilder playTime(int playTime) {
+        this.playTime = playTime;
+        return this;
+    }
+
     public UserBuilder level(int level) {
         this.level = level;
         return this;
@@ -92,6 +101,7 @@ public class UserBuilder {
                 nameList,
                 connectionIPList,
                 joinCount,
+                playTime,
                 level,
                 godMode,
                 announcingSkip

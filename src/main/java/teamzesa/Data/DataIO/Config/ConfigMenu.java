@@ -30,7 +30,8 @@ public enum ConfigMenu {
     MESSAGE_COMMAND_SHOP("message.commandShop"),
     MESSAGE_COMMAND_BALANCE("message.commandBalance"),
     MESSAGE_COMMAND_PARTY("message.commandParty"),
-    MESSAGE_COMMAND_SKILL("message.commandSkill");
+    MESSAGE_COMMAND_SKILL("message.commandSkill"),
+    MESSAGE_COMMAND_PLAY_TIME("message.commandPlayTime");
 
     private final String configMessage;
 

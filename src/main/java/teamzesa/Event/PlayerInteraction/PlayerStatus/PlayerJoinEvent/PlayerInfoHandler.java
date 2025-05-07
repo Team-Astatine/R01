@@ -3,6 +3,7 @@ package teamzesa.Event.PlayerInteraction.PlayerStatus.PlayerJoinEvent;
 import net.kyori.adventure.title.Title;
 import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.Statistic;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerJoinEvent;
 import teamzesa.Data.User.UserKillStatus.UserKillStatusController;
@@ -39,6 +40,7 @@ public class PlayerInfoHandler extends StringComponentExchanger implements Event
         Optional.ofNullable(user).ifPresentOrElse(
                 existUser -> {
                     this.joinUser = new UserBuilder(existUser)
+                            .playTime(this.joinPlayer.getStatistic(Statistic.PLAY_ONE_MINUTE))
                             .level(this.joinPlayer.getLevel())
                             .buildAndUpdate();
                 },

@@ -45,7 +45,7 @@ public class ConfigIOHandler extends StringComponentExchanger {
         getRaidTip();
         getWeaponTip();
         getExplosiveTip();
-        getCommandHelp();
+        getCommand();
         getCommandFly();
         getCommandHat();
         getCommandSwap();
@@ -57,6 +57,7 @@ public class ConfigIOHandler extends StringComponentExchanger {
         getCommandBalance();
         getCommandParty();
         getCommandSkill();
+        getCommandPlayTime();
     }
 
     public void setWorldSettingMotd() {
@@ -120,7 +121,7 @@ public class ConfigIOHandler extends StringComponentExchanger {
         return getString(ConfigMenu.MESSAGE_EXPLOSIVE_TIP);
     }
 
-    public String getCommandHelp() {
+    public String getCommand() {
         return getString(ConfigMenu.MESSAGE_COMMAND_TIP);
     }
 
@@ -166,6 +167,10 @@ public class ConfigIOHandler extends StringComponentExchanger {
 
     public String getCommandSkill() {
         return getString(ConfigMenu.MESSAGE_COMMAND_SKILL);
+    }
+
+    public String getCommandPlayTime() {
+        return getString(ConfigMenu.MESSAGE_COMMAND_PLAY_TIME);
     }
 
     public void worldConfigSave(String motd) {
