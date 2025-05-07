@@ -35,6 +35,7 @@ public record CommandTip() implements CommandExecutor {
         commandTip.add(Component.text(configIOHandler.getCommandBalance(), commandColor));
         commandTip.add(Component.text(configIOHandler.getCommandParty(), commandColor));
         commandTip.add(Component.text(configIOHandler.getCommandSkill(), commandColor));
+        commandTip.add(Component.text(configIOHandler.getCommandPlayTime(), commandColor));
 
         for (Component comment : commandTip)
             commandSender.sendMessage(comment);

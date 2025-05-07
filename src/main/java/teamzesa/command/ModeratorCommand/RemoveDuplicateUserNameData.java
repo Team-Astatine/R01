@@ -62,6 +62,7 @@ public class RemoveDuplicateUserNameData extends CommandRegisterSection {
                     user.uuid(),
                     nonDupeUserName,
                     user.connectionIPList(),
+                    user.playTime(),
                     user.joinCount(),
                     user.level(),
                     user.godMode(),
