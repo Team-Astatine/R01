@@ -90,8 +90,8 @@ public class EnhanceUIClickEvent extends StringComponentExchanger implements Eve
 
                 case 6 -> {
                     this.event.setCancelled(true);
-                    event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
-                    event.getWhoClicked().sendMessage(createLinkComponentExchanger(
+                    this.event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                    this.event.getWhoClicked().sendMessage(createLinkComponentExchanger(
                             ConfigIOHandler.getConfigIOHandler().getDiscordInvite(),
                             ConfigIOHandler.getConfigIOHandler().getDiscordConfig(),
                             ColorType.DISCORD_COLOR
@@ -114,8 +114,8 @@ public class EnhanceUIClickEvent extends StringComponentExchanger implements Eve
 
                 case 8 -> {
                     this.event.setCancelled(true);
-                    event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
-                    event.getWhoClicked().sendMessage(createLinkComponentExchanger(
+                    this.event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                    this.event.getWhoClicked().sendMessage(createLinkComponentExchanger(
                             ConfigIOHandler.getConfigIOHandler().getServerGuideNotion(),
                             ConfigIOHandler.getConfigIOHandler().getNotionConfig(),
                             ColorType.NOTION_COLOR
