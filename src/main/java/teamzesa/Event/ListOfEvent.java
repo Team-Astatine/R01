@@ -30,6 +30,7 @@ import teamzesa.Event.Enhance.PlayerInteraction.UserInterface.EnhanceUIClickEven
 import teamzesa.Event.Enhance.PlayerInteraction.UserInterface.EnhanceUICloseEvent;
 import teamzesa.Event.PlayerInteraction.Announce.JoinAndQuitMessage.JoinMessageHandler;
 import teamzesa.Event.PlayerInteraction.PlayerStatus.PlayerQuitEvent.PlayTimeUpdate;
+import teamzesa.Event.PlayerInteraction.UserInterface.GSIT.GSitUIClickEvent;
 import teamzesa.Event.RemoveHitDelay.EntityAttackSpeedHandler;
 import teamzesa.Event.LifeSteel.BossDeathRewardHandler;
 import teamzesa.Event.CustomizationExploded.ExplosiveEvent;
@@ -174,6 +175,8 @@ public class ListOfEvent implements Listener {
         new EnhanceUIClickEvent(event);
         new UpdateEnhanceResultItemLoreFromAnvil(event);
         new UpdateEnhanceResultItemLoreFromGrindStone(event);
+
+        new GSitUIClickEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
