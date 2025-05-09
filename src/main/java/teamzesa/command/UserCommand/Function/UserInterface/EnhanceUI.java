@@ -13,7 +13,7 @@ import teamzesa.Event.PlayerInteraction.UserInterface.SlotItemMapping;
 import teamzesa.Event.PlayerInteraction.UserInterface.PanelItem;
 import teamzesa.Event.Enhance.PlayerInteraction.UserInterface.EnhanceInventoryManager;
 import teamzesa.Enumeration.Type.ColorType;
-import teamzesa.Event.Enhance.PlayerInteraction.UserInterface.Enumeration.InventoryUICustomModeData;
+import teamzesa.Event.PlayerInteraction.UserInterface.InventoryUICustomModeData;
 import teamzesa.command.CommandRegisterSection;
 import teamzesa.Event.Enhance.PlayerInteraction.UserInterface.EnhanceUIClickEvent;
 import teamzesa.Util.UserUIGenerator.CreatePanelItem;
@@ -23,7 +23,7 @@ import teamzesa.command.ListOfCommand;
 import java.util.Arrays;
 import java.util.List;
 
-public class OpenEnhanceDialog extends CommandRegisterSection {
+public class EnhanceUI extends CommandRegisterSection {
     // 슬롯 인덱스 상수 정의
     private final int SLOT_WEAPON = 0;
     private final int SLOT_SCROLL = 1;
@@ -32,7 +32,7 @@ public class OpenEnhanceDialog extends CommandRegisterSection {
     private final int SLOT_EXECUTE = 7;
     private final int SLOT_NOTION = 8;
 
-    public OpenEnhanceDialog() {
+    public EnhanceUI() {
         super(ListOfCommand.ENHANCE);
     }
 
@@ -64,57 +64,54 @@ public class OpenEnhanceDialog extends CommandRegisterSection {
         Inventory enhanceUI = new InventoryUIGenerator()
                 .chestOwner(player)
                 .setInventory(InventoryType.DROPPER, componentExchanger("강화", ColorType.RED))
-                .setEnhanceUIItem(generateItemMappings())
+                .setEnhanceUIItem(Arrays.asList(
+                        new SlotItemMapping(SLOT_WEAPON, createItem(
+                                Material.NETHERITE_SWORD,
+                                InventoryUICustomModeData.PANEL_STUFF_CUSTOM_DATA,
+                                "강화할 아래슬롯에 무기를 올려주세요",
+                                ColorType.ORANGE
+                        )),
+
+                        new SlotItemMapping(SLOT_SCROLL, createItem(
+                                Material.ANVIL,
+                                InventoryUICustomModeData.PANEL_STUFF_CUSTOM_DATA,
+                                "아이템에 들어갈 재료를 아래슬롯에 넣어주세요",
+                                ColorType.ORANGE
+                        )),
+
+                        new SlotItemMapping(SLOT_PROTECT, createItem(
+                                Material.HEART_OF_THE_SEA,
+                                InventoryUICustomModeData.PANEL_STUFF_CUSTOM_DATA,
+                                "파괴방어 스크롤을 아래슬롯에 넣어주세요",
+                                ColorType.ORANGE
+                        )),
+
+                        new SlotItemMapping(SLOT_DISCORD, createItem(
+                                Material.LIGHT_BLUE_STAINED_GLASS_PANE,
+                                InventoryUICustomModeData.EXECUTE_DISCORD_DATA,
+                                "디스코드 링크받기",
+                                ColorType.DISCORD_COLOR
+                        )),
+
+                        new SlotItemMapping(SLOT_EXECUTE, createItem(
+                                Material.RED_STAINED_GLASS_PANE,
+                                InventoryUICustomModeData.EXECUTE_STUFF_DATA,
+                                "강화 실행",
+                                ColorType.RED
+                        )),
+
+                        new SlotItemMapping(SLOT_NOTION, createItem(
+                                Material.LIGHT_GRAY_STAINED_GLASS_PANE,
+                                InventoryUICustomModeData.EXECUTE_NOTION_DATA,
+                                "강화법 확인하기",
+                                ColorType.NOTION_COLOR
+                        ))
+                ))
                 .executeUI();
 
         EnhanceInventoryManager.getEnhanceInventoryManager()
                 .insert(player.getUniqueId(), enhanceUI);
         return true;
-    }
-
-    /**
-     * 슬롯에 배치할 아이템 매핑을 생성합니다.
-     *
-     * @return 아이템 매핑 목록
-     */
-    private List<SlotItemMapping> generateItemMappings() {
-        return Arrays.asList(
-                new SlotItemMapping(SLOT_WEAPON, createItem(
-                        Material.NETHERITE_SWORD,
-                        InventoryUICustomModeData.PANEL_STUFF_CUSTOM_DATA,
-                        "강화할 아래슬롯에 무기를 올려주세요",
-                        ColorType.ORANGE)),
-
-                new SlotItemMapping(SLOT_SCROLL, createItem(
-                        Material.ANVIL,
-                        InventoryUICustomModeData.PANEL_STUFF_CUSTOM_DATA,
-                        "아이템에 들어갈 재료를 아래슬롯에 넣어주세요",
-                        ColorType.ORANGE)),
-
-                new SlotItemMapping(SLOT_PROTECT, createItem(
-                        Material.HEART_OF_THE_SEA,
-                        InventoryUICustomModeData.PANEL_STUFF_CUSTOM_DATA,
-                        "파괴방어 스크롤을 아래슬롯에 넣어주세요",
-                        ColorType.ORANGE)),
-
-                new SlotItemMapping(SLOT_DISCORD, createItem(
-                        Material.LIGHT_BLUE_STAINED_GLASS_PANE,
-                        InventoryUICustomModeData.EXECUTE_DISCORD_DATA,
-                        "디스코드 링크받기",
-                        ColorType.DISCORD_COLOR)),
-
-                new SlotItemMapping(SLOT_EXECUTE, createItem(
-                        Material.RED_STAINED_GLASS_PANE,
-                        InventoryUICustomModeData.EXECUTE_STUFF_DATA,
-                        "강화 실행",
-                        ColorType.RED)),
-
-                new SlotItemMapping(SLOT_NOTION, createItem(
-                        Material.LIGHT_GRAY_STAINED_GLASS_PANE,
-                        InventoryUICustomModeData.EXECUTE_NOTION_DATA,
-                        "강화법 확인하기",
-                        ColorType.NOTION_COLOR))
-        );
     }
 
     /**
