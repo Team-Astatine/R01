@@ -22,15 +22,15 @@ public class EnhanceInventoryManager {
         this.enhanceInventoryCachedData = new HashMap<>();
     }
 
-    public void insert(UUID uuid, Inventory inventory) {
+    public synchronized void insert(UUID uuid, Inventory inventory) {
         this.enhanceInventoryCachedData.put(uuid, inventory);
     }
 
-    public Inventory get(UUID uuid) {
+    public synchronized Inventory get(UUID uuid) {
         return this.enhanceInventoryCachedData.get(uuid);
     }
 
-    public void remove(UUID uuid) {
+    public synchronized void remove(UUID uuid) {
         this.enhanceInventoryCachedData.remove(uuid);
     }
 }
