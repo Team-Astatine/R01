@@ -6,6 +6,8 @@ import teamzesa.command.ModeratorCommand.*;
 import teamzesa.command.UserCommand.*;
 import teamzesa.command.UserCommand.Announce.*;
 import teamzesa.command.UserCommand.Function.*;
+import teamzesa.command.UserCommand.Function.UserInterface.GSitActions;
+import teamzesa.command.UserCommand.Function.UserInterface.OpenEnhanceDialog;
 
 /**
  * 명령어 추가 시 해당 Enumeration 에 추가합니다.
@@ -28,6 +30,7 @@ public enum ListOfCommand {
     TOTEM_STACKING("totem", new StackingTotemFunction()),
     FLY("fly", new ToggleFly()),
     TIME("playtime", new PlayTime()),
+    GSIT_ACTIONS("gsitActioUI", new GSitActions()),
     ANNOUNCING("공지", new ToggleAnnouncing()),
     ENHANCE("강화", new OpenEnhanceDialog()),
     COMMAND_TIP("명령어", new CommandTip()),

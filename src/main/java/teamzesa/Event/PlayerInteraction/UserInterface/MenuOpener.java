@@ -49,7 +49,10 @@ public class MenuOpener extends StringComponentExchanger implements EventRegiste
 
         Inventory mainMenu = new InventoryUIGenerator()
                 .chestOwner(this.chestOwner)
-                .setInventory(54, componentExchanger("강화", ColorType.RED))
+                .setInventory(
+                        45,
+                        componentExchanger("강화", ColorType.RED
+                ))
                 .setEnhanceUIItem(List.of(
                         new SlotItemMapping(0, item1),
                         new SlotItemMapping(2, item2),

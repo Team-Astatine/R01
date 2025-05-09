@@ -237,7 +237,7 @@ public class ListOfEvent implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void PlayerSwapHandItemsEvent(PlayerSwapHandItemsEvent event) {
-//        new MenuOpener(event);
+        new MenuOpener(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
