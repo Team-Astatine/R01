@@ -1,6 +1,7 @@
 package teamzesa.Util.UserUIGenerator;
 
 import net.kyori.adventure.text.Component;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
@@ -23,13 +24,13 @@ public class InventoryUIGenerator extends StringComponentExchanger implements In
 
     @Override
     public InventoryUIGenerator setInventory(InventoryType inventoryType, Component component) {
-        this.enhanceDialog = this.chestOwner.getServer().createInventory(this.chestOwner, inventoryType, component);
+        this.enhanceDialog = Bukkit.createInventory(this.chestOwner, inventoryType, component);
         return this;
     }
 
     @Override
     public InventoryUIGenerator setInventory(int slotCount, Component component) {
-        this.enhanceDialog = this.chestOwner.getServer().createInventory(this.chestOwner, slotCount, component);
+        this.enhanceDialog = Bukkit.createInventory(this.chestOwner, slotCount, component);
         return this;
     }
 
