@@ -15,7 +15,7 @@ import teamzesa.Event.Enhance.Enumeration.Scroll.ProtectScrollList;
 import teamzesa.Event.Enhance.Enumeration.Scroll.ScrollList;
 import teamzesa.Event.Enhance.Enumeration.Weapon.LongRange;
 import teamzesa.Event.Enhance.Enumeration.Weapon.ShortRange;
-import teamzesa.Event.Enhance.PlayerInteraction.UserInterface.Enumeration.EnhanceItemLore;
+import teamzesa.Event.Enhance.PlayerInteraction.UserInterface.EnhanceItemLore;
 import teamzesa.Exception.Enhance.EnhanceItemMetaException;
 import teamzesa.Enumeration.Type.ColorType;
 import teamzesa.Util.Function.StringComponentExchanger;
