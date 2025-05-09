@@ -1,4 +1,4 @@
-package teamzesa.Event.Enhance.PlayerInteraction.UserInterface.Enumeration;
+package teamzesa.Event.Enhance.PlayerInteraction.UserInterface;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
