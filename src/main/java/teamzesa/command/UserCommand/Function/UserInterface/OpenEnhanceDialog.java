@@ -1,4 +1,4 @@
-package teamzesa.command.UserCommand.Function;
+package teamzesa.command.UserCommand.Function.UserInterface;
 
 import org.bukkit.Material;
 import org.bukkit.command.Command;
