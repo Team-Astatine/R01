@@ -1,7 +1,7 @@
 name: R01
 version: '8.4'
 main: teamzesa.R01
-api-version: '1.21.1'
+api-version: '1.21.4'
 authors: [JAXPLE]
 website: https://jaxple.notion.site/Astn-kr-e000a5d52aaa4611a63fd62629ea0f36?pvs=4
 
@@ -31,6 +31,10 @@ commands:
     description: 토템을 합칩니다.
   fly:
     description: 하늘을 납니다.
+  playtime:
+    description: 플레이시간을 확인합니다.
+  gsitActioUI:
+    description: Gsit 메뉴를 엽니다.
   공지:
     description: 공지를 활/비활성화 합니다.
   강화:
@@ -68,4 +72,7 @@ commands:
     permission: R01.ItemControl
   enhance:
     description: 강화를 설정합니다.
+    permission: R01.ItemControl
+  setKillCount:
+    description: 킬 카운트를 설정합니다.
     permission: R01.ItemControl
