@@ -2,12 +2,14 @@ package teamzesa.Event;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
 import io.papermc.paper.event.player.PlayerArmSwingEvent;
+import io.papermc.paper.event.player.PlayerOpenSignEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPhysicsEvent;
 import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.block.BlockRedstoneEvent;
+import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.enchantment.EnchantItemEvent;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.inventory.*;
@@ -29,6 +31,7 @@ import teamzesa.Event.Enhance.PlayerInteraction.UpdateItemLore.*;
 import teamzesa.Event.Enhance.PlayerInteraction.UserInterface.EnhanceUIClickEvent;
 import teamzesa.Event.Enhance.PlayerInteraction.UserInterface.EnhanceUICloseEvent;
 import teamzesa.Event.PlayerInteraction.Announce.JoinAndQuitMessage.JoinMessageHandler;
+import teamzesa.Event.PlayerInteraction.Announce.Raid.RaidAnnouncerEvent;
 import teamzesa.Event.PlayerInteraction.PlayerStatus.PlayerQuitEvent.PlayTimeUpdate;
 import teamzesa.Event.PlayerInteraction.UserInterface.GSIT.GSitUIClickEvent;
 import teamzesa.Event.RemoveHitDelay.EntityAttackSpeedHandler;
@@ -53,6 +56,8 @@ import teamzesa.Event.Restricted.AntiExploit.Interaction.InventoryInteraction.Di
 import teamzesa.Event.Restricted.AntiExploit.Interaction.LeverInteraction.LeverInteractionHandler;
 import teamzesa.Event.Restricted.AntiExploit.Interaction.PlayerInteraction.RestrictedCommandInteraction;
 import teamzesa.Event.Restricted.AntiExploit.Interaction.PlayerInteraction.RestrictedPlayerInteract;
+import teamzesa.Event.Restricted.AntiExploit.Interaction.SignInteraction.RestrictedSignChangeInteraction;
+import teamzesa.Event.Restricted.AntiExploit.Interaction.SignInteraction.RestrictedSignOpenInteraction;
 import teamzesa.Event.Restricted.Function.Event.EntityExplode.RestrictedExplosiveDamageManager;
 import teamzesa.Event.Restricted.Function.TotemStack.RestrictedShulkerChest;
 import teamzesa.Event.Restricted.Function.TotemStack.RestrictedStackingTotemInteraction;
@@ -113,7 +118,7 @@ public class ListOfEvent implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void RaidTriggerEvent(RaidTriggerEvent event) {
 //        todo 반야생변경에 따른 콘텐츠 수정
-//        new RaidAnnouncerEvent(event);
+        new RaidAnnouncerEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -185,6 +190,16 @@ public class ListOfEvent implements Listener {
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
+    public void onPlayerEditSign(PlayerOpenSignEvent event) {
+        new RestrictedSignOpenInteraction(event);
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void SignChangeEvent(SignChangeEvent event) {
+        new RestrictedSignChangeInteraction(event);
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
     public void InventoryMoveItemEvent(InventoryMoveItemEvent event) {
         new RestrictedDispenserInventoryMoveItemHandler(event);
     }
@@ -240,7 +255,7 @@ public class ListOfEvent implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void PlayerSwapHandItemsEvent(PlayerSwapHandItemsEvent event) {
-        new MenuOpener(event);
+//        new MenuOpener(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
