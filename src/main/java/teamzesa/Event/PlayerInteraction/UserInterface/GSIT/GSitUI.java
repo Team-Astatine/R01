@@ -1,4 +1,4 @@
-package teamzesa.command.UserCommand.Function.UserInterface;
+package teamzesa.Event.PlayerInteraction.UserInterface.GSIT;
 
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -8,7 +8,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.Enumeration.Type.ColorType;
-import teamzesa.Event.PlayerInteraction.UserInterface.GSIT.GSitInventoryManager;
 import teamzesa.Event.PlayerInteraction.UserInterface.InventoryUICustomModeData;
 import teamzesa.Event.PlayerInteraction.UserInterface.PanelItem;
 import teamzesa.Event.PlayerInteraction.UserInterface.SlotItemMapping;

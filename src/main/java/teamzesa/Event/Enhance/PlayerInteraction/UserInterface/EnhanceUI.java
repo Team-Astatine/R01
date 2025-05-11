@@ -1,4 +1,4 @@
-package teamzesa.command.UserCommand.Function.UserInterface;
+package teamzesa.Event.Enhance.PlayerInteraction.UserInterface;
 
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -11,17 +11,14 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.Data.DataIO.Config.ConfigIOHandler;
 import teamzesa.Event.PlayerInteraction.UserInterface.SlotItemMapping;
 import teamzesa.Event.PlayerInteraction.UserInterface.PanelItem;
-import teamzesa.Event.Enhance.PlayerInteraction.UserInterface.EnhanceInventoryManager;
 import teamzesa.Enumeration.Type.ColorType;
 import teamzesa.Event.PlayerInteraction.UserInterface.InventoryUICustomModeData;
 import teamzesa.command.CommandRegisterSection;
-import teamzesa.Event.Enhance.PlayerInteraction.UserInterface.EnhanceUIClickEvent;
 import teamzesa.Util.UserUIGenerator.CreatePanelItem;
 import teamzesa.Util.UserUIGenerator.InventoryUIGenerator;
 import teamzesa.command.ListOfCommand;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class EnhanceUI extends CommandRegisterSection {
     // 슬롯 인덱스 상수 정의
