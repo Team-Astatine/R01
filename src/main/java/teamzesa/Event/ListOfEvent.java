@@ -34,6 +34,7 @@ import teamzesa.Event.PlayerInteraction.Announce.JoinAndQuitMessage.JoinMessageH
 import teamzesa.Event.PlayerInteraction.Announce.Raid.RaidAnnouncerEvent;
 import teamzesa.Event.PlayerInteraction.PlayerStatus.PlayerQuitEvent.PlayTimeUpdate;
 import teamzesa.Event.PlayerInteraction.UserInterface.GSIT.GSitUIClickEvent;
+import teamzesa.Event.PlayerInteraction.UserInterface.Menu.MainMenuUIClickEvent;
 import teamzesa.Event.RemoveHitDelay.EntityAttackSpeedHandler;
 import teamzesa.Event.LifeSteel.BossDeathRewardHandler;
 import teamzesa.Event.CustomizationExploded.ExplosiveEvent;
@@ -47,7 +48,7 @@ import teamzesa.Event.PlayerInteraction.PlayerStatus.PlayerJoinEvent.PlayerInfoH
 import teamzesa.Event.PlayerInteraction.Announce.JoinAndQuitMessage.QuitMessageHandler;
 import teamzesa.Event.PlayerInteraction.PlayerStatus.PlayerRespawnEvent.RespawnMessageHandler;
 import teamzesa.Event.RandomTeleport.RespawnRandomTeleportEvent;
-import teamzesa.Event.PlayerInteraction.UserInterface.MenuOpener;
+import teamzesa.Event.PlayerInteraction.UserInterface.Menu.MainMenuUI;
 import teamzesa.Event.Restricted.AntiExploit.ChatFlood.RestrictedChatFlood;
 import teamzesa.Event.Restricted.AntiExploit.ChunkRenderer.AntiPortalChunkRenderingEvent;
 import teamzesa.Event.Restricted.AntiExploit.Gravity.AntiPistonPushGravityBlockEvent;
@@ -173,15 +174,21 @@ public class ListOfEvent implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void InventoryClickEvent(InventoryClickEvent event) {
+
+//        Restriction
         new RestrictedItemInputDispenserHandler(event);
         new RestrictedStackingTotemInteraction(event);
         new RestrictedShulkerChest(event);
+
+//        Inventory User Interface
+        new MainMenuUIClickEvent(event);
+
+        new GSitUIClickEvent(event);
 
         new EnhanceUIClickEvent(event);
         new UpdateEnhanceResultItemLoreFromAnvil(event);
         new UpdateEnhanceResultItemLoreFromGrindStone(event);
 
-        new GSitUIClickEvent(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
@@ -255,7 +262,7 @@ public class ListOfEvent implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void PlayerSwapHandItemsEvent(PlayerSwapHandItemsEvent event) {
-//        new MenuOpener(event);
+        new MainMenuUI(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
