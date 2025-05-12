@@ -5,23 +5,31 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.Enumeration.Type.ColorType;
-import teamzesa.Event.PlayerInteraction.UserInterface.InventoryUICustomModeData;
-import teamzesa.Event.PlayerInteraction.UserInterface.PanelItem;
-import teamzesa.Event.PlayerInteraction.UserInterface.SlotItemMapping;
-import teamzesa.Util.UserUIGenerator.CreatePanelItem;
 import teamzesa.Util.UserUIGenerator.InventoryUIGenerator;
+import teamzesa.Util.UserUIGenerator.UIGenerator.InventoryUICustomModeData;
+import teamzesa.Util.UserUIGenerator.UIGenerator.PanelItem;
+import teamzesa.Util.UserUIGenerator.UIGenerator.SlotItemMapping;
+import teamzesa.Util.UserUIGenerator.UIGenerator.CreatePanelItem;
 import teamzesa.command.CommandRegisterSection;
 import teamzesa.command.ListOfCommand;
 
 import java.util.Arrays;
 
-public class GSitUI extends CommandRegisterSection {
+public class GSitUI extends CommandRegisterSection implements InventoryHolder {
+
+    private Inventory inventory;
 
     public GSitUI() {
         super(ListOfCommand.GSIT_ACTIONS);
+    }
+
+    @Override
+    public @NotNull Inventory getInventory() {
+        return this.inventory;
     }
 
     @Override
@@ -38,7 +46,7 @@ public class GSitUI extends CommandRegisterSection {
          * 0 1  2 3 4 5  6 7 8
          */
 
-        Inventory gsitUI = new InventoryUIGenerator()
+        this.inventory = new InventoryUIGenerator()
                 .chestOwner(player)
                 .setInventory(
                         9,
@@ -71,9 +79,6 @@ public class GSitUI extends CommandRegisterSection {
                         ))
                 ))
                 .executeUI();
-
-        GSitInventoryManager.getGSitInventoryManager()
-                .insert(player.getUniqueId() ,gsitUI);
 
         return true;
     }

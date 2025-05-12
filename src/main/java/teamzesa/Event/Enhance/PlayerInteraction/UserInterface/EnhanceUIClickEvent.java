@@ -6,8 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.event.inventory.InventoryType;
-import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.Data.DataIO.Config.ConfigIOHandler;
 import teamzesa.Event.Enhance.Processor.EnhanceItemBuilder;
@@ -28,15 +27,18 @@ import java.util.HashSet;
 
 
 public class EnhanceUIClickEvent extends StringComponentExchanger implements EventRegister {
-    private final InventoryClickEvent event;
-    private Player ownerPlayer;
-    private Inventory enhanceInventory;
-    private ItemStack currentItem;
+    private InventoryHolder inventoryHolder;
+    private Player clickPlayer;
+    private Player holderPlayer;
+
     private ItemStack enhanceItem;
     private ItemStack scrollStuff;
     private ItemStack protectScroll;
+
     private HashSet<Material> allowedItem;
     private HashSet<Material> allowedScroll;
+
+    private final InventoryClickEvent event;
 
     public EnhanceUIClickEvent(InventoryClickEvent event) {
         this.event = event;
@@ -46,9 +48,10 @@ public class EnhanceUIClickEvent extends StringComponentExchanger implements Eve
 
     @Override
     public void init() {
-        this.currentItem = this.event.getCurrentItem();
-        this.ownerPlayer = this.event.getWhoClicked() instanceof Player player ? player : null;
-        this.enhanceInventory = EnhanceInventoryManager.getEnhanceInventoryManager().get(this.ownerPlayer.getUniqueId());
+        this.inventoryHolder = this.event.getClickedInventory().getHolder();
+
+        this.clickPlayer = this.event.getWhoClicked() instanceof Player player ? player : null;
+        this.holderPlayer = this.event.getClickedInventory().getHolder() instanceof Player player ? player : null;
 
         this.enhanceItem = this.event.getView().getItem(3);
         this.scrollStuff = this.event.getView().getItem(4);
@@ -61,15 +64,16 @@ public class EnhanceUIClickEvent extends StringComponentExchanger implements Eve
     /**
      * 인벤토리를 열고 닫음에 있어서 인벤토리 주인을 찾습니다.
      * Click Inventory 생성은 {@link InventoryUIGenerator}를 참고해주세요.
-     * Inventory UUID 를 고정하기 위해 {@link EnhanceInventoryManager}를 사용합니다.
      * 인벤토리 생성, 등록이 완료되면 플레이어가 강화 이벤트를 발생시키는지 확인합니다.
      * 강화는 {@link EnhanceItemExecutor} 를 참조하세요.
      */
     @Override
     public void execute() {
-        if (BooleanUtils.isFalse(this.event.getInventory().equals(this.enhanceInventory))) {
+        if (ObjectUtils.isEmpty(this.inventoryHolder))
             return;
-        }
+
+        if (ObjectUtils.notEqual(this.clickPlayer, this.holderPlayer))
+            return;
 
 //        Add Allowed Item
         if (ObjectUtils.allNotNull(this.enhanceItem, this.scrollStuff)) {
@@ -81,46 +85,42 @@ public class EnhanceUIClickEvent extends StringComponentExchanger implements Eve
             Arrays.stream(ProtectScrollList.values()).forEach(i -> this.allowedScroll.add(i.getMaterial()));
         }
 
-        Inventory playerOpenInv = this.event.getClickedInventory();
-        if (ObjectUtils.isNotEmpty(playerOpenInv) && playerOpenInv.getType().equals(InventoryType.DROPPER)) {
-            switch (this.event.getSlot()) {
-                case 0, 1, 2 -> {
-                    this.event.setCancelled(true);
-                }
+        switch (this.event.getSlot()) {
+            case 0, 1, 2 -> {
+                this.event.setCancelled(true);
+                this.event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+            }
 
-                case 6 -> {
-                    this.event.setCancelled(true);
-                    this.event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
-                    this.event.getWhoClicked().sendMessage(createLinkComponentExchanger(
-                            ConfigIOHandler.getConfigIOHandler().getDiscordInvite(),
-                            ConfigIOHandler.getConfigIOHandler().getDiscordConfig(),
-                            ColorType.DISCORD_COLOR
-                    ));
-                }
+            case 6 -> {
+                this.event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                this.event.getWhoClicked().sendMessage(createLinkComponentExchanger(
+                        ConfigIOHandler.getConfigIOHandler().getDiscordInvite(),
+                        ConfigIOHandler.getConfigIOHandler().getDiscordConfig(),
+                        ColorType.DISCORD_COLOR
+                ));
+            }
 
-                case 7 -> {
-                    if (isAllowedEnhanceItem()) {
-                        EnhanceItem enhanceItemObj = new EnhanceItemBuilder()
-                                .enhancePlayer((Player) this.event.getWhoClicked())
-                                .enhanceItem(this.enhanceItem)
-                                .enhanceScroll(this.scrollStuff)
-                                .protectScroll(this.protectScroll)
-                                .generating();
+            case 7 -> {
+                if (isAllowedEnhanceItem()) {
+                    EnhanceItem enhanceItemObj = new EnhanceItemBuilder()
+                            .enhancePlayer((Player) this.event.getWhoClicked())
+                            .enhanceItem(this.enhanceItem)
+                            .enhanceScroll(this.scrollStuff)
+                            .protectScroll(this.protectScroll)
+                            .generating();
 
-                        new EnhanceItemExecutor(enhanceItemObj);
-                    }
-                    this.event.setCancelled(true);
+                    new EnhanceItemExecutor(enhanceItemObj);
                 }
+            }
 
-                case 8 -> {
-                    this.event.setCancelled(true);
-                    this.event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
-                    this.event.getWhoClicked().sendMessage(createLinkComponentExchanger(
-                            ConfigIOHandler.getConfigIOHandler().getServerGuideNotion(),
-                            ConfigIOHandler.getConfigIOHandler().getNotionConfig(),
-                            ColorType.NOTION_COLOR
-                    ));
-                }
+            case 8 -> {
+                this.event.setCancelled(true);
+                this.event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+                this.event.getWhoClicked().sendMessage(createLinkComponentExchanger(
+                        ConfigIOHandler.getConfigIOHandler().getServerGuideNotion(),
+                        ConfigIOHandler.getConfigIOHandler().getNotionConfig(),
+                        ColorType.NOTION_COLOR
+                ));
             }
         }
     }
@@ -142,7 +142,7 @@ public class EnhanceUIClickEvent extends StringComponentExchanger implements Eve
             comment = "허용된 주문서를 넣어주세요";
 
         if (BooleanUtils.isFalse(comment.isBlank()))
-            playerSendMsgComponentExchanger(this.ownerPlayer, comment, ColorType.RED);
+            playerSendMsgComponentExchanger(this.clickPlayer, comment, ColorType.RED);
 
         return comment.isBlank();
     }

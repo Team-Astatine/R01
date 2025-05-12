@@ -1,12 +1,11 @@
 package teamzesa.Event.Enhance.PlayerInteraction.UserInterface;
 
-import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
-import teamzesa.Event.PlayerInteraction.UserInterface.InventoryUICustomModeData;
+import teamzesa.Util.UserUIGenerator.UIGenerator.InventoryUICustomModeData;
 import teamzesa.Event.EventRegister;
 
 import java.util.ArrayList;
@@ -14,12 +13,12 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class EnhanceUICloseEvent implements EventRegister {
-    private final int MINIMUM_INVENTORY_SLOT = 5;
-    private EnhanceInventoryManager enhanceInventoryHandler;
-
-    private Player itemOwner;
-    private Inventory enhanceDialog;
+    private final int MINIMUM_INVENTORY_SLOT = 3;
     private ArrayList<ItemStack> slot;
+
+    private InventoryHolder inventoryHolder;
+    private Player closePlayer;
+    private Player holderPlayer;
 
     private final InventoryCloseEvent event;
 
@@ -31,10 +30,11 @@ public class EnhanceUICloseEvent implements EventRegister {
 
     @Override
     public void init() {
-        this.enhanceInventoryHandler = EnhanceInventoryManager.getEnhanceInventoryManager();
+        this.inventoryHolder = this.event.getInventory().getHolder();
 
-        this.itemOwner = (Player) this.event.getPlayer();
-        this.enhanceDialog = this.enhanceInventoryHandler.get(this.itemOwner.getUniqueId());
+        this.closePlayer = this.event.getPlayer() instanceof Player player ? player : null;
+        this.holderPlayer = this.event.getInventory().getHolder() instanceof Player player ? player : null;
+
         this.slot = new ArrayList<>();
     }
 
@@ -51,24 +51,25 @@ public class EnhanceUICloseEvent implements EventRegister {
                 .filter(Objects::nonNull)
                 .count();
 
-        long blankInventoryCount = Arrays.stream(this.itemOwner.getInventory().getContents())
+        long playerFreeSlotCount = Arrays.stream(this.closePlayer.getInventory().getContents())
                 .filter(Objects::isNull)
                 .count();
 
-        if (blankInventoryCount >= MINIMUM_INVENTORY_SLOT + receiveItemCount)
+        if (playerFreeSlotCount >= MINIMUM_INVENTORY_SLOT + receiveItemCount)
             this.slot.stream()
                     .filter(Objects::nonNull)
-                    .forEach(item -> this.itemOwner.getInventory().addItem(item));
+                    .forEach(item -> this.closePlayer.getInventory().addItem(item));
         else
             this.slot.stream()
                     .filter(Objects::nonNull)
-                    .forEach(item -> this.itemOwner.getWorld().dropItem(this.itemOwner.getLocation(), item));
-
-        this.enhanceInventoryHandler.remove(this.itemOwner.getUniqueId());
+                    .forEach(item -> this.closePlayer.getWorld().dropItem(this.closePlayer.getLocation(), item));
     }
 
     private boolean isNotAllowedThisEvent() {
-        if (BooleanUtils.isFalse(this.event.getInventory().equals(this.enhanceDialog)))
+        if (ObjectUtils.isEmpty(this.inventoryHolder))
+            return true;
+
+        if (ObjectUtils.notEqual(this.closePlayer, this.holderPlayer))
             return true;
 
         ItemStack slotZeroItem = this.event.getView().getItem(0);
