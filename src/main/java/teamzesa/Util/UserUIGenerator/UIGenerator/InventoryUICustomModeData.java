@@ -1,4 +1,4 @@
-package teamzesa.Event.PlayerInteraction.UserInterface;
+package teamzesa.Util.UserUIGenerator.UIGenerator;
 
 public enum InventoryUICustomModeData {
 

@@ -1,10 +1,9 @@
-package teamzesa.Util.UserUIGenerator;
+package teamzesa.Util.UserUIGenerator.UIGenerator;
 
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import teamzesa.Event.PlayerInteraction.UserInterface.PanelItem;
 import teamzesa.Enumeration.Type.ColorType;
 import teamzesa.Util.Function.StringComponentExchanger;
 
