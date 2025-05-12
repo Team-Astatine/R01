@@ -1,5 +1,6 @@
 package teamzesa.Util.UserUIGenerator.UIGenerator;
 
+import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -9,14 +10,14 @@ import teamzesa.Util.Function.StringComponentExchanger;
 
 public class CreatePanelItem extends StringComponentExchanger {
 
-    private PanelItem panelItem;
+    private Material panelItemMaterial;
     private String comment;
     private ColorType color;
 
     public CreatePanelItem() {}
 
-    public CreatePanelItem setPanelItem(PanelItem panelItem) {
-        this.panelItem = panelItem;
+    public CreatePanelItem setPanelItem(Material panelItemMaterial) {
+        this.panelItemMaterial = panelItemMaterial;
         return this;
     }
 
@@ -31,7 +32,7 @@ public class CreatePanelItem extends StringComponentExchanger {
     }
 
     public ItemStack createItem() {
-        ItemStack item = new ItemStack(this.panelItem.items());
+        ItemStack item = new ItemStack(this.panelItemMaterial);
         ItemMeta meta = item.getItemMeta();
 
         meta.displayName(componentExchanger(this.comment, this.color));
@@ -41,7 +42,6 @@ public class CreatePanelItem extends StringComponentExchanger {
         meta.addItemFlags(ItemFlag.HIDE_ADDITIONAL_TOOLTIP);
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
-        meta.setCustomModelData(this.panelItem.customModelData());
         item.setItemMeta(meta);
         return item;
     }

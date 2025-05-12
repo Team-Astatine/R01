@@ -10,8 +10,6 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.Enumeration.Type.ColorType;
 import teamzesa.Util.UserUIGenerator.InventoryUIGenerator;
-import teamzesa.Util.UserUIGenerator.UIGenerator.InventoryUICustomModeData;
-import teamzesa.Util.UserUIGenerator.UIGenerator.PanelItem;
 import teamzesa.Util.UserUIGenerator.UIGenerator.SlotItemMapping;
 import teamzesa.Util.UserUIGenerator.UIGenerator.CreatePanelItem;
 import teamzesa.command.CommandRegisterSection;
@@ -55,25 +53,21 @@ public class GSitUI extends CommandRegisterSection implements InventoryHolder {
                 .setEnhanceUIItem(Arrays.asList(
                         new SlotItemMapping(1, createItem(
                                 Material.BRICK_STAIRS,
-                                InventoryUICustomModeData.SIT,
                                 "앉기",
                                 ColorType.ORANGE
                         )),
                         new SlotItemMapping(3, createItem(
                                 Material.RED_BED,
-                                InventoryUICustomModeData.LAY,
                                 "눕기",
                                 ColorType.ORANGE
                         )),
                         new SlotItemMapping(5, createItem(
                                 Material.TRIDENT,
-                                InventoryUICustomModeData.SPIN,
                                 "돌기",
                                 ColorType.ORANGE
                         )),
                         new SlotItemMapping(7, createItem(
                                 Material.IRON_TRAPDOOR,
-                                InventoryUICustomModeData.CRAWL,
                                 "기어가기",
                                 ColorType.ORANGE
                         ))
@@ -83,9 +77,9 @@ public class GSitUI extends CommandRegisterSection implements InventoryHolder {
         return true;
     }
 
-    private ItemStack createItem(Material material, InventoryUICustomModeData modelId, String comment, ColorType color) {
+    private ItemStack createItem(Material material, String comment, ColorType color) {
         return new CreatePanelItem()
-                .setPanelItem(new PanelItem(material, modelId.getValues()))
+                .setPanelItem(material)
                 .setComment(comment)
                 .setColor(color)
                 .createItem();

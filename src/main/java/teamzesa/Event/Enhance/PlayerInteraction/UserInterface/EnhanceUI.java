@@ -1,6 +1,5 @@
 package teamzesa.Event.Enhance.PlayerInteraction.UserInterface;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -13,9 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.Data.DataIO.Config.ConfigIOHandler;
 import teamzesa.Util.UserUIGenerator.InventoryUIGenerator;
 import teamzesa.Util.UserUIGenerator.UIGenerator.SlotItemMapping;
-import teamzesa.Util.UserUIGenerator.UIGenerator.PanelItem;
 import teamzesa.Enumeration.Type.ColorType;
-import teamzesa.Util.UserUIGenerator.UIGenerator.InventoryUICustomModeData;
 import teamzesa.command.CommandRegisterSection;
 import teamzesa.Util.UserUIGenerator.UIGenerator.CreatePanelItem;
 import teamzesa.command.ListOfCommand;
@@ -84,42 +81,36 @@ public class EnhanceUI extends CommandRegisterSection implements InventoryHolder
         return Arrays.asList(
                 new SlotItemMapping(SLOT_WEAPON, createItem(
                         Material.NETHERITE_SWORD,
-                        InventoryUICustomModeData.PANEL_STUFF_CUSTOM_DATA,
                         "강화할 아래슬롯에 무기를 올려주세요",
                         ColorType.ORANGE
                 )),
 
                 new SlotItemMapping(SLOT_SCROLL, createItem(
                         Material.ANVIL,
-                        InventoryUICustomModeData.PANEL_STUFF_CUSTOM_DATA,
                         "아이템에 들어갈 재료를 아래슬롯에 넣어주세요",
                         ColorType.ORANGE
                 )),
 
                 new SlotItemMapping(SLOT_PROTECT, createItem(
                         Material.HEART_OF_THE_SEA,
-                        InventoryUICustomModeData.PANEL_STUFF_CUSTOM_DATA,
                         "파괴방어 스크롤을 아래슬롯에 넣어주세요",
                         ColorType.ORANGE
                 )),
 
                 new SlotItemMapping(SLOT_DISCORD, createItem(
                         Material.LIGHT_BLUE_STAINED_GLASS_PANE,
-                        InventoryUICustomModeData.EXECUTE_DISCORD_DATA,
                         "디스코드 링크받기",
                         ColorType.DISCORD_COLOR
                 )),
 
                 new SlotItemMapping(SLOT_EXECUTE, createItem(
                         Material.RED_STAINED_GLASS_PANE,
-                        InventoryUICustomModeData.EXECUTE_STUFF_DATA,
                         "강화 실행",
                         ColorType.RED
                 )),
 
                 new SlotItemMapping(SLOT_NOTION, createItem(
                         Material.LIGHT_GRAY_STAINED_GLASS_PANE,
-                        InventoryUICustomModeData.EXECUTE_NOTION_DATA,
                         "강화법 확인하기",
                         ColorType.NOTION_COLOR
                 ))
@@ -129,9 +120,9 @@ public class EnhanceUI extends CommandRegisterSection implements InventoryHolder
     /**
      * 기본 아이템 생성 메서드
      */
-    private ItemStack createItem(Material material, InventoryUICustomModeData modelId, String comment, ColorType color) {
+    private ItemStack createItem(Material material, String comment, ColorType color) {
         return new CreatePanelItem()
-                .setPanelItem(new PanelItem(material, modelId.getValues()))
+                .setPanelItem(material)
                 .setComment(comment)
                 .setColor(color)
                 .createItem();
