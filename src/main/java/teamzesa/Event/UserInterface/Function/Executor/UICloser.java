@@ -1,11 +1,11 @@
-package teamzesa.Util.UserUIGenerator.Executor;
+package teamzesa.Event.UserInterface.Function.Executor;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.event.inventory.InventoryCloseEvent;
-import teamzesa.Event.Enhance.PlayerInteraction.UserInterface.EnhanceUICloseEvent;
-import teamzesa.Util.UserUIGenerator.Interface.Type;
-import teamzesa.Util.UserUIGenerator.Interface.UIHolder;
-import teamzesa.Util.UserUIGenerator.Interface.UIType;
+import teamzesa.Event.UserInterface.Enhance.EnhanceUICloseEvent;
+import teamzesa.Event.UserInterface.Function.Interface.Type;
+import teamzesa.Event.UserInterface.Function.Interface.UIHolder;
+import teamzesa.Event.UserInterface.Function.Interface.UIType;
 
 public class UICloser {
 

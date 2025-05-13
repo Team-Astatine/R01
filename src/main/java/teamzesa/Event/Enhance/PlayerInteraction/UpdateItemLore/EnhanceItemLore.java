@@ -1,4 +1,4 @@
-package teamzesa.Event.Enhance.PlayerInteraction.UserInterface;
+package teamzesa.Event.Enhance.PlayerInteraction.UpdateItemLore;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;

@@ -28,13 +28,9 @@ import teamzesa.Event.Enhance.PlayerInteraction.LongRange.Shot.EnhanceCrossBowSh
 import teamzesa.Event.Enhance.PlayerInteraction.LongRange.Shot.EnhanceTridentShotEvent;
 import teamzesa.Event.Enhance.PlayerInteraction.ShortRange.EnhanceShortRangeWeaponHurtEvent;
 import teamzesa.Event.Enhance.PlayerInteraction.UpdateItemLore.*;
-import teamzesa.Event.Enhance.PlayerInteraction.UserInterface.EnhanceUIClickEvent;
-import teamzesa.Event.Enhance.PlayerInteraction.UserInterface.EnhanceUICloseEvent;
 import teamzesa.Event.PlayerInteraction.Announce.JoinAndQuitMessage.JoinMessageHandler;
 import teamzesa.Event.PlayerInteraction.Announce.Raid.RaidAnnouncerEvent;
 import teamzesa.Event.PlayerInteraction.PlayerStatus.PlayerQuitEvent.PlayTimeUpdate;
-import teamzesa.Event.PlayerInteraction.UserInterface.GSIT.GSitUIClickEvent;
-import teamzesa.Event.PlayerInteraction.UserInterface.Menu.MainMenuUIClickEvent;
 import teamzesa.Event.RemoveHitDelay.EntityAttackSpeedHandler;
 import teamzesa.Event.LifeSteel.BossDeathRewardHandler;
 import teamzesa.Event.CustomizationExploded.ExplosiveEvent;
@@ -48,7 +44,7 @@ import teamzesa.Event.PlayerInteraction.PlayerStatus.PlayerJoinEvent.PlayerInfoH
 import teamzesa.Event.PlayerInteraction.Announce.JoinAndQuitMessage.QuitMessageHandler;
 import teamzesa.Event.PlayerInteraction.PlayerStatus.PlayerRespawnEvent.RespawnMessageHandler;
 import teamzesa.Event.RandomTeleport.RespawnRandomTeleportEvent;
-import teamzesa.Event.PlayerInteraction.UserInterface.Menu.MainMenuUI;
+import teamzesa.Event.UserInterface.Menu.MainMenuUI;
 import teamzesa.Event.Restricted.AntiExploit.ChatFlood.RestrictedChatFlood;
 import teamzesa.Event.Restricted.AntiExploit.ChunkRenderer.AntiPortalChunkRenderingEvent;
 import teamzesa.Event.Restricted.AntiExploit.Gravity.AntiPistonPushGravityBlockEvent;
@@ -62,8 +58,8 @@ import teamzesa.Event.Restricted.AntiExploit.Interaction.SignInteraction.Restric
 import teamzesa.Event.Restricted.Function.Event.EntityExplode.RestrictedExplosiveDamageManager;
 import teamzesa.Event.Restricted.Function.TotemStack.RestrictedShulkerChest;
 import teamzesa.Event.Restricted.Function.TotemStack.RestrictedStackingTotemInteraction;
-import teamzesa.Util.UserUIGenerator.Executor.UICloser;
-import teamzesa.Util.UserUIGenerator.Executor.UIExecutor;
+import teamzesa.Event.UserInterface.Function.Executor.UICloser;
+import teamzesa.Event.UserInterface.Function.Executor.UIExecutor;
 
 /**
  * {@linkplain org.bukkit.event.Listener}의 구현체를 관리합니다.

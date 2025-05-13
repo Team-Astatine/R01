@@ -1,4 +1,4 @@
-package teamzesa.Util.UserUIGenerator.UIGenerator;
+package teamzesa.Event.UserInterface.Function.UIGenerator;
 
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;

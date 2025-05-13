@@ -1,4 +1,4 @@
-package teamzesa.Util.UserUIGenerator.UIGenerator;
+package teamzesa.Event.UserInterface.Function.UIGenerator;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import teamzesa.Util.Function.StringComponentExchanger;
-import teamzesa.Util.UserUIGenerator.Interface.UIHolder;
+import teamzesa.Event.UserInterface.Function.Interface.UIHolder;
 
 import java.util.List;
 

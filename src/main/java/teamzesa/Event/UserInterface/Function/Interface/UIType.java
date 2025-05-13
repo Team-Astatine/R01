@@ -1,4 +1,4 @@
-package teamzesa.Util.UserUIGenerator.Interface;
+package teamzesa.Event.UserInterface.Function.Interface;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

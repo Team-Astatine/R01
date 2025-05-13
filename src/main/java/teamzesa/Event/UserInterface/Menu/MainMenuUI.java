@@ -1,4 +1,4 @@
-package teamzesa.Event.PlayerInteraction.UserInterface.Menu;
+package teamzesa.Event.UserInterface.Menu;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.bukkit.Material;
@@ -10,12 +10,12 @@ import org.bukkit.inventory.meta.SkullMeta;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.Enumeration.Type.ColorType;
 import teamzesa.Event.EventRegister;
-import teamzesa.Util.UserUIGenerator.UIGenerator.InventoryUIGenerator;
-import teamzesa.Util.UserUIGenerator.Interface.Type;
-import teamzesa.Util.UserUIGenerator.Interface.UIType;
+import teamzesa.Event.UserInterface.Function.UIGenerator.InventoryUIGenerator;
+import teamzesa.Event.UserInterface.Function.Interface.Type;
+import teamzesa.Event.UserInterface.Function.Interface.UIType;
 import teamzesa.Util.Function.StringComponentExchanger;
-import teamzesa.Util.UserUIGenerator.UIGenerator.SlotItemMapping;
-import teamzesa.Util.UserUIGenerator.Interface.UIHolder;
+import teamzesa.Event.UserInterface.Function.UIGenerator.SlotItemMapping;
+import teamzesa.Event.UserInterface.Function.Interface.UIHolder;
 
 import java.util.ArrayList;
 

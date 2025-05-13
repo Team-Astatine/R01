@@ -1,11 +1,11 @@
-package teamzesa.Event.Enhance.PlayerInteraction.UserInterface;
+package teamzesa.Event.UserInterface.Enhance;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.Event.EventRegister;
-import teamzesa.Util.UserUIGenerator.Interface.UIHolder;
+import teamzesa.Event.UserInterface.Function.Interface.UIHolder;
 
 import java.util.ArrayList;
 import java.util.Arrays;

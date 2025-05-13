@@ -5,8 +5,8 @@ import teamzesa.R01;
 import teamzesa.command.ModeratorCommand.*;
 import teamzesa.command.UserCommand.Announce.*;
 import teamzesa.command.UserCommand.Function.*;
-import teamzesa.Event.PlayerInteraction.UserInterface.GSIT.GSitUI;
-import teamzesa.Event.Enhance.PlayerInteraction.UserInterface.EnhanceUI;
+import teamzesa.Event.UserInterface.GSit.GSitUI;
+import teamzesa.Event.UserInterface.Enhance.EnhanceUI;
 
 /**
  * 명령어 추가 시 해당 Enumeration 에 추가합니다.

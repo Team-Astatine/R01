@@ -1,4 +1,4 @@
-package teamzesa.Util.UserUIGenerator.Interface;
+package teamzesa.Event.UserInterface.Function.Interface;
 
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.InventoryHolder;

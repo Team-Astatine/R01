@@ -1,13 +1,13 @@
-package teamzesa.Util.UserUIGenerator.Executor;
+package teamzesa.Event.UserInterface.Function.Executor;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import teamzesa.Event.Enhance.PlayerInteraction.UserInterface.EnhanceUIClickEvent;
-import teamzesa.Event.PlayerInteraction.UserInterface.GSIT.GSitUIClickEvent;
-import teamzesa.Event.PlayerInteraction.UserInterface.Menu.MainMenuUIClickEvent;
-import teamzesa.Util.UserUIGenerator.Interface.Type;
-import teamzesa.Util.UserUIGenerator.Interface.UIHolder;
-import teamzesa.Util.UserUIGenerator.Interface.UIType;
+import teamzesa.Event.UserInterface.Enhance.EnhanceUIClickEvent;
+import teamzesa.Event.UserInterface.GSit.GSitUIClickEvent;
+import teamzesa.Event.UserInterface.Menu.MainMenuUIClickEvent;
+import teamzesa.Event.UserInterface.Function.Interface.Type;
+import teamzesa.Event.UserInterface.Function.Interface.UIHolder;
+import teamzesa.Event.UserInterface.Function.Interface.UIType;
 
 /**
  * {@link Type} 각 UI 타입에 맞는 {@link org.bukkit.inventory.Inventory}를 생성하는 클래스입니다.

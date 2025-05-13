@@ -1,4 +1,4 @@
-package teamzesa.Event.Enhance.PlayerInteraction.UserInterface;
+package teamzesa.Event.UserInterface.Enhance;
 
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -9,14 +9,14 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.Data.DataIO.Config.ConfigIOHandler;
-import teamzesa.Util.UserUIGenerator.Interface.UIHolder;
-import teamzesa.Util.UserUIGenerator.UIGenerator.InventoryUIGenerator;
-import teamzesa.Util.UserUIGenerator.Interface.Type;
-import teamzesa.Util.UserUIGenerator.Interface.UIType;
-import teamzesa.Util.UserUIGenerator.UIGenerator.SlotItemMapping;
+import teamzesa.Event.UserInterface.Function.Interface.UIHolder;
+import teamzesa.Event.UserInterface.Function.UIGenerator.InventoryUIGenerator;
+import teamzesa.Event.UserInterface.Function.Interface.Type;
+import teamzesa.Event.UserInterface.Function.Interface.UIType;
+import teamzesa.Event.UserInterface.Function.UIGenerator.SlotItemMapping;
 import teamzesa.Enumeration.Type.ColorType;
 import teamzesa.command.CommandRegisterSection;
-import teamzesa.Util.UserUIGenerator.UIGenerator.CreatePanelItem;
+import teamzesa.Event.UserInterface.Function.UIGenerator.CreatePanelItem;
 import teamzesa.command.ListOfCommand;
 
 import java.util.Arrays;

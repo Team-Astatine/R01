@@ -1,4 +1,4 @@
-package teamzesa.Event.Enhance.PlayerInteraction.UserInterface;
+package teamzesa.Event.UserInterface.Enhance;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ObjectUtils;
@@ -18,8 +18,8 @@ import teamzesa.Event.Enhance.Enumeration.Weapon.ShortRange;
 import teamzesa.Event.Enhance.Processor.EnhanceItemExecutor;
 import teamzesa.Event.EventRegister;
 import teamzesa.Enumeration.Type.ColorType;
-import teamzesa.Util.UserUIGenerator.Interface.UIHolder;
-import teamzesa.Util.UserUIGenerator.UIGenerator.InventoryUIGenerator;
+import teamzesa.Event.UserInterface.Function.Interface.UIHolder;
+import teamzesa.Event.UserInterface.Function.UIGenerator.InventoryUIGenerator;
 import teamzesa.Util.Function.StringComponentExchanger;
 
 import java.util.Arrays;
