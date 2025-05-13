@@ -32,6 +32,9 @@ public class EnhanceUICloseEvent implements EventRegister {
         this.closePlayer = this.event.getPlayer() instanceof Player player ? player : null;
 
         this.slot = new ArrayList<>();
+        this.slot.add(this.event.getInventory().getItem(3));
+        this.slot.add(this.event.getInventory().getItem(4));
+        this.slot.add(this.event.getInventory().getItem(5));
     }
 
     @Override
@@ -41,10 +44,6 @@ public class EnhanceUICloseEvent implements EventRegister {
 
         if (ObjectUtils.notEqual(this.closePlayer, this.uiHolder.getOwner()))
             return;
-
-        this.slot.add(this.event.getInventory().getItem(3));
-        this.slot.add(this.event.getInventory().getItem(4));
-        this.slot.add(this.event.getInventory().getItem(5));
 
         long receiveItemCount = this.slot.stream()
                 .filter(Objects::nonNull)
