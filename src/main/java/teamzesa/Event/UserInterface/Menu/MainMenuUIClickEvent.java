@@ -36,15 +36,15 @@ public class MainMenuUIClickEvent extends StringComponentExchanger implements Ev
             return;
 
         switch (this.event.getSlot()) {
-            case 0,1,9,10 -> this.event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+//            case 0,1,9,10 -> this.event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
 
             case 3,4,5,12,13,14 -> this.clickPlayer.performCommand("shop");
 
             case 7,8,16,17 -> this.clickPlayer.performCommand("강화");
 
-            case 18,19,27,28 -> this.event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+//            case 18,19,27,28 -> this.event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
 
-            case 21,22,23,30,31,32 -> this.event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+//            case 21,22,23,30,31,32 -> this.event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
 
             case 25,26,34,35 -> this.clickPlayer.performCommand("gsitactioui");
 

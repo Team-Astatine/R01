@@ -56,7 +56,7 @@ public class GSitUI extends CommandRegisterSection implements UIHolder {
                 .bindHolder(this)
                 .inventoryGenerator(
                         9,
-                        componentExchanger("상호작용", ColorType.RED)
+                        componentExchanger("행동 상호작용", ColorType.PINK)
                 )
                 .setEnhanceUIItem(itemPanelList())
                 .executeUI();

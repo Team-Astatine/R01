@@ -22,7 +22,8 @@ public enum ColorType {
     DISCORD_COLOR(TextColor.color(114, 137, 218)),
     VOTE_COLOR(TextColor.color(167, 123, 202)),
     NOTION_COLOR(TextColor.color(129, 90, 157)),
-    PURPLE(TextColor.color(139, 0, 255));
+    PURPLE(TextColor.color(139, 0, 255)),
+    GRAY(TextColor.color(86, 86, 86));
 
     private final TextColor textColor;
 
