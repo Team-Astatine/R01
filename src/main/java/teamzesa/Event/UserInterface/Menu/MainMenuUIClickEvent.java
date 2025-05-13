@@ -3,7 +3,6 @@ package teamzesa.Event.UserInterface.Menu;
 import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 import teamzesa.Event.EventRegister;
 import teamzesa.Util.Function.StringComponentExchanger;
 import teamzesa.Event.UserInterface.Function.Interface.UIHolder;
@@ -16,6 +15,9 @@ public class MainMenuUIClickEvent extends StringComponentExchanger implements Ev
 
     public MainMenuUIClickEvent(InventoryClickEvent event) {
         this.event = event;
+
+        if (ObjectUtils.isEmpty(this.event.getClickedInventory()))
+            return;
 
         init();
         execute();

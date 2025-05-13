@@ -17,6 +17,9 @@ public class GSitUIClickEvent extends StringComponentExchanger implements EventR
     public GSitUIClickEvent(InventoryClickEvent event) {
         this.event = event;
 
+        if (ObjectUtils.isEmpty(this.event.getClickedInventory()))
+            return;
+
         init();
         execute();
     }

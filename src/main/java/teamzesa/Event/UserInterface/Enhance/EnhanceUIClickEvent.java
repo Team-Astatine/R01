@@ -42,6 +42,9 @@ public class EnhanceUIClickEvent extends StringComponentExchanger implements Eve
     public EnhanceUIClickEvent(InventoryClickEvent event) {
         this.event = event;
 
+        if (ObjectUtils.isEmpty(this.event.getClickedInventory()))
+            return;
+
         init();
         execute();
     }
