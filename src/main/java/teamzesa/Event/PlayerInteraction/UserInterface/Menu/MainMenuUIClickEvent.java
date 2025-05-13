@@ -2,6 +2,7 @@ package teamzesa.Event.PlayerInteraction.UserInterface.Menu;
 
 import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import teamzesa.Event.EventRegister;
@@ -46,7 +47,9 @@ public class MainMenuUIClickEvent extends StringComponentExchanger implements Ev
 
             case 21,22,23,30,31,32 -> this.event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
 
-            case 25,26,34,35 -> this.event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+            case 25,26,34,35 -> this.clickPlayer.performCommand("gsitactioui");
+
+            default -> this.event.setCancelled(true);
         }
 
         this.event.setCancelled(true);

@@ -84,11 +84,6 @@ public class EnhanceUIClickEvent extends StringComponentExchanger implements Eve
         }
 
         switch (this.event.getSlot()) {
-            case 0, 1, 2 -> {
-                this.event.setCancelled(true);
-                this.event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
-            }
-
             case 6 -> {
                 this.event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
                 this.event.getWhoClicked().sendMessage(createLinkComponentExchanger(
@@ -120,7 +115,11 @@ public class EnhanceUIClickEvent extends StringComponentExchanger implements Eve
                         ColorType.NOTION_COLOR
                 ));
             }
+
+            default -> this.event.setCancelled(true);
         }
+
+        this.event.setCancelled(true);
     }
 
     private boolean isAllowedEnhanceItem() {

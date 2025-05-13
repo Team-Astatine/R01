@@ -40,6 +40,7 @@ public class GSitUIClickEvent extends StringComponentExchanger implements EventR
             case 3 -> this.clickPlayer.performCommand("lay");
             case 5 -> this.clickPlayer.performCommand("spin");
             case 7 -> this.clickPlayer.performCommand("crawl");
+            default -> this.event.setCancelled(true);
         }
 
         this.event.setCancelled(true);
