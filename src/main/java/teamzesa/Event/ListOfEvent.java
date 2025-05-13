@@ -62,6 +62,7 @@ import teamzesa.Event.Restricted.AntiExploit.Interaction.SignInteraction.Restric
 import teamzesa.Event.Restricted.Function.Event.EntityExplode.RestrictedExplosiveDamageManager;
 import teamzesa.Event.Restricted.Function.TotemStack.RestrictedShulkerChest;
 import teamzesa.Event.Restricted.Function.TotemStack.RestrictedStackingTotemInteraction;
+import teamzesa.Util.UserUIGenerator.Executor.UICloser;
 import teamzesa.Util.UserUIGenerator.Executor.UIExecutor;
 
 /**
@@ -191,7 +192,8 @@ public class ListOfEvent implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void InventoryCloseEvent(InventoryCloseEvent event) {
-        new EnhanceUICloseEvent(event);
+//        User Interface
+        new UICloser(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
