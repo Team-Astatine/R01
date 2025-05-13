@@ -1,4 +1,4 @@
-package teamzesa.command.UserCommand.Function;
+package teamzesa.command.UserCommand.Announce;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
