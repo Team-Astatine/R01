@@ -103,7 +103,7 @@ public class EnhanceItemExecutor extends StringComponentExchanger {
     private void successEnhanceScenario() {
         playerSendMessage(6, ColorType.DISCORD_COLOR);
         try {
-            EnhanceUtil.increaseEnhanceItemLevel(this.item.enhanceItem(), +1);
+            EnhanceUtil.increaseEnhanceItemLevel(this.item.enhancePlayer(), this.item.enhanceItem(), +1);
         } catch (Exception e) {
             e.printStackTrace();
         }

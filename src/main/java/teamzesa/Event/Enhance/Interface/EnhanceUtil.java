@@ -4,8 +4,10 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ObjectUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
@@ -18,12 +20,11 @@ import teamzesa.Event.Enhance.Enumeration.Weapon.ShortRange;
 import teamzesa.Event.Enhance.Enumeration.EnhanceItemLore;
 import teamzesa.Exception.Enhance.EnhanceItemMetaException;
 import teamzesa.Enumeration.Type.ColorType;
-import teamzesa.Util.Function.StringComponentExchanger;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public final class EnhanceUtil extends StringComponentExchanger {
+public final class EnhanceUtil {
 
     /*
      * 0 -> 1강  100% 0%
@@ -84,6 +85,54 @@ public final class EnhanceUtil extends StringComponentExchanger {
             return 0;
 
         return item.getItemMeta().getCustomModelData();
+    }
+
+    public static void increaseEnhanceItemLevel(Player enhancePlayer, ItemStack item, int increaseLevel) throws EnhanceItemMetaException {
+        List<Component> lore = new ArrayList<>();
+        try {
+            validCustomModelData(item, "addItemDescription");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        ItemMeta itemMeta = item.getItemMeta();
+        itemMeta.setCustomModelData(itemMeta.getCustomModelData() + increaseLevel);
+
+//        최종강화 아이템 설정
+        if (itemMeta.getCustomModelData() == 10) {
+            itemMeta.setUnbreakable(true);
+            itemMeta.setFireResistant(true);
+            itemMeta.setRarity(ItemRarity.EPIC);
+
+            ((Damageable) itemMeta).resetDamage();
+
+            Bukkit.broadcast(Component.text()
+                    .content(
+                            String.format(
+                                    "%s 님이 \"%s\" 10강 강화에 성공하셨습니다!"
+                                    , enhancePlayer.getName(), item.getType()
+                            )
+                    )
+                    .color(ColorType.WHITE_TO_RED7.getTextColor())
+                    .build()
+            );
+        }
+
+        item.setItemMeta(itemMeta);
+
+//        정상적인 형태의 강화작업
+        if (itemMeta.getCustomModelData() > 0) { // 0 == Remove All Item Lore /enhance 0
+            lore.add(getEnhanceStatusLore(item));
+
+            ArmourList armourList = ArmourList.findByItemStack(item);
+            if (armourList.getMaterial().equals(Material.AIR))
+                lore.add(getWeaponDamageLore(item));
+            else
+                lore.add(getEnhanceDecreaseDamagePercentageLore(item));
+            item.lore(lore);
+        }
+
+//        todo CustomModelData 가 0 일 시 아이템 초기화 작업 로직
     }
 
     public static void increaseEnhanceItemLevel(ItemStack item, int increaseLevel) throws EnhanceItemMetaException {
