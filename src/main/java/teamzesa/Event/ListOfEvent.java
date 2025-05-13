@@ -62,6 +62,7 @@ import teamzesa.Event.Restricted.AntiExploit.Interaction.SignInteraction.Restric
 import teamzesa.Event.Restricted.Function.Event.EntityExplode.RestrictedExplosiveDamageManager;
 import teamzesa.Event.Restricted.Function.TotemStack.RestrictedShulkerChest;
 import teamzesa.Event.Restricted.Function.TotemStack.RestrictedStackingTotemInteraction;
+import teamzesa.Util.UserUIGenerator.Executor.UIExecutor;
 
 /**
  * {@linkplain org.bukkit.event.Listener}의 구현체를 관리합니다.
@@ -180,15 +181,12 @@ public class ListOfEvent implements Listener {
         new RestrictedStackingTotemInteraction(event);
         new RestrictedShulkerChest(event);
 
-//        Inventory User Interface
-        new MainMenuUIClickEvent(event);
-
-        new GSitUIClickEvent(event);
-
-        new EnhanceUIClickEvent(event);
+//        Enhance Prepare
         new UpdateEnhanceResultItemLoreFromAnvil(event);
         new UpdateEnhanceResultItemLoreFromGrindStone(event);
 
+//        User Interface
+        new UIExecutor(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
