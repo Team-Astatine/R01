@@ -23,9 +23,6 @@ public class EnhanceUICloseEvent implements EventRegister {
     public EnhanceUICloseEvent(InventoryCloseEvent event) {
         this.event = event;
 
-        if (ObjectUtils.isEmpty(this.event.getInventory()))
-            return;
-
         init();
         execute();
     }
