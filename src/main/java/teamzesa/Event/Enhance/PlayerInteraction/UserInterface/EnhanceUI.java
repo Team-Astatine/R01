@@ -6,11 +6,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.Data.DataIO.Config.ConfigIOHandler;
-import teamzesa.Util.UserUIGenerator.InventoryUIGenerator;
+import teamzesa.Util.UserUIGenerator.Interface.UIHolder;
+import teamzesa.Util.UserUIGenerator.UIGenerator.InventoryUIGenerator;
+import teamzesa.Util.UserUIGenerator.Interface.Type;
+import teamzesa.Util.UserUIGenerator.Interface.UIType;
 import teamzesa.Util.UserUIGenerator.UIGenerator.SlotItemMapping;
 import teamzesa.Enumeration.Type.ColorType;
 import teamzesa.command.CommandRegisterSection;
@@ -20,7 +22,8 @@ import teamzesa.command.ListOfCommand;
 import java.util.Arrays;
 import java.util.List;
 
-public class EnhanceUI extends CommandRegisterSection implements InventoryHolder {
+@UIType(Type.ENHANCE)
+public class EnhanceUI extends CommandRegisterSection implements UIHolder {
     // 슬롯 인덱스 상수 정의
     private final int SLOT_WEAPON = 0;
     private final int SLOT_SCROLL = 1;
@@ -29,10 +32,16 @@ public class EnhanceUI extends CommandRegisterSection implements InventoryHolder
     private final int SLOT_EXECUTE = 7;
     private final int SLOT_NOTION = 8;
 
+    private Player chestOwner;
     private Inventory inventory;
 
     public EnhanceUI() {
         super(ListOfCommand.ENHANCE);
+    }
+
+    @Override
+    public Player getOwner() {
+        return this.chestOwner;
     }
 
     @Override
@@ -63,11 +72,11 @@ public class EnhanceUI extends CommandRegisterSection implements InventoryHolder
                              final @NotNull String s,
                              final @NotNull String[] strings) {
 
-        Player player = (Player) commandSender;
+        this.chestOwner = (Player) commandSender;
 
         this.inventory = new InventoryUIGenerator()
-                .chestOwner(player)
-                .setInventory(
+                .bindHolder(this)
+                .inventoryGenerator(
                         InventoryType.DROPPER,
                         componentExchanger("강화", ColorType.RED
                 ))

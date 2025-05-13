@@ -5,11 +5,13 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import teamzesa.Enumeration.Type.ColorType;
-import teamzesa.Util.UserUIGenerator.InventoryUIGenerator;
+import teamzesa.Util.UserUIGenerator.Interface.UIHolder;
+import teamzesa.Util.UserUIGenerator.UIGenerator.InventoryUIGenerator;
+import teamzesa.Util.UserUIGenerator.Interface.Type;
+import teamzesa.Util.UserUIGenerator.Interface.UIType;
 import teamzesa.Util.UserUIGenerator.UIGenerator.SlotItemMapping;
 import teamzesa.Util.UserUIGenerator.UIGenerator.CreatePanelItem;
 import teamzesa.command.CommandRegisterSection;
@@ -17,12 +19,18 @@ import teamzesa.command.ListOfCommand;
 
 import java.util.Arrays;
 
-public class GSitUI extends CommandRegisterSection implements InventoryHolder {
-
+@UIType(Type.GSIT)
+public class GSitUI extends CommandRegisterSection implements UIHolder {
+    private Player chestOwner;
     private Inventory inventory;
 
     public GSitUI() {
         super(ListOfCommand.GSIT_ACTIONS);
+    }
+
+    @Override
+    public Player getOwner() {
+        return this.chestOwner;
     }
 
     @Override
@@ -36,7 +44,7 @@ public class GSitUI extends CommandRegisterSection implements InventoryHolder {
                              final @NotNull String s,
                              final @NotNull String[] strings) {
 
-        Player player = (Player) commandSender;
+        this.chestOwner = (Player) commandSender;
 
         /**
          * 총 4개의 매뉴, 각 메뉴별로 아이템으로 표기예정
@@ -45,8 +53,8 @@ public class GSitUI extends CommandRegisterSection implements InventoryHolder {
          */
 
         this.inventory = new InventoryUIGenerator()
-                .chestOwner(player)
-                .setInventory(
+                .bindHolder(this)
+                .inventoryGenerator(
                         9,
                         componentExchanger("상호작용", ColorType.RED)
                 )
