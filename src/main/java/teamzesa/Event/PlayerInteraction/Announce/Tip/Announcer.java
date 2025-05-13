@@ -73,7 +73,9 @@ public class Announcer extends StringComponentExchanger {
                     players.forEach(player -> {
                         User user = new UserController().readUser(player.getUniqueId());
                         if (user.announcingSkip())
-                            Bukkit.getScheduler().runTask(R01.getPlugin(R01.class), ()-> player.performCommand("help"));
+                            Bukkit.getScheduler().runTask(
+                                    R01.getPlugin(R01.class),
+                                    ()-> player.performCommand("help"));
                     });
                 },
                 delay,
