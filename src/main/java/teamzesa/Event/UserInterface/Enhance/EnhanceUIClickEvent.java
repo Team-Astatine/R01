@@ -84,7 +84,12 @@ public class EnhanceUIClickEvent extends StringComponentExchanger implements Eve
         }
 
         switch (this.event.getSlot()) {
+            case 0, 1, 2 -> {
+                this.event.setCancelled(true);
+            }
+
             case 6 -> {
+                this.event.setCancelled(true);
                 this.event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
                 this.event.getWhoClicked().sendMessage(createLinkComponentExchanger(
                         ConfigIOHandler.getConfigIOHandler().getDiscordInvite(),
@@ -94,6 +99,7 @@ public class EnhanceUIClickEvent extends StringComponentExchanger implements Eve
             }
 
             case 7 -> {
+                this.event.setCancelled(true);
                 if (isAllowedEnhanceItem()) {
                     EnhanceItem enhanceItemObj = new EnhanceItemBuilder()
                             .enhancePlayer((Player) this.event.getWhoClicked())
@@ -115,11 +121,7 @@ public class EnhanceUIClickEvent extends StringComponentExchanger implements Eve
                         ColorType.NOTION_COLOR
                 ));
             }
-
-            default -> this.event.setCancelled(true);
         }
-
-        this.event.setCancelled(true);
     }
 
     private boolean isAllowedEnhanceItem() {
