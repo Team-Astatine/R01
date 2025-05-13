@@ -5,4 +5,6 @@ import org.bukkit.inventory.InventoryHolder;
 
 public interface UIHolder extends InventoryHolder {
     Player getOwner();
+
+    void UIExecutor();
 }

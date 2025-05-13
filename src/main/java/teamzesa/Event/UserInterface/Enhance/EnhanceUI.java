@@ -1,8 +1,6 @@
 package teamzesa.Event.UserInterface.Enhance;
 
 import org.bukkit.Material;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
@@ -15,15 +13,14 @@ import teamzesa.Event.UserInterface.Function.Interface.Type;
 import teamzesa.Event.UserInterface.Function.Interface.UIType;
 import teamzesa.Event.UserInterface.Function.UIGenerator.SlotItemMapping;
 import teamzesa.Enumeration.Type.ColorType;
-import teamzesa.command.CommandRegisterSection;
+import teamzesa.Util.Function.StringComponentExchanger;
 import teamzesa.Event.UserInterface.Function.UIGenerator.CreatePanelItem;
-import teamzesa.command.ListOfCommand;
 
 import java.util.Arrays;
 import java.util.List;
 
 @UIType(Type.ENHANCE)
-public class EnhanceUI extends CommandRegisterSection implements UIHolder {
+public class EnhanceUI extends StringComponentExchanger implements UIHolder {
     // 슬롯 인덱스 상수 정의
     private final int SLOT_WEAPON = 0;
     private final int SLOT_SCROLL = 1;
@@ -35,8 +32,9 @@ public class EnhanceUI extends CommandRegisterSection implements UIHolder {
     private Player chestOwner;
     private Inventory inventory;
 
-    public EnhanceUI() {
-        super(ListOfCommand.ENHANCE);
+    public EnhanceUI(Player player) {
+        this.chestOwner = player;
+        UIExecutor();
     }
 
     @Override
@@ -67,13 +65,7 @@ public class EnhanceUI extends CommandRegisterSection implements UIHolder {
      * 웹 사이트 링크는 {@link ConfigIOHandler} 를 참고하면 됩니다.
      */
     @Override
-    public boolean onCommand(final @NotNull CommandSender commandSender,
-                             final @NotNull Command command,
-                             final @NotNull String s,
-                             final @NotNull String[] strings) {
-
-        this.chestOwner = (Player) commandSender;
-
+    public void UIExecutor() {
         this.inventory = new InventoryUIGenerator()
                 .bindHolder(this)
                 .inventoryGenerator(
@@ -82,8 +74,6 @@ public class EnhanceUI extends CommandRegisterSection implements UIHolder {
                 ))
                 .setEnhanceUIItem(setSlotItemPannelList())
                 .executeUI();
-
-        return true;
     }
 
     private @NotNull List<SlotItemMapping> setSlotItemPannelList() {

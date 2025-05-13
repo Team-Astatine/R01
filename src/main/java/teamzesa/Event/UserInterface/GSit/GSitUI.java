@@ -1,8 +1,6 @@
 package teamzesa.Event.UserInterface.GSit;
 
 import org.bukkit.Material;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -14,18 +12,18 @@ import teamzesa.Event.UserInterface.Function.Interface.Type;
 import teamzesa.Event.UserInterface.Function.Interface.UIType;
 import teamzesa.Event.UserInterface.Function.UIGenerator.SlotItemMapping;
 import teamzesa.Event.UserInterface.Function.UIGenerator.CreatePanelItem;
-import teamzesa.command.CommandRegisterSection;
-import teamzesa.command.ListOfCommand;
+import teamzesa.Util.Function.StringComponentExchanger;
 
 import java.util.ArrayList;
 
 @UIType(Type.GSIT)
-public class GSitUI extends CommandRegisterSection implements UIHolder {
+public class GSitUI extends StringComponentExchanger implements UIHolder {
     private Player chestOwner;
     private Inventory inventory;
 
-    public GSitUI() {
-        super(ListOfCommand.GSIT_ACTIONS);
+    public GSitUI(Player player) {
+        this.chestOwner = player;
+        UIExecutor();
     }
 
     @Override
@@ -39,13 +37,7 @@ public class GSitUI extends CommandRegisterSection implements UIHolder {
     }
 
     @Override
-    public boolean onCommand(final @NotNull CommandSender commandSender,
-                             final @NotNull Command command,
-                             final @NotNull String s,
-                             final @NotNull String[] strings) {
-
-        this.chestOwner = (Player) commandSender;
-
+    public void UIExecutor() {
         /**
          * 총 4개의 매뉴, 각 메뉴별로 아이템으로 표기예정
          * ⬜️🟧⬜️🟧⬜️🟧⬜️🟧⬜️
@@ -60,8 +52,6 @@ public class GSitUI extends CommandRegisterSection implements UIHolder {
                 )
                 .setEnhanceUIItem(itemPanelList())
                 .executeUI();
-
-        return true;
     }
 
     private ArrayList<SlotItemMapping> itemPanelList() {

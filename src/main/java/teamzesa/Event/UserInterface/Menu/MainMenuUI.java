@@ -37,6 +37,7 @@ public class MainMenuUI extends StringComponentExchanger implements EventRegiste
         this.event.setCancelled(true);
         init();
         execute();
+        UIExecutor();
     }
 
     @Override
@@ -53,7 +54,10 @@ public class MainMenuUI extends StringComponentExchanger implements EventRegiste
     public void init() {}
 
     @Override
-    public void execute() {
+    public void execute() {}
+
+    @Override
+    public void UIExecutor() {
         this.inventory = new InventoryUIGenerator()
                 .bindHolder(this)
                 .inventoryGenerator(
