@@ -6,7 +6,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.Data.DataIO.Config.ConfigIOHandler;
 import teamzesa.Event.Enhance.Processor.EnhanceItemBuilder;
@@ -19,7 +18,8 @@ import teamzesa.Event.Enhance.Enumeration.Weapon.ShortRange;
 import teamzesa.Event.Enhance.Processor.EnhanceItemExecutor;
 import teamzesa.Event.EventRegister;
 import teamzesa.Enumeration.Type.ColorType;
-import teamzesa.Util.UserUIGenerator.InventoryUIGenerator;
+import teamzesa.Util.UserUIGenerator.Interface.UIHolder;
+import teamzesa.Util.UserUIGenerator.UIGenerator.InventoryUIGenerator;
 import teamzesa.Util.Function.StringComponentExchanger;
 
 import java.util.Arrays;
@@ -27,9 +27,8 @@ import java.util.HashSet;
 
 
 public class EnhanceUIClickEvent extends StringComponentExchanger implements EventRegister {
-    private InventoryHolder inventoryHolder;
+    private UIHolder uiHolder;
     private Player clickPlayer;
-    private Player holderPlayer;
 
     private ItemStack enhanceItem;
     private ItemStack scrollStuff;
@@ -42,16 +41,15 @@ public class EnhanceUIClickEvent extends StringComponentExchanger implements Eve
 
     public EnhanceUIClickEvent(InventoryClickEvent event) {
         this.event = event;
+
         init();
         execute();
     }
 
     @Override
     public void init() {
-        this.inventoryHolder = this.event.getClickedInventory().getHolder();
-
+        this.uiHolder = this.event.getClickedInventory().getHolder() instanceof UIHolder holder ? holder : null;
         this.clickPlayer = this.event.getWhoClicked() instanceof Player player ? player : null;
-        this.holderPlayer = this.event.getClickedInventory().getHolder() instanceof Player player ? player : null;
 
         this.enhanceItem = this.event.getView().getItem(3);
         this.scrollStuff = this.event.getView().getItem(4);
@@ -69,10 +67,10 @@ public class EnhanceUIClickEvent extends StringComponentExchanger implements Eve
      */
     @Override
     public void execute() {
-        if (ObjectUtils.isEmpty(this.inventoryHolder))
+        if (ObjectUtils.isEmpty(this.uiHolder))
             return;
 
-        if (ObjectUtils.notEqual(this.clickPlayer, this.holderPlayer))
+        if (ObjectUtils.notEqual(this.clickPlayer, this.uiHolder.getOwner()))
             return;
 
 //        Add Allowed Item

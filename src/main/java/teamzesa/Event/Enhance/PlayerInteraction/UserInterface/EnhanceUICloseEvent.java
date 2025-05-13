@@ -3,9 +3,9 @@ package teamzesa.Event.Enhance.PlayerInteraction.UserInterface;
 import org.apache.commons.lang3.ObjectUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import teamzesa.Event.EventRegister;
+import teamzesa.Util.UserUIGenerator.Interface.UIHolder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,9 +15,8 @@ public class EnhanceUICloseEvent implements EventRegister {
     private final int MINIMUM_INVENTORY_SLOT = 3;
     private ArrayList<ItemStack> slot;
 
-    private InventoryHolder inventoryHolder;
+    private UIHolder uiHolder;
     private Player closePlayer;
-    private Player holderPlayer;
 
     private final InventoryCloseEvent event;
 
@@ -29,20 +28,18 @@ public class EnhanceUICloseEvent implements EventRegister {
 
     @Override
     public void init() {
-        this.inventoryHolder = this.event.getInventory().getHolder();
-
+        this.uiHolder = this.event.getInventory().getHolder() instanceof UIHolder holder ? holder : null;
         this.closePlayer = this.event.getPlayer() instanceof Player player ? player : null;
-        this.holderPlayer = this.event.getInventory().getHolder() instanceof Player player ? player : null;
 
         this.slot = new ArrayList<>();
     }
 
     @Override
     public void execute() {
-        if (ObjectUtils.isEmpty(this.inventoryHolder))
+        if (ObjectUtils.isEmpty(this.uiHolder))
             return;
 
-        if (ObjectUtils.notEqual(this.closePlayer, this.holderPlayer))
+        if (ObjectUtils.notEqual(this.closePlayer, this.uiHolder.getOwner()))
             return;
 
         this.slot.add(this.event.getInventory().getItem(3));
