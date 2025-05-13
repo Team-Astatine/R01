@@ -15,10 +15,7 @@ import teamzesa.Util.UserUIGenerator.Interface.UIType;
  */
 public class UIExecutor {
 
-    private final InventoryClickEvent event;
-
     public UIExecutor(InventoryClickEvent event) {
-        this.event = event;
 
         if (!(event.getView().getTopInventory().getHolder() instanceof UIHolder holder))
             return;
