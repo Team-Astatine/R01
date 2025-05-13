@@ -17,7 +17,7 @@ import teamzesa.Util.Function.StringComponentExchanger;
 import teamzesa.Util.UserUIGenerator.UIGenerator.SlotItemMapping;
 import teamzesa.Util.UserUIGenerator.Interface.UIHolder;
 
-import java.util.List;
+import java.util.ArrayList;
 
 @UIType(Type.MAIN_MENU)
 public class MainMenuUI extends StringComponentExchanger implements EventRegister, UIHolder {
@@ -53,10 +53,18 @@ public class MainMenuUI extends StringComponentExchanger implements EventRegiste
 
     @Override
     public void execute() {
-        this.inventory = createMainMenuInventory();
+        this.inventory = new InventoryUIGenerator()
+                .bindHolder(this)
+                .inventoryGenerator(
+                        45,
+                        componentExchanger("서버메뉴", ColorType.RED)
+                )
+                .setEnhanceUIItem(itemPanelList())
+                .executeUI();
     }
 
-    private Inventory createMainMenuInventory() {
+    private ArrayList<SlotItemMapping> itemPanelList() {
+        ItemStack panel = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
         ItemStack item = new ItemStack(Material.PAPER);
         ItemStack item1 = new ItemStack(Material.DIAMOND);
 
@@ -67,54 +75,50 @@ public class MainMenuUI extends StringComponentExchanger implements EventRegiste
         data.setOwningPlayer(this.chestOwner);
         headItemStack.setItemMeta(data);
 
-        return new InventoryUIGenerator()
-                .bindHolder(this)
-                .inventoryGenerator(
-                    45,
-                    componentExchanger("서버메뉴", ColorType.RED)
-                )
-                .setEnhanceUIItem(
-                    List.of(
-//                                First Line
-                        new SlotItemMapping(0, item),
-                        new SlotItemMapping(1, item),
-                        new SlotItemMapping(9, item),
-                        new SlotItemMapping(10, item),
 
-                        new SlotItemMapping(3, item),
-                        new SlotItemMapping(4, item),
-                        new SlotItemMapping(5, item),
-                        new SlotItemMapping(12, item),
-                        new SlotItemMapping(13, item),
-                        new SlotItemMapping(14, item),
+        ArrayList<SlotItemMapping> result = new ArrayList<>();
+        for (int i = 0; i < 45; i++)
+            result.add(new SlotItemMapping(i, panel));
 
-                        new SlotItemMapping(7, item),
-                        new SlotItemMapping(8, item),
-                        new SlotItemMapping(16, item),
-                        new SlotItemMapping(17, item),
+        result.add(new SlotItemMapping(0, item));
+        result.add(new SlotItemMapping(1, item));
+        result.add(new SlotItemMapping(9, item));
+        result.add(new SlotItemMapping(10, item));
 
-//                                Second Line
-                        new SlotItemMapping(18, item1),
-                        new SlotItemMapping(19, item1),
-                        new SlotItemMapping(27, item1),
-                        new SlotItemMapping(28, item1),
+        result.add(new SlotItemMapping(3, item));
+        result.add(new SlotItemMapping(4, item));
+        result.add(new SlotItemMapping(5, item));
+        result.add(new SlotItemMapping(12, item));
+        result.add(new SlotItemMapping(13, item));
+        result.add(new SlotItemMapping(14, item));
 
-                        new SlotItemMapping(21, item1),
-                        new SlotItemMapping(22, item1),
-                        new SlotItemMapping(23, item1),
-                        new SlotItemMapping(30, item1),
-                        new SlotItemMapping(31, item1),
-                        new SlotItemMapping(32, item1),
+        result.add(new SlotItemMapping(7, item));
+        result.add(new SlotItemMapping(8, item));
+        result.add(new SlotItemMapping(16, item));
+        result.add(new SlotItemMapping(17, item));
 
-                        new SlotItemMapping(25, item1),
-                        new SlotItemMapping(26, item1),
-                        new SlotItemMapping(34, item1),
-                        new SlotItemMapping(35, item1),
 
-//                                Third Line
-                        new SlotItemMapping(36, emerald),
-                        new SlotItemMapping(44, headItemStack)
-                ))
-                .executeUI();
+        result.add(new SlotItemMapping(18, item));
+        result.add(new SlotItemMapping(19, item));
+        result.add(new SlotItemMapping(27, item));
+        result.add(new SlotItemMapping(28, item));
+
+        result.add(new SlotItemMapping(21, item));
+        result.add(new SlotItemMapping(22, item));
+        result.add(new SlotItemMapping(23, item));
+        result.add(new SlotItemMapping(30, item));
+        result.add(new SlotItemMapping(31, item));
+        result.add(new SlotItemMapping(32, item));
+
+        result.add(new SlotItemMapping(25, item));
+        result.add(new SlotItemMapping(26, item));
+        result.add(new SlotItemMapping(34, item));
+        result.add(new SlotItemMapping(35, item));
+
+
+        result.add(new SlotItemMapping(36, emerald));
+        result.add(new SlotItemMapping(44, headItemStack));
+
+        return result;
     }
 }

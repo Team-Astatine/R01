@@ -17,7 +17,7 @@ import teamzesa.Util.UserUIGenerator.UIGenerator.CreatePanelItem;
 import teamzesa.command.CommandRegisterSection;
 import teamzesa.command.ListOfCommand;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 @UIType(Type.GSIT)
 public class GSitUI extends CommandRegisterSection implements UIHolder {
@@ -58,31 +58,55 @@ public class GSitUI extends CommandRegisterSection implements UIHolder {
                         9,
                         componentExchanger("상호작용", ColorType.RED)
                 )
-                .setEnhanceUIItem(Arrays.asList(
-                        new SlotItemMapping(1, createItem(
-                                Material.BRICK_STAIRS,
-                                "앉기",
-                                ColorType.ORANGE
-                        )),
-                        new SlotItemMapping(3, createItem(
-                                Material.RED_BED,
-                                "눕기",
-                                ColorType.ORANGE
-                        )),
-                        new SlotItemMapping(5, createItem(
-                                Material.TRIDENT,
-                                "돌기",
-                                ColorType.ORANGE
-                        )),
-                        new SlotItemMapping(7, createItem(
-                                Material.IRON_TRAPDOOR,
-                                "기어가기",
-                                ColorType.ORANGE
-                        ))
-                ))
+                .setEnhanceUIItem(itemPanelList())
                 .executeUI();
 
         return true;
+    }
+
+    private ArrayList<SlotItemMapping> itemPanelList() {
+        ItemStack panel = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
+
+        ArrayList<SlotItemMapping> result = new ArrayList<>();
+        for (int i = 0; i < 9; i++)
+            result.add(new SlotItemMapping(i, panel));
+
+        result.add(new SlotItemMapping(
+                1,
+                createItem(
+                Material.BRICK_STAIRS,
+                "앉기",
+                ColorType.ORANGE)
+        ));
+
+        result.add(new SlotItemMapping(
+                3,
+                createItem(
+                Material.RED_BED,
+                "눕기",
+                ColorType.ORANGE
+                )
+        ));
+
+        result.add(new SlotItemMapping(
+                5,
+                createItem(
+                Material.TRIDENT,
+                "돌기",
+                ColorType.ORANGE
+                )
+        ));
+
+        result.add(new SlotItemMapping(
+                7,
+                createItem(
+                Material.IRON_TRAPDOOR,
+                "기어가기",
+                ColorType.ORANGE
+        )
+        ));
+
+        return result;
     }
 
     private ItemStack createItem(Material material, String comment, ColorType color) {
