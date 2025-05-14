@@ -55,8 +55,6 @@ public class GSitUI extends StringComponentExchanger implements UIHolder {
     }
 
     private ArrayList<SlotItemMapping> itemPanelList() {
-        ItemStack panel = new ItemStack(Material.WHITE_STAINED_GLASS_PANE);
-
         ArrayList<SlotItemMapping> result = new ArrayList<>();
         for (int i = 0; i < 9; i++)
             result.add(new SlotItemMapping(
@@ -65,7 +63,9 @@ public class GSitUI extends StringComponentExchanger implements UIHolder {
                             Material.WHITE_STAINED_GLASS_PANE,
                             "",
                             ColorType.WHITE
-                    )));
+                    )
+                )
+            );
 
         result.add(new SlotItemMapping(
                 1,
