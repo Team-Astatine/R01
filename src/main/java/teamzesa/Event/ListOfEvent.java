@@ -45,6 +45,7 @@ import teamzesa.Event.PlayerInteraction.PlayerStatus.PlayerJoinEvent.PlayerInfoH
 import teamzesa.Event.PlayerInteraction.Announce.JoinAndQuitMessage.QuitMessageHandler;
 import teamzesa.Event.PlayerInteraction.PlayerStatus.PlayerRespawnEvent.RespawnMessageHandler;
 import teamzesa.Event.RandomTeleport.RespawnRandomTeleportEvent;
+import teamzesa.Event.Restricted.Function.Event.FromMace.RestrictedItemDamageFromMace;
 import teamzesa.Event.UserInterface.Menu.MainMenuUI;
 import teamzesa.Event.Restricted.AntiExploit.ChatFlood.RestrictedChatFlood;
 import teamzesa.Event.Restricted.AntiExploit.ChunkRenderer.AntiPortalChunkRenderingEvent;
@@ -206,6 +207,11 @@ public class ListOfEvent implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void InventoryMoveItemEvent(InventoryMoveItemEvent event) {
         new RestrictedDispenserInventoryMoveItemHandler(event);
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void PlayerItemDamageEvent(PlayerItemDamageEvent event) {
+        new RestrictedItemDamageFromMace(event);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
