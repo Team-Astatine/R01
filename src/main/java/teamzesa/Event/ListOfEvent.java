@@ -31,6 +31,7 @@ import teamzesa.Event.Enhance.PlayerInteraction.UpdateItemLore.*;
 import teamzesa.Event.PlayerInteraction.Announce.JoinAndQuitMessage.JoinMessageHandler;
 import teamzesa.Event.PlayerInteraction.Announce.Raid.RaidAnnouncerEvent;
 import teamzesa.Event.PlayerInteraction.PlayerStatus.PlayerQuitEvent.PlayTimeUpdate;
+import teamzesa.Event.RemoveHitDelay.EntityAttackSpeedClear;
 import teamzesa.Event.RemoveHitDelay.EntityAttackSpeedHandler;
 import teamzesa.Event.LifeSteel.BossDeathRewardHandler;
 import teamzesa.Event.CustomizationExploded.ExplosiveEvent;
@@ -226,6 +227,7 @@ public class ListOfEvent implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void PlayerInteractEvent(PlayerInteractEvent event) {
+        new EntityAttackSpeedClear(event);
         new LeverInteractionHandler(event);
         new RestrictedPlayerInteract(event);
     }
