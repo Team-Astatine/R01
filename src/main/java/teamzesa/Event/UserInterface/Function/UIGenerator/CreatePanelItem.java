@@ -10,39 +10,39 @@ import teamzesa.Util.Function.StringComponentExchanger;
 
 public class CreatePanelItem extends StringComponentExchanger {
 
+    private ItemStack resultItem;
+    private ItemMeta resultItemMeta;
     private Material panelItemMaterial;
-    private String comment;
-    private ColorType color;
 
     public CreatePanelItem() {}
 
     public CreatePanelItem setPanelItem(Material panelItemMaterial) {
         this.panelItemMaterial = panelItemMaterial;
+        this.resultItem = new ItemStack(this.panelItemMaterial);
+        this.resultItemMeta = this.resultItem.getItemMeta();
         return this;
     }
 
-    public CreatePanelItem setComment(String comment) {
-        this.comment = comment;
+    public CreatePanelItem setDisplayName(String displayName, ColorType color) {
+        this.resultItemMeta.displayName(componentExchanger(displayName, color));
         return this;
     }
 
-    public CreatePanelItem setColor(ColorType color) {
-        this.color = color;
+    public CreatePanelItem isEnchantGlowing(boolean isEnchantGlowing) {
+        if (!isEnchantGlowing)
+            return this;
+
+        this.resultItemMeta.addEnchant(Enchantment.CHANNELING, 1, true);
         return this;
     }
 
     public ItemStack createItem() {
-        ItemStack item = new ItemStack(this.panelItemMaterial);
-        ItemMeta meta = item.getItemMeta();
 
-        meta.displayName(componentExchanger(this.comment, this.color));
+        this.resultItemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        this.resultItemMeta.addItemFlags(ItemFlag.HIDE_ADDITIONAL_TOOLTIP);
+        this.resultItemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
-        meta.addEnchant(Enchantment.CHANNELING, 1, true);
-        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-        meta.addItemFlags(ItemFlag.HIDE_ADDITIONAL_TOOLTIP);
-        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-
-        item.setItemMeta(meta);
-        return item;
+        this.resultItem.setItemMeta(this.resultItemMeta);
+        return this.resultItem;
     }
 }

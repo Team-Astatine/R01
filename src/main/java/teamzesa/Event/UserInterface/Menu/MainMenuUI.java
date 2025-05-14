@@ -152,8 +152,8 @@ public class MainMenuUI extends StringComponentExchanger implements EventRegiste
     private ItemStack createItem(Material material, String comment, ColorType color) {
         return new CreatePanelItem()
                 .setPanelItem(material)
-                .setComment(comment)
-                .setColor(color)
+                .setDisplayName(comment, color)
+                .isEnchantGlowing(false)
                 .createItem();
     }
 }

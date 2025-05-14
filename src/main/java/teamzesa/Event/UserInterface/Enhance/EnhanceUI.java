@@ -122,8 +122,8 @@ public class EnhanceUI extends StringComponentExchanger implements UIHolder {
     private ItemStack createItem(Material material, String comment, ColorType color) {
         return new CreatePanelItem()
                 .setPanelItem(material)
-                .setComment(comment)
-                .setColor(color)
+                .setDisplayName(comment, color)
+                .isEnchantGlowing(true)
                 .createItem();
     }
 }
