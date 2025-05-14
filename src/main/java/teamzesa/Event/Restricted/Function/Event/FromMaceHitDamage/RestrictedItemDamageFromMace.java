@@ -1,4 +1,4 @@
-package teamzesa.Event.Restricted.Function.Event.FromMace;
+package teamzesa.Event.Restricted.Function.Event.FromMaceHitDamage;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.ObjectUtils;
