@@ -6,6 +6,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import teamzesa.Event.EventRegister;
 import teamzesa.Util.Function.StringComponentExchanger;
 import teamzesa.Event.UserInterface.Function.Interface.UIHolder;
+import teamzesa.command.ListOfCommand;
 
 public class MainMenuUIClickEvent extends StringComponentExchanger implements EventRegister {
     private UIHolder uiHolder;
@@ -38,19 +39,17 @@ public class MainMenuUIClickEvent extends StringComponentExchanger implements Ev
             return;
 
         switch (this.event.getSlot()) {
-//            case 0,1,9,10 -> this.event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+//            case /*0,1,9,*/10 -> this.event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
 
-            case 3,4,5,12,13,14 -> this.clickPlayer.performCommand("shop");
+            case /*3,4,5,12,*/13/*,14*/ -> this.clickPlayer.performCommand("shop");
 
-            case 7,8,16,17 -> this.clickPlayer.performCommand("강화");
+            case /*7,8,*/16/*,17*/ -> this.clickPlayer.performCommand(ListOfCommand.ENHANCE_TAB_OPEN.getCommand());
 
-//            case 18,19,27,28 -> this.event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+//            case /*18,19,27,*/28 -> this.event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
 
-//            case 21,22,23,30,31,32 -> this.event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+//            case /*21,22,23,30,*/31/*,32*/ -> this.event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
 
-            case 25,26,34,35 -> this.clickPlayer.performCommand("gsitactioui");
-
-            default -> this.event.setCancelled(true);
+            case /*25,26,*/34/*,35*/ -> this.clickPlayer.performCommand(ListOfCommand.GSIT_TAB_OPEN.getCommand());
         }
 
         this.event.setCancelled(true);

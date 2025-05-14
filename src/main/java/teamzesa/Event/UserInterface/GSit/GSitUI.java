@@ -20,9 +20,11 @@ import java.util.ArrayList;
 public class GSitUI extends StringComponentExchanger implements UIHolder {
     private Player chestOwner;
     private Inventory inventory;
+    private int slotCount;
 
     public GSitUI(Player player) {
         this.chestOwner = player;
+        this.slotCount = 9;
         UIExecutor();
     }
 
@@ -47,7 +49,7 @@ public class GSitUI extends StringComponentExchanger implements UIHolder {
         this.inventory = new InventoryUIGenerator()
                 .bindHolder(this)
                 .inventoryGenerator(
-                        9,
+                        this.slotCount,
                         componentExchanger("행동 상호작용", ColorType.PINK)
                 )
                 .setEnhanceUIItem(itemPanelList())
@@ -56,7 +58,7 @@ public class GSitUI extends StringComponentExchanger implements UIHolder {
 
     private ArrayList<SlotItemMapping> itemPanelList() {
         ArrayList<SlotItemMapping> result = new ArrayList<>();
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < this.slotCount; i++)
             result.add(new SlotItemMapping(
                     i,
                     createItem(

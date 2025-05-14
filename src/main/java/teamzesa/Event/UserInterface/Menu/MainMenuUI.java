@@ -24,12 +24,14 @@ import java.util.ArrayList;
 public class MainMenuUI extends StringComponentExchanger implements EventRegister, UIHolder {
     private Player chestOwner;
     private Inventory inventory;
+    private int slotCount;
 
     private final PlayerSwapHandItemsEvent event;
 
     public MainMenuUI(PlayerSwapHandItemsEvent event) {
         this.event = event;
         this.chestOwner = this.event.getPlayer();
+        this.slotCount = 45;
 
         if (BooleanUtils.isFalse(this.chestOwner.isSneaking()))
             return;
@@ -61,7 +63,7 @@ public class MainMenuUI extends StringComponentExchanger implements EventRegiste
         this.inventory = new InventoryUIGenerator()
                 .bindHolder(this)
                 .inventoryGenerator(
-                        45,
+                        this.slotCount,
                         componentExchanger("서버 메뉴", ColorType.YELLOW)
                 )
                 .setEnhanceUIItem(itemPanelList())
@@ -78,7 +80,7 @@ public class MainMenuUI extends StringComponentExchanger implements EventRegiste
         headItemStack.setItemMeta(data);
 
         ArrayList<SlotItemMapping> result = new ArrayList<>();
-        for (int i = 0; i < 45; i++)
+        for (int i = 0; i < this.slotCount; i++)
             result.add(new SlotItemMapping(
                     i,
                     createItem(
@@ -90,7 +92,14 @@ public class MainMenuUI extends StringComponentExchanger implements EventRegiste
 //        result.add(new SlotItemMapping(0, item));
 //        result.add(new SlotItemMapping(1, item));
 //        result.add(new SlotItemMapping(9, item));
-//        result.add(new SlotItemMapping(10, item));
+        result.add(new SlotItemMapping(
+                10,
+                createButtonItem(
+                        Material.BARRIER,
+                        "준비중",
+                        ColorType.GRAY
+                ))
+        );
 
 //        result.add(new SlotItemMapping(3, item));
 //        result.add(new SlotItemMapping(4, item));
@@ -98,7 +107,7 @@ public class MainMenuUI extends StringComponentExchanger implements EventRegiste
 //        result.add(new SlotItemMapping(12, item));
         result.add(new SlotItemMapping(
                 13,
-                createItem(
+                createButtonItem(
                         Material.DIAMOND,
                         "상점",
                         ColorType.GRAY
@@ -108,8 +117,9 @@ public class MainMenuUI extends StringComponentExchanger implements EventRegiste
 
 //        result.add(new SlotItemMapping(7, item));
 //        result.add(new SlotItemMapping(8, item));
-        result.add(
-                new SlotItemMapping(16, createItem(
+        result.add(new SlotItemMapping(
+                16,
+                createButtonItem(
                         Material.ANVIL,
                         "강화",
                         ColorType.RED
@@ -121,27 +131,40 @@ public class MainMenuUI extends StringComponentExchanger implements EventRegiste
 //        result.add(new SlotItemMapping(18, item));
 //        result.add(new SlotItemMapping(19, item));
 //        result.add(new SlotItemMapping(27, item));
-//        result.add(new SlotItemMapping(28, item));
+        result.add(new SlotItemMapping(
+                28,
+                createButtonItem(
+                        Material.BARRIER,
+                        "준비중",
+                        ColorType.GRAY
+                ))
+        );
 
 //        result.add(new SlotItemMapping(21, item));
 //        result.add(new SlotItemMapping(22, item));
 //        result.add(new SlotItemMapping(23, item));
 //        result.add(new SlotItemMapping(30, item));
-//        result.add(new SlotItemMapping(31, item));
+        result.add(new SlotItemMapping(
+                31,
+                createButtonItem(
+                        Material.BARRIER,
+                        "준비중",
+                        ColorType.GRAY
+                ))
+        );
 //        result.add(new SlotItemMapping(32, item));
 
+//        result.add(new SlotItemMapping(25, item));
+//        result.add(new SlotItemMapping(26, item));
         result.add(new SlotItemMapping(
-                25,
-                createItem(
+                34,
+                createButtonItem(
                         Material.COMMAND_BLOCK,
                         "행동 상호작용",
                         ColorType.PINK
                 ))
         );
-//        result.add(new SlotItemMapping(26, item));
-//        result.add(new SlotItemMapping(34, item));
 //        result.add(new SlotItemMapping(35, item));
-
 
         result.add(new SlotItemMapping(36, emerald));
         result.add(new SlotItemMapping(44, headItemStack));
@@ -154,6 +177,14 @@ public class MainMenuUI extends StringComponentExchanger implements EventRegiste
                 .setPanelItem(material)
                 .setDisplayName(comment, color)
                 .isEnchantGlowing(false)
+                .createItem();
+    }
+
+    private ItemStack createButtonItem(Material material, String comment, ColorType color) {
+        return new CreatePanelItem()
+                .setPanelItem(material)
+                .setDisplayName(comment, color)
+                .isEnchantGlowing(true)
                 .createItem();
     }
 }
