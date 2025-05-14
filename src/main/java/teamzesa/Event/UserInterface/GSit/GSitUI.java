@@ -59,11 +59,17 @@ public class GSitUI extends StringComponentExchanger implements UIHolder {
 
         ArrayList<SlotItemMapping> result = new ArrayList<>();
         for (int i = 0; i < 9; i++)
-            result.add(new SlotItemMapping(i, panel));
+            result.add(new SlotItemMapping(
+                    i,
+                    createItem(
+                            Material.WHITE_STAINED_GLASS_PANE,
+                            "",
+                            ColorType.WHITE
+                    )));
 
         result.add(new SlotItemMapping(
                 1,
-                createItem(
+                createButtonItem(
                 Material.BRICK_STAIRS,
                 "앉기",
                 ColorType.ORANGE)
@@ -71,7 +77,7 @@ public class GSitUI extends StringComponentExchanger implements UIHolder {
 
         result.add(new SlotItemMapping(
                 3,
-                createItem(
+                createButtonItem(
                 Material.RED_BED,
                 "눕기",
                 ColorType.ORANGE
@@ -80,7 +86,7 @@ public class GSitUI extends StringComponentExchanger implements UIHolder {
 
         result.add(new SlotItemMapping(
                 5,
-                createItem(
+                createButtonItem(
                 Material.TRIDENT,
                 "돌기",
                 ColorType.ORANGE
@@ -89,7 +95,7 @@ public class GSitUI extends StringComponentExchanger implements UIHolder {
 
         result.add(new SlotItemMapping(
                 7,
-                createItem(
+                createButtonItem(
                 Material.IRON_TRAPDOOR,
                 "기어가기",
                 ColorType.ORANGE
@@ -100,6 +106,14 @@ public class GSitUI extends StringComponentExchanger implements UIHolder {
     }
 
     private ItemStack createItem(Material material, String comment, ColorType color) {
+        return new CreatePanelItem()
+                .setPanelItem(material)
+                .setDisplayName(comment, color)
+                .isEnchantGlowing(false)
+                .createItem();
+    }
+
+    private ItemStack createButtonItem(Material material, String comment, ColorType color) {
         return new CreatePanelItem()
                 .setPanelItem(material)
                 .setDisplayName(comment, color)

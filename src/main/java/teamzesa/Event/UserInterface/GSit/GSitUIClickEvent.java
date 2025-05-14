@@ -39,14 +39,17 @@ public class GSitUIClickEvent extends StringComponentExchanger implements EventR
             return;
 
         switch (this.event.getSlot()) {
-            case 1 -> this.clickPlayer.performCommand("sit");
-            case 3 -> this.clickPlayer.performCommand("lay");
-            case 5 -> this.clickPlayer.performCommand("spin");
-            case 7 -> this.clickPlayer.performCommand("crawl");
-            default -> this.event.setCancelled(true);
+            case 1 -> executeCommand("sit");
+            case 3 -> executeCommand("lay");
+            case 5 -> executeCommand("spin");
+            case 7 -> executeCommand("crawl");
         }
 
         this.event.setCancelled(true);
+    }
+
+    private void executeCommand(String sit) {
+        this.clickPlayer.performCommand(sit);
         this.event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
     }
 }
