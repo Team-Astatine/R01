@@ -10,16 +10,12 @@ import teamzesa.command.CommandRegisterSection;
 import teamzesa.Enumeration.Type.ColorType;
 import teamzesa.command.ListOfCommand;
 
-public class SwapMainHandItemToHatInvItem extends CommandRegisterSection {
+public class Hat extends CommandRegisterSection {
     private Player player;
     private PlayerInventory playerInventory;
 
-    public SwapMainHandItemToHatInvItem() {
+    public Hat() {
         super(ListOfCommand.ARMOUR_HEAD);
-    }
-
-    private enum ArmourType {
-        hat
     }
 
     @Override
@@ -37,17 +33,11 @@ public class SwapMainHandItemToHatInvItem extends CommandRegisterSection {
             return false;
         }
 
-        ArmourType armourType = ArmourType.valueOf(label);
-        switch (armourType) {
-            case hat -> headSet(tmpItemInHand);
-        }
-        return true;
-    }
-
-    private void headSet(ItemStack temp) {
         ItemStack armourHead = this.playerInventory.getHelmet();
-        this.playerInventory.setHelmet(temp);
+        this.playerInventory.setHelmet(tmpItemInHand);
         this.playerInventory.setItemInMainHand(armourHead);
         playerSendMsgComponentExchanger(this.player, "머리에 썼어요!", ColorType.YELLOW);
+
+        return true;
     }
 }

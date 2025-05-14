@@ -24,7 +24,7 @@ public enum ListOfCommand {
     ASTN("Astn", new TitleAstatine()),
     HELP("Help", new Help()),
     MODERATOR("moderator", new Moderator()),
-    ARMOUR_HEAD("hat", new SwapMainHandItemToHatInvItem()),
+    ARMOUR_HEAD("hat", new Hat()),
     OFF_HAND_ITEM_SWAP_FOR_BE("swap", new OffHandItemSwapFunction()),
     TOTEM_STACKING("totem", new StackingTotemFunction()),
     FLY("fly", new ToggleFly()),
