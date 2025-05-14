@@ -33,12 +33,14 @@ commands:
     description: 하늘을 납니다.
   playtime:
     description: 플레이시간을 확인합니다.
-  gsitActioUI:
+  gsitTabOpen:
     description: Gsit 메뉴를 엽니다.
-  공지:
-    description: 공지를 활/비활성화 합니다.
+  tpaTabOpen:
+    description: TPA 메뉴를 엽니다.
   강화:
     description: 강화창을 엽니다.
+  공지:
+    description: 공지를 활/비활성화 합니다.
   명령어:
     description: 사용가능한 명령어를 확인합니다.
   서버팁:

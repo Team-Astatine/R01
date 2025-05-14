@@ -4,14 +4,14 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import teamzesa.Event.UserInterface.GSit.GSitUI;
+import teamzesa.Event.UserInterface.Enhance.EnhanceUI;
 import teamzesa.command.CommandRegisterSection;
 import teamzesa.command.ListOfCommand;
 
-public class GSitOpen extends CommandRegisterSection {
+public class EnhanceTabOpen extends CommandRegisterSection {
 
-    public GSitOpen() {
-        super(ListOfCommand.GSIT_ACTIONS);
+    public EnhanceTabOpen() {
+        super(ListOfCommand.ENHANCE_TAB_OPEN);
     }
 
     @Override
@@ -20,7 +20,7 @@ public class GSitOpen extends CommandRegisterSection {
                              final @NotNull String s,
                              final @NotNull String[] strings) {
 
-        new GSitUI((Player) commandSender);
+        new EnhanceUI((Player) commandSender);
         return true;
     }
 }

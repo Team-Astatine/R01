@@ -1,8 +1,9 @@
 package teamzesa.command;
 
 import org.bukkit.command.CommandExecutor;
-import teamzesa.Event.UserInterface.Command.EnhanceOpen;
-import teamzesa.Event.UserInterface.Command.GSitOpen;
+import teamzesa.Event.UserInterface.Command.EnhanceTabOpen;
+import teamzesa.Event.UserInterface.Command.GSitTabOpen;
+import teamzesa.Event.UserInterface.Command.TpaTabOpen;
 import teamzesa.R01;
 import teamzesa.command.ModeratorCommand.*;
 import teamzesa.command.UserCommand.Announce.*;
@@ -29,9 +30,10 @@ public enum ListOfCommand {
     TOTEM_STACKING("totem", new StackingTotemFunction()),
     FLY("fly", new ToggleFly()),
     TIME("playtime", new PlayTime()),
-    GSIT_ACTIONS("gsitActioUI", new GSitOpen()),
+    GSIT_TAB_OPEN("gsitTabOpen", new GSitTabOpen()),
+    TPA_TAB_OPEN("tpaTabOpen", new TpaTabOpen()),
+    ENHANCE_TAB_OPEN("강화", new EnhanceTabOpen()),
     ANNOUNCING("공지", new ToggleAnnouncing()),
-    ENHANCE("강화", new EnhanceOpen()),
     COMMAND_TIP("명령어", new CommandTip()),
     SERVER_TIP("서버팁", new ServerTip()),
     COMMUNITY("커뮤니티", new Community()),
