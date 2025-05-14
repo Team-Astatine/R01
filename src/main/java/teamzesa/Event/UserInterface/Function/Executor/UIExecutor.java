@@ -8,6 +8,7 @@ import teamzesa.Event.UserInterface.Menu.MainMenuUIClickEvent;
 import teamzesa.Event.UserInterface.Function.Interface.Type;
 import teamzesa.Event.UserInterface.Function.Interface.UIHolder;
 import teamzesa.Event.UserInterface.Function.Interface.UIType;
+import teamzesa.Event.UserInterface.TPA.TpaUIClickEvent;
 
 /**
  * {@link Type} 각 UI 타입에 맞는 {@link org.bukkit.inventory.Inventory}를 생성하는 클래스입니다.
@@ -31,6 +32,7 @@ public class UIExecutor {
             case MAIN_MENU  -> new MainMenuUIClickEvent(event);
             case GSIT       -> new GSitUIClickEvent(event);
             case ENHANCE    -> new EnhanceUIClickEvent(event);
+            case TPA        -> new TpaUIClickEvent(event);
         }
 
     }

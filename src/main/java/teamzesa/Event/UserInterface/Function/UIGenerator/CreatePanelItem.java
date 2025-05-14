@@ -23,6 +23,13 @@ public class CreatePanelItem extends StringComponentExchanger {
         return this;
     }
 
+    public CreatePanelItem setPanelItem(ItemStack panelItem) {
+        this.panelItemMaterial = panelItem.getType();
+        this.resultItem = panelItem;
+        this.resultItemMeta = panelItem.getItemMeta();
+        return this;
+    }
+
     public CreatePanelItem setDisplayName(String displayName, ColorType color) {
         this.resultItemMeta.displayName(componentExchanger(displayName, color));
         return this;

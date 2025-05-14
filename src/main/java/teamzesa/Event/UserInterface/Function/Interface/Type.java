@@ -4,4 +4,5 @@ public enum Type {
     MAIN_MENU,
     ENHANCE,
     GSIT,
+    TPA,
 }
