@@ -2,6 +2,7 @@ package teamzesa.Util.Function;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.ClickEvent;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -67,5 +68,9 @@ public abstract class StringComponentExchanger {
 
     public Component componentExchanger(String comment, ColorType color) {
         return exchangerStringToComponentAndColor(comment, color);
+    }
+
+    public String componentExchanger(Component comment) {
+        return PlainTextComponentSerializer.plainText().serialize(comment);
     }
 }
