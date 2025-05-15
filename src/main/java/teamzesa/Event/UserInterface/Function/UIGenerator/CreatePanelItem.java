@@ -1,5 +1,6 @@
 package teamzesa.Event.UserInterface.Function.UIGenerator;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
@@ -7,6 +8,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import teamzesa.Enumeration.Type.ColorType;
 import teamzesa.Util.Function.StringComponentExchanger;
+
+import java.util.ArrayList;
 
 public class CreatePanelItem extends StringComponentExchanger {
 
@@ -32,6 +35,11 @@ public class CreatePanelItem extends StringComponentExchanger {
 
     public CreatePanelItem setDisplayName(String displayName, ColorType color) {
         this.resultItemMeta.displayName(componentExchanger(displayName, color));
+        return this;
+    }
+
+    public CreatePanelItem setLore(ArrayList<Component> lore) {
+        this.resultItemMeta.lore(lore);
         return this;
     }
 
