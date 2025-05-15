@@ -1,5 +1,6 @@
 package teamzesa.Event.UserInterface.TPA;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -17,18 +18,32 @@ import teamzesa.Event.UserInterface.Function.UIGenerator.SlotItemMapping;
 import teamzesa.Util.Function.StringComponentExchanger;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @UIType(Type.TPA)
 public class TpaUI extends StringComponentExchanger implements UIHolder {
+    private final int MINIUM_TAB_CNT = 9;
+
     private Player chestOwner;
     private Inventory inventory;
+
+    private List<Player> onlinePlayers;
     private int slotCount;
 
     public TpaUI(Player player) {
         this.chestOwner = player;
-        this.slotCount = 9;
+        setOnlinePlayer();
+        calculatingSlotCount();
         UIExecutor();
+    }
+
+    private void setOnlinePlayer() {
+        this.onlinePlayers = new ArrayList<>(Bukkit.getOnlinePlayers());
+//        Exclude the Chest Owner from the oneline player list
+        this.onlinePlayers.removeIf(
+                targetPlayer -> targetPlayer.getName().equals(this.chestOwner.getName())
+        );
     }
 
     @Override
@@ -41,6 +56,19 @@ public class TpaUI extends StringComponentExchanger implements UIHolder {
         return this.inventory;
     }
 
+    private void calculatingSlotCount() {
+        int playerCount = this.onlinePlayers.size();
+
+        int fullPages = playerCount / MINIUM_TAB_CNT;
+        boolean hasRemainder = (playerCount % MINIUM_TAB_CNT) > 0;
+        int line = fullPages + (hasRemainder ? 1 : 0);
+
+        if (line == 0)
+            line = 1;
+
+        this.slotCount = line * MINIUM_TAB_CNT;
+    }
+
     @Override
     public void UIExecutor() {
         this.inventory = new InventoryUIGenerator()
@@ -51,9 +79,6 @@ public class TpaUI extends StringComponentExchanger implements UIHolder {
                 )
                 .setEnhanceUIItem(itemPanelList())
                 .executeUI();
-
-//
-//        onlinePlayers.size() % 9 =
     }
 
     private ArrayList<SlotItemMapping> itemPanelList() {
@@ -63,17 +88,21 @@ public class TpaUI extends StringComponentExchanger implements UIHolder {
                     new SlotItemMapping(i, createItem(
                             new ItemStack(Material.WHITE_STAINED_GLASS_PANE),
                             "",
-                            ColorType.WHITE
+                            ColorType.WHITE,
+                            null
                     ))
             );
 
-        List<Player> onlinePlayers = new ArrayList<>(Bukkit.getOnlinePlayers());
-        for (int i = 0; i < onlinePlayers.size(); i++) {
+        for (int i = 0; i < this.onlinePlayers.size(); i++) {
             result.add(
                     new SlotItemMapping(i, createItem(
-                            createHead(onlinePlayers.get(i).getPlayer()),
-                            onlinePlayers.get(i).getName(),
-                            ColorType.COMMAND_COLOR
+                            createHead(this.onlinePlayers.get(i).getPlayer()),
+                            this.onlinePlayers.get(i).getName(),
+                            ColorType.COMMAND_COLOR,
+                            new ArrayList<>(Arrays.asList(
+                                    componentExchanger("왼쪽 클릭 : TPA 요청", ColorType.YELLOW),
+                                    componentExchanger("오른쪽 클릭 : TPA HERE 요청", ColorType.YELLOW)
+                            ))
                     ))
             );
         }
@@ -91,10 +120,11 @@ public class TpaUI extends StringComponentExchanger implements UIHolder {
         return headItemStack;
     }
 
-    private ItemStack createItem(ItemStack itemStack, String comment, ColorType color) {
+    private ItemStack createItem(ItemStack itemStack, String comment, ColorType color, ArrayList<Component> lore) {
         return new CreatePanelItem()
                 .setPanelItem(itemStack)
                 .setDisplayName(comment, color)
+                .setLore(lore)
                 .isEnchantGlowing(false)
                 .createItem();
     }

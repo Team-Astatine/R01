@@ -95,9 +95,9 @@ public class MainMenuUI extends StringComponentExchanger implements EventRegiste
         result.add(new SlotItemMapping(
                 10,
                 createButtonItem(
-                        Material.BARRIER,
-                        "준비중",
-                        ColorType.GRAY
+                        Material.ENDER_PEARL,
+                        "TPA 요청",
+                        ColorType.GREEN
                 ))
         );
 

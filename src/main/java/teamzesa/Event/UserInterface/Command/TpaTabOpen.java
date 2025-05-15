@@ -1,5 +1,6 @@
 package teamzesa.Event.UserInterface.Command;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -21,8 +22,12 @@ public class TpaTabOpen extends CommandRegisterSection {
                              final @NotNull String s,
                              final @NotNull String[] strings) {
 
-//        new TpaUI((Player) commandSender);
-        commandSender.sendMessage(componentExchanger("준비중입니다.", ColorType.RED));
+        if (Bukkit.getOnlinePlayers().size() == 1) {
+            commandSender.sendMessage(componentExchanger("온라인 플레이어가 없습니다.", ColorType.RED));
+            return false;
+        }
+
+        new TpaUI((Player) commandSender);
         return true;
     }
 }

@@ -39,7 +39,7 @@ public class MainMenuUIClickEvent extends StringComponentExchanger implements Ev
             return;
 
         switch (this.event.getSlot()) {
-//            case /*0,1,9,*/10 -> this.event.getWhoClicked().closeInventory(InventoryCloseEvent.Reason.PLUGIN);
+            case /*0,1,9,*/10 -> this.clickPlayer.performCommand("tpatabopen");
 
             case /*3,4,5,12,*/13/*,14*/ -> this.clickPlayer.performCommand("shop");
 
