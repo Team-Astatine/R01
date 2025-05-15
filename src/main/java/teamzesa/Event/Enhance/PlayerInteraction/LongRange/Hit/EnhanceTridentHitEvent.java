@@ -39,8 +39,8 @@ public class EnhanceTridentHitEvent implements EventRegister {
             return;
 
         this.tridentHitLocation = trident.getLocation();
-        ItemStack mainHandTrident = shooter.getInventory().getItemInMainHand();
 
+        ItemStack mainHandTrident = trident.getItemStack();
         if (ObjectUtils.notEqual(mainHandTrident.getType(), Material.TRIDENT))
             mainHandTrident = shooter.getInventory().getItemInOffHand();
 
