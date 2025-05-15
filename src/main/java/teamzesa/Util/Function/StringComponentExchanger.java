@@ -10,6 +10,9 @@ import org.jetbrains.annotations.NotNull;
 import teamzesa.Enumeration.Type.ColorType;
 import teamzesa.Data.DataIO.Config.ConfigMenu;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public abstract class StringComponentExchanger {
     private Component exchangerStringToComponent(String comment) {
         return Component.text(comment);
@@ -71,6 +74,27 @@ public abstract class StringComponentExchanger {
     }
 
     public String componentExchanger(Component comment) {
-        return PlainTextComponentSerializer.plainText().serialize(comment);
+        String result = PlainTextComponentSerializer.plainText().serialize(comment);
+
+        /*
+        String input = "Name: John, Age: 30";
+        Pattern pattern = Pattern.compile("Name: (.*?), Age: (\\d+)");
+        Matcher matcher = pattern.matcher(input);
+
+        if (matcher.find()) {
+            System.out.println("group(0): " + matcher.group(0)); // Name: John, Age: 30
+            System.out.println("group(1): " + matcher.group(1)); // John
+            System.out.println("group(2): " + matcher.group(2)); // 30
+        }
+         */
+
+        Pattern pattern = Pattern.compile("\\[(.*?)\\]");
+        Matcher matcher = pattern.matcher(result);
+
+        if (matcher.find()) {
+            result = matcher.group(1); // 대괄호 안의 내용만 추출
+        }
+
+        return result;
     }
 }
