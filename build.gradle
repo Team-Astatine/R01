@@ -8,6 +8,10 @@ version = '8.4'
 repositories {
     mavenCentral()
     maven {
+        name "essentialsx-releases"
+        url "https://repo.essentialsx.net/releases/"
+    }
+    maven {
         url = uri("https://repo.papermc.io/repository/maven-public/")
     }
     maven {
@@ -19,7 +23,10 @@ repositories {
 dependencies {
     implementation 'com.google.code.gson:gson:2.11.0'
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
-    compileOnly"io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT"
+    compileOnly "io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT"
+    compileOnly("net.essentialsx:EssentialsX:2.21.0") {
+        exclude group: 'org.spigotmc', module: 'spigot-api'
+    }
 }
 
 def targetJavaVersion = 21
