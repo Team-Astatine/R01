@@ -38,14 +38,13 @@ public class GSitUIClickEvent extends StringComponentExchanger implements EventR
         if (ObjectUtils.notEqual(this.clickPlayer, this.uiHolder.getOwner()))
             return;
 
+        this.event.setCancelled(true);
         switch (this.event.getSlot()) {
             case 1 -> executeCommand("sit");
             case 3 -> executeCommand("lay");
             case 5 -> executeCommand("spin");
             case 7 -> executeCommand("crawl");
         }
-
-        this.event.setCancelled(true);
     }
 
     private void executeCommand(String sit) {

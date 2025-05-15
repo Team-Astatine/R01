@@ -38,6 +38,7 @@ public class MainMenuUIClickEvent extends StringComponentExchanger implements Ev
         if (ObjectUtils.notEqual(this.clickPlayer, this.uiHolder.getOwner()))
             return;
 
+        this.event.setCancelled(true);
         switch (this.event.getSlot()) {
             case /*0,1,9,*/10 -> this.clickPlayer.performCommand("tpatabopen");
 
@@ -51,7 +52,5 @@ public class MainMenuUIClickEvent extends StringComponentExchanger implements Ev
 
             case /*25,26,*/34/*,35*/ -> this.clickPlayer.performCommand(ListOfCommand.GSIT_TAB_OPEN.getCommand());
         }
-
-        this.event.setCancelled(true);
     }
 }
